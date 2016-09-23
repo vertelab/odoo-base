@@ -20,7 +20,7 @@
 ##############################################################################
 
 {
-    'name': 'Business Card',
+    'name': 'User Business Card',
     'version': '0.1',
     'category': 'Event',
     'summary': 'Print Business Card',
@@ -30,7 +30,7 @@
     'author': 'Vertel AB',
     'website': 'http://www.vertel.se',
     'depends': ['base', 'report_scribus'],
-    'data': ['business_card_report.xml'],
+    'data': ['user_business_card_report.xml'],
     'application': False,
     'installable': True,
 }
