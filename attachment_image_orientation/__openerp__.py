@@ -20,13 +20,13 @@
 ##############################################################################
 
 {
-    'name': 'Attachment PDF to Image',
+    'name': 'Attachment Image Orientation',
     'version': '0.1',
     'category': '',
     'description': """
-Convert PDF Attachment to Image
+Attachment Image Orientation
 ===================================
-PDF to image
+Image Orientation
 """,
     'author': 'Vertel AB',
     'website': 'http://www.vertel.se',

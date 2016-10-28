@@ -2,7 +2,7 @@
 ##############################################################################
 #
 #    OpenERP, Open Source Management Solution, third party addon
-#    Copyright (C) 2004-2015 Vertel AB (<http://vertel.se>).
+#    Copyright (C) 2004-2016 Vertel AB (<http://vertel.se>).
 #
 #    This program is free software: you can redistribute it and/or modify
 #    it under the terms of the GNU Affero General Public License as
@@ -18,21 +18,14 @@
 #    along with this program.  If not, see <http://www.gnu.org/licenses/>.
 #
 ##############################################################################
+from openerp import models, fields, api, _
+from wand.image import Image
+from wand.display import display
+from wand.color import Color
+import logging
+_logger = logging.getLogger(__name__)
 
-{
-    'name': 'Attachment PDF to Image',
-    'version': '0.1',
-    'category': '',
-    'description': """
-Convert PDF Attachment to Image
-===================================
-PDF to image
-""",
-    'author': 'Vertel AB',
-    'website': 'http://www.vertel.se',
-    'depends': ['attachment_image'],
-    'data': [],
-    'application': False,
-    'installable': True,
-}
-# vim:expandtab:smartindent:tabstop=4s:softtabstop=4:shiftwidth=4:
+class ir_attachment(models.Model):
+    _inherit='ir.attachment'
+
+    image = fields.Binary()

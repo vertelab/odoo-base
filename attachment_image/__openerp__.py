@@ -20,18 +20,18 @@
 ##############################################################################
 
 {
-    'name': 'Attachment PDF to Image',
+    'name': 'Attachment Image',
     'version': '0.1',
     'category': '',
     'description': """
-Convert PDF Attachment to Image
+Attachment Image
 ===================================
-PDF to image
+Add a image filed for attachment, it shows in a notebook page in attachment management
 """,
     'author': 'Vertel AB',
     'website': 'http://www.vertel.se',
-    'depends': ['attachment_image'],
-    'data': [],
+    'depends': ['base', 'document'],
+    'data': ['attachment_image_view.xml'],
     'application': False,
     'installable': True,
 }
