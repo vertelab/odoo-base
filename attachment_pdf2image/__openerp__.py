@@ -20,17 +20,18 @@
 ##############################################################################
 
 {
-    'name': 'Child Category Tags',
+    'name': 'Attachment PDF to Image',
     'version': '0.1',
     'category': '',
     'description': """
-Add list for children tags
+Convert PDF Attachment to Image
 ===================================
+PDF to image
 """,
     'author': 'Vertel AB',
     'website': 'http://www.vertel.se',
-    'depends': ['base'],
-    'data': ['res_partner_view.xml'],
+    'depends': ['attachment_image'],
+    'data': [],
     'application': False,
     'installable': True,
 }

@@ -18,7 +18,8 @@
             <field name="inherit_id" ref="base.view_res_partner_filter" />
             <field name="arch" type="xml">
                 <field name="category_id" position="after">
-                    <field name="child_category_ids" string="Child Tags" filter_domain="[('child_category_ids','ilike', self)]"/>
+                    <field name="child_category_ids" string="Child Tags" filter_domain="[('child_category_ids', 'ilike', self)]"/>
+                    <field name="missed_child_category_ids" string="Missed Child Tags" filter_domain="[('missed_child_category_ids', 'ilike', self)]"/>
                 </field>
             </field>
         </record>

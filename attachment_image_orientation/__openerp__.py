@@ -20,17 +20,18 @@
 ##############################################################################
 
 {
-    'name': 'Child Category Tags',
+    'name': 'Attachment Image Orientation',
     'version': '0.1',
     'category': '',
     'description': """
-Add list for children tags
+Attachment Image Orientation
 ===================================
+Image Orientation
 """,
     'author': 'Vertel AB',
     'website': 'http://www.vertel.se',
-    'depends': ['base'],
-    'data': ['res_partner_view.xml'],
+    'depends': ['attachment_image'],
+    'data': [],
     'application': False,
     'installable': True,
 }

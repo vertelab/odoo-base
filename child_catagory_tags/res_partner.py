@@ -36,5 +36,12 @@ class res_partner(models.Model):
                 for categ in c.category_id:
                     categories |= categ
             self.child_category_ids = categories
-
     child_category_ids = fields.Many2many(comodel_name='res.partner.category', relation='res_partner_rel_res_partner_category_child', compute='_get_childs_categs', string='Child Tags', store=True)
+
+    @api.one
+    @api.depends('category_id', 'child_ids', 'child_ids.category_id', 'child_category_ids')
+    def _get_missed_childs_categs(self):
+        if self.is_company:
+            categories = self.env['res.partner.category'].search([])
+            self.missed_child_category_ids = categories - self.child_category_ids
+    missed_child_category_ids = fields.Many2many(comodel_name='res.partner.category', relation='res_partner_rel_res_partner_all_category_child', compute='_get_missed_childs_categs', string='Missed Child Tags', store=True)
