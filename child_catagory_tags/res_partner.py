@@ -28,8 +28,13 @@ class res_partner(models.Model):
     _inherit = 'res.partner'
 
     @api.one
-    @api.depends('category_id', 'child_ids')
+    @api.depends('category_id', 'child_ids', 'child_ids.category_id')
     def _get_childs_categs(self):
         if self.is_company:
-            self.child_category_ids = [(6, 0, set([t.id for t in [c.category_id for c in self.child_ids]]))]
-    child_category_ids = fields.Many2many(comodel_name='res.partner.category', compute='_get_childs_categs', string='Child Tags')
+            categories = self.env['res.partner.category'].browse([])
+            for c in self.child_ids:
+                for categ in c.category_id:
+                    categories |= categ
+            self.child_category_ids = categories
+
+    child_category_ids = fields.Many2many(comodel_name='res.partner.category', relation='res_partner_rel_res_partner_category_child', compute='_get_childs_categs', string='Child Tags', store=True)
