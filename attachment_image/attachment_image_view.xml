@@ -6,22 +6,13 @@
             <field name="model">ir.attachment</field>
             <field name="inherit_id" ref="base.view_attachment_form"/>
             <field name="arch" type="xml">
-                <group string="Indexed Content" position="replace">
-                </group>
-                <group position="after">
-                    <notebook>
-                        <page string="Indexed Content">
-                            <group string="Indexed Content" colspan="4">
-                                <field name="index_content" nolabel="1"/>
-                            </group>
-                        </page>
+                <notebook position="inside">
                         <page string="Image">
                             <group rows="20">
                                 <field name="image" widget="image" class="oe_left oe_avatar" options="{&quot;preview_image&quot;: &quot;image&quot;,&quot;size&quot;: [800, 1200]}" nolabel="1" />
                             </group>
                         </page>
-                    </notebook>
-                </group>
+                </notebook>
             </field>
         </record>
     </data>

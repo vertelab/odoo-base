@@ -2,7 +2,7 @@
 ##############################################################################
 #
 #    OpenERP, Open Source Management Solution, third party addon
-#    Copyright (C) 2004-2015 Vertel AB (<http://vertel.se>).
+#    Copyright (C) 2004-2016 Vertel AB (<http://vertel.se>).
 #
 #    This program is free software: you can redistribute it and/or modify
 #    it under the terms of the GNU Affero General Public License as
@@ -20,18 +20,15 @@
 ##############################################################################
 
 {
-    'name': 'Attachment Attributes',
+    'name': 'Attachment Notebook',
     'version': '0.1',
     'category': '',
     'description': """
-Attachment Attributes
-=====================
-
-Adds attributes to an attachment
+Adds a notebook for other modules to populate with more functionality
 """,
     'author': 'Vertel AB',
     'website': 'http://www.vertel.se',
-    'depends': ['attachment_notebook', 'document'],
+    'depends': ['base',],
     'data': ['ir_attachment_view.xml'],
     'application': False,
     'installable': True,
