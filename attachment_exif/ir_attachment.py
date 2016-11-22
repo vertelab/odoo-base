@@ -25,6 +25,8 @@ from wand.color import Color
 import logging
 _logger = logging.getLogger(__name__)
 
+# Document: https://pypi.python.org/pypi/piexif
+
 class ir_attachment(models.Model):
     _inherit='ir.attachment'
 
