@@ -28,7 +28,7 @@ Adds a notebook for other modules to populate with more functionality
 """,
     'author': 'Vertel AB',
     'website': 'http://www.vertel.se',
-    'depends': ['base',],
+    'depends': ['document',],
     'data': ['ir_attachment_view.xml'],
     'application': False,
     'installable': True,
