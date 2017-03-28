@@ -19,26 +19,25 @@
 #
 ##############################################################################
 from openerp import models, fields, api, _
-from datetime import datetime, timedelta
+from datetime import date, datetime, timedelta
 
 import logging
 _logger = logging.getLogger(__name__)
 
 class mail_nodup(models.Model):
-    _inherit='mail.nodup'
+    _name = 'mail.nodup'
 
-    recipent = fields.Char()
+    recipient = fields.Char()
     subject  = fields.Char()
     date     = fields.Date(default=fields.Date.today())
     
     @api.model
-    def check_dup(self,recipent,subject):
-        for dup in self.env['mail.nodup'].search([('recipient','=',recipent),('subject','=',subject)]):
-            if dup.date >= fields.Datetime.to_string(today + timedelta(days=int(self.env['ir.config_parameter'].get_param('mail_nodup days','7'))):
-                dup.unlink()
-        dups = self.env['mail.nodup'].search([('recipient','=',recipent),('subject','=',subject)])
-        if not len(dups) > 0:
-            self.env['mail.nodup'].create({'recipient': recipent,'subject':subject})
+    def check_dup(self, recipient, subject):
+        dups = self.env['mail.nodup'].search([('recipient','=',recipient),('subject','=',subject),('date', '<=', fields.Date.to_string(date.today() - timedelta(days=int(self.env['ir.config_parameter'].get_param('mail_nodup days','7')))))])
+        dups.unlink()
+        dups = self.env['mail.nodup'].search([('recipient','=',recipient),('subject','=',subject)])
+        if not dups:
+            self.env['mail.nodup'].create({'recipient': recipient,'subject':subject})
             return False
         else:
             return True
