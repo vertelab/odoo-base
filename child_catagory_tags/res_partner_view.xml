@@ -1,13 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <openerp>
     <data>
-        <template id="assets_backend" name="module_name assets" inherit_id="web.assets_backend">
-            <xpath expr="//link[last()]" position="after">
-                <style>
-                    .child_tag .oe_tag { background-color: #FFF282; }
-                </style>
-            </xpath>
-        </template>
         <!-- res.partner -->
         <record id="view_partner_form" model="ir.ui.view">
             <field name="name">event.participant.inherit.res.partner.form</field>
@@ -28,23 +21,6 @@
                     <field name="child_category_ids" string="Child Tags" filter_domain="[('child_category_ids', 'ilike', self)]"/>
                     <field name="missed_child_category_ids" string="Missed Child Tags" filter_domain="[('missed_child_category_ids', 'ilike', self)]"/>
                 </field>
-            </field>
-        </record>
-        <record id="res_partner_kanban_view" model="ir.ui.view">
-            <field name="name">res.partner.kanban.inherited.account_dermanord</field>
-            <field name="model">res.partner</field>
-            <field name="inherit_id" ref="base.res_partner_kanban_view"/>
-            <field name="arch" type="xml">
-                <field name="has_image" position="after">
-                    <field name="child_category_ids"/>
-                </field>
-                <div class="oe_kanban_partner_categories" position="after">
-                    <div class="oe_kanban_partner_child_category_ids">
-                        <span class="oe_kanban_list_many2many">
-                            <field name="child_category_ids" class="child_tag"/>
-                        </span>
-                    </div>
-                </div>
             </field>
         </record>
     </data>
