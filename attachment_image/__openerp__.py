@@ -30,7 +30,7 @@ Add a image filed for attachment, it shows in a notebook page in attachment mana
 """,
     'author': 'Vertel AB',
     'website': 'http://www.vertel.se',
-    'depends': ['attachment_notebook', 'document'],
+    'depends': ['attachment_notebook'],
     'data': ['attachment_image_view.xml'],
     'application': False,
     'installable': True,
