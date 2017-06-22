@@ -31,7 +31,8 @@ class ir_attachment(models.Model):
     @api.model
     def create(self, values):
         att = super(ir_attachment, self).create(values)
-        if att.mimetype == 'application/pdf':
+        if self._context.get('convert') == 'pdf2image' and att.mimetype == 'application/pdf':
+        #~ if att.mimetype == 'application/pdf':
             att.pdf2image(800,1200)
         return att
 
