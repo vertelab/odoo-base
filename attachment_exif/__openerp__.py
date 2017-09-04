@@ -30,8 +30,11 @@ Attachment Exif
 """,
     'author': 'Vertel AB',
     'website': 'http://www.vertel.se',
-    'depends': ['base', 'document'],
+    'depends': ['attachment_notebook'],
     'data': ['ir_attachment_view.xml'],
+     'external_dependencies': {
+        'python': ['piexif'],
+    },
     'application': False,
     'installable': True,
 }

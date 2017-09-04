@@ -22,6 +22,15 @@ from openerp import models, fields, api, _
 from wand.image import Image
 from wand.display import display
 from wand.color import Color
+
+from openerp.modules import get_module_resource, get_module_path
+
+try:
+    import piexif
+except:
+    raise ImportError(_(u'Dependency failure: attachment_exif requires python library "piexif".'))
+
+
 import logging
 _logger = logging.getLogger(__name__)
 
@@ -34,23 +43,53 @@ class ir_attachment(models.Model):
 
     @api.one
     def load_exif(self):
-        pass
+        if self.type == 'url':
+            module = self.url.split('/')[1]
+            path = '/'.join(self.url.split('/')[2:])
+            #~ raise Warning(get_module_path(module),get_module_resource(module,path),module,path)
+            exif_dict = piexif.load(get_module_resource(module,path))
+        else:
+            exif_dict = piexif.load(self.datas.decode('base64'))
+        for ifd in ['0th','Exif','thumbnail','1th','GPS','Interop']:
+            if exif_dict.get(ifd):
+                for tag in exif_dict[ifd]:
+                    label = self.env['ir.attachment.exif.label'].search([('name','=',piexif.TAGS[ifd][tag]["name"])])
+                    if not label:
+                        label = self.env['ir.attachment.exif.label'].create({'ifd': ifd,'name': piexif.TAGS[ifd][tag]['name'], 'exif_type': piexif.TAGS[ifd][tag]['type']} )
+                    if not label.type == 'drop':
+                        exif = self.env['ir.attachment.exif'].search([('attachment_id','=',self.id),('exif_label','=',label.id)])
+                        if not exif:
+                            try:
+                                self.env['ir.attachment.exif'].create({
+                                    'attachment_id': self.id,
+                                    'exif_label': label.id,
+                                    'exif_value': '%s' % (exif_dict[ifd][tag]),
+                                })
+                            except:
+                                pass
+
     # TODO: write exif data when create or write
     #~ @api.model
     #~ def create(self):
 
-    #~ @api.one
-    #~ def write(self):
-
+    @api.multi
+    def write(self, vals):
+        if self.mimetype in ['image/jpeg','image/tiff']:
+            self.load_exif()
+        return super(ir_attachment, self).write(vals)
+        
 class ir_attachment_exif(models.Model):
     _name = 'ir.attachment.exif'
 
     attachment_id = fields.Many2one(comodel_name='ir.attachment')
     exif_label = fields.Many2one(comodel_name='ir.attachment.exif.label', string='Label')
     exif_value = fields.Text(string='Value')
-    exif_expose = fields.Boolean(string='Expose', help='This exif value is exposed in the image')
+    ifd = fields.Selection([],related='exif_label.ifd')
+    type = fields.Selection([],related='exif_label.type')
 
 class ir_attachment_exif_label(models.Model):
     _name = 'ir.attachment.exif.label'
 
+    ifd = fields.Selection([('0th','Primary Image'),('1th','Thumbnail Image'),('Exif','Exif'),('thumbnail','Thumbnail'),('GPS','GPS'),('Interop','Interop')],string="IFD")
     name = fields.Char(string='name')
+    type = fields.Selection([('drop','Drop'),('hide','Hide'),('view','View')],string="Type",default='view')
