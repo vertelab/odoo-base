@@ -2,7 +2,7 @@
 ##############################################################################
 #
 #    OpenERP, Open Source Management Solution, third party addon
-#    Copyright (C) 2004-2015 Vertel AB (<http://vertel.se>).
+#    Copyright (C) 2004-2017 Vertel AB (<http://vertel.se>).
 #
 #    This program is free software: you can redistribute it and/or modify
 #    it under the terms of the GNU Affero General Public License as
@@ -20,19 +20,27 @@
 ##############################################################################
 
 {
-    'name': 'Attachment Exif',
+    'name': 'Attachment Autoload',
     'version': '0.1',
     'category': '',
     'description': """
-Attachment Exif
-===============
-* read and write exif data.
+Monitor a directory and load saved document to the database
+
+* read exif data if its an image.
+* attache the document to an object using its name [res.partner,res.user]
+
+This module needs the package incron to be installed (apt install incron)
+
 """,
     'author': 'Vertel AB',
     'website': 'http://www.vertel.se',
-    'depends': ['base', 'document'],
-    'data': ['ir_attachment_view.xml'],
+    'depends': ['document','attachment_exif'],
+    'external_dependencies': {
+        'bin': ['incrontab'],
+    },
+    'data': ['ir_attachment_view.xml','res_config_view.xml'],
     'application': False,
     'installable': True,
 }
+
 # vim:expandtab:smartindent:tabstop=4s:softtabstop=4:shiftwidth=4:

@@ -32,6 +32,9 @@ class ir_attachment(models.Model):
 
     exif_ids = fields.One2many(comodel_name='ir.attachment.exif', inverse_name='attachment_id', string='Exif Data')
 
+    @api.one
+    def load_exif(self):
+        pass
     # TODO: write exif data when create or write
     #~ @api.model
     #~ def create(self):
@@ -47,7 +50,7 @@ class ir_attachment_exif(models.Model):
     exif_value = fields.Text(string='Value')
     exif_expose = fields.Boolean(string='Expose', help='This exif value is exposed in the image')
 
-class ir_attachment_exif_label
+class ir_attachment_exif_label(models.Model):
     _name = 'ir.attachment.exif.label'
 
     name = fields.Char(string='name')
