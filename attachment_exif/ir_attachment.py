@@ -42,7 +42,7 @@ class ir_attachment(models.Model):
     exif_ids = fields.One2many(comodel_name='ir.attachment.exif', inverse_name='attachment_id', string='Exif Data')
 
     @api.one
-    def load_exif(self):
+    def load_exif(self):  # Should be one using StringIO to conform with file/datas and vals (in create)
         if self.type == 'url':
             module = self.url.split('/')[1]
             path = '/'.join(self.url.split('/')[2:])
@@ -69,8 +69,11 @@ class ir_attachment(models.Model):
                                 pass
 
     # TODO: write exif data when create or write
-    #~ @api.model
-    #~ def create(self):
+    @api.model
+    def create(self,vals):
+        if vals.get('mimetype') in ['image/jpeg','image/tiff']:
+            self.load_exif()
+        return super(ir_attachment, self).create(vals)
 
     @api.multi
     def write(self, vals):
