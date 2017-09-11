@@ -2,7 +2,7 @@
 ##############################################################################
 #
 #    OpenERP, Open Source Management Solution, third party addon
-#    Copyright (C) 2004-2017 Vertel AB (<http://vertel.se>).
+#    Copyright (C) 2004-2016 Vertel AB (<http://vertel.se>).
 #
 #    This program is free software: you can redistribute it and/or modify
 #    it under the terms of the GNU Affero General Public License as
@@ -19,28 +19,33 @@
 #
 ##############################################################################
 from openerp import models, fields, api, _
-from wand.image import Image
-from wand.display import display
-from wand.color import Color
+import subprocess
+from StringIO import StringIO
+
 import logging
 _logger = logging.getLogger(__name__)
 
 class ir_attachment(models.Model):
     _inherit='ir.attachment'
 
-    @api.model
-    def create(self, values):
-        att = super(ir_attachment, self).create(values)
-        #~ if self._context.get('convert') == 'pdf2image' and att.mimetype == 'application/pdf':
-        if att.mimetype == 'application/pdf':
-            att.pdf2image(800,1200)
-        return att
+   
+    #~ @api.model
+    #~ def create(self, values):
+        #~ att = super(ir_attachment, self).create(values)
+        #~ if att.mimetype == 'application/pdf':
+            #~ att.pdf2image(800,1200)
+        #~ return att
 
     @api.multi
-    def pdf2image(self,dest_width, dest_height):
-        RESOLUTION = 300
+    def ocr2index(self):
         for attachment in self:
-            img = Image(blob=attachment.datas.decode('base64'),resolution=(RESOLUTION,RESOLUTION))
-            img.background_color = Color('white')
-            #img.resize(dest_width,dest_height)
-            attachment.image = img.make_blob(format='jpg').encode('base64')
+            process = subprocess.Popen(
+                ['tesseract', '-l','swe+eng','stdin', 'stdout'],
+                stdin=subprocess.PIPE, stdout=subprocess.PIPE,
+                stderr=subprocess.PIPE,
+            )
+            stdout, stderr = process.communicate(attachment.image.decode('base64'))
+            if process.returncode:
+                _logger.error('Error during OCR: %s', stderr)
+            if stdout:
+                attachment.index_content += u'%s' % stdout.decode('utf-8')

@@ -20,13 +20,13 @@
 ##############################################################################
 
 {
-    'name': 'Attachment PDF to Image',
-    'version': '0.2',
+    'name': 'Attachment OCR',
+    'version': '0.1',
     'category': '',
     'description': """
-Convert PDF Attachment to Image
-===================================
-PDF to image
+Attachment OCR
+==============
+Add a image filed for attachment, it shows in a notebook page in attachment management
 """,
     'author': 'Vertel AB',
     'website': 'http://www.vertel.se',

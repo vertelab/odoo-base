@@ -1,0 +1,23 @@
+<?xml version="1.0"?>
+<openerp>
+  <data noupdate="1">
+    <!-- server action -->
+    <record model="ir.actions.server" id="ocr2index">
+      <field name="name">OCR</field>
+      <field name="state">code</field>
+      <field name="condition" eval="True" />
+      <field name="model_id" ref="base.model_ir_attachment" />
+      <field name="code">
+for o in object.browse(context.get('active_ids', [])):
+    o.ocr2index()
+      </field>
+    </record>
+    <record model="ir.values" id="ocr2index_menu">
+      <field name="name">OCR</field>
+      <field name="model">ir.attachment</field>
+      <field name="key2">client_action_multi</field>
+      <field name="value" eval="'ir.actions.server,%d' % ocr2index" />
+    </record>
+  </data>
+
+</openerp>

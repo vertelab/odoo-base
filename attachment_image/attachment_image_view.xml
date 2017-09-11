@@ -7,7 +7,7 @@
             <field name="inherit_id" ref="attachment_notebook.view_attachment_form"/>
             <field name="arch" type="xml">
                 <notebook position="inside">
-                        <page string="Image">
+                        <page string="Image" attrs="{'invisible':[('image','=',None)]}">
                             <group rows="20">
                                 <field name="image" widget="image" class="oe_left oe_avatar" options="{&quot;preview_image&quot;: &quot;image&quot;,&quot;size&quot;: [800, 1200]}" nolabel="1" />
                             </group>
