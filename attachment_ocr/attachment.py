@@ -32,7 +32,7 @@ class ir_attachment(models.Model):
     #~ @api.model
     #~ def create(self, values):
         #~ att = super(ir_attachment, self).create(values)
-        #~ if att.mimetype == 'application/pdf':
+        #~ if att. == 'application/pdf':
             #~ att.pdf2image(800,1200)
         #~ return att
 
