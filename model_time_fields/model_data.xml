@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<openerp>
+    <data>
+        <!-- res.partner -->
+        <record id="action_time_fields" model="ir.actions.server">
+            <field name="name">Measure read times</field>
+            <field name="model_id" ref="product.model_product_template"/>
+            <field name="state">code</field>
+            <field name="code">res = []
+for field in object.fields_get():
+    start = datetime.datetime.now()
+    object.read([field])
+    dt = datetime.datetime.now() - start
+    res.append((float(dt.seconds) + float(dt.microseconds) / 1000000, field))
+res.sort(key=lambda f: f[0], reverse=True)
+raise Warning('\n'.join(['%.6f s:\t%s' % (t[0], t[1]) for t in res]))</field>
+        </record>
+    </data>
+</openerp>
