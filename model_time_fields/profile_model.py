@@ -2,7 +2,7 @@
 ##############################################################################
 #
 #    OpenERP, Open Source Management Solution, third party addon
-#    Copyright (C) 2017 Vertel AB (<http://vertel.se>).
+#    Copyright (C) 2004-2017 Vertel AB (<http://vertel.se>).
 #
 #    This program is free software: you can redistribute it and/or modify
 #    it under the terms of the GNU Affero General Public License as
@@ -18,20 +18,28 @@
 #    along with this program.  If not, see <http://www.gnu.org/licenses/>.
 #
 ##############################################################################
+from openerp import models, fields, api, _
+from openerp.exceptions import except_orm, Warning, RedirectWarning
+import base64
+from cStringIO import StringIO
 
-{
-    'name': 'Profile Model',
-    'version': '0.1',
-    'category': '',
-    'description': """
-Adds a serveraction for measuring loading times of object fields.
-""",
-    'author': 'Vertel AB',
-    'website': 'http://www.vertel.se',
-    'depends': ['base', 'sale'], # TODO: Remove sale
-    'data': ['model_data.xml'],
-    'qweb': ['static/src/xml/menu.xml'],
-    'application': False,
-    'installable': True,
-}
-# vim:expandtab:smartindent:tabstop=4s:softtabstop=4:shiftwidth=4:
+import logging
+_logger = logging.getLogger(__name__)
+
+
+class ProfileModel(models.TransientModel):
+    _name = 'profile.model'
+
+    model = fields.Many2one('ir.model')
+    profile_field = fields.Many2many('profile.model.field')
+    
+    @api.one
+    def profile(self,model):
+        return True
+
+class ProfileModelfield(models.TransientModel):
+    _name = 'profile.model.field'
+    
+    model = fields.Many2one('ir.model')
+    field = fields.Char()
+    time  = fields.Float()

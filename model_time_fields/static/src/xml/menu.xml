@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<templates>
+  <t t-extend="ViewManagerDebug">
+    <t t-jquery="option[value='print_workflow']" t-operation="after">
+      <option value="profile_model">Profile Model</option>
+    </t>
+  </t>
+</templates>
+
+<!--
+this.do_action({
+                    res_model: 'profile.model',
+                    views: [[false, 'form']],
+                    type: 'ir.actions.act_window',
+                    context: {
+                        search_default_model_id: this.dataset.model
+                        default_model_id: this.dataset.model
+                    }
+                });
+                
+ web/static/src/js/view.js#1064 
+ https://www.odoo.com/forum/help-1/question/what-is-t-jquery-in-qweb-72802
+               
+-->
