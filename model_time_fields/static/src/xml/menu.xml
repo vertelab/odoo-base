@@ -6,19 +6,3 @@
     </t>
   </t>
 </templates>
-
-<!--
-this.do_action({
-                    res_model: 'profile.model',
-                    views: [[false, 'form']],
-                    type: 'ir.actions.act_window',
-                    context: {
-                        search_default_model_id: this.dataset.model
-                        default_model_id: this.dataset.model
-                    }
-                });
-                
- web/static/src/js/view.js#1064 
- https://www.odoo.com/forum/help-1/question/what-is-t-jquery-in-qweb-72802
-               
--->

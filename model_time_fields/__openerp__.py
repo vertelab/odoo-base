@@ -28,7 +28,7 @@ Adds a serveraction for measuring loading times of object fields.
 """,
     'author': 'Vertel AB',
     'website': 'http://www.vertel.se',
-    'depends': ['base', 'sale'], # TODO: Remove sale
+    'depends': ['web'],
     'data': ['model_data.xml'],
     'qweb': ['static/src/xml/menu.xml'],
     'application': False,

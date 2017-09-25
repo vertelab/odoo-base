@@ -20,8 +20,7 @@
 ##############################################################################
 from openerp import models, fields, api, _
 from openerp.exceptions import except_orm, Warning, RedirectWarning
-import base64
-from cStringIO import StringIO
+from datetime import datetime
 
 import logging
 _logger = logging.getLogger(__name__)
@@ -30,16 +29,46 @@ _logger = logging.getLogger(__name__)
 class ProfileModel(models.TransientModel):
     _name = 'profile.model'
 
-    model = fields.Many2one('ir.model')
-    profile_field = fields.Many2many('profile.model.field')
+    object_id = fields.Reference(selection=[], string='Model', required=True)
+    profile_fields = fields.One2many(comodel_name='profile.model.field', inverse_name='profile_id', compute='_profile_fields')
     
     @api.one
-    def profile(self,model):
-        return True
+    @api.depends('object_id')
+    @api.onchange('object_id')
+    def _profile_fields(self):
+        self.profile_fields = self.env['profile.model.field'].browse()
+        res = []
+        if not self.object_id:
+            return
+        for field in self.object_id.fields_get():
+            start = datetime.now()
+            self.object_id.read([field])
+            dt = datetime.now() - start
+            res.append((float(dt.seconds) + float(dt.microseconds) / 1000000, field))
+        res.sort(key=lambda f: f[0], reverse=True)
+        for f in res:
+            self.profile_fields |= self.env['profile.model.field'].create({
+                'field': f[1],
+                'time': f[0],
+            })
+
+    @api.model
+    def profile(self, model, id):
+        _logger.warn('\n\nmodel: %s\nids: %s\n\n' % (model, id))
+        profile = self.create({'object_id' : '%s,%s' % (model, id)})
+        return {
+                    'res_model': 'profile.model',
+                    'res_id': profile.id,
+                    'views': [[False, 'form']],
+                    'type': 'ir.actions.act_window',
+                    'view_type': 'form',
+                    'target': 'new',
+                    'context': {},
+                }
 
 class ProfileModelfield(models.TransientModel):
     _name = 'profile.model.field'
     
-    model = fields.Many2one('ir.model')
-    field = fields.Char()
-    time  = fields.Float()
+    profile_id = fields.Many2one('profile.model')
+    field = fields.Char(string='Field')
+    time  = fields.Float(string='Time (s)', digits=(10, 6))
