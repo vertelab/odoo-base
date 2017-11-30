@@ -1,0 +1,4 @@
+"id","name","model_id:id","group_id:id","perm_read","perm_write","perm_create","perm_unlink"
+"access_opening_hours_group_partner_manager","opening.hours.manager","model_opening_hours","base.group_partner_manager",1,1,1,1
+"access_opening_hours_group_user","opening.hours.user","model_opening_hours","base.group_user",1,0,0,0
+"access_opening_hours_public","opening.hours.public","model_opening_hours",,1,0,0,0

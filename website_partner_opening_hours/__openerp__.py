@@ -30,7 +30,7 @@ Add opening hours for a partner
     'author': 'Vertel AB',
     'website': 'http://www.vertel.se',
     'depends': ['base'],
-    'data': ['res_partner_view.xml',],
+    'data': ['res_partner_view.xml', 'security/ir.model.access.csv',],
     'application': False,
     'installable': True,
 }
