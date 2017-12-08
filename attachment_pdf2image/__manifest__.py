@@ -1,8 +1,8 @@
 # -*- coding: utf-8 -*-
 ##############################################################################
 #
-#    OpenERP, Open Source Management Solution, third party addon
-#    Copyright (C) 2004-2015 Vertel AB (<http://vertel.se>).
+#    Odoo, Open Source Enterprise Management Solution, third party addon
+#    Copyright (C) 2017 Vertel AB (<http://vertel.se>).
 #
 #    This program is free software: you can redistribute it and/or modify
 #    it under the terms of the GNU Affero General Public License as
@@ -20,18 +20,18 @@
 ##############################################################################
 
 {
-    'name': 'Attachment Image',
+    'name': 'Attachment PDF to Image',
     'version': '0.1',
     'category': '',
     'description': """
-Attachment Image
+Convert PDF Attachment to Image
 ===================================
-Add a image filed for attachment, it shows in a notebook page in attachment management
+PDF to image
 """,
     'author': 'Vertel AB',
     'website': 'http://www.vertel.se',
-    'depends': ['attachment_notebook'],
-    'data': ['attachment_image_view.xml'],
+    'depends': ['attachment_image'],
+    'data': ['views/attachment_data.xml'],
     'application': False,
     'installable': True,
 }

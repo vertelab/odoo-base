@@ -1,5 +1,5 @@
 <?xml version="1.0"?>
-<openerp>
+<odoo>
   <data noupdate="1">
     <!-- server action -->
     <record model="ir.actions.server" id="pdf2image">
@@ -20,4 +20,4 @@ for o in object.browse(context.get('active_ids', [])):
     </record>
   </data>
 
-</openerp>
+</odoo>
