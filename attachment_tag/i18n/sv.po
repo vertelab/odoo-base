@@ -1,0 +1,86 @@
+# Translation of Odoo Server.
+# This file contains the translation of the following modules:
+# 	* attachment_tag
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: Odoo Server 8.0-20171009\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2018-01-25 10:40+0000\n"
+"PO-Revision-Date: 2018-01-25 11:43+0100\n"
+"Last-Translator: <>\n"
+"Language-Team: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: \n"
+"Language: sv\n"
+"X-Generator: Poedit 2.0.4\n"
+
+#. module: attachment_tag
+#: model:ir.actions.act_window,name:attachment_tag.action_attachment_tag
+#: model:ir.ui.menu,name:attachment_tag.menu_action_attachment_tag
+msgid "Attachment Tags"
+msgstr "Bilageetiketter"
+
+#. module: attachment_tag
+#: view:ir.attachment.tag:attachment_tag.view_attachment_tag_search
+msgid "Attachments"
+msgstr "Bilagor"
+
+#. module: attachment_tag
+#: field:ir.attachment.tag,create_uid:0
+msgid "Created by"
+msgstr "Created by"
+
+#. module: attachment_tag
+#: field:ir.attachment.tag,create_date:0
+msgid "Created on"
+msgstr "Created on"
+
+#. module: attachment_tag
+#: field:ir.attachment.tag,display_name:0
+msgid "Display Name"
+msgstr "Display Name"
+
+#. module: attachment_tag
+#: field:ir.attachment.tag,id:0
+msgid "ID"
+msgstr "ID"
+
+#. module: attachment_tag
+#: field:ir.attachment.tag,__last_update:0
+msgid "Last Modified on"
+msgstr "Last Modified on"
+
+#. module: attachment_tag
+#: field:ir.attachment.tag,write_uid:0
+msgid "Last Updated by"
+msgstr "Last Updated by"
+
+#. module: attachment_tag
+#: field:ir.attachment.tag,write_date:0
+msgid "Last Updated on"
+msgstr "Last Updated on"
+
+#. module: attachment_tag
+#: field:ir.attachment.tag,name:0
+msgid "Name"
+msgstr "Namn"
+
+#. module: attachment_tag
+#: view:ir.attachment.tag:attachment_tag.view_attachment_tag_form
+#: view:ir.attachment.tag:attachment_tag.view_attachment_tag_tree
+msgid "Tag"
+msgstr "Etikett"
+
+#. module: attachment_tag
+#: field:ir.attachment,tag_ids:0
+#: view:ir.attachment.tag:attachment_tag.view_attachment_tag_search
+msgid "Tags"
+msgstr "Etiketter"
+
+#. module: attachment_tag
+#: view:ir.attachment:attachment_tag.view_attachment_form
+msgid "Tags..."
+msgstr "Etiketter..."

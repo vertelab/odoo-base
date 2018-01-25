@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="utf-8"?>
+<openerp>
+    <data>
+        <record id="view_attachment_form" model="ir.ui.view">
+            <field name="name">ir.attachment.form.inherited.attachment_tag</field>
+            <field name="model">ir.attachment</field>
+            <field name="inherit_id" ref="base.view_attachment_form"/>
+            <field name="arch" type="xml">
+                <group position="before">
+                    <field name="tag_ids" widget="many2many_tags" placeholder="Tags..."/>
+                </group>
+            </field>
+        </record>
+        <record id="view_attachment_tag_form" model="ir.ui.view">
+            <field name="name">ir.attachment.tag.form</field>
+            <field name="model">ir.attachment.tag</field>
+            <field name="arch" type="xml">
+                <form string="Tag">
+                    <sheet>
+                        <label for="name" class="oe_edit_only"/>
+                        <h1>
+                            <field name="name"/>
+                        </h1>
+                    </sheet>
+                </form>
+            </field>
+        </record>
+        <record id="view_attachment_tag_tree" model="ir.ui.view">
+            <field name="name">ir.attachment.tag.tree</field>
+            <field name="model">ir.attachment.tag</field>
+            <field name="arch" type="xml">
+                <tree string="Tag">
+                    <field name="name"/>
+                </tree>
+            </field>
+        </record>
+        <record id="view_attachment_tag_search" model="ir.ui.view">
+            <field name="model">ir.attachment.tag.search</field>
+            <field name="model">ir.attachment.tag</field>
+            <field name="arch" type="xml">
+                <search string="Attachments">
+                    <field name="name" filter_domain="[('name','ilike',self)]" string="Tags"/>
+                </search>
+            </field>
+        </record>
+        <record id="action_attachment_tag" model="ir.actions.act_window">
+            <field name="name">Attachment Tags</field>
+            <field name="type">ir.actions.act_window</field>
+            <field name="res_model">ir.attachment.tag</field>
+            <field name="view_type">form</field>
+            <field name="view_mode">tree,form</field>
+            <field name="view_id" eval="False"/>
+            <field name="search_view_id" ref="view_attachment_tag_search"/>
+        </record>
+        <menuitem action="action_attachment_tag" id="menu_action_attachment_tag" parent="base.next_id_9"/>
+    </data>
+</openerp>
