@@ -52,3 +52,23 @@ class res_partner(models.Model):
                 markers += marker_tmp %(partner.id, partner.name, pos['lat'], pos['lng'], icon)
             return map_tmp %(center['lat'], center['lng'], zoom, markers)
         return ''
+
+    @api.multi
+    def get_position(self):
+        #~ url = ''
+        #~ if not self.partner_latitude and (self.street or self.street2):
+            #~ url = u'https://maps.googleapis.com/maps/api/geocode/json?address=%s,%s,%s,%s' %(self.street if (self.street and not self.street2) else self.street2, self.zip, self.city, self.country_id.name)
+            #~ try:
+                #~ geo_info = urllib.urlopen(url.encode('ascii', 'xmlcharrefreplace')).read()
+                #~ geo = json.loads(geo_info)
+                #~ result = geo.get('results')
+                #~ if len(result) > 0:
+                    #~ geometry = result[0].get("geometry")
+                    #~ if geometry:
+                        #~ self.partner_latitude = geometry["location"]["lat"]
+                        #~ self.partner_longitude = geometry["location"]["lng"]
+            #~ except ValueError as e:
+                #~ _logger.error(e)
+        if self.partner_latitude == 0.0 and self.partner_longitude == 0.0:
+            self.geo_localize()
+        return {'lat': self.partner_latitude, "lng": self.partner_longitude}

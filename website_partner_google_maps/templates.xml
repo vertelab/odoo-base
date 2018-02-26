@@ -6,6 +6,7 @@
             <script>
                 <t t-esc="request.env['res.partner'].get_map(zoom=zoom, center=center, partners=partners, icon=icon)"/>
             </script>
+            <script t-att-src="'https://maps.googleapis.com/maps/api/js?key=%s&amp;callback=initMap' %api_key"></script>
         </template>
     </data>
 </openerp>
