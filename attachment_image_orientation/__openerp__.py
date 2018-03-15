@@ -29,6 +29,7 @@ Attachment Image Orientation
 Image Orientation
 """,
     'author': 'Vertel AB',
+    'license': 'AGPL-3',
     'website': 'http://www.vertel.se',
     'depends': ['attachment_image'],
     'data': [],

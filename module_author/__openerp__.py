@@ -28,6 +28,7 @@ Group by module author
 ===================================
 """,
     'author': 'Vertel AB',
+    'license': 'AGPL-3',
     'website': 'http://www.vertel.se',
     'depends': ['base'],
     'data': ['module_author.xml',],

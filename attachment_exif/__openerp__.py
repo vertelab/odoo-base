@@ -29,6 +29,7 @@ Attachment Exif
 * read and write exif data.
 """,
     'author': 'Vertel AB',
+    'license': 'AGPL-3',
     'website': 'http://www.vertel.se',
     'depends': ['attachment_notebook'],
     'data': ['ir_attachment_view.xml'],

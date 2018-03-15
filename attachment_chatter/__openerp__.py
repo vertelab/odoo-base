@@ -29,6 +29,7 @@ Add chatter in ir.attachment
 
 """,
     'author': 'Vertel AB',
+    'license': 'AGPL-3',
     'website': 'http://www.vertel.se',
     'depends': ['document'],
     'data': [

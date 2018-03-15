@@ -34,6 +34,7 @@ to often to a recipient.
 
 """,
     'author': 'Vertel AB',
+    'license': 'AGPL-3',
     'website': 'http://www.vertel.se',
     'depends': ['mail', ],
     'data': ['mail_nodup_data.xml'],

@@ -29,6 +29,7 @@ Attachment Image
 Add a image filed for attachment, it shows in a notebook page in attachment management
 """,
     'author': 'Vertel AB',
+    'license': 'AGPL-3',
     'website': 'http://www.vertel.se',
     'depends': ['attachment_notebook'],
     'data': ['attachment_image_view.xml'],

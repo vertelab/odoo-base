@@ -29,6 +29,7 @@ Add permissions to server actions using groups. The implementation are
 similar to Reports permissions.
 """,
     'author': 'Vertel AB',
+    'license': 'AGPL-3',
     'website': 'http://www.vertel.se',
     'depends': ['base',],
     'data': [

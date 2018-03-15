@@ -28,6 +28,7 @@ Add opening hours for a partner
 ===============================
 """,
     'author': 'Vertel AB',
+    'license': 'AGPL-3',
     'website': 'http://www.vertel.se',
     'depends': ['base'],
     'data': ['res_partner_view.xml', 'security/ir.model.access.csv',],

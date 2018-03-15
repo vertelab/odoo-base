@@ -33,6 +33,7 @@ This module needs the package incron to be installed (apt install incron)
 
 """,
     'author': 'Vertel AB',
+    'license': 'AGPL-3',
     'website': 'http://www.vertel.se',
     'depends': ['document','attachment_exif'],
     'external_dependencies': {

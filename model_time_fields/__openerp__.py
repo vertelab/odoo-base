@@ -27,6 +27,7 @@
 Adds a serveraction for measuring loading times of object fields.
 """,
     'author': 'Vertel AB',
+    'license': 'AGPL-3',
     'website': 'http://www.vertel.se',
     'depends': ['web'],
     'data': ['model_data.xml'],

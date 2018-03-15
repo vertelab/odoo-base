@@ -30,6 +30,7 @@ Attachment Attributes
 Adds attributes to an attachment
 """,
     'author': 'Vertel AB',
+    'license': 'AGPL-3',
     'website': 'http://www.vertel.se',
     'depends': ['attachment_notebook', 'document'],
     'data': ['ir_attachment_view.xml'],

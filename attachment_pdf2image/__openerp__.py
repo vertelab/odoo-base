@@ -29,6 +29,7 @@ Convert PDF Attachment to Image
 PDF to image
 """,
     'author': 'Vertel AB',
+    'license': 'AGPL-3',
     'website': 'http://www.vertel.se',
     'depends': ['attachment_image'],
     'data': ['attachment_data.xml'],

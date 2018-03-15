@@ -30,6 +30,7 @@ Relations:
 res.country 1-m res.district 1-m res.partner
 """,
     'author': 'Vertel AB',
+    'license': 'AGPL-3',
     'website': 'http://www.vertel.se',
     'depends': ['base',],
     'data': [
