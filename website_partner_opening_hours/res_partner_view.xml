@@ -21,7 +21,7 @@
             <field name="inherit_id" ref="base.view_partner_form"/>
             <field name="arch" type="xml">
                 <notebook position="inside">
-                    <page string="Opening Time" attrs="{'invisible': [('is_reseller', '=', False)]}">
+                    <page string="Opening Time" attrs="{'invisible': [('is_company', '=', False)]}">
                         <field name="opening_hours_ids">
                             <tree editable="bottom">
                                 <field name="dayofweek"/>
