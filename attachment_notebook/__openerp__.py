@@ -27,6 +27,7 @@
 Adds a notebook for other modules to populate with more functionality
 """,
     'author': 'Vertel AB',
+    'license': 'AGPL-3',
     'website': 'http://www.vertel.se',
     'depends': ['document',],
     'data': ['ir_attachment_view.xml'],
