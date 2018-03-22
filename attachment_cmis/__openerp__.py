@@ -31,7 +31,7 @@ Attachment CMIS
     'author': 'Vertel AB',
     'license': 'AGPL-3',
     'website': 'http://www.vertel.se',
-    'depends': ['base'],
+    'depends': ['document'],
     'data': ['ir_attachment_view.xml'],
      'external_dependencies': {
         'python': ['cmislib'],
