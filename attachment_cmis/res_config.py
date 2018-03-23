@@ -18,25 +18,26 @@
 #    along with this program.  If not, see <http://www.gnu.org/licenses/>.
 #
 ##############################################################################
+from openerp import models, fields, api, _
+import logging
+_logger = logging.getLogger(__name__)
 
-{
-    'name': 'Attachment CMIS',
-    'version': '0.1',
-    'category': 'Document',
-    'description': """
-Attachment CMIS
-===============
-* Upload and download attachment to Remote server use Chemistry.
-""",
-    'author': 'Vertel AB',
-    'license': 'AGPL-3',
-    'website': 'http://www.vertel.se',
-    'depends': ['document'],
-    'data': ['ir_attachment_view.xml', 'res_config_view.xml'],
-     'external_dependencies': {
-        'python': ['cmislib'],
-    },
-    'application': False,
-    'installable': True,
-}
-# vim:expandtab:smartindent:tabstop=4s:softtabstop=4:shiftwidth=4:
+
+class remote_server_configuration(models.TransientModel):
+    _name = 'remote.server.configuration'
+    _inherit = 'res.config.settings'
+
+    remote_server = fields.Selection([], string='Select Remote Server')
+
+    @api.model
+    def get_default_remote_server_values(self, fields):
+        icp = self.env['ir.config_parameter']
+        return {
+            'remote_server': icp.get_param('attachment_cmis.remote_server'),
+        }
+
+    @api.multi
+    def set_remote_server_values(self):
+        icp = self.env['ir.config_parameter']
+        for record in self:
+            icp.set_param(key="attachment_cmis.remote_server", value=record.remote_server)

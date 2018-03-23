@@ -20,22 +20,20 @@
 ##############################################################################
 
 {
-    'name': 'Attachment CMIS',
+    'name': 'CMIS Alfresco',
     'version': '0.1',
-    'category': 'Document',
+    'category': '',
     'description': """
-Attachment CMIS
-===============
-* Upload and download attachment to Remote server use Chemistry.
+CMIS Alfresco
+=============
+* Communicate with Alfresco server.
 """,
     'author': 'Vertel AB',
     'license': 'AGPL-3',
     'website': 'http://www.vertel.se',
-    'depends': ['document'],
-    'data': ['ir_attachment_view.xml', 'res_config_view.xml'],
-     'external_dependencies': {
-        'python': ['cmislib'],
-    },
+    'depends': ['attachment_cmis'],
+    'data': ['res_config_view.xml'],
+     'external_dependencies': {},
     'application': False,
     'installable': True,
 }

@@ -19,6 +19,7 @@
 #
 ##############################################################################
 from openerp import models, fields, api, _
+from openerp.exceptions import Warning
 from cStringIO import StringIO
 try:
     import cmislib
@@ -30,10 +31,6 @@ import logging
 _logger = logging.getLogger(__name__)
 
 # Documentation: https://chemistry.apache.org/python/docs/examples.html
-
-CLIENT_PATH = 'http://192.168.1.124:8080/alfresco/cmisatom'
-LOGIN = 'admin'
-PASSWORD = 'admin'
 
 
 class ir_attachment(models.Model):
@@ -52,6 +49,8 @@ class ir_attachment(models.Model):
         else:
             try:
                 repo = self.get_repo()
+                # acl = repo.getObject(xxx).getACL()
+                # acl.entries.values()[0].permission
                 self.datas = repo.getObject(self.store_fname).getContentStream().read().encode('base64')
             except Exception as e:
                 self.datas = None
@@ -64,7 +63,7 @@ class ir_attachment(models.Model):
         if ((self.store_fname) and ('workspace' not in self.store_fname)) or not self.store_fname:
             try:
             #~ doc = repo.createDocument(attach.name, properties={}, parentFolder=attach.parent_id.name, contentFile=StringIO(value), contentType=None, contentEncoding=None)
-                self.store_fname = repo.createDocument(self.name.replace('/', '_'), parentFolder=self.get_directory(self.res_model), contentFile=StringIO(self.datas.decode('base64'))).id
+                self.store_fname = repo.createDocument(self.name.replace('/', '_'), parentFolder=self.get_directory(self.res_model), contentFile=StringIO(self.datas.decode('base64'))).id.getProperties().get('cmis:versionSeriesId')
             except Exception as e:
                 _logger.warn('CMIS set create document except: %s' %e)
         else:
@@ -72,7 +71,7 @@ class ir_attachment(models.Model):
             try:
                 doc = repo.getObject(self.store_fname).checkout()
                 doc.setContentStream(contentFile=StringIO(self.datas.decode('base64')))
-                doc.checkin(checkinComment='Checked In by Odoo')
+                doc.checkin(checkinComment='Checked In by Odoo: %s' %self.env.user.login)
             except Exception as e:
                 _logger.warn('CMIS set checkin/out except: %s' %e)
 
@@ -91,8 +90,13 @@ class ir_attachment(models.Model):
 
     @api.model
     def get_repo(self):
+        icp = self.env['ir.config_parameter']
+        values = icp.get_param('attachment_cmis.remote_server')
+        client_path = values.split(',')[0]
+        admin_login = values.split(',')[1]
+        admin_password = values.split(',')[2]
         try:
-            client = CmisClient(CLIENT_PATH, LOGIN, PASSWORD)
+            client = CmisClient('http://192.168.1.124:8080/alfresco/cmisatom', 'admin@vertel.se', 'admin')
         except Exception as e:
             _logger.warn('get repo: %s' %e)
         return client.defaultRepository
@@ -107,6 +111,10 @@ class ir_attachment(models.Model):
                 else:
                     folder_obj = repo.getObjectByPath('/%s/%s' %('/'.join(parent.getPaths()[0].split('/')[1:]), folder))
             except:
+                # acl = folder_obj.getACL()
+                # acl.addEntry('GROUP_EVERYONE', 'cmis:write', 'true')
+                # folder_obj.applyACL(acl)
+                # folder_obj.getACL().getEntries().get('GROUP_EVERYONE').permissions
                 folder_obj = parent.createFolder(folder, properties={})
             return folder_obj
         parent = repo.getRootFolder()
@@ -136,6 +144,15 @@ class ir_attachment(models.Model):
         if directory.remote_id == '':
             directory.remote_id = folder.id
         return folder
+
+    def cron_sync(self):
+        repo = self.get_repo()
+        # get latest token from a system paramet?
+        #~ token = repo.info['latestChangeLogToken']
+        #~ changes = repo.getContentChanges(changeLogToken='0')
+        #~ for c in changes:
+            #~ if c.changeType == 'created':
+                #~ repo.getObject(c.objectId)
 
 
 class document_directory(models.Model):
