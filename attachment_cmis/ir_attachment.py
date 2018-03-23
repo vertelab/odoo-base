@@ -41,9 +41,60 @@ class ir_attachment(models.Model):
 
     datas = fields.Binary(compute='_cmis_get', inverse='_cmis_set', string='File Content', nodrop=True)
 
+    @api.one
+    def _cmis_get(self):
+        if self.store_fname and 'workspace' not in self.store_fname:
+            try:
+                self.datas = open(self._full_path(self.store_fname),'rb').read().encode('base64')
+            except IOError:
+                self.datas = None
+                _logger.error("CMIS get fileread: %s", self._full_path(self.store_fname))
+        else:
+            try:
+                repo = self.get_repo()
+                self.datas = repo.getObject(self.store_fname).getContentStream().read().encode('base64')
+            except Exception as e:
+                self.datas = None
+                _logger.warn('CMIS get datas except: %s' %e)
+
+    @api.one
+    def _cmis_set(self):
+        file_size = len(self.datas.decode('base64'))
+        repo = self.get_repo()
+        if ((self.store_fname) and ('workspace' not in self.store_fname)) or not self.store_fname:
+            try:
+            #~ doc = repo.createDocument(attach.name, properties={}, parentFolder=attach.parent_id.name, contentFile=StringIO(value), contentType=None, contentEncoding=None)
+                self.store_fname = repo.createDocument(self.name.replace('/', '_'), parentFolder=self.get_directory(self.res_model), contentFile=StringIO(self.datas.decode('base64'))).id
+            except Exception as e:
+                _logger.warn('CMIS set create document except: %s' %e)
+        else:
+            # checkout and checkin
+            try:
+                doc = repo.getObject(self.store_fname).checkout()
+                doc.setContentStream(contentFile=StringIO(self.datas.decode('base64')))
+                doc.checkin(checkinComment='Checked In by Odoo')
+            except Exception as e:
+                _logger.warn('CMIS set checkin/out except: %s' %e)
+
+    #~ @api.model
+    #~ def create(self, values):
+        #~ if (not values.get('parent_id', False)) and (values.get('res_model', False)):
+            #~ values['parent_id'] = self.get_directory(values['res_model']).id
+        #~ att = super(ir_attachment, self).create(values)
+        #~ return att
+
+    #~ @api.multi
+    #~ def write(self, vals):
+        #~ if (not vals.get('parent_id', False)) and (vals['res_model']):
+            #~ vals['parent_id'] = self.get_directory(vals['res_model']).id
+        #~ return super(ir_attachment, self).write(vals)
+
     @api.model
     def get_repo(self):
-        client = CmisClient(CLIENT_PATH, LOGIN, PASSWORD)
+        try:
+            client = CmisClient(CLIENT_PATH, LOGIN, PASSWORD)
+        except Exception as e:
+            _logger.warn('get repo: %s' %e)
         return client.defaultRepository
 
     @api.model
@@ -65,58 +116,6 @@ class ir_attachment(models.Model):
                 folder_obj = _get_folder(parent, folder)
                 parent = folder_obj
         return folder_obj
-
-    @api.one
-    def _cmis_get(self):
-        if self.store_fname and 'workspace' not in self.store_fname:
-            r = ''
-            try:
-                r = open(self._full_path(self.store_fname),'rb').read().encode('base64')
-            except IOError:
-                _logger.exception("_read_file reading %s", self._full_path(self.store_fname))
-            self.datas = r
-        else:
-            self.datas = self._file_read_cmis(self.store_fname)
-
-    @api.model
-    def _file_read_cmis(self, fname):
-        repo = self.get_repo()
-        r = ''
-        try:
-            r = repo.getObject(fname).getContentStream().read().encode('base64')
-        except:
-            _logger.warn("_read_file reading %s", fname)
-            return None
-        #~ if bin_size:
-            #~ r = repo.getObject(fname).getProperties().get('cmis:contentStreamLength')
-        return r
-
-    @api.one
-    def _cmis_set(self):
-        file_size = len(self.datas.decode('base64'))
-        repo = self.get_repo()
-        if (self.store_fname and 'workspace' not in self.store_fname) or not self.store_fname:
-            #~ doc = repo.createDocument(attach.name, properties={}, parentFolder=attach.parent_id.name, contentFile=StringIO(value), contentType=None, contentEncoding=None)
-            self.store_fname = repo.createDocument(self.name.replace('/', '_'), parentFolder=self.get_directory(self.res_model), contentFile=StringIO(self.datas.decode('base64'))).id
-        else:
-            # checkout and checkin
-            doc = repo.getObject(self.store_fname).checkout()
-            doc.setContentStream(contentFile=StringIO(self.datas.decode('base64')))
-            doc.checkin(checkinComment='Checked In by Odoo')
-
-
-    #~ @api.model
-    #~ def create(self, values):
-        #~ if (not values.get('parent_id', False)) and (values.get('res_model', False)):
-            #~ values['parent_id'] = self.get_directory(values['res_model']).id
-        #~ att = super(ir_attachment, self).create(values)
-        #~ return att
-
-    #~ @api.multi
-    #~ def write(self, vals):
-        #~ if (not vals.get('parent_id', False)) and (vals['res_model']):
-            #~ vals['parent_id'] = self.get_directory(vals['res_model']).id
-        #~ return super(ir_attachment, self).write(vals)
 
     @api.model
     def get_directory(self, res_model):
