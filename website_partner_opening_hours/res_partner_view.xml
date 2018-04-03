@@ -32,6 +32,8 @@
                                 <field name="close"/>
                             </tree>
                         </field>
+                        <label for="opening_hours_exceptions"/>
+                        <field name="opening_hours_exceptions"/>
                     </page>
                 </notebook>
             </field>

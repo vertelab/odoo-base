@@ -63,3 +63,4 @@ class res_partner(models.Model):
     _inherit = 'res.partner'
 
     opening_hours_ids = fields.One2many(comodel_name='opening.hours', inverse_name='partner_id', string='Opening Hours')
+    opening_hours_exceptions = fields.Text(string='Exceptions', help="Holidays etc", translate=True)
