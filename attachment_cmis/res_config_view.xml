@@ -2,18 +2,14 @@
 <openerp>
     <data>
 
-        <record id="view_remote_server_configuration" model="ir.ui.view">
-            <field name="name">Remote Server Settings</field>
-            <field name="model">remote.server.configuration</field>
+        <record id="view_knowledge_configuration" model="ir.ui.view">
+            <field name="name">knowledge.config.settings.remote_server</field>
+            <field name="model">knowledge.config.settings</field>
+            <field name="inherit_id" ref="knowledge.view_knowledge_configuration"/>
             <field name="arch" type="xml">
-                <form string="Configure Remote Server" class="oe_form_configuration">
-                    <header>
-                        <button string="Apply" type="object" name="execute" class="oe_highlight"/>
-                        or
-                        <button string="Cancel" type="object" name="cancel" class="oe_link"/>
-                    </header>
-                    <separator string="Remote Server"/>
-                    <group>
+                <form position="inside">
+                    <separator string="CMIS Server"/>
+                    <group name="remote_server">
                         <label for="remote_server" string="Remote Server"/>
                         <div>
                             <div>
@@ -24,17 +20,6 @@
                 </form>
             </field>
         </record>
-
-        <record id="action_remote_server_configuration" model="ir.actions.act_window">
-            <field name="name">Configure Remote Server Settings</field>
-            <field name="res_model">remote.server.configuration</field>
-            <field name="view_id" ref="attachment_cmis.view_remote_server_configuration"/>
-            <field name="view_mode">form</field>
-            <field name="target">inline</field>
-        </record>
-
-        <menuitem id="menu_remote_server_configuration" name="Remote Server Settings" parent="base.menu_config"
-            sequence="50" action="attachment_cmis.action_remote_server_configuration"/>
 
     </data>
 </openerp>

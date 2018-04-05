@@ -61,11 +61,20 @@ class ir_attachment(models.Model):
         file_size = len(self.datas.decode('base64'))
         repo = self.get_repo()
         if ((self.store_fname) and ('workspace' not in self.store_fname)) or not self.store_fname:
+            parent = self.env['document.directory'].model2dir(self)
             try:
-            #~ doc = repo.createDocument(attach.name, properties={}, parentFolder=attach.parent_id.name, contentFile=StringIO(value), contentType=None, contentEncoding=None)
-                self.store_fname = repo.createDocument(self.name.replace('/', '_'), parentFolder=self.get_directory(self.res_model), contentFile=StringIO(self.datas.decode('base64'))).id.getProperties().get('cmis:versionSeriesId')
+                doc = repo.createDocument(self.name.replace('/', '_'), 
+                    parentFolder=self.env['document.directory'].model2dir(self).id, 
+                    contentFile=StringIO(self.datas.decode('base64')))
+                
             except Exception as e:
                 _logger.warn('CMIS set create document except: %s' %e)
+                return None
+            try:
+                self.store_fname = doc.getProperties().get('cmis:versionSeriesId')
+            except Exception as e:
+                _logger.warn('CMIS set get document properties except: %s' %e)
+                return None
         else:
             # checkout and checkin
             try:
@@ -101,50 +110,6 @@ class ir_attachment(models.Model):
             _logger.warn('get repo: %s' %e)
         return client.defaultRepository
 
-    @api.model
-    def get_folder(self, path):
-        repo = self.get_repo()
-        def _get_folder(parent, folder):
-            try:
-                if parent.getPaths()[0] == '/':
-                    folder_obj = repo.getObjectByPath('/%s' %(folder))
-                else:
-                    folder_obj = repo.getObjectByPath('/%s/%s' %('/'.join(parent.getPaths()[0].split('/')[1:]), folder))
-            except:
-                # acl = folder_obj.getACL()
-                # acl.addEntry('GROUP_EVERYONE', 'cmis:write', 'true')
-                # folder_obj.applyACL(acl)
-                # folder_obj.getACL().getEntries().get('GROUP_EVERYONE').permissions
-                folder_obj = parent.createFolder(folder, properties={})
-            return folder_obj
-        parent = repo.getRootFolder()
-        folder_obj = None
-        for folder in path.split('/'):
-            if folder != '':
-                folder_obj = _get_folder(parent, folder)
-                parent = folder_obj
-        return folder_obj
-
-    @api.model
-    def get_directory(self, res_model):
-        models_directory = self.env['document.directory'].search([('name', '=', 'odoo_models'), ('parent_id', '=', False)])
-        if not models_directory:
-            models_directory = self.env['document.directory'].create({
-                'name': 'odoo_models',
-                'user_id': self.env.ref('base.user_root').id,
-            })
-        directory = self.env['document.directory'].search([('name', '=', res_model or 'other'), ('parent_id', '=', models_directory.id)])
-        if not directory:
-            directory = self.env['document.directory'].create({
-                'name': res_model or 'other',
-                'user_id': self.env.ref('base.user_root').id,
-                'parent_id': models_directory.id,
-            })
-        folder = self.get_folder('/odoo_models/%s' %directory.name)
-        if directory.remote_id == '':
-            directory.remote_id = folder.id
-        return folder
-
     def cron_sync(self):
         repo = self.get_repo()
         # get latest token from a system paramet?
@@ -159,3 +124,54 @@ class document_directory(models.Model):
     _inherit = 'document.directory'
 
     remote_id = fields.Char(string='Remote ID')
+
+    @api.one
+    def check_remote_id(self,folder):
+        if not self.remote_id:
+            repo = self.env['ir.attachment'].get_repo()
+            parent = repo.getRootFolder()
+            folder_obj = None
+            for f in folder.split('/'):
+                if f != '':
+                    try:
+                        if parent.getPaths()[0] == '/':
+                            folder_obj = repo.getObjectByPath('/%s' %(f))
+                        else:
+                            folder_obj = repo.getObjectByPath('/'.join(parent.getPaths()[0].split('/')+[f]))
+                    except Exception as e:
+                        # acl = folder_obj.getACL()
+                        # acl.addEntry('GROUP_EVERYONE', 'cmis:write', 'true')
+                        # folder_obj.applyACL(acl)
+                        # folder_obj.getACL().getEntries().get('GROUP_EVERYONE').permissions
+                        _logger.warn('GetObjectByPath: %s' % e)
+                        folder_obj = None
+                        try:
+                            folder_obj = parent.createFolder(f, properties={})
+                        except Exception as e:
+                            _logger.warn('Create Folder: %s' %e)
+                    parent = folder_obj
+                _logger.warn('folder %s %s' % (f,folder_obj))
+            _logger.warn('folder II %s' % (folder_obj))
+            
+            self.remote_id = folder_obj.id
+
+
+    @api.model
+    def model2dir(self, attachment):
+        def _check_dir(dirname,parent_id,user_id,folder):
+            directory = self.env['document.directory'].search([('name', '=', dirname), ('parent_id', '=', parent_id)],limit=1)
+            if not directory:
+                directory = self.env['document.directory'].create({
+                    'name': dirname,
+                    'user_id': user_id,
+                    'parent_id': parent_id,
+                })
+            directory.check_remote_id(folder)
+            _logger.warn('_check_dir %s %s' % (directory.name,directory.remote_id))
+            return directory
+        odoo_directory = _check_dir('odoo_models',False,self.env.ref('base.user_root').id,'/odoo_models')
+        models_directory = _check_dir(attachment.res_model,odoo_directory.id,self.env.ref('base.user_root').id,'/odoo_models/%s' % attachment.res_model)
+        object_directory = _check_dir('%s_%s' % (attachment.res_model,attachment.res_id),models_directory.id,self.env.ref('base.user_root').id,'/odoo_models/%s/%s' %(attachment.res_model,'%s_%s' % (attachment.res_model,attachment.res_id)))
+        return self.env['ir.attachment'].get_repo().getObject(object_directory.remote_id)
+        
+

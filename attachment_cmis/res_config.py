@@ -24,8 +24,7 @@ _logger = logging.getLogger(__name__)
 
 
 class remote_server_configuration(models.TransientModel):
-    _name = 'remote.server.configuration'
-    _inherit = 'res.config.settings'
+    _inherit = 'knowledge.config.settings'
 
     remote_server = fields.Selection([], string='Select Remote Server')
 

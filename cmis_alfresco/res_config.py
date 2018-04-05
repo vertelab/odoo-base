@@ -24,7 +24,7 @@ _logger = logging.getLogger(__name__)
 
 
 class remote_server_configuration(models.TransientModel):
-    _inherit = 'remote.server.configuration'
+    _inherit = 'knowledge.config.settings'
 
     remote_server = fields.Selection(selection_add=[('cmis_alfresco.client_path,cmis_alfresco.admin_login,cmis_alfresco.admin_password', 'Alfresco')], string='Select Remote Server')
     client_path = fields.Char(string='Client Path')

@@ -2,12 +2,12 @@
 <openerp>
     <data>
 
-        <record id="view_remote_server_configuration" model="ir.ui.view">
+        <record id="view_knowledge_configuration" model="ir.ui.view">
             <field name="name">Remote Server Settings Inherited cmis_alfresco</field>
-            <field name="model">remote.server.configuration</field>
-            <field name="inherit_id" ref="attachment_cmis.view_remote_server_configuration"/>
+            <field name="model">knowledge.config.settings</field>
+            <field name="inherit_id" ref="attachment_cmis.view_knowledge_configuration"/>
             <field name="arch" type="xml">
-                <group position="after">
+                <group name="remote_server" position="after">
                     <separator string="Alfresco Management"/>
                     <group>
                         <label for="client_path" string="Client Path"/>
