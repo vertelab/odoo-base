@@ -42,17 +42,21 @@ class ir_attachment(models.Model):
     
     @api.one
     def _cmis_get(self):
-        if self.remote_id:  # CMIS
+        if self.type =='url':
+            pass
+        elif self.remote_id:  # CMIS
             try:
                 repo = self.get_repo()
                 # acl = repo.getObject(xxx).getACL()
                 # acl.entries.values()[0].permission
                 self.datas = repo.getObject(self.remote_id).getContentStream().read().encode('base64')
+                _logger.warn(self.datas)
             except Exception as e:
                 self.datas = None
                 _logger.warn('CMIS get datas except: %s' %e)
         else: # not in CMIS, fallback
             try: 
+                _logger.error('CMIS Fallback %s' % self.id)
                 self.datas = super(ir_attachment, self)._data_get(self.name,{}) # Fallback open(self._full_path(self.store_fname),'rb').read().encode('base64')
             except IOError:
                 self.datas = None
@@ -60,6 +64,8 @@ class ir_attachment(models.Model):
 
     @api.one
     def _cmis_set(self):
+        if self.type == 'url':
+            return super(ir_attachment, self)._data_set(self.name,self.datas)
         file_size = len(self.datas.decode('base64'))
         repo = self.get_repo()
         if not self.remote_id:
