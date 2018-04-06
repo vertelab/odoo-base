@@ -37,65 +37,63 @@ class ir_attachment(models.Model):
     _inherit='ir.attachment'
 
     datas = fields.Binary(compute='_cmis_get', inverse='_cmis_set', string='File Content', nodrop=True)
-
+    remote_id = fields.Char(string='Remote ID')
+    
+    
     @api.one
     def _cmis_get(self):
-        if self.store_fname and 'workspace' not in self.store_fname:
-            try:
-                self.datas = open(self._full_path(self.store_fname),'rb').read().encode('base64')
-            except IOError:
-                self.datas = None
-                _logger.error("CMIS get fileread: %s", self._full_path(self.store_fname))
-        else:
+        if self.remote_id:  # CMIS
             try:
                 repo = self.get_repo()
                 # acl = repo.getObject(xxx).getACL()
                 # acl.entries.values()[0].permission
-                self.datas = repo.getObject(self.store_fname).getContentStream().read().encode('base64')
+                self.datas = repo.getObject(self.remote_id).getContentStream().read().encode('base64')
             except Exception as e:
                 self.datas = None
                 _logger.warn('CMIS get datas except: %s' %e)
+        else: # not in CMIS, fallback
+            try: 
+                self.datas = super(ir_attachment, self)._data_get(self.name,{}) # Fallback open(self._full_path(self.store_fname),'rb').read().encode('base64')
+            except IOError:
+                self.datas = None
+                _logger.error("CMIS fallback error: %s", self._full_path(self.store_fname))
 
     @api.one
     def _cmis_set(self):
         file_size = len(self.datas.decode('base64'))
         repo = self.get_repo()
-        if ((self.store_fname) and ('workspace' not in self.store_fname)) or not self.store_fname:
-            parent = self.env['document.directory'].model2dir(self)
+        if not self.remote_id:
             try:
                 doc = repo.createDocument(self.name.replace('/', '_'), 
-                    parentFolder=self.env['document.directory'].model2dir(self).id, 
+                    parentFolder=self.getFolder(), 
                     contentFile=StringIO(self.datas.decode('base64')))
-                
-            except Exception as e:
+            except Exception as e: # Fallback
                 _logger.warn('CMIS set create document except: %s' %e)
+                super(ir_attachment, self)._data_set(self.name,self.datas)
                 return None
             try:
-                self.store_fname = doc.getProperties().get('cmis:versionSeriesId')
+                self.remote_id = doc.getProperties().get('cmis:versionSeriesId')
             except Exception as e:
                 _logger.warn('CMIS set get document properties except: %s' %e)
+                # raise Warning()
                 return None
         else:
             # checkout and checkin
             try:
-                doc = repo.getObject(self.store_fname).checkout()
+                doc = repo.getObject(self.remote_id).checkout()
                 doc.setContentStream(contentFile=StringIO(self.datas.decode('base64')))
                 doc.checkin(checkinComment='Checked In by Odoo: %s' %self.env.user.login)
             except Exception as e:
                 _logger.warn('CMIS set checkin/out except: %s' %e)
+                # No Fallback raise Warning()
 
-    #~ @api.model
-    #~ def create(self, values):
-        #~ if (not values.get('parent_id', False)) and (values.get('res_model', False)):
-            #~ values['parent_id'] = self.get_directory(values['res_model']).id
-        #~ att = super(ir_attachment, self).create(values)
-        #~ return att
 
-    #~ @api.multi
-    #~ def write(self, vals):
-        #~ if (not vals.get('parent_id', False)) and (vals['res_model']):
-            #~ vals['parent_id'] = self.get_directory(vals['res_model']).id
-        #~ return super(ir_attachment, self).write(vals)
+    @api.multi
+    def unlink(self):
+        for a in self:
+            if a.remote_id:
+                self.env['ir.attachment'].get_repo().getObject(a.remote_id).delete()
+        return super(ir_attachment, self).unlink()  
 
     @api.model
     def get_repo(self):
@@ -109,6 +107,15 @@ class ir_attachment(models.Model):
         except Exception as e:
             _logger.warn('get repo: %s' %e)
         return client.defaultRepository
+
+
+    @api.multi
+    def getFolder(self):
+        self.ensure_one()
+        return self.parent_id.getFolder() if self.parent_id else self.env['document.directory'].model2dir(self).getFolder()
+        #~ return [a.parent_id.getFolder() if a.parent_id else self.env['document.directory'].model2dir(a).getFolder() for a in self][0]
+
+
 
     def cron_sync(self):
         repo = self.get_repo()
@@ -172,6 +179,10 @@ class document_directory(models.Model):
         odoo_directory = _check_dir('odoo_models',False,self.env.ref('base.user_root').id,'/odoo_models')
         models_directory = _check_dir(attachment.res_model,odoo_directory.id,self.env.ref('base.user_root').id,'/odoo_models/%s' % attachment.res_model)
         object_directory = _check_dir('%s_%s' % (attachment.res_model,attachment.res_id),models_directory.id,self.env.ref('base.user_root').id,'/odoo_models/%s/%s' %(attachment.res_model,'%s_%s' % (attachment.res_model,attachment.res_id)))
-        return self.env['ir.attachment'].get_repo().getObject(object_directory.remote_id)
+        return object_directory
         
 
+    @api.multi
+    def getFolder(self):
+        self.ensure_one()
+        return self.env['ir.attachment'].get_repo().getFolder(self.remote_id)

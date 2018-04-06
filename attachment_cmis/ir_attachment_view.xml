@@ -12,6 +12,18 @@
                 </field>
             </field>
         </record>
+        
+         <record id="view_attachment_form" model="ir.ui.view">
+            <field name="name">ir.attachment_cmis.form</field>
+            <field name="model">ir.attachment</field>
+            <field name="inherit_id" ref="base.view_attachment_form"/>
+            <field name="arch" type="xml">
+                <field name="parent_id" position="after">
+                    <field name="remote_id"/>
+                </field>
+            </field>
+        </record>
+
 
     </data>
 </openerp>
