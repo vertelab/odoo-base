@@ -21,6 +21,10 @@
 from openerp import models, fields, api, _
 from openerp.exceptions import Warning
 from cStringIO import StringIO
+
+CMIS_CLIENT = False
+CMIS_SERVER = False
+CMIS_LOGIN = {}
 try:
     import cmislib
 except:
@@ -31,6 +35,72 @@ import logging
 _logger = logging.getLogger(__name__)
 
 # Documentation: https://chemistry.apache.org/python/docs/examples.html
+
+
+class cmis_repo(object):
+    def __init__(self,fw):
+        global CMIS_CLIENT,CMIS_LOGIN,CMIS_SERVER
+        try:
+            self.personal_repo = CMIS_LOGIN[self.env.cr.dbname][self.env.uid]['client'].defaultRepository
+        except Exception as e:
+            self.personal_repo = None
+        try:
+            self.repo = CMIS_CLIENT.defaultRepository
+        except Exception as e:
+            self.repo = None
+        if not self.repo:
+            values = fw.env['ir.config_parameter'].get_param('attachment_cmis.remote_server')
+            CMIS_SERVER = values.split(',')[0]
+            CMIS_CLIENT = CmisClient(CMIS_SERVER,values.split(',')[1],values.split(',')[2])
+            self.repo = CMIS_CLIENT.defaltRepository
+            
+        _logger.warn('CMIS_repo : general %s personal %s'  %(self.repo,self.personal_repo))
+    def getObject(self,remote_id):
+        try:
+            return self.personal_repo.getObject(remote_id)
+        except Exception as e:
+            _logger.warn('CMIS_repo personal client: %s' %e)
+        try:
+            return self.repo.getObject(remote_id)
+        except Exception as e:
+            _logger.warn('CMIS_repo general client: %s' %e)
+        return None
+
+    def createDocument(self,**kw):
+        try:
+            return self.personal_repo.createDocument(**kw)
+        except Exception as e:
+            _logger.warn('CMIS_repo personal client: %s' %e)
+        try:
+            return self.repo.createDocument(**kw)
+        except Exception as e:
+            _logger.warn('CMIS_repo general client: %s' %e)
+        return None    
+    
+        #~ repo.createDocument(self.name.replace('/', '_'), 
+                    #~ parentFolder=self.getFolder(), 
+                    #~ contentFile=StringIO(self.datas.decode('base64')))
+    def getRootFolder(self):
+        try:
+            return self.personal_repo.getRootFolder()
+        except Exception as e:
+            _logger.warn('CMIS_repo personal client: %s' %e)
+        try:
+            return self.repo.getRootFolder()
+        except Exception as e:
+            _logger.warn('CMIS_repo general client: %s' %e)
+        return None
+
+    def getObjectByPath(self,path):
+        try:
+            return self.personal_repo.getObjectByPath(path)
+        except Exception as e:
+            _logger.warn('CMIS_repo personal client: %s' %e)
+        try:
+            return self.repo.getObjectByPath(path)
+        except Exception as e:
+            _logger.warn('CMIS_repo general client: %s' %e)
+        return None    
 
 
 class ir_attachment(models.Model):
@@ -46,18 +116,18 @@ class ir_attachment(models.Model):
             pass
         elif self.remote_id:  # CMIS
             try:
-                repo = self.get_repo()
+                repo = cmis_repo()
                 # acl = repo.getObject(xxx).getACL()
                 # acl.entries.values()[0].permission
                 self.datas = repo.getObject(self.remote_id).getContentStream().read().encode('base64')
-                _logger.warn(self.datas)
             except Exception as e:
                 self.datas = None
                 _logger.warn('CMIS get datas except: %s' %e)
         else: # not in CMIS, fallback
             try: 
                 _logger.error('CMIS Fallback %s' % self.id)
-                self.datas = super(ir_attachment, self)._data_get(self.name,{}) # Fallback open(self._full_path(self.store_fname),'rb').read().encode('base64')
+                res = super(ir_attachment, self)._data_get(self.name,{}) # Fallback open(self._full_path(self.store_fname),'rb').read().encode('base64')
+                self.datas = res[res.keys()[0]]
             except IOError:
                 self.datas = None
                 _logger.error("CMIS fallback error: %s", self._full_path(self.store_fname))
@@ -67,7 +137,7 @@ class ir_attachment(models.Model):
         if self.type == 'url':
             return super(ir_attachment, self)._data_set(self.name,self.datas)
         file_size = len(self.datas.decode('base64'))
-        repo = self.get_repo()
+        repo = cmis_repo()
         if not self.remote_id:
             try:
                 doc = repo.createDocument(self.name.replace('/', '_'), 
@@ -98,21 +168,28 @@ class ir_attachment(models.Model):
     def unlink(self):
         for a in self:
             if a.remote_id:
-                self.env['ir.attachment'].get_repo().getObject(a.remote_id).delete()
+                cmis_repo().getObject(a.remote_id).delete()
         return super(ir_attachment, self).unlink()  
 
     @api.model
     def get_repo(self):
-        icp = self.env['ir.config_parameter']
-        values = icp.get_param('attachment_cmis.remote_server')
-        client_path = values.split(',')[0]
-        admin_login = values.split(',')[1]
-        admin_password = values.split(',')[2]
-        try:
-            client = CmisClient('http://192.168.1.124:8080/alfresco/cmisatom', 'admin@vertel.se', 'admin')
-        except Exception as e:
-            _logger.warn('get repo: %s' %e)
-        return client.defaultRepository
+        global CMIS_CLIENT,CMIS_LOGIN,CMIS_SERVER
+        if self.env.cr.dbname in CMIS_LOGIN.keys() and self.env.uid in CMIS_LOGIN[self.env.cr.dbname].keys() and CMIS_LOGIN[self.env.cr.dbname][self.env.uid]['client']:
+            return CMIS_LOGIN[self.env.cr.dbname][self.env.uid]['client'].defaultRepository
+        if CMIS_CLIENT:
+            return CMIS_CLIENT.defaultRepository
+        return None
+
+        #~ icp = self.env['ir.config_parameter']
+        #~ values = icp.get_param('attachment_cmis.remote_server')
+        #~ client_path = values.split(',')[0]
+        #~ admin_login = values.split(',')[1]
+        #~ admin_password = values.split(',')[2]
+        #~ try:
+            #~ client = CmisClient('http://192.168.1.124:8080/alfresco/cmisatom', 'admin@vertel.se', 'admin')
+        #~ except Exception as e:
+            #~ _logger.warn('get repo: %s' %e)
+        #~ return client.defaultRepository
 
 
     @api.multi
@@ -124,7 +201,7 @@ class ir_attachment(models.Model):
 
 
     def cron_sync(self):
-        repo = self.get_repo()
+        repo = cmis_repo()
         # get latest token from a system paramet?
         #~ token = repo.info['latestChangeLogToken']
         #~ changes = repo.getContentChanges(changeLogToken='0')
@@ -141,7 +218,7 @@ class document_directory(models.Model):
     @api.one
     def check_remote_id(self,folder):
         if not self.remote_id:
-            repo = self.env['ir.attachment'].get_repo()
+            repo = cmis_repo()
             parent = repo.getRootFolder()
             folder_obj = None
             for f in folder.split('/'):
@@ -191,4 +268,35 @@ class document_directory(models.Model):
     @api.multi
     def getFolder(self):
         self.ensure_one()
-        return self.env['ir.attachment'].get_repo().getFolder(self.remote_id)
+        return cmis_repo().getObject(self.remote_id).getFolder()
+
+class res_users(models.Model):
+    _inherit = "res.users"
+
+    def init(self, cr):
+        _logger.info("Init DB %s CMIS_LOGIN %s" % (cr.dbname,CMIS_LOGIN))
+
+    def check_credentials(self, cr, uid, password):
+        #~ if not password == config.get('admin_passwd',False) and uid not in CMIS_LOGIN.keys():  # admin_passwd overrides 
+        global CMIS_CLIENT,CMIS_LOGIN,CMIS_SERVER
+        
+        if not CMIS_CLIENT:
+            try:
+                values = self.pool['ir.config_parameter'].get_param(cr,uid,'attachment_cmis.remote_server')
+                CMIS_SERVER = values.split(',')[0]
+                CMIS_CLIENT = CmisClient(CMIS_SERVER,values.split(',')[1],values.split(',')[2])
+            except Exception as e:
+                _logger.warn('CMIS_CLIENT: %s %s' %(e,values))
+        if CMIS_CLIENT:
+            if not cr.dbname in CMIS_LOGIN.keys():
+                CMIS_LOGIN[cr.dbname] = {}
+            if not uid in CMIS_LOGIN[cr.dbname].keys():
+                CMIS_LOGIN[cr.dbname][uid] = {}
+            CMIS_LOGIN[cr.dbname][uid]['password'] = password
+            CMIS_LOGIN[cr.dbname][uid]['login'] = self.pool['res.users'].browse(cr,uid,uid).login
+            try:
+                CMIS_LOGIN[cr.dbname][uid]['client'] = CmisClient(CMIS_SERVER,CMIS_LOGIN[cr.dbname][uid]['login'],password)
+            except Exception as e:
+                _logger.warn('CMIS_LOGIN: %s %s %s' %(e,CMIS_SERVER,CMIS_LOGIN[cr.dbname][uid]['login']))
+        _logger.warn('CMIS_CLIENT: %s CMIS_SERVER %s CMIS_LOGIN %s' %(CMIS_CLIENT,CMIS_SERVER,CMIS_LOGIN))
+        return super(res_users, self).check_credentials(cr, uid, password)
