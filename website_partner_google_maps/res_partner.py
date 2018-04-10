@@ -19,12 +19,33 @@
 #
 ##############################################################################
 from openerp import models, fields, api, _
+from openerp.addons.base_geolocalize.models.res_partner import geo_find, geo_query_address
 import logging
 _logger = logging.getLogger(__name__)
 
 
 class res_partner(models.Model):
     _inherit = 'res.partner'
+
+    @api.multi
+    def geo_localize(self):
+        res = super(res_partner, self).geo_localize()
+        for partner in self:
+            if not partner:
+                continue
+            if partner.street2:
+                result = geo_find(geo_query_address(street=partner.street2,
+                                                    zip=partner.zip,
+                                                    city=partner.city,
+                                                    state=partner.state_id.name,
+                                                    country=partner.country_id.name))
+                if result:
+                    partner.write({
+                        'partner_latitude': result[0],
+                        'partner_longitude': result[1],
+                        'date_localization': fields.Date.context_today(partner)
+                    })
+        return res
 
     @api.model
     def get_map(self, zoom=12, center=None, partners=None, icon=''):
