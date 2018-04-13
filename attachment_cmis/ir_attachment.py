@@ -49,9 +49,9 @@ class cmis_repo(object):
         except Exception as e:
             self.repo = None
         if not self.repo:
-            values = fw.env['ir.config_parameter'].get_param('attachment_cmis.remote_server')
-            CMIS_SERVER = values.split(',')[0]
-            CMIS_CLIENT = CmisClient(CMIS_SERVER,values.split(',')[1],values.split(',')[2])
+            (CMIS_SERVER,user,password) = [fw.env['ir.config_parameter'].get_param(v) for v in fw.env['ir.config_parameter'].get_param('attachment_cmis.remote_server').split(',')]
+            CMIS_CLIENT = CmisClient(CMIS_SERVER,user,password)
+            _logger.error('valuers %s' % (CMIS_SERVER,user,password))
             self.repo = CMIS_CLIENT.defaltRepository
             
         _logger.warn('CMIS_repo : general %s personal %s'  %(self.repo,self.personal_repo))
@@ -116,7 +116,7 @@ class ir_attachment(models.Model):
             pass
         elif self.remote_id:  # CMIS
             try:
-                repo = cmis_repo()
+                repo = cmis_repo(self)
                 # acl = repo.getObject(xxx).getACL()
                 # acl.entries.values()[0].permission
                 self.datas = repo.getObject(self.remote_id).getContentStream().read().encode('base64')
@@ -137,7 +137,7 @@ class ir_attachment(models.Model):
         if self.type == 'url':
             return super(ir_attachment, self)._data_set(self.name,self.datas)
         file_size = len(self.datas.decode('base64'))
-        repo = cmis_repo()
+        repo = cmis_repo(self)
         if not self.remote_id:
             try:
                 doc = repo.createDocument(self.name.replace('/', '_'), 
@@ -168,7 +168,7 @@ class ir_attachment(models.Model):
     def unlink(self):
         for a in self:
             if a.remote_id:
-                cmis_repo().getObject(a.remote_id).delete()
+                cmis_repo(self).getObject(a.remote_id).delete()
         return super(ir_attachment, self).unlink()  
 
     @api.model
@@ -201,7 +201,7 @@ class ir_attachment(models.Model):
 
 
     def cron_sync(self):
-        repo = cmis_repo()
+        repo = cmis_repo(self)
         # get latest token from a system paramet?
         #~ token = repo.info['latestChangeLogToken']
         #~ changes = repo.getContentChanges(changeLogToken='0')
@@ -218,7 +218,7 @@ class document_directory(models.Model):
     @api.one
     def check_remote_id(self,folder):
         if not self.remote_id:
-            repo = cmis_repo()
+            repo = cmis_repo(self)
             parent = repo.getRootFolder()
             folder_obj = None
             for f in folder.split('/'):
@@ -268,7 +268,7 @@ class document_directory(models.Model):
     @api.multi
     def getFolder(self):
         self.ensure_one()
-        return cmis_repo().getObject(self.remote_id).getFolder()
+        return cmis_repo(self).getObject(self.remote_id).getFolder()
 
 class res_users(models.Model):
     _inherit = "res.users"

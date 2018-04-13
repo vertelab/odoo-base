@@ -32,7 +32,7 @@ Attachment CMIS
     'license': 'AGPL-3',
     'website': 'http://www.vertel.se',
     'depends': ['document'],
-    'data': ['ir_attachment_view.xml', 'res_config_view.xml'],
+    'data': ['ir_attachment_view.xml', 'res_config_view.xml','ir_attachment_data.xml'],
      'external_dependencies': {
         'python': ['cmislib'],
     },
