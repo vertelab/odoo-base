@@ -34,13 +34,15 @@ class remote_server_configuration(models.TransientModel):
     @api.model
     def get_default_alfresco_values(self, fields):
         return {
-            'client_path': self.env['ir.config_parameter'].get_param('cmis_alfresco.client_path'),
-            'admin_login': self.env['ir.config_parameter'].get_param('cmis_alfresco.admin_login'),
-            'admin_password': self.env['ir.config_parameter'].get_param('cmis_alfresco.admin_password'),
+            'client_path': self.env['ir.config_parameter'].get_param('cmis_alfresco.client_path', ''),
+            'admin_login': self.env['ir.config_parameter'].get_param('cmis_alfresco.admin_login', ''),
+            'admin_password': self.env['ir.config_parameter'].get_param('cmis_alfresco.admin_password', ''),
         }
 
     @api.multi
     def set_alfresco_values(self):
+        if not self.env['ir.config_parameter'].get_param('attachment_cmis.remote_server'):
+            self.env['ir.config_parameter'].set_param(key='attachment_cmis.remote_server', value='cmis_alfresco.client_path,cmis_alfresco.admin_login,cmis_alfresco.admin_password')
         for record in self:
             self.env['ir.config_parameter'].set_param(key="cmis_alfresco.client_path", value=record.client_path)
             self.env['ir.config_parameter'].set_param(key="cmis_alfresco.admin_login", value=record.admin_login)
