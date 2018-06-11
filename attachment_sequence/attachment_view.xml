@@ -1,0 +1,17 @@
+<openerp>
+    <data>
+                        
+        <record id="view_attachment_tree" model="ir.ui.view">
+            <field name="name">ir.attachment.tree.sequence</field>
+            <field name="model">ir.attachment</field>
+            <field name="inherit_id" ref="base.view_attachment_tree"/>
+            <field name="arch" type="xml">
+                
+                <field name="name" position="before">
+                    <field name="sequence" widget="handle" />
+                </field>
+            </field>
+        </record>
+        
+    </data>
+</openerp>
