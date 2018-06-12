@@ -1,0 +1,24 @@
+<openerp>
+    <data>
+                        
+      <record id="view_attachment_form" model="ir.ui.view">
+      <field name="name">ir.attachment.form.youtube</field>
+      <field name="model">ir.attachment</field>
+      <field name="inherit_id" ref="base.view_attachment_form" />
+      <field name="arch" type="xml">
+        <field name="url" position="after">
+            <field name="open_new_window" attr="{'invisible': [('type','=','binary')]}"/>
+        </field>
+        <field name="datas" position="replace">
+            <field name="datas"  attrs="{'invisible':[('type','!=','binary')]}"/>
+        </field>
+        <field name="datas_fname" position="replace">
+            <field name="datas_fname" invisible="1" attrs="{'invisible':[('type','!=','binary')]}" class="oe_inline oe_right"/>
+        </field>
+
+      </field>
+    </record>
+
+        
+    </data>
+</openerp>
