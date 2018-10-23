@@ -52,7 +52,7 @@ class OpeningHours(models.Model):
             else:
                 self.opening_hours = '%s-%s %s-%s' %(self.get_float_time(self.open_time), self.get_float_time(self.break_start), self.get_float_time(self.break_stop), self.get_float_time(self.close_time))
         else:
-            self.opening_hours = _('Close')
+            self.opening_hours = _('Closed')
 
 
     @api.model
