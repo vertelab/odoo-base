@@ -70,7 +70,7 @@ class res_partner(models.Model):
             markers = ''
             for partner in partners:
                 pos = partner.get_position()
-                markers += marker_tmp %(partner.id, partner.sudo().name, pos['lat'], pos['lng'], icon)
+                markers += marker_tmp %(partner.id, partner.name, pos['lat'], pos['lng'], icon)
             return map_tmp %(center['lat'], center['lng'], zoom, markers)
         return ''
 
@@ -90,6 +90,6 @@ class res_partner(models.Model):
                         #~ self.partner_longitude = geometry["location"]["lng"]
             #~ except ValueError as e:
                 #~ _logger.error(e)
-        if self.sudo().partner_latitude == 0.0 and self.sudo().partner_longitude == 0.0:
+        if self.partner_latitude == 0.0 and self.partner_longitude == 0.0:
             self.geo_localize()
-        return {'lat': self.sudo().partner_latitude, "lng": self.sudo().partner_longitude}
+        return {'lat': self.partner_latitude, "lng": self.partner_longitude}
