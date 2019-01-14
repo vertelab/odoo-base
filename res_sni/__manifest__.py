@@ -20,14 +20,30 @@
 ##############################################################################
 
 {
-    'name': 'Res District',
+    'name': 'Res SNI',
     'version': '0.1',
     'category': '',
     'description': """
-Hook discticts to a country
-===========================
-Relations:
-res.country 1-m res.district 1-m res.partner
+SNI Swedish Standard Industrial Classification
+==============================================
+Industry classification or industry taxonomy is a type of economic taxonomy that organizes companies into industrial groupings based on similar production processes, similar products, or similar behavior in financial markets.
+
+The SNI standard is modeled on the Statistical Classification of Economic Activities in the European Community, commonly referred to as NACE. The SNI standard is maintained by Statistics Sweden (also known as SCB), a Swedish government office
+
+SNI 2007
+
+The Standard Industrial Classification (SIC) is a system for classifying industries by a four-digit code. Established in the United States in 1937, it is used by government agencies to classify industry areas. The SIC system is also used by agencies in other countries, e.g., by the United Kingdom's Companies House.
+Standard Industrial Classification - Wikipedia
+https://en.wikipedia.org/wiki/Standard_Industrial_Classification
+
+
+Industry classification or industry taxonomy is a type of economic taxonomy that organizes companies into industrial groupings based on similar production processes, similar products, or similar behavior in financial markets.
+
+SNI Swedish Standard Industrial Classification
+
+https://en.wikipedia.org/wiki/Swedish_Standard_Industrial_Classification
+
+
 """,
     'author': 'Vertel AB',
     'website': 'http://www.vertel.se',
