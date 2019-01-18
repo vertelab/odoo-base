@@ -22,11 +22,9 @@
             <field name="name">res.district.tree</field>
             <field name="model">res.district</field>
             <field name="arch" type="xml">
-                <tree string="State">
                     <field name="name"/>
                     <field name="country_id"/>
                     <field name="partner_ids" widget="many2many_tags"/>
-                </tree>
             </field>
         </record>
 

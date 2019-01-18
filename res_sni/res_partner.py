@@ -25,4 +25,4 @@ _logger = logging.getLogger(__name__)
 class Partner(models.Model):
     _inherit = 'res.partner'
 
-    district_id = fields.Many2one(comodel_name='res.district', string='District')
+    sni_id = fields.Many2one(comodel_name='res.sni', string='SNI')

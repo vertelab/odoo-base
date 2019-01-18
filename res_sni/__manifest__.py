@@ -47,11 +47,9 @@ https://en.wikipedia.org/wiki/Swedish_Standard_Industrial_Classification
 """,
     'author': 'Vertel AB',
     'website': 'http://www.vertel.se',
-    'depends': ['base',],
+    'depends': ['sale',],
     'data': [
-        'res_country_view.xml',
-        'res_district_view.xml',
-        'res_partner_view.xml',
+        'res_sni_view.xml',
         ],
     'application': False,
     'installable': True,

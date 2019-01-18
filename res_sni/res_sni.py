@@ -2,7 +2,7 @@
 ##############################################################################
 #
 #    OpenERP, Open Source Management Solution, third party addon
-#    Copyright (C) 2004-2017 Vertel AB (<http://vertel.se>).
+#    Copyright (C) 2004-2019 Vertel AB (<http://vertel.se>).
 #
 #    This program is free software: you can redistribute it and/or modify
 #    it under the terms of the GNU Affero General Public License as
@@ -22,9 +22,10 @@ from openerp import models, fields, api, _
 import logging
 _logger = logging.getLogger(__name__)
 
-class District(models.Model):
-    _name = 'res.district'
+class Sni(models.Model):
+    _name = 'res.sni'
 
     name = fields.Char(string='Name', required=True)
-    country_id = fields.Many2one(comodel_name='res.country', string='Country')
-    partner_ids = fields.One2many(comodel_name='res.partner', inverse_name='district_id', string='Suppliers')
+    code = fields.Char(string='Official Code',help="Official code, group, sub-group or detail group.")
+    description = fields.Char(string='Description')
+    parent_id = fields.Many2one(comodel_name='res.sni', string='Parent')

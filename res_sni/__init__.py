@@ -1,3 +1,2 @@
-import res_country
-import res_district
-import res_partner
+import res_sni
+#import res_partner
