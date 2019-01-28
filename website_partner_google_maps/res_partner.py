@@ -19,9 +19,36 @@
 #
 ##############################################################################
 from openerp import models, fields, api, _
-from openerp.addons.base_geolocalize.models.res_partner import geo_find, geo_query_address
+from openerp.addons.base_geolocalize.models.res_partner import geo_query_address
+try:
+    import simplejson as json
+except ImportError:
+    import json     # noqa
+import urllib2
+
 import logging
 _logger = logging.getLogger(__name__)
+
+
+def geo_find(addr, api_key):
+    if not addr:
+        return None
+    url = 'https://maps.googleapis.com/maps/api/geocode/json?key=%s&sensor=false&address=' %api_key
+    url += urllib2.quote(addr.encode('utf8'))
+
+    try:
+        result = json.load(urllib2.urlopen(url))
+    except Exception, e:
+        raise osv.except_osv(_('Network error'),
+                             _('Cannot contact geolocation servers. Please make sure that your internet connection is up and running (%s).') % e)
+    if result['status'] != 'OK':
+        return None
+
+    try:
+        geo = result['results'][0]['geometry']['location']
+        return float(geo['lat']), float(geo['lng'])
+    except (KeyError, ValueError):
+        return None
 
 
 class res_partner(models.Model):
@@ -29,23 +56,23 @@ class res_partner(models.Model):
 
     @api.multi
     def geo_localize(self):
-        res = super(res_partner, self).geo_localize()
+        api_key = self.env['ir.config_parameter'].get_param('google_maps_api')
         for partner in self:
             if not partner:
                 continue
-            if partner.street2:
-                result = geo_find(geo_query_address(street=partner.street2,
-                                                    zip=partner.zip,
-                                                    city=partner.city,
-                                                    state=partner.state_id.name,
-                                                    country=partner.country_id.name))
-                if result:
-                    partner.write({
-                        'partner_latitude': result[0],
-                        'partner_longitude': result[1],
-                        'date_localization': fields.Date.context_today(partner)
-                    })
-        return res
+            result = geo_find(geo_query_address(street=' '.join([getattr(partner, f) for f in ('street', 'street2') if getattr(partner, f)]),
+                                                zip=partner.zip,
+                                                city=partner.city,
+                                                state=partner.state_id.name,
+                                                country=partner.country_id.name),
+                              api_key)
+            if result:
+                partner.write({
+                    'partner_latitude': result[0],
+                    'partner_longitude': result[1],
+                    'date_localization': fields.Date.context_today(partner)
+                })
+        return True
 
     @api.model
     def get_map(self, zoom=12, center=None, partners=None, icon=''):
