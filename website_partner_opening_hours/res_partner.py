@@ -37,13 +37,26 @@ class OpeningHours(models.Model):
         ('saturday', 'Saturday'),
         ('sunday', 'Sunday'),
     ], string='Day of week', required=True)
+    dayofweek_short = fields.Selection([
+        ('monday', 'Mon'),
+        ('tuesday', 'Tue'),
+        ('wednesday', 'Wed'),
+        ('thursday', 'Thu'),
+        ('friday', 'Fri'),
+        ('saturday', 'Sat'),
+        ('sunday', 'Sun'),
+    ], compute='_dayofweek_short')
     open_time = fields.Float(string='Open Time')
     close_time = fields.Float(string='Close Time')
     break_start = fields.Float(string='Break Start')
     break_stop = fields.Float(string='Break Stop')
     close = fields.Boolean(string='Close')
     opening_hours = fields.Char(string='Opening Hours', compute='_opening_hours')
-
+    
+    @api.one
+    def _dayofweek_short(self):
+        self.dayofweek_short = self.dayofweek
+    
     @api.one
     def _opening_hours(self):
         if not self.close:

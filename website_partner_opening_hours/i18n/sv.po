@@ -134,3 +134,38 @@ msgstr "Tisdag"
 #: selection:opening.hours,dayofweek:0
 msgid "Wednesday"
 msgstr "Onsdag"
+
+#. module: website_partner_opening_hours
+#: selection:opening.hours,dayofweek_short:0
+msgid "Mon"
+msgstr "Mån"
+
+#. module: website_partner_opening_hours
+#: selection:opening.hours,dayofweek_short:0
+msgid "Tue"
+msgstr "Tis"
+
+#. module: website_partner_opening_hours
+#: selection:opening.hours,dayofweek_short:0
+msgid "Wed"
+msgstr "Ons"
+
+#. module: website_partner_opening_hours
+#: selection:opening.hours,dayofweek_short:0
+msgid "Thu"
+msgstr "Tor"
+
+#. module: website_partner_opening_hours
+#: selection:opening.hours,dayofweek_short:0
+msgid "Fri"
+msgstr "Fre"
+
+#. module: website_partner_opening_hours
+#: selection:opening.hours,dayofweek_short:0
+msgid "Sat"
+msgstr "Lör"
+
+#. module: website_partner_opening_hours
+#: selection:opening.hours,dayofweek_short:0
+msgid "Sun"
+msgstr "Sön"
