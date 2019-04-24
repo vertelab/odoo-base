@@ -1,0 +1,34 @@
+<?xml version="1.0"?>
+<openerp>
+  <data>
+
+base.act_report_xml_view
+
+    <!-- ir.report form view -->
+    <record model="ir.ui.view" id="action_report_xml_form">
+      <field name="name">ir.actions.report.xml.add.printer.tray</field>
+      <field name="model">ir.actions.report.xml</field>
+      <field name="inherit_id" ref="base_report_to_printer.action_report_xml_form" />
+      <field name="arch" type="xml">
+        <field name="printing_printer_id" position="after">
+          <field name="printer_tray_id"/>
+        </field>
+      </field>
+    </record>
+    
+    
+    
+   <record model="ir.ui.view" id="action_report_xml_form">
+      <field name="name">ir.actions.report.xml.printing</field>
+      <field name="model">ir.actions.report.xml</field>
+      <field name="inherit_id" ref="base_report_to_printer.act_report_xml_view" />
+      <field name="arch" type="xml">
+          <field name="printing_action_ids" position="after">
+            <separator string="Specific actions per ip/host"/>
+            <field name="ip_ids"/>
+         </field>
+      </field>
+    </record>
+
+  </data>
+</openerp>

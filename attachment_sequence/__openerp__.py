@@ -29,7 +29,7 @@ Change order of attachments
 Financed by Dermanord AB""",
 'author': 'Vertel AB',
 'website': 'http://www.vertel.se',
-'depends': ['base',],
+'depends': ['document',],
 'data': ['attachment_view.xml'],
 'installable': True,
 }
