@@ -19,44 +19,72 @@
 #
 ##############################################################################
 from openerp import models, fields, api
-
+from openerp.http import request
 
 
 class IrActionsReportXml(models.Model):
     _inherit = 'ir.actions.report.xml'
-        
-    ip_ids = fields.One2many(comodel_name='ir.ip.report.action',inverse_name='',
+    
+    ip_ids = fields.One2many(comodel_name='ir.ip.report.action',inverse_name='report_id',
                               string='IP',
         help='This field allows configuring action and printer on a per '
              'ip/host basis'
-                              )
+    )
                         
 class ir_ip_report_action(models.Model):
     """
     Ip and actions
     """
     _name = 'ir.ip.report.action'
-
+    _description = 'Report Printing Actions for IP'
 
     def _available_action_types(self):
         return [('server', 'Send to Printer'),
                 ('client', 'Send to Client'),
+                ('user_default', "Use user's defaults"),
                 ]
     
-    name = fields.Char(string='IP or host')
-    printing_action = fields.Selection(_available_action_types)
+    report_id = fields.Many2one(comodel_name='ir.actions.report.xml',
+                                string='Report',
+                                required=True,
+                                ondelete='cascade')
+    name = fields.Char(string='IP or host',
+                       required=True,
+                       ondelete='cascade')
+    printing_action = fields.Selection(_available_action_types,
+                                       required=True)
     printing_printer_id = fields.Many2one(comodel_name='printing.printer',
-                                          string='Default Printer')
-     
-
+                                          string='Printer')
+                                          
+    @api.multi
+    def behaviour(self):
+        if not self:
+            return {}
+        return {'action': self.printing_action,
+                'printer': self.printing_printer_id,
+                }
+                                          
 class ReportXMLAction(models.Model):
-    _inherit = 'printing.report.xml.action'
+    _inherit = 'ir.actions.report.xml'
+
+    def get_client_ip(self):
+        return(request.httprequest.environ['REMOTE_ADDR'])
+
 
     @api.multi
     def behaviour(self):
         self.ensure_one()
         res = super(ReportXMLAction, self).behaviour()
-        res['tray'] = self.printer_tray_id.system_name
+        
+        for report in self:
+            printing_act_obj = self.env['ir.ip.report.action'].browse( [ ('report_id', '=', report.id) ] )
+            
+            if printing_act_obj:
+                report['action'] = printing_act_obj.printing_action
+                report['printer'] = printing_act_obj.printing_printer_id
+            
+            res[report.id] = report
+        
         return res
 
         
