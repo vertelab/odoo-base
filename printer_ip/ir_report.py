@@ -21,16 +21,9 @@
 from openerp import models, fields, api
 from openerp.http import request
 
-
-class IrActionsReportXml(models.Model):
-    _inherit = 'ir.actions.report.xml'
-    
-    ip_ids = fields.One2many(comodel_name='ir.ip.report.action',inverse_name='report_id',
-                              string='IP',
-        help='This field allows configuring action and printer on a per '
-             'ip/host basis'
-    )
-                        
+import logging
+_logger = logging.getLogger(__name__)
+                 
 class ir_ip_report_action(models.Model):
     """
     Ip and actions
@@ -49,8 +42,7 @@ class ir_ip_report_action(models.Model):
                                 required=True,
                                 ondelete='cascade')
     name = fields.Char(string='IP or host',
-                       required=True,
-                       ondelete='cascade')
+                       required=True)
     printing_action = fields.Selection(_available_action_types,
                                        required=True)
     printing_printer_id = fields.Many2one(comodel_name='printing.printer',
@@ -67,6 +59,12 @@ class ir_ip_report_action(models.Model):
 class ReportXMLAction(models.Model):
     _inherit = 'ir.actions.report.xml'
 
+    ip_ids = fields.One2many(comodel_name='ir.ip.report.action',inverse_name='report_id',
+                              string='IP',
+        help='This field allows configuring action and printer on a per '
+             'ip/host basis'
+    )
+    
     def get_client_ip(self):
         return(request.httprequest.environ['REMOTE_ADDR'])
 
@@ -77,14 +75,13 @@ class ReportXMLAction(models.Model):
         res = super(ReportXMLAction, self).behaviour()
         
         for report in self:
-            printing_act_obj = self.env['ir.ip.report.action'].browse( [ ('report_id', '=', report.id) ] )
             
-            if printing_act_obj:
-                report['action'] = printing_act_obj.printing_action
-                report['printer'] = printing_act_obj.printing_printer_id
+            printing_act_obj = report.ip_ids.filtered(lambda ip: ip.name == self.get_client_ip())
             
-            res[report.id] = report
-        
+            if len(printing_act_obj):
+                res[report.id]['action'] = printing_act_obj.printing_action
+                res[report.id]['printer'] = printing_act_obj.printing_printer_id
+                
         return res
 
         
