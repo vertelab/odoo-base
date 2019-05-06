@@ -29,7 +29,7 @@
              ],
  'data': [
      'ir_report_view.xml',
-#     'security/ir.model.access.csv',
+     'ir_report_data.xml',
      ],
  'external_dependencies': {
      'python': ['cups'],
