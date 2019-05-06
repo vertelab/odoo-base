@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8"?>
+<openerp>
+    <data noupdate="1">
+
+<record model="ir.actions.server" id="show_ip">
+        <field name="name">Show IP</field>
+        <field name="state">code</field>
+        <field name="condition" eval="True"/>
+        <field name="model_id" ref="base.model_ir_actions_report_xml"/>
+        <field name="code">
+res = env['ir.actions.report.xml'].get_client_ip()
+raise Warning("%s" % res)
+</field>
+    </record>
+    
+    <record model="ir.values" id="show_ip_action_menu">
+        <field name="name" >Show IP</field>
+        <field name="model">ir.actions.report.xml</field>
+        <field name="model_id" ref="base.model_ir_actions_report_xml"/>
+        <field name="key2">client_action_multi</field>
+        <field name="value" eval="'ir.actions.server,%d' % show_ip"/>
+    </record>
+
+    </data>
+</openerp>
