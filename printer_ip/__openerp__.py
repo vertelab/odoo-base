@@ -28,6 +28,7 @@
  'depends': ['base_report_to_printer',
              ],
  'data': [
+     'security/ir.model.access.csv',
      'ir_report_view.xml',
      'ir_report_data.xml',
      ],
