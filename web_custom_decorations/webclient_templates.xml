@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <template id="assets_backend" inherit_id="web.assets_backend">
+        <xpath expr="//script[@src='/web/static/src/js/views/list_view.js']" position="after">
+            <script type="text/javascript" src="/web_custom_decorations/static/src/js/list_view.js"></script>
+        </xpath>
+    </template>
+
+</odoo>
