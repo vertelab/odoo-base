@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<openerp>
+    <data>
+
+        <template id="login" inherit_id="web.login">
+            <xpath expr="//input[@id='password']" position="attributes">
+                <attribute name="t-att-value">password or ''</attribute>
+            </xpath>
+        </template>
+
+        <template id="database_select" inherit_id="web.database_select">
+            <xpath expr="//select[@id='db']" position="attributes">
+                <attribute name="t-att-value">db or ''</attribute>
+            </xpath>
+        </template>
+
+    </data>
+</openerp>
