@@ -22,7 +22,7 @@
 'name': 'ResPartner Sudo Login',
 'version': '0.1',
 'summary': 'Login as a customer',
-'category': 'project',
+'category': '',
 'description': """Login as a customer.
 
 """,
