@@ -22,9 +22,6 @@ from openerp import models, fields, api, _
 import subprocess
 import time
 
-from openerp import SUPERUSER_ID, netsvc, api
-from openerp.osv import fields, osv
-
 import logging
 _logger = logging.getLogger(__name__)
 
@@ -42,7 +39,8 @@ class ir_cron(models.Model):
         (load_one,load_five,load_fifteen,tmp,tmp) = subprocess.check_output(['cat', '/proc/loadavg']).decode('utf-8').split()
         _logger.warn(job)
         # ~ env = Environment(cron_cr, job['user_id'], {})
-        if job['log_type'] == 'all' or stop > 5.0:
+        # ~ if job['log_type'] == 'all' or stop > 5.0:
+        if True:
             # ~ env['mail.message'].create({
             # ~ self.registry['mail.message'].create(cron_cr, job['user_id'], {
                 # ~ 'body': 'Cron-job ready %s \nTime %s s\nLoad %s  %s (five) %s (fifteen)' % (job['name'], stop, load_one, load_five,load_fifteen),
