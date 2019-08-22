@@ -28,11 +28,9 @@
  'depends': ['base_report_to_printer',
              ],
  'data': [
-     'users_view.xml',
-     'ir_report_view.xml',
-     'printer_view.xml',
-     'report_xml_action_view.xml',
      'security/ir.model.access.csv',
+     'ir_report_view.xml',
+     'ir_report_data.xml',
      ],
  'external_dependencies': {
      'python': ['cups'],
