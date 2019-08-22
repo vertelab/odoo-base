@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<openerp>
+    <data>
+        <record id="view_module_filter" model="ir.ui.view">
+            <field name="name">module.author.inherit.ir.module.module.list.select</field>
+            <field name="model">ir.module.module</field>
+            <field name="inherit_id" ref="base.view_module_filter"/>
+            <field name="arch" type="xml">
+                <field name="category_id" position="after">
+                    <field name="author"/>
+                    <filter string="Author" domain="[]" context="{'group_by':'author'}"/>
+                </field>
+            </field>
+        </record>
+    </data>
+</openerp>
