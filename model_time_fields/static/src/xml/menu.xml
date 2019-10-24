@@ -1,8 +1,0 @@
-<?xml version="1.0" encoding="utf-8"?>
-<templates>
-  <t t-extend="ViewManagerDebug">
-    <t t-jquery="option[value='print_workflow']" t-operation="after">
-      <option value="profile_model">Profile Model</option>
-    </t>
-  </t>
-</templates>
