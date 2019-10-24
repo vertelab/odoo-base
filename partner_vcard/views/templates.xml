@@ -12,7 +12,7 @@
       <span t-field="partner.email" />
       <div>
              <button id="vcard" on-click=""/>
-        <a t-att-href="/partner/%s/vcard.vcl">vCard</a>
+        <a t-att-href="'/partner/%s/vcard.vcl' % partner.id">vCard</a>
       </div>
     </t>
   </template>

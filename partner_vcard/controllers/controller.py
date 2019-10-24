@@ -32,9 +32,10 @@ _logger = logging.getLogger(__name__)
 class parter_vcard(http.Controller):
 
 
-    @http.route(['/vcard/<string:partner_name>',], type='http', auth="public", website=True, )
-    def vcard_partner(self, partner_name=None, **post):
-        partner = request.env['res.partner'].search('name','ilike',name)        
+    @http.route(['/vcard/<string:partner_name>','/partner/vc/<int:partner_id>'], type='http', auth="public", website=True, )
+    def vcard_partner_view(self, partner_name=None,partner_id=None, **post):
+        name = partner_name.replace(':.-_','    ')
+        partner = request.env['res.partner'].search([('name','ilike',name)])  
         return request.render("partner_vcard.partner_vcard_view", {'partner':partner})
     
     @http.route([
