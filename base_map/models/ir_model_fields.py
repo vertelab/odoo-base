@@ -19,23 +19,13 @@
 #
 ##############################################################################
 
-{
-    'name': 'Base mapping',
-    'version': '0.1',
-    'category': '',
-    'description': """
-This modules allows for quick mapping of odoo fields to fields in other systems.
-========================
+from odoo import models, fields, api, _
+import logging
+_logger = logging.getLogger(__name__)
 
-""",
-    'author': 'Vertel AB',
-    'license': 'AGPL-3',
-    'website': 'http://www.vertel.se',
-    'depends': ['base',],
-    'data': [
-			'views/ir_model.xml',
-        ],
-    'application': False,
-    'installable': True,
-}
-# vim:expandtab:smartindent:tabstop=4s:softtabstop=4:shiftwidth=4:
+class IrModelFields(models.Model):
+    _inherit = 'ir.model.fields'
+
+    map_system = fields.Char(string='Mapped system', help="The name of the mapped system")
+    map_field = fields.Char(string='Mapped system field', help="The name of the field in the mapped system")
+    map_odoo_master = fields.Boolean(string='Odoo master', help="Is Odoo master of the data?")
