@@ -10,8 +10,11 @@
         <page name='map' string="Mapping">
             <group>
                 <field name="map_system" />
+                <field name="map_table" />
                 <field name="map_field" />
+                <field name="map_type" />
                 <field name="map_odoo_master" />
+                <field name="map_comment" />
             </group>
         </page>
       </xpath>
@@ -28,8 +31,11 @@
         <page name='map' string="Mapping">
             <group>
                 <field name="map_system" />
+                <field name="map_table" />
                 <field name="map_field" />
+                <field name="map_type" />
                 <field name="map_odoo_master" />
+                <field name="map_comment" />
             </group>
         </page>
       </xpath>

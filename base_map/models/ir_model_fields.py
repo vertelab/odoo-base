@@ -27,5 +27,8 @@ class IrModelFields(models.Model):
     _inherit = 'ir.model.fields'
 
     map_system = fields.Char(string='Mapped system', help="The name of the mapped system")
+    map_table = fields.Char(string='Mapped system table', help="The name of the table in the mapped system")
     map_field = fields.Char(string='Mapped system field', help="The name of the field in the mapped system")
     map_odoo_master = fields.Boolean(string='Odoo master', help="Is Odoo master of the data?")
+    map_type = fields.Char(string='Mapped type', help="The type of the mapped system field")
+    map_comment = fields.Char(string='Comment', help="Comment regarding the mapping")
