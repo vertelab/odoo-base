@@ -24,9 +24,9 @@
     'version': '0.1',
     'category': '',
     'description': """
+Base mapping
+============
 This modules allows for quick mapping of odoo fields to fields in other systems.
-========================
-
 """,
     'author': 'Vertel AB',
     'license': 'AGPL-3',
@@ -34,6 +34,8 @@ This modules allows for quick mapping of odoo fields to fields in other systems.
     'depends': ['base',],
     'data': [
 			'views/ir_model.xml',
+			'security/ir.model.access.csv',
+            'data/ir.model.fields.csv',
         ],
     'application': False,
     'installable': True,

@@ -26,9 +26,84 @@ _logger = logging.getLogger(__name__)
 class IrModelFields(models.Model):
     _inherit = 'ir.model.fields'
 
-    map_system = fields.Char(string='Mapped system', help="The name of the mapped system")
-    map_table = fields.Char(string='Mapped system table', help="The name of the table in the mapped system")
-    map_field = fields.Char(string='Mapped system field', help="The name of the field in the mapped system")
-    map_odoo_master = fields.Boolean(string='Odoo master', help="Is Odoo master of the data?")
-    map_type = fields.Char(string='Mapped type', help="The type of the mapped system field")
-    map_comment = fields.Char(string='Comment', help="Comment regarding the mapping")
+    map_id = fields.One2many(comodel_name='ir.model.fields.mapping', inverse_name='odoo_field', string='Mapped line id', copy=False)
+    map_system = fields.Char(string='Mapped system', related='map_id.target_system', help="The name of the mapped system")
+    map_table = fields.Char(string='Mapped system table', related='map_id.target_table', help="The name of the table in the mapped system")
+    map_field = fields.Char(string='Mapped system field', related='map_id.target_field', help="The name of the field in the mapped system")
+    map_odoo_master = fields.Boolean(string='Odoo master', related='map_id.odoo_master', help="Is Odoo master of the data?")
+    map_type = fields.Char(string='Mapped type', related='map_id.target_type', help="The type of the mapped system field")
+    map_comment = fields.Char(string='Comment', related='map_id.comment', help="Comment regarding the mapping")
+
+    def create_mapped_field(self):
+        vals = {
+            'odoo_field' : self.id,
+        }
+
+        self.env['ir.model.fields.mapping'].create(vals)
+
+    @api.multi
+    def write(self, values):
+
+        new_values = {}
+        res = False
+
+        for field in ['map_id','map_system','map_table','map_field','map_odoo_master','map_type','map_comment']:
+            if field in values:
+                
+                # self.fields_get([field], ['related'])[field]['related'][1]
+                # This code fetches the related field for 'field'
+
+                new_values[self.fields_get([field], ['related'])[field]['related'][1]] = values.pop(field)
+
+        if new_values:
+            _logger.warn("DAER: filed write %s" % new_values)
+            field_mapping = self.env['ir.model.fields.mapping'].search([('odoo_field','=',self.id)], limit=1)
+            _logger.warn("DAER: field write %s" % field_mapping)
+
+            if field_mapping:
+                field_mapping.write(new_values)
+            else:
+                new_values['odoo_field'] = self.id
+                self.env['ir.model.fields.mapping'].create(new_values)
+
+            res = True
+
+        if values:
+            res = super(IrModelFields, self).write(values)
+
+        return res
+
+class IrModelFieldsMapping(models.Model):
+    _name = 'ir.model.fields.mapping'
+    
+    odoo_field = fields.Many2one(comodel_name='ir.model.fields', string='Odoo Field', help="The mapped Odoo field", copy=False)
+    odoo_master = fields.Boolean(string='Odoo master', help="Is Odoo master of the data?")
+    target_system = fields.Char(string='Mapped system', help="The name of the mapped system")
+    target_table = fields.Char(string='Mapped system table', help="The name of the table in the mapped system")
+    target_field = fields.Char(string='Mapped system field', help="The name of the field in the mapped system")
+    target_type = fields.Char(string='Mapped type', help="The type of the mapped system field")
+    comment = fields.Char(string='Comment', help="Comment regarding the mapping")
+
+    _sql_constraints = [
+                    ('field_unique', 
+                     'unique(odoo_field)',
+                     'This Odoo field has already been mapped!')
+    ]
+
+    def write(self, values):
+        res = super(IrModelFieldsMapping, self).write(values)
+        return res
+
+    def create(self, values):
+        res = super(IrModelFieldsMapping, self).create(values)
+        
+        # This is probably not needed anymore.
+        # ext_vals = {
+        #     'module': 'base_map',s
+        #     'model' : 'ir.model.fields.mapping',
+        #     'name' : 'base_map_%s' % res.id,
+        #     'res_id' : res.id,
+        # }
+        # self.env['ir.model.data'].create(ext_vals)
+
+        return res

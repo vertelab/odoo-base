@@ -9,12 +9,14 @@
       <xpath expr="//form//form/notebook" position="inside">
         <page name='map' string="Mapping">
             <group>
-                <field name="map_system" />
-                <field name="map_table" />
-                <field name="map_field" />
-                <field name="map_type" />
-                <field name="map_odoo_master" />
-                <field name="map_comment" />
+                <button string="Start mapping" type="object" name="create_mapped_field" class="oe_highlight" attrs="{'invisible': [('map_id', '!=', '')]}" />
+                <field name="map_id" invisible="1" />
+                <field name="map_system" readonly="0" />
+                <field name="map_table" readonly="0" />
+                <field name="map_field" readonly="0" />
+                <field name="map_type" readonly="0" />
+                <field name="map_odoo_master" readonly="0" />
+                <field name="map_comment" readonly="0" />
             </group>
         </page>
       </xpath>
@@ -30,12 +32,14 @@
       <xpath expr="//notebook" position="inside">
         <page name='map' string="Mapping">
             <group>
-                <field name="map_system" />
-                <field name="map_table" />
-                <field name="map_field" />
-                <field name="map_type" />
-                <field name="map_odoo_master" />
-                <field name="map_comment" />
+                <button string="Start mapping" type="object" name="create_mapped_field" class="oe_highlight" attrs="{'invisible': [('map_id', '!=', '')]}" />
+                <field name="map_id" invisible="1" />
+                <field name="map_system" readonly="0" />
+                <field name="map_table" readonly="0" />
+                <field name="map_field" readonly="0" />
+                <field name="map_type" readonly="0" />
+                <field name="map_odoo_master" readonly="0" />
+                <field name="map_comment" readonly="0" />
             </group>
         </page>
       </xpath>

@@ -1,0 +1,2 @@
+id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
+access_ir_model_fields_mapping_public,ir.model.fields.mapping.public,base_map.model_ir_model_fields_mapping,base.group_system,1,1,1,1
