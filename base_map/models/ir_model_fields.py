@@ -56,9 +56,7 @@ class IrModelFields(models.Model):
                 new_values[self.fields_get([field], ['related'])[field]['related'][1]] = values.pop(field)
 
         if new_values:
-            _logger.warn("DAER: filed write %s" % new_values)
             field_mapping = self.env['ir.model.fields.mapping'].search([('odoo_field','=',self.id)], limit=1)
-            _logger.warn("DAER: field write %s" % field_mapping)
 
             if field_mapping:
                 field_mapping.write(new_values)
