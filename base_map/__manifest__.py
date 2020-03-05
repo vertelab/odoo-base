@@ -27,6 +27,7 @@
 Base mapping
 ============
 This modules allows for quick mapping of odoo fields to fields in other systems.
+Also supports import / export of field data.
 """,
     'author': 'Vertel AB',
     'license': 'AGPL-3',
