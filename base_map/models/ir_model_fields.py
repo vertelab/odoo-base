@@ -45,7 +45,7 @@ class IrModelFields(models.Model):
         related='map_id.target_field',
         help="The name of the field in the mapped system")
     map_odoo_master = fields.Boolean(
-        string='Odoo master', 
+        string='Odoo master',
         related='map_id.odoo_master',
         help="Is Odoo master of the data?")
     map_type = fields.Char(
@@ -70,13 +70,11 @@ class IrModelFields(models.Model):
         new_values = {}
         res = False
 
-        for field in ['map_id', 'map_system', 'map_table', 'map_field', 
+        for field in ['map_id', 'map_system', 'map_table', 'map_field',
                       'map_odoo_master', 'map_type', 'map_comment']:
             if field in values:
-                
                 # self.fields_get([field], ['related'])[field]['related'][1]
                 # This code fetches the related field for 'field'
-
                 rel_field = self.fields_get([field], ['related'])[field]['related'][1]
                 new_values[rel_field] = values.pop(field)
 
@@ -100,7 +98,7 @@ class IrModelFields(models.Model):
 
 class IrModelFieldsMapping(models.Model):
     _name = 'ir.model.fields.mapping'
-    
+
     odoo_field = fields.Many2one(
         comodel_name='ir.model.fields',
         string='Odoo Field',
@@ -139,7 +137,7 @@ class IrModelFieldsMapping(models.Model):
 
     def create(self, values):
         res = super(IrModelFieldsMapping, self).create(values)
-        
+
         # This is probably not needed anymore.
         # ext_vals = {
         #     'module': 'base_map',
