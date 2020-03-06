@@ -34,10 +34,10 @@ Also supports import / export of field data.
     'website': 'http://www.vertel.se',
     'depends': ['base', ],
     'data': [
-            'views/ir_model.xml',
-            'security/ir.model.access.csv',
-            'data/ir.model.fields.csv',
-            ],
+        'views/ir_model.xml',
+        'security/ir.model.access.csv',
+        'data/ir.model.fields.csv',
+    ],
     'application': False,
     'installable': True,
 }
