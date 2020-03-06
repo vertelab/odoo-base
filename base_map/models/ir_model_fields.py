@@ -71,7 +71,7 @@ class IrModelFields(models.Model):
         res = False
 
         for field in ['map_id', 'map_system', 'map_table', 'map_field', 
-                'map_odoo_master', 'map_type', 'map_comment']:
+                        'map_odoo_master', 'map_type', 'map_comment']:
             if field in values:
                 
                 # self.fields_get([field], ['related'])[field]['related'][1]
@@ -126,9 +126,11 @@ class IrModelFieldsMapping(models.Model):
         help="Comment regarding the mapping")
 
     _sql_constraints = [
-        ('field_unique',
-        'unique(odoo_field)',
-        'This Odoo field has already been mapped!')
+        (
+            'field_unique',
+            'unique(odoo_field)',
+            'This Odoo field has already been mapped!'
+        )
     ]
 
     def write(self, values):
