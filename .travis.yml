@@ -41,7 +41,7 @@ jobs:
     - stage: linting
       name: "pre-commit"
       python: "3.6"  # Black requires python >= 3.6
-      install: pip3 install pre-commit
+      install: pip install pre-commit
       script: pre-commit run --all --show-diff-on-failure --verbose --color always
       after_success:
       before_install:
@@ -69,7 +69,7 @@ jobs:
 
 env:
   global:
-    - VERSION="10.0" TESTS="0" LINT_CHECK="0" MAKEPOT="0"
+    - VERSION="13.0" TESTS="0" LINT_CHECK="0" MAKEPOT="0"
     # Set this variable to some version existing as linux-generic build on
     # https://github.com/wkhtmltopdf/wkhtmltopdf/releases
     # if you need to install wkhtmltopdf
