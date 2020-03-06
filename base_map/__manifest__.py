@@ -32,7 +32,7 @@ Also supports import / export of field data.
     'author': 'Vertel AB',
     'license': 'AGPL-3',
     'website': 'http://www.vertel.se',
-    'depends': ['base',],
+    'depends': ['base', ],
     'data': [
             'views/ir_model.xml',
             'security/ir.model.access.csv',

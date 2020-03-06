@@ -19,9 +19,10 @@
 #
 ##############################################################################
 
-from odoo import models, fields, api, _
+from odoo import models, fields, api
 import logging
 _logger = logging.getLogger(__name__)
+
 
 class IrModelFields(models.Model):
     _inherit = 'ir.model.fields'
@@ -47,7 +48,7 @@ class IrModelFields(models.Model):
         new_values = {}
         res = False
 
-        for field in ['map_id','map_system','map_table','map_field','map_odoo_master','map_type','map_comment']:
+        for field in ['map_id', 'map_system', 'map_table', 'map_field', 'map_odoo_master', 'map_type', 'map_comment']:
             if field in values:
                 
                 # self.fields_get([field], ['related'])[field]['related'][1]
@@ -56,7 +57,7 @@ class IrModelFields(models.Model):
                 new_values[self.fields_get([field], ['related'])[field]['related'][1]] = values.pop(field)
 
         if new_values:
-            field_mapping = self.env['ir.model.fields.mapping'].search([('odoo_field','=',self.id)], limit=1)
+            field_mapping = self.env['ir.model.fields.mapping'].search([('odoo_field', '=', self.id)], limit=1)
 
             if field_mapping:
                 field_mapping.write(new_values)
@@ -71,6 +72,7 @@ class IrModelFields(models.Model):
 
         return res
 
+
 class IrModelFieldsMapping(models.Model):
     _name = 'ir.model.fields.mapping'
     
@@ -81,7 +83,7 @@ class IrModelFieldsMapping(models.Model):
     target_field = fields.Char(string='Mapped system field', help="The name of the field in the mapped system")
     target_type = fields.Char(string='Mapped type', help="The type of the mapped system field")
     comment = fields.Char(string='Comment', help="Comment regarding the mapping")
-
+    
     _sql_constraints = [
                     ('field_unique', 
                      'unique(odoo_field)',
@@ -97,7 +99,7 @@ class IrModelFieldsMapping(models.Model):
         
         # This is probably not needed anymore.
         # ext_vals = {
-        #     'module': 'base_map',s
+        #     'module': 'base_map',
         #     'model' : 'ir.model.fields.mapping',
         #     'name' : 'base_map_%s' % res.id,
         #     'res_id' : res.id,
