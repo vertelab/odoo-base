@@ -46,9 +46,9 @@ jobs:
       after_success:
       before_install:
     # use this linting job for repos that do not use pre-commit (default for < 13)
-    - stage: linting
-      env:
-        - LINT_CHECK="1"
+    # - stage: linting
+    #   env:
+    #     - LINT_CHECK="1"
     - stage: test
       env:
         # add MAKEPOT="1" to a TEST line to export .pot files from
