@@ -20,7 +20,7 @@
 
 import logging
 
-from odoo import api, fields, models
+from odoo import fields, models
 
 _logger = logging.getLogger(__name__)
 
@@ -70,7 +70,6 @@ class IrModelFields(models.Model):
 
         self.env["ir.model.fields.mapping"].create(vals)
 
-    @api.multi
     def write(self, values):
 
         new_values = {}
