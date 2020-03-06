@@ -1,4 +1,3 @@
-# -*- coding: utf-8 -*-
 ##############################################################################
 #
 #    Odoo, Open Source Management Solution, third party addon
@@ -20,25 +19,24 @@
 ##############################################################################
 
 {
-    'name': 'Base mapping',
-    'version': '0.1',
-    'category': '',
-    'description': """
+    "name": "Base mapping",
+    "version": "13.0.1.0.0",
+    "category": "",
+    "summary": """
 Base mapping
 ============
 This modules allows for quick mapping of odoo fields to fields in other systems.
 Also supports import / export of field data.
 """,
-    'author': 'Vertel AB',
-    'license': 'AGPL-3',
-    'website': 'http://www.vertel.se',
-    'depends': ['base'],
-    'data': [
-        'views/ir_model.xml',
-        'security/ir.model.access.csv',
-        'data/ir.model.fields.csv',
+    "author": "Vertel AB",
+    "license": "AGPL-3",
+    "website": "http://www.vertel.se",
+    "depends": ["base"],
+    "data": [
+        "views/ir_model.xml",
+        "security/ir.model.access.csv",
+        "data/ir.model.fields.csv",
     ],
-    'application': False,
-    'installable': True,
+    "application": False,
+    "installable": True,
 }
-# vim:expandtab:smartindent:tabstop=4s:softtabstop=4:shiftwidth=4:

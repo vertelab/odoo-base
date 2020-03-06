@@ -16,9 +16,9 @@ addons:
   # Better use higher PostgreSQL version
   postgresql: "9.6"
   apt:
-#    sources:
-#    Search your sources alias here:
-#      https://github.com/travis-ci/apt-source-whitelist/blob/master/ubuntu.json
+    #    sources:
+    #    Search your sources alias here:
+    #      https://github.com/travis-ci/apt-source-whitelist/blob/master/ubuntu.json
     packages:
       - expect-dev # provides unbuffer utility
 #     Search your packages here:
@@ -40,7 +40,7 @@ jobs:
     # use this linting job repos that use pre-commit (mandatory for >= 13)
     - stage: linting
       name: "pre-commit"
-      python: "3.6"  # Black requires python >= 3.6
+      python: "3.6" # Black requires python >= 3.6
       install: pip install pre-commit
       script: pre-commit run --all --show-diff-on-failure --verbose --color always
       after_success:
@@ -86,7 +86,8 @@ env:
     # * Compass
 
 install:
-  - git clone --depth=1 https://github.com/OCA/maintainer-quality-tools.git ${HOME}/maintainer-quality-tools
+  - git clone --depth=1 https://github.com/OCA/maintainer-quality-tools.git
+    ${HOME}/maintainer-quality-tools
   - export PATH=${HOME}/maintainer-quality-tools/travis:${PATH}
   - travis_install_nightly
 
