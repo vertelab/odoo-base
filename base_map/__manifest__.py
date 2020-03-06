@@ -21,7 +21,7 @@
 
 {
     'name': 'Base mapping',
-    'version': '0.1',
+    'version': '1.0',
     'category': '',
     'description': """
 Base mapping
@@ -37,6 +37,8 @@ Also supports import / export of field data.
 			'views/ir_model.xml',
 			'security/ir.model.access.csv',
             'data/ir.model.fields.csv',
+            'data/ir.exports.csv',
+            'data/ir.exports.line.csv',
         ],
     'application': False,
     'installable': True,
