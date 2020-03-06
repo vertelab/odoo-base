@@ -47,6 +47,7 @@ class IrModelFields(models.Model):
         new_values = {}
         res = False
 
+        # catch wrties to these fileds and send them over to ir.model.fields.mapping instead
         for field in ['map_id','map_system','map_table','map_field','map_odoo_master','map_type','map_comment']:
             if field in values:
                 
@@ -55,18 +56,23 @@ class IrModelFields(models.Model):
 
                 new_values[self.fields_get([field], ['related'])[field]['related'][1]] = values.pop(field)
 
+        # check if we have values to send to ir.model.fields.mapping
         if new_values:
+            # try to find field_mapping
             field_mapping = self.env['ir.model.fields.mapping'].search([('odoo_field','=',self.id)], limit=1)
 
             if field_mapping:
+                # Update if field_mapping already exists
                 field_mapping.write(new_values)
             else:
+                # Create new field_mapping if none exists
                 new_values['odoo_field'] = self.id
                 self.env['ir.model.fields.mapping'].create(new_values)
 
             res = True
 
         if values:
+            # If we have writes to the standard ir.model.fields, call super write
             res = super(IrModelFields, self).write(values)
 
         return res
