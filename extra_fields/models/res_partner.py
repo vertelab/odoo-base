@@ -29,3 +29,6 @@ class ResPartner(models.Model):
     office_name = fields.Char(string="Office", help="Office name")
     work_phone = fields.Char(string='Work phone', help="Work phone number")
     available_since = fields.Char(string='Available since', help="Time when they became available")
+    org_or_social_sec_nr = fields.Char(string='Social security number', help="Social security number or organization number")
+    test = fields.Char(string='test', help="test")
+

@@ -6,23 +6,41 @@
     <field name="model">res.partner</field> 
     <field name="inherit_id" ref="base.view_partner_form" /> <!-- ref = record id för det jag ärver från -->
     <field name="arch" type="xml"> 
-      <xpath expr="//field[@name='function']" position="after">
-     
-        <field name="office_name"/> 
-              
-     </xpath>      
+           
     <xpath expr="//field[@name='function']" position="after"> <!-- //typ av tag[@name='namn på taggen'] -->
      
-         
+         <field name="office_name"/> 
         <field name="work_phone"/>
-        
-      
-     </xpath>      
-     <xpath expr="//field[@name='function']" position="after"> 
+         <field name="available_since"/>
+               
+     </xpath>
 
-        <field name="available_since"/>
+      <field name="image" position="replace"/>
+      <xpath expr="//field[@name='vat']" position="before">
+      <field name="org_or_social_sec_nr"/> <!-- för privatpersoner, ska ha annan label vid företagsvy-->
      
-     </xpath> 
+     </xpath>
+     
+     <!-- funkar inte, varför? Alltid true även när is_company != true  -->
+      <!-- <xpath expr="//field[@name='function']" position="after"> 
+        <t t-if="record.is_company.raw_value === TRUE">  
+                 
+                <field name="test"/>
+       </t> 
+       </xpath> -->
+     <!-- det här ska endast hända på företag -->
+     <!-- required/invisible gör inget i varken field eller attribute --> <!-- position = attributes-->
+     <!-- ändrar label -->
+      <!--<field name="org_or_social_sec_nr" position="attributes" attrs="{'required':[('is_company', '=', True)]}"> 
+       <attribute name="string"  >Organization number</attribute> 
+      </field>
+      -->
+      <field name="vat" position="replace"/>
+
+      
+
+
+     
     </field>
   </record>
 </odoo>
