@@ -25,10 +25,13 @@ _logger = logging.getLogger(__name__)
 
 class ResPartner(models.Model):
     _inherit = "res.partner" #odoo inheritance från res.partner
-    #_name = "Extra.fields"
+    #_name = ""
     office_name = fields.Char(string="Office", help="Office name")
     work_phone = fields.Char(string='Work phone', help="Work phone number")
     available_since = fields.Char(string='Available since', help="Time when they became available")
     org_or_social_sec_nr = fields.Char(string='Social security number', help="Social security number or organization number")
-    test = fields.Char(string='test', help="test")
+    sni_code = fields.Char(string='SNI-code', help="Social security number or organization number")
+
+
+    
 

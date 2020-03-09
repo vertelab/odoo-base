@@ -20,13 +20,13 @@
 ##############################################################################
 
 {
-    'name': 'Extra fields',
+    'name': 'Partner employee 360 view',
     'version': '0.1',
     'category': '',
     'description': """
-This module adds fields for office, time since person became available and work phone
-========================
-
+Module for employee 360 view
+================================================================================================
+This module alters, adds, removes and shuffles around fields in the partner view
 """,
     'author': 'Vertel AB',
     'license': 'AGPL-3',

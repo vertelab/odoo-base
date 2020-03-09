@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    
+  <record id="view_partner_form_extra_fields" model="ir.ui.view"> <!-- id = namn som används vid referering till recorden, model = odoo-modell som den beskriver -->
+    <field name="name">res.partner.extra_fields</field> <!-- mitt namn på min modul -->
+    <field name="model">res.partner</field> 
+    <field name="inherit_id" ref="base.view_partner_form" /> <!-- ref = record id för det jag ärver från -->
+    <field name="arch" type="xml"> 
+
+    <!--  -->       
+      <field name="function" position="after"> <!-- //typ av tag[@name='namn på taggen'] -->
+     
+        <field name="office_name"/> 
+        <field name="work_phone"/>
+        <field name="available_since"/>
+               
+      </field>
+
+    
+      <field name="vat" position="before">
+
+     <!--   <label for="org_or_social_sec_nr" position="replace">
+          <label for="org_or_social_sec_nr" string="Organization number" attrs="{'invisible':[('is_company', '=', False)]}"/>
+          <label  string="Social security number" for="org_or_social_sec_nr" attrs="{'invisible':[('is_company', '=', True)]}"/> --> <!-- ger dubbla labels, men inte ens med rätt namn, är alltid 2x default string från python koden -->
+      <!--  </label> -->
+
+      <!--   <label for="org_or_social_sec_nr" string="Organization number" attrs="{'invisible':[('is_company', '=', False)]}"/>
+        <label for="org_or_social_sec_nr" string="Social security number" attrs="{'invisible':[('is_company', '=', True)]}"/> -->  <!-- ger dubbla labels, byter inte ut default string, placerar bara en label ovanför, extra labeln byts beroende på vy som förväntat -->
+        <field name="org_or_social_sec_nr"/>  <!-- för privatpersoner, ska ha annan label vid företagsvy --> 
+      </field>
+
+      <!--<field name="user_id" position="attributes"> --> <!-- fungerar inte, byter inte ut label -->
+     <!--   <attribute name="string">Administrative official</attribute> -->
+     <!-- </field> -->
+
+     <label for="user_id" string="Administrative official"/> <!-- Element '<label for="user_id" string="Administrative official">' cannot be located in parent view -->
+
+      <field name="barcode" position="after">
+        <field name="sni_code"/>
+      </field>
+
+      <field name="vat" position="replace"/>
+      <field name="image" position="replace"/>
+      <field name="barcode" position="replace"/>
+        
+
+
+
+     
+    </field>
+  </record>
+</odoo>
