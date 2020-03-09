@@ -33,7 +33,7 @@
      <!--   <attribute name="string">Administrative official</attribute> -->
      <!-- </field> -->
 
-     <label for="user_id" string="Administrative official"/> <!-- Element '<label for="user_id" string="Administrative official">' cannot be located in parent view -->
+    <!-- <label for="user_id" string="Administrative official"/>  Element '<label for="user_id" string="Administrative official">' cannot be located in parent view -->
 
       <field name="barcode" position="after">
         <field name="sni_code"/>
