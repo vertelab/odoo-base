@@ -7,7 +7,13 @@
     <field name="inherit_id" ref="base.view_partner_form" /> <!-- ref = record id för det jag ärver från -->
     <field name="arch" type="xml"> 
 
-    <!--  -->       
+    <!-- TODO: 
+      kolla om jag kan byta databas för allt är broken.
+      ta bort Skattemässig information - hitta dens namn 
+      ändra ordning på adressfältet till postnr, ort, kommun - hur? 
+      CFAR - centralt arbetsgivarregister nummer, arbetsplatsnummer, kolla upp på SCB,   
+      ta bort fakturering - det läggs till av annan modul, så modifiera den? 
+      -->       
       <field name="function" position="after"> <!-- //typ av tag[@name='namn på taggen'] -->
      
         <field name="office_name"/> 
@@ -26,14 +32,13 @@
 
       <!--   <label for="org_or_social_sec_nr" string="Organization number" attrs="{'invisible':[('is_company', '=', False)]}"/>
         <label for="org_or_social_sec_nr" string="Social security number" attrs="{'invisible':[('is_company', '=', True)]}"/> -->  <!-- ger dubbla labels, byter inte ut default string, placerar bara en label ovanför, extra labeln byts beroende på vy som förväntat -->
-        <field name="org_or_social_sec_nr"/>  <!-- för privatpersoner, ska ha annan label vid företagsvy --> 
+        <field name="org_or_social_sec_nr" attrs="{'invisible':[('is_company', '=', True)]}"/>  <!-- för privatpersoner, ska ha annan label vid företagsvy --> 
       </field>
 
       <!--<field name="user_id" position="attributes"> --> <!-- fungerar inte, byter inte ut label -->
      <!--   <attribute name="string">Administrative official</attribute> -->
      <!-- </field> -->
-
-    <!-- <label for="user_id" string="Administrative official"/>  Element '<label for="user_id" string="Administrative official">' cannot be located in parent view -->
+    <!-- <label for="user_id" string="Administrative official"/> --> <!-- Element '<label for="user_id" string="Administrative official">' cannot be located in parent view --> <!-- byt ut label på user_id till Administrative official -->
 
       <field name="barcode" position="after">
         <field name="sni_code"/>
@@ -42,6 +47,8 @@
       <field name="vat" position="replace"/>
       <field name="image" position="replace"/>
       <field name="barcode" position="replace"/>
+     <!-- <field name="property_account_position_id" position="replace"/> --> <!-- Element '<field name="property_account_position_id">' cannot be located in parent view --> <!-- ta bort property_account_position_id -->
+
         
 
 
