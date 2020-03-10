@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    
+    <record id="view_partner_form_activity_field" model="ir.ui.view"> <!-- id = namn som används vid referering till recorden, model = odoo-modell som den beskriver -->
+        <field name="name">res.partner.activity_field</field> <!-- mitt namn på min modul -->
+        <field name="model">res.partner</field> 
+        <field name="inherit_id" ref="base.view_partner_form" /> <!-- ref = record id för det jag ärver från -->
+        <field name="arch" type="xml"> 
+           
+            <xpath expr="//page[@name='internal_notes']" position="after">
+                <page string="Activity">
+                    <group>
+                        <field name="latest_activity_date"/>    
+                        <field name="latest_activity"/>
+                        <field name="next_activity_date"/>
+                        <field name="next_activity"/>
+                    </group>
+                </page>
+            </xpath>
+            
+            
+            <!--<page=name"" string="Activity">-->
+              
+
+            <!--</xpath> -->
+           <!-- </page> -->   
+        </field>
+     </record>
+</odoo>
