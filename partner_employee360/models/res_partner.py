@@ -30,7 +30,9 @@ class ResPartner(models.Model):
     work_phone = fields.Char(string='Work phone', help="Work phone number")
     available_since = fields.Char(string='Available since', help="Time when they became available")
     org_or_social_sec_nr = fields.Char(string='Social security number', help="Social security number or organization number")
-    sni_code = fields.Char(string='SNI-code', help="Social security number or organization number")
+    sni_code = fields.Char(string='SNI-code', help="SNI-code")
+    customer_nr = fields.Char(string='Customer number', help="Customer number")
+
 
 
     
