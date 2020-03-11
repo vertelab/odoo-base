@@ -20,7 +20,7 @@
 ##############################################################################
 
 {
-    'name': 'Partner employee 360 view',
+    'name': 'Event Automatic Digital Dialogue',
     'version': '0.1',
     'category': '',
     'description': """
@@ -31,9 +31,9 @@ This module alters, adds, removes and shuffles around fields in the partner view
     'author': 'Vertel AB',
     'license': 'AGPL-3',
     'website': 'http://www.vertel.se',
-    'depends': ['base'],
+    'depends': ['base', 'event'],
     'data': [
-			'views/res_partner.xml'
+			'views/event_event.xml'
         ],
     'application': False,
     'installable': True,

@@ -19,22 +19,10 @@
 #
 ##############################################################################
 
-{
-    'name': 'Partner employee 360 view',
-    'version': '0.1',
-    'category': '',
-    'description': """
-Module for employee 360 view
-================================================================================================
-This module alters, adds, removes and shuffles around fields in the partner view
-""",
-    'author': 'Vertel AB',
-    'license': 'AGPL-3',
-    'website': 'http://www.vertel.se',
-    'depends': ['base'],
-    'data': [
-			'views/res_partner.xml'
-        ],
-    'application': False,
-    'installable': True,
-}
+from odoo import models, fields, api, _
+import logging
+_logger = logging.getLogger(__name__)
+
+class EventEvent(models.Model):
+    _inherit = "event.event" 
+    
