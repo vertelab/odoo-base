@@ -45,6 +45,11 @@
             <field name="date_end" position="attributes"> 
                <attribute name="string">Meeting end</attribute>
             </field>
+
+            <field name="date_begin" position="before"> 
+               <field name="registration_date"/>
+            </field>
+
         </field>
     </record>
 <!-- 

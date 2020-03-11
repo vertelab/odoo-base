@@ -25,4 +25,4 @@ _logger = logging.getLogger(__name__)
 
 class EventEvent(models.Model):
     _inherit = "event.event" 
-    
+    registration_date = fields.Char(string="Registration date", help="Date that the job-seeker was entered into the system") #temporärt, ska tas från arbetssökande kundkortet
