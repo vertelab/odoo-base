@@ -31,7 +31,7 @@ This module alters, adds, removes and shuffles around fields in the partner view
     'author': 'Vertel AB',
     'license': 'AGPL-3',
     'website': 'http://www.vertel.se',
-    'depends': ['base'],
+    'depends': ['base','account'],
     'data': [
 			'views/res_partner.xml'
         ],
