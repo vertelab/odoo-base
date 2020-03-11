@@ -79,6 +79,7 @@ class IrModelFields(models.Model):
 
 class IrModelFieldsMapping(models.Model):
     _name = 'ir.model.fields.mapping'
+    _description = 'Helper model to ir.model.fields'
     
     odoo_field = fields.Many2one(comodel_name='ir.model.fields', string='Odoo Field', help="The mapped Odoo field", copy=False)
     odoo_master = fields.Boolean(string='Odoo master', help="Is Odoo master of the data?")
