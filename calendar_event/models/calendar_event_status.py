@@ -32,7 +32,7 @@ class CalendarEventForm(models.Model):
                                         ('plan', 'Planned by administrator'),
                                         ('ok', 'Meeting OK'),
                                         ('cancel', 'Cancelled by administrator'),
-                                        ('fail', 'Applicant failed to attend to the metting')],
+                                        ('fail', 'Applicant failed to attend to the meeting')],
                                         string='Meeting status', 
                                         default='request', 
                                         help="Reasons for having or cancelling the meeting")
