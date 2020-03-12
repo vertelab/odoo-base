@@ -11,7 +11,7 @@
                 <attribute name="invisible">1</attribute>
     
             </xpath>
-             <xpath expr="/form/sheet/group/group/div/span[@class='oe_inline']" position="attributes">
+             <xpath expr="/form/sheet/group/group/div/span[hasclass('oe_inline')]" position="attributes">
 
                 <attribute name="invisible">1</attribute>
     
@@ -35,10 +35,20 @@
             <button name="464" position="attributes"> 
                <attribute name="invisible">1</attribute>
             </button>
-            
-            <field name="name" position="attributes"> 
-               <attribute name="placeholder">Dialogue template</attribute> <!-- appliceras inte, står fortfarande evenemang -->
+
+            <field name="is_online" position="attributes"> 
+               <attribute name="invisible">1</attribute>
             </field>
+            <label for="is_online" position="attributes">
+                <attribute name="invisible">1</attribute>
+            </label>
+            <field name="auto_confirm" position="attributes"> 
+               <attribute name="invisible">1</attribute>
+            </field>
+
+            <xpath expr="/form/sheet/div[hasclass('oe_title')]/label" position="attributes">
+               <attribute name="string">Dialogue template</attribute>
+            </xpath>     
             <field name="date_begin" position="attributes"> 
                <attribute name="string">Meeting start</attribute>
             </field>
@@ -53,10 +63,12 @@
         </field>
     </record>
 
-      <!-- <record id="event_event_view_form_inherit_website_auto_dig_dia" model="ir.ui.view">
+      <record id="event_event_view_form_inherit_website_auto_dig_dia" model="ir.ui.view">
         <field name="name">event.event.view.form.inherit.website.auto_dig_dia</field>
         <field name="model">event.event</field> 
         <field name="inherit_id" ref="website_event.event_event_view_form_inherit_website"/>
+        <field name="type">form</field>
+       
         <field name="arch" type="xml"> 
 
             <button name="website_publish_button" position="attributes"> 
@@ -70,7 +82,7 @@
             </label>
 
         </field>
-    </record>   -->
+    </record>  
 
 
      <record id="view_event_kanban_auto_dig_dia" model="ir.ui.view">
@@ -78,19 +90,19 @@
          <field name="model">event.event</field> 
          <field name="inherit_id" ref="event.view_event_kanban" />
          <field name="arch" type="xml"> 
-            <xpath expr="/kanban/templates/t/div/div[@class='o_event_right']/div" position="attributes">        
+            <xpath expr="/kanban/templates/t/div/div[hasclass('o_event_right')]/div" position="attributes">        
                <!-- <field name="recipient"/> -->
                <attribute name="invisible">1</attribute>
             </xpath>
-            <xpath expr="/kanban/templates/t/div/div[@class='o_event_right']/h4/a" position="attributes">        
+            <xpath expr="/kanban/templates/t/div/div[hasclass('o_event_right')]/h4/a" position="attributes">        
                <!-- <field name="recipient"/> -->
                <attribute name="invisible">1</attribute>
             </xpath>
-            <xpath expr="/kanban/templates/t/div/div[@class='o_event_right']/h4/t" position="attributes">        
+            <xpath expr="/kanban/templates/t/div/div[hasclass('o_event_right')]/h4/t" position="attributes">        
                <!-- <field name="recipient"/> -->
                <attribute name="invisible">1</attribute>
             </xpath>
-            <xpath expr="/kanban/templates/t/div/div[@class='o_event_left']" position="attributes">        
+            <xpath expr="/kanban/templates/t/div/div[hasclass('o_event_left')]" position="attributes">        
                
                <attribute name="invisible">1</attribute>
             </xpath> 
