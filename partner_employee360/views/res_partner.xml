@@ -113,14 +113,18 @@
     <field name="arch" type="xml"> 
       <xpath expr="//field[@name='user_id']" position="after">
         
-        <field name="customer_nr" filter_domain="[('customer','=',True), ('parent_id', '=', False), ('customer_nr', '=', 'something')]"/>
-        
+        <field name="customer_nr" />
+
+        <!--        filter_domain="[('customer','=',True), ('parent_id', '=', False)]" --> <!-- kommenterad för att jag inte har någon customer, behöver testas -->
     
       </xpath>
     </field>
   </record>
 
-  <record id="view_partner_filter_employee360" model="ir.ui.view">
+
+<!-- gör inget, tanken är att försöka få den där lilla neråt pilen -->
+
+  <!-- <record id="view_partner_filter_employee360" model="ir.ui.view">
     <field name="name">res.partner.select.employee360</field>
     <field name="model">res.partner</field>
     <field name="arch" type="xml">
@@ -128,7 +132,7 @@
             <field name="customer_nr" />
        </search>
     </field>
-</record>
+</record> -->
 
 
 
