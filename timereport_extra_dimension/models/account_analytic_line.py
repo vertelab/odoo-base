@@ -23,8 +23,8 @@ from odoo import models, fields, api, _
 import logging
 _logger = logging.getLogger(__name__)
 
-class ProjectTask(models.Model):
-   _inherit = "project.task" 
+class AccountAnalyticLine(models.Model):
+   _inherit = "account.analytic.line" 
    #_name = ""
-   code = fields.Char(string="Code", help="Code")
+   code = fields.Char(string="Code", help="Code") #borde sitta ihop med project_task
   

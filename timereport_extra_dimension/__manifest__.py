@@ -31,7 +31,7 @@ Module for adding another dimension to the time reporting
     'author': 'Vertel AB',
     'license': 'AGPL-3',
     'website': 'http://www.vertel.se',
-    'depends': ['base', 'event'],
+    'depends': ['base', 'hr_timesheet', 'project'],
     'data': [
 			'views/hr_timesheet.xml',
             'views/project_task.xml'
