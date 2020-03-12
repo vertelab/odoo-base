@@ -37,7 +37,7 @@
             </button>
             
             <field name="name" position="attributes"> 
-               <attribute name="placeholder">Dialogue template</attribute>
+               <attribute name="placeholder">Dialogue template</attribute> <!-- appliceras inte, står fortfarande evenemang -->
             </field>
             <field name="date_begin" position="attributes"> 
                <attribute name="string">Meeting start</attribute>
@@ -52,8 +52,8 @@
 
         </field>
     </record>
-<!-- 
-      <record id="event_event_view_form_inherit_website_auto_dig_dia" model="ir.ui.view">
+
+      <!-- <record id="event_event_view_form_inherit_website_auto_dig_dia" model="ir.ui.view">
         <field name="name">event.event.view.form.inherit.website.auto_dig_dia</field>
         <field name="model">event.event</field> 
         <field name="inherit_id" ref="website_event.event_event_view_form_inherit_website"/>
@@ -73,7 +73,7 @@
     </record>   -->
 
 
- <!--
+                     <!--
                         göra fälten invisible gjorde inget
                         vet inte vad som ska ändras för att ta bort
                         date_begin, date_end och kalkylerat antal besökare
