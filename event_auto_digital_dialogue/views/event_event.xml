@@ -73,20 +73,28 @@
     </record>   -->
 
 
-                     <!--
-                        göra fälten invisible gjorde inget
-                        vet inte vad som ska ändras för att ta bort
-                        date_begin, date_end och kalkylerat antal besökare
+     <record id="view_event_kanban_auto_dig_dia" model="ir.ui.view">
+         <field name="name">event.event.auto_dig_dia</field>
+         <field name="model">event.event</field> 
+         <field name="inherit_id" ref="event.view_event_kanban" />
+         <field name="arch" type="xml"> 
+            <xpath expr="/kanban/templates/t/div/div[@class='o_event_right']/div" position="attributes">        
+               <!-- <field name="recipient"/> -->
+               <attribute name="invisible">1</attribute>
+            </xpath>
+            <xpath expr="/kanban/templates/t/div/div[@class='o_event_right']/h4/a" position="attributes">        
+               <!-- <field name="recipient"/> -->
+               <attribute name="invisible">1</attribute>
+            </xpath>
+            <xpath expr="/kanban/templates/t/div/div[@class='o_event_right']/h4/t" position="attributes">        
+               <!-- <field name="recipient"/> -->
+               <attribute name="invisible">1</attribute>
+            </xpath>
+            <xpath expr="/kanban/templates/t/div/div[@class='o_event_left']" position="attributes">        
+               
+               <attribute name="invisible">1</attribute>
+            </xpath> 
 
-                    -->
-    <!-- <record id="view_event_kanban_auto_dig_dia" model="ir.ui.view">
-        <field name="name">event.event.auto_dig_dia</field>
-        <field name="model">event.event</field> 
-        <field name="inherit_id" ref="event.view_event_kanban" />
-        <field name="arch" type="xml"> 
-                    
-                   
-
-        </field>
-    </record> -->
+         </field>
+    </record> 
 </odoo>
