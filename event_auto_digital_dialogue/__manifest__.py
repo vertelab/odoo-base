@@ -24,9 +24,9 @@
     'version': '0.1',
     'category': '',
     'description': """
-Module for employee 360 view
+Module that changes event view to an automatic digital dialogue view
 ================================================================================================
-This module alters, adds, removes and shuffles around fields in the partner view
+This module alters, adds and removes fields in the event view
 """,
     'author': 'Vertel AB',
     'license': 'AGPL-3',
