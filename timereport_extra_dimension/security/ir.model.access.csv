@@ -1,0 +1,4 @@
+id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
+access_project_task_code_user,project.task.code,analytic.model_project_task_code,project.group_project_user,1,0,0,0
+access_project_task_code_manager,project.task.code,analytic.model_project_task_code,project.group_project_manager,1,1,1,1
+access_project_task_code_timesheet_user,project.task.code,model_project_task_code,hr_timesheet.group_hr_timesheet_user,1,0,0,0
