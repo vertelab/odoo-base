@@ -33,7 +33,8 @@ This module adds adds a tab with different activities
     'website': 'http://www.vertel.se',
     'depends': ['base'],
     'data': [
-			'views/res_partner.xml'
+			'views/res_partner.xml',
+            'security/ir.model.access.csv'
         ],
     'application': False,
     'installable': True,

@@ -10,10 +10,20 @@
             <xpath expr="//page[@name='internal_notes']" position="after">
                 <page string="Activity">
                     <group>
-                        <field name="latest_activity_date"/>    
+                      <field name="activities_ids" mode="tree" nolabel="1">
+                        <tree editable="bottom" string="Timesheet Activities" default_order="date">
+                           <field name="name" />    
+                            <field name="meeting_type"/>
+                            <field name="start_date"/>
+                            <field name="duration" widget="timesheet_uom"/> 
+                            <field name="notes"/> 
+                            <field name="location"/>  
+                        </tree>
+                      </field>
+                        <!-- <field name="latest_activity_date"/>    
                         <field name="latest_activity"/>
                         <field name="next_activity_date"/>
-                        <field name="next_activity"/>
+                        <field name="next_activity"/> -->
                     </group>
                 </page>
             </xpath>
