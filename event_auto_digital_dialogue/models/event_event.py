@@ -26,4 +26,4 @@ _logger = logging.getLogger(__name__)
 class EventEvent(models.Model):
     _inherit = "event.event" 
     registration_date = fields.Char(string="Registration date", help="Date that the job-seeker was entered into the system") #temporärt, ska tas från arbetssökande kundkortet
-    recipient = fields.Char(string="Recipient", help="...")
+    recipients = fields.Integer(string="Recipient", default="100", help="...") #ska vara kalkylerat fält utifrån hur många som är kopplade till samma event, måste göra nått som kopplar personer till event

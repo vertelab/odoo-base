@@ -27,5 +27,5 @@ class ProjectTaskCode(models.Model):
    _name = "project.task.code"
    _description = "Code...?"
    
-   code = fields.Char(string="Code", help="Code") #borde sitta ihop med project_task
+   name = fields.Char(string="Code", help="Code") #kalla för name för att värdet ska visas upp vid dropdown
   
