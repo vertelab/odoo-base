@@ -26,8 +26,19 @@ _logger = logging.getLogger(__name__)
 class ResPartner(models.Model):
     _inherit = "res.partner" #odoo inheritance från res.partner
     
-    activity = fields.Char(string="Activity", help="tab")
-    latest_activity_date = fields.Datetime(string="Latest Activity Date", help="Date")
-    latest_activity = fields.Char(string="Latest Activity", help="Latest Activity Text")
-    next_activity_date = fields.Datetime(string="Next Activity Date", help="Date")
-    next_activity = fields.Char(string="Next Activity", help="Next Activity Text")
+   
+
+    activities_ids = fields.One2many(comodel_name="res.partner.activity", inverse_name="partner_id")
+
+class ResPartnerActivity(models.Model):
+    _name="res.partner.activity"
+    
+    partner_id = fields.Many2one(comodel_name="res.partner")
+
+    name = fields.Char(string="Subject", help="", required=True)
+    meeting_type = fields.Char(string="Meeting type", help="Type of meeting")
+    start_date = fields.Datetime(string="Start date", help="", required=True)
+    duration = fields.Float(string="Duration", help="", required=True)
+    notes = fields.Char(string="Notes", help="")
+    location = fields.Char(string="Location", help="")
+
