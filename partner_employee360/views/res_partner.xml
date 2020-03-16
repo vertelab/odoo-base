@@ -44,7 +44,7 @@
     
       <field name="barcode" position="after">
         <field name="sni_code"/>
-        <field name="office" options="{'no_create_edit': True}" domain="[('type', '=', 'delivery')]"/>
+        <field name="office" options="{'no_create_edit': True}" domain="[('type', '=', 'af office')]"/>
       </field>
       
 
