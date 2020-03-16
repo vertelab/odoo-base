@@ -8,20 +8,14 @@
     <field name="arch" type="xml"> 
 
      <!-- TODO: 
-      kolla om jag kan byta databas för allt är broken.
-
-      ändra ordning på adressfältet till postnr, ort, kommun - hur? 
-      CFAR - centralt arbetsgivarregister nummer, arbetsplatsnummer, kolla upp på SCB,   
-      
-      ta bort fakturering - det läggs till av annan modul, så modifiera den? 
-
-      vid sökning heter administrative officer fortfarande säljare, kanske ska ändra genom 
+     
+      vid sökning heter administrative officer (user_id) fortfarande säljare, kanske ska ändra genom 
       en translation fil eller på liknande sätt så att alla instanser av säljare blir till handläggare
       alternativt byta ut fältet helt.
       -->   
       <field name="function" position="after"> 
      
-        <field name="office_name"/> 
+        <!-- <field name="office_name"/>  -->
         <field name="work_phone"/>
         <field name="available_since"/>
                
@@ -50,6 +44,7 @@
     
       <field name="barcode" position="after">
         <field name="sni_code"/>
+        <field name="office"/>
       </field>
       
 
