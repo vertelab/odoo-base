@@ -20,20 +20,46 @@
                             <field name="location"/>  
                         </tree>
                       </field>
-                        <!-- <field name="latest_activity_date"/>    
-                        <field name="latest_activity"/>
-                        <field name="next_activity_date"/>
-                        <field name="next_activity"/> -->
+                    
                     </group>
                 </page>
             </xpath>
-            
-            
-            <!--<page=name"" string="Activity">-->
-              
-
-            <!--</xpath> -->
-           <!-- </page> -->   
+            <div name="button_box" position="inside">
+                <button string="Activities" name="open_partner_activities" type="object" class="oe_stat_button">
+                </button>
+            </div>
         </field>
+    
      </record>
+       <record id="action_activities" model="ir.actions.act_window">
+        <field name="name">Activities</field>
+        <field name="type">ir.actions.act_window</field>
+        <field name="res_model">res.partner.activity</field>
+        <field name="view_type">form</field>
+        <field name="view_mode">kanban</field>
+
+        
+
+    </record> 
+
+    <menuitem id="activities_root" name="Activities" sequence="5"/>
+    <menuitem id="activities_kanban" name="Activities" parent="activities_root" action="action_activities"/> <!--  -->
+
+    <!-- 
+        
+        context eller domain 
+        gör knapp i res.partner som pekar på en action, jämför med calendar event knapp
+        gör en kanban, list och kalender vy
+
+        för button ärv in på div name=button_box 
+
+        visa upp count, computed field som använder len på ids
+
+        flytta menyn till acivity field
+
+        koppla till calendar event
+
+        tänk på search för specifika fält, och grupperingar (domän) på allt möjligt, filter, sökrecord i action record
+
+    -->
 </odoo>

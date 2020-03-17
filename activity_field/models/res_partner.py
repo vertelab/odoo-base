@@ -27,8 +27,20 @@ class ResPartner(models.Model):
     _inherit = "res.partner" #odoo inheritance från res.partner
     
    
-
     activities_ids = fields.One2many(comodel_name="res.partner.activity", inverse_name="partner_id")
+
+    @api.multi
+    def open_partner_activities(self):
+        return{
+            'name': _('Activities'),
+            'domain':[('partner_id', '=', self.ids)],
+            'view_type': 'form',
+            'res_model': 'res.partner.activity',
+            'view_id':  False,
+            'view_mode': 'kanban,tree,form', 
+            'type': 'ir.actions.act_window',
+        }
+
 
 class ResPartnerActivity(models.Model):
     _name="res.partner.activity"

@@ -25,7 +25,7 @@
     'category': '',
     'description': """
 This module adds adds a tab with different activities 
-========================
+===========================================================
 
 """,
     'author': 'Vertel AB',
