@@ -15,7 +15,7 @@
       </xpath>
     </field>
   </record>
-
+<!--
   <record id="notes_tree_view" model="ir.ui.view">
     <field name="name">Daily Notes Tree View</field>
     <field name="model">daily.notes</field>
@@ -26,4 +26,5 @@
         </tree>
       </field>
   </record>
+-->
 </odoo>
