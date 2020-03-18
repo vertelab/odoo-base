@@ -48,7 +48,7 @@ class ResPartnerNotes(models.Model):
             'domain': domain,
             }
 
-class ResPartner(models.Model):
+class DailyNotes(models.Model):
     #_inherit = 'res.partner'
     _name = 'daily.notes'
 
