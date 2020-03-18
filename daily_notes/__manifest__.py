@@ -34,6 +34,7 @@ This module allowes daily notes for a partner.
     'depends': ['base',],
     'data': [
 			'views/ir_model.xml',
+            'security/ir.model.access.csv',
         ],
     'application': False,
     'installable': True,

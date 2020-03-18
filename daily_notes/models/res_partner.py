@@ -27,32 +27,31 @@ class ResPartnerNotes(models.Model):
     _description = 'Daily notes for a partner'
     _name = 'res.partner.notes'
 
+    name = fields.Char(string="Title")
+    note = fields.Char(string="Notes")
+
+class ResPartner(models.Model):
+    _inherit = 'res.partner'
+
+    notes_ids = fields.Many2many(comodel_name='res.partner.notes', 
+                                 string='Daily notes',)
+
     @api.multi
-    def daily_notes_button(self, context=None):
+    def view_notes(self, context=None):
 #        dailynotes_id = self.env['res.partner'].search (
 #            [('name', '=', "daily_notes.notes_tree_view")]).partner_id=self.partner.partner_id
 #            )
         domain = []
 #        domain = [('id','in',dailynotes_id)]
-        view_id_tree = self.env['ir.ui.view'].search(
-            [('name','=',"daily_notes.notes_tree_view")])partner_id=self.partner.partner_id
-            )
+        view_id_tree = self.env['ir.ui.view'].search([('name','=',"daily_notes.notes_tree_view")])
+        partner_id = self.id
         return {
             'type': 'ir.actions.act_window',
-            'res_model': 'daily.notes',
+            'res_model': 'res.partner.notes',
             'view_type': 'form',
             'view_mode': 'tree,form',
-            'views': [(view_id_tree[0].id, 'tree'),(False,'form')],
-            'view_id ref="daily_notes.notes_tree_view"': '',
+            # 'views': [(view_id_tree[0].id, 'tree'),(False,'form')],
+            # 'view_id ref="daily_notes.notes_tree_view"': '',
             'target': 'current',
             'domain': domain,
             }
-
-class DailyNotes(models.Model):
-    #_inherit = 'res.partner'
-    _name = 'daily.notes'
-
-    daily_notes = fields.One2many(comodel_name='daily.notes', 
-                                 inverse_name='notes_id', 
-                                 string='Daily notes id', 
-                                 copy=False)
