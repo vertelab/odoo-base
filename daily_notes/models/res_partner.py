@@ -45,6 +45,7 @@ class ResPartner(models.Model):
         # view_id_tree = self.env['ir.ui.view'].search([('name','=',"daily_notes.notes_tree_view")])
         partner_id = self.id
         return {
+            'name': 'Daily notes',
             'type': 'ir.actions.act_window',
             'res_model': 'res.partner.notes',
             'view_type': 'form',
@@ -54,3 +55,16 @@ class ResPartner(models.Model):
             'target': 'current',
             'domain': domain,
             }
+
+class ResPartnerNotes(models.Model):
+    _inherit = 'res.partner.notes'
+
+    categories = fields.Selection(selection=[('request', 'Requested by applicant'),
+                                        ('plan', 'Planned by administrator'),
+                                        ('ok', 'Meeting OK'),
+                                        ('cancel', 'Cancelled by administrator'),
+                                        ('fail', 'Applicant failed to attend to the meeting')],
+                                        string='Categories', 
+                                        default='request', 
+                                        help="Notes categories")
+    tags = fields.Char(string='Tags', help="Notes tags separated with ,")

@@ -7,12 +7,12 @@
     <field name="inherit_id" ref="base.view_partner_form" /> 
     <field name="arch" type="xml"> 
       <button name="toggle_active" position="before">
-        <button class="oe_stat_button" type="object"
+        <button class="oe_stat_button" type="object" string="Notes"
             name="view_notes"
-            icon="fa-calendar"
+            icon="fa-pencil-square-o"
             groups="sales_team.group_sale_salesman"
             context="{'partner_id': active_id, 'partner_name': name}">
-            <!-- <field string="Notes" name="meeting_count" widget="statinfo"/> -->
+            <!-- <field string="Notes" name="notes_count" widget="statinfo"/> -->
         </button>
       </button>
       <!-- <xpath expr="//button[@name='toggle_active'][not(ancestor::field)]" position="after">
@@ -24,6 +24,7 @@
       </xpath> -->
     </field>
   </record>
+
 <!--  <record id="notes_tree_view" model="ir.ui.view">
     <field name="name">Daily Notes Tree View</field>
     <field name="model">daily.notes</field>
@@ -34,4 +35,5 @@
         </tree>
       </field>
   </record> -->
+  
 </odoo>
