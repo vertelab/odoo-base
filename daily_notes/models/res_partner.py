@@ -25,6 +25,7 @@ _logger = logging.getLogger(__name__)
 
 class ResPartnerNotes(models.Model):
     _description = 'Daily notes for a partner'
+    _inherit = 'res.partner'
     _name = 'res.partner.notes'
 
     name = fields.Char(string="Title")
@@ -39,8 +40,7 @@ class ResPartner(models.Model):
     @api.multi
     def view_notes(self, context=None):
 #        dailynotes_id = self.env['res.partner'].search (
-#            [('name', '=', "daily_notes.notes_tree_view")]).partner_id=self.partner.partner_id
-#            )
+#            [('name', '=', "daily_notes.notes_tree_view")]) partner_id=self.partner.partner_id
         domain = []
 #        domain = [('id','in',dailynotes_id)]
         view_id_tree = self.env['ir.ui.view'].search([('name','=',"daily_notes.notes_tree_view")])
