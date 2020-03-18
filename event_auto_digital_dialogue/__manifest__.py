@@ -31,7 +31,7 @@ This module alters, adds and removes fields in the event view
     'author': 'Vertel AB',
     'license': 'AGPL-3',
     'website': 'http://www.vertel.se',
-    'depends': ['website_event'],
+    'depends': ['website_event', 'event'],
     'data': [
 			'views/event_event.xml'
         ],
