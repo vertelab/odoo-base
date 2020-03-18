@@ -13,7 +13,7 @@
                       <field name="activities_ids" mode="tree" nolabel="1">
                         <tree editable="bottom" string="Timesheet Activities" default_order="start_date">
                            <field name="name" />    
-                            <field name="meeting_type"/>
+                            <field name="meeting_type" readonly="0"/>
                             <field name="start_date"/>
                             <field name="duration" widget="timesheet_uom"/> 
                             <field name="notes"/> 
@@ -42,6 +42,19 @@
         
 
     </record> 
+
+    <record id="view_event_form_auto_dig_dia" model="ir.ui.view">
+        <field name="name">event.event.auto_dig_dia</field>
+        <field name="model">event.event</field> 
+        <field name="inherit_id" ref="event.view_event_form" />
+        <field name="arch" type="xml"> 
+            
+            <field name="date_begin" position="before"> 
+               <field name="meeting_type"/>
+            </field>
+
+        </field>
+    </record>
 
     <menuitem id="activities_root" name="Activities" sequence="5"/>
     <menuitem id="activities_kanban" name="Activities" parent="activities_root" action="action_activities"/> <!--  -->

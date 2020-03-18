@@ -29,6 +29,7 @@ class ResPartner(models.Model):
    
     activities_ids = fields.One2many(comodel_name="res.partner.activity", inverse_name="partner_id")
 
+    @api.one
     def compute_activities_count(self):
         for partner in self:
             partner.activities_count = len(partner.activities_ids)
@@ -56,9 +57,20 @@ class ResPartnerActivity(models.Model):
     partner_id = fields.Many2one(comodel_name="res.partner")
 
     name = fields.Char(string="Subject", help="", required=True)
-    meeting_type = fields.Char(string="Meeting type", help="Type of meeting") #gör till lista, gör att auto_digital_dialogue tar inskrivningsdatum från en meeting type = "inskrivning"
+    meeting_type = fields.Many2many(comodel_name="res.partner.activity.type", inverse_name="activity_id") #gör till lista, gör att auto_digital_dialogue tar inskrivningsdatum från en meeting type = "inskrivning"
     start_date = fields.Datetime(string="Start date", help="", required=True)
     duration = fields.Float(string="Duration", help="")
     notes = fields.Char(string="Notes", help="")
     location = fields.Char(string="Location", help="")
+
+class ResPartnerMeetingType(models.Model):
+    _name="res.partner.activity.type"
+
+    activity_id = fields.Many2many(comodel_name="res.partner.activity")
+
+    name = fields.Char(string="Meeting type", help="")
+    description = fields.Char(string="Description", help="")
+
+    #more fields?
+
 
