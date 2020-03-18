@@ -31,7 +31,7 @@ This module adds adds a tab with different activities
     'author': 'Vertel AB',
     'license': 'AGPL-3',
     'website': 'http://www.vertel.se',
-    'depends': ['base','event'],
+    'depends': ['base','website_event', 'event'],
     'data': [
 			'views/res_partner.xml',
             'security/ir.model.access.csv'
