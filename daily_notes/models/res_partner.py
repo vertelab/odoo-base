@@ -27,14 +27,16 @@ class ResPartnerNotes(models.Model):
     _description = 'Daily notes for a partner'
     _name = 'res.partner.notes'
 
+    partner_id = fields.Many2one(comodel_name="res.partner")
+
     name = fields.Char(string="Title")
     note = fields.Char(string="Notes")
 
 class ResPartner(models.Model):
     _inherit = 'res.partner'
 
-    notes_ids = fields.Many2many(comodel_name='res.partner.notes', 
-                                 string='Daily notes',)
+    notes_ids = fields.One2many(comodel_name='res.partner.notes', 
+                                 string='Daily notes', inverse_name="partner_id")
 
     @api.multi
     def view_notes(self):
@@ -65,15 +67,16 @@ class ResPartner(models.Model):
 #            'target': 'current',
 #            }
 
-#class ResPartnerNotesCategories(models.Model):
- #   _inherit = 'res.partner.notes'
-#
- #   categories = fields.Selection(selection=[('request', 'Requested by applicant'),
-  #                                      ('plan', 'Planned by administrator'),
-   #                                     ('ok', 'Meeting OK'),
-    #                                    ('cancel', 'Cancelled by administrator'),
-     #                                   ('fail', 'Applicant failed to attend to the meeting')],
-      #                                  string='Categories', 
-       #                                 default='request', 
-        #                                help="Notes categories")
-    # tags = fields.Char(string='Tags', help="Notes tags separated with ,")
+class ResPartnerNotesCategories(models.Model):
+    _inherit = 'res.partner.notes'
+    categories = fields.Selection(selection=[('request', 
+    'Requested by applicant'), 
+    ('plan', 'Planned by administrator'), 
+    ('ok', 'Meeting OK'), 
+    ('cancel', 'Cancelled by administrator'), 
+    ('fail', 'Applicant failed to attend to the meeting')], 
+    string='Categories', 
+    default='request', 
+    help="Notes categories")
+    
+    tags = fields.Char(string='Tags', help="Notes tags separated with ,")

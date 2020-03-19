@@ -33,7 +33,7 @@ This module allowes daily notes for a partner.
     'website': 'http://www.vertel.se',
     'depends': ['base',],
     'data': [
-			'views/ir_model.xml',
+			'views/res_partner.xml',
             'security/ir.model.access.csv',
         ],
     'application': False,
