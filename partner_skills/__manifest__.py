@@ -19,24 +19,22 @@
 #
 ##############################################################################
 
-from odoo import models, fields, api, _
-import logging
-_logger = logging.getLogger(__name__)
-
-class ResPartner(models.Model):
-    _inherit = "res.partner" #odoo inheritance från res.partner
-    #_name = ""
-    office = fields.Many2one('res.partner', string="Office")
-    work_phone = fields.Integer(string='Work phone', help="Work phone number")
-    available_since = fields.Char(string='Available since', help="Time when they became available") #datetime/time?
-    org_or_social_sec_nr = fields.Integer(string='Social security number', help="Social security number or organization number")
-    cfar = fields.Integer(string='CFAR', help="CFAR number")
-    sni_code = fields.Char(string='SNI-code', help="SNI-code")
-    customer_nr = fields.Integer(string='Customer number', help="Customer number")
-
-    type = fields.Selection(selection_add=[('af office', 'AF Office')])
-
-
-
-    
-
+{
+    'name': 'Partner skills',
+    'version': '0.1',
+    'category': '',
+    'description': """
+Adds skills to the partner view
+================================================================================================
+Gets skills from hr_skill
+""",
+    'author': 'Vertel AB',
+    'license': 'AGPL-3',
+    'website': 'http://www.vertel.se',
+    'depends': ['base', 'hr_skill'],
+    'data': [
+			'views/res_partner.xml'
+        ],
+    'application': False,
+    'installable': True,
+}
