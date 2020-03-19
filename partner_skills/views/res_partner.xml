@@ -6,7 +6,7 @@
         <field name="inherit_id" ref="base.view_partner_form" />
         <field name="arch" type="xml"> 
             <field name="category_id" position="before">
-                <field name="skills"/>
+                <field name="skills" widget="many2many_tags"/>
             </field>
         </field>
     </record>
