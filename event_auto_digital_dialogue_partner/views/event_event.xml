@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <!-- <record id="view_event_form_auto_dig_dia" model="ir.ui.view">
+        <field name="name">event.event.auto_dig_dia</field>
+        <field name="model">event.event</field> 
+        <field name="inherit_id" ref="event.view_event_form" />
+        <field name="arch" type="xml"> 
+
+        </field>
+    </record> -->
+
+    <record id="view_res_partner_form_events" model="ir.ui.view"> 
+        <field name="name">view.res.partner.form.events</field>
+        <field name="model">res.partner</field> 
+        <field name="inherit_id" ref="base.view_partner_form" /> 
+        <field name="arch" type="xml"> 
+            <field name="category_id" position="before">
+                <field name="events" widget="many2many_tags"/>
+                asdljsadljsa
+            </field>
+        </field>
+    </record>
+</odoo>
