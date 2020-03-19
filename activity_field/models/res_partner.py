@@ -64,7 +64,7 @@ class ResPartnerActivity(models.Model):
     notes = fields.Char(string="Notes", help="")
     location = fields.Char(string="Location", help="")
 
-class ResPartnerMeetingType(models.Model):
+class ResPartnerActivityType(models.Model):
     _name="res.partner.activity.type"
 
     activity_id = fields.Many2one(comodel_name="res.partner.activity")

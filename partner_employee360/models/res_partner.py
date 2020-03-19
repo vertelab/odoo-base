@@ -27,12 +27,12 @@ class ResPartner(models.Model):
     _inherit = "res.partner" #odoo inheritance från res.partner
     #_name = ""
     office = fields.Many2one('res.partner', string="Office", )
-    work_phone = fields.Char(string='Work phone', help="Work phone number")
-    available_since = fields.Char(string='Available since', help="Time when they became available")
-    org_or_social_sec_nr = fields.Char(string='Social security number', help="Social security number or organization number")
-    cfar = fields.Char(string='CFAR', help="CFAR number")
+    work_phone = fields.Integer(string='Work phone', help="Work phone number")
+    available_since = fields.Char(string='Available since', help="Time when they became available") #datetime/time?
+    org_or_social_sec_nr = fields.Integer(string='Social security number', help="Social security number or organization number")
+    cfar = fields.Integer(string='CFAR', help="CFAR number")
     sni_code = fields.Char(string='SNI-code', help="SNI-code")
-    customer_nr = fields.Char(string='Customer number', help="Customer number")
+    customer_nr = fields.Integer(string='Customer number', help="Customer number")
 
     type = fields.Selection(selection_add=[('af office', 'AF Office')])
 
