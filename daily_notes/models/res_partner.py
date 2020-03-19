@@ -37,34 +37,43 @@ class ResPartner(models.Model):
                                  string='Daily notes',)
 
     @api.multi
-    def view_notes(self, context=None):
+    def view_notes(self):
+        return{
+            'name': _('Daily notes'),
+            'domain':[('partner_id', '=', self.ids)],
+            'view_type': 'form',
+            'res_model': 'res.partner.notes',
+            'view_id':  False,
+            'view_mode': 'tree,form', #calendar: insufficient fields for calendar view
+            'type': 'ir.actions.act_window',
+        }
+#    @api.multi
+#    def view_notes(self): #context=None
 #        dailynotes_id = self.env['res.partner'].search (
 #            [('name', '=', "daily_notes.notes_tree_view")]) partner_id=self.partner.partner_id
-        domain = []
 #        domain = [('id','in',dailynotes_id)]
         # view_id_tree = self.env['ir.ui.view'].search([('name','=',"daily_notes.notes_tree_view")])
-        partner_id = self.id
-        return {
-            'name': 'Daily notes',
-            'type': 'ir.actions.act_window',
-            'res_model': 'res.partner.notes',
-            'view_type': 'form',
-            'view_mode': 'tree,form',
-            # 'views': [(view_id_tree[0].id, 'tree'),(False,'form')],
-            # 'view_id ref="daily_notes.notes_tree_view"': '',
-            'target': 'current',
-            'domain': domain,
-            }
+#        return {
+#            'name': 'Daily notes',
+#            'domain':[('partner_id', '=', self.ids)],
+#            'type': 'ir.actions.act_window',
+#            'res_model': 'res.partner.notes',
+#            'view_type': 'form',
+#            'view_mode': 'tree,form',
+#            # 'views': [(view_id_tree[0].id, 'tree'),(False,'form')],
+#            # 'view_id ref="daily_notes.notes_tree_view"': '',
+#            'target': 'current',
+#            }
 
-class ResPartnerNotes(models.Model):
-    _inherit = 'res.partner.notes'
-
-    categories = fields.Selection(selection=[('request', 'Requested by applicant'),
-                                        ('plan', 'Planned by administrator'),
-                                        ('ok', 'Meeting OK'),
-                                        ('cancel', 'Cancelled by administrator'),
-                                        ('fail', 'Applicant failed to attend to the meeting')],
-                                        string='Categories', 
-                                        default='request', 
-                                        help="Notes categories")
-    tags = fields.Char(string='Tags', help="Notes tags separated with ,")
+#class ResPartnerNotesCategories(models.Model):
+ #   _inherit = 'res.partner.notes'
+#
+ #   categories = fields.Selection(selection=[('request', 'Requested by applicant'),
+  #                                      ('plan', 'Planned by administrator'),
+   #                                     ('ok', 'Meeting OK'),
+    #                                    ('cancel', 'Cancelled by administrator'),
+     #                                   ('fail', 'Applicant failed to attend to the meeting')],
+      #                                  string='Categories', 
+       #                                 default='request', 
+        #                                help="Notes categories")
+    # tags = fields.Char(string='Tags', help="Notes tags separated with ,")

@@ -13,7 +13,7 @@
                       <field name="activities_ids" mode="tree" nolabel="1">
                         <tree editable="bottom" string="Timesheet Activities" default_order="start_date">
                            <field name="name" />    
-                            <field name="meeting_type" widget="many2one"/>
+                            <field name="meeting_type" widget="many2many_tags"/>
                             <field name="start_date"/>
                             <field name="duration" widget="timesheet_uom"/> 
                             <field name="notes"/> 
