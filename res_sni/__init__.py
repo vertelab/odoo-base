@@ -1,2 +1,1 @@
-from . import res_sni
-#import res_partner
+from . import models
