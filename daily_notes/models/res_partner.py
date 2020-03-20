@@ -27,16 +27,24 @@ class ResPartnerNotes(models.Model):
     _description = 'Daily notes for a partner'
     _name = 'res.partner.notes'
 
-    partner_id = fields.Many2one(comodel_name="res.partner")
+    partner_id = fields.Many2one(comodel_name="res.partner", string="Administrator") #borde fyllas ut automatiskt baserat på vilken du kommer från
 
-    name = fields.Char(string="Title")
+    name = fields.Char(string="Title") 
     note = fields.Char(string="Notes")
+    refers_to_date = fields.Datetime(string="Refers to date") 
 
 class ResPartner(models.Model):
     _inherit = 'res.partner'
 
     notes_ids = fields.One2many(comodel_name='res.partner.notes', 
                                  string='Daily notes', inverse_name="partner_id")
+
+    @api.one
+    def compute_notes_count(self):
+        for partner in self:
+            partner.notes_count = len(partner.notes_ids)
+
+    notes_count = fields.Integer(compute='compute_notes_count')
 
     @api.multi
     def view_notes(self):
@@ -67,16 +75,16 @@ class ResPartner(models.Model):
 #            'target': 'current',
 #            }
 
-class ResPartnerNotesCategories(models.Model):
-    _inherit = 'res.partner.notes'
-    categories = fields.Selection(selection=[('request', 
-    'Requested by applicant'), 
-    ('plan', 'Planned by administrator'), 
-    ('ok', 'Meeting OK'), 
-    ('cancel', 'Cancelled by administrator'), 
-    ('fail', 'Applicant failed to attend to the meeting')], 
-    string='Categories', 
-    default='request', 
-    help="Notes categories")
+#class ResPartnerNotesCategories(models.Model):
+#    _inherit = 'res.partner.notes'
+#    categories = fields.Selection(selection=[('request', 
+#    'Requested by applicant'), 
+#    ('plan', 'Planned by administrator'), 
+#    ('ok', 'Meeting OK'), 
+#    ('cancel', 'Cancelled by administrator'), 
+#    ('fail', 'Applicant failed to attend to the meeting')], 
+#   string='Categories', 
+#    default='request', 
+#    help="Notes categories")
     
-    tags = fields.Char(string='Tags', help="Notes tags separated with ,")
+#    tags = fields.Char(string='Tags', help="Notes tags separated with ,")

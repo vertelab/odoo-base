@@ -25,8 +25,8 @@
                 </page>
             </xpath>
             <div name="button_box" position="inside">
-                <button string="Activities" name="open_partner_activities" type="object" class="oe_stat_button" >
-               <field name="activities_count"/> <!-- ser fult ut, behöver fixas-->
+                <button name="open_partner_activities" type="object" class="oe_stat_button" icon="fa-calendar">
+               <field name="activities_count" string="Activities" widget="statinfo"/> <!-- ser fult ut, behöver fixas-->
                 </button>
             </div>
         </field>
