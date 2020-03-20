@@ -22,10 +22,10 @@ from odoo import models, fields, api, _
 import logging
 _logger = logging.getLogger(__name__)
 
-class Sni(models.Model):
+class Sni(models.Model): 
     _name = 'res.sni'
 
-    partner_id = fields.Many2one(comodel_name="res.partner")
+    partner_id = fields.Many2many(comodel_name="res.partner")
     
     name = fields.Char(string='Name', required=True)
     code = fields.Char(string='Official Code',help="Official code, group, sub-group or detail group.")

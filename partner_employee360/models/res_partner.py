@@ -31,7 +31,6 @@ class ResPartner(models.Model):
     available_since = fields.Char(string='Available since', help="Time when they became available") #datetime/time?
     org_or_social_sec_nr = fields.Integer(string='Social security number', help="Social security number or organization number")
     cfar = fields.Integer(string='CFAR', help="CFAR number")
-    sni_code = fields.Char(string='SNI-code', help="SNI-code")
     customer_nr = fields.Integer(string='Customer number', help="Customer number")
 
     type = fields.Selection(selection_add=[('af office', 'AF Office')])
