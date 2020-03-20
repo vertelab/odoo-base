@@ -50,7 +50,8 @@ https://en.wikipedia.org/wiki/Swedish_Standard_Industrial_Classification
     'depends': ['base',],
     'data': [
         'views/res_partner_view.xml',
-        'security/ir.model.access.csv' #, 'views/res_sni_view.xml'
+        'security/ir.model.access.csv', 
+        'views/res_sni_view.xml'
         ],
     'application': False,
     'installable': True,

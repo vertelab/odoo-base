@@ -8,7 +8,8 @@
             <field name="inherit_id" ref="base.view_partner_form" />
             <field name="arch" type="xml">
 
-                 <page name="internal_notes" position="before">
+                     <!-- <field name="parent_id" />  -->
+                 <!-- <page name="internal_notes" position="before">
                     <page string="SNI">
                     <group>
                         <field name="sni_ids" mode="tree" nolabel="1">
@@ -16,14 +17,14 @@
                             <field name="name" />    
                             <field name="code" />
                             <field name="description"/>
-                                        <!-- <field name="parent_id" />  -->
+                                       
 
                            
                         </tree>
                       </field>
                     </group>
                     </page>
-                </page>  
+                </page>   -->
                 <field name="barcode" position="after">
                      <field name="sni_ids" widget="many2many_tags"/> 
                 </field>

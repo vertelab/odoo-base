@@ -12,7 +12,7 @@
                         </h1>
                         <group>
                             <field name="description" />
-                            <field name="parent_id" />
+                            <!-- <field name="parent_id" /> --> 
                             <field name="code" />
                         </group>
                     </sheet>
@@ -26,7 +26,7 @@
                 <tree string="Code">
                     <field name="name" />
                     <field name="description" />
-                    <field name="parent_id" />
+                     <!-- <field name="parent_id" /> --> 
                     <field name="code" />
                 </tree>
             </field>
@@ -39,13 +39,13 @@
                     <field name="name" filter_domain="[('name','ilike',self),('description','ilike',self)]" />
                     <field name="description" />
                     <field name="code" />
-                    <field name="parent_id" />
+                    <!-- <field name="parent_id" /> -->
                     <separator />
-                    <filter string="Main" name="parent_id_none" domain="[('parent_id','=',None)]" />
-                    <filter string="Parent" name="parent_id" domain="[('parent_id','!=',None)]" />
-                    <group expand="0" string="Group By">
+                    <!-- <filter string="Main" name="parent_id_none" domain="[('parent_id','=',None)]" />
+                    <filter string="Parent" name="parent_id" domain="[('parent_id','!=',None)]" /> -->
+                    <!-- <group expand="0" string="Group By">
                         <filter name="parent_grp" string="Parent" context="{'group_by': 'parent_id'}" />
-                    </group>
+                    </group> -->
                 </search>
             </field>
         </record>
@@ -59,6 +59,6 @@
             <field name="context">{}</field>
             <field name="search_view_id" ref="view_sni_filter" />
         </record>
-        <menuitem id="menu_sni_form" parent="base_setup.menu_config" action="action_sni_form" sequence="50" />
+        <menuitem id="menu_sni_form" parent="contacts.res_partner_menu_config" action="action_sni_form" sequence="50" />
     </data>
 </odoo>
