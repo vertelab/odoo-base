@@ -1,0 +1,163 @@
+﻿Externt ID;Namn;Official Code
+111; Politiker och högre ämbetsmän;111
+112; Verkställande direktörer m.fl.;112
+121; Ekonomi- och finanschefer;121
+122; Personal- och HR-chefer;122
+123; Förvaltnings- och planeringschefer;123
+124; Informations-, kommunikations- och PR-chefer;124
+125; Försäljnings- och marknadschefer;125
+129; Övriga administrations- och servicechefer;129
+131; IT-chefer;131
+132; Inköps-, logistik- och transportchefer;132
+133; Forsknings- och utvecklingschefer;133
+134; Chefer inom arkitekt- och ingenjörsverksamhet;134
+135; Fastighets- och förvaltningschefer;135
+136; Driftchefer inom bygg, anläggning och gruva;136
+137; Produktionschefer inom tillverkning;137
+138; Förvaltare inom skogsbruk och lantbruk m.fl.;138
+141; Chefer inom grund- och gymnasieskola samt vuxenutbildning;141
+142; Chefer inom förskoleverksamhet;142
+149; Övriga chefer inom utbildning;149
+151; Chefer inom hälso- och sjukvård;151
+152; Chefer inom socialt och kurativt arbete;152
+153; Chefer inom äldreomsorg;153
+154; Chefer och ledare inom trossamfund;154
+159; Övriga chefer inom samhällsservice;159
+161; Chefer inom bank, finans och försäkring;161
+171; Hotell- och konferenschefer;171
+172; Restaurang- och kökschefer;172
+173; Chefer inom handel;173
+174; Chefer inom friskvård, sport och fritid;174
+179; Chefer inom övrig servicenäring;179
+211; Fysiker och kemister m.fl.;211
+212; Matematiker, aktuarier och statistiker;212
+213; Biologer, farmakologer och specialister inom lant- och skogsbruk m.fl.;213
+214; Civilingenjörsyrken;214
+216; Arkitekter och lantmätare;216
+217; Designer och formgivare;217
+218; Specialister inom miljö- och hälsoskydd;218
+221; Läkare;221
+222; Sjuksköterskor;222
+223; Sjuksköterskor (fortsättning);223
+224; Psykologer och psykoterapeuter;224
+225; Veterinärer;225
+226; Tandläkare;226
+227; Naprapater, sjukgymnaster och arbetsterapeuter m.fl.;227
+228; Andra specialister inom hälso- och sjukvård;228
+231; Universitets- och högskollärare;231
+232; Lärare i yrkesämnen;232
+233; Gymnasielärare;233
+234; Grundskollärare, fritidspedagoger och förskollärare;234
+235; Andra pedagoger med teoretisk specialistkompetens;235
+241; Revisorer, finansanalytiker och fondförvaltare m.fl.;241
+242; Organisationsutvecklare, utredare och HR-specialister m.fl.;242
+243; Marknadsförare och informatörer m.fl.;243
+251; IT-arkitekter, systemutvecklare och testledare m.fl.;251
+261; Jurister;261
+262; Museiintendenter och bibliotekarier m.fl.;262
+264; Författare, journalister och tolkar m.fl.;264
+265; Konstnärer, musiker och skådespelare m.fl.;265
+266; Socialsekreterare och kuratorer m.fl.;266
+267; Präster och diakoner;267
+311; Ingenjörer och tekniker;311
+312; Arbetsledare inom bygg och tillverkning m.m.;312
+315; Piloter, fartygs- och maskinbefäl m.fl.;315
+321; Biomedicinska analytiker, tandtekniker och laboratorieingenjörer m.fl.;321
+323; Terapeuter inom alternativmedicin;323
+324; Djursjukskötare m.fl.;324
+325; Tandhygienister;325
+331; Banktjänstemän och redovisningsekonomer m.fl.;331
+332; Försäkringsrådgivare, företagssäljare och inköpare m.fl.;332
+333; Förmedlare m.fl.;333
+334; Juristsekreterare, chefssekreterare och institutionssekreterare m.fl.;334
+335; Skatte- och socialförsäkringshandläggare m.fl.;335
+336; Poliser;336
+341;Behandlingsassistenter och pastorer;341
+342; Idrottsutövare och fritidsledare m.fl.;342
+343; Fotografer, dekoratörer och underhållningsartister m.fl.;343
+344; Trafiklärare och instruktörer;344
+345; Köksmästare och souschefer;345
+351; Drift-, support- och nätverkstekniker m.fl.;351
+352; Bild-, ljud- och ljustekniker m.fl.;352
+411; Kontorsassistenter och sekreterare;411
+421; Croupierer och inkasserare;421
+422; Resesäljare, kundtjänstpersonal och receptionister m.fl.;422
+432; Lagerpersonal och transportledare m.fl.;432
+441;Biblioteks- och arkivassistenter m.fl.;441
+442; Brevbärare och postterminalarbetare;442
+443; Förtroendevalda;443
+511; Kabinpersonal, tågmästare och guider m.fl.;511
+512; Kockar och kallskänkor;512
+513; Hovmästare, servitörer och bartendrar;513
+514; Skönhets- och kroppsterapeuter;514
+515; Städledare och fastighetsskötare m.fl.;515
+516; Övrig servicepersonal;516
+522; Butikspersonal;522
+523; Kassapersonal m.fl.;523
+524; Eventsäljare och telefonförsäljare m.fl.;524
+531; Barnskötare och elevassistenter m.fl.;531
+532; Undersköterskor;532
+533; Vårdbiträden;533
+534; Skötare, vårdare och personliga assistenter m.fl.;534
+535; Tandsköterskor;535
+541; Andra bevaknings- och säkerhetsyrken;541
+611; Växtodlare inom jordbruk och trädgård;611
+612; Djuruppfödare och djurskötare;612
+613; Växtodlare och djuruppfödare, blandad drift;613
+621; Skogsarbetare;621
+622; Fiskodlare och fiskare;622
+711; Snickare, murare och anläggningsarbetare;711
+712; Takmontörer, golvläggare och VVS-montörer m.fl.;712
+713; Målare, lackerare och skorstensfejare m.fl.;713
+721; Gjutare, svetsare och plåtslagare m.fl.;721
+722; Smeder och verktygsmakare m.fl.;722
+723; Fordonsmekaniker och reparatörer m.fl.;723
+731; Finmekaniker och konsthantverkare m.fl.;731
+732; Prepresstekniker, tryckare och bokbindare m.fl.;732
+741; Installations- och industrielektriker m.fl.;741
+742; Elektronikreparatörer och kommunikationselektriker m.fl.;742
+752; Ytbehandlare, trä och möbelsnickare m.fl.;752
+753; Skräddare, tapetserare och läderhantverkare m.fl.;753
+761; Slaktare, bagare och livsmedelsförädlare m.fl.;761
+811; Malmförädlingsyrken och brunnsborrare m.fl.;811
+812; Process- och maskinoperatörer, vid stål- och metallverk;812
+813; Maskinoperatörer, kemiska och farmaceutiska produkter m.m.;813
+814; Maskinoperatörer, gummi-, plast- och pappersvaruindustri;814
+815; Maskinoperatörer, textil-, tvätt- och läderindustri m.m.;815
+816; Maskinoperatörer, livsmedelsindustri;816
+817; Processoperatörer, trä- och pappersindustri;817
+818; Andra process- och maskinoperatörer;818
+819; Drifttekniker och processövervakare;819
+821; Montörer;821
+831; Lokförare och bangårdspersonal;831
+832; Bil-, motorcykel och cykelförare;832
+833; Lastbils- och bussförare;833
+834; Maskinförare;834
+835; Matroser och jungmän m.fl.;835
+911; Städare och hemservicepersonal m.fl.;911
+912; Tvättare, fönsterputsare och övriga rengöringsarbetare;912
+921; Bärplockare och plantörer m.fl.;921
+931; Grovarbetare inom bygg och anläggning;931
+932; Handpaketerare och andra fabriksarbetare;932
+933; Hamnarbetare och ramppersonal m.fl.;933
+941; Snabbmatspersonal, köks- och restaurangbiträden m.fl.;941
+952; Torg- och marknadsförsäljare;952
+961; Återvinningsarbetare;961
+962; Tidningsdistributörer, vaktmästare och övriga servicearbetare;962
+011; Officerare;011
+021; Specialistofficerare;021
+031; Soldater m.fl.;031
+;;
+;;
+;;
+;;
+;;
+;;
+;;
+;;
+;;
+;;
+;;
+;;
+;;
+;;
