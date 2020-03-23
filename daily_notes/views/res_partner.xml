@@ -19,10 +19,14 @@
                 <page string="Daily Notes">
                     <group>
                       <field name="notes_ids" mode="tree" nolabel="1">
-                        <tree editable="bottom" string="Notes" default_order="date">
+                        <tree editable="bottom" string="Notes" default_order="note_date">
                            <field name="name" />    
                             <field name="note"/>
-                            <field name="refers_to_date"/> 
+                            <field name="note_date"/> 
+                            <field name="note_type"/>
+                            <field name="note_number"/>
+                            <field name="office" options="{'no_create_edit': True}" domain="[('type', '=', 'af office')]"/>
+
                         </tree>
                       </field>
                     

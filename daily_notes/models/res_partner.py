@@ -27,11 +27,15 @@ class ResPartnerNotes(models.Model):
     _description = 'Daily notes for a partner'
     _name = 'res.partner.notes'
 
-    partner_id = fields.Many2one(comodel_name="res.partner", string="Administrative officer") #borde fyllas ut automatiskt baserat på vilken du kommer från
 
     name = fields.Char(string="Title") 
-    note = fields.Char(string="Notes")
-    refers_to_date = fields.Datetime(string="Refers to date") 
+    partner_id = fields.Many2one(comodel_name="res.partner", string="Administrative officer") #borde fyllas ut automatiskt baserat på vilken du kommer från
+
+    note = fields.Text(string="Notes")
+    note_date = fields.Datetime(string="Refers to date") 
+    note_type = fields.Char(string="Type of note") #temporärt, antingen koppla samman med mötestyp eller göra en separat anteckningstyp som är likadan 
+    note_number = fields.Char(string="AIS number")
+    office = fields.Many2one('res.partner', string="Office")
 
 class ResPartner(models.Model):
     _inherit = 'res.partner'
