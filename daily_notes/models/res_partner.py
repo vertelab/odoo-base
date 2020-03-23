@@ -27,7 +27,7 @@ class ResPartnerNotes(models.Model):
     _description = 'Daily notes for a partner'
     _name = 'res.partner.notes'
 
-    partner_id = fields.Many2one(comodel_name="res.partner", string="Administrator") #borde fyllas ut automatiskt baserat på vilken du kommer från
+    partner_id = fields.Many2one(comodel_name="res.partner", string="Administrative officer") #borde fyllas ut automatiskt baserat på vilken du kommer från
 
     name = fields.Char(string="Title") 
     note = fields.Char(string="Notes")

@@ -23,7 +23,7 @@
      
 
       <xpath expr="//group[@name='sale']/field[@name='user_id']" position="attributes">
-        <attribute name="string">Administrative official</attribute>
+        <attribute name="string">Administrative officer</attribute>
       </xpath>
 
 <!-- label har fel utseende och fältet är för kort och har ingen divider på det sätt som normala fält har-->
