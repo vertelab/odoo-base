@@ -29,7 +29,7 @@ class ResPartner(models.Model):
     office = fields.Many2one('res.partner', string="Office")
     work_phone = fields.Integer(string='Work phone', help="Work phone number")
     available_since = fields.Char(string='Available since', help="Time when they became available") #datetime/time?
-    org_or_social_sec_nr = fields.Integer(string='Social security number', help="Social security number or organization number")
+    org_or_social_sec_nr = fields.Char(string='Social security number', help="Social security number or organization number")
     cfar = fields.Integer(string='CFAR', help="CFAR number")
     customer_nr = fields.Integer(string='Customer number', help="Customer number")
 
