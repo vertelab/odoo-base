@@ -43,6 +43,13 @@
       <field name="barcode" position="after">
         
         <field name="office" options="{'no_create_edit': True}" domain="[('type', '=', 'af office')]"/>
+        <field name="office_code" />
+        <field name="is_jobseeker" />
+        <field name="is_independent_partner" />
+        <field name="is_government" />
+        <field name="is_employer" />
+
+      
       </field>
       
 

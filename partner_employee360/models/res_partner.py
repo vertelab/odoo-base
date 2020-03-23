@@ -33,6 +33,12 @@ class ResPartner(models.Model):
     cfar = fields.Integer(string='CFAR', help="CFAR number")
     customer_nr = fields.Integer(string='Customer number', help="Customer number")
 
+    office_code = fields.Integer(string="Office code")
+    is_jobseeker = fields.Boolean(string="Jobseeker")
+    is_independent_partner = fields.Boolean(string="Independent partner")
+    is_government = fields.Boolean(string="Government")
+    is_employer = fields.Boolean(string="Employer")
+
     type = fields.Selection(selection_add=[('af office', 'AF Office')])
 
 
