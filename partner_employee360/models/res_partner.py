@@ -28,12 +28,12 @@ class ResPartner(models.Model):
     #_name = ""
     office = fields.Many2one('res.partner', string="Office")
     work_phone = fields.Integer(string='Work phone', help="Work phone number")
-    available_since = fields.Char(string='Available since', help="Time when they became available") #datetime/time?
-    org_or_social_sec_nr = fields.Char(string='Social security number', help="Social security number or organization number")
+    available_since = fields.Datetime(string='Available since', help="Time when they became available") #datetime/time?
+    org_or_social_sec_nr = fields.Char(string='Organization/Social security number', help="Social security number or organization number")
     cfar = fields.Integer(string='CFAR', help="CFAR number")
     customer_nr = fields.Integer(string='Customer number', help="Customer number")
 
-    office_code = fields.Integer(string="Office code")
+    office_code = fields.Integer(string="Office code") #bör tas från office och vara satt för office partners
     is_jobseeker = fields.Boolean(string="Jobseeker")
     is_independent_partner = fields.Boolean(string="Independent partner")
     is_government = fields.Boolean(string="Government")

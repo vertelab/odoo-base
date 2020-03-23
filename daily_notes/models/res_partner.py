@@ -29,13 +29,16 @@ class ResPartnerNotes(models.Model):
 
 
     name = fields.Char(string="Title") 
-    partner_id = fields.Many2one(comodel_name="res.partner", string="Administrative officer") #borde fyllas ut automatiskt baserat på vilken du kommer från
+    partner_id = fields.Many2one(comodel_name="res.partner", string="Job seeker")
 
+    administrative_officer = fields.Many2one('res.users', string='Administrative officer', default=lambda self: self.env.user)
     note = fields.Text(string="Notes")
     note_date = fields.Datetime(string="Refers to date") 
-    note_type = fields.Char(string="Type of note") #temporärt, antingen koppla samman med mötestyp eller göra en separat anteckningstyp som är likadan 
+    note_type = fields.Many2many(comodel_name="res.partner.note.type", inverse_name="note_id") 
+    
     note_number = fields.Char(string="AIS number")
     office = fields.Many2one('res.partner', string="Office")
+    customer_nr = fields.Integer(string="Customer number") #temporär, ska vara kopplad till customer number från res.partner som läggs till av partner_employee360
 
 class ResPartner(models.Model):
     _inherit = 'res.partner'
@@ -58,9 +61,25 @@ class ResPartner(models.Model):
             'view_type': 'form',
             'res_model': 'res.partner.notes',
             'view_id':  False,
-            'view_mode': 'tree,form', #calendar: insufficient fields for calendar view
+            'view_mode': 'tree,form', 
             'type': 'ir.actions.act_window',
         }
+
+class ResPartnerNoteType(models.Model):
+    _name="res.partner.note.type"
+
+    note_id = fields.Many2many(comodel_name="res.partner.notes")
+
+    name = fields.Selection(selection=[('request', 
+    'Requested by applicant'), 
+    ('plan', 'Planned by administrator'), 
+    ('ok', 'Meeting OK'), 
+    ('cancel', 'Cancelled by administrator'), 
+    ('fail', 'Applicant failed to attend to the meeting')], 
+    string='Categories', 
+    default='request', 
+    help="Notes categories")
+
 #    @api.multi
 #    def view_notes(self): #context=None
 #        dailynotes_id = self.env['res.partner'].search (
