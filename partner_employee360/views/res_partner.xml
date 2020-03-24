@@ -117,7 +117,10 @@
       <xpath expr="//field[@name='user_id']" position="after">
         
         <field name="customer_nr" />
-
+        <filter string="Job seekers" name="is_jobseeker" domain="[('is_jobseeker','=',True)]"/> <!-- ('parent_id', '=', False)-->
+        <filter string="Employers" name="is_employer" domain="[('is_employer','=',True)]"/>
+        <filter string="Government body" name="is_government" domain="[('is_government','=',True)]"/>
+        <filter string="Independent partners" name="is_independent_partner" domain="[('is_independent_partner','=',True)]"/>
         <!--        filter_domain="[('customer','=',True), ('parent_id', '=', False)]" --> <!-- kommenterad för att jag inte har någon customer, behöver testas -->
     
       </xpath>
