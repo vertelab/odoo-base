@@ -23,7 +23,7 @@ import logging
 _logger = logging.getLogger(__name__)
 
 class Ssyk(models.Model): 
-    _name = 'res.ssky'
+    _name = 'res.ssyk'
 
     partner_id = fields.Many2many(comodel_name="res.partner")
     

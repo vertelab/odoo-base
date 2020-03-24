@@ -34,9 +34,9 @@ SSYK
     'website': 'http://www.vertel.se',
     'depends': ['base',],
     'data': [
-       # 'views/res_partner_view.xml',
-       # 'security/ir.model.access.csv', 
-       # 'views/res_ssyk_view.xml'
+        'views/res_partner_view.xml',
+        'security/ir.model.access.csv', 
+        'views/res_ssyk_view.xml'
         ],
     'application': False,
     'installable': True,

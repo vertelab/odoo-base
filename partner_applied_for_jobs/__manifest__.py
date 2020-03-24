@@ -33,10 +33,11 @@ Module to track a jobseeking partner has applied for
     'depends': ['base', 
     'partner_employee360', 
     'hr_skill',
-    #'res_ssyk'
+    'res_ssyk'
     ], 
     'data': [
-			'views/res_partner.xml'
+			'views/res_partner.xml',
+            'security/ir.model.access.csv'
         ],
     'application': False,
     'installable': True,
