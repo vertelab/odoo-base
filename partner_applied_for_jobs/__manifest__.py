@@ -19,11 +19,25 @@
 #
 ##############################################################################
 
-from odoo import models, fields, api, _
-import logging
-_logger = logging.getLogger(__name__)
-
-class ResPartner(models.Model):
-    _inherit = "res.partner" #odoo inheritance från res.partner
-
-    skills = fields.Many2many('hr.skill', string="skill")
+{
+    'name': 'Partner applied for jobs',
+    'version': '0.2',
+    'category': '',
+    'description': """
+Module to track a jobseeking partner has applied for
+================================================================================================
+""",
+    'author': 'Vertel AB',
+    'license': 'AGPL-3',
+    'website': 'http://www.vertel.se',
+    'depends': ['base', 
+    'partner_employee360', 
+    'hr_skill',
+    #'res_ssyk'
+    ], 
+    'data': [
+			'views/res_partner.xml'
+        ],
+    'application': False,
+    'installable': True,
+}

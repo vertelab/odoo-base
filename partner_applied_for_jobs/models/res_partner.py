@@ -24,6 +24,17 @@ import logging
 _logger = logging.getLogger(__name__)
 
 class ResPartner(models.Model):
-    _inherit = "res.partner" #odoo inheritance från res.partner
+    _inherit = "res.partner" 
+    
+    job_ids = fields.Many2many(comodel_name="res.partner.jobs", inverse_name="partner_id")
 
-    skills = fields.Many2many('hr.skill', string="skill")
+    
+class Jobs(models.Model):
+    _name = 'res.partner.jobs'
+
+    partner_id = fields.Many2one(comodel_name="res.partner")
+    name = fields.Char(string="Job ID")
+    description = fields.Text(string="Job description")
+    skills = fields.Many2many('hr.skill', string="skill") #bör vara separerat från kompetenser på nått sätt, kanske göra utökning på hr_skill?
+   # ssyk_ids = fields.Many2many('res.ssyk', string="SSYK") #ssyk broken for now
+

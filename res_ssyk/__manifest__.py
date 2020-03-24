@@ -36,7 +36,7 @@ SSYK
     'data': [
        # 'views/res_partner_view.xml',
        # 'security/ir.model.access.csv', 
-       # 'views/res_SSYK_view.xml'
+       # 'views/res_ssyk_view.xml'
         ],
     'application': False,
     'installable': True,
