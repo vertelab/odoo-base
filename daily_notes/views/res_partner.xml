@@ -38,15 +38,14 @@
     </field>
   </record>
 
-<!--  <record id="notes_tree_view" model="ir.ui.view">
-    <field name="name">Daily Notes Tree View</field>
-    <field name="model">daily.notes</field>
+ <record id="view_res_partner_notes_tree_view" model="ir.ui.view">
+    <field name="name">veiw.res.partner.notes_tree_view</field>
+    <field name="model">res.partner.notes</field>
      <field name="arch" type="xml">
         <tree>
-          <field name="partner_id"/>
-          <field name="daily_notes"/>
+          
         </tree>
       </field>
-  </record> -->
+  </record> 
   
 </odoo>
