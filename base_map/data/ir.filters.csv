@@ -1,0 +1,3 @@
+"Externt ID","Filternamn","Användare","Default Filter","Domän","Modell","Sammanhang","Sortera","Åtgärd"
+"__export__.ir_filters_20_82a5992c","Fält är inte mappat","base.user_admin","True","[[""map_field"", ""="", False]]","ir.model.fields","{}","[]","__export__.ir_actions_16_f0f33017"
+"__export__.ir_filters_19_7573e71b","Fält är mappat","","False","[[""map_field"", ""!="", False]]","ir.model.fields","{}","[]","__export__.ir_actions_16_f0f33017"
