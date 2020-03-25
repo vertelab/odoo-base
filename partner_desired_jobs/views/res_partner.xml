@@ -11,14 +11,11 @@
                     <group>
                       <field name="job_ids" mode="tree" nolabel="1">
                         <tree editable="bottom" string="Desired jobs" default_order="name">
-                           <field name="name" />   
-                           <field name="job_id"/> 
-                            <field name="description"/>
-                            <field name="ssyk_ids"/>
-                            <field name="ssyk_description"/>
+                            
+                           <field name="ssyk_code"/> 
+                           <field name="name" />  
                             <field name="education"/>
-                            <field name="skills" widget="many2many_tags"/>  
-
+                            <field name="experience"/>
                         </tree>
                       </field>
                     
