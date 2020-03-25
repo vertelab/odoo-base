@@ -21,20 +21,22 @@
 
 {
     'name': 'Daily notes',
-    'version': '1.0',
+    'version': '12.0.1.1',
     'category': '',
     'description': """
 Base mapping
 ============
 This module allowes daily notes for a partner.
+- 12.0.1.1  Added mapping for Integration platform with the module base_map.
 """,
     'author': 'Vertel AB',
     'license': 'AGPL-3',
     'website': 'http://www.vertel.se',
-    'depends': ['base',],
+    'depends': ['base','base_map'],
     'data': [
 			'views/res_partner.xml',
             'security/ir.model.access.csv',
+            'data/ir.model.fields.csv',			
         ],
     'application': False,
     'installable': True,

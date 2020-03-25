@@ -16,12 +16,6 @@ base_map.field_ir_model_fields__map_odoo_master;;;;;False
 base_map.field_ir_model_fields__map_system;Testsystem;Testfield;Testtable;TestString;True
 base_map.field_ir_model_fields__map_table;;;;;False
 base_map.field_ir_model_fields__map_type;;;;;False
-daily_notes.field_res_partner_notes__administrative_officer;AIS-F;reg_sign;dagant_ag;;False
-daily_notes.field_res_partner_notes__customer_nr;AIS-F;kundnr;dagant_ag;;False
-daily_notes.field_res_partner_notes__name;AIS-F;rubrik;dagant_ag;;False
-daily_notes.field_res_partner_notes__note_number;AIS-F;handelselopnr;dagant_ag;;False
-daily_notes.field_res_partner_notes__note_type;AIS-F;typ;dagant_ag;;False
-daily_notes.field_res_partner_notes__office;AIS-F;reg_kontor_kod;dagant_ag;;False
 partner_employee360.field_res_partner__cfar;AIS-F;arbetsstallenr;arbetsgivare;;False
 partner_employee360.field_res_partner__customer_nr;AIS-F;organisation_kundnr;arbetsgivare;;False
 partner_employee360.field_res_partner__office_code;AIS-F;kontor_kod;arbetsgivare;;False
