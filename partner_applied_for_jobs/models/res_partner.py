@@ -30,14 +30,14 @@ class ResPartner(models.Model):
 
     
 class Jobs(models.Model):
-    _name = 'res.partner.job'
+    _name = 'res.partner.jobs'
 
     partner_id = fields.Many2one(comodel_name="res.partner")
     
     name = fields.Char(string="Sequence number")
-    job_id = fields.Char(string="Job ID")
-    description = fields.Text(string="Job description")
-    ssyk_ids = fields.Many2many('res.ssyk', string="SSYK") #visa upp ssyk beskrivning också
+    job_id = fields.Char(string="Job ID", related="res.partner.job.job_id")
+    description = fields.Text(string="Job description", related="res.partner.job.description")
+    ssyk_id = fields.Many2one('res.ssyk', string="SSYK", related="res.partner.job.ssyk_id") #visa upp ssyk beskrivning också
     education = fields.Char(string="Education")
     skills = fields.Many2many('hr.skill', string="Experience") #bör vara separerat från kompetenser på nått sätt, kanske göra utökning på hr_skill? Visa nivå och beskrivning
 

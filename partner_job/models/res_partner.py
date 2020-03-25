@@ -35,5 +35,5 @@ class Jobs(models.Model):
     name = fields.Char(string="Job")
     job_id = fields.Char(string="Job ID")
     description = fields.Text(string="Job description")
-    ssyk_ids = fields.Many2many('res.ssyk', string="SSYK") 
+    ssyk_id = fields.Many2one('res.ssyk', string="SSYK") 
     

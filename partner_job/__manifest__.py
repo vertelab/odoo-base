@@ -26,14 +26,12 @@
     'description': """
     Adds office to res.partner
 ================================================================================================
-
+AFC-169
 """,
     'author': 'Vertel AB',
     'license': 'AGPL-3',
     'website': 'http://www.vertel.se',
-    'depends': ['base', 
-    'partner_employee360', 
-    'hr_skill',
+    'depends': ['base',  
     'res_ssyk'
     ], 
     'data': [

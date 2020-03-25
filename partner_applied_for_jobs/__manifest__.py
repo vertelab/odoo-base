@@ -33,7 +33,7 @@ Module to track a jobseeking partner has applied for
     'depends': ['base', 
     'partner_employee360', 
     'hr_skill',
-    'res_ssyk'
+    'partner_job'
     ], 
     'data': [
 			'views/res_partner.xml',
