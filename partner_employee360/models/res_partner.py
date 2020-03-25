@@ -26,20 +26,22 @@ _logger = logging.getLogger(__name__)
 class ResPartner(models.Model):
     _inherit = "res.partner" #odoo inheritance från res.partner
     #_name = ""
-    office = fields.Many2one('res.partner', string="Office")
+    office = fields.Many2one(string="Office", related="res.partner.office.office")
     work_phone = fields.Integer(string='Work phone', help="Work phone number")
     available_since = fields.Datetime(string='Available since', help="Time when they became available") #datetime/time?
     org_or_social_sec_nr = fields.Char(string='Organization/Social security number', help="Social security number or organization number")
     cfar = fields.Integer(string='CFAR', help="CFAR number")
     customer_nr = fields.Integer(string='Customer number', help="Customer number")
 
-    office_code = fields.Integer(string="Office code") #bör tas från office och vara satt för office partners
+    office_code = fields.Integer(string='Office code', related='res.partner.office.office_code')
+    
+    #office_code = fields.Integer(string="Office code") #bör tas från office och vara satt för office partners
     is_jobseeker = fields.Boolean(string="Jobseeker")
     is_independent_partner = fields.Boolean(string="Independent partner")
     is_government = fields.Boolean(string="Government")
     is_employer = fields.Boolean(string="Employer")
 
-    type = fields.Selection(selection_add=[('af office', 'AF Office')])
+    #type = fields.Selection(selection_add=[('af office', 'AF Office')])
 
 
 
