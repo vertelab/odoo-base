@@ -24,7 +24,7 @@
     'version': '0.1',
     'category': '',
     'description': """
-    Adds office to res.partner
+Adds office to res.partner
 ================================================================================================
 AFC-169
 """,
@@ -35,7 +35,6 @@ AFC-169
     'res_ssyk'
     ], 
     'data': [
-			'views/res_partner.xml',
             'security/ir.model.access.csv'
         ],
     'application': False,

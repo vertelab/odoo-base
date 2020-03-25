@@ -26,7 +26,7 @@ _logger = logging.getLogger(__name__)
 class ResPartner(models.Model):
     _inherit = "res.partner" 
     
-    job_ids = fields.One2many(comodel_name="res.partner.job", inverse_name="partner_id")
+    job_ids = fields.One2many(comodel_name="res.partner.jobs", inverse_name="partner_id")
 
     
 class Jobs(models.Model):
@@ -38,6 +38,7 @@ class Jobs(models.Model):
     job_id = fields.Char(string="Job ID", related="res.partner.job.job_id")
     description = fields.Text(string="Job description", related="res.partner.job.description")
     ssyk_id = fields.Many2one('res.ssyk', string="SSYK", related="res.partner.job.ssyk_id") #visa upp ssyk beskrivning också
+    ssyk_description = fields.Char(string="SSYK description", related="res.partner.job.ssyk_id.description")
     education = fields.Char(string="Education")
     skills = fields.Many2many('hr.skill', string="Experience") #bör vara separerat från kompetenser på nått sätt, kanske göra utökning på hr_skill? Visa nivå och beskrivning
 

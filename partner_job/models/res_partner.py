@@ -23,14 +23,9 @@ from odoo import models, fields, api, _
 import logging
 _logger = logging.getLogger(__name__)
 
-class ResPartner(models.Model):
-    _inherit = "res.partner" 
-    
 
 class Jobs(models.Model):
-    _name = 'res.partner.job'
-
-    partner_id = fields.Many2one(comodel_name="res.partner")
+    _name = "res.partner.job"
     
     name = fields.Char(string="Job")
     job_id = fields.Char(string="Job ID")
