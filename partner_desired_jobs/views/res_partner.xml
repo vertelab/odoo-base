@@ -7,7 +7,7 @@
         <field name="inherit_id" ref="base.view_partner_form" />
         <field name="arch" type="xml"> 
             <xpath expr="//page[@name='internal_notes']" position="after" attrs="{'invisible':[('is_jobseeker', '=', False)]}">
-                <page string="Jobs looked for">
+                <page string="Desired jobs">
                     <group>
                       <field name="job_ids" mode="tree" nolabel="1">
                         <tree editable="bottom" string="Desired jobs" default_order="name">
