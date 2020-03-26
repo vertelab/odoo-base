@@ -26,7 +26,7 @@ _logger = logging.getLogger(__name__)
 class ResPartner(models.Model):
     _inherit = "res.partner" #odoo inheritance från res.partner
     #_name = ""
-    office = fields.Many2one(string="Office", related="res.partner.office.office")
+    office = fields.Many2one('res.partner.office', string="Office")
     work_phone = fields.Integer(string='Work phone', help="Work phone number")
     available_since = fields.Datetime(string='Available since', help="Time when they became available") #datetime/time?
     org_or_social_sec_nr = fields.Char(string='Organization/Social security number', help="Social security number or organization number")

@@ -31,11 +31,9 @@
     'author': 'Vertel AB',
     'license': 'AGPL-3',
     'website': 'http://www.vertel.se',
-    'depends': ['base', 
-    'partner_employee360'
-    ], 
+    'depends': ['base',], 
     'data': [
-            'security/ir.model.access.csv'
+            #'security/ir.model.access.csv'
         ],
     'application': False,
     'installable': True,
