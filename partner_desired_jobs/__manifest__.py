@@ -20,12 +20,13 @@
 ##############################################################################
 
 {
-    'name': 'Partner applied for jobs',
-    'version': '0.2',
+    'name': 'Partner desired jobs',
+    'version': '0.3',
     'category': '',
     'description': """
-Module to track a jobseeking partner has applied for
+Module to see which jobs a jobseeking partner desires
 ================================================================================================
+AFC-169
 """,
     'author': 'Vertel AB',
     'license': 'AGPL-3',
