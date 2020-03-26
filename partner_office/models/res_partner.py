@@ -26,8 +26,4 @@ _logger = logging.getLogger(__name__)
 class ResPartner(models.Model):
     _inherit = "res.partner" 
 
-class Office(models.Model):
-    _name = "res.partner.office"
-    name = fields.Many2one('res.partner', sting="Office")
-    office_code = fields.Integer(string="Office code") 
-    type = fields.Selection(selection_add=[('af office', 'AF Office')])
+

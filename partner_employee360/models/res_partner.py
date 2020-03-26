@@ -41,9 +41,15 @@ class ResPartner(models.Model):
     is_government = fields.Boolean(string="Government")
     is_employer = fields.Boolean(string="Employer")
 
-    #type = fields.Selection(selection_add=[('af office', 'AF Office')])
+    type = fields.Selection(selection_add=[('af office', 'AF Office')])
 
+class Office(models.Model):
+    _name = "res.partner.office"
+    
 
+    name = fields.Many2one('res.partner', sting="Office")
+    office_code = fields.Integer(string="Office code") 
+    
 
     
 

@@ -128,7 +128,7 @@
   </record>
 
 
-  <record id="view_partner_kanban_employee360" model="ir.ui.view"> 
+  <!-- <record id="view_partner_kanban_employee360" model="ir.ui.view"> 
     <field name="name">res.partner.select.inherit.employee360</field> 
     <field name="model">res.partner</field> 
     <field name="inherit_id" ref="base.res_partner_kanban_view" /> 
@@ -153,7 +153,7 @@
        
       </xpath>
     </field>
-  </record>
+  </record> -->
 
 
 <!-- gör inget, tanken är att försöka få den där lilla neråt pilen -->
