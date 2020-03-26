@@ -38,7 +38,8 @@ AFC-157
     'data': [
         'views/res_partner_view.xml',
         'security/ir.model.access.csv', 
-        'views/res_ssyk_view.xml'
+        'views/res_ssyk_view.xml',
+        'data/res_ssyk.csv'
         ],
     'application': False,
     'installable': True,
