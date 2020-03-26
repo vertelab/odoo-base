@@ -30,5 +30,4 @@ class Ssyk(models.Model):
     name = fields.Char(string='Name', required=True)
     code = fields.Char(string='Official Code',help="Official code, group, sub-group or detail group.")
     description = fields.Char(string='Description')
-   #jobs_ids = fields.One2many('res.partner.job', string="Jobs")
     parent_id = fields.Many2one(comodel_name='res.ssyk', string='Parent')
