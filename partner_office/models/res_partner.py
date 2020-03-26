@@ -28,6 +28,6 @@ class ResPartner(models.Model):
 
 class Office(models.Model):
     _name = "res.partner.office"
-    office = fields.Many2one('res.partner', sting="Office")
+    name = fields.Many2one('res.partner', sting="Office")
     office_code = fields.Integer(string="Office code") 
     type = fields.Selection(selection_add=[('af office', 'AF Office')])
