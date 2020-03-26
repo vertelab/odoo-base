@@ -38,7 +38,7 @@
 
 
         
-        <field name="org_or_social_sec_nr" nolabel="0"/> 
+        <field name="company_registry"/> 
         
         <field name="cfar" attrs="{'invisible':[('is_company', '=', False)]}"/>
       </field>
