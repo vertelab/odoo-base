@@ -18,7 +18,6 @@
       <field name="function" position="after"> 
      
         <field name="work_phone"/>
-        <field name="available_since"/>
                
       </field>
 
@@ -46,7 +45,7 @@
       <field name="barcode" position="after">
         
         <field name="office" options="{'no_create_edit': True}" domain="[('type', '=', 'af office')]"/>
-        <field name="office_code" />
+        <field name="my_office_code" />
         <field name="is_jobseeker" />
         <field name="is_independent_partner" />
         <field name="is_government" />
@@ -58,7 +57,8 @@
 
       <!-- endast för om is_customer är true-->
       <field name="vat" position="after">
-        <field name="customer_nr" attrs="{'invisible':[('customer', '=', False)]}"/>  <!--  -->
+        <field name="customer_nr" attrs="{'invisible':[('customer', '=', False)]}"/> 
+        <field name="office_code" attrs="{'invisible':[('type', '!=', 'af office')]}"/>
       </field>
 
 
