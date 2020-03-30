@@ -31,7 +31,7 @@ class ResPartner(models.Model):
     available_since = fields.Datetime(string='Available since', help="Time when they became available") #datetime/time?
     company_registry = fields.Char(string='Organization/Social security number', help="Social security number or organization number")
     cfar = fields.Integer(string='CFAR', help="CFAR number")
-    customer_nr = fields.Integer(string='Customer number', help="Customer number")
+    customer_id = fields.Integer(string='Customer number', help="Customer number")
 
     office_code = fields.Integer(string="Office code") #bör tas från office och vara satt för office partners
     is_jobseeker = fields.Boolean(string="Jobseeker")

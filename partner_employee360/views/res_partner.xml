@@ -58,7 +58,7 @@
 
       <!-- endast för om is_customer är true-->
       <field name="vat" position="after">
-        <field name="customer_nr" attrs="{'invisible':[('customer', '=', False)]}"/>  <!--  -->
+        <field name="customer_id" attrs="{'invisible':[('customer', '=', False)]}"/>  <!--  -->
       </field>
 
 
@@ -101,7 +101,7 @@
     <field name="arch" type="xml"> 
       <xpath expr="/tree" position="inside">
 
-        <field name="customer_nr"/>
+        <field name="customer_id"/>
 
     
       </xpath>
@@ -116,7 +116,7 @@
     <field name="arch" type="xml"> 
       <xpath expr="//field[@name='user_id']" position="after">
         
-        <field name="customer_nr" />
+        <field name="customer_id" />
         <filter string="Job seekers" name="is_jobseeker" domain="[('is_jobseeker','=',True)]"/> <!-- ('parent_id', '=', False)-->
         <filter string="Employers" name="is_employer" domain="[('is_employer','=',True)]"/>
         <filter string="Government body" name="is_government" domain="[('is_government','=',True)]"/>
@@ -163,7 +163,7 @@
     <field name="model">res.partner</field>
     <field name="arch" type="xml">
         <search string="Search Test">
-            <field name="customer_nr" />
+            <field name="customer_id" />
        </search>
     </field>
 </record> -->
