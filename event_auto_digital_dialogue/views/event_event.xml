@@ -32,9 +32,9 @@
             <label for="seats_availability" position="attributes"> 
                <attribute name="invisible">1</attribute>
             </label>
-            <button name="464" position="attributes"> 
+            <!-- <button name="464" position="attributes"> 
                <attribute name="invisible">1</attribute>
-            </button>
+            </button> --> <!-- verkar som att den här knappen har olika namn -->
 
             <field name="is_online" position="attributes"> 
                <attribute name="invisible">1</attribute>
