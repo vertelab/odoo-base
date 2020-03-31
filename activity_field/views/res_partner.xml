@@ -37,10 +37,33 @@
         <field name="type">ir.actions.act_window</field>
         <field name="res_model">res.partner.activity</field>
         <field name="view_type">form</field>
-        <field name="view_mode">kanban</field>
+        <field name="view_mode">tree</field>
 
         
 
+    </record> 
+
+    <record id="view_activity_tree" model="ir.ui.view"> 
+        <field name="name">activity.tree</field> 
+        <field name="model">res.partner.activity</field> 
+        <field name="arch" type="xml"> 
+            
+            <tree editable="bottom" string="Timesheet Activities" default_order="start_date">
+                <field name="name" />    
+                <field name="meeting_type" widget="many2many_tags"/>
+                <field name="start_date"/>
+                <field name="duration" widget="timesheet_uom"/> 
+                 <field name="notes"/> 
+                <field name="location"/>  
+            </tree>
+        </field>
+    </record>
+
+     <record id="action_view_view_activity_tree" model="ir.actions.act_window.view">
+        <field name="act_window_id" ref="action_activities"/>
+        <field name="sequence" eval="1"/>
+        <field name="view_mode">tree</field>
+        <field name="view_id" ref="view_activity_tree"/>
     </record> 
 
     <!-- <record id="view_event_form__registration_date" model="ir.ui.view">

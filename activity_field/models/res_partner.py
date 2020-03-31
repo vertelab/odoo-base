@@ -47,7 +47,7 @@ class ResPartner(models.Model):
             'view_type': 'form',
             'res_model': 'res.partner.activity',
             'view_id':  False,
-            'view_mode': 'kanban,tree,form', #calendar: insufficient fields for calendar view
+            'view_mode': 'tree,kanban,form', #calendar: insufficient fields for calendar view
             'type': 'ir.actions.act_window',
         }
 
