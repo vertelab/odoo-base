@@ -21,7 +21,7 @@
 
 {
     'name': 'Res SSYK',
-    'version': '12.0.0.3',
+    'version': '12.0.0.4',
     'category': '',
     'description': """
 SSYK
@@ -30,6 +30,7 @@ https://www.scb.se/dokumentation/klassifikationer-och-standarder/standard-for-sv
 
 AFC-157
 
+Updated header in /data/res_ssyk.csv
 
 """,
     'author': 'Vertel AB',
