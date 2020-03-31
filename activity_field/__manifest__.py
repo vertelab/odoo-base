@@ -21,7 +21,7 @@
 
 {
     'name': 'Activity Tab',
-    'version': '0.1',
+    'version': '0.2',
     'category': '',
     'description': """
 This module adds adds a tab with different activities 
