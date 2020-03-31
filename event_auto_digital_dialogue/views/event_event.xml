@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
 <odoo>
     <record id="view_event_form_auto_dig_dia" model="ir.ui.view">
-        <field name="name">event.event.auto_dig_dia</field>
+        <field name="name">event.event.auto_dig_dia</field>   <!--borde sluta med .form   -->
         <field name="model">event.event</field> 
         <field name="inherit_id" ref="event.view_event_form" />
         <field name="arch" type="xml"> 
-            
+            <!--Ta bort onödig whitespace -->
             <xpath expr="/form/sheet/group/group/label" position="attributes">
 
                 <attribute name="invisible">1</attribute>
@@ -32,6 +32,7 @@
             <label for="seats_availability" position="attributes"> 
                <attribute name="invisible">1</attribute>
             </label>
+            <!--Hårdkoda inte id använd %(något.xml_id)d -->
             <!-- <button name="464" position="attributes"> 
                <attribute name="invisible">1</attribute>
             </button> --> <!-- verkar som att den här knappen har olika namn -->
@@ -64,7 +65,7 @@
     </record>
 
       <record id="event_event_view_form_inherit_website_auto_dig_dia" model="ir.ui.view">
-        <field name="name">event.event.view.form.inherit.website.auto_dig_dia</field>
+        <field name="name">event.event.view.form.inherit.website.auto_dig_dia</field>    <!--Lite väl långt namn :D -->
         <field name="model">event.event</field> 
         <field name="inherit_id" ref="website_event.event_event_view_form_inherit_website"/>
         <field name="type">form</field>
@@ -86,7 +87,7 @@
 
 
      <record id="view_event_kanban_auto_dig_dia" model="ir.ui.view">
-         <field name="name">event.event.auto_dig_dia</field>
+         <field name="name">event.event.auto_dig_dia</field>  <!--Addera viewtype i namn gärna i slutet -->
          <field name="model">event.event</field> 
          <field name="inherit_id" ref="event.view_event_kanban" />
          <field name="arch" type="xml"> 
