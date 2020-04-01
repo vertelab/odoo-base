@@ -89,7 +89,6 @@
             <xpath expr="/kanban/templates/t/div/div[hasclass('o_event_left')]" position="attributes">                       
                <attribute name="invisible">1</attribute>
             </xpath> 
-
          </field>
     </record> 
 </odoo>
