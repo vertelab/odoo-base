@@ -2,31 +2,15 @@
 <odoo>
     <data>
         
-        <record id="view_partner_form_ssyk" model="ir.ui.view">
-            <field name="name">res.partner.form.inherit.ssyk</field>
+        <record id="view_partner_form_sun" model="ir.ui.view">
+            <field name="name">res.partner.form.inherit.sun</field>
             <field name="model">res.partner</field>
             <field name="inherit_id" ref="base.view_partner_form" />
             <field name="arch" type="xml">
-
-                     <!-- <field name="parent_id" />  -->
-                 <!-- <page name="internal_notes" position="before">
-                    <page string="ssyk">
-                    <group>
-                        <field name="ssyk_ids" mode="tree" nolabel="1">
-                            <tree editable="bottom" string="ssyk codes">
-                            <field name="name" />    
-                            <field name="code" />
-                            <field name="description"/>
-                                       
-
-                           
-                        </tree>
-                      </field>
-                    </group>
-                    </page>
-                </page>   -->
-                <field name="barcode" position="after">
-                     <field name="sun_ids" widget="many2many_tags"/> 
+                <field name="supplier" position="after">
+                     <field name="sun_id" widget=""/> 
+                     <field name="foreign_education"/>
+                     <field name="foreign_education_approved"/>
                 </field>
             </field>
         </record>
