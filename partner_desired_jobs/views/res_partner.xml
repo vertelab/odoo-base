@@ -11,18 +11,15 @@
                     <group>
                       <field name="job_ids" mode="tree" nolabel="1">
                         <tree editable="bottom" string="Desired jobs" default_order="name">
-                            
                            <field name="ssyk_code"/> 
                            <field name="name" />  
                             <field name="education"/>
                             <field name="experience"/>
                         </tree>
                       </field>
-                    
                     </group>
                 </page>
             </xpath>
-
         </field>
     </record>
 </odoo>
