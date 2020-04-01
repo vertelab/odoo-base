@@ -24,19 +24,14 @@ import logging
 _logger = logging.getLogger(__name__)
 
 class ResPartner(models.Model):
-    _inherit = "res.partner" #odoo inheritance från res.partner
+    _inherit = "res.partner" 
     
-   
     activities_ids = fields.One2many(comodel_name="res.partner.activity", inverse_name="partner_id")
-
 
     @api.one
     def compute_activities_count(self):
         for partner in self:
             partner.activities_count = len(partner.activities_ids)
-
-        # return len(self.activities_ids) #for something in self something.count = len(partner.activities_ids)
-
     activities_count = fields.Integer(compute='compute_activities_count')
 
     @api.multi
@@ -47,7 +42,7 @@ class ResPartner(models.Model):
             'view_type': 'form',
             'res_model': 'res.partner.activity',
             'view_id':  False,
-            'view_mode': 'kanban,tree,form', #calendar: insufficient fields for calendar view
+            'view_mode': 'tree,kanban,form', #calendar: insufficient fields for calendar view
             'type': 'ir.actions.act_window',
         }
 
@@ -56,7 +51,6 @@ class ResPartnerActivity(models.Model):
     _name="res.partner.activity"
     
     partner_id = fields.Many2one(comodel_name="res.partner")
-
     name = fields.Char(string="Subject", help="", required=True)
     meeting_type = fields.Many2many(comodel_name="res.partner.activity.type", inverse_name="activity_id") #gör till lista, gör att auto_digital_dialogue tar inskrivningsdatum från en meeting type = "inskrivning"
     start_date = fields.Datetime(string="Start date", help="", required=True)
@@ -68,7 +62,6 @@ class ResPartnerActivityType(models.Model):
     _name="res.partner.activity.type"
 
     activity_id = fields.Many2many(comodel_name="res.partner.activity")
-
     name = fields.Char(string="Meeting type", help="")
     description = fields.Char(string="Description", help="")
 
