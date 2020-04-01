@@ -1,6 +1,7 @@
 <!-- Fixa whitespace på några ställen, kolla igenom indenteringen   -->
 <!-- Rensa bort oanvänd kod. Skriv anledningen om den ska ligga kvar  -->
 <!-- Använd .form i ditt namn på modulen -->
+<!-- Kommentarer som du skrivit att det ska fixas, är det gjort? -->
 
 <?xml version="1.0" encoding="utf-8"?>
 <odoo>
