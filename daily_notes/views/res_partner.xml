@@ -38,7 +38,7 @@
     </field>
   </record>
 
-<!--  <record id="notes_tree_view" model="ir.ui.view">
+ <!--  <record id="notes_tree_view" model="ir.ui.view">
     <field name="name">Daily Notes Tree View</field>
     <field name="model">daily.notes</field>
      <field name="arch" type="xml">

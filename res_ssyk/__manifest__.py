@@ -21,13 +21,16 @@
 
 {
     'name': 'Res SSYK',
-    'version': '0.1',
+    'version': '12.0.0.4',
     'category': '',
     'description': """
 SSYK
 ==============================================
+https://www.scb.se/dokumentation/klassifikationer-och-standarder/standard-for-svensk-yrkesklassificering-ssyk/
 
+AFC-157
 
+Updated header in /data/res_ssyk.csv
 
 """,
     'author': 'Vertel AB',
@@ -36,7 +39,8 @@ SSYK
     'data': [
         'views/res_partner_view.xml',
         'security/ir.model.access.csv', 
-        'views/res_ssyk_view.xml'
+        'views/res_ssyk_view.xml',
+        'data/res_ssyk.csv'
         ],
     'application': False,
     'installable': True,

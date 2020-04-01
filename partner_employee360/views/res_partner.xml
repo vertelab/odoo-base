@@ -134,7 +134,7 @@
     <field name="model">res.partner</field>
     <field name="arch" type="xml">
         <search string="Search Test">
-            <field name="customer_nr" />
+            <field name="customer_id" />
        </search>
     </field>
 </record> -->

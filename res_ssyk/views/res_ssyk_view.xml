@@ -12,7 +12,7 @@
                         </h1>
                         <group>
                             <field name="description" />
-                            <!-- <field name="parent_id" /> --> 
+                            <field name="parent_id" /> 
                             <field name="code" />
                         </group>
                     </sheet>
@@ -24,10 +24,11 @@
             <field name="model">res.ssyk</field>
             <field name="arch" type="xml">
                 <tree string="Code">
+                 <field name="parent_id" />  
+                    <field name="code" />
                     <field name="name" />
                     <field name="description" />
-                     <!-- <field name="parent_id" /> --> 
-                    <field name="code" />
+                   
                 </tree>
             </field>
         </record>
@@ -39,7 +40,7 @@
                     <field name="name" filter_domain="[('name','ilike',self),('description','ilike',self)]" />
                     <field name="description" />
                     <field name="code" />
-                    <!-- <field name="parent_id" /> -->
+                    <field name="parent_id" /> 
                     <separator />
                     <!-- <filter string="Main" name="parent_id_none" domain="[('parent_id','=',None)]" />
                     <filter string="Parent" name="parent_id" domain="[('parent_id','!=',None)]" /> -->

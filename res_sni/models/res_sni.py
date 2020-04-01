@@ -30,4 +30,4 @@ class Sni(models.Model):
     name = fields.Char(string='Name', required=True)
     code = fields.Char(string='Official Code',help="Official code, group, sub-group or detail group.")
     description = fields.Char(string='Description')
-    #parent_id = fields.Many2one(comodel_name='res.sni', string='Parent')
+    parent_id = fields.Many2one(comodel_name='res.sni', string='Parent')

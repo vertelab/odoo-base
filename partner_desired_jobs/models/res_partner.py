@@ -23,23 +23,23 @@ from odoo import models, fields, api, _
 import logging
 _logger = logging.getLogger(__name__)
 
+
 class ResPartner(models.Model):
     _inherit = "res.partner" 
     
-    job_ids = fields.One2many(comodel_name="res.partner.job", inverse_name="partner_id")
+    job_ids = fields.One2many(comodel_name="res.partner.jobs", inverse_name="partner_id")
+
 
     
 class Jobs(models.Model):
-    _name = 'res.partner.job'
+    _name = 'res.partner.jobs'
 
     partner_id = fields.Many2one(comodel_name="res.partner")
     
-    name = fields.Char(string="Sequence number")
-    job_id = fields.Char(string="Job ID")
-    description = fields.Text(string="Job description")
-    ssyk_ids = fields.Many2many('res.ssyk', string="SSYK") #visa upp ssyk beskrivning också
-    education = fields.Char(string="Education")
-    skills = fields.Many2many('hr.skill', string="Experience") #bör vara separerat från kompetenser på nått sätt, kanske göra utökning på hr_skill? Visa nivå och beskrivning
-
+    name = fields.Many2one('res.ssyk', string="Job title") 
+    ssyk_code = fields.Char(string="SSYK", related="name.code")
+    education = fields.Boolean(string="Education") #kan expanderas till modul i framtiden så att den visar utbildningen
+    experience = fields.Boolean(string="Experience")
     
+    #skills = fields.Many2many('hr.skill', string="Experience") #potentiell expansion istället för endast checkbox som då bör vara separerat från kompetenser på nått sätt, kanske göra utökning på hr_skill? Visa nivå och beskrivning
 

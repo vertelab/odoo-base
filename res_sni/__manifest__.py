@@ -21,7 +21,7 @@
 
 {
     'name': 'Res SNI',
-    'version': '12.0.0.1',
+    'version': '12.0.0.2',
     'category': '',
     'description': """
 SNI Swedish Standard Industrial Classification
@@ -43,6 +43,7 @@ SNI Swedish Standard Industrial Classification
 
 https://en.wikipedia.org/wiki/Swedish_Standard_Industrial_Classification
 
+v12.0.0.2 Added automatic install of the codes.
 
 """,
     'author': 'Vertel AB',
@@ -51,7 +52,8 @@ https://en.wikipedia.org/wiki/Swedish_Standard_Industrial_Classification
     'data': [
         'views/res_partner_view.xml',
         'security/ir.model.access.csv', 
-        'views/res_sni_view.xml'
+        'views/res_sni_view.xml',
+		'data/res_sni.csv',
         ],
     'application': False,
     'installable': True,
