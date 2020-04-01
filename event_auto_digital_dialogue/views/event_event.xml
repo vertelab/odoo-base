@@ -26,7 +26,7 @@
             <label for="seats_availability" position="attributes"> 
                <attribute name="invisible">1</attribute>
             </label>
-            <!--Hårdkoda inte id använd %(något.xml_id)d -->
+            <!--Hårdkoda inte id använd \%\(något.xml_id)d -->
             <!-- <button name="464" position="attributes"> 
                <attribute name="invisible">1</attribute>
             </button> --> <!-- verkar som att den här knappen har olika namn -->
