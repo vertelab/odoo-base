@@ -1,8 +1,11 @@
+<!-- Fixa whitespace  -->
+<!-- Ta bort oanvänd kod, om kvar skriv anledning  -->
+
 <?xml version="1.0" encoding="utf-8"?>
 <odoo>
     
   <record id="view_partner_form_employee360" model="ir.ui.view">
-    <field name="name">res.partner.employee360</field>
+    <field name="name">res.partner.employee360</field>             <!-- Använd form i namnet -->
     <field name="model">res.partner</field> 
     <field name="inherit_id" ref="base.view_partner_form" />
     <field name="arch" type="xml"> 
@@ -95,7 +98,7 @@
   </record>
 -->
   <record id="view_partner_tree_employee360" model="ir.ui.view"> 
-    <field name="name">res.partner.tree.inherit.employee360</field> 
+    <field name="name">res.partner.tree.inherit.employee360</field>      <!-- Använd view i namnet  -->
     <field name="model">res.partner</field> 
     <field name="inherit_id" ref="base.view_partner_tree" /> 
     <field name="arch" type="xml"> 
@@ -110,7 +113,7 @@
 
 
   <record id="view_partner_select_employee360" model="ir.ui.view"> 
-    <field name="name">res.partner.select.inherit.employee360</field> 
+    <field name="name">res.partner.select.inherit.employee360</field>           <!-- Använd view i namnet  -->
     <field name="model">res.partner</field> 
     <field name="inherit_id" ref="base.view_res_partner_filter" /> 
     <field name="arch" type="xml"> 
