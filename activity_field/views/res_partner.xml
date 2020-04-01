@@ -5,13 +5,11 @@
 
 <?xml version="1.0" encoding="utf-8"?>
 <odoo>
-    
-    <record id="view_partner_form_activity_field" model="ir.ui.view"> <!-- id = namn som används vid referering till recorden, model = odoo-modell som den beskriver -->
-        <field name="name">res.partner.activity_field</field> <!-- mitt namn på min modul --> 
-        <field name="model">res.partner</field> 
-        <field name="inherit_id" ref="base.view_partner_form" /> <!-- ref = record id för det jag ärver från -->
+    <record id="view_partner_form_activity_field" model="ir.ui.view"> 
+        <field name="name">res.partner.activity_field</field> 
+        <field name="model">res.partner.form</field> 
+        <field name="inherit_id" ref="base.view_partner_form" /> 
         <field name="arch" type="xml"> 
-           
             <xpath expr="//page[@name='internal_notes']" position="after">
                 <page string="Activity">
                     <group>
@@ -24,41 +22,36 @@
                             <field name="notes"/> 
                             <field name="location"/>  
                         </tree>
-                      </field>
-                    
+                      </field>   
                     </group>
                 </page>
             </xpath>
             <div name="button_box" position="inside">
                 <button name="open_partner_activities" type="object" class="oe_stat_button" icon="fa-calendar">
-               <field name="activities_count" string="Activities" widget="statinfo"/> <!-- ser fult ut, behöver fixas-->
+                <field name="activities_count" string="Activities" widget="statinfo"/> 
                 </button>
             </div>
         </field>
-    
      </record>
-       <record id="action_activities" model="ir.actions.act_window">
+
+    <record id="action_activities" model="ir.actions.act_window">
         <field name="name">Activities</field>
         <field name="type">ir.actions.act_window</field>
         <field name="res_model">res.partner.activity</field>
         <field name="view_type">form</field>
         <field name="view_mode">tree</field>
-
-        
-
     </record> 
 
     <record id="view_activity_tree" model="ir.ui.view"> 
         <field name="name">activity.tree</field> 
         <field name="model">res.partner.activity</field> 
-        <field name="arch" type="xml"> 
-            
+        <field name="arch" type="xml">           
             <tree editable="bottom" string="Timesheet Activities" default_order="start_date">
                 <field name="name" />    
                 <field name="meeting_type" widget="many2many_tags"/>
                 <field name="start_date"/>
                 <field name="duration" widget="timesheet_uom"/> 
-                 <field name="notes"/> 
+                <field name="notes"/> 
                 <field name="location"/>  
             </tree>
         </field>
@@ -69,26 +62,8 @@
         <field name="sequence" eval="1"/>
         <field name="view_mode">tree</field>
         <field name="view_id" ref="view_activity_tree"/>
-    </record> 
-
+    </record>    
     
-    
-    
-    <!-- <record id="view_event_form__registration_date" model="ir.ui.view">
-        <field name="name">event.event.registration_date</field>
-        <field name="model">event.event</field> 
-        <field name="inherit_id" ref="event.view_event_form" />
-        <field name="arch" type="xml"> 
-            
-            <field name="date_begin" position="before"> 
-               
-               <field name="meeting_type"/>
-            </field>
-
-        </field>
-    </record> -->
-
-    <!-- <menuitem id="activities_root" name="Activities" sequence="5"/> -->
     <menuitem id="activities_kanban" name="Activities" parent="contacts.res_partner_menu_config" action="action_activities"/> <!--  -->
 
     <!-- 
