@@ -7,24 +7,6 @@
             <field name="model">res.partner</field>
             <field name="inherit_id" ref="base.view_partner_form" />
             <field name="arch" type="xml">
-
-                     <!-- <field name="parent_id" />  -->
-                 <!-- <page name="internal_notes" position="before">
-                    <page string="SNI">
-                    <group>
-                        <field name="sni_ids" mode="tree" nolabel="1">
-                            <tree editable="bottom" string="SNI codes">
-                            <field name="name" />    
-                            <field name="code" />
-                            <field name="description"/>
-                                       
-
-                           
-                        </tree>
-                      </field>
-                    </group>
-                    </page>
-                </page>   -->
                 <field name="barcode" position="after">
                      <field name="sni_ids" widget="many2many_tags"/> 
                 </field>
