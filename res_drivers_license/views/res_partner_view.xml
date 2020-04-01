@@ -2,18 +2,17 @@
 <odoo>
     <data>
         
-        <record id="view_partner_form_sni" model="ir.ui.view">
-            <field name="name">res.partner.form.inherit.sni</field>
+        <record id="view_partner_form_drivers_license" model="ir.ui.view">
+            <field name="name">res.partner.form.inherit.drivers_license</field>
             <field name="model">res.partner</field>
             <field name="inherit_id" ref="base.view_partner_form" />
             <field name="arch" type="xml">
-                <field name="supplier" position="after">
+                <xpath expr="//page[@name='sales_purchases']/group/group/field[@name='supplier']" position="after">
                     <field name="has_drivers_license"/>
                     <field name="drivers_license_ids" widget=""/> 
                     <field name="has_car"/>
-                </field>
+                </xpath>
             </field>
         </record>
-        
     </data>
 </odoo>

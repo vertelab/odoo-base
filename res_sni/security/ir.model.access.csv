@@ -1,3 +1,0 @@
-id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
-access_sni_manager,res.sni,res_sni.model_res_sni,base.group_partner_manager,1,1,1,1
-access_sni_user,res.sni.user,res_sni.model_res_sni,base.group_user,1,0,0,0

@@ -18,26 +18,13 @@
 #    along with this program.  If not, see <http://www.gnu.org/licenses/>.
 #
 ##############################################################################
+from odoo import models, fields, api, _
+import logging
+_logger = logging.getLogger(__name__)
 
-{
-    'name': 'Drivers License',
-    'version': '12.0.1.1',
-    'category': '',
-    'description': """
-Drivers License
-==============================================
-AFC-197
-""",
-    'author': 'Vertel AB',
-    'website': 'http://www.vertel.se',
-    'depends': ['base',],
-    'data': [
-        'views/res_partner_view.xml',
-        #'security/ir.model.access.csv', 
-        'views/res_drivers_license_view.xml',
-        
-        ],
-    'application': False,
-    'installable': True,
-}
-# vim:expandtab:smartindent:tabstop=4s:softtabstop=4:shiftwidth=4:
+class Partner(models.Model):
+    _inherit = 'res.partner'
+
+    has_drivers_license = fields.Boolean(string="Has drivers license")
+    drivers_license_ids = fields.Many2one(comodel_name='res.drivers_license', string='Drivers license class', inverse_name="partner_id")
+    has_car = fields.Boolean(string="Has access to car")
