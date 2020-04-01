@@ -1,8 +1,12 @@
+<!-- Fixa whitespace på några ställen, kolla igenom indenteringen   -->
+<!-- Rensa bort oanvänd kod. Skriv anledningen om den ska ligga kvar  -->
+<!-- Använd .form i ditt namn på modulen -->
+
 <?xml version="1.0" encoding="utf-8"?>
 <odoo>
     
     <record id="view_partner_form_activity_field" model="ir.ui.view"> <!-- id = namn som används vid referering till recorden, model = odoo-modell som den beskriver -->
-        <field name="name">res.partner.activity_field</field> <!-- mitt namn på min modul -->
+        <field name="name">res.partner.activity_field</field> <!-- mitt namn på min modul --> 
         <field name="model">res.partner</field> 
         <field name="inherit_id" ref="base.view_partner_form" /> <!-- ref = record id för det jag ärver från -->
         <field name="arch" type="xml"> 
@@ -66,6 +70,9 @@
         <field name="view_id" ref="view_activity_tree"/>
     </record> 
 
+    
+    
+    
     <!-- <record id="view_event_form__registration_date" model="ir.ui.view">
         <field name="name">event.event.registration_date</field>
         <field name="model">event.event</field> 
