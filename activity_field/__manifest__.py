@@ -26,7 +26,7 @@
     'description': """
 This module adds adds a tab with different activities 
 ===========================================================
-
+AFC-130
 """,
     'author': 'Vertel AB',
     'license': 'AGPL-3',

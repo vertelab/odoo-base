@@ -6,8 +6,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <odoo>
     <record id="view_partner_form_activity_field" model="ir.ui.view"> 
-        <field name="name">res.partner.activity_field</field> 
-        <field name="model">res.partner.form</field> 
+        <field name="name">res.partner.activity_field.form</field> 
+        <field name="model">res.partner</field> 
         <field name="inherit_id" ref="base.view_partner_form" /> 
         <field name="arch" type="xml"> 
             <xpath expr="//page[@name='internal_notes']" position="after">
@@ -35,7 +35,7 @@
      </record>
 
     <record id="action_activities" model="ir.actions.act_window">
-        <field name="name">Activities</field>
+        <field name="name">Activities.action</field>
         <field name="type">ir.actions.act_window</field>
         <field name="res_model">res.partner.activity</field>
         <field name="view_type">form</field>
