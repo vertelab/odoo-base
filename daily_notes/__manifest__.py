@@ -21,11 +21,12 @@
 
 {
     'name': 'Daily notes',
-    'version': '12.0.1.1',
+    'version': '12.0.1.2',
     'category': '',
     'description': """
-Base mapping
-============
+Daily notes
+===============================================================================
+AFC-81
 This module allowes daily notes for a partner.
 - 12.0.1.1  Added mapping for Integration platform with the module base_map.
 """,
