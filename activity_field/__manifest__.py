@@ -21,12 +21,12 @@
 
 {
     'name': 'Activity Tab',
-    'version': '0.1',
+    'version': '12.0.1.2',						# Format 12.0.1.0, för att vi använder Odoo 12
     'category': '',
     'description': """
 This module adds adds a tab with different activities 
 ===========================================================
-
+AFC-130
 """,
     'author': 'Vertel AB',
     'license': 'AGPL-3',
