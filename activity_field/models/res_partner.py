@@ -26,7 +26,7 @@ _logger = logging.getLogger(__name__)
 class ResPartner(models.Model):
     _inherit = "res.partner" #odoo inheritance från res.partner
     
-   
+# Fixa whitespace 
     activities_ids = fields.One2many(comodel_name="res.partner.activity", inverse_name="partner_id")
 
 
