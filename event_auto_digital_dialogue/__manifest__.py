@@ -21,7 +21,7 @@
 
 {
     'name': 'Event Automatic Digital Dialogue',
-    'version': '12.0.0.1.1',       
+    'version': '12.0.0.1',       
     'category': '',
     'description': """
 Module that changes event view to an automatic digital dialogue view

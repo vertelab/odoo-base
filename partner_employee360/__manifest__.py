@@ -26,7 +26,7 @@
     'description': """
 Module for employee 360 view
 ================================================================================================
-This module alters, adds, removes and shuffles around fields in the partner view AFC-102, 103, 140
+This module alters, adds, removes and shuffles around fields in the partner view AFC-102, 103, 140, 183
 """,
     'author': 'Vertel AB',
     'license': 'AGPL-3',
