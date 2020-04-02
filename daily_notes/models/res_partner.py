@@ -37,7 +37,7 @@ class ResPartnerNotes(models.Model):
     note_number = fields.Char(string="AIS number")
     
     office = fields.Many2one('res.partner', string="Office")
-    customer_nr = fields.Char(string="Customer number", related="partner_id.customer_nr") #temporär, ska vara kopplad till customer number från res.partner som läggs till av partner_employee360
+    customer_id = fields.Char(string="Customer number", related="partner_id.customer_id") 
 
 class ResPartner(models.Model):
     _inherit = 'res.partner'
