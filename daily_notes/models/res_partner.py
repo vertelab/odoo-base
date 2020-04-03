@@ -27,7 +27,6 @@ class ResPartnerNotes(models.Model):
     _description = 'Daily notes for a partner'
     _name = 'res.partner.notes'
 
-
     name = fields.Char(string="Title") 
     partner_id = fields.Many2one(comodel_name="res.partner", string="Job seeker")
 
@@ -35,10 +34,10 @@ class ResPartnerNotes(models.Model):
     note = fields.Text(string="Notes")
     note_date = fields.Datetime(string="Refers to date") 
     note_type = fields.Many2many(comodel_name="res.partner.note.type", inverse_name="note_id") 
-    
     note_number = fields.Char(string="AIS number")
+    
     office = fields.Many2one('res.partner', string="Office")
-    customer_nr = fields.Integer(string="Customer number") #temporär, ska vara kopplad till customer number från res.partner som läggs till av partner_employee360
+    customer_id = fields.Char(string="Customer number", related="partner_id.customer_id") 
 
 class ResPartner(models.Model):
     _inherit = 'res.partner'
@@ -79,35 +78,3 @@ class ResPartnerNoteType(models.Model):
     string='Categories', 
     default='request', 
     help="Notes categories")
-
-#    @api.multi
-#    def view_notes(self): #context=None
-#        dailynotes_id = self.env['res.partner'].search (
-#            [('name', '=', "daily_notes.notes_tree_view")]) partner_id=self.partner.partner_id
-#        domain = [('id','in',dailynotes_id)]
-        # view_id_tree = self.env['ir.ui.view'].search([('name','=',"daily_notes.notes_tree_view")])
-#        return {
-#            'name': 'Daily notes',
-#            'domain':[('partner_id', '=', self.ids)],
-#            'type': 'ir.actions.act_window',
-#            'res_model': 'res.partner.notes',
-#            'view_type': 'form',
-#            'view_mode': 'tree,form',
-#            # 'views': [(view_id_tree[0].id, 'tree'),(False,'form')],
-#            # 'view_id ref="daily_notes.notes_tree_view"': '',
-#            'target': 'current',
-#            }
-
-#class ResPartnerNotesCategories(models.Model):
-#    _inherit = 'res.partner.notes'
-#    categories = fields.Selection(selection=[('request', 
-#    'Requested by applicant'), 
-#    ('plan', 'Planned by administrator'), 
-#    ('ok', 'Meeting OK'), 
-#    ('cancel', 'Cancelled by administrator'), 
-#    ('fail', 'Applicant failed to attend to the meeting')], 
-#   string='Categories', 
-#    default='request', 
-#    help="Notes categories")
-    
-#    tags = fields.Char(string='Tags', help="Notes tags separated with ,")

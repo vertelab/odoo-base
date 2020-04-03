@@ -1,11 +1,10 @@
-<!-- Fixa whitespace  -->
-<!-- Ta bort oanvänd kod, om kvar skriv anledning  -->
-
 <?xml version="1.0" encoding="utf-8"?>
 <odoo>
     
   <record id="view_partner_form_employee360" model="ir.ui.view">
-    <field name="name">res.partner.employee360</field>             <!-- Använd form i namnet -->
+
+    <field name="name">res.partner.employee360.form</field>
+
     <field name="model">res.partner</field> 
     <field name="inherit_id" ref="base.view_partner_form" />
     <field name="arch" type="xml"> 
@@ -19,64 +18,43 @@
       borde ändra implementering, administrative officer bör vara eget fält, medan user_id är gömd, men används för annat.
       -->   
       <field name="function" position="after"> 
-     
         <field name="work_phone"/>
-        <field name="available_since"/>
-               
       </field>
-
-     
-
       <xpath expr="//group[@name='sale']/field[@name='user_id']" position="attributes">
         <attribute name="string">Administrative officer</attribute>
       </xpath>
-
-<!-- label har fel utseende och fältet är för kort och har ingen divider på det sätt som normala fält har-->
-      <field name="type" position="before">
-      
+      <field name="type" position="before">   
+       <!-- behåll ifall det behövs i framtiden -->
         <!-- <span>
         <label for="org_or_social_sec_nr" string="Organization number" attrs="{'invisible':[('is_company', '=', False)]}"/>
         <label for="org_or_social_sec_nr" string="Social security number" attrs="{'invisible':[('is_company', '=', True)]}"/>
         </span> -->
-
-
-        
-        <field name="company_registry"/> 
-        
+        <field name="company_registry" /> 
         <field name="cfar" attrs="{'invisible':[('is_company', '=', False)]}"/>
       </field>
     
       <field name="barcode" position="after">
-        
         <field name="office" options="{'no_create_edit': True}" domain="[('type', '=', 'af office')]"/>
-        <field name="office_code" />
+        <field name="my_office_code" />
         <field name="is_jobseeker" />
         <field name="is_independent_partner" />
         <field name="is_government" />
         <field name="is_employer" />
-
-      
+        <field name="type"/>
       </field>
-      
-
       <!-- endast för om is_customer är true-->
       <field name="vat" position="after">
-        <field name="customer_id" attrs="{'invisible':[('customer', '=', False)]}"/>  <!--  -->
+        <field name="customer_id" attrs="{'invisible':[('customer', '=', False)]}"/> 
+        <field name="office_code" attrs="{'invisible':[('type', '!=', 'af office')]}"/>
       </field>
-
-
-
-
-
-
       <field name="vat" position="attributes">
-               <attribute name="invisible">1</attribute>
+        <attribute name="invisible">1</attribute>
       </field>
       <field name="image" position="attributes">
-               <attribute name="invisible">1</attribute>
+        <attribute name="invisible">1</attribute>
       </field>
       <field name="barcode" position="attributes"> 
-               <attribute name="invisible">1</attribute>
+        <attribute name="invisible">1</attribute>
       </field>
     </field>
   </record>
@@ -103,10 +81,7 @@
     <field name="inherit_id" ref="base.view_partner_tree" /> 
     <field name="arch" type="xml"> 
       <xpath expr="/tree" position="inside">
-
         <field name="customer_id"/>
-
-    
       </xpath>
     </field>
   </record>
@@ -117,21 +92,18 @@
     <field name="model">res.partner</field> 
     <field name="inherit_id" ref="base.view_res_partner_filter" /> 
     <field name="arch" type="xml"> 
-      <xpath expr="//field[@name='user_id']" position="after">
-        
-        <field name="customer_id" />
-        <filter string="Job seekers" name="is_jobseeker" domain="[('is_jobseeker','=',True)]"/> <!-- ('parent_id', '=', False)-->
+      <xpath expr="//field[@name='user_id']" position="after"> 
+        <field name="customer_id" />         <!-- filter_domain="[('customer','=',True), ('parent_id', '=', False)]" --> <!-- kommenterad för att jag inte har någon customer, behöver testas -->
+        <filter string="Job seekers" name="is_jobseeker" domain="[('is_jobseeker','=',True)]"/> 
         <filter string="Employers" name="is_employer" domain="[('is_employer','=',True)]"/>
         <filter string="Government body" name="is_government" domain="[('is_government','=',True)]"/>
         <filter string="Independent partners" name="is_independent_partner" domain="[('is_independent_partner','=',True)]"/>
-        <!--        filter_domain="[('customer','=',True), ('parent_id', '=', False)]" --> <!-- kommenterad för att jag inte har någon customer, behöver testas -->
-    
       </xpath>
     </field>
   </record>
 
-<!-- försök att ta bort bilderna i kanban vyn, fungerar inte
-  <record id="view_partner_kanban_employee360" model="ir.ui.view"> 
+  <!-- försök att ändra kanban vyn, gick inte så bra -->
+  <!-- <record id="view_partner_kanban_employee360" model="ir.ui.view"> 
     <field name="name">res.partner.select.inherit.employee360</field> 
     <field name="model">res.partner</field> 
     <field name="inherit_id" ref="base.res_partner_kanban_view" /> 
@@ -160,7 +132,6 @@
 
 
 <!-- gör inget, tanken är att försöka få den där lilla neråt pilen -->
-
   <!-- <record id="view_partner_filter_employee360" model="ir.ui.view">
     <field name="name">res.partner.select.employee360</field>
     <field name="model">res.partner</field>

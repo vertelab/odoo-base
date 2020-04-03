@@ -21,17 +21,21 @@
 
 {
     'name': 'Partner employee 360 view',
+<<<<<<< HEAD
     'version': '0.2',                        # Version 12.0.1.0
+=======
+    'version': '12.0.0.1.3',
+>>>>>>> 12.0
     'category': '',
     'description': """
 Module for employee 360 view
 ================================================================================================
-This module alters, adds, removes and shuffles around fields in the partner view AFC-102, 103, 140
+This module alters, adds, removes and shuffles around fields in the partner view AFC-102, 103, 140, 183, 192
 """,
     'author': 'Vertel AB',
     'license': 'AGPL-3',
     'website': 'http://www.vertel.se',
-    'depends': ['base'],
+    'depends': ['base',],
     'data': [
 			'views/res_partner.xml'
         ],
