@@ -1,6 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
 <odoo>
-
   <record id="view_res_partner_form_notes_inherited" model="ir.ui.view"> 
     <field name="name">view.res.partner.form.notes.inherited</field>
     <field name="model">res.partner</field> 
@@ -26,27 +25,12 @@
                             <field name="note_type" widget="many2many_tags"/>
                             <field name="note_number"/>
                             <field name="office" options="{'no_create_edit': True}" domain="[('type', '=', 'af office')]"/>
-                            <field name="customer_nr"/>
+                            <field name="customer_id"/>
                         </tree>
                       </field>
-                    
                     </group>
                 </page>
             </xpath>
-
-
     </field>
-  </record>
-
- <!--  <record id="notes_tree_view" model="ir.ui.view">
-    <field name="name">Daily Notes Tree View</field>
-    <field name="model">daily.notes</field>
-     <field name="arch" type="xml">
-        <tree>
-          <field name="partner_id"/>
-          <field name="daily_notes"/>
-        </tree>
-      </field>
-  </record> -->
-  
+  </record> 
 </odoo>

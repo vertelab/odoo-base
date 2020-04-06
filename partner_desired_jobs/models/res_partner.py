@@ -38,8 +38,5 @@ class Jobs(models.Model):
     
     name = fields.Many2one('res.ssyk', string="Job title") 
     ssyk_code = fields.Char(string="SSYK", related="name.code")
-    education = fields.Boolean(string="Education") #kan expanderas till modul i framtiden så att den visar utbildningen
+    education = fields.Boolean(string="Education") 
     experience = fields.Boolean(string="Experience")
-    
-    #skills = fields.Many2many('hr.skill', string="Experience") #potentiell expansion istället för endast checkbox som då bör vara separerat från kompetenser på nått sätt, kanske göra utökning på hr_skill? Visa nivå och beskrivning
-

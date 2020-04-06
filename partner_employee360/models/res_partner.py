@@ -23,25 +23,29 @@ from odoo import models, fields, api, _
 import logging
 _logger = logging.getLogger(__name__)
 
-class ResPartner(models.Model):
-    _inherit = "res.partner" #odoo inheritance från res.partner
-    #_name = ""
-    office = fields.Many2one('res.partner', string="Office")
-    work_phone = fields.Integer(string='Work phone', help="Work phone number")
-    available_since = fields.Datetime(string='Available since', help="Time when they became available") #datetime/time?
-    company_registry = fields.Char(string='Organization/Social security number', help="Social security number or organization number")
-    cfar = fields.Integer(string='CFAR', help="CFAR number")
-    customer_id = fields.Integer(string='Customer number', help="Customer number")
 
-    office_code = fields.Integer(string="Office code") #bör tas från office och vara satt för office partners
+class ResPartner(models.Model):
+    _inherit = "res.partner"  # odoo inheritance från res.partner
+    #_name = ""
+
+    work_phone = fields.Integer(string='Work phone', help="Work phone number")
+    company_registry = fields.Char(
+        string='Organization/Social security number', help="Social security number or organization number")
+    cfar = fields.Char(string='CFAR', help="CFAR number")
+    customer_id = fields.Char(string='Customer number', help="Customer number")
+
+    # office selection field for partners connected to an office, my_office_code filled in by office_code for the office
+    office = fields.Many2one('res.partner', string="Office")
+    my_office_code = fields.Char(
+        string='Office code', related='office.office_code')
+
+    # adds af office as a type of partner
+    type = fields.Selection(selection_add=[('af office', 'AF Office'), ('legal adress','Legal Adress'), ('foreign adress','Foreign Adress'), ('postal adress','Postal Adress')])
+
+    # office code for office type partners only
+    office_code = fields.Char(string="Office code")
+
     is_jobseeker = fields.Boolean(string="Jobseeker")
     is_independent_partner = fields.Boolean(string="Independent partner")
     is_government = fields.Boolean(string="Government")
     is_employer = fields.Boolean(string="Employer")
-
-    type = fields.Selection(selection_add=[('af office', 'AF Office')])
-
-
-
-    
-
