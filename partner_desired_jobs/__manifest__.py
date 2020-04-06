@@ -38,6 +38,7 @@ AFC-168
     ], 
     'data': [
 			'views/res_partner.xml',
+            'views/desired_jobs.xml',
             'security/ir.model.access.csv'
         ],
     'application': False,
