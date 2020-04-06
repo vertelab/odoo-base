@@ -21,22 +21,26 @@
 
 {
     'name': 'Daily notes',
-    'version': '12.0.1.1',
+    'version': '12.0.1.2',
     'category': '',
     'description': """
-Base mapping
-============
+Daily notes
+===============================================================================
+AFC-81
 This module allowes daily notes for a partner.
 - 12.0.1.1  Added mapping for Integration platform with the module base_map.
 """,
     'author': 'Vertel AB',
     'license': 'AGPL-3',
     'website': 'http://www.vertel.se',
-    'depends': ['base','base_map'],
+    'depends': [
+        'base',
+        'base_map'
+    ],
     'data': [
 			'views/res_partner.xml',
             'security/ir.model.access.csv',
-            'data/ir.model.fields.csv',			
+            #'data/ir.model.fields.csv',			
         ],
     'application': False,
     'installable': True,

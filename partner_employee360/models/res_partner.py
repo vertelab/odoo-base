@@ -29,10 +29,10 @@ class ResPartner(models.Model):
     #_name = ""
 
     work_phone = fields.Integer(string='Work phone', help="Work phone number")
-    org_or_social_sec_nr = fields.Char(
+    company_registry = fields.Char(
         string='Organization/Social security number', help="Social security number or organization number")
     cfar = fields.Char(string='CFAR', help="CFAR number")
-    customer_nr = fields.Char(string='Customer number', help="Customer number")
+    customer_id = fields.Char(string='Customer number', help="Customer number")
 
     # office selection field for partners connected to an office, my_office_code filled in by office_code for the office
     office = fields.Many2one('res.partner', string="Office")
@@ -40,7 +40,7 @@ class ResPartner(models.Model):
         string='Office code', related='office.office_code')
 
     # adds af office as a type of partner
-    type = fields.Selection(selection_add=[('af office', 'AF Office')])
+    type = fields.Selection(selection_add=[('af office', 'AF Office'), ('legal adress','Legal Adress'), ('foreign adress','Foreign Adress'), ('postal adress','Postal Adress')])
 
     # office code for office type partners only
     office_code = fields.Char(string="Office code")
