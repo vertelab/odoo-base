@@ -56,7 +56,7 @@ class ResPartnerActivity(models.Model):
     start_date = fields.Datetime(string="Start date", help="", required=True)
     duration = fields.Float(string="Duration", help="")
     notes = fields.Char(string="Notes", help="")
-    fields.Many2one('res.partner', related="partner_id.office", string="Location")
+    location = fields.Many2one('res.partner', related="partner_id.office", string="Location")
 
 class ResPartnerActivityType(models.Model):
     _name="res.partner.activity.type"
