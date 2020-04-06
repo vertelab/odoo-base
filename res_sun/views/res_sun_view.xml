@@ -24,10 +24,11 @@
             <field name="model">res.sun</field>
             <field name="arch" type="xml">
                 <tree string="Code">
+                    <field name="parent_id" /> 
+                    <field name="code" />
                     <field name="name" />
                     <field name="description" />
-                     <field name="parent_id" /> 
-                    <field name="code" />
+                    
                 </tree>
             </field>
         </record>
@@ -50,7 +51,7 @@
             </field>
         </record>
         <record id="action_sun_form" model="ir.actions.act_window">
-            <field name="name">sun-koder</field>
+            <field name="name">SUN-koder</field>
             <field name="type">ir.actions.act_window</field>
             <field name="res_model">res.sun</field>
             <field name="view_type">form</field>
