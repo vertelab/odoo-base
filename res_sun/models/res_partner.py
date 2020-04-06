@@ -27,7 +27,7 @@ class ResPartner(models.Model):
 
     sun_id = fields.Many2one(comodel_name='res.sun', string='SUN Code')
     
-    education_level_domestic = fields.Char(string="Education level")
+    education_level = fields.Integer(string="Education level") #model where nr = type of education?
 
     foreign_education = fields.Boolean(string="Foreign education")
     foreign_education_approved = fields.Boolean(string="Foreign education approved")
