@@ -25,9 +25,9 @@ _logger = logging.getLogger(__name__)
 class ResDriversLicense(models.Model): 
     _name = 'res.drivers_license'
 
-    partner_id = fields.Many2many(comodel_name="res.partner")
+    partner_id = fields.One2many(comodel_name="res.partner", inverse_name="drivers_license_id")
     
-    name = fields.Char(string='Type', required=True) #A,B etc.
+    name = fields.Char(string='Class', required=True) #A,B etc.
     description = fields.Char(string='Description')
 
 
