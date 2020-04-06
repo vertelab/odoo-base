@@ -7,11 +7,11 @@
             <field name="model">res.partner</field>
             <field name="inherit_id" ref="base.view_partner_form" />
             <field name="arch" type="xml">
-                <field name="supplier" position="after">
+                <xpath expr="//page[@name='sales_purchases']/group/group/field[@name='supplier']" position="after">
                      <field name="sun_id" widget=""/> 
                      <field name="foreign_education"/>
                      <field name="foreign_education_approved"/>
-                </field>
+                </xpath>
             </field>
         </record>
         

@@ -25,10 +25,10 @@ _logger = logging.getLogger(__name__)
 class ResPartner(models.Model):
     _inherit = 'res.partner'
 
-    sun_id = fields.One2many(comodel_name='res.sun', string='SUN Code', inverse_name="partner_id")
+    sun_id = fields.Many2one(comodel_name='res.sun', string='SUN Code')
     
     education_level_domestic = fields.Char(string="Education level")
 
     foreign_education = fields.Boolean(string="Foreign education")
-    foreign_education_approved = fields.Boolean(string="Foreign education")
+    foreign_education_approved = fields.Boolean(string="Foreign education approved")
 
