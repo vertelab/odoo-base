@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <record id="view_drivers_license_form" model="ir.ui.view">
+            <field name="name">res.drivers_license.form</field>
+            <field name="model">res.drivers_license</field>
+            <field name="arch" type="xml">
+                <form string="drivers_license">
+                    <sheet>
+                        <h1>
+                            <field name="name" default_focus="1" placeholder="Name" />
+                        </h1>
+                        <group>
+                            <field name="description" />
+                        </group>
+                    </sheet>
+                </form>
+            </field>
+        </record>
+        <record id="view_drivers_license_tree" model="ir.ui.view">
+            <field name="name">res.drivers_license.tree</field>
+            <field name="model">res.drivers_license</field>
+            <field name="arch" type="xml">
+                <tree string="Drivers License">
+                    <field name="name" />
+                    <field name="description" />
+                </tree>
+            </field>
+        </record>
+        <record id="res_view_drivers_license_filter" model="ir.ui.view">
+            <field name="name">res.drivers_license.select</field>
+            <field name="model">res.drivers_license</field>
+            <field name="arch" type="xml">
+                <search string="Search drivers_license">
+                    <field name="name" filter_domain="[('name','ilike',self),('description','ilike',self)]" />
+                    <field name="description" />
+                    <separator />
+                </search>
+            </field>
+        </record>
+        <record id="action_drivers_license_form" model="ir.actions.act_window">
+            <field name="name">Drivers licenses</field>
+            <field name="type">ir.actions.act_window</field>
+            <field name="res_model">res.drivers_license</field>
+            <field name="view_type">form</field>
+            <field name="view_mode">tree,form</field>
+            <field name="view_id" ref="res_drivers_license.view_drivers_license_tree" />
+            <field name="context">{}</field>
+            <field name="search_view_id" ref="res_view_drivers_license_filter" />
+        </record>
+        <menuitem id="menu_drivers_license_form" parent="contacts.res_partner_menu_config" action="action_drivers_license_form" sequence="50" />
+    </data>
+</odoo>

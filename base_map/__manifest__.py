@@ -37,9 +37,9 @@ Also supports import / export of field data.
     'data': [
 			'views/ir_model.xml',
 			'security/ir.model.access.csv',
-            'data/ir.model.fields.csv',
-            'data/ir.exports.csv',
-            'data/ir.exports.line.csv',
+#            'data/ir.model.fields.csv',
+#            'data/ir.exports.csv',
+#            'data/ir.exports.line.csv',
         ],
     'application': False,
     'installable': True,

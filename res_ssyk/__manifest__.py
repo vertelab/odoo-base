@@ -40,7 +40,7 @@ Updated header in /data/res_ssyk.csv
         'views/res_partner_view.xml',
         'security/ir.model.access.csv', 
         'views/res_ssyk_view.xml',
-        'data/res_ssyk.csv'
+        #'data/res_ssyk.csv'
         ],
     'application': False,
     'installable': True,
