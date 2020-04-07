@@ -47,7 +47,7 @@
         <field name="view_id" ref="view_partner_jobs_pivot"/>
     </record> -->
 
-    <menuitem action="action_jobs" id="menu_action_jobs" parent="contacts.res_partner_menu_config" sequence="10" />
+    <menuitem action="action_jobs" id="menu_action_jobs" parent="contacts.menu_contacts"/>
 </odoo>
 
 
