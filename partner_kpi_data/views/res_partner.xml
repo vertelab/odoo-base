@@ -7,12 +7,12 @@
         <field name="inherit_id" ref="base.view_partner_form" /> 
         <field name="arch" type="xml"> 
             <xpath expr="//page[@name='internal_notes']" position="after">
-                <page string="kpi">
+                <page string="KPI">
                     <group>
                       <field name="kpi_ids" mode="tree" nolabel="1">
-                        <tree editable="bottom" string="Timesheet kpi" >
+                        <tree editable="bottom" string="KPI" >
                            
-                           <field name="fiscal_year" />  
+                           <field name="fiscal_year" widget="date"/>  
                             <field name="turnover" />    
                             <field name="turnover_change" />    
                             <field name="turnover_change_percent" />    
@@ -45,7 +45,7 @@
         <field name="name">kpi.tree</field> 
         <field name="model">res.partner.kpi</field> 
         <field name="arch" type="xml">           
-            <tree editable="bottom" string="kpi">
+            <tree editable="bottom" string="KPI">
                 <field name="partner_id" groups="base.group_no_one"/>
                    <field name="fiscal_year" />  
                             <field name="turnover" />    
@@ -104,5 +104,5 @@
         <field name="view_mode">graph</field>
         <field name="view_id" ref="view_kpi_graph"/>
     </record>     -->
-    <menuitem id="kpi_tree" name="kpi" parent="contacts.menu_contacts" action="action_kpi"/> 
+    <menuitem id="kpi_tree" name="KPI" parent="contacts.menu_contacts" action="action_kpi"/> 
 </odoo>
