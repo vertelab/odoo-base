@@ -13,7 +13,7 @@ AFC-84
     'depends': ['base'],
     'data': [
 			'views/res_partner.xml',
-            #'security/ir.model.access.csv'
+            'security/ir.model.access.csv'
         ],
     'application': False,
     'installable': True,
