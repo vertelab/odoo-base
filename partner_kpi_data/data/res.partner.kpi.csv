@@ -1,0 +1,35 @@
+﻿id;partner_id/id;partner_id;turnover_change;profit_change;employee_change;turnover_change_percent;profit_change_percent;employee_change_percent;employees;fiscal_year;profit;profit_percent;turnover
+demo_kpi1;base.main_partner;YourCompany;;;;;;;2000;2017-12-31;10000;1;1000000
+demo_kpi2;base.main_partner;YourCompany;100000;5000;200;110;150;110;2200;2018-12-31;15000;1;1100000
+demo_kpi3;base.main_partner;YourCompany;100000;-3000;200;109;80;109;2400;2019-12-31;12000;1;1200000
+demo_kpi4;__export__.res_partner_15_bfdd0265;Wood Corner;;;;;;;2600;2017-12-31;100000;8;1300000
+demo_kpi5;__export__.res_partner_15_bfdd0265;Wood Corner;100000;20000;200;108;120;108;2800;2018-12-31;120000;9;1400000
+demo_kpi6;__export__.res_partner_15_bfdd0265;Wood Corner;100000;10000;200;107;108;107;3000;2019-12-31;130000;9;1500000
+demo_kpi7;;The Jackson Group;;;;;;;108;2017-12-31;5000;9;54000
+demo_kpi8;;The Jackson Group;6000;650;12;111;113;111;120;2018-12-31;5650;9;60000
+demo_kpi9;;The Jackson Group;120000;-11052;240;300;-96;300;360;2019-12-31;-5402;-3;180000
+demo_kpi10;__export__.res_partner_13_508969d3;Azure Interior;;;;;;;3800;2017-12-31;110000;6;1900000
+demo_kpi11;__export__.res_partner_13_508969d3;Azure Interior;100000;0;200;105;100;105;4000;2018-12-31;110000;6;2000000
+demo_kpi12;__export__.res_partner_13_508969d3;Azure Interior;100000;0;200;105;100;105;4200;2019-12-31;110000;5;2100000
+demo_kpi13;__export__.res_partner_12_fb004421;Lumber Inc;;;;;;;100000;2017-12-31;2300000;5;50000000
+demo_kpi14;__export__.res_partner_12_fb004421;Lumber Inc;5000000;700000;10000;110;130;110;110000;2018-12-31;3000000;5;55000000
+demo_kpi15;__export__.res_partner_12_fb004421;Lumber Inc;5000000;2000000;10000;109;167;109;120000;2019-12-31;5000000;8;60000000
+demo_kpi16;__export__.res_partner_10_cdb7412b;Deco Addict;;;;;;;5000;2017-08-31;110000;4;2500000
+demo_kpi17;__export__.res_partner_10_cdb7412b;Deco Addict;100000;0;200;104;100;104;5200;2018-08-31;110000;4;2600000
+demo_kpi18;__export__.res_partner_10_cdb7412b;Deco Addict;100000;0;200;104;100;104;5400;2019-08-31;110000;4;2700000
+demo_kpi19;;Gemini Furniture;;;;;;;380;2017-04-30;5000;3;190000
+demo_kpi20;;Gemini Furniture;110000;-20000;220;158;-300;158;600;2018-04-30;-15000;-5;300000
+demo_kpi21;;Gemini Furniture;-50000;35000;-100;83;-133;83;500;2019-04-30;20000;8;250000
+demo_kpi22;;Ready Mat;;;;;;;6200;2017-12-31;50000;2;3100000
+demo_kpi23;;Ready Mat;100000;30000;200;103;160;103;6400;2018-12-31;80000;3;3200000
+demo_kpi24;;Ready Mat;100000;40000;200;103;150;103;6600;2019-12-31;120000;4;3300000
+;;;;;;;;;;;;;
+;;;;;;;;;;;;;
+;;;;;;;;;;;;;
+;;;;;;;;;;;;;
+;;;;;;;;;;;;;
+;;;;;;;;;;;;;
+;;;;;;;;;;;;;
+;;;;;;;;;;;;;
+;;;;;;;;;;;;;
+;;;;;;;;;;;;;
