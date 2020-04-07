@@ -21,7 +21,7 @@
 
 {
     'name': 'Partner desired jobs',
-    'version': '12.0.1.3',
+    'version': '12.0.1.4',
     'category': '',
     'description': """
 Module to see which jobs a jobseeking partner desires
@@ -38,6 +38,7 @@ AFC-168
     ], 
     'data': [
 			'views/res_partner.xml',
+            'views/desired_jobs.xml',
             'security/ir.model.access.csv'
         ],
     'application': False,
