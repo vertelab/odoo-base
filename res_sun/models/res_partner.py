@@ -33,7 +33,7 @@ class ResPartner(models.Model):
     foreign_education_approved = fields.Boolean(string="Foreign education approved")
 
 class ResPartnerEducationLevel(models.Model):
-    _name="res.partner.education.level"
+    _name="res.partner.education_level"
 
     partner_id = fields.One2many(comodel_name="res.partner", inverse_name="education_level")
 
