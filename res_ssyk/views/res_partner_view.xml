@@ -6,7 +6,7 @@
             <field name="inherit_id" ref="base.view_partner_form" />
             <field name="arch" type="xml">
                 <field name="barcode" position="after">
-                     <field name="ssyk_ids" widget="many2many_tags" /> 
+                     <field name="ssyk_ids" widget="many2many_tags" options="{'no_create_edit': True}"/> 
                 </field>
             </field>
         </record>
