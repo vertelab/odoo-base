@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        
+        <record id="view_partner_form_sun" model="ir.ui.view">
+            <field name="name">res.partner.form.inherit.sun</field>
+            <field name="model">res.partner</field>
+            <field name="inherit_id" ref="base.view_partner_form" />
+            <field name="arch" type="xml">
+                <xpath expr="//page[@name='sales_purchases']/group/group/field[@name='supplier']" position="after">
+                     <field name="sun_id" options="{'no_create_edit': True}"/> 
+                     <field name="education_level"/>
+                     <field name="foreign_education"/>
+                     <field name="foreign_education_approved"/>
+                </xpath>
+            </field>
+        </record>
+        
+    </data>
+</odoo>
