@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <record id="view_sun_form" model="ir.ui.view">
+            <field name="name">res.sun.form</field>
+            <field name="model">res.sun</field>
+            <field name="arch" type="xml">
+                <form string="sun">
+                    <sheet>
+                        <h1>
+                            <field name="name" default_focus="1" placeholder="Name" />
+                        </h1>
+                        <group>
+                            <field name="description" />
+                            <field name="parent_id" /> 
+                            <field name="code" />
+                        </group>
+                    </sheet>
+                </form>
+            </field>
+        </record>
+        <record id="view_sun_tree" model="ir.ui.view">
+            <field name="name">res.sun.tree</field>
+            <field name="model">res.sun</field>
+            <field name="arch" type="xml">
+                <tree string="Code">
+                    <field name="parent_id" /> 
+                    <field name="code" />
+                    <field name="name" />
+                    <field name="description" />
+                    
+                </tree>
+            </field>
+        </record>
+        <record id="view_sun_filter" model="ir.ui.view">
+            <field name="name">res.sun.select</field>
+            <field name="model">res.sun</field>
+            <field name="arch" type="xml">
+                <search string="Search sun">
+                    <field name="name" filter_domain="[('name','ilike',self),('description','ilike',self)]" />
+                    <field name="description" />
+                    <field name="code" />
+                    <field name="parent_id" />
+                    <separator />
+                    <!-- <filter string="Main" name="parent_id_none" domain="[('parent_id','=',None)]" />
+                    <filter string="Parent" name="parent_id" domain="[('parent_id','!=',None)]" /> -->
+                    <!-- <group expand="0" string="Group By">
+                        <filter name="parent_grp" string="Parent" context="{'group_by': 'parent_id'}" />
+                    </group> -->
+                </search>
+            </field>
+        </record>
+        <record id="action_sun_form" model="ir.actions.act_window">
+            <field name="name">SUN-koder</field>
+            <field name="type">ir.actions.act_window</field>
+            <field name="res_model">res.sun</field>
+            <field name="view_type">form</field>
+            <field name="view_mode">tree,form</field>
+            <field name="view_id" ref="res_sun.view_sun_tree" />
+            <field name="context">{}</field>
+            <field name="search_view_id" ref="view_sun_filter" />
+        </record>
+        <menuitem id="menu_sun_form" parent="contacts.res_partner_menu_config" action="action_sun_form" sequence="50" />
+    </data>
+</odoo>

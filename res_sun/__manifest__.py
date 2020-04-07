@@ -1,8 +1,8 @@
 # -*- coding: utf-8 -*-
 ##############################################################################
 #
-#    Odoo, Open Source Management Solution, third party addon
-#    Copyright (C) 2004-2019 Vertel AB (<http://vertel.se>).
+#    OpenERP, Open Source Management Solution, third party addon
+#    Copyright (C) 2004-2017 Vertel AB (<http://vertel.se>).
 #
 #    This program is free software: you can redistribute it and/or modify
 #    it under the terms of the GNU Affero General Public License as
@@ -20,21 +20,25 @@
 ##############################################################################
 
 {
-    'name': 'Partner employee 360 view',
-    'version': '12.0.0.1.3',
+    'name': 'Res SUN',
+    'version': '12.0.1.1',
     'category': '',
     'description': """
-Module for employee 360 view
-================================================================================================
-This module alters, adds, removes and shuffles around fields in the partner view AFC-102, 103, 140, 183, 192
+SUN
+==============================================
+AFC-191
+
+
 """,
     'author': 'Vertel AB',
-    'license': 'AGPL-3',
     'website': 'http://www.vertel.se',
     'depends': ['base',],
     'data': [
-			'views/res_partner.xml'
+        'views/res_partner_view.xml',
+        'security/ir.model.access.csv', 
+        'views/res_sun_view.xml'
         ],
     'application': False,
     'installable': True,
 }
+# vim:expandtab:smartindent:tabstop=4s:softtabstop=4:shiftwidth=4:
