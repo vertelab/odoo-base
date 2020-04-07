@@ -48,6 +48,18 @@ class ResPartnerKpi(models.Model):
     employee_change = fields.Integer(string="Change")
     employee_change_percent = fields.Integer(string="Change %")
     
+    @api.one
+    def compute_profit_percent(self):
+        profit_decimal = (float(self.profit) / self.turnover)
+        if profit_decimal > 1:
+            profit_decimal = profit_decimal -1
+        else:
+            profit_decimal = 1 - profit_decimal
 
+        profit_decimal = profit_decimal * 100
+        profit_decimal = round(profit_decimal, 0)
+        self.profit_percent = int(profit_decimal)
 
+            
+        
     
