@@ -49,3 +49,12 @@ class ResPartner(models.Model):
     is_independent_partner = fields.Boolean(string="Independent partner")
     is_government = fields.Boolean(string="Government")
     is_employer = fields.Boolean(string="Employer")
+
+    jobseeker_category = fields.Char(string="Jobseeker category") #egen modell?
+    jobseeker_since = fields.Datetime(string="Since")
+    jobseeker_work = fields.Boolean(string="Work")
+    deactualization_date = fields.Datetime(string="Date")
+    deactualization_reason = fields.Char(string="Reason") #egen modell?
+    foreign_country_of_work = fields.Char(string="If working in foreign country")
+    deactualization_message = fields.Text(string="Message to jobseeker regarding deactualization")
+
