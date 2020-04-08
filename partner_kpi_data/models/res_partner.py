@@ -41,7 +41,7 @@ class ResPartnerKpi(models.Model):
     turnover_change = fields.Integer(string="Change")
     turnover_change_percent = fields.Integer(string="Change %")
     profit = fields.Integer(string="Profit")
-    profit_percent = fields.Integer(string="Profit %") #profit/turnover
+    profit_percent = fields.Integer(compute="compute_profit_percent") #profit/turnover
     profit_change = fields.Integer(string="Change")
     profit_change_percent = fields.Integer(string="Change %")
     employees = fields.Integer(string="Employees")
@@ -55,10 +55,16 @@ class ResPartnerKpi(models.Model):
             profit_decimal = profit_decimal -1
         else:
             profit_decimal = 1 - profit_decimal
+            profit_decimal = profit_decimal * -1
 
         profit_decimal = profit_decimal * 100
         profit_decimal = round(profit_decimal, 0)
         self.profit_percent = int(profit_decimal)
+    
+    @api.one
+    def compute_turnover_change(self):
+        previous_turnover = self.env['res.partner'].search([('turnover', '<', self.turnover)], order='turnover DESC', limit=1)
+        self.turnover_change = self.turnover - previous_turnover
 
             
         
