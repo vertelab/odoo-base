@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 ##############################################################################
 #
-#    Odoo, Open Source Management Solution, third party addon
+#    OpenERP, Open Source Management Solution, third party addon
 #    Copyright (C) 2004-2019 Vertel AB (<http://vertel.se>).
 #
 #    This program is free software: you can redistribute it and/or modify
@@ -18,23 +18,16 @@
 #    along with this program.  If not, see <http://www.gnu.org/licenses/>.
 #
 ##############################################################################
+from odoo import models, fields, api, _
+import logging
+_logger = logging.getLogger(__name__)
 
-{
-    'name': 'Partner employee 360 view',
-    'version': '12.0.0.1.3',
-    'category': '',
-    'description': """
-Module for employee 360 view
-================================================================================================
-This module alters, adds, removes and shuffles around fields in the partner view AFC-102, 103, 140, 183, 192
-""",
-    'author': 'Vertel AB',
-    'license': 'AGPL-3',
-    'website': 'http://www.vertel.se',
-    'depends': ['base',],
-    'data': [
-			'views/res_partner.xml'
-        ],
-    'application': False,
-    'installable': True,
-}
+class ResDriversLicense(models.Model): 
+    _name = 'res.drivers_license'
+
+    partner_id = fields.One2many(comodel_name="res.partner", inverse_name="drivers_license_id")
+    
+    name = fields.Char(string='Class', required=True) #A,B etc.
+    description = fields.Char(string='Description')
+
+
