@@ -38,7 +38,7 @@ class ResPartnerKpi(models.Model):
     #name = fields.Char(string="", help="", required=True)
     fiscal_year = fields.Datetime(string="Fiscal year")
     turnover = fields.Integer(string="Turnover")
-    turnover_change = fields.Integer(string="Change")
+    turnover_change = fields.Integer(compute="compute_turnover_change")
     turnover_change_percent = fields.Integer(string="Change %")
     profit = fields.Integer(string="Profit")
     profit_percent = fields.Integer(compute="compute_profit_percent") #profit/turnover
@@ -50,21 +50,51 @@ class ResPartnerKpi(models.Model):
     
     @api.one
     def compute_profit_percent(self):
-        profit_decimal = (float(self.profit) / self.turnover)
-        if profit_decimal > 1:
-            profit_decimal = profit_decimal -1
+        decimal = (float(self.profit) / self.turnover)
+        if decimal > 1:
+            decimal = decimal -1
         else:
-            profit_decimal = 1 - profit_decimal
-            profit_decimal = profit_decimal * -1
+            decimal = 1 - decimal
+            decimal = decimal * -1
 
-        profit_decimal = profit_decimal * 100
-        profit_decimal = round(profit_decimal, 0)
-        self.profit_percent = int(profit_decimal)
+        decimal = decimal * 100
+        decimal = round(decimal, 0)
+        self.profit_percent = int(decimal)
     
     @api.one
     def compute_turnover_change(self):
-        previous_turnover = self.env['res.partner'].search([('turnover', '<', self.turnover)], order='turnover DESC', limit=1)
-        self.turnover_change = self.turnover - previous_turnover
+        previous = self.env['res.partner.kpi'].search([('turnover', '<', self.turnover)], order='fiscal_year DESC', limit=1)
+        self.turnover_change = self.turnover - previous.turnover
+    @api.one
+    def compute_profit_change(self):
+        previous = self.env['res.partner.kpi'].search([('profit', '<', self.profit)], order='fiscal_year DESC', limit=1)
+        self.profit_change = self.profit - previous.profit
+    @api.one
+    def compute_employees_change(self):
+        previous = self.env['res.partner.kpi'].search([('employees', '<', self.employees)], order='fiscal_year DESC', limit=1)
+        self.employees_change = self.employees - previous.employees
+    
+    @api.one
+    def compute_turnover_change_percent(self):
+        decimal = (float(self.turnover_change) / self.turnover)
+        decimal = decimal * 100
+        decimal = round(decimal, 0)
+        self.turnover_change_percent = int(decimal)
+    
+    @api.one
+    def compute_profit_change_percent(self):
+        decimal = (float(self.profit_change) / self.profit)
+        decimal = decimal * 100
+        decimal = round(decimal, 0)
+        self.profit_change_percent = int(decimal)
+    
+    @api.one
+    def compute_employees_change_percent(self):
+        decimal = (float(self.profit) / self.turnover)
+        decimal = decimal * 100
+        decimal = round(decimal, 0)
+        self.employees_change_percent = int(decimal)
+    
 
             
         

@@ -10,7 +10,7 @@
                 <page string="KPI">
                     <group>
                       <field name="kpi_ids" mode="tree" nolabel="1">
-                        <tree editable="bottom" string="KPI" >
+                        <tree editable="bottom" string="KPI" default_order="fiscal_year desc">
                            
                            <field name="fiscal_year" widget="date"/>  
                             <field name="turnover" />    
