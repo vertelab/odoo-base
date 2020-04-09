@@ -21,12 +21,12 @@
 
 {
     'name': 'Partner desired jobs',
-    'version': '0.3',
+    'version': '12.0.1.4',
     'category': '',
     'description': """
 Module to see which jobs a jobseeking partner desires
 ================================================================================================
-AFC-169
+AFC-168
 """,
     'author': 'Vertel AB',
     'license': 'AGPL-3',
@@ -38,6 +38,7 @@ AFC-169
     ], 
     'data': [
 			'views/res_partner.xml',
+            'views/desired_jobs.xml',
             'security/ir.model.access.csv'
         ],
     'application': False,

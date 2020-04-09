@@ -2,7 +2,9 @@
 <odoo>
     
   <record id="view_partner_form_employee360" model="ir.ui.view">
+
     <field name="name">res.partner.employee360.form</field>
+
     <field name="model">res.partner</field> 
     <field name="inherit_id" ref="base.view_partner_form" />
     <field name="arch" type="xml"> 
@@ -27,7 +29,7 @@
         <label for="org_or_social_sec_nr" string="Organization number" attrs="{'invisible':[('is_company', '=', False)]}"/>
         <label for="org_or_social_sec_nr" string="Social security number" attrs="{'invisible':[('is_company', '=', True)]}"/>
         </span> -->
-        <field name="org_or_social_sec_nr" nolabel="0"/> 
+        <field name="company_registry" /> 
         <field name="cfar" attrs="{'invisible':[('is_company', '=', False)]}"/>
       </field>
     
@@ -38,16 +40,14 @@
         <field name="is_independent_partner" />
         <field name="is_government" />
         <field name="is_employer" />
+        <field name="type"/>
       </field>
       <!-- endast för om is_customer är true-->
       <field name="vat" position="after">
-        <field name="customer_nr" attrs="{'invisible':[('customer', '=', False)]}"/> 
+        <field name="customer_id" attrs="{'invisible':[('customer', '=', False)]}"/> 
         <field name="office_code" attrs="{'invisible':[('type', '!=', 'af office')]}"/>
       </field>
       <field name="vat" position="attributes">
-        <attribute name="invisible">1</attribute>
-      </field>
-      <field name="image" position="attributes">
         <attribute name="invisible">1</attribute>
       </field>
       <field name="barcode" position="attributes"> 
@@ -73,24 +73,24 @@
   </record>
 -->
   <record id="view_partner_tree_employee360" model="ir.ui.view"> 
-    <field name="name">res.partner.tree.inherit.employee360</field> 
+    <field name="name">res.partner.tree.inherit.employee360.view</field>      
     <field name="model">res.partner</field> 
     <field name="inherit_id" ref="base.view_partner_tree" /> 
     <field name="arch" type="xml"> 
       <xpath expr="/tree" position="inside">
-        <field name="customer_nr"/>
+        <field name="customer_id"/>
       </xpath>
     </field>
   </record>
 
 
   <record id="view_partner_select_employee360" model="ir.ui.view"> 
-    <field name="name">res.partner.select.inherit.employee360</field> 
+    <field name="name">res.partner.select.inherit.employee360.view</field>           
     <field name="model">res.partner</field> 
     <field name="inherit_id" ref="base.view_res_partner_filter" /> 
     <field name="arch" type="xml"> 
       <xpath expr="//field[@name='user_id']" position="after"> 
-        <field name="customer_nr" />         <!-- filter_domain="[('customer','=',True), ('parent_id', '=', False)]" --> <!-- kommenterad för att jag inte har någon customer, behöver testas -->
+        <field name="customer_id" />         <!-- filter_domain="[('customer','=',True), ('parent_id', '=', False)]" --> <!-- kommenterad för att jag inte har någon customer, behöver testas -->
         <filter string="Job seekers" name="is_jobseeker" domain="[('is_jobseeker','=',True)]"/> 
         <filter string="Employers" name="is_employer" domain="[('is_employer','=',True)]"/>
         <filter string="Government body" name="is_government" domain="[('is_government','=',True)]"/>
