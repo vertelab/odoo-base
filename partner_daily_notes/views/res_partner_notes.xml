@@ -22,6 +22,7 @@
             <field name="model">res.partner.notes</field>
             <field name="arch" type="xml">
                 <tree editable="bottom" string="Notes" default_order="note_date">
+                    <field name="partner_id"/>
                     <field name="name" />    
                     <field name="note"/>
                     <field name="note_date" widget="date"/> 
@@ -59,7 +60,7 @@
             <field name="res_model">res.partner.notes</field>
             <field name="view_type">form</field>
             <field name="view_mode">tree,form</field>
-            <field name="view_id" ref="res_partner_notes.view_partner_notes_tree" />
+            <field name="view_id" ref="partner_daily_notes.view_partner_notes_tree" />
             <field name="context">{}</field>
             <!-- <field name="search_view_id" ref="res_view_partner_notes_filter" /> -->
         </record> 
@@ -70,7 +71,7 @@
             <field name="res_model">res.partner.note.type</field>
             <field name="view_type">form</field>
             <field name="view_mode">tree,form</field>
-            <field name="view_id" ref="res_partner_notes.view_partner_note_type_tree" />
+            <field name="view_id" ref="partner_daily_notes.view_partner_note_type_tree" />
             <field name="context">{}</field>
             <!-- <field name="search_view_id" ref="res_view_partner_notes_filter" /> -->
         </record> 
