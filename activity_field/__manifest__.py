@@ -21,7 +21,7 @@
 
 {
     'name': 'Activity Tab',
-    'version': '12.0.1.2',						# Format 12.0.1.0, för att vi använder Odoo 12
+    'version': '12.0.1.3',						# Format 12.0.1.0, för att vi använder Odoo 12
     'category': '',
     'description': """
 This module adds adds a tab with different activities 
@@ -31,7 +31,7 @@ AFC-130
     'author': 'Vertel AB',
     'license': 'AGPL-3',
     'website': 'http://www.vertel.se',
-    'depends': ['base','website_event', 'event'],
+    'depends': ['base','website_event', 'event', 'partner_employee360'],
     'data': [
 			'views/res_partner.xml',
             'security/ir.model.access.csv'
