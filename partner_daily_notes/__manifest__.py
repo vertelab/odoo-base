@@ -20,22 +20,30 @@
 ##############################################################################
 
 {
-    'name': 'Activity Tab',
-    'version': '12.0.1.3',						# Format 12.0.1.0, för att vi använder Odoo 12
+    'name': 'Daily notes',
+    'version': '12.0.1.3',
     'category': '',
     'description': """
-This module adds adds a tab with different activities 
-===========================================================
-AFC-130
+Daily notes
+===============================================================================
+AFC-81
+This module allowes daily notes for a partner.
+- 12.0.1.1  Added mapping for Integration platform with the module base_map.
 """,
     'author': 'Vertel AB',
     'license': 'AGPL-3',
     'website': 'http://www.vertel.se',
-    'depends': ['base','website_event', 'event', 'partner_employee360'],
+    'depends': [
+        'base',
+        'base_map'
+    ],
     'data': [
 			'views/res_partner.xml',
-            'security/ir.model.access.csv'
+            'security/ir.model.access.csv',
+            'views/res_partner_notes.xml'
+            #'data/ir.model.fields.csv',			
         ],
     'application': False,
     'installable': True,
 }
+# vim:expandtab:smartindent:tabstop=4s:softtabstop=4:shiftwidth=4:
