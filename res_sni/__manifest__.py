@@ -53,7 +53,7 @@ v12.0.0.2 Added automatic install of the codes.
         'views/res_partner_view.xml',
         'security/ir.model.access.csv', 
         'views/res_sni_view.xml',
-		'data/res_sni.csv',
+		#'data/res_sni.csv',
         ],
     'application': False,
     'installable': True,
