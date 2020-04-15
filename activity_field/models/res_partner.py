@@ -67,7 +67,7 @@ class ResPartnerActivityType(models.Model):
     activity_id = fields.One2many(comodel_name="res.partner.activity", inverse_name="meeting_type")
     name = fields.Char(string="Meeting type", help="")
     description = fields.Char(string="Description", help="")
-
+    parent_id = fields.Many2one(comodel_name='res.partner.activity.type', string='Parent')
     #more fields?
 
 
