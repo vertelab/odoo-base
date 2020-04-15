@@ -59,7 +59,7 @@ class ResPartner(models.Model):
             'domain':[('partner_id', '=', self.ids)],
             'view_type': 'form',
             'res_model': 'res.partner.notes',
-            'view_id':  'partner_daily_notes.action_partner_notes_tree_button',
+            'view_id': self.env.ref('partner_daily_notes.view_partner_notes_tree_button').id, #self.env['ir.model.data'].get_object_reference('partner_daily_notes','view_partner_notes_tree_button'),
             'view_mode': 'tree', 
             'type': 'ir.actions.act_window',
         }
