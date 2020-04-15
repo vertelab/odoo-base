@@ -7,13 +7,17 @@
             <field name="model">res.partner</field>
             <field name="inherit_id" ref="base.view_partner_form" />
             <field name="arch" type="xml">
-                <xpath expr="//page[@name='sales_purchases']/group/group/field[@name='supplier']" position="after">
-                    <group attrs="{'invisible':[('customer', '=', False)]}">
-                        <field name="has_drivers_license"/>
-                        <field name="drivers_license_id" options="{'no_create_edit': True}"/> 
-                        <field name="has_car"/>
-                    </group>
-                </xpath>
+                <xpath expr="//page[@name='sales_purchases']" position="after" attrs="{'invisible':[('is_jobseeker', '=', False)]}">
+                    <page string="Drivers License">
+                        <group>
+                            <group>
+                                <field name="has_drivers_license"/>
+                                <field name="drivers_license_id" options="{'no_create_edit': True}"/> 
+                                <field name="has_car"/>
+                            </group>
+                        </group>
+                    </page>
+                </xpath> 
             </field>
         </record>
     </data>
