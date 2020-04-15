@@ -13,9 +13,13 @@
                            <field name="name" />    
                             <field name="meeting_type" />
                             <field name="start_date"/>
+                            <field name="done_before_date" />    
                             <field name="duration" widget="timesheet_uom"/> 
                             <field name="notes"/> 
                             <field name="location"/>  
+                            <field name="mandatory" />    
+                           <field name="done" />    
+
                         </tree>
                       </field>   
                     </group>
@@ -46,9 +50,12 @@
                 <field name="name" />    
                 <field name="meeting_type" />
                 <field name="start_date"/>
+                <field name="done_before_date" />    
                 <field name="duration" widget="timesheet_uom"/> 
                 <field name="notes"/> 
                 <field name="location"/>  
+                <field name="mandatory" />    
+                <field name="done" />  
             </tree>
         </field>
     </record>

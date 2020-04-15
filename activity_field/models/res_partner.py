@@ -51,12 +51,15 @@ class ResPartnerActivity(models.Model):
     _name="res.partner.activity"
     
     partner_id = fields.Many2one(comodel_name="res.partner")
-    name = fields.Char(string="Subject", help="", required=True)
+    name = fields.Char(string="Activity Description", help="", required=True)
     meeting_type = fields.Many2one(comodel_name="res.partner.activity.type") #gör till lista, gör att auto_digital_dialogue tar inskrivningsdatum från en meeting type = "inskrivning"
     start_date = fields.Datetime(string="Start date", help="", required=True)
+    done_before_date = fields.Datetime(string="Done before date")
     duration = fields.Float(string="Duration", help="")
     notes = fields.Char(string="Notes", help="")
     location = fields.Many2one('res.partner', related="partner_id.office", string="Location")
+    mandatory = fields.Boolean(string="Mandatory")
+    done = fields.Boolean(string="Done")
 
 class ResPartnerActivityType(models.Model):
     _name="res.partner.activity.type"
