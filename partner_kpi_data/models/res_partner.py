@@ -47,6 +47,19 @@ class ResPartnerKpi(models.Model):
     employees = fields.Integer(string="Employees")
     employee_change = fields.Integer(string="Change")
     employee_change_percent = fields.Integer(string="Change %")
+    size = fields.Selection(selection=[
+    ('1', 'Class 1'), 
+    ('2', 'Class 2'), 
+    ('3', 'Class 3'), 
+    ('4', 'Class 4'), 
+    ('5', 'Class 5'),
+    ('6', 'Class 6'),
+    ('7', 'Class 7'),
+    ('8', 'Class 8'),
+    ('9', 'Class 9')], 
+    string='Size class', 
+    default='1', 
+    help="Size class")
     
     @api.one
     def compute_profit_percent(self):
