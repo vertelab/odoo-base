@@ -10,16 +10,16 @@
                     <group>
                       <field name="activities_ids" mode="tree" nolabel="1">
                         <tree editable="bottom" string="Timesheet Activities" default_order="start_date">
-                           <field name="name" />    
-                            <field name="meeting_type" />
-                            <field name="start_date"/>
-                            <field name="done_before_date" />    
-                            <field name="duration" widget="timesheet_uom"/> 
+                           <!-- <field name="name" />     -->
+                            <field name="meeting_type"/>
+                            <field name="meeting_type_parent"/>
+                            <field name="start_date" widget="date"/>
+                            <field name="done_before_date" widget="date"/>    
+                            <field name="duration" widget="timesheet_uom" groups="base.group_no_one"/> 
                             <field name="notes"/> 
                             <field name="location"/>  
                             <field name="mandatory" />    
                            <field name="done" />    
-
                         </tree>
                       </field>   
                     </group>
@@ -48,10 +48,11 @@
             <tree editable="bottom" string="Timesheet Activities" default_order="start_date">
                 <field name="partner_id" groups="base.group_no_one"/>
                 <field name="name" />    
-                <field name="meeting_type" />
-                <field name="start_date"/>
-                <field name="done_before_date" />    
-                <field name="duration" widget="timesheet_uom"/> 
+                <field name="meeting_type"/>
+                <field name="meeting_type_parent"/>
+                <field name="start_date" widget="date"/>
+                <field name="done_before_date" widget="date"/>    
+                <field name="duration" widget="timesheet_uom" groups="base.group_no_one"/> 
                 <field name="notes"/> 
                 <field name="location"/>  
                 <field name="mandatory" />    
@@ -86,11 +87,11 @@
         <field name="name">activity.calendar</field> 
         <field name="model">res.partner.activity</field> 
         <field name="arch" type="xml">           
-            <calendar string="Appointments" date_start="start_date"  date_delay="duration"> <!-- date_stop="stop" = start+duration? -->
+            <calendar string="Appointments" date_start="start_date"  date_delay="duration"> <!-- date_stop="stop" = start+duration?  -->
                 <field name="name"/>
             </calendar>
         </field>
-    </record>
+    </record> 
 
      <record id="action_view_view_activity_tree" model="ir.actions.act_window.view">
         <field name="act_window_id" ref="action_activities"/>
@@ -135,9 +136,10 @@
         <field name="model">res.partner.activity.type</field> 
         <field name="arch" type="xml">           
             <tree editable="bottom" string="Activity types" default_order="activity_id">
+                <field name="parent_id"/>   
                 <field name="name" />   
                 <field name="description"/>
-                <field name="activity_id" widget="many2many_tags" readonly="True"/>   <!-- Maybe not optimal, looks nice though-->
+                <!-- <field name="activity_id" widget="many2many_tags" readonly="True"/>  -->
             </tree>
         </field>
     </record>
@@ -155,7 +157,8 @@
                     </div>
                     <group>
                         <group>
-                            <field name="description"/>   
+                            <field name="description"/>
+                            <field name="parent_id"/>   
                         </group>
                     </group>
                 </sheet>
