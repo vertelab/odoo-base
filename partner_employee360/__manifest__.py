@@ -21,12 +21,13 @@
 
 {
     'name': 'Partner employee 360 view',
-    'version': '12.0.0.1.3',
+    'version': '12.0.0.1.5',
     'category': '',
     'description': """
 Module for employee 360 view
 ================================================================================================
-This module alters, adds, removes and shuffles around fields in the partner view AFC-102, 103, 140, 183, 192
+This module alters, adds, removes and shuffles around fields in the partner view 
+AFC-102, 103, 140, 183, 192, 213, 210
 """,
     'author': 'Vertel AB',
     'license': 'AGPL-3',

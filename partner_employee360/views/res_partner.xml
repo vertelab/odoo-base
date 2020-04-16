@@ -50,14 +50,29 @@
       <field name="vat" position="attributes">
         <attribute name="invisible">1</attribute>
       </field>
-      <field name="image" position="attributes">
-        <attribute name="invisible">1</attribute>
-      </field>
       <field name="barcode" position="attributes"> 
         <attribute name="invisible">1</attribute>
       </field>
+       <xpath expr="//page[@name='internal_notes']" position="after" attrs="{'invisible':[('is_jobseeker', '=', False)]}">
+                <page string="Jobseeker info">
+                    <group>
+                    <group>
+                      <field name="jobseeker_category" /> 
+                      <field name="jobseeker_since" /> 
+                      <field name="jobseeker_work" /> 
+                    </group>   
+                    <group>
+                      <field name="deactualization_date" />    
+                      <field name="deactualization_reason" />    
+                      <field name="foreign_country_of_work" /> 
+                      <field name="deactualization_message" />   
+                    </group>   
+                    </group>
+                </page>
+            </xpath>
     </field>
   </record>
+
 
  <!-- endast när account är installerad
    <record id="view_partner_property_form_employee360" model="ir.ui.view"> 
@@ -144,5 +159,44 @@
 
 
 
+<record id="action_jobseekers" model="ir.actions.act_window">
+        <field name="name">Jobseekers</field>
+        <field name="type">ir.actions.act_window</field>
+        <field name="res_model">res.partner</field>
+        <field name="view_type">form</field>
+        <field name="view_mode">kanban,tree,form,activity</field>
+        <field name="search_view_id" ref="base.view_res_partner_filter"/>
+        <field name="help" type="html">
+          <p class="o_view_nocontent_smiling_face">
+            Create a jobseeker in your address book
+          </p>
+        </field>
+        <field name="domain" eval="[('is_jobseeker', '=', True)]"/>
+    </record>
+
+  <menuitem id="jobseekers_root"
+        name="Jobseekers"
+        action="action_jobseekers"
+        sequence="4"/>
+
+  <record id="action_employers" model="ir.actions.act_window">
+    <field name="name">Employers</field>
+    <field name="type">ir.actions.act_window</field>
+    <field name="res_model">res.partner</field>
+    <field name="view_type">form</field>
+    <field name="view_mode">kanban,tree,form,activity</field>
+    <field name="search_view_id" ref="base.view_res_partner_filter"/>
+    <field name="help" type="html">
+      <p class="o_view_nocontent_smiling_face">
+        Create an employer in your address book
+      </p>
+    </field>
+    <field name="domain" eval="[('is_employer', '=', True)]"/>
+  </record>
+
+  <menuitem id="employers_root"
+        name="Employers"
+        action="action_employers"
+        sequence="4"/>
 
 </odoo>
