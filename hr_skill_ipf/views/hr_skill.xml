@@ -3,17 +3,14 @@
     
         
     <record id="view_employee_skill_form" model="ir.ui.view">
-        <field name="name">hr.employee.skill.form.inherit.ipf</field>
-        <field name="model">hr.employee</field>
-        <field name="inherit_id" ref="hr_skill.view_employee_skill_form" />
+        <field name="name">hr.skill.form.inherit.ipf</field>
+        <field name="model">hr.skill</field>
+        <field name="inherit_id" ref="hr_skill.view_skill_form" />
         <field name="type">form</field>
         <field name="arch" type="xml">
-        
-            <field name="level" position="after">
+            <field name="color" position="after">
                 <field name="ipf"/>
             </field>
-        
         </field>
     </record>
-        
 </odoo>

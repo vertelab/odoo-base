@@ -23,6 +23,6 @@ import logging
 _logger = logging.getLogger(__name__)
 
 class HrSkill(models.Model):
-    _inherit = 'hr.skill'
+    _inherit = "hr.skill"
 
     ipf = fields.Char(string="IPF nummer")
