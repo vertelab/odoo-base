@@ -53,8 +53,26 @@
       <field name="barcode" position="attributes"> 
         <attribute name="invisible">1</attribute>
       </field>
+       <xpath expr="//page[@name='internal_notes']" position="after" attrs="{'invisible':[('is_jobseeker', '=', False)]}">
+                <page string="Jobseeker info">
+                    <group>
+                    <group>
+                      <field name="jobseeker_category" /> 
+                      <field name="jobseeker_since" /> 
+                      <field name="jobseeker_work" /> 
+                    </group>   
+                    <group>
+                      <field name="deactualization_date" />    
+                      <field name="deactualization_reason" />    
+                      <field name="foreign_country_of_work" /> 
+                      <field name="deactualization_message" />   
+                    </group>   
+                    </group>
+                </page>
+            </xpath>
     </field>
   </record>
+
 
  <!-- endast när account är installerad
    <record id="view_partner_property_form_employee360" model="ir.ui.view"> 
