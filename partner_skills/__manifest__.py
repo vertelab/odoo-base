@@ -27,13 +27,14 @@
 Adds skills to the partner view
 ================================================================================================
 Gets skills from hr_skill
+AFC-106
 """,
     'author': 'Vertel AB',
     'license': 'AGPL-3',
     'website': 'http://www.vertel.se',
     'depends': ['base', 'hr_skill'],
     'data': [
-			'views/res_partner.xml'
+			'views/res_partner_view.xml'
         ],
     'application': False,
     'installable': True,
