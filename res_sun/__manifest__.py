@@ -36,7 +36,8 @@ AFC-191, 209
     'data': [
         'views/res_partner_view.xml',
         'security/ir.model.access.csv', 
-        'views/res_sun_view.xml'
+        'views/res_sun_view.xml',
+        'data/res.sun.py'
         ],
     'application': False,
     'installable': True,
