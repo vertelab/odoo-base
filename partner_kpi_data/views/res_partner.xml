@@ -21,8 +21,8 @@
                             <field name="profit_change" />    
                             <field name="profit_change_percent" />    
                             <field name="employees" />    
-                            <field name="employee_change" />    
-                            <field name="employee_change_percent" />    
+                            <field name="employees_change" />    
+                            <field name="employees_change_percent" />    
                         </tree>
                       </field>   
                     </group>
@@ -55,8 +55,8 @@
                     <field name="profit_change" />    
                     <field name="profit_change_percent" />    
                     <field name="employees" />    
-                    <field name="employee_change" />    
-                    <field name="employee_change_percent" />    
+                    <field name="employees_change" />    
+                    <field name="employees_change_percent" />    
             </tree>
         </field>
     </record>
