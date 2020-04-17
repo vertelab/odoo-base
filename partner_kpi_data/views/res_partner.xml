@@ -10,9 +10,9 @@
                 <page string="KPI">
                     <group>
                       <field name="kpi_ids" mode="tree" nolabel="1">
-                        <tree editable="bottom" string="KPI" >
-                           
-                           <field name="fiscal_year" widget="date"/>  
+                        <tree editable="bottom" string="KPI" default_order="fiscal_year desc"> 
+                            <field name="fiscal_year" widget="date"/>  
+                            <field name="size"/>
                             <field name="turnover" />    
                             <field name="turnover_change" />    
                             <field name="turnover_change_percent" />    
@@ -21,10 +21,8 @@
                             <field name="profit_change" />    
                             <field name="profit_change_percent" />    
                             <field name="employees" />    
-                            <field name="employee_change" />    
-                            <field name="employee_change_percent" />    
-
-                          
+                            <field name="employees_change" />    
+                            <field name="employees_change_percent" />    
                         </tree>
                       </field>   
                     </group>
@@ -47,19 +45,18 @@
         <field name="arch" type="xml">           
             <tree editable="bottom" string="KPI">
                 <field name="partner_id" groups="base.group_no_one"/>
-                   <field name="fiscal_year" />  
-                            <field name="turnover" />    
-                            <field name="turnover_change" />    
-                            <field name="turnover_change_percent" />    
-                            <field name="profit" />    
-                            <field name="profit_percent" />    
-                            <field name="profit_change" />    
-                            <field name="profit_change_percent" />    
-                            <field name="employees" />    
-                            <field name="employee_change" />    
-                            <field name="employee_change_percent" />    
-
-
+                    <field name="fiscal_year" />  
+                    <field name="size"/>
+                    <field name="turnover" />    
+                    <field name="turnover_change" />    
+                    <field name="turnover_change_percent" />    
+                    <field name="profit" />    
+                    <field name="profit_percent" />    
+                    <field name="profit_change" />    
+                    <field name="profit_change_percent" />    
+                    <field name="employees" />    
+                    <field name="employees_change" />    
+                    <field name="employees_change_percent" />    
             </tree>
         </field>
     </record>
