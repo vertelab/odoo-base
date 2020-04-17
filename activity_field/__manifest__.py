@@ -26,14 +26,14 @@
     'description': """
 This module adds adds a tab for managing jobseeker activities
 ===============================================================
-AFC-130 DEPRECATED
+AFC-130
 """,
     'author': 'Vertel AB',
     'license': 'AGPL-3',
     'website': 'http://www.vertel.se',
     'depends': ['base', 'partner_employee360'],
     'data': [
-			'views/res_partner.xml',
+			'views/res_partner_view.xml',
             'security/ir.model.access.csv'
         ],
     'application': False,
