@@ -38,16 +38,85 @@ class ResPartnerKpi(models.Model):
     #name = fields.Char(string="", help="", required=True)
     fiscal_year = fields.Datetime(string="Fiscal year")
     turnover = fields.Integer(string="Turnover")
-    turnover_change = fields.Integer(string="Change")
-    turnover_change_percent = fields.Integer(string="Change %")
+    turnover_change = fields.Integer(compute="compute_change")
+    turnover_change_percent = fields.Integer(compute="compute_turnover_change_percent")
     profit = fields.Integer(string="Profit")
-    profit_percent = fields.Integer(string="Profit %") #profit/turnover
-    profit_change = fields.Integer(string="Change")
-    profit_change_percent = fields.Integer(string="Change %")
+    profit_percent = fields.Integer(compute="compute_profit_percent") #profit/turnover
+    profit_change = fields.Integer(compute="compute_change")
+    profit_change_percent = fields.Integer(compute="compute_profit_change_percent")
     employees = fields.Integer(string="Employees")
-    employee_change = fields.Integer(string="Change")
-    employee_change_percent = fields.Integer(string="Change %")
+    employees_change = fields.Integer(compute="compute_change")
+    employees_change_percent = fields.Integer(compute="compute_employees_change_percent")
+    size = fields.Selection(selection=[
+    ('1', 'Class 1'), 
+    ('2', 'Class 2'), 
+    ('3', 'Class 3'), 
+    ('4', 'Class 4'), 
+    ('5', 'Class 5'),
+    ('6', 'Class 6'),
+    ('7', 'Class 7'),
+    ('8', 'Class 8'),
+    ('9', 'Class 9')], 
+    string='Size class', 
+    default='1', 
+    help="Size class")
+    
+    @api.one
+    def compute_profit_percent(self):
+        decimal = (float(self.profit) / self.turnover)
+        if decimal > 1:
+            decimal = decimal -1
+        else:
+            decimal = 1 - decimal
+            decimal = decimal * -1
+
+        decimal = decimal * 100
+        decimal = round(decimal, 0)
+        self.profit_percent = int(decimal)
+    
+    @api.one
+    def compute_change(self):
+        previous = self.env['res.partner.kpi'].search([('fiscal_year', '<', self.fiscal_year)], order='fiscal_year DESC', limit=1)
+        self.turnover_change = self.turnover - previous.turnover
+        self.profit_change = self.profit - previous.profit
+        self.employees_change = self.employees - previous.employees
+    #@api.one
+    #def compute_profit_change(self):
+    #    previous = self.env['res.partner.kpi'].search([('fiscal_year', '<', self.fiscal_year)], order='fiscal_year DESC', limit=1)
+    #    self.profit_change = self.profit - previous.profit
+    #@api.one
+    #def compute_employees_change(self):
+    #    previous = self.env['res.partner.kpi'].search([('fiscal_year', '<', self.fiscal_year)], order='fiscal_year DESC', limit=1)
+    #    self.employees_change = self.employees - previous.employees
+    
+    @api.one
+    def compute_turnover_change_percent(self):
+        previous = self.env['res.partner.kpi'].search([('fiscal_year', '<', self.fiscal_year)], order='fiscal_year DESC', limit=1)
+        if previous.turnover != 0:
+            decimal = (float(self.turnover_change) / previous.turnover)
+            decimal = decimal * 100
+            decimal = round(decimal, 0)
+            self.turnover_change_percent = int(decimal)
+    
+    @api.one
+    def compute_profit_change_percent(self):
+        previous = self.env['res.partner.kpi'].search([('fiscal_year', '<', self.fiscal_year)], order='fiscal_year DESC', limit=1)
+        if previous.profit != 0:
+            decimal = (float(self.profit_change) / previous.profit)
+            decimal = decimal * 100
+            decimal = round(decimal, 0)
+            self.profit_change_percent = int(decimal)
+    
+    @api.one
+    def compute_employees_change_percent(self):
+        previous = self.env['res.partner.kpi'].search([('fiscal_year', '<', self.fiscal_year)], order='fiscal_year DESC', limit=1)
+        if previous.employees != 0:
+            decimal = (float(self.employees_change) / previous.employees)
+            decimal = decimal * 100
+            decimal = round(decimal, 0)
+            self.employees_change_percent = int(decimal)
     
 
-
+            
+        
     
