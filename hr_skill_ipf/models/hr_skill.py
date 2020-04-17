@@ -1,8 +1,8 @@
 # -*- coding: utf-8 -*-
 ##############################################################################
 #
-#    Odoo, Open Source Management Solution, third party addon
-#    Copyright (C) 2004-2019 Vertel AB (<http://vertel.se>).
+#    OpenERP, Open Source Management Solution, third party addon
+#    Copyright (C) 2004-2017 Vertel AB (<http://vertel.se>).
 #
 #    This program is free software: you can redistribute it and/or modify
 #    it under the terms of the GNU Affero General Public License as
@@ -18,24 +18,11 @@
 #    along with this program.  If not, see <http://www.gnu.org/licenses/>.
 #
 ##############################################################################
+from odoo import models, fields, api, _
+import logging
+_logger = logging.getLogger(__name__)
 
-{
-    'name': 'Cancel reason',
-    'version': '0.1',
-    'category': '',
-    'description': """
-Base mapping
-============
-This modules makes it possible to give a reason for cancellation of a meeting.
-""",
-    'author': 'Vertel AB',
-    'license': 'AGPL-3',
-    'website': 'http://www.vertel.se',
-    'depends': ['calendar',],
-    'data': [
-			 'views/calendar_event.xml',
-        ],
-    'application': False,
-    'installable': True,
-}
-# vim:expandtab:smartindent:tabstop=4s:softtabstop=4:shiftwidth=4:
+class HrSkill(models.Model):
+    _inherit = "hr.skill"
+
+    ipf = fields.Char(string="IPF nummer")

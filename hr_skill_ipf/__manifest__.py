@@ -1,8 +1,8 @@
 # -*- coding: utf-8 -*-
 ##############################################################################
 #
-#    Odoo, Open Source Management Solution, third party addon
-#    Copyright (C) 2004-2019 Vertel AB (<http://vertel.se>).
+#    OpenERP, Open Source Management Solution, third party addon
+#    Copyright (C) 2004-2017 Vertel AB (<http://vertel.se>).
 #
 #    This program is free software: you can redistribute it and/or modify
 #    it under the terms of the GNU Affero General Public License as
@@ -20,28 +20,20 @@
 ##############################################################################
 
 {
-    'name': 'Daily notes',
-    'version': '12.0.1.2',
+    'name': 'Skill IPF',
+    'version': '12.0.1.1',
     'category': '',
     'description': """
-Daily notes
-===============================================================================
-AFC-81
-This module allowes daily notes for a partner.
-- 12.0.1.1  Added mapping for Integration platform with the module base_map.
+Add ipf number field to hr_skill
+==============================================
+AFC-193
+
 """,
     'author': 'Vertel AB',
-    'license': 'AGPL-3',
     'website': 'http://www.vertel.se',
-    'depends': [
-        'base',
-        'base_map',
-	'partner_employee360',
-    ],
+    'depends': ['base','hr_skill','hr',],
     'data': [
-			'views/res_partner.xml',
-            'security/ir.model.access.csv',
-            #'data/ir.model.fields.csv',			
+        'views/hr_skill.xml', 
         ],
     'application': False,
     'installable': True,
