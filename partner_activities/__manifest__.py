@@ -26,7 +26,7 @@
     'description': """
 This module adds adds a tab for managing jobseeker activities
 ===============================================================
-AFC-130 DEPRECATED
+AFC-130
 """,
     'author': 'Vertel AB',
     'license': 'AGPL-3',
