@@ -21,7 +21,7 @@
 
 {
     'name': 'Partner skills',
-    'version': '0.1',
+    'version': '12.0.1.1',
     'category': '',
     'description': """
 Adds skills to the partner view
