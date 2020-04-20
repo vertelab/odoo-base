@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <odoo>
     <record id="view_partner_form" model="ir.ui.view"> 
-        <field name="name">res.partner.activity_field.form</field> 
+        <field name="name">res.partner.view.form.inherit.activity</field> 
         <field name="model">res.partner</field> 
         <field name="inherit_id" ref="base.view_partner_form" /> 
         <field name="arch" type="xml"> 
@@ -33,16 +33,16 @@
         </field>
      </record>
 
-    <record id="action_activities" model="ir.actions.act_window">
-        <field name="name">Activities.action</field>
+    <record id="action_partner_activity" model="ir.actions.act_window">
+        <field name="name">Activity Action</field>
         <field name="type">ir.actions.act_window</field>
         <field name="res_model">res.partner.activity</field>
         <field name="view_type">form</field>
         <field name="view_mode">tree,pivot,graph,calendar</field>
     </record> 
 
-    <record id="view_activity_tree" model="ir.ui.view"> 
-        <field name="name">activity.tree</field> 
+    <record id="view_partner_activity_tree" model="ir.ui.view"> 
+        <field name="name">res.partner.activity.view.tree</field> 
         <field name="model">res.partner.activity</field> 
         <field name="arch" type="xml">           
             <tree editable="bottom" string="Timesheet Activities" default_order="start_date">
@@ -61,8 +61,8 @@
         </field>
     </record>
 
-     <record id="view_activity_pivot" model="ir.ui.view"> 
-        <field name="name">activity.pivot</field> 
+     <record id="view_partner_activity_pivot" model="ir.ui.view"> 
+        <field name="name">res.partner.activity.view.pivot</field> 
         <field name="model">res.partner.activity</field> 
         <field name="arch" type="xml">           
             <pivot string="Activities">
@@ -72,8 +72,8 @@
         </field>
     </record>
 
-     <record id="view_activity_graph" model="ir.ui.view"> 
-        <field name="name">activity.graph</field> 
+     <record id="view_partner_activity_graph" model="ir.ui.view"> 
+        <field name="name">res.partner.activity.view.graph</field> 
         <field name="model">res.partner.activity</field> 
         <field name="arch" type="xml">           
             <graph string="Activities">
@@ -83,8 +83,8 @@
         </field>
     </record>
 
-     <record id="view_activity_calendar" model="ir.ui.view"> 
-        <field name="name">activity.calendar</field> 
+     <record id="view_partner_activity_calendar" model="ir.ui.view"> 
+        <field name="name">res.partner.activity.view.calendar</field> 
         <field name="model">res.partner.activity</field> 
         <field name="arch" type="xml">           
             <calendar string="Appointments" date_start="start_date"  date_delay="duration"> <!-- date_stop="stop" = start+duration?  -->
@@ -93,46 +93,46 @@
         </field>
     </record> 
 
-     <record id="action_view_view_activity_tree" model="ir.actions.act_window.view">
+     <record id="actio_view_partner_activity_tree" model="ir.actions.act_window.view">
         <field name="act_window_id" ref="action_activities"/>
         <field name="sequence" eval="1"/>
         <field name="view_mode">tree</field>
-        <field name="view_id" ref="view_activity_tree"/>
+        <field name="view_id" ref="view_partner_activity_tree"/>
     </record>    
 
-      <record id="action_view_view_activity_pivot" model="ir.actions.act_window.view">
+      <record id="action_view_partner_activity_pivot" model="ir.actions.act_window.view">
         <field name="act_window_id" ref="action_activities"/>
         <field name="sequence" eval="2"/>
         <field name="view_mode">pivot</field>
-        <field name="view_id" ref="view_activity_pivot"/>
+        <field name="view_id" ref="view_partner_activity_pivot"/>
     </record>    
 
-      <record id="action_view_view_activity_graph" model="ir.actions.act_window.view">
+      <record id="action_view_partner_activity_graph" model="ir.actions.act_window.view">
         <field name="act_window_id" ref="action_activities"/>
         <field name="sequence" eval="3"/>
         <field name="view_mode">graph</field>
-        <field name="view_id" ref="view_activity_graph"/>
+        <field name="view_id" ref="view_partner_activity_graph"/>
     </record> 
 
-      <record id="action_view_view_activity_calendar" model="ir.actions.act_window.view">
+      <record id="action_view_partner_activity_calendar" model="ir.actions.act_window.view">
         <field name="act_window_id" ref="action_activities"/>
         <field name="sequence" eval="4"/>
         <field name="view_mode">calendar</field>
-        <field name="view_id" ref="view_activity_calendar"/>
+        <field name="view_id" ref="view_partner_activity_calendar"/>
     </record>    
     
-    <menuitem id="activities_tree" name="Activities" parent="contacts.menu_contacts" action="action_activities"/> 
+    <menuitem id="partner_activity_menu" name="Activities" parent="contacts.menu_contacts" action="action_patner_activty"/> 
 
-    <record id="action_activity_types" model="ir.actions.act_window">
-        <field name="name">Activity.type.action</field>
+    <record id="action_partner_activity_type" model="ir.actions.act_window">
+        <field name="name">Activity Type Action</field>
         <field name="type">ir.actions.act_window</field>
         <field name="res_model">res.partner.activity.type</field>
         <field name="view_type">form</field>
         <field name="view_mode">tree,form</field>
     </record> 
 
-    <record id="view_activity_type_tree" model="ir.ui.view"> 
-        <field name="name">activity.type.tree</field> 
+    <record id="view_partner_activity_type_tree" model="ir.ui.view"> 
+        <field name="name">res.partner.activity.type.tree</field> 
         <field name="model">res.partner.activity.type</field> 
         <field name="arch" type="xml">           
             <tree editable="bottom" string="Activity types" default_order="activity_id">
@@ -144,8 +144,8 @@
         </field>
     </record>
 
-    <record id="view_activity_type_form" model="ir.ui.view"> 
-        <field name="name">activity.type.form</field> 
+    <record id="view_partner_activity_type_form" model="ir.ui.view"> 
+        <field name="name">res.partner.activity.type.form</field> 
         <field name="model">res.partner.activity.type</field> 
         <field name="arch" type="xml">           
             <form>
@@ -166,21 +166,21 @@
         </field>
     </record>
 
-    <record id="action_view_view_activity_type_tree" model="ir.actions.act_window.view">
+    <record id="action_view_partner_activity_type_tree" model="ir.actions.act_window.view">
         <field name="act_window_id" ref="action_activity_types"/>
         <field name="sequence" eval="1"/>
         <field name="view_mode">tree</field>
-        <field name="view_id" ref="view_activity_type_tree"/>
+        <field name="view_id" ref="view_partner_activity_type_tree"/>
     </record>  
 
-    <record id="action_view_view_activity_type_form" model="ir.actions.act_window.view">
+    <record id="action_view_partner_activity_type_form" model="ir.actions.act_window.view">
         <field name="act_window_id" ref="action_activity_types"/>
         <field name="sequence" eval="2"/>
         <field name="view_mode">form</field>
-        <field name="view_id" ref="view_activity_type_form"/>
+        <field name="view_id" ref="view_partner_activity_type_form"/>
     </record>  
 
-    <menuitem id="activities" name="Activity types" parent="contacts.res_partner_menu_config" action="action_activity_types"/> 
+    <menuitem id="partner_activity_type_menu" name="Activity types" parent="contacts.res_partner_menu_config" action="action_partner_activity_type"/> 
 
     <!-- 
         
