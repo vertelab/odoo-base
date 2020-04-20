@@ -18,7 +18,7 @@
             </field>
         </record> -->
         <record id="view_partner_notes_tree" model="ir.ui.view">
-            <field name="name">res.partner.notes.tree</field>
+            <field name="name">res.partner.notes.view.tree</field>
             <field name="model">res.partner.notes</field>
             <field name="arch" type="xml">
                 <tree editable="bottom" string="Notes" default_order="note_date">
@@ -34,11 +34,11 @@
         </record>
 
          <record id="view_partner_notes_tree_button" model="ir.ui.view">
-            <field name="name">res.partner.notes.tree.button</field>
+            <field name="name">res.partner.notes.view.tree.button</field>
             <field name="model">res.partner.notes</field>
             <field name="arch" type="xml">
                 <tree editable="bottom" string="Notes" default_order="note_date">
-                    <field name="name" />    
+                    <field name="name"/>    
                     <field name="note"/>
                     <field name="note_date" widget="date"/> 
                     <field name="note_type" options="{'no_create_edit': True}"/>
@@ -49,7 +49,7 @@
         </record>
 
           <record id="view_partner_note_type_tree" model="ir.ui.view">
-            <field name="name">res.partner.notes.tree</field>
+            <field name="name">res.partner.note.type.view.tree</field>
             <field name="model">res.partner.note.type</field>
             <field name="arch" type="xml">
                 <tree editable="bottom" string="Note types">
@@ -70,7 +70,7 @@
             </field>
         </record>  -->
         <record id="action_partner_notes_tree" model="ir.actions.act_window">
-            <field name="name">Daily notes</field>
+            <field name="name">Partner Daily Notes Action</field>
             <field name="type">ir.actions.act_window</field>
             <field name="res_model">res.partner.notes</field>
             <field name="view_type">form</field>
@@ -81,7 +81,7 @@
         </record> 
 
         <record id="action_partner_note_type_tree" model="ir.actions.act_window">
-            <field name="name">Note types</field>
+            <field name="name">Note Types Action</field>
             <field name="type">ir.actions.act_window</field>
             <field name="res_model">res.partner.note.type</field>
             <field name="view_type">form</field>
@@ -93,7 +93,7 @@
 
 
         
-        <menuitem id="menu_partner_note_type_tree" parent="contacts.res_partner_menu_config" action="action_partner_note_type_tree" sequence="50" />
-        <menuitem id="menu_partner_notes_tree" parent="contacts.menu_contacts" action="action_partner_notes_tree" sequence="50" />
+        <menuitem id="partner_note_type_menu_action" parent="contacts.res_partner_menu_config" action="action_partner_note_type_tree" sequence="50" />
+        <menuitem id="partner_notes_menu_action" parent="contacts.menu_contacts" action="action_partner_notes_tree" sequence="50" />
     </data>
 </odoo>
