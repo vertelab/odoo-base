@@ -35,9 +35,9 @@ class ResPartnerNotes(models.Model):
     note_date = fields.Datetime(string="Refers to date") 
     note_type = fields.Many2one(comodel_name="res.partner.note.type") 
     note_number = fields.Char(string="AIS number")
-    
-    #office = fields.Many2one('res.partner', string="Office")
-    #customer_id = fields.Char(string="Customer number", related="partner_id.customer_id") 
+
+    office = fields.Many2one('res.partner', string="Office")
+    customer_id = fields.Char(string="Customer number", related="partner_id.customer_id") 
 
 class ResPartner(models.Model):
     _inherit = 'res.partner'
