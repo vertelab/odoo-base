@@ -26,12 +26,13 @@ _logger = logging.getLogger(__name__)
 class ResPartner(models.Model):
     _inherit = "res.partner" 
     
-    activity_ids = fields.One2many(comodel_name="res.partner.activity", inverse_name="partner_id")
+    partner_activity_ids = fields.One2many(comodel_name="res.partner.activity", inverse_name="partner_id")
+    
 
     @api.one
     def compute_activities_count(self):
-        for partner in self:
-            partner.activities_count = len(partner.activities_ids)
+            for partner in self:
+                partner.activities_count = len(partner.activity_ids)
     activities_count = fields.Integer(compute='compute_activities_count')
 
     @api.multi
