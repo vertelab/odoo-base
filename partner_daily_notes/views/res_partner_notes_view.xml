@@ -93,7 +93,7 @@
 
 
         
-        <menuitem id="partner_note_type_menu_action" parent="contacts.res_partner_menu_config" action="action_partner_note_type_tree" sequence="50" />
-        <menuitem id="partner_notes_menu_action" parent="contacts.menu_contacts" action="action_partner_notes_tree" sequence="50" />
+        <menuitem id="partner_note_type_menu_action" name="Note types" parent="contacts.res_partner_menu_config" action="action_partner_note_type_tree" sequence="50" />
+        <menuitem id="partner_notes_menu_action" name="Daily notes" parent="contacts.menu_contacts" action="action_partner_notes_tree" sequence="50" />
     </data>
 </odoo>
