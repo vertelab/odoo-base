@@ -31,7 +31,7 @@ AFC-130
     'author': 'Vertel AB',
     'license': 'AGPL-3',
     'website': 'http://www.vertel.se',
-    'depends': ['partner_employee360'],
+    'depends': ['partner_view_360'],
     'data': [
 			'views/res_partner_view.xml',
             'security/ir.model.access.csv'
