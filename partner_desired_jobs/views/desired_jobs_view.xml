@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <odoo>
     <record id="partner_jobs_view_tree" model="ir.ui.view">
-        <field name="name">res.partner.view.form.inherit.jobs</field>
+        <field name="name">res.partner.jobs.view.tree</field>
         <field name="model">res.partner.jobs</field>
         <field name="priority" eval="2"/>
         <field name="arch" type="xml">
@@ -27,14 +27,14 @@
         </field>
     </record> -->
 
-    <record id="action_jobs" model="ir.actions.act_window">
+    <record id="partner_jobs_action" model="ir.actions.act_window">
         <field name="name">Desired Jobs Action</field>
         <field name="res_model">res.partner.jobs</field>
         <field name="view_mode">tree,pivot</field>
         <field name="view_id" ref="partner_jobs_view_tree"/>
     </record>
 
-     <record id="action_view_partner_jobs_tree" model="ir.actions.act_window.view">
+     <record id="partner_jobs_action_view_tree" model="ir.actions.act_window.view">
         <field name="act_window_id" ref="action_jobs"/>
         <field name="sequence" eval="2"/>
         <field name="view_mode">tree</field>
@@ -48,7 +48,7 @@
         <field name="view_id" ref="view_partner_jobs_pivot"/>
     </record> -->
 
-    <menuitem action="action_jobs" id="res_partner_jobs_menu" parent="contacts.menu_contacts"/>
+    <menuitem action="action_jobs" id="partner_jobs_menu_action" parent="contacts.menu_contacts"/>
 
   
 
