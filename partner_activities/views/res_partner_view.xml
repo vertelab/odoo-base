@@ -8,7 +8,7 @@
             <xpath expr="//page[@name='internal_notes']" position="after">
                 <page string="Activity">
                     <group>
-                      <field name="activity_ids" mode="tree" nolabel="1">
+                      <field name="partner_activity_ids" mode="tree" nolabel="1">
                         <tree editable="bottom" string="Timesheet Activities" default_order="start_date">
                            <!-- <field name="name" />     -->
                             <field name="meeting_type"/>
@@ -121,7 +121,7 @@
         <field name="view_id" ref="view_partner_activity_calendar"/>
     </record>    
     
-    <menuitem id="partner_activity_menu" name="Activities" parent="contacts.menu_contacts" action="action_patner_activity"/> 
+    <menuitem id="partner_activity_menu" name="Activities" parent="contacts.menu_contacts" action="action_partner_activity"/> 
 
     <record id="action_partner_activity_type" model="ir.actions.act_window">
         <field name="name">Activity Type Action</field>
@@ -167,14 +167,14 @@
     </record>
 
     <record id="action_view_partner_activity_type_tree" model="ir.actions.act_window.view">
-        <field name="act_window_id" ref="action_activity_types"/>
+        <field name="act_window_id" ref="action_partner_activity_type"/>
         <field name="sequence" eval="1"/>
         <field name="view_mode">tree</field>
         <field name="view_id" ref="view_partner_activity_type_tree"/>
     </record>  
 
     <record id="action_view_partner_activity_type_form" model="ir.actions.act_window.view">
-        <field name="act_window_id" ref="action_activity_types"/>
+        <field name="act_window_id" ref="action_partner_activity_type"/>
         <field name="sequence" eval="2"/>
         <field name="view_mode">form</field>
         <field name="view_id" ref="view_partner_activity_type_form"/>
