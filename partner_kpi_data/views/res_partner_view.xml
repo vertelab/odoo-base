@@ -7,7 +7,7 @@
         <field name="inherit_id" ref="base.view_partner_form" /> 
         <field name="arch" type="xml"> 
             <xpath expr="//page[@name='internal_notes']" position="after">
-                <page string="KPI" attrs="{'invisible':[('company', '=', False)]}">
+                <page string="KPI" attrs="{'invisible':[('is_company', '=', False)]}">
                     <group>
                       <field name="kpi_ids" mode="tree" nolabel="1">
                         <tree editable="bottom" string="KPI" default_order="fiscal_year desc"> 
