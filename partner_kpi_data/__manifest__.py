@@ -12,7 +12,7 @@ AFC-84
     'website': 'http://www.vertel.se',
     'depends': ['base'],
     'data': [
-			'views/res_partner.xml',
+			'views/res_partner_view.xml',
             'security/ir.model.access.csv'
         ],
     'application': False,

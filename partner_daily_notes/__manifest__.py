@@ -34,13 +34,13 @@ This module allowes daily notes for a partner.
     'license': 'AGPL-3',
     'website': 'http://www.vertel.se',
     'depends': [
-        'base',
-        'base_map'
+        'base_map',
+        'partner_view_360'
     ],
     'data': [
-			'views/res_partner.xml',
+			'views/res_partner_view.xml',
             'security/ir.model.access.csv',
-            'views/res_partner_notes.xml'
+            'views/res_partner_notes_view.xml'
             #'data/ir.model.fields.csv',			
         ],
     'application': False,
