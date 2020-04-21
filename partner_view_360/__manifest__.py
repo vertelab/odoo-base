@@ -20,26 +20,21 @@
 ##############################################################################
 
 {
-    'name': 'Partner desired jobs',
-    'version': '12.0.1.4',
+    'name': 'Partner 360 view',
+    'version': '12.0.0.1.1',
     'category': '',
     'description': """
-Module to see which jobs a jobseeking partner desires
+Module for employee 360 view
 ================================================================================================
-AFC-168
+This module alters, adds, removes and shuffles around fields in the partner view 
+AFC-102, 103, 140, 183, 192, 213, 210
 """,
     'author': 'Vertel AB',
     'license': 'AGPL-3',
     'website': 'http://www.vertel.se',
-    'depends': ['base', 
-    'partner_view_360', 
-    'hr_skill',
-    'res_ssyk'
-    ], 
+    'depends': ['contacts'],
     'data': [
-			'views/res_partner.xml',
-            'views/desired_jobs.xml',
-            'security/ir.model.access.csv'
+			'views/res_partner_view.xml'
         ],
     'application': False,
     'installable': True,
