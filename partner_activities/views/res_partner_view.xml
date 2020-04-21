@@ -8,7 +8,7 @@
             <xpath expr="//page[@name='internal_notes']" position="after">
                 <page string="Activity">
                     <group>
-                      <field name="activities_ids" mode="tree" nolabel="1">
+                      <field name="activity_ids" mode="tree" nolabel="1">
                         <tree editable="bottom" string="Timesheet Activities" default_order="start_date">
                            <!-- <field name="name" />     -->
                             <field name="meeting_type"/>
@@ -17,7 +17,7 @@
                             <field name="done_before_date" widget="date"/>    
                             <field name="duration" widget="timesheet_uom" groups="base.group_no_one"/> 
                             <field name="notes"/> 
-                            <field name="location"/>  
+                            <field name="office_id"/>  
                             <field name="mandatory" />    
                            <field name="done" />    
                         </tree>
@@ -54,7 +54,7 @@
                 <field name="done_before_date" widget="date"/>    
                 <field name="duration" widget="timesheet_uom" groups="base.group_no_one"/> 
                 <field name="notes"/> 
-                <field name="location"/>  
+                <field name="office_id"/>  
                 <field name="mandatory" />    
                 <field name="done" />  
             </tree>
@@ -78,7 +78,7 @@
         <field name="arch" type="xml">           
             <graph string="Activities">
                 <field name="partner_id"/>
-                <field name="location"/>
+                <field name="office_id"/>
             </graph>
         </field>
     </record>
@@ -93,35 +93,35 @@
         </field>
     </record> 
 
-     <record id="actio_view_partner_activity_tree" model="ir.actions.act_window.view">
-        <field name="act_window_id" ref="action_activities"/>
+     <record id="action_view_partner_activity_tree" model="ir.actions.act_window.view">
+        <field name="act_window_id" ref="action_partner_activity"/>
         <field name="sequence" eval="1"/>
         <field name="view_mode">tree</field>
         <field name="view_id" ref="view_partner_activity_tree"/>
     </record>    
 
       <record id="action_view_partner_activity_pivot" model="ir.actions.act_window.view">
-        <field name="act_window_id" ref="action_activities"/>
+        <field name="act_window_id" ref="action_partner_activity"/>
         <field name="sequence" eval="2"/>
         <field name="view_mode">pivot</field>
         <field name="view_id" ref="view_partner_activity_pivot"/>
     </record>    
 
       <record id="action_view_partner_activity_graph" model="ir.actions.act_window.view">
-        <field name="act_window_id" ref="action_activities"/>
+        <field name="act_window_id" ref="action_partner_activity"/>
         <field name="sequence" eval="3"/>
         <field name="view_mode">graph</field>
         <field name="view_id" ref="view_partner_activity_graph"/>
     </record> 
 
       <record id="action_view_partner_activity_calendar" model="ir.actions.act_window.view">
-        <field name="act_window_id" ref="action_activities"/>
+        <field name="act_window_id" ref="action_partner_activity"/>
         <field name="sequence" eval="4"/>
         <field name="view_mode">calendar</field>
         <field name="view_id" ref="view_partner_activity_calendar"/>
     </record>    
     
-    <menuitem id="partner_activity_menu" name="Activities" parent="contacts.menu_contacts" action="action_patner_activty"/> 
+    <menuitem id="partner_activity_menu" name="Activities" parent="contacts.menu_contacts" action="action_patner_activity"/> 
 
     <record id="action_partner_activity_type" model="ir.actions.act_window">
         <field name="name">Activity Type Action</field>
