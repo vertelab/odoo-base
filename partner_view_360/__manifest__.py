@@ -32,7 +32,7 @@ AFC-102, 103, 140, 183, 192, 213, 210
     'author': 'Vertel AB',
     'license': 'AGPL-3',
     'website': 'http://www.vertel.se',
-    'depends': ['base',],
+    'depends': ['contacts'],
     'data': [
 			'views/res_partner_view.xml'
         ],
