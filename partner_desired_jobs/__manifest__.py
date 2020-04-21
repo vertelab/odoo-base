@@ -32,7 +32,7 @@ AFC-168
     'license': 'AGPL-3',
     'website': 'http://www.vertel.se',
     'depends': ['base', 
-    'partner_employee360', 
+    'partner_view_360', 
     'hr_skill',
     'res_ssyk'
     ], 
