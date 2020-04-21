@@ -1,0 +1,658 @@
+id,parent_id/id,code,name,description
+ssyk_1,,1,1 Chefsyrken,Chefsyrken
+ssyk_2,,2,2 Yrken med krav på fördjupad högskolekompetens,Yrken med krav på fördjupad högskolekompetens
+ssyk_3,,3,3 Yrken med krav på högskolekompetens eller motsvarande,Yrken med krav på högskolekompetens eller motsvarande
+ssyk_4,,4,4 Yrken inom administration och kundtjänst,Yrken inom administration och kundtjänst
+ssyk_5,,5,5 Service-, omsorgs- och försäljningsyrken,Service-, omsorgs- och försäljningsyrken
+ssyk_6,,6,6 Yrken inom lantbruk, trädgård, skogsbruk och fiske,Yrken inom lantbruk, trädgård, skogsbruk och fiske
+ssyk_7,,7,7 Yrken inom byggverksamhet och tillverkning,Yrken inom byggverksamhet och tillverkning
+ssyk_8,,8,8 Yrken inom maskinell tillverkning och transport m.m.,Yrken inom maskinell tillverkning och transport m.m.
+ssyk_9,,9,9 Yrken med krav på kortare utbildning eller introduktion,Yrken med krav på kortare utbildning eller introduktion
+ssyk_11,ssyk_1,11,11  Politiker, verkställande direktörer och högre ämbetsmän m.fl., Politiker, verkställande direktörer och högre ämbetsmän m.fl.
+ssyk_12,ssyk_1,12,12  Chefer inom ekonomi, HR, marknadsföring och försäljning samt annan administration m.m., Chefer inom ekonomi, HR, marknadsföring och försäljning samt annan administration m.m.
+ssyk_13,ssyk_1,13,13  Chefer inom IT, logistik, FoU, fastighetsbolag, bygg- och ingenjörsverksamhet samt tillverkning m.m., Chefer inom IT, logistik, FoU, fastighetsbolag, bygg- och ingenjörsverksamhet samt tillverkning m.m.
+ssyk_14,ssyk_1,14,14  Chefer inom utbildning, Chefer inom utbildning
+ssyk_15,ssyk_1,15,15  Chefer inom hälso- och sjukvård samt annan samhällsservice, Chefer inom hälso- och sjukvård samt annan samhällsservice
+ssyk_16,ssyk_1,16,16  Chefer inom bank, finans och försäkring, Chefer inom bank, finans och försäkring
+ssyk_17,ssyk_1,17,17  Chefer inom övrig servicenäring, Chefer inom övrig servicenäring
+ssyk_21,ssyk_2,21,21  Yrken med krav på fördjupad högskolekompetens inom naturvetenskap och teknik, Yrken med krav på fördjupad högskolekompetens inom naturvetenskap och teknik
+ssyk_22,ssyk_2,22,22  Yrken med krav på fördjupad högskolekompetens inom hälso- och sjukvård, Yrken med krav på fördjupad högskolekompetens inom hälso- och sjukvård
+ssyk_23,ssyk_2,23,23  Yrken med krav på fördjupad högskolekompetens inom utbildning, Yrken med krav på fördjupad högskolekompetens inom utbildning
+ssyk_24,ssyk_2,24,24  Yrken med krav på fördjupad högskolekompetens inom ekonomi och förvaltning, Yrken med krav på fördjupad högskolekompetens inom ekonomi och förvaltning
+ssyk_25,ssyk_2,25,25  Yrken med krav på fördjupad högskolekompetens inom IT, Yrken med krav på fördjupad högskolekompetens inom IT
+ssyk_26,ssyk_2,26,26  Yrken med krav på fördjupad högskolekompetens inom juridik, kultur och socialt arbete m.m., Yrken med krav på fördjupad högskolekompetens inom juridik, kultur och socialt arbete m.m.
+ssyk_31,ssyk_3,31,31  Yrken med krav på högskolekompetens eller motsvarande inom teknik, Yrken med krav på högskolekompetens eller motsvarande inom teknik
+ssyk_32,ssyk_3,32,32  Yrken med krav på högskolekompetens eller motsvarande inom hälso- och sjukvård samt laboratorium, Yrken med krav på högskolekompetens eller motsvarande inom hälso- och sjukvård samt laboratorium
+ssyk_33,ssyk_3,33,33  Yrken med krav på högskolekompetens eller motsvarande inom ekonomi och förvaltning, Yrken med krav på högskolekompetens eller motsvarande inom ekonomi och förvaltning
+ssyk_34,ssyk_3,34,34  Yrken med krav på högskolekompetens eller motsvarande inom kultur, friskvård och socialt arbete, Yrken med krav på högskolekompetens eller motsvarande inom kultur, friskvård och socialt arbete
+ssyk_35,ssyk_3,35,35  Yrken med krav på högskolekompetens eller motsvarande inom IT, ljud- och ljusteknik m.m., Yrken med krav på högskolekompetens eller motsvarande inom IT, ljud- och ljusteknik m.m.
+ssyk_41,ssyk_4,41,41  Kontorsassistenter och sekreterare, Kontorsassistenter och sekreterare
+ssyk_42,ssyk_4,42,42  Kundserviceyrken, Kundserviceyrken
+ssyk_43,ssyk_4,43,43  Yrken inom materialförvaltning m.m., Yrken inom materialförvaltning m.m.
+ssyk_44,ssyk_4,44,44  Andra kontors- och kundserviceyrken, Andra kontors- och kundserviceyrken
+ssyk_51,ssyk_5,51,51  Serviceyrken, Serviceyrken
+ssyk_52,ssyk_5,52,52  Försäljningsyrken inom detaljhandeln m.m., Försäljningsyrken inom detaljhandeln m.m.
+ssyk_53,ssyk_5,53,53  Omsorgsyrken, Omsorgsyrken
+ssyk_54,ssyk_5,54,54  Andra bevaknings- och säkerhetsyrken, Andra bevaknings- och säkerhetsyrken
+ssyk_61,ssyk_6,61,61  Lantbruks- och trädgårdsyrken, Lantbruks- och trädgårdsyrken
+ssyk_62,ssyk_6,62,62  Skogsarbetare, fiskodlare och fiskare, Skogsarbetare, fiskodlare och fiskare
+ssyk_71,ssyk_7,71,71  Byggnads- och anläggningsyrken, Byggnads- och anläggningsyrken
+ssyk_72,ssyk_7,72,72  Metallhantverks- och reparatörsyrken, Metallhantverks- och reparatörsyrken
+ssyk_73,ssyk_7,73,73  Finmekaniska, grafiska och konsthantverksyrken, Finmekaniska, grafiska och konsthantverksyrken
+ssyk_74,ssyk_7,74,74  Installations- och serviceyrken inom el och elektronik, Installations- och serviceyrken inom el och elektronik
+ssyk_75,ssyk_7,75,75  Andra hantverksyrken inom trä och textil m.m., Andra hantverksyrken inom trä och textil m.m.
+ssyk_76,ssyk_7,76,76  Hantverksyrken inom livsmedel, Hantverksyrken inom livsmedel
+ssyk_81,ssyk_8,81,81  Process- och maskinoperatörer, Process- och maskinoperatörer
+ssyk_82,ssyk_8,82,82  Montörer, Montörer
+ssyk_83,ssyk_8,83,83  Transport- och maskinföraryrken, Transport- och maskinföraryrken
+ssyk_91,ssyk_9,91,91  Städyrken, Städyrken
+ssyk_92,ssyk_9,92,92  Bärplockare och plantörer m.fl., Bärplockare och plantörer m.fl.
+ssyk_93,ssyk_9,93,93  Andra yrken inom bygg, tillverkning och godshantering, Andra yrken inom bygg, tillverkning och godshantering
+ssyk_94,ssyk_9,94,94  Snabbmatspersonal, köks- och restaurangbiträden m.fl., Snabbmatspersonal, köks- och restaurangbiträden m.fl.
+ssyk_95,ssyk_9,95,95  Torg- och marknadsförsäljare, Torg- och marknadsförsäljare
+ssyk_96,ssyk_9,96,96  Återvinningsarbetare, tidningsdistributörer och övriga servicearbetare, Återvinningsarbetare, tidningsdistributörer och övriga servicearbetare
+ssyk_111,ssyk_11,111,111  Politiker och högre ämbetsmän, Politiker och högre ämbetsmän
+ssyk_112,ssyk_11,112,112  Verkställande direktörer m.fl., Verkställande direktörer m.fl.
+ssyk_121,ssyk_12,121,121  Ekonomi- och finanschefer, Ekonomi- och finanschefer
+ssyk_122,ssyk_12,122,122  Personal- och HR-chefer, Personal- och HR-chefer
+ssyk_123,ssyk_12,123,123  Förvaltnings- och planeringschefer, Förvaltnings- och planeringschefer
+ssyk_124,ssyk_12,124,124  Informations-, kommunikations- och PR-chefer, Informations-, kommunikations- och PR-chefer
+ssyk_125,ssyk_12,125,125  Försäljnings- och marknadschefer, Försäljnings- och marknadschefer
+ssyk_129,ssyk_12,129,129  Övriga administrations- och servicechefer, Övriga administrations- och servicechefer
+ssyk_131,ssyk_13,131,131  IT-chefer, IT-chefer
+ssyk_132,ssyk_13,132,132  Inköps-, logistik- och transportchefer, Inköps-, logistik- och transportchefer
+ssyk_133,ssyk_13,133,133  Forsknings- och utvecklingschefer, Forsknings- och utvecklingschefer
+ssyk_134,ssyk_13,134,134  Chefer inom arkitekt- och ingenjörsverksamhet, Chefer inom arkitekt- och ingenjörsverksamhet
+ssyk_135,ssyk_13,135,135  Fastighets- och förvaltningschefer, Fastighets- och förvaltningschefer
+ssyk_136,ssyk_13,136,136  Driftchefer inom bygg, anläggning och gruva, Driftchefer inom bygg, anläggning och gruva
+ssyk_137,ssyk_13,137,137  Produktionschefer inom tillverkning, Produktionschefer inom tillverkning
+ssyk_138,ssyk_13,138,138  Förvaltare inom skogsbruk och lantbruk m.fl., Förvaltare inom skogsbruk och lantbruk m.fl.
+ssyk_141,ssyk_14,141,141  Chefer inom grund- och gymnasieskola samt vuxenutbildning, Chefer inom grund- och gymnasieskola samt vuxenutbildning
+ssyk_142,ssyk_14,142,142  Chefer inom förskoleverksamhet, Chefer inom förskoleverksamhet
+ssyk_149,ssyk_14,149,149  Övriga chefer inom utbildning, Övriga chefer inom utbildning
+ssyk_151,ssyk_15,151,151  Chefer inom hälso- och sjukvård, Chefer inom hälso- och sjukvård
+ssyk_152,ssyk_15,152,152  Chefer inom socialt och kurativt arbete, Chefer inom socialt och kurativt arbete
+ssyk_153,ssyk_15,153,153  Chefer inom äldreomsorg, Chefer inom äldreomsorg
+ssyk_154,ssyk_15,154,154  Chefer och ledare inom trossamfund, Chefer och ledare inom trossamfund
+ssyk_159,ssyk_15,159,159  Övriga chefer inom samhällsservice, Övriga chefer inom samhällsservice
+ssyk_161,ssyk_16,161,161  Chefer inom bank, finans och försäkring, Chefer inom bank, finans och försäkring
+ssyk_171,ssyk_17,171,171  Hotell- och konferenschefer, Hotell- och konferenschefer
+ssyk_172,ssyk_17,172,172  Restaurang- och kökschefer, Restaurang- och kökschefer
+ssyk_173,ssyk_17,173,173  Chefer inom handel, Chefer inom handel
+ssyk_174,ssyk_17,174,174  Chefer inom friskvård, sport och fritid, Chefer inom friskvård, sport och fritid
+ssyk_179,ssyk_17,179,179  Chefer inom övrig servicenäring, Chefer inom övrig servicenäring
+ssyk_210,ssyk_2,0210,210  Specialistofficerare, Specialistofficerare
+ssyk_211,ssyk_21,211,211  Fysiker och kemister m.fl., Fysiker och kemister m.fl.
+ssyk_212,ssyk_21,212,212  Matematiker, aktuarier och statistiker, Matematiker, aktuarier och statistiker
+ssyk_213,ssyk_21,213,213  Biologer, farmakologer och specialister inom lant- och skogsbruk m.fl., Biologer, farmakologer och specialister inom lant- och skogsbruk m.fl.
+ssyk_214,ssyk_21,214,214  Civilingenjörsyrken, Civilingenjörsyrken
+ssyk_215,ssyk_21,215,215  UTGÅR[], UTGÅR[]
+ssyk_216,ssyk_21,216,216  Arkitekter och lantmätare, Arkitekter och lantmätare
+ssyk_217,ssyk_21,217,217  Designer och formgivare, Designer och formgivare
+ssyk_218,ssyk_21,218,218  Specialister inom miljö- och hälsoskydd, Specialister inom miljö- och hälsoskydd
+ssyk_221,ssyk_22,221,221  Läkare, Läkare
+ssyk_222,ssyk_22,222,222  Sjuksköterskor, Sjuksköterskor
+ssyk_223,ssyk_22,223,223  Sjuksköterskor (fortsättning), Sjuksköterskor (fortsättning)
+ssyk_224,ssyk_22,224,224  Psykologer och psykoterapeuter, Psykologer och psykoterapeuter
+ssyk_225,ssyk_22,225,225  Veterinärer, Veterinärer
+ssyk_226,ssyk_22,226,226  Tandläkare, Tandläkare
+ssyk_227,ssyk_22,227,227  Naprapater, sjukgymnaster och arbetsterapeuter m.fl., Naprapater, sjukgymnaster och arbetsterapeuter m.fl.
+ssyk_228,ssyk_22,228,228  Andra specialister inom hälso- och sjukvård, Andra specialister inom hälso- och sjukvård
+ssyk_231,ssyk_23,231,231  Universitets- och högskollärare, Universitets- och högskollärare
+ssyk_232,ssyk_23,232,232  Lärare i yrkesämnen, Lärare i yrkesämnen
+ssyk_233,ssyk_23,233,233  Gymnasielärare, Gymnasielärare
+ssyk_234,ssyk_23,234,234  Grundskollärare, fritidspedagoger och förskollärare, Grundskollärare, fritidspedagoger och förskollärare
+ssyk_235,ssyk_23,235,235  Andra pedagoger med teoretisk specialistkompetens, Andra pedagoger med teoretisk specialistkompetens
+ssyk_241,ssyk_24,241,241  Revisorer, finansanalytiker och fondförvaltare m.fl., Revisorer, finansanalytiker och fondförvaltare m.fl.
+ssyk_242,ssyk_24,242,242  Organisationsutvecklare, utredare och HR-specialister m.fl., Organisationsutvecklare, utredare och HR-specialister m.fl.
+ssyk_243,ssyk_24,243,243  Marknadsförare och informatörer m.fl., Marknadsförare och informatörer m.fl.
+ssyk_251,ssyk_25,251,251  IT-arkitekter, systemutvecklare och testledare m.fl., IT-arkitekter, systemutvecklare och testledare m.fl.
+ssyk_252,ssyk_25,252,252  UTGÅR[], UTGÅR[]
+ssyk_261,ssyk_26,261,261  Jurister, Jurister
+ssyk_262,ssyk_26,262,262  Museiintendenter och bibliotekarier m.fl., Museiintendenter och bibliotekarier m.fl.
+ssyk_263,ssyk_26,263,263  Utgår[], Utgår[]
+ssyk_264,ssyk_26,264,264  Författare, journalister och tolkar m.fl., Författare, journalister och tolkar m.fl.
+ssyk_265,ssyk_26,265,265  Konstnärer, musiker och skådespelare m.fl., Konstnärer, musiker och skådespelare m.fl.
+ssyk_266,ssyk_26,266,266  Socialsekreterare och kuratorer m.fl., Socialsekreterare och kuratorer m.fl.
+ssyk_267,ssyk_26,267,267  Präster och diakoner, Präster och diakoner
+ssyk_310,ssyk_3,0310,310  Soldater m.fl., Soldater m.fl.
+ssyk_311,ssyk_31,311,311  Ingenjörer och tekniker, Ingenjörer och tekniker
+ssyk_312,ssyk_31,312,312  Arbetsledare inom bygg och tillverkning m.m., Arbetsledare inom bygg och tillverkning m.m.
+ssyk_313,ssyk_31,313,313  UTGÅR[], UTGÅR[]
+ssyk_314,ssyk_31,314,314  UTGÅR[], UTGÅR[]
+ssyk_315,ssyk_31,315,315  Piloter, fartygs- och maskinbefäl m.fl., Piloter, fartygs- och maskinbefäl m.fl.
+ssyk_321,ssyk_32,321,321  Biomedicinska analytiker, tandtekniker och laboratorieingenjörer m.fl., Biomedicinska analytiker, tandtekniker och laboratorieingenjörer m.fl.
+ssyk_322,ssyk_32,322,322  UTGÅR[], UTGÅR[]
+ssyk_323,ssyk_32,323,323  Terapeuter inom alternativmedicin, Terapeuter inom alternativmedicin
+ssyk_324,ssyk_32,324,324  Djursjukskötare, Djursjukskötare
+ssyk_325,ssyk_32,325,325  Tandhygienister, Tandhygienister
+ssyk_331,ssyk_33,331,331  Banktjänstemän och redovisningsekonomer m.fl., Banktjänstemän och redovisningsekonomer m.fl.
+ssyk_332,ssyk_33,332,332  Försäkringsrådgivare, företagssäljare och inköpare m.fl., Försäkringsrådgivare, företagssäljare och inköpare m.fl.
+ssyk_333,ssyk_33,333,333  Förmedlare m.fl., Förmedlare m.fl.
+ssyk_334,ssyk_33,334,334  Juristsekreterare, chefssekreterare och institutionssekreterare m.fl., Juristsekreterare, chefssekreterare och institutionssekreterare m.fl.
+ssyk_335,ssyk_33,335,335  Skatte- och socialförsäkringshandläggare m.fl., Skatte- och socialförsäkringshandläggare m.fl.
+ssyk_336,ssyk_33,336,336  Poliser, Poliser
+ssyk_341,ssyk_34,341,341 Behandlingsassistenter och pastorer,Behandlingsassistenter och pastorer
+ssyk_342,ssyk_34,342,342  Idrottsutövare och fritidsledare m.fl., Idrottsutövare och fritidsledare m.fl.
+ssyk_343,ssyk_34,343,343  Fotografer, dekoratörer och underhållningsartister m.fl., Fotografer, dekoratörer och underhållningsartister m.fl.
+ssyk_344,ssyk_34,344,344  Trafiklärare och instruktörer, Trafiklärare och instruktörer
+ssyk_345,ssyk_34,345,345  Köksmästare och souschefer, Köksmästare och souschefer
+ssyk_351,ssyk_35,351,351  Drift-, support- och nätverkstekniker m.fl., Drift-, support- och nätverkstekniker m.fl.
+ssyk_352,ssyk_35,352,352  Bild-, ljud- och ljustekniker m.fl., Bild-, ljud- och ljustekniker m.fl.
+ssyk_411,ssyk_41,411,411  Kontorsassistenter och sekreterare, Kontorsassistenter och sekreterare
+ssyk_421,ssyk_42,421,421  Croupierer och inkasserare, Croupierer och inkasserare
+ssyk_422,ssyk_42,422,422  Resesäljare, kundtjänstpersonal och receptionister m.fl., Resesäljare, kundtjänstpersonal och receptionister m.fl.
+ssyk_431,ssyk_43,431,431  Utgår[], Utgår[]
+ssyk_432,ssyk_43,432,432  Lagerpersonal och transportledare m.fl., Lagerpersonal och transportledare m.fl.
+ssyk_441,ssyk_44,441,441  Biblioteks- och arkivassistenter m.fl., Biblioteks- och arkivassistenter m.fl.
+ssyk_442,ssyk_44,442,442  Brevbärare och postterminalarbetare, Brevbärare och postterminalarbetare
+ssyk_443,ssyk_44,443,443  Övrig kontorspersonal, Övrig kontorspersonal
+ssyk_511,ssyk_51,511,511  Kabinpersonal, tågmästare och guider m.fl., Kabinpersonal, tågmästare och guider m.fl.
+ssyk_512,ssyk_51,512,512  Kockar och kallskänkor, Kockar och kallskänkor
+ssyk_513,ssyk_51,513,513  Hovmästare, servitörer och bartendrar, Hovmästare, servitörer och bartendrar
+ssyk_514,ssyk_51,514,514  Skönhets- och kroppsterapeuter, Skönhets- och kroppsterapeuter
+ssyk_515,ssyk_51,515,515  Städledare och fastighetsskötare m.fl., Städledare och fastighetsskötare m.fl.
+ssyk_516,ssyk_51,516,516  Övrig servicepersonal, Övrig servicepersonal
+ssyk_521,ssyk_52,521,521  UTGÅR[], UTGÅR[]
+ssyk_522,ssyk_52,522,522  Butikspersonal, Butikspersonal
+ssyk_523,ssyk_52,523,523  Kassapersonal m.fl., Kassapersonal m.fl.
+ssyk_524,ssyk_52,524,524  Eventsäljare och telefonförsäljare m.fl., Eventsäljare och telefonförsäljare m.fl.
+ssyk_531,ssyk_53,531,531  Barnskötare och elevassistenter m.fl., Barnskötare och elevassistenter m.fl.
+ssyk_532,ssyk_53,532,532  Undersköterskor, Undersköterskor
+ssyk_533,ssyk_53,533,533  Vårdbiträden, Vårdbiträden
+ssyk_534,ssyk_53,534,534  Skötare, vårdare och personliga assistenter m.fl., Skötare, vårdare och personliga assistenter m.fl.
+ssyk_535,ssyk_53,535,535  Tandsköterskor, Tandsköterskor
+ssyk_541,ssyk_54,541,541  Andra bevaknings- och säkerhetsyrken, Andra bevaknings- och säkerhetsyrken
+ssyk_611,ssyk_61,611,611  Växtodlare inom jordbruk och trädgård, Växtodlare inom jordbruk och trädgård
+ssyk_612,ssyk_61,612,612  Djuruppfödare och djurskötare, Djuruppfödare och djurskötare
+ssyk_613,ssyk_61,613,613  Växtodlare och djuruppfödare, blandad drift, Växtodlare och djuruppfödare, blandad drift
+ssyk_621,ssyk_62,621,621  Skogsarbetare, Skogsarbetare
+ssyk_622,ssyk_62,622,622  Fiskodlare och fiskare, Fiskodlare och fiskare
+ssyk_711,ssyk_71,711,711  Snickare, murare och anläggningsarbetare, Snickare, murare och anläggningsarbetare
+ssyk_712,ssyk_71,712,712  Takmontörer, golvläggare och VVS-montörer m.fl., Takmontörer, golvläggare och VVS-montörer m.fl.
+ssyk_713,ssyk_71,713,713  Målare, lackerare och skorstensfejare m.fl., Målare, lackerare och skorstensfejare m.fl.
+ssyk_721,ssyk_72,721,721  Gjutare, svetsare och plåtslagare m.fl., Gjutare, svetsare och plåtslagare m.fl.
+ssyk_722,ssyk_72,722,722  Smeder och verktygsmakare m.fl., Smeder och verktygsmakare m.fl.
+ssyk_723,ssyk_72,723,723  Fordonsmekaniker och reparatörer m.fl., Fordonsmekaniker och reparatörer m.fl.
+ssyk_731,ssyk_73,731,731  Finmekaniker och konsthantverkare m.fl., Finmekaniker och konsthantverkare m.fl.
+ssyk_732,ssyk_73,732,732  Prepresstekniker, tryckare och bokbindare m.fl., Prepresstekniker, tryckare och bokbindare m.fl.
+ssyk_741,ssyk_74,741,741  Installations- och industrielektriker m.fl., Installations- och industrielektriker m.fl.
+ssyk_742,ssyk_74,742,742  Elektronikreparatörer och kommunikationselektriker m.fl., Elektronikreparatörer och kommunikationselektriker m.fl.
+ssyk_751,ssyk_75,751,751  Utgår[], Utgår[]
+ssyk_752,ssyk_75,752,752  Ytbehandlare, trä och möbelsnickare m.fl., Ytbehandlare, trä och möbelsnickare m.fl.
+ssyk_753,ssyk_75,753,753  Skräddare, tapetserare och läderhantverkare m.fl., Skräddare, tapetserare och läderhantverkare m.fl.
+ssyk_761,ssyk_76,761,761  Slaktare, bagare och livsmedelsförädlare m.fl., Slaktare, bagare och livsmedelsförädlare m.fl.
+ssyk_811,ssyk_81,811,811  Malmförädlingsyrken och brunnsborrare m.fl., Malmförädlingsyrken och brunnsborrare m.fl.
+ssyk_812,ssyk_81,812,812  Process- och maskinoperatörer, vid stål- och metallverk, Process- och maskinoperatörer, vid stål- och metallverk
+ssyk_813,ssyk_81,813,813  Maskinoperatörer, kemiska och farmaceutiska produkter m.m., Maskinoperatörer, kemiska och farmaceutiska produkter m.m.
+ssyk_814,ssyk_81,814,814  Maskinoperatörer, gummi-, plast- och pappersvaruindustri, Maskinoperatörer, gummi-, plast- och pappersvaruindustri
+ssyk_815,ssyk_81,815,815  Maskinoperatörer, textil-, tvätt- och läderindustri m.m., Maskinoperatörer, textil-, tvätt- och läderindustri m.m.
+ssyk_816,ssyk_81,816,816  Maskinoperatörer, livsmedelsindustri, Maskinoperatörer, livsmedelsindustri
+ssyk_817,ssyk_81,817,817  Processoperatörer, trä- och pappersindustri, Processoperatörer, trä- och pappersindustri
+ssyk_818,ssyk_81,818,818  Andra process- och maskinoperatörer, Andra process- och maskinoperatörer
+ssyk_819,ssyk_81,819,819  Drifttekniker och processövervakare, Drifttekniker och processövervakare
+ssyk_821,ssyk_82,821,821  Montörer, Montörer
+ssyk_831,ssyk_83,831,831  Lokförare och bangårdspersonal, Lokförare och bangårdspersonal
+ssyk_832,ssyk_83,832,832  Bil-, motorcykel och cykelförare, Bil-, motorcykel och cykelförare
+ssyk_833,ssyk_83,833,833  Lastbils- och bussförare, Lastbils- och bussförare
+ssyk_834,ssyk_83,834,834  Maskinförare, Maskinförare
+ssyk_835,ssyk_83,835,835  Matroser och jungmän m.fl., Matroser och jungmän m.fl.
+ssyk_911,ssyk_91,911,911  Städare och hemservicepersonal m.fl., Städare och hemservicepersonal m.fl.
+ssyk_912,ssyk_91,912,912  Tvättare, fönsterputsare och övriga rengöringsarbetare, Tvättare, fönsterputsare och övriga rengöringsarbetare
+ssyk_921,ssyk_92,921,921  Bärplockare och plantörer m.fl., Bärplockare och plantörer m.fl.
+ssyk_931,ssyk_93,931,931  Grovarbetare inom bygg och anläggning, Grovarbetare inom bygg och anläggning
+ssyk_932,ssyk_93,932,932  Handpaketerare och andra fabriksarbetare, Handpaketerare och andra fabriksarbetare
+ssyk_933,ssyk_93,933,933  Hamnarbetare och ramppersonal m.fl., Hamnarbetare och ramppersonal m.fl.
+ssyk_941,ssyk_94,941,941  Snabbmatspersonal, köks- och restaurangbiträden m.fl., Snabbmatspersonal, köks- och restaurangbiträden m.fl.
+ssyk_951,ssyk_95,951,951  Utgår[], Utgår[]
+ssyk_952,ssyk_95,952,952  Torg- och marknadsförsäljare, Torg- och marknadsförsäljare
+ssyk_961,ssyk_96,961,961  Återvinningsarbetare, Återvinningsarbetare
+ssyk_962,ssyk_96,962,962  Tidningsdistributörer, vaktmästare och övriga servicearbetare, Tidningsdistributörer, vaktmästare och övriga servicearbetare
+ssyk_1111,ssyk_111,1111,1111  Politiker, Politiker
+ssyk_1112,ssyk_111,1112,1112  General-, landstings- och kommundirektörer m.fl., General-, landstings- och kommundirektörer m.fl.
+ssyk_1113,ssyk_111,1113,1113  Chefstjänstemän i intresseorganisationer, Chefstjänstemän i intresseorganisationer
+ssyk_1120,ssyk_112,1120,1120  Verkställande direktörer m.fl., Verkställande direktörer m.fl.
+ssyk_1211,ssyk_121,1211,1211  Ekonomi- och finanschefer, Ekonomi- och finanschefer
+ssyk_1212,ssyk_121,1212,1212  Ekonomi- och finanschefer, Ekonomi- och finanschefer
+ssyk_1221,ssyk_122,1221,1221  Personal- och HR-chefer, Personal- och HR-chefer
+ssyk_1222,ssyk_122,1222,1222  Personal- och HR-chefer, Personal- och HR-chefer
+ssyk_1230,ssyk_123,1230,1230  Förvaltnings- och planeringschefer, Förvaltnings- och planeringschefer
+ssyk_1241,ssyk_124,1241,1241  Informations-, kommunikations- och PR-chefer, Informations-, kommunikations- och PR-chefer
+ssyk_1242,ssyk_124,1242,1242  Informations-, kommunikations - och PR-chefer, Informations-, kommunikations - och PR-chefer
+ssyk_1251,ssyk_125,1251,1251  Försäljnings- och marknadschefer, Försäljnings- och marknadschefer
+ssyk_1252,ssyk_125,1252,1252  Försäljnings- och marknadschefer, Försäljnings- och marknadschefer
+ssyk_1291,ssyk_129,1291,1291  Övriga administrations- och servicechefer, Övriga administrations- och servicechefer
+ssyk_1292,ssyk_129,1292,1292  Övriga administrations- och servicechefer, Övriga administrations- och servicechefer
+ssyk_1311,ssyk_131,1311,1311  IT-chefer, IT-chefer
+ssyk_1312,ssyk_131,1312,1312  IT-chefer, IT-chefer
+ssyk_1321,ssyk_132,1321,1321  Inköps-, logistik- och transportchefer, Inköps-, logistik- och transportchefer
+ssyk_1322,ssyk_132,1322,1322  Inköps-, logistik- och transportchefer, Inköps-, logistik- och transportchefer
+ssyk_1331,ssyk_133,1331,1331  Forsknings- och utvecklingschefer, Forsknings- och utvecklingschefer
+ssyk_1332,ssyk_133,1332,1332  Forsknings- och utvecklingschefer, Forsknings- och utvecklingschefer
+ssyk_1341,ssyk_134,1341,1341  Chefer inom arkitekt- och ingenjörsverksamhet, Chefer inom arkitekt- och ingenjörsverksamhet
+ssyk_1342,ssyk_134,1342,1342  Chefer inom arkitekt- och ingenjörsverksamhet, Chefer inom arkitekt- och ingenjörsverksamhet
+ssyk_1351,ssyk_135,1351,1351  Fastighets- och förvaltningschefer, Fastighets- och förvaltningschefer
+ssyk_1352,ssyk_135,1352,1352  Fastighets- och förvaltningschefer, Fastighets- och förvaltningschefer
+ssyk_1361,ssyk_136,1361,1361  Driftchefer inom bygg, anläggning och gruva, Driftchefer inom bygg, anläggning och gruva
+ssyk_1362,ssyk_136,1362,1362  Driftchefer inom bygg, anläggning och gruva, Driftchefer inom bygg, anläggning och gruva
+ssyk_1371,ssyk_137,1371,1371  Produktionschefer inom tillverkning, Produktionschefer inom tillverkning
+ssyk_1372,ssyk_137,1372,1372  Produktionschefer inom tillverkning, Produktionschefer inom tillverkning
+ssyk_1380,ssyk_138,1380,1380  Förvaltare inom skogsbruk och lantbruk m.fl., Förvaltare inom skogsbruk och lantbruk m.fl.
+ssyk_1411,ssyk_141,1411,1411  Avdelningschefer inom grund- och gymnasieskola samt vuxenutbildning, Avdelningschefer inom grund- och gymnasieskola samt vuxenutbildning
+ssyk_1412,ssyk_141,1412,1412  Rektorer, Rektorer
+ssyk_1421,ssyk_142,1421,1421  Avdelningschefer inom förskola, Avdelningschefer inom förskola
+ssyk_1422,ssyk_142,1422,1422  Förskolechefer, Förskolechefer
+ssyk_1491,ssyk_149,1491,1491  Övriga avdelningschefer inom utbildning, Övriga avdelningschefer inom utbildning
+ssyk_1492,ssyk_149,1492,1492  Övriga verksamhetschefer inom utbildning, Övriga verksamhetschefer inom utbildning
+ssyk_1511,ssyk_151,1511,1511  Klinik- och verksamhetschefer inom hälsa och sjukvård, Klinik- och verksamhetschefer inom hälsa och sjukvård
+ssyk_1512,ssyk_151,1512,1512  Avdelnings- och enhetschefer inom hälsa och sjukvård, Avdelnings- och enhetschefer inom hälsa och sjukvård
+ssyk_1521,ssyk_152,1521,1521  Avdelningschefer inom socialt och kurativt arbete, Avdelningschefer inom socialt och kurativt arbete
+ssyk_1522,ssyk_152,1522,1522  Enhetschefer inom socialt och kurativt arbete, Enhetschefer inom socialt och kurativt arbete
+ssyk_1531,ssyk_153,1531,1531  Avdelningschefer inom äldreomsorg, Avdelningschefer inom äldreomsorg
+ssyk_1532,ssyk_153,1532,1532  Enhetschefer inom äldreomsorg, Enhetschefer inom äldreomsorg
+ssyk_1540,ssyk_154,1540,1540  Chefer och ledare inom trossamfund, Chefer och ledare inom trossamfund
+ssyk_1591,ssyk_159,1591,1591  Övriga chefer inom samhällsservice, Övriga chefer inom samhällsservice
+ssyk_1592,ssyk_159,1592,1592  Övriga verksamhetschefer inom samhällsservice, Övriga verksamhetschefer inom samhällsservice
+ssyk_1611,ssyk_161,1611,1611  Chefer inom bank, finans och försäkring, Chefer inom bank, finans och försäkring
+ssyk_1612,ssyk_161,1612,1612  Chefer inom bank, finans och försäkring, Chefer inom bank, finans och försäkring
+ssyk_1711,ssyk_171,1711,1711  Hotell- och konferenschefer, Hotell- och konferenschefer
+ssyk_1712,ssyk_171,1712,1712  Hotell- och konferenschefer, Hotell- och konferenschefer
+ssyk_1721,ssyk_172,1721,1721  Restaurang- och kökschefer, Restaurang- och kökschefer
+ssyk_1722,ssyk_172,1722,1722  Restaurang- och kökschefer, Restaurang- och kökschefer
+ssyk_1731,ssyk_173,1731,1731  Chefer inom handel, Chefer inom handel
+ssyk_1732,ssyk_173,1732,1732  Chefer inom handel, Chefer inom handel
+ssyk_1741,ssyk_174,1741,1741  Chefer inom friskvård, sport och fritid, Chefer inom friskvård, sport och fritid
+ssyk_1742,ssyk_174,1742,1742  Chefer inom friskvård, sport och fritid, Chefer inom friskvård, sport och fritid
+ssyk_1791,ssyk_179,1791,1791  Chefer inom övrig servicenäring, Chefer inom övrig servicenäring
+ssyk_1792,ssyk_179,1792,1792  Chefer inom övrig servicenäring, Chefer inom övrig servicenäring
+ssyk_2111,ssyk_211,2111,2111  Fysiker och astronomer, Fysiker och astronomer
+ssyk_2112,ssyk_211,2112,2112  Meteorologer, Meteorologer
+ssyk_2113,ssyk_211,2113,2113  Kemister, Kemister
+ssyk_2114,ssyk_211,2114,2114  Geologer och geofysiker m.fl., Geologer och geofysiker m.fl.
+ssyk_2121,ssyk_212,2121,2121  Matematiker och aktuarier, Matematiker och aktuarier
+ssyk_2122,ssyk_212,2122,2122  Statistiker, Statistiker
+ssyk_2131,ssyk_213,2131,2131  Cell- och molekylärbiologer m.fl., Cell- och molekylärbiologer m.fl.
+ssyk_2132,ssyk_213,2132,2132  Växt- och djurbiologer, Växt- och djurbiologer
+ssyk_2133,ssyk_213,2133,2133  Farmakologer och biomedicinare, Farmakologer och biomedicinare
+ssyk_2134,ssyk_213,2134,2134  Specialister och rådgivare inom lantbruk m.m., Specialister och rådgivare inom lantbruk m.m.
+ssyk_2135,ssyk_213,2135,2135  Specialister och rådgivare inom skogsbruk, Specialister och rådgivare inom skogsbruk
+ssyk_2141,ssyk_214,2141,2141  Civilingenjörsyrken inom logistik och produktionsplanering, Civilingenjörsyrken inom logistik och produktionsplanering
+ssyk_2142,ssyk_214,2142,2142  Civilingenjörsyrken inom bygg och anläggning, Civilingenjörsyrken inom bygg och anläggning
+ssyk_2143,ssyk_214,2143,2143  Civilingenjörsyrken inom elektroteknik, Civilingenjörsyrken inom elektroteknik
+ssyk_2144,ssyk_214,2144,2144  Civilingenjörsyrken inom maskinteknik, Civilingenjörsyrken inom maskinteknik
+ssyk_2145,ssyk_214,2145,2145  Civilingenjörsyrken inom kemi och kemiteknik, Civilingenjörsyrken inom kemi och kemiteknik
+ssyk_2146,ssyk_214,2146,2146  Civilingenjörsyrken inom gruvteknik och metallurgi, Civilingenjörsyrken inom gruvteknik och metallurgi
+ssyk_2149,ssyk_214,2149,2149  Övriga civilingenjörsyrken, Övriga civilingenjörsyrken
+ssyk_2161,ssyk_216,2161,2161  Arkitekter m.fl., Arkitekter m.fl.
+ssyk_2162,ssyk_216,2162,2162  Landskapsarkitekter, Landskapsarkitekter
+ssyk_2163,ssyk_216,2163,2163  Planeringsarkitekter m.fl., Planeringsarkitekter m.fl.
+ssyk_2164,ssyk_216,2164,2164  Lantmätare, Lantmätare
+ssyk_2171,ssyk_217,2171,2171  Industridesigner, Industridesigner
+ssyk_2172,ssyk_217,2172,2172  Grafisk formgivare m.fl., Grafisk formgivare m.fl.
+ssyk_2173,ssyk_217,2173,2173  Designer inom spel och digitala medier, Designer inom spel och digitala medier
+ssyk_2179,ssyk_217,2179,2179  Övriga designer och formgivare, Övriga designer och formgivare
+ssyk_2181,ssyk_218,2181,2181  Arbetsmiljöingenjörer, yrkes- och miljöhygieniker, Arbetsmiljöingenjörer, yrkes- och miljöhygieniker
+ssyk_2182,ssyk_218,2182,2182  Miljö- och hälsoskyddsinspektörer, Miljö- och hälsoskyddsinspektörer
+ssyk_2183,ssyk_218,2183,2183  Specialister inom miljöskydd och miljöteknik, Specialister inom miljöskydd och miljöteknik
+ssyk_2211,ssyk_221,2211,2211  Specialistläkare, Specialistläkare
+ssyk_2212,ssyk_221,2212,2212  ST-läkare, ST-läkare
+ssyk_2213,ssyk_221,2213,2213  AT-läkare, AT-läkare
+ssyk_2219,ssyk_221,2219,2219  Övriga läkare, Övriga läkare
+ssyk_2221,ssyk_222,2221,2221  Grundutbildade sjuksköterskor, Grundutbildade sjuksköterskor
+ssyk_2222,ssyk_222,2222,2222  Barnmorskor, Barnmorskor
+ssyk_2223,ssyk_222,2223,2223  Anestesisjuksköterskor, Anestesisjuksköterskor
+ssyk_2224,ssyk_222,2224,2224  Distriktssköterskor, Distriktssköterskor
+ssyk_2225,ssyk_222,2225,2225  Psykiatrisjuksköterskor, Psykiatrisjuksköterskor
+ssyk_2226,ssyk_222,2226,2226  Ambulanssjuksköterskor m.fl., Ambulanssjuksköterskor m.fl.
+ssyk_2227,ssyk_222,2227,2227  Geriatriksjuksköterskor, Geriatriksjuksköterskor
+ssyk_2228,ssyk_222,2228,2228  Intensivvårdssjuksköterskor, Intensivvårdssjuksköterskor
+ssyk_2231,ssyk_223,2231,2231  Operationssjuksköterskor, Operationssjuksköterskor
+ssyk_2232,ssyk_223,2232,2232  Barnsjuksköterskor, Barnsjuksköterskor
+ssyk_2233,ssyk_223,2233,2233  Skolsköterskor, Skolsköterskor
+ssyk_2234,ssyk_223,2234,2234  Företagssköterskor, Företagssköterskor
+ssyk_2235,ssyk_223,2235,2235  Röntgensjuksköterskor, Röntgensjuksköterskor
+ssyk_2239,ssyk_223,2239,2239  Övriga specialistsjuksköterskor, Övriga specialistsjuksköterskor
+ssyk_2241,ssyk_224,2241,2241  Psykologer, Psykologer
+ssyk_2242,ssyk_224,2242,2242  Psykoterapeuter, Psykoterapeuter
+ssyk_2250,ssyk_225,2250,2250  Veterinärer, Veterinärer
+ssyk_2260,ssyk_226,2260,2260  Tandläkare, Tandläkare
+ssyk_2271,ssyk_227,2271,2271  Kiropraktorer och naprapater m.fl., Kiropraktorer och naprapater m.fl.
+ssyk_2272,ssyk_227,2272,2272  Sjukgymnaster, Sjukgymnaster
+ssyk_2273,ssyk_227,2273,2273  Arbetsterapeuter, Arbetsterapeuter
+ssyk_2281,ssyk_228,2281,2281  Apotekare, Apotekare
+ssyk_2282,ssyk_228,2282,2282  Dietister, Dietister
+ssyk_2283,ssyk_228,2283,2283  Audionomer och logopeder, Audionomer och logopeder
+ssyk_2284,ssyk_228,2284,2284  Optiker, Optiker
+ssyk_2289,ssyk_228,2289,2289  Övriga specialister inom hälso- och sjukvård, Övriga specialister inom hälso- och sjukvård
+ssyk_2311,ssyk_231,2311,2311  Professorer, Professorer
+ssyk_2312,ssyk_231,2312,2312  Universitets- och högskolelektorer, Universitets- och högskolelektorer
+ssyk_2313,ssyk_231,2313,2313  Forskarassistenter m.fl., Forskarassistenter m.fl.
+ssyk_2314,ssyk_231,2314,2314  Doktorander, Doktorander
+ssyk_2319,ssyk_231,2319,2319  Övriga universitets- och högskollärare, Övriga universitets- och högskollärare
+ssyk_2320,ssyk_232,2320,2320  Lärare i yrkesämnen, Lärare i yrkesämnen
+ssyk_2330,ssyk_233,2330,2330  Gymnasielärare, Gymnasielärare
+ssyk_2341,ssyk_234,2341,2341  Grundskollärare, Grundskollärare
+ssyk_2342,ssyk_234,2342,2342  Fritidspedagoger, Fritidspedagoger
+ssyk_2343,ssyk_234,2343,2343  Förskollärare, Förskollärare
+ssyk_2351,ssyk_235,2351,2351  Speciallärare och specialpedagoger m.fl., Speciallärare och specialpedagoger m.fl.
+ssyk_2352,ssyk_235,2352,2352  Studie- och yrkesvägledare, Studie- och yrkesvägledare
+ssyk_2359,ssyk_235,2359,2359  Övriga pedagoger med teoretisk specialistkompetens, Övriga pedagoger med teoretisk specialistkompetens
+ssyk_2411,ssyk_241,2411,2411  Revisorer m.fl., Revisorer m.fl.
+ssyk_2412,ssyk_241,2412,2412  Controller, Controller
+ssyk_2413,ssyk_241,2413,2413  Finansanalytiker och investeringsrådgivare m.fl., Finansanalytiker och investeringsrådgivare m.fl.
+ssyk_2414,ssyk_241,2414,2414  Traders och fondförvaltare, Traders och fondförvaltare
+ssyk_2415,ssyk_241,2415,2415  Nationalekonomer och makroanalytiker m.fl., Nationalekonomer och makroanalytiker m.fl.
+ssyk_2419,ssyk_241,2419,2419  Övriga ekonomer, Övriga ekonomer
+ssyk_2421,ssyk_242,2421,2421  Lednings- och organisationsutvecklare, Lednings- och organisationsutvecklare
+ssyk_2422,ssyk_242,2422,2422  Planerare och utredare m.fl., Planerare och utredare m.fl.
+ssyk_2423,ssyk_242,2423,2423  Personal- och HR-specialister, Personal- och HR-specialister
+ssyk_2431,ssyk_243,2431,2431  Marknadsanalytiker och marknadsförare m.fl., Marknadsanalytiker och marknadsförare m.fl.
+ssyk_2432,ssyk_243,2432,2432  Informatörer, kommunikatörer och PR-specialister, Informatörer, kommunikatörer och PR-specialister
+ssyk_2511,ssyk_251,2511,2511  Systemanalytiker och IT-arkitekter m.fl., Systemanalytiker och IT-arkitekter m.fl.
+ssyk_2512,ssyk_251,2512,2512  Mjukvaru- och systemutvecklare m.fl., Mjukvaru- och systemutvecklare m.fl.
+ssyk_2513,ssyk_251,2513,2513  Utvecklare inom spel och digitala media, Utvecklare inom spel och digitala media
+ssyk_2514,ssyk_251,2514,2514  Systemtestare och testledare, Systemtestare och testledare
+ssyk_2515,ssyk_251,2515,2515  Systemförvaltare m.fl., Systemförvaltare m.fl.
+ssyk_2516,ssyk_251,2516,2516  IT-säkerhetsspecialister, IT-säkerhetsspecialister
+ssyk_2519,ssyk_251,2519,2519  Övriga IT-specialister, Övriga IT-specialister
+ssyk_2611,ssyk_261,2611,2611  Advokater, Advokater
+ssyk_2612,ssyk_261,2612,2612  Domare, Domare
+ssyk_2613,ssyk_261,2613,2613  Åklagare, Åklagare
+ssyk_2614,ssyk_261,2614,2614  Affärs- och företagsjurister, Affärs- och företagsjurister
+ssyk_2615,ssyk_261,2615,2615  Förvaltnings- och organisationsjurister, Förvaltnings- och organisationsjurister
+ssyk_2619,ssyk_261,2619,2619  Övriga jurister, Övriga jurister
+ssyk_2621,ssyk_262,2621,2621  Museiintendenter m.fl., Museiintendenter m.fl.
+ssyk_2622,ssyk_262,2622,2622  Bibliotekarier och arkivarier, Bibliotekarier och arkivarier
+ssyk_2623,ssyk_262,2623,2623  Arkeologer och specialister inom humaniora m.m., Arkeologer och specialister inom humaniora m.m.
+ssyk_2641,ssyk_264,2641,2641  Författare m.fl., Författare m.fl.
+ssyk_2642,ssyk_264,2642,2642  Journalister m.fl., Journalister m.fl.
+ssyk_2643,ssyk_264,2643,2643  Översättare, tolkar och lingvister m.fl., Översättare, tolkar och lingvister m.fl.
+ssyk_2651,ssyk_265,2651,2651  Bildkonstnärer m.fl., Bildkonstnärer m.fl.
+ssyk_2652,ssyk_265,2652,2652  Musiker, sångare och kompositörer, Musiker, sångare och kompositörer
+ssyk_2653,ssyk_265,2653,2653  Koreografer och dansare, Koreografer och dansare
+ssyk_2654,ssyk_265,2654,2654  Regissörer och producenter av film, teater m.m., Regissörer och producenter av film, teater m.m.
+ssyk_2655,ssyk_265,2655,2655  Skådespelare, Skådespelare
+ssyk_2661,ssyk_266,2661,2661  Socialsekreterare, Socialsekreterare
+ssyk_2662,ssyk_266,2662,2662  Kuratorer, Kuratorer
+ssyk_2663,ssyk_266,2663,2663  Biståndsbedömare m.fl., Biståndsbedömare m.fl.
+ssyk_2669,ssyk_266,2669,2669  Övriga yrken inom socialt arbete, Övriga yrken inom socialt arbete
+ssyk_2671,ssyk_267,2671,2671  Präster, Präster
+ssyk_2672,ssyk_267,2672,2672  Diakoner, Diakoner
+ssyk_3111,ssyk_311,3111,3111  Ingenjörer och tekniker inom industri, logistik och produktionsplanering, Ingenjörer och tekniker inom industri, logistik och produktionsplanering
+ssyk_3112,ssyk_311,3112,3112  Ingenjörer och tekniker inom bygg och anläggning, Ingenjörer och tekniker inom bygg och anläggning
+ssyk_3113,ssyk_311,3113,3113  Ingenjörer och tekniker inom elektroteknik, Ingenjörer och tekniker inom elektroteknik
+ssyk_3114,ssyk_311,3114,3114  Ingenjörer och tekniker inom maskinteknik, Ingenjörer och tekniker inom maskinteknik
+ssyk_3115,ssyk_311,3115,3115  Ingenjörer och tekniker inom kemi och kemiteknik, Ingenjörer och tekniker inom kemi och kemiteknik
+ssyk_3116,ssyk_311,3116,3116  Ingenjörer och tekniker inom gruvteknik och metallurgi, Ingenjörer och tekniker inom gruvteknik och metallurgi
+ssyk_3117,ssyk_311,3117,3117  GIS- och kartingenjörer, GIS- och kartingenjörer
+ssyk_3119,ssyk_311,3119,3119  Övriga ingenjörer och tekniker, Övriga ingenjörer och tekniker
+ssyk_3121,ssyk_312,3121,3121  Arbetsledare inom bygg, anläggning och gruva, Arbetsledare inom bygg, anläggning och gruva
+ssyk_3122,ssyk_312,3122,3122  Arbetsledare inom tillverkning, Arbetsledare inom tillverkning
+ssyk_3151,ssyk_315,3151,3151  Maskinbefäl, Maskinbefäl
+ssyk_3152,ssyk_315,3152,3152  Fartygsbefäl m.fl., Fartygsbefäl m.fl.
+ssyk_3153,ssyk_315,3153,3153  Piloter m.fl., Piloter m.fl.
+ssyk_3154,ssyk_315,3154,3154  Flygledare, Flygledare
+ssyk_3155,ssyk_315,3155,3155  Flygtekniker, Flygtekniker
+ssyk_3211,ssyk_321,3211,3211  Tekniker, bilddiagnostik och medicinteknisk utrustning, Tekniker, bilddiagnostik och medicinteknisk utrustning
+ssyk_3212,ssyk_321,3212,3212  Biomedicinska analytiker m.fl., Biomedicinska analytiker m.fl.
+ssyk_3213,ssyk_321,3213,3213  Receptarier, Receptarier
+ssyk_3214,ssyk_321,3214,3214  Tandtekniker och ortopedingenjörer m.fl., Tandtekniker och ortopedingenjörer m.fl.
+ssyk_3215,ssyk_321,3215,3215  Laboratorieingenjörer, Laboratorieingenjörer
+ssyk_3230,ssyk_323,3230,3230  Terapeuter inom alternativmedicin, Terapeuter inom alternativmedicin
+ssyk_3240,ssyk_324,3240,3240  Djursjukskötare m.fl., Djursjukskötare m.fl.
+ssyk_3250,ssyk_325,3250,3250  Tandhygienister, Tandhygienister
+ssyk_3311,ssyk_331,3311,3311  Mäklare inom finans, Mäklare inom finans
+ssyk_3312,ssyk_331,3312,3312  Banktjänstemän, Banktjänstemän
+ssyk_3313,ssyk_331,3313,3313  Redovisningsekonomer, Redovisningsekonomer
+ssyk_3314,ssyk_331,3314,3314  Skadereglerare och värderare, Skadereglerare och värderare
+ssyk_3321,ssyk_332,3321,3321  Försäkringssäljare och försäkringsrådgivare, Försäkringssäljare och försäkringsrådgivare
+ssyk_3322,ssyk_332,3322,3322  Företagssäljare, Företagssäljare
+ssyk_3323,ssyk_332,3323,3323  Inköpare och upphandlare, Inköpare och upphandlare
+ssyk_3324,ssyk_332,3324,3324  Ordersamordnare m.fl., Ordersamordnare m.fl.
+ssyk_3331,ssyk_333,3331,3331  Speditörer och transportmäklare, Speditörer och transportmäklare
+ssyk_3332,ssyk_333,3332,3332  Evenemangs- och reseproducenter m.fl., Evenemangs- och reseproducenter m.fl.
+ssyk_3333,ssyk_333,3333,3333  Arbetsförmedlare, Arbetsförmedlare
+ssyk_3334,ssyk_333,3334,3334  Fastighetsmäklare, Fastighetsmäklare
+ssyk_3335,ssyk_333,3335,3335  Fastighetsförvaltare, Fastighetsförvaltare
+ssyk_3339,ssyk_333,3339,3339  Övriga förmedlare, Övriga förmedlare
+ssyk_3341,ssyk_334,3341,3341  Gruppledare för kontorspersonal, Gruppledare för kontorspersonal
+ssyk_3342,ssyk_334,3342,3342  Domstols- och juristsekreterare m.fl., Domstols- och juristsekreterare m.fl.
+ssyk_3343,ssyk_334,3343,3343  Chefssekreterare och VD-assistenter m.fl., Chefssekreterare och VD-assistenter m.fl.
+ssyk_3351,ssyk_335,3351,3351  Tull- och kustbevakningstjänstemän, Tull- och kustbevakningstjänstemän
+ssyk_3352,ssyk_335,3352,3352  Skattehandläggare, Skattehandläggare
+ssyk_3353,ssyk_335,3353,3353  Socialförsäkringshandläggare, Socialförsäkringshandläggare
+ssyk_3354,ssyk_335,3354,3354  Säkerhetsinspektörer m.fl., Säkerhetsinspektörer m.fl.
+ssyk_3355,ssyk_335,3355,3355  Brandingenjörer och byggnadsinspektörer m.fl., Brandingenjörer och byggnadsinspektörer m.fl.
+ssyk_3359,ssyk_335,3359,3359  Övriga handläggare, Övriga handläggare
+ssyk_3360,ssyk_336,3360,3360  Poliser, Poliser
+ssyk_3411,ssyk_341,3411,3411  Behandlingsassistenter och socialpedagoger m.fl., Behandlingsassistenter och socialpedagoger m.fl.
+ssyk_3412,ssyk_341,3412,3412  Pastorer m.fl., Pastorer m.fl.
+ssyk_3421,ssyk_342,3421,3421  Professionella idrottsutövare, Professionella idrottsutövare
+ssyk_3422,ssyk_342,3422,3422  Idrottstränare och instruktörer m.fl., Idrottstränare och instruktörer m.fl.
+ssyk_3423,ssyk_342,3423,3423  Fritidsledare m.fl., Fritidsledare m.fl.
+ssyk_3424,ssyk_342,3424,3424  Friskvårdskonsulenter och hälsopedagoger m.fl., Friskvårdskonsulenter och hälsopedagoger m.fl.
+ssyk_3431,ssyk_343,3431,3431  Fotografer, Fotografer
+ssyk_3432,ssyk_343,3432,3432  Inredare, dekoratörer och scenografer m.fl., Inredare, dekoratörer och scenografer m.fl.
+ssyk_3433,ssyk_343,3433,3433  Inspicienter och scriptor m.fl., Inspicienter och scriptor m.fl.
+ssyk_3439,ssyk_343,3439,3439  Övriga yrken inom kultur och underhållning, Övriga yrken inom kultur och underhållning
+ssyk_3441,ssyk_344,3441,3441  Trafiklärare, Trafiklärare
+ssyk_3449,ssyk_344,3449,3449  Övriga utbildare och instruktörer, Övriga utbildare och instruktörer
+ssyk_3451,ssyk_345,3451,3451  Köksmästare och souschefer, Köksmästare och souschefer
+ssyk_3452,ssyk_345,3452,3452  Storhushållsföreståndare, Storhushållsföreståndare
+ssyk_3511,ssyk_351,3511,3511  Drifttekniker, IT, Drifttekniker, IT
+ssyk_3512,ssyk_351,3512,3512  Supporttekniker, IT, Supporttekniker, IT
+ssyk_3513,ssyk_351,3513,3513  Systemadministratörer, Systemadministratörer
+ssyk_3514,ssyk_351,3514,3514  Nätverks- och systemtekniker m.fl., Nätverks- och systemtekniker m.fl.
+ssyk_3515,ssyk_351,3515,3515  Webbmaster och webbadministratörer, Webbmaster och webbadministratörer
+ssyk_3521,ssyk_352,3521,3521  Bild- och sändningstekniker, Bild- och sändningstekniker
+ssyk_3522,ssyk_352,3522,3522  Ljus-, ljud och scentekniker, Ljus-, ljud och scentekniker
+ssyk_4111,ssyk_411,4111,4111  Ekonomiassistenter m.fl., Ekonomiassistenter m.fl.
+ssyk_4112,ssyk_411,4112,4112  Löne- och personaladministratörer, Löne- och personaladministratörer
+ssyk_4113,ssyk_411,4113,4113  Backofficepersonal m.fl., Backofficepersonal m.fl.
+ssyk_4114,ssyk_411,4114,4114  Marknads- och försäljningsassistenter, Marknads- och försäljningsassistenter
+ssyk_4115,ssyk_411,4115,4115  Inköps- och orderassistenter, Inköps- och orderassistenter
+ssyk_4116,ssyk_411,4116,4116  Skolassistenter m.fl., Skolassistenter m.fl.
+ssyk_4117,ssyk_411,4117,4117  Medicinska sekreterare, vårdadministratörer m.fl., Medicinska sekreterare, vårdadministratörer m.fl.
+ssyk_4119,ssyk_411,4119,4119  Övriga kontorsassistenter och sekreterare, Övriga kontorsassistenter och sekreterare
+ssyk_4211,ssyk_421,4211,4211  Croupierer och oddssättare m.fl., Croupierer och oddssättare m.fl.
+ssyk_4212,ssyk_421,4212,4212  Inkasserare och pantlånare m.fl., Inkasserare och pantlånare m.fl.
+ssyk_4221,ssyk_422,4221,4221  Resesäljare och trafikassistenter m.fl., Resesäljare och trafikassistenter m.fl.
+ssyk_4222,ssyk_422,4222,4222  Kundtjänstpersonal, Kundtjänstpersonal
+ssyk_4223,ssyk_422,4223,4223  Telefonister, Telefonister
+ssyk_4224,ssyk_422,4224,4224  Hotellreceptionister m.fl., Hotellreceptionister m.fl.
+ssyk_4225,ssyk_422,4225,4225  Kontorsreceptionister, Kontorsreceptionister
+ssyk_4226,ssyk_422,4226,4226  Marknadsundersökare och intervjuare, Marknadsundersökare och intervjuare
+ssyk_4321,ssyk_432,4321,4321  Arbetsledare inom lager och terminal, Arbetsledare inom lager och terminal
+ssyk_4322,ssyk_432,4322,4322  Lager- och terminalpersonal, Lager- och terminalpersonal
+ssyk_4323,ssyk_432,4323,4323  Transportledare och transportsamordnare, Transportledare och transportsamordnare
+ssyk_4410,ssyk_441,4410,4410  Biblioteks- och arkivassistenter m.fl., Biblioteks- och arkivassistenter m.fl.
+ssyk_4420,ssyk_442,4420,4420  Brevbärare och postterminalarbetare, Brevbärare och postterminalarbetare
+ssyk_4430,ssyk_443,4430,4430  Förtroendevalda, Förtroendevalda
+ssyk_5111,ssyk_511,5111,5111  Kabinpersonal m.fl., Kabinpersonal m.fl.
+ssyk_5112,ssyk_511,5112,5112  Tågvärdar och ombordansvariga m.fl., Tågvärdar och ombordansvariga m.fl.
+ssyk_5113,ssyk_511,5113,5113  Guider och reseledare, Guider och reseledare
+ssyk_5120,ssyk_512,5120,5120  Kockar och kallskänkor, Kockar och kallskänkor
+ssyk_5131,ssyk_513,5131,5131  Hovmästare och servitörer, Hovmästare och servitörer
+ssyk_5132,ssyk_513,5132,5132  Bartendrar, Bartendrar
+ssyk_5141,ssyk_514,5141,5141  Frisörer, Frisörer
+ssyk_5142,ssyk_514,5142,5142  Hudterapeuter, Hudterapeuter
+ssyk_5143,ssyk_514,5143,5143  Massörer och massageterapeuter, Massörer och massageterapeuter
+ssyk_5144,ssyk_514,5144,5144  Fotterapeuter, Fotterapeuter
+ssyk_5149,ssyk_514,5149,5149  Övriga skönhets- och kroppsterapeuter, Övriga skönhets- och kroppsterapeuter
+ssyk_5151,ssyk_515,5151,5151  Städledare och husfruar, Städledare och husfruar
+ssyk_5152,ssyk_515,5152,5152  Fastighetsskötare, Fastighetsskötare
+ssyk_5161,ssyk_516,5161,5161  Begravnings- och krematoriepersonal, Begravnings- och krematoriepersonal
+ssyk_5169,ssyk_516,5169,5169  Övrig servicepersonal, Övrig servicepersonal
+ssyk_5221,ssyk_522,5221,5221  Säljande butikschefer och avdelningschefer i butik, Säljande butikschefer och avdelningschefer i butik
+ssyk_5222,ssyk_522,5222,5222  Butikssäljare, dagligvaror, Butikssäljare, dagligvaror
+ssyk_5223,ssyk_522,5223,5223  Butikssäljare, fackhandel, Butikssäljare, fackhandel
+ssyk_5224,ssyk_522,5224,5224  Optikerassistenter, Optikerassistenter
+ssyk_5225,ssyk_522,5225,5225  Bensinstationspersonal, Bensinstationspersonal
+ssyk_5226,ssyk_522,5226,5226  Uthyrare, Uthyrare
+ssyk_5227,ssyk_522,5227,5227  Apotekstekniker, Apotekstekniker
+ssyk_5230,ssyk_523,5230,5230  Kassapersonal m.fl., Kassapersonal m.fl.
+ssyk_5241,ssyk_524,5241,5241  Eventsäljare och butiksdemonstratörer m.fl., Eventsäljare och butiksdemonstratörer m.fl.
+ssyk_5242,ssyk_524,5242,5242  Telefonförsäljare m.fl., Telefonförsäljare m.fl.
+ssyk_5311,ssyk_531,5311,5311  Barnskötare, Barnskötare
+ssyk_5312,ssyk_531,5312,5312  Elevassistenter m.fl., Elevassistenter m.fl.
+ssyk_5321,ssyk_532,5321,5321  Undersköterskor, hemtjänst, hemsjukvård och äldreboende, Undersköterskor, hemtjänst, hemsjukvård och äldreboende
+ssyk_5322,ssyk_532,5322,5322  Undersköterskor, habilitering, Undersköterskor, habilitering
+ssyk_5323,ssyk_532,5323,5323  Undersköterskor, vård- och specialavdelning, Undersköterskor, vård- och specialavdelning
+ssyk_5324,ssyk_532,5324,5324  Undersköterskor, mottagning, Undersköterskor, mottagning
+ssyk_5325,ssyk_532,5325,5325  Barnsköterskor, Barnsköterskor
+ssyk_5326,ssyk_532,5326,5326  Ambulanssjukvårdare, Ambulanssjukvårdare
+ssyk_5330,ssyk_533,5330,5330  Vårdbiträden, Vårdbiträden
+ssyk_5341,ssyk_534,5341,5341  Skötare, Skötare
+ssyk_5342,ssyk_534,5342,5342  Vårdare, boendestödjare, Vårdare, boendestödjare
+ssyk_5343,ssyk_534,5343,5343  Personliga assistenter, Personliga assistenter
+ssyk_5349,ssyk_534,5349,5349  Övrig vård- och omsorgspersonal, Övrig vård- och omsorgspersonal
+ssyk_5350,ssyk_535,5350,5350  Tandsköterskor, Tandsköterskor
+ssyk_5411,ssyk_541,5411,5411  Brandmän, Brandmän
+ssyk_5412,ssyk_541,5412,5412  Kriminalvårdare, Kriminalvårdare
+ssyk_5413,ssyk_541,5413,5413  Väktare och ordningsvakter, Väktare och ordningsvakter
+ssyk_5414,ssyk_541,5414,5414  SOS-operatörer m.fl., SOS-operatörer m.fl.
+ssyk_5419,ssyk_541,5419,5419  Övrig bevaknings- och säkerhetspersonal, Övrig bevaknings- och säkerhetspersonal
+ssyk_6111,ssyk_611,6111,6111  Odlare av jordbruksväxter, frukt- och bär, Odlare av jordbruksväxter, frukt- och bär
+ssyk_6112,ssyk_611,6112,6112  Trädgårdsodlare, Trädgårdsodlare
+ssyk_6113,ssyk_611,6113,6113  Trädgårdsanläggare m.fl., Trädgårdsanläggare m.fl.
+ssyk_6121,ssyk_612,6121,6121  Uppfödare och skötare av lantbrukets husdjur, Uppfödare och skötare av lantbrukets husdjur
+ssyk_6122,ssyk_612,6122,6122  Uppfödare och skötare av sällskapsdjur, Uppfödare och skötare av sällskapsdjur
+ssyk_6129,ssyk_612,6129,6129  Övriga djuruppfödare och djurskötare, Övriga djuruppfödare och djurskötare
+ssyk_6130,ssyk_613,6130,6130  Växtodlare och djuruppfödare, blandad drift, Växtodlare och djuruppfödare, blandad drift
+ssyk_6210,ssyk_621,6210,6210  Skogsarbetare, Skogsarbetare
+ssyk_6221,ssyk_622,6221,6221  Fiskodlare, Fiskodlare
+ssyk_6222,ssyk_622,6222,6222  Fiskare, Fiskare
+ssyk_7111,ssyk_711,7111,7111  Träarbetare, snickare m.fl., Träarbetare, snickare m.fl.
+ssyk_7112,ssyk_711,7112,7112  Murare m.fl., Murare m.fl.
+ssyk_7113,ssyk_711,7113,7113  Betongarbetare, Betongarbetare
+ssyk_7114,ssyk_711,7114,7114  Anläggningsarbetare, Anläggningsarbetare
+ssyk_7115,ssyk_711,7115,7115  Anläggningsdykare, Anläggningsdykare
+ssyk_7116,ssyk_711,7116,7116  Ställningsbyggare, Ställningsbyggare
+ssyk_7119,ssyk_711,7119,7119  Övriga byggnads- och anläggningsarbetare, Övriga byggnads- och anläggningsarbetare
+ssyk_7121,ssyk_712,7121,7121  Takmontörer, Takmontörer
+ssyk_7122,ssyk_712,7122,7122  Golvläggare, Golvläggare
+ssyk_7123,ssyk_712,7123,7123  Isoleringsmontörer, Isoleringsmontörer
+ssyk_7124,ssyk_712,7124,7124  Glastekniker, Glastekniker
+ssyk_7125,ssyk_712,7125,7125  VVS-montörer m.fl., VVS-montörer m.fl.
+ssyk_7126,ssyk_712,7126,7126  Kyl- och värmepumpstekniker m.fl., Kyl- och värmepumpstekniker m.fl.
+ssyk_7131,ssyk_713,7131,7131  Målare, Målare
+ssyk_7132,ssyk_713,7132,7132  Lackerare och industrimålare, Lackerare och industrimålare
+ssyk_7133,ssyk_713,7133,7133  Skorstensfejare, Skorstensfejare
+ssyk_7134,ssyk_713,7134,7134  Saneringsarbetare m.fl., Saneringsarbetare m.fl.
+ssyk_7211,ssyk_721,7211,7211  Gjutare, Gjutare
+ssyk_7212,ssyk_721,7212,7212  Svetsare och gasskärare, Svetsare och gasskärare
+ssyk_7213,ssyk_721,7213,7213  Byggnads- och ventilationsplåtslagare, Byggnads- och ventilationsplåtslagare
+ssyk_7214,ssyk_721,7214,7214  Tunnplåtslagare, Tunnplåtslagare
+ssyk_7215,ssyk_721,7215,7215  Stålkonstruktionsmontörer och grovplåtsslagare, Stålkonstruktionsmontörer och grovplåtsslagare
+ssyk_7221,ssyk_722,7221,7221  Smeder, Smeder
+ssyk_7222,ssyk_722,7222,7222  Verktygsmakare, Verktygsmakare
+ssyk_7223,ssyk_722,7223,7223  Maskinställare och maskinoperatörer, metallarbete, Maskinställare och maskinoperatörer, metallarbete
+ssyk_7224,ssyk_722,7224,7224  Slipare m.fl., Slipare m.fl.
+ssyk_7231,ssyk_723,7231,7231  Motorfordonsmekaniker och fordonsreparatörer, Motorfordonsmekaniker och fordonsreparatörer
+ssyk_7232,ssyk_723,7232,7232  Flygmekaniker m.fl., Flygmekaniker m.fl.
+ssyk_7233,ssyk_723,7233,7233  Underhållsmekaniker och maskinreparatörer, Underhållsmekaniker och maskinreparatörer
+ssyk_7311,ssyk_731,7311,7311  Finmekaniker, Finmekaniker
+ssyk_7312,ssyk_731,7312,7312  Guld- och silversmeder, Guld- och silversmeder
+ssyk_7319,ssyk_731,7319,7319  Musikinstrumentmakare och övriga konsthantverkare, Musikinstrumentmakare och övriga konsthantverkare
+ssyk_7321,ssyk_732,7321,7321  Prepresstekniker, Prepresstekniker
+ssyk_7322,ssyk_732,7322,7322  Tryckare, Tryckare
+ssyk_7323,ssyk_732,7323,7323  Bokbindare m.fl., Bokbindare m.fl.
+ssyk_7411,ssyk_741,7411,7411  Installations- och serviceelektriker, Installations- och serviceelektriker
+ssyk_7412,ssyk_741,7412,7412  Industrielektriker, Industrielektriker
+ssyk_7413,ssyk_741,7413,7413  Distributionselektriker, Distributionselektriker
+ssyk_7420,ssyk_742,7420,7420  Elektronikreparatörer och kommunikationselektriker m.fl., Elektronikreparatörer och kommunikationselektriker m.fl.
+ssyk_7521,ssyk_752,7521,7521  Manuella ytbehandlare, trä, Manuella ytbehandlare, trä
+ssyk_7522,ssyk_752,7522,7522  Fin-, inrednings- och möbelsnickare, Fin-, inrednings- och möbelsnickare
+ssyk_7523,ssyk_752,7523,7523  Maskinsnickare och maskinoperatörer, träindustri, Maskinsnickare och maskinoperatörer, träindustri
+ssyk_7531,ssyk_753,7531,7531  Skräddare och ateljésömmerskor m.fl., Skräddare och ateljésömmerskor m.fl.
+ssyk_7532,ssyk_753,7532,7532  Sömmare, Sömmare
+ssyk_7533,ssyk_753,7533,7533  Tapetserare, Tapetserare
+ssyk_7534,ssyk_753,7534,7534  Läderhantverkare och skomakare, Läderhantverkare och skomakare
+ssyk_7611,ssyk_761,7611,7611  Slaktare och styckare m.fl., Slaktare och styckare m.fl.
+ssyk_7612,ssyk_761,7612,7612  Bagare och konditorer, Bagare och konditorer
+ssyk_7613,ssyk_761,7613,7613  Provsmakare och kvalitetsbedömare, Provsmakare och kvalitetsbedömare
+ssyk_7619,ssyk_761,7619,7619  Övriga livsmedelsförädlare, Övriga livsmedelsförädlare
+ssyk_8111,ssyk_811,8111,8111  Gruv- och stenbrottsarbetare, Gruv- och stenbrottsarbetare
+ssyk_8112,ssyk_811,8112,8112  Processoperatörer, stenkross- och malmförädlingsanläggning, Processoperatörer, stenkross- och malmförädlingsanläggning
+ssyk_8113,ssyk_811,8113,8113  Brunnsborrare m.fl., Brunnsborrare m.fl.
+ssyk_8114,ssyk_811,8114,8114  Maskinoperatörer, cement-, sten- och betongvaror, Maskinoperatörer, cement-, sten- och betongvaror
+ssyk_8115,ssyk_811,8115,8115  Bergssprängare, Bergssprängare
+ssyk_8116,ssyk_811,8116,8116  Stenhuggare m.fl., Stenhuggare m.fl.
+ssyk_8121,ssyk_812,8121,8121  Maskinoperatörer, ytbehandling, Maskinoperatörer, ytbehandling
+ssyk_8122,ssyk_812,8122,8122  Valsverksoperatörer, Valsverksoperatörer
+ssyk_8129,ssyk_812,8129,8129  Övriga maskin- och processoperatörer vid stål- och metallverk, Övriga maskin- och processoperatörer vid stål- och metallverk
+ssyk_8131,ssyk_813,8131,8131  Maskinoperatörer, farmaceutiska produkter, Maskinoperatörer, farmaceutiska produkter
+ssyk_8132,ssyk_813,8132,8132  Maskinoperatörer, kemisktekniska och fotografiska produkter, Maskinoperatörer, kemisktekniska och fotografiska produkter
+ssyk_8141,ssyk_814,8141,8141  Maskinoperatörer, gummiindustri, Maskinoperatörer, gummiindustri
+ssyk_8142,ssyk_814,8142,8142  Maskinoperatörer, plastindustri, Maskinoperatörer, plastindustri
+ssyk_8143,ssyk_814,8143,8143  Maskinoperatörer, pappersvaruindustri, Maskinoperatörer, pappersvaruindustri
+ssyk_8151,ssyk_815,8151,8151  Maskinoperatörer, blekning, färgning och tvättning, Maskinoperatörer, blekning, färgning och tvättning
+ssyk_8159,ssyk_815,8159,8159  Övriga maskinoperatörer, textil-, skinn- och läderindustri, Övriga maskinoperatörer, textil-, skinn- och läderindustri
+ssyk_8161,ssyk_816,8161,8161  Maskinoperatörer, kött- och fiskberedningsindustri, Maskinoperatörer, kött- och fiskberedningsindustri
+ssyk_8162,ssyk_816,8162,8162  Maskinoperatörer, mejeri, Maskinoperatörer, mejeri
+ssyk_8163,ssyk_816,8163,8163  Maskinoperatörer, kvarn-, bageri- och konfektyrindustri, Maskinoperatörer, kvarn-, bageri- och konfektyrindustri
+ssyk_8169,ssyk_816,8169,8169  Övriga maskinoperatörer inom livsmedelsindustri m.m., Övriga maskinoperatörer inom livsmedelsindustri m.m.
+ssyk_8171,ssyk_817,8171,8171  Processoperatörer, pappersmassa, Processoperatörer, pappersmassa
+ssyk_8172,ssyk_817,8172,8172  Processoperatörer, papper, Processoperatörer, papper
+ssyk_8173,ssyk_817,8173,8173  Operatörer inom sågverk, hyvleri och plywood m.m., Operatörer inom sågverk, hyvleri och plywood m.m.
+ssyk_8174,ssyk_817,8174,8174  Maskinoperatörer inom ytbehandling, trä, Maskinoperatörer inom ytbehandling, trä
+ssyk_8181,ssyk_818,8181,8181  Maskinoperatörer, påfyllning, packning och märkning, Maskinoperatörer, påfyllning, packning och märkning
+ssyk_8189,ssyk_818,8189,8189  Andra process- och maskinoperatörer, Andra process- och maskinoperatörer
+ssyk_8191,ssyk_819,8191,8191  Drifttekniker vid värme- och vattenverk, Drifttekniker vid värme- och vattenverk
+ssyk_8192,ssyk_819,8192,8192  Processövervakare, kemisk industri, Processövervakare, kemisk industri
+ssyk_8193,ssyk_819,8193,8193  Processövervakare, metallproduktion, Processövervakare, metallproduktion
+ssyk_8199,ssyk_819,8199,8199  Övriga drifttekniker och processövervakare, Övriga drifttekniker och processövervakare
+ssyk_8211,ssyk_821,8211,8211  Fordonsmontörer, Fordonsmontörer
+ssyk_8212,ssyk_821,8212,8212  Montörer, elektrisk och elektronisk utrustning, Montörer, elektrisk och elektronisk utrustning
+ssyk_8213,ssyk_821,8213,8213  Montörer, metall-, gummi- och plastprodukter, Montörer, metall-, gummi- och plastprodukter
+ssyk_8214,ssyk_821,8214,8214  Montörer, träprodukter, Montörer, träprodukter
+ssyk_8219,ssyk_821,8219,8219  Övriga montörer, Övriga montörer
+ssyk_8311,ssyk_831,8311,8311  Lokförare, Lokförare
+ssyk_8312,ssyk_831,8312,8312  Bangårdspersonal, Bangårdspersonal
+ssyk_8321,ssyk_832,8321,8321  Taxiförare m.fl., Taxiförare m.fl.
+ssyk_8329,ssyk_832,8329,8329  Övriga bil-, motorcykel- och cykelförare, Övriga bil-, motorcykel- och cykelförare
+ssyk_8331,ssyk_833,8331,8331  Buss- och spårvagnsförare, Buss- och spårvagnsförare
+ssyk_8332,ssyk_833,8332,8332  Lastbilsförare m.fl., Lastbilsförare m.fl.
+ssyk_8341,ssyk_834,8341,8341  Förare av jordbruks- och skogsmaskiner, Förare av jordbruks- och skogsmaskiner
+ssyk_8342,ssyk_834,8342,8342  Anläggningsmaskinförare m.fl., Anläggningsmaskinförare m.fl.
+ssyk_8343,ssyk_834,8343,8343  Kranförare m.fl., Kranförare m.fl.
+ssyk_8344,ssyk_834,8344,8344  Truckförare, Truckförare
+ssyk_8350,ssyk_835,8350,8350  Matroser och jungmän m.fl., Matroser och jungmän m.fl.
+ssyk_9111,ssyk_911,9111,9111  Städare, Städare
+ssyk_9119,ssyk_911,9119,9119  Övrig hemservicepersonal m.fl., Övrig hemservicepersonal m.fl.
+ssyk_9120,ssyk_912,9120,9120  Bilrekonditionerare, fönsterputsare och övriga rengöringsarbetare, Bilrekonditionerare, fönsterputsare och övriga rengöringsarbetare
+ssyk_9210,ssyk_921,9210,9210  Bärplockare och plantörer m.fl., Bärplockare och plantörer m.fl.
+ssyk_9310,ssyk_931,9310,9310  Grovarbetare inom bygg och anläggning, Grovarbetare inom bygg och anläggning
+ssyk_9320,ssyk_932,9320,9320  Handpaketerare och andra fabriksarbetare, Handpaketerare och andra fabriksarbetare
+ssyk_9331,ssyk_933,9331,9331  Hamnarbetare, Hamnarbetare
+ssyk_9332,ssyk_933,9332,9332  Ramppersonal, flyttkarlar och varupåfyllare m.fl., Ramppersonal, flyttkarlar och varupåfyllare m.fl.
+ssyk_9411,ssyk_941,9411,9411  Pizzabagare m.fl., Pizzabagare m.fl.
+ssyk_9412,ssyk_941,9412,9412  Restaurang- och köksbiträden m.fl., Restaurang- och köksbiträden m.fl.
+ssyk_9413,ssyk_941,9413,9413  Kafé- och konditoribiträden, Kafé- och konditoribiträden
+ssyk_9520,ssyk_952,9520,9520  Torg- och marknadsförsäljare, Torg- och marknadsförsäljare
+ssyk_9610,ssyk_961,9610,9610  Renhållnings- och återvinningsarbetare, Renhållnings- och återvinningsarbetare
+ssyk_9621,ssyk_962,9621,9621  Reklamutdelare och tidningsdistributörer, Reklamutdelare och tidningsdistributörer
+ssyk_9622,ssyk_962,9622,9622  Vaktmästare m.fl., Vaktmästare m.fl.
+ssyk_9629,ssyk_962,9629,9629  Övriga servicearbetare, Övriga servicearbetare
+ssyk_0,,0,0 Militära yrken,Militära yrken
+ssyk_01,ssyk_0,01,01  Officerare, Officerare
+ssyk_011,ssyk_01,011,011  Officerare, Officerare
+ssyk_0110,ssyk_011,0110,0110  Officerare, Officerare
+ssyk_02,ssyk_0,02,02  Specialistofficerare, Specialistofficerare
+ssyk_021,ssyk_02,021,021  Specialistofficerare, Specialistofficerare
+ssyk_03,ssyk_0,03,03  Soldater m.fl., Soldater m.fl.
+ssyk_031,ssyk_03,031,031  Soldater m.fl., Soldater m.fl.
+,,,,
+,,,,
+,,,,
+,,,,
+,,,,
+,,,,
+,,,,
+,,,,
+,,,,
+,,,,
+,,,,
+,,,,
+,,,,
+,,,,
