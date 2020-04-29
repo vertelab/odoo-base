@@ -1,0 +1,159 @@
+# Translation of Odoo Server.
+# This file contains the translation of the following modules:
+# 	* res_sun
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: Odoo Server 12.0-20190808\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2020-04-22 08:56+0000\n"
+"PO-Revision-Date: 2020-04-22 11:01+0200\n"
+"Last-Translator: <>\n"
+"Language-Team: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: \n"
+"Language: sv_SE\n"
+"X-Generator: Poedit 2.0.6\n"
+
+#. module: res_sun
+#: model_terms:ir.ui.view,arch_db:res_sun.view_sun_tree
+msgid "Code"
+msgstr "Kod"
+
+#. module: res_sun
+#: model:ir.model,name:res_sun.model_res_partner
+msgid "Contact"
+msgstr "Kontakt"
+
+#. module: res_sun
+#: model:ir.model.fields,field_description:res_sun.field_res_partner_education_level__create_uid
+#: model:ir.model.fields,field_description:res_sun.field_res_sun__create_uid
+msgid "Created by"
+msgstr "Skapad av"
+
+#. module: res_sun
+#: model:ir.model.fields,field_description:res_sun.field_res_partner_education_level__create_date
+#: model:ir.model.fields,field_description:res_sun.field_res_sun__create_date
+msgid "Created on"
+msgstr "Skapad den"
+
+#. module: res_sun
+#: model:ir.model.fields,field_description:res_sun.field_res_partner_education_level__description
+#: model:ir.model.fields,field_description:res_sun.field_res_sun__description
+msgid "Description"
+msgstr "Beskrivning"
+
+#. module: res_sun
+#: model:ir.model.fields,field_description:res_sun.field_res_partner_education_level__display_name
+#: model:ir.model.fields,field_description:res_sun.field_res_sun__display_name
+msgid "Display Name"
+msgstr "Visningsnamn"
+
+#. module: res_sun
+#: model_terms:ir.ui.view,arch_db:res_sun.view_partner_form_education
+msgid "Education"
+msgstr "Utbildning"
+
+#. module: res_sun
+#: model:ir.model.fields,field_description:res_sun.field_res_partner__education_level
+#: model:ir.model.fields,field_description:res_sun.field_res_partner_education_level__name
+#: model:ir.model.fields,field_description:res_sun.field_res_users__education_level
+msgid "Education level"
+msgstr "Utbildningsnivå"
+
+#. module: res_sun
+#: model:ir.model.fields,field_description:res_sun.field_res_partner__foreign_education
+#: model:ir.model.fields,field_description:res_sun.field_res_users__foreign_education
+msgid "Foreign education"
+msgstr "Utländsk utbildning"
+
+#. module: res_sun
+#: model:ir.model.fields,field_description:res_sun.field_res_partner__foreign_education_approved
+#: model:ir.model.fields,field_description:res_sun.field_res_users__foreign_education_approved
+msgid "Foreign education approved"
+msgstr "Utländsk utbildning bedömd av berörd instans"
+
+#. module: res_sun
+#: model:ir.model.fields,field_description:res_sun.field_res_partner_education_level__id
+#: model:ir.model.fields,field_description:res_sun.field_res_sun__id
+msgid "ID"
+msgstr ""
+
+#. module: res_sun
+#: model:ir.model.fields,field_description:res_sun.field_res_partner_education_level____last_update
+#: model:ir.model.fields,field_description:res_sun.field_res_sun____last_update
+msgid "Last Modified on"
+msgstr "Senast redigerad"
+
+#. module: res_sun
+#: model:ir.model.fields,field_description:res_sun.field_res_partner_education_level__write_uid
+#: model:ir.model.fields,field_description:res_sun.field_res_sun__write_uid
+msgid "Last Updated by"
+msgstr "Senast uppdaterad av"
+
+#. module: res_sun
+#: model:ir.model.fields,field_description:res_sun.field_res_partner_education_level__write_date
+#: model:ir.model.fields,field_description:res_sun.field_res_sun__write_date
+msgid "Last Updated on"
+msgstr "Senast uppdaterad"
+
+#. module: res_sun
+#: model:ir.model.fields,field_description:res_sun.field_res_sun__name
+#: model_terms:ir.ui.view,arch_db:res_sun.view_sun_form
+msgid "Name"
+msgstr "Namn"
+
+#. module: res_sun
+#: model:ir.model.fields,field_description:res_sun.field_res_sun__code
+msgid "Official Code"
+msgstr "Officiell Kod"
+
+#. module: res_sun
+#: model:ir.model.fields,help:res_sun.field_res_sun__code
+msgid "Official code, group, sub-group or detail group."
+msgstr ""
+
+#. module: res_sun
+#: model:ir.model.fields,field_description:res_sun.field_res_sun__parent_id
+msgid "Parent"
+msgstr "Överordnad"
+
+#. module: res_sun
+#: model:ir.model.fields,field_description:res_sun.field_res_partner_education_level__partner_id
+#: model:ir.model.fields,field_description:res_sun.field_res_sun__partner_id
+msgid "Partner"
+msgstr "Samarbetspartner"
+
+#. module: res_sun
+#: model:ir.model.fields,field_description:res_sun.field_res_partner__sun_id
+#: model:ir.model.fields,field_description:res_sun.field_res_users__sun_id
+msgid "SUN Code"
+msgstr "SUN Kod"
+
+#. module: res_sun
+#: model:ir.actions.act_window,name:res_sun.action_sun_form
+#: model:ir.ui.menu,name:res_sun.menu_sun_form
+msgid "SUN-koder"
+msgstr ""
+
+#. module: res_sun
+#: model_terms:ir.ui.view,arch_db:res_sun.view_sun_filter
+msgid "Search sun"
+msgstr ""
+
+#. module: res_sun
+#: model:ir.model,name:res_sun.model_res_partner_education_level
+msgid "res.partner.education_level"
+msgstr ""
+
+#. module: res_sun
+#: model:ir.model,name:res_sun.model_res_sun
+msgid "res.sun"
+msgstr ""
+
+#. module: res_sun
+#: model_terms:ir.ui.view,arch_db:res_sun.view_sun_form
+msgid "sun"
+msgstr "SUN"

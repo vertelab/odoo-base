@@ -1,0 +1,107 @@
+# Translation of Odoo Server.
+# This file contains the translation of the following modules:
+# 	* partner_desired_jobs
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: Odoo Server 12.0-20190808\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2020-04-21 14:57+0000\n"
+"PO-Revision-Date: 2020-04-21 17:04+0200\n"
+"Last-Translator: <>\n"
+"Language-Team: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: \n"
+"Language: sv_SE\n"
+"X-Generator: Poedit 2.0.6\n"
+
+#. module: partner_desired_jobs
+#: model:ir.model,name:partner_desired_jobs.model_res_partner
+msgid "Contact"
+msgstr "Kontakt"
+
+#. module: partner_desired_jobs
+#: model:ir.model.fields,field_description:partner_desired_jobs.field_res_partner_jobs__create_uid
+msgid "Created by"
+msgstr "Skapad av"
+
+#. module: partner_desired_jobs
+#: model:ir.model.fields,field_description:partner_desired_jobs.field_res_partner_jobs__create_date
+msgid "Created on"
+msgstr "Skapad den"
+
+#. module: partner_desired_jobs
+#: model:ir.actions.act_window,name:partner_desired_jobs.action_jobs
+#: model:ir.ui.menu,name:partner_desired_jobs.menu_action_jobs
+#: model_terms:ir.ui.view,arch_db:partner_desired_jobs.view_partner_form_applied_for_jobs
+#: model_terms:ir.ui.view,arch_db:partner_desired_jobs.view_partner_jobs_tree
+msgid "Desired jobs"
+msgstr "Sökta jobb"
+
+#. module: partner_desired_jobs
+#: model:ir.model.fields,field_description:partner_desired_jobs.field_res_partner_jobs__display_name
+msgid "Display Name"
+msgstr "Visningsnamn"
+
+#. module: partner_desired_jobs
+#: model:ir.model.fields,field_description:partner_desired_jobs.field_res_partner_jobs__education
+msgid "Education"
+msgstr "Utbildning"
+
+#. module: partner_desired_jobs
+#: model:ir.model.fields,field_description:partner_desired_jobs.field_res_partner_jobs__experience
+msgid "Experience"
+msgstr "Erfarenhet"
+
+#. module: partner_desired_jobs
+#: model:ir.model.fields,field_description:partner_desired_jobs.field_res_partner_jobs__id
+msgid "ID"
+msgstr ""
+
+#. module: partner_desired_jobs
+#: model:ir.model.fields,field_description:partner_desired_jobs.field_res_partner__job_ids
+#: model:ir.model.fields,field_description:partner_desired_jobs.field_res_users__job_ids
+msgid "Job"
+msgstr "Jobb"
+
+#. module: partner_desired_jobs
+#: model:ir.model.fields,field_description:partner_desired_jobs.field_res_partner_jobs__name
+msgid "Job title"
+msgstr "Jobbtitel"
+
+#. module: partner_desired_jobs
+#: model:ir.model.fields,field_description:partner_desired_jobs.field_res_partner_jobs____last_update
+msgid "Last Modified on"
+msgstr "Senast redigerad"
+
+#. module: partner_desired_jobs
+#: model:ir.model.fields,field_description:partner_desired_jobs.field_res_partner_jobs__write_uid
+msgid "Last Updated by"
+msgstr "Senast uppdaterad av"
+
+#. module: partner_desired_jobs
+#: model:ir.model.fields,field_description:partner_desired_jobs.field_res_partner_jobs__write_date
+msgid "Last Updated on"
+msgstr "Senast uppdaterad"
+
+#. module: partner_desired_jobs
+#: model:ir.model.fields,help:partner_desired_jobs.field_res_partner_jobs__ssyk_code
+msgid "Official code, group, sub-group or detail group."
+msgstr ""
+
+#. module: partner_desired_jobs
+#: model:ir.model.fields,field_description:partner_desired_jobs.field_res_partner_jobs__partner_id
+msgid "Partner"
+msgstr "Samarbetspartner"
+
+#. module: partner_desired_jobs
+#: model:ir.model.fields,field_description:partner_desired_jobs.field_res_partner_jobs__ssyk_code
+msgid "SSYK"
+msgstr ""
+
+#. module: partner_desired_jobs
+#: model:ir.model,name:partner_desired_jobs.model_res_partner_jobs
+msgid "res.partner.jobs"
+msgstr ""
