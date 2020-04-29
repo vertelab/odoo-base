@@ -1,0 +1,74 @@
+id,parent_id/id,code,name
+sun_0,,0,Förskoleutbildning
+sun_1,,1,Förgymnasial utbildning, kortare än 9 år
+sun_2,,2,Förgymnasial utbildning, 9 (10) år
+sun_3,,3,Gymnasial utbildning
+sun_4,,4,Eftergymnasial utbildning, kortare än 2 år
+sun_5,,5,Eftergymnasial utbildning, minst 2 år
+sun_6,,6,Forskarutbildning
+sun_00,sun_0,00,Förskoleutbildning
+sun_10,sun_1,10,Förgymnasial utbildning kortare än 9 år
+sun_20,sun_2,20,Förgymnasial utbildning, 9 (10) år
+sun_31,sun_3,31,Gymnasial utbildning, kortare än 2 år
+sun_32,sun_3,32,Gymnasial utbildning, 2 år 
+sun_33,sun_3,33,Gymnasial utbildning, 3 år
+sun_41,sun_4,41,Eftergymnasial utbildning, kortare än 2 år
+sun_52,sun_5,52,Eftergymnasial utbildning, 2 år
+sun_53,sun_5,53,Eftergymnasial utbildning, 3 år
+sun_54,sun_5,54,Eftergymnasial utbildning, 4 år
+sun_55,sun_5,55,Eftergymnasial utbildning, 5 år eller längre
+sun_60,sun_6,60,Övrig forskarutbildning
+sun_62,sun_6,62,Licentiatutbildning
+sun_64,sun_6,64,Doktorsutbildning
+sun_000,sun_00,000,Övrig förskoleutbildning
+sun_001,sun_00,001,Förskola
+sun_002,sun_00,002,Förskoleklass
+sun_100,sun_10,100,Övrig förgymnasial utbildning, kortare än 9 år
+sun_102,sun_10,102,Grundskoleutbildning, årskurs 1–6
+sun_106,sun_10,106,Folkskoleutbildning
+sun_200,sun_20,200,Övrig förgymnasial utbildning, 9 (10) år
+sun_204,sun_20,204,Realskoleutbildning
+sun_206,sun_20,206,Grundskoleutbildning, årskurs 7–9 (10)
+sun_310,sun_31,310,Övrig gymnasial utbildning, kortare än 2 år
+sun_312,sun_31,312,Gymnasial utbildning, studieförberedande, ej examen, kortare än 2 år
+sun_313,sun_31,313,Gymnasial utbildning, yrkesinriktad, ej examen, kortare än 2 år
+sun_316,sun_31,316,Gymnasial utbildning, studieförberedande, kortare än 2 år
+sun_317,sun_31,317,Gymnasial utbildning, yrkesinriktad, kortare än 2 år
+sun_320,sun_32,320,Övrig gymnasial utbildning, 2 år
+sun_322,sun_32,322,Gymnasial utbildning, studieförberedande, ej examen, 2 år
+sun_323,sun_32,323,Gymnasial utbildning, yrkesinriktad, ej examen, 2 år
+sun_326,sun_32,326,Gymnasial utbildning, studieförberedande, 2 år
+sun_327,sun_32,327,Gymnasial utbildning, yrkesinriktad, 2 år
+sun_330,sun_33,330,Övrig gymnasial utbildning, 3 år
+sun_332,sun_33,332,Gymnasial utbildning, studieförberedande, ej examen, 3 år
+sun_333,sun_33,333,Gymnasial utbildning, yrkesinriktad, ej examen, 3 år
+sun_336,sun_33,336,Gymnasial utbildning, studieförberedande, 3 år
+sun_337,sun_33,337,Gymnasial utbildning, yrkesinriktad, 3 år
+sun_410,sun_41,410,Övrig eftergymnasial utbildning, kortare än 2 år 
+sun_412,sun_41,412,Högskoleutbildning, minst 30 högskolepoäng, ej examen, kortare än 2 år
+sun_413,sun_41,413,Gymnasial påbyggnadsutbildning, kortare än 2 år
+sun_415,sun_41,415,Eftergymnasial utbildning, ej vid universitet och högskola, yrkesinriktad, kortare än 2 år
+sun_417,sun_41,417,Högskoleutbildning, yrkesinriktad, kortare än 2 år
+sun_520,sun_52,520,Övrig eftergymnasial utbildning, 2 år
+sun_522,sun_52,522,Högskoleutbildning, 120 högskolepoäng, ej examen, 2 år
+sun_525,sun_52,525,Eftergymnasial utbildning, ej vid universitet och högskola, yrkesinriktad, 2 år
+sun_526,sun_52,526,Högskoleutbildning, generell, 2 år
+sun_527,sun_52,527,Högskoleutbildning, yrkesinriktad, 2 år
+sun_530,sun_53,530,Övrig eftergymnasial utbildning, 3 år
+sun_532,sun_53,532,Högskoleutbildning, minst 180 högskolepoäng, ej examen, 3 år
+sun_535,sun_53,535,Eftergymnasial utbildning, ej vid universitet och högskola, yrkesinriktad, 3 år
+sun_536,sun_53,536,Högskoleutbildning, generell, 3 år
+sun_537,sun_53,537,Högskoleutbildning, yrkesinriktad, 3 år
+sun_540,sun_54,540,Övrig eftergymnasial utbildning, 4 år
+sun_545,sun_54,545,Eftergymnasial utbildning, ej vid universitet och högskola, yrkesinriktad, 4 år
+sun_546,sun_54,546,Högskoleutbildning, generell, 4 år
+sun_547,sun_54,547,Högskoleutbildning, yrkesinriktad, 4 år
+sun_550,sun_55,550,Övrig eftergymnasial utbildning, 5 år eller längre
+sun_555,sun_55,555,Eftergymnasial utbildning, ej vid universitet och högskola, yrkesinriktad, 5 år
+sun_556,sun_55,556,Högskoleutbildning, generell, 5 år eller längre
+sun_557,sun_55,557,Högskoleutbildning, yrkesinriktad, 5 år eller längre
+sun_600,sun_60,600,Övrig forskarutbildning
+sun_620,sun_62,620,Licentiatutbildning
+sun_640,sun_64,640,Doktorsutbildning
+,,,
+,,,

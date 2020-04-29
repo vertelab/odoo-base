@@ -30,7 +30,7 @@ AFC-197
 """,
     'author': 'Vertel AB',
     'website': 'http://www.vertel.se',
-    'depends': ['base', 'partner_employee360'],
+    'depends': ['base', 'partner_view_360'],
     'data': [
         'views/res_partner_view.xml',
         'security/ir.model.access.csv', 

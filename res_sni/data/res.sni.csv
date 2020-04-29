@@ -1,0 +1,1821 @@
+id,parent_id/id,name,code
+sni_A,,A,Jordbruk, skogsbruk och fiske
+sni_B,,B,Utvinning av mineral
+sni_C,,C,Tillverkning
+sni_D,,D,Försörjning av el, gas, värme och kyla
+sni_E,,E,"Vattenförsörjning, avloppsrening, avfallshantering och sanering"
+sni_F,,F,Byggverksamhet
+sni_G,,G,"Handel, reparation av motorfordon och motorcyklar"
+sni_H,,H,Transport och magasinering
+sni_I,,I,Hotell- och restaurangverksamhet
+sni_J,,J,Informations- och kommunikationsverksamhet
+sni_K,,K,Finans- och försäkringsverksamhet
+sni_L,,L,Fastighetsverksamhet
+sni_M,,M,Verksamhet inom juridik, ekonomi, vetenskap och teknik
+sni_N,,N,Uthyrning, fastighetsservice, resetjänster och andra stödtjänster
+sni_O,,O,"Offentlig förvaltning och försvar, obligatorisk socialförsäkring"
+sni_P,,P,Utbildning
+sni_Q,,Q,"Vård och omsorg, sociala tjänster"
+sni_R,,R,Kultur, nöje och fritid
+sni_S,,S,Annan serviceverksamhet
+sni_T,,T,"Förvärvsarbete i hushåll, hushållens produktion av diverse varor och tjänster för eget bruk"
+sni_U,,U,Verksamhet vid internationella organisationer, utländska ambassader o.d.
+sni_01,sni_A,01,Jordbruk och jakt samt service i anslutning härtill
+sni_02,sni_A,02,Skogsbruk
+sni_03,sni_A,03,Fiske och vattenbruk
+sni_05,sni_B,05,Kolutvinning
+sni_06,sni_B,06,Utvinning av råpetroleum och naturgas
+sni_07,sni_B,07,Utvinning av metallmalmer
+sni_08,sni_B,08,Annan utvinning av mineral
+sni_09,sni_B,09,Service till utvinning
+sni_10,sni_C,10,Livsmedelsframställning
+sni_11,sni_C,11,Framställning av drycker
+sni_12,sni_C,12,Tobaksvarutillverkning
+sni_13,sni_C,13,Textilvarutillverkning
+sni_14,sni_C,14,Tillverkning av kläder
+sni_15,sni_C,15,Tillverkning av läder, läder- och skinnvaror m.m.
+sni_16,sni_C,16,Tillverkning av trä och varor av trä, kork, rotting o.d. utom möbler
+sni_17,sni_C,17,Pappers- och pappersvarutillverkning
+sni_18,sni_C,18,Grafisk produktion och reproduktion av inspelningar
+sni_19,sni_C,19,Tillverkning av stenkolsprodukter och raffinerade petroleumprodukter
+sni_20,sni_C,20,Tillverkning av kemikalier och kemiska produkter
+sni_21,sni_C,21,Tillverkning av farmaceutiska basprodukter och läkemedel
+sni_22,sni_C,22,Tillverkning av gummi- och plastvaror
+sni_23,sni_C,23,Tillverkning av andra icke-metalliska mineraliska produkter
+sni_24,sni_C,24,Stål- och metallframställning
+sni_25,sni_C,25,Tillverkning av metallvaror utom maskiner och apparater
+sni_26,sni_C,26,Tillverkning av datorer, elektronikvaror och optik
+sni_27,sni_C,27,Tillverkning av elapparatur
+sni_28,sni_C,28,Tillverkning av övriga maskiner
+sni_29,sni_C,29,Tillverkning av motorfordon, släpfordon och påhängsvagnar
+sni_30,sni_C,30,Tillverkning av andra transportmedel
+sni_31,sni_C,31,Tillverkning av möbler
+sni_32,sni_C,32,Annan tillverkning
+sni_33,sni_C,33,Reparation och installation av maskiner och apparater
+sni_35,sni_D,35,Försörjning av el, gas, värme och kyla
+sni_36,sni_E,36,Vattenförsörjning
+sni_37,sni_E,37,Avloppsrening
+sni_38,sni_E,38,"Avfallshantering, återvinning"
+sni_39,sni_E,39,Sanering, efterbehandling av jord och vatten samt annan verksamhet för föroreningsbekämpning
+sni_41,sni_F,41,Byggande av hus
+sni_42,sni_F,42,Anläggningsarbeten
+sni_43,sni_F,43,Specialiserad bygg- och anläggningsverksamhet
+sni_45,sni_G,45,Handel samt reparation av motorfordon och motorcyklar
+sni_46,sni_G,46,Parti- och provisionshandel utom med motorfordon
+sni_47,sni_G,47,Detaljhandel utom med motorfordon och motorcyklar
+sni_49,sni_H,49,"Landtransport, transport i rörsystem"
+sni_50,sni_H,50,Sjötransport
+sni_51,sni_H,51,Lufttransport
+sni_52,sni_H,52,Magasinering och stödtjänster till transport
+sni_53,sni_H,53,Post- och kurirverksamhet
+sni_55,sni_I,55,Hotell- och logiverksamhet
+sni_56,sni_I,56,Restaurang-, catering- och barverksamhet
+sni_58,sni_J,58,Förlagsverksamhet
+sni_59,sni_J,59,Film-, video- och tv-programverksamhet, ljudinspelningar och fonogramutgivning
+sni_60,sni_J,60,Planering och sändning av program
+sni_61,sni_J,61,Telekommunikation
+sni_62,sni_J,62,Dataprogrammering, datakonsultverksamhet o.d.
+sni_63,sni_J,63,Informationstjänster
+sni_64,sni_K,64,Finansiella tjänster utom försäkring och pensionsfondsverksamhet
+sni_65,sni_K,65,Försäkring, återförsäkring och pensionsfondsverksamhet utom obligatorisk socialförsäkring
+sni_66,sni_K,66,Stödtjänster till finansiella tjänster och försäkring
+sni_68,sni_L,68,Fastighetsverksamhet
+sni_69,sni_M,69,Juridisk och ekonomisk konsultverksamhet
+sni_70,sni_M,70,"Verksamheter som utövas av huvudkontor, konsulttjänster till företag"
+sni_71,sni_M,71,"Arkitekt- och teknisk konsultverksamhet, teknisk provning och analys"
+sni_72,sni_M,72,Vetenskaplig forskning och utveckling
+sni_73,sni_M,73,Reklam och marknadsundersökning
+sni_74,sni_M,74,Annan verksamhet inom juridik, ekonomi, vetenskap och teknik
+sni_75,sni_M,75,Veterinärverksamhet
+sni_77,sni_N,77,Uthyrning och leasing
+sni_78,sni_N,78,Arbetsförmedling, bemanning och andra personalrelaterade tjänster
+sni_79,sni_N,79,Resebyrå- och researrangörsverksamhet och andra resetjänster och relaterade tjänster
+sni_80,sni_N,80,Säkerhets- och bevakningsverksamhet
+sni_81,sni_N,81,Fastighetsservice samt skötsel och underhåll av grönytor
+sni_82,sni_N,82,Kontorstjänster och andra företagstjänster
+sni_84,sni_O,84,"Offentlig förvaltning och försvar,  obligatorisk socialförsäkring"
+sni_85,sni_P,85,Utbildning
+sni_86,sni_Q,86,Hälso- och sjukvård
+sni_87,sni_Q,87,Vård och omsorg med boende
+sni_88,sni_Q,88,Öppna sociala insatser
+sni_90,sni_Q,90,Konstnärlig och kulturell verksamhet samt underhållningsverksamhet
+sni_91,sni_Q,91,Biblioteks-, arkiv- och museiverksamhet m.m.
+sni_92,sni_Q,92,Spel- och vadhållningsverksamhet
+sni_93,sni_Q,93,Sport-, fritids- och nöjesverksamhet
+sni_94,sni_S,94,"Intressebevakning, religiös verksamhet"
+sni_95,sni_S,95,Reparation av datorer, hushållsartiklar och personliga artiklar
+sni_96,sni_S,96,Andra konsumenttjänster
+sni_97,sni_S,97,Förvärvsarbete i hushåll
+sni_98,sni_S,98,Hushållens produktion av diverse varor och tjänster för eget bruk
+sni_99,sni_U,99,Verksamhet vid internationella organisationer, utländska ambassader o.d.
+sni_011,sni_01,011,Odling av ett- och tvååriga växter
+sni_012,sni_01,012,Odling av fleråriga växter
+sni_013,sni_01,013,Odling av plantskoleväxter
+sni_014,sni_01,014,Husdjursskötsel
+sni_015,sni_01,015,Blandat jordbruk
+sni_016,sni_01,016,Service till jordbruk och bearbetning av skördade växter
+sni_017,sni_01,017,Jakt och service i anslutning härtill
+sni_021,sni_02,021,Skogsförvaltning och skogsskötsel
+sni_022,sni_02,022,Drivning
+sni_023,sni_02,023,Insamling av annat vilt växande skogsmaterial än trä
+sni_024,sni_02,024,Service till skogsbruk
+sni_031,sni_03,031,Fiske
+sni_032,sni_03,032,Vattenbruk
+sni_051,sni_05,051,Stenkolsutvinning
+sni_052,sni_05,052,Brunkolsutvinning
+sni_061,sni_06,061,Utvinning av råpetroleum
+sni_062,sni_06,062,Utvinning av naturgas
+sni_071,sni_07,071,Järnmalmsutvinning
+sni_072,sni_07,072,Utvinning av andra metallmalmer än järnmalm
+sni_081,sni_08,081,Utvinning av sand, grus, sten och lera
+sni_089,sni_08,089,Övrig utvinning av mineral
+sni_091,sni_09,091,Stödtjänster till råpetroleum- och naturgasutvinning
+sni_099,sni_09,099,Stödtjänster till annan utvinning
+sni_101,sni_10,101,Beredning och hållbarhetsbehandling av kött och köttvaror
+sni_102,sni_10,102,Beredning och hållbarhetsbehandling av fisk samt skal- och blötdjur
+sni_103,sni_10,103,Beredning och hållbarhetsbehandling av frukt, bär och grönsaker
+sni_104,sni_10,104,Framställning av vegetabiliska och animaliska oljor och fetter
+sni_105,sni_10,105,Mejerivaru- och glasstillverkning
+sni_106,sni_10,106,Tillverkning av kvarnprodukter och stärkelse
+sni_107,sni_10,107,Tillverkning av bageri- och mjölprodukter
+sni_108,sni_10,108,Annan livsmedelsframställning
+sni_109,sni_10,109,Framställning av beredda djurfoder
+sni_110,sni_11,110,Framställning av drycker
+sni_120,sni_12,120,Tobaksvarutillverkning
+sni_131,sni_13,131,Garntillverkning
+sni_132,sni_13,132,Vävnadstillverkning
+sni_133,sni_13,133,Blekning, färgning och annan textilberedning
+sni_139,sni_13,139,Annan textilietillverkning
+sni_141,sni_14,141,Tillverkning av kläder, utom pälsvaror
+sni_142,sni_14,142,Tillverkning av pälsvaror
+sni_143,sni_14,143,Tillverkning av trikåvaror
+sni_151,sni_15,151,"Garvning och annan läderberedning, tillverkning av reseffekter, handväskor, sadel- och seldon, pälsberedning"
+sni_152,sni_15,152,Tillverkning av skodon
+sni_161,sni_16,161,Sågning och hyvling av trä
+sni_162,sni_16,162,Tillverkning av varor av trä, kork, halm, rotting o.d.
+sni_171,sni_17,171,Massa-, pappers- och papptillverkning
+sni_172,sni_17,172,Tillverkning av pappers- och pappvaror
+sni_181,sni_18,181,Grafisk produktion
+sni_182,sni_18,182,Reproduktion av inspelningar
+sni_191,sni_19,191,Tillverkning av stenkolsprodukter
+sni_192,sni_19,192,Petroleumraffinering
+sni_201,sni_20,201,Tillverkning av baskemikalier, gödselmedel och kväveprodukter, plaster och syntetgummi i obearbetad form
+sni_202,sni_20,202,Tillverkning av bekämpningsmedel och andra lantbrukskemiska produkter
+sni_203,sni_20,203,Tillverkning av färg, lack, tryckfärg m.m.
+sni_204,sni_20,204,Tillverkning av rengöringsmedel, parfym och toalettartiklar
+sni_205,sni_20,205,Tillverkning av andra kemiska produkter
+sni_206,sni_20,206,Konstfibertillverkning
+sni_211,sni_21,211,Tillverkning av farmaceutiska basprodukter
+sni_212,sni_21,212,Tillverkning av läkemedel
+sni_221,sni_22,221,Tillverkning av gummivaror
+sni_222,sni_22,222,Plastvarutillverkning
+sni_231,sni_23,231,Glas- och glasvarutillverkning
+sni_232,sni_23,232,Tillverkning av eldfasta produkter
+sni_233,sni_23,233,Tillverkning av byggmaterial av lergods
+sni_234,sni_23,234,Tillverkning av andra porslinsprodukter och keramiska produkter
+sni_235,sni_23,235,Tillverkning av cement, kalk och gips
+sni_236,sni_23,236,Tillverkning av varor av betong, cement och gips
+sni_237,sni_23,237,Huggning, formning och slutlig bearbetning av sten
+sni_239,sni_23,239,Tillverkning av slipmedel och övriga icke-metalliska mineraliska produkter
+sni_241,sni_24,241,Framställning av järn och stål samt ferrolegeringar
+sni_242,sni_24,242,Tillverkning av rör, ledningar, ihåliga profiler och tillbehör av stål
+sni_243,sni_24,243,Annan primärbearbetning av stål
+sni_244,sni_24,244,Framställning av andra metaller än järn
+sni_245,sni_24,245,Gjutning av metall
+sni_251,sni_25,251,Byggnadsmetallvarutillverkning
+sni_252,sni_25,252,Tillverkning av cisterner, tankar, kar och andra behållare av metall
+sni_253,sni_25,253,Tillverkning av ånggeneratorer utom varmvattenpannor för centraluppvärmning
+sni_254,sni_25,254,Tillverkning av vapen och ammunition
+sni_255,sni_25,255,"Smidning, pressning, prägling och valsning av metall, pulvermetallurgi"
+sni_256,sni_25,256,"Beläggning och överdragning av metall, metallegoarbeten"
+sni_257,sni_25,257,Tillverkning av bestick, verktyg och andra järnhandelsvaror
+sni_259,sni_25,259,Annan metallvarutillverkning
+sni_261,sni_26,261,Tillverkning av elektroniska komponenter och kretskort
+sni_262,sni_26,262,Tillverkning av datorer och kringutrustning
+sni_263,sni_26,263,Tillverkning av kommunikationsutrustning
+sni_264,sni_26,264,Tillverkning av hemelektronik
+sni_265,sni_26,265,Tillverkning av instrument och apparater för mätning, provning och navigering samt ur
+sni_266,sni_26,266,Tillverkning av strålningsutrustning samt elektromedicinsk och elektroterapeutisk utrustning
+sni_267,sni_26,267,Tillverkning av optiska instrument och fotoutrustning
+sni_268,sni_26,268,Tillverkning av magnetiska och optiska medier
+sni_271,sni_27,271,Tillverkning av elmotorer, generatorer och transformatorer samt eldistributions- och elkontrollapparater
+sni_272,sni_27,272,Batteri- och ackumulatortillverkning
+sni_273,sni_27,273,Tillverkning av ledningar och kablar och kabeltillbehör
+sni_274,sni_27,274,Tillverkning av belysningsarmatur
+sni_275,sni_27,275,Tillverkning av hushållsmaskiner och hushållsapparater
+sni_279,sni_27,279,Tillverkning av annan elapparatur
+sni_281,sni_28,281,Tillverkning av maskiner för allmänt ändamål
+sni_282,sni_28,282,Tillverkning av andra maskiner för allmänt ändamål
+sni_283,sni_28,283,Tillverkning av jord- och skogsbruksmaskiner
+sni_284,sni_28,284,Tillverkning av maskiner för metallbearbetning och verktygsmaskiner
+sni_289,sni_28,289,Tillverkning av andra specialmaskiner
+sni_291,sni_29,291,Motorfordonstillverkning
+sni_292,sni_29,292,"Tillverkning av karosserier för motorfordon, tillverkning av släpfordon och påhängsvagnar"
+sni_293,sni_29,293,Tillverkning av delar och tillbehör till motorfordon
+sni_301,sni_30,301,Byggande av fartyg och båtar
+sni_302,sni_30,302,Tillverkning av rälsfordon
+sni_303,sni_30,303,Tillverkning av luftfartyg, rymdfarkoster o.d.
+sni_304,sni_30,304,Tillverkning av militära stridsfordon
+sni_309,sni_30,309,Övrig tillverkning av transportmedel
+sni_310,sni_31,310,Tillverkning av möbler
+sni_321,sni_32,321,Tillverkning av smycken, guld- och silversmedsvaror samt bijouterier
+sni_322,sni_32,322,Tillverkning av musikinstrument
+sni_323,sni_32,323,Tillverkning av sportartiklar
+sni_324,sni_32,324,Tillverkning av spel och leksaker
+sni_325,sni_32,325,Tillverkning av medicinsk och dental utrustning
+sni_329,sni_32,329,Övrig tillverkning
+sni_331,sni_33,331,Reparation av metallvaror, maskiner och apparater
+sni_332,sni_33,332,Installation av industrimaskiner och -utrustning
+sni_351,sni_35,351,Generering, överföring och distribution av elkraft
+sni_352,sni_35,352,"Gasförsörjning, distribution av gasformiga bränslen via rörnät"
+sni_353,sni_35,353,Försörjning av värme och kyla
+sni_360,sni_36,360,Vattenförsörjning
+sni_370,sni_37,370,Avloppsrening
+sni_381,sni_38,381,Insamling av avfall
+sni_382,sni_38,382,Behandling och bortskaffande av avfall
+sni_383,sni_38,383,Återvinning
+sni_390,sni_39,390,Sanering, efterbehandling av jord och vatten samt annan verksamhet för föroreningsbekämpning
+sni_411,sni_41,411,Utformning av byggprojekt
+sni_412,sni_41,412,Byggande av bostadshus och andra byggnader
+sni_421,sni_42,421,Anläggning av vägar och järnvägar
+sni_422,sni_42,422,Allmännyttiga anläggningsarbeten
+sni_429,sni_42,429,Andra anläggningsarbeten
+sni_431,sni_43,431,Rivning av hus samt mark- och grundarbeten
+sni_432,sni_43,432,Elinstallationer, VVS-arbeten och andra bygginstallationer
+sni_433,sni_43,433,Slutbehandling av byggnader
+sni_439,sni_43,439,Annan specialiserad bygg- och anläggningsverksamhet
+sni_451,sni_45,451,Handel med motorfordon utom motorcyklar
+sni_452,sni_45,452,Underhåll och reparation av motorfordon utom motorcyklar
+sni_453,sni_45,453,Handel med reservdelar och tillbehör till motorfordon utom motorcyklar
+sni_454,sni_45,454,Handel med och service av motorcyklar inklusive reservdelar och tillbehör
+sni_461,sni_46,461,Provisionshandel utom med motorfordon
+sni_462,sni_46,462,Partihandel med jordbruksråvaror och levande djur
+sni_463,sni_46,463,Partihandel med livsmedel, drycker och tobak
+sni_464,sni_46,464,Partihandel med hushållsvaror
+sni_465,sni_46,465,Partihandel med informations- och kommunikationsutrustning
+sni_466,sni_46,466,Partihandel med övriga maskiner och övrig utrustning
+sni_467,sni_46,467,Annan specialiserad partihandel
+sni_469,sni_46,469,Övrig partihandel
+sni_471,sni_47,471,Detaljhandel med brett sortiment
+sni_472,sni_47,472,Specialiserad butikshandel med livsmedel, drycker och tobak
+sni_473,sni_47,473,Specialiserad detaljhandel med drivmedel
+sni_474,sni_47,474,Specialiserad butikshandel med informations- och kommunikationsutrustning
+sni_475,sni_47,475,Specialiserad butikshandel med heminredningsartiklar och husgeråd
+sni_476,sni_47,476,Specialiserad butikshandel med kultur- och fritidsartiklar
+sni_477,sni_47,477,Övrig specialiserad butikshandel med hushållsvaror
+sni_478,sni_47,478,Torg- och marknadshandel
+sni_479,sni_47,479,Detaljhandel ej i butik, på torg eller marknad
+sni_491,sni_49,491,Järnvägstransport, passagerartrafik
+sni_492,sni_49,492,Järnvägstransport, godstrafik
+sni_493,sni_49,493,Annan landtransport, passagerartrafik
+sni_494,sni_49,494,Vägtransport, godstrafik och flyttjänster
+sni_495,sni_49,495,Transport i rörsystem
+sni_501,sni_50,501,Havs- och kustsjöfart, passagerartrafik
+sni_502,sni_50,502,Havs- och kustsjöfart, godstrafik
+sni_503,sni_50,503,Sjöfart på inre vattenvägar, passagerartrafik
+sni_504,sni_50,504,Sjöfart på inre vattenvägar, godstrafik
+sni_511,sni_51,511,Lufttransport, passagerartrafik
+sni_512,sni_51,512,Lufttransport, godstrafik och rymdfart
+sni_521,sni_52,521,Magasinering och varulagring
+sni_522,sni_52,522,Stödtjänster till transport
+sni_531,sni_53,531,Postbefordran via nationella posten
+sni_532,sni_53,532,Annan postbefordran samt kurirverksamhet
+sni_551,sni_55,551,Hotellverksamhet
+sni_552,sni_55,552,Semesterbostäder och annan korttidsinkvartering
+sni_553,sni_55,553,Campingplatsverksamhet
+sni_559,sni_55,559,Annan logiverksamhet
+sni_561,sni_56,561,Restaurangverksamhet
+sni_562,sni_56,562,Cateringverksamhet
+sni_563,sni_56,563,Barverksamhet
+sni_581,sni_58,581,Utgivning av böcker och tidskrifter och annan förlagsverksamhet
+sni_582,sni_58,582,Utgivning av programvara
+sni_591,sni_59,591,Film-, video- och TV-programverksamhet
+sni_592,sni_59,592,Ljudinspelning och fonogramutgivning
+sni_601,sni_60,601,Sändning av radioprogram
+sni_602,sni_60,602,Planering av TV-program och sändningsverksamhet
+sni_611,sni_61,611,Trådbunden telekommunikation
+sni_612,sni_61,612,Trådlös telekommunikation
+sni_613,sni_61,613,Telekommunikation via satellit
+sni_619,sni_61,619,Annan telekommunikation
+sni_620,sni_62,620,Dataprogrammering, datakonsultverksamhet o.d.
+sni_631,sni_63,631,"Databehandling, hosting o.d., webbportaler"
+sni_639,sni_63,639,Andra informationstjänster
+sni_641,sni_64,641,Monetär finansförmedling
+sni_642,sni_64,642,Holdingverksamhet
+sni_643,sni_64,643,Fonder och liknande finansiella enheter
+sni_649,sni_64,649,Andra finansiella tjänster utom försäkring och pensionsfondsverksamhet
+sni_651,sni_65,651,Försäkring
+sni_652,sni_65,652,Återförsäkring
+sni_653,sni_65,653,Pensionsfondsverksamhet
+sni_661,sni_66,661,Stödtjänster till finansiella tjänster utom försäkring och pensionsfondsverksamhet
+sni_662,sni_66,662,Stödtjänster till försäkrings- och pensionsfondsverksamhet
+sni_663,sni_66,663,Fondförvaltning
+sni_681,sni_68,681,Handel med egna fastigheter
+sni_682,sni_68,682,Uthyrning och förvaltning av egna eller arrenderade fastigheter
+sni_683,sni_68,683,Fastighetsförmedling och fastighetsförvaltning på uppdrag
+sni_691,sni_69,691,Juridisk verksamhet
+sni_692,sni_69,692,Redovisning och bokföring, revision, skatterådgivning
+sni_701,sni_70,701,Verksamheter som utövas av huvudkontor
+sni_702,sni_70,702,Konsulttjänster till företag
+sni_711,sni_71,711,Arkitekt- och teknisk konsultverksamhet o.d.
+sni_712,sni_71,712,Teknisk provning och analys
+sni_721,sni_72,721,Naturvetenskaplig och teknisk forskning och utveckling
+sni_722,sni_72,722,Samhällsvetenskaplig och humanistisk forskning och utveckling
+sni_731,sni_73,731,Reklamverksamhet
+sni_732,sni_73,732,Marknads- och opinionsundersökning
+sni_741,sni_74,741,Specialiserad designverksamhet
+sni_742,sni_74,742,Fotoverksamhet
+sni_743,sni_74,743,Översättning och tolkning
+sni_749,sni_74,749,Övrig verksamhet inom juridik, ekonomi, vetenskap och teknik
+sni_750,sni_75,750,Veterinärverksamhet
+sni_771,sni_77,771,Uthyrning och leasing av motorfordon
+sni_772,sni_77,772,Uthyrning och leasing av hushållsartiklar och varor för personligt bruk
+sni_773,sni_77,773,Uthyrning och leasing av annan utrustning och andra maskiner och materiella tillgångar
+sni_774,sni_77,774,Leasing av immateriell egendom och liknande produkter, med undantag för upphovsrättsskyddade verk
+sni_781,sni_78,781,Arbetsförmedling och rekrytering
+sni_782,sni_78,782,Personaluthyrning
+sni_783,sni_78,783,Övrigt tillhandahållande av personalfunktioner
+sni_791,sni_79,791,Resetjänster
+sni_799,sni_79,799,Turist- och bokningsservice
+sni_801,sni_80,801,Säkerhetsverksamhet
+sni_802,sni_80,802,Säkerhetssystemtjänster
+sni_803,sni_80,803,Spanings- och detektivverksamhet
+sni_811,sni_81,811,Fastighetsrelaterade stödtjänster
+sni_812,sni_81,812,Rengöring och lokalvård
+sni_813,sni_81,813,Skötsel och underhåll av grönytor
+sni_821,sni_82,821,Kontorstjänster
+sni_822,sni_82,822,Callcenterverksamhet
+sni_823,sni_82,823,Arrangemang av kongresser och mässor
+sni_829,sni_82,829,Andra företagstjänster
+sni_841,sni_84,841,Offentlig förvaltning
+sni_842,sni_84,842,Offentliga tjänster
+sni_843,sni_84,843,Obligatorisk socialförsäkring
+sni_851,sni_85,851,Förskoleutbildning
+sni_852,sni_85,852,Grundskoleutbildning
+sni_853,sni_85,853,Gymnasial utbildning
+sni_854,sni_85,854,Eftergymnasial utbildning
+sni_855,sni_85,855,Vuxenutbildning och övrig utbildning
+sni_856,sni_85,856,Stödverksamhet för utbildningsväsendet
+sni_861,sni_86,861,Sluten sjukvård
+sni_862,sni_86,862,Öppen hälso- och sjukvård, tandvård
+sni_869,sni_86,869,Annan hälso- och sjukvård
+sni_871,sni_87,871,Boende med sjuksköterskevård
+sni_872,sni_87,872,Boende med särskild service för personer med utvecklingsstörning, psykiska funktionshinder eller missbruksproblem
+sni_873,sni_87,873,Vård och omsorg i särskilda boendeformer för äldre och funktionshindrade personer
+sni_879,sni_87,879,Annan vård och omsorg med boende
+sni_881,sni_88,881,Öppna sociala insatser för äldre och funktionshindrade personer
+sni_889,sni_88,889,Andra öppna sociala insatser
+sni_900,sni_90,900,Konstnärlig och kulturell verksamhet samt underhållningsverksamhet
+sni_910,sni_91,910,Biblioteks-, arkiv- och museiverksamhet m.m.
+sni_920,sni_92,920,Spel- och vadhållningsverksamhet
+sni_931,sni_93,931,Sportverksamhet
+sni_932,sni_93,932,Fritids- och nöjesverksamhet
+sni_941,sni_94,941,Intressebevakning inom bransch-, arbetsgivar- och yrkesorganisationer
+sni_942,sni_94,942,Intressebevakning inom arbetstagarorganisationer
+sni_949,sni_94,949,Verksamhet i religiösa samfund och i andra intresseorganisationer
+sni_951,sni_95,951,Reparation av datorer och kommunikationsutrustning
+sni_952,sni_95,952,Reparation av hushållsartiklar och personliga artiklar
+sni_960,sni_96,960,Andra konsumenttjänster
+sni_970,sni_97,970,Förvärvsarbete i hushåll
+sni_981,sni_98,981,Hushållens produktion av diverse varor för eget bruk
+sni_982,sni_98,982,Hushållens produktion av diverse tjänster för eget bruk
+sni_990,sni_99,990,Verksamhet vid internationella organisationer, utländska ambassader o.d.
+sni_0111,sni_011,0111,Odling av spannmål (utom ris), baljväxter och oljeväxter
+sni_0112,sni_011,0112,Odling av ris
+sni_0113,sni_011,0113,Odling av grönsaker och meloner, rotfrukter och stam- eller rotknölar
+sni_0114,sni_011,0114,Odling av sockerrör
+sni_0115,sni_011,0115,Odling av tobak
+sni_0116,sni_011,0116,Odling av fiberväxter
+sni_0119,sni_011,0119,Odling av andra ett- och tvååriga växter
+sni_0121,sni_012,0121,Odling av druvor
+sni_0122,sni_012,0122,Odling av tropiska och subtropiska frukter
+sni_0123,sni_012,0123,Odling av citrusfrukter
+sni_0124,sni_012,0124,Odling av kärnfrukter och stenfrukter
+sni_0125,sni_012,0125,Odling av andra frukter och bär samt nötter
+sni_0126,sni_012,0126,Odling av oljehaltiga frukter
+sni_0127,sni_012,0127,Odling av växter för dryckesframställning
+sni_0128,sni_012,0128,Odling av kryddväxter, drog- och medicinalväxter
+sni_0129,sni_012,0129,Odling av andra fleråriga växter
+sni_0130,sni_013,0130,Odling av plantskoleväxter
+sni_0141,sni_014,0141,Mjölkproduktion och uppfödning av nötkreatur av mjölkras
+sni_0142,sni_014,0142,Uppfödning av andra nötkreatur och bufflar
+sni_0143,sni_014,0143,Uppfödning av hästar och andra hästdjur
+sni_0144,sni_014,0144,Uppfödning av kameler och kameldjur
+sni_0145,sni_014,0145,Uppfödning av får och getter
+sni_0146,sni_014,0146,Uppfödning av svin
+sni_0147,sni_014,0147,Äggproduktion och uppfödning av fjäderfä
+sni_0149,sni_014,0149,Uppfödning av andra djur
+sni_0150,sni_015,0150,Blandat jordbruk
+sni_0161,sni_016,0161,Service till växtodling
+sni_0162,sni_016,0162,Service till husdjursskötsel
+sni_0163,sni_016,0163,Bearbetning av skördade växter
+sni_0164,sni_016,0164,Bearbetning av utsäde
+sni_0170,sni_017,0170,Jakt och service i anslutning härtill
+sni_0210,sni_021,0210,Skogsförvaltning och skogsskötsel
+sni_0220,sni_022,0220,Drivning
+sni_0230,sni_023,0230,Insamling av annat vilt växande skogsmaterial än trä
+sni_0240,sni_024,0240,Service till skogsbruk
+sni_0311,sni_031,0311,Saltvattensfiske
+sni_0312,sni_031,0312,Sötvattensfiske
+sni_0321,sni_032,0321,Fiskodling i salvatten
+sni_0322,sni_032,0322,Fiskodling i sötvatten
+sni_0510,sni_051,0510,Stenkolsutvinning
+sni_0520,sni_052,0520,Brunkolsutvinning
+sni_0610,sni_061,0610,Utvinning av råpetroleum
+sni_0620,sni_062,0620,Utvinning av naturgas
+sni_0710,sni_071,0710,Järnmalmsutvinning
+sni_0721,sni_072,0721,Utvinning av uran- och toriummalm
+sni_0729,sni_072,0729,Utvinning av annan malm
+sni_0811,sni_081,0811,Brytning av natursten, kalk- och gipssten, krita och skiffer
+sni_0812,sni_081,0812,"Utvinning av sand, grus och berg, utvinning av lera och kaolin"
+sni_0891,sni_089,0891,Brytning av kemiska mineral
+sni_0892,sni_089,0892,Torvutvinning
+sni_0893,sni_089,0893,Saltutvinning
+sni_0899,sni_089,0899,Diverse övrig utvinning av mineral
+sni_0910,sni_091,0910,Stödtjänster till råpetroleum- och naturgasutvinning
+sni_0990,sni_099,0990,Stödtjänster till annan utvinning
+sni_1011,sni_101,1011,Beredning och hållbarhetsbehandling av kreaturskött
+sni_1012,sni_101,1012,Beredning och hållbarhetsbehandling av fjäderfäkött
+sni_1013,sni_101,1013,Charkuteri- och annan köttvarutillverkning
+sni_1020,sni_102,1020,Beredning och hållbarhetsbehandling av fisk samt skal- och blötdjur
+sni_1031,sni_103,1031,Beredning och hållbarhetsbehandling av potatis
+sni_1032,sni_103,1032,Juice- och safttillverkning
+sni_1039,sni_103,1039,Annan beredning och hållbarhetsbehandling av frukt, bär och grönsaker
+sni_1041,sni_104,1041,Framställning av oljor och fetter
+sni_1042,sni_104,1042,Matfettstillverkning
+sni_1051,sni_105,1051,Mejerivarutillverkning
+sni_1052,sni_105,1052,Glasstillverkning
+sni_1061,sni_106,1061,Tillverkning av kvarnprodukter
+sni_1062,sni_106,1062,Stärkelsetillverkning
+sni_1071,sni_107,1071,Tillverkning av mjukt matbröd och färska bakverk
+sni_1072,sni_107,1072,Tillverkning av knäckebröd, kex och konserverade bakverk
+sni_1073,sni_107,1073,Tillverkning av pastaprodukter
+sni_1081,sni_108,1081,Sockertillverkning
+sni_1082,sni_108,1082,Tillverkning av choklad, choklad- och sockerkonfektyrer
+sni_1083,sni_108,1083,Framställning av te och kaffe
+sni_1084,sni_108,1084,Tillverkning av senap, ketchup, kryddor och andra smaksättningsmedel
+sni_1085,sni_108,1085,Tillverkning av lagad mat och färdigrätter
+sni_1086,sni_108,1086,Tillverkning av homogeniserade livsmedelspreparat inklusive dietmat
+sni_1089,sni_108,1089,Framställning av andra livsmedel
+sni_1091,sni_109,1091,Framställning av beredda fodermedel
+sni_1092,sni_109,1092,Framställning av mat till sällskapsdjur
+sni_1101,sni_110,1101,Destillering, rening och tillblandning av spritdrycker
+sni_1102,sni_110,1102,Framställning av vin från druvor
+sni_1103,sni_110,1103,Framställning av cider och andra fruktviner
+sni_1104,sni_110,1104,Framställning av andra icke-destillerade jästa drycker
+sni_1105,sni_110,1105,Framställning av öl
+sni_1106,sni_110,1106,Framställning av malt
+sni_1107,sni_110,1107,Framställning av läskedrycker, mineralvatten och annat vatten på flaska
+sni_1200,sni_120,1200,Tobaksvarutillverkning
+sni_1310,sni_131,1310,Garntillverkning
+sni_1320,sni_132,1320,Vävnadstillverkning
+sni_1330,sni_133,1330,Blekning, färgning och annan textilberedning
+sni_1391,sni_139,1391,Tillverkning av trikåväv
+sni_1392,sni_139,1392,Tillverkning av sydda textilvaror utom beklädnadsvaror
+sni_1393,sni_139,1393,Tillverkning av mattor
+sni_1394,sni_139,1394,Tågvirkes- och bindgarnstillverkning
+sni_1395,sni_139,1395,Tillverkning av bondad duk
+sni_1396,sni_139,1396,Tillverkning av andra tekniska textilier och industritextilier
+sni_1399,sni_139,1399,Övrig textilietillverkning
+sni_1411,sni_141,1411,Tillverkning av läder- och skinnkläder
+sni_1412,sni_141,1412,Tillverkning av arbets-, skydds- och överdragskläder
+sni_1413,sni_141,1413,Tillverkning av andra gång- och ytterkläder
+sni_1414,sni_141,1414,Tillverkning av underkläder, skjortor och blusar
+sni_1419,sni_141,1419,Tillverkning av andra beklädnadsvaror och tillbehör
+sni_1420,sni_142,1420,Tillverkning av pälsvaror
+sni_1431,sni_143,1431,Tillverkning av strumpor
+sni_1439,sni_143,1439,Tillverkning av andra trikåvaror
+sni_1511,sni_151,1511,"Garvning och annan läderberedning, pälsberedning"
+sni_1512,sni_151,1512,Tillverkning av reseffekter, handväskor, sadel- och seldon m. m.
+sni_1520,sni_152,1520,Tillverkning av skodon
+sni_1610,sni_161,1610,Sågning och hyvling av trä
+sni_1621,sni_162,1621,Tillverkning av fanér och träbaserade skivor
+sni_1622,sni_162,1622,Tillverkning av sammansatta parkettgolv
+sni_1623,sni_162,1623,Tillverkning av andra byggnads- och inredningssnickerier
+sni_1624,sni_162,1624,Träförpackningstillverkning
+sni_1629,sni_162,1629,"Övrig trävarutillverkning, tillverkning av varor av kork, halm, rotting o.d."
+sni_1711,sni_171,1711,Massatillverkning
+sni_1712,sni_171,1712,Pappers- och papptillverkning
+sni_1721,sni_172,1721,Tillverkning av wellpapp och pappers- och pappförpackningar
+sni_1722,sni_172,1722,Tillverkning av hushålls- och hygienartiklar av papper
+sni_1723,sni_172,1723,Tillverkning av skrivpapper, kuvert o.d.
+sni_1724,sni_172,1724,Tapettillverkning
+sni_1729,sni_172,1729,Tillverkning av andra pappers- och pappvaror
+sni_1811,sni_181,1811,Tryckning av dagstidningar
+sni_1812,sni_181,1812,Annan tryckning
+sni_1813,sni_181,1813,Grafiska tjänster före tryckning (prepress/premedia)
+sni_1814,sni_181,1814,Bokbindning och andra tjänster i samband med tryckning
+sni_1820,sni_182,1820,Reproduktion av inspelningar
+sni_1910,sni_191,1910,Tillverkning av stenkolsprodukter
+sni_1920,sni_192,1920,Petroleumraffinering
+sni_2011,sni_201,2011,Industrigasframställning
+sni_2012,sni_201,2012,Tillverkning av färgämnen
+sni_2013,sni_201,2013,Tillverkning av andra oorganiska baskemikalier
+sni_2014,sni_201,2014,Tillverkning av andra organiska baskemikalier
+sni_2015,sni_201,2015,Tillverkning av gödselmedel och kväveprodukter
+sni_2016,sni_201,2016,Basplastframställning
+sni_2017,sni_201,2017,Tillverkning av syntetiskt basgummi
+sni_2020,sni_202,2020,Tillverkning av bekämpningsmedel och andra lantbrukskemiska produkter
+sni_2030,sni_203,2030,Tillverkning av färg, lack, tryckfärg m.m.
+sni_2041,sni_204,2041,Tillverkning av tvål, såpa, tvättmedel och polermedel
+sni_2042,sni_204,2042,Tillverkning av parfymer och toalettartiklar
+sni_2051,sni_205,2051,Sprängämnestillverkning
+sni_2052,sni_205,2052,Tillverkning av lim
+sni_2053,sni_205,2053,Tillverkning av eteriska oljor
+sni_2059,sni_205,2059,Tillverkning av övriga kemiska produkter
+sni_2060,sni_206,2060,Konstfibertillverkning
+sni_2110,sni_211,2110,Tillverkning av farmaceutiska basprodukter
+sni_2120,sni_212,2120,Tillverkning av läkemedel
+sni_2211,sni_221,2211,"Tillverkning av däck och slangar, regummering"
+sni_2219,sni_221,2219,Annan gummivarutillverkning
+sni_2221,sni_222,2221,Tillverkning av plasthalvfabrikat
+sni_2222,sni_222,2222,Plastförpackningstillverkning
+sni_2223,sni_222,2223,Byggplastvarutillverkning
+sni_2229,sni_222,2229,Annan plastvarutillverkning
+sni_2311,sni_231,2311,Framställning av planglas
+sni_2312,sni_231,2312,Bearbetning av planglas
+sni_2313,sni_231,2313,Tillverkning av buteljer, glasförpackningar och husgeråd av glas
+sni_2314,sni_231,2314,Tillverkning av glasfiber
+sni_2319,sni_231,2319,Tillverkning av andra glasvaror inklusive tekniska glasvaror
+sni_2320,sni_232,2320,Tillverkning av eldfasta produkter
+sni_2331,sni_233,2331,Tillverkning av keramiska golv- och väggplattor
+sni_2332,sni_233,2332,Tillverkning av murtegel, takpannor och andra byggvaror av tegel
+sni_2341,sni_234,2341,Tillverkning av keramiska hushålls- och prydnadsartiklar
+sni_2342,sni_234,2342,Tillverkning av keramiska sanitetsartiklar
+sni_2343,sni_234,2343,Tillverkning av keramiska isolatorer o.d.
+sni_2344,sni_234,2344,Tillverkning av andra tekniska keramiska produkter
+sni_2349,sni_234,2349,Tillverkning av andra keramiska produkter
+sni_2351,sni_235,2351,Tillverkning av cement
+sni_2352,sni_235,2352,Tillverkning av kalk och gips
+sni_2361,sni_236,2361,Tillverkning av betongvaror  för byggändamål
+sni_2362,sni_236,2362,Tillverkning av gipsvaror  för byggändamål
+sni_2363,sni_236,2363,Tillverkning av fabriksblandad betong
+sni_2364,sni_236,2364,Tillverkning av murbruk
+sni_2365,sni_236,2365,Tillverkning av fibercementvaror
+sni_2369,sni_236,2369,Tillverkning av andra varor av betong, cement och gips
+sni_2370,sni_237,2370,Huggning, formning och slutlig bearbetning av sten
+sni_2391,sni_239,2391,Slipmedelstillverkning
+sni_2399,sni_239,2399,Tillverkning av övriga icke-metalliska mineraliska produkter
+sni_2410,sni_241,2410,Framställning av järn och stål samt ferrolegeringar
+sni_2420,sni_242,2420,Tillverkning av rör, ledningar, ihåliga profiler och tillbehör av stål
+sni_2431,sni_243,2431,Tillverkning av kalldragen stålstång
+sni_2432,sni_243,2432,Tillverkning av kallvalsade stålband
+sni_2433,sni_243,2433,Tillverkning av andra kallformade produkter av stål
+sni_2434,sni_243,2434,Tillverkning av kalldragen ståltråd
+sni_2441,sni_244,2441,Framställning av ädla metaller
+sni_2442,sni_244,2442,Framställning av aluminium
+sni_2443,sni_244,2443,Framställning av bly, zink och tenn
+sni_2444,sni_244,2444,Framställning av koppar
+sni_2445,sni_244,2445,Framställning av andra metaller
+sni_2446,sni_244,2446,Tillverkning av kärnbränsle
+sni_2451,sni_245,2451,Gjutning av järn
+sni_2452,sni_245,2452,Gjutning av stål
+sni_2453,sni_245,2453,Gjutning av lättmetall
+sni_2454,sni_245,2454,Gjutning av andra metaller
+sni_2511,sni_251,2511,Tillverkning av metallstommar och delar därav
+sni_2512,sni_251,2512,Tillverkning av dörrar och fönster av metall
+sni_2521,sni_252,2521,Tillverkning av radiatorer och pannor för centraluppvärmning
+sni_2529,sni_252,2529,Tillverkning av andra cisterner, tankar, kar och andra behållare av metall
+sni_2530,sni_253,2530,Tillverkning av ånggeneratorer utom varmvattenpannor för centraluppvärmning
+sni_2540,sni_254,2540,Tillverkning av vapen och ammunition
+sni_2550,sni_255,2550,"Smidning, pressning, prägling och valsning av metall, pulvermetallurgi"
+sni_2561,sni_256,2561,Beläggning och överdragning av metall
+sni_2562,sni_256,2562,Metallegoarbeten
+sni_2571,sni_257,2571,Tillverkning av bestick
+sni_2572,sni_257,2572,Tillverkning av lås och gångjärn
+sni_2573,sni_257,2573,Tillverkning av verktyg och redskap
+sni_2591,sni_259,2591,Tillverkning av stålfat o.d. behållare
+sni_2592,sni_259,2592,Tillverkning av lättmetallförpackningar
+sni_2593,sni_259,2593,Tillverkning av metalltrådvaror, kedjor och fjädrar
+sni_2594,sni_259,2594,Tillverkning av nitar och skruvar
+sni_2599,sni_259,2599,Övrig metallvarutillverkning
+sni_2611,sni_261,2611,Tillverkning av elektroniska komponenter
+sni_2612,sni_261,2612,Tillverkning av kretskort
+sni_2620,sni_262,2620,Tillverkning av datorer och kringutrustning
+sni_2630,sni_263,2630,Tillverkning av kommunikationsutrustning
+sni_2640,sni_264,2640,Tillverkning av hemelektronik
+sni_2651,sni_265,2651,Tillverkning av instrument och apparater för mätning, provning och navigering
+sni_2652,sni_265,2652,Urtillverkning
+sni_2660,sni_266,2660,Tillverkning av strålningsutrustning samt elektromedicinsk och elektroterapeutisk utrustning
+sni_2670,sni_267,2670,Tillverkning av optiska instrument och fotoutrustning
+sni_2680,sni_268,2680,Tillverkning av magnetiska och optiska medier
+sni_2711,sni_271,2711,Tillverkning av elmotorer, generatorer och transformatorer
+sni_2712,sni_271,2712,Tillverkning av eldistributions- och elkontrollapparater
+sni_2720,sni_272,2720,Batteri- och ackumulatortillverkning
+sni_2731,sni_273,2731,Tillverkning av optiska fiberkablar
+sni_2732,sni_273,2732,Tillverkning av andra elektroniska och elektriska ledningar och kablar
+sni_2733,sni_273,2733,Tillverkning av kabeltillbehör
+sni_2740,sni_274,2740,Tillverkning av belysningsarmatur
+sni_2751,sni_275,2751,Tillverkning av elektriska hushållsmaskiner och hushållsapparater
+sni_2752,sni_275,2752,Tillverkning av icke-elektriska hushållsmaskiner och hushållsapparater
+sni_2790,sni_279,2790,Tillverkning av annan elapparatur
+sni_2811,sni_281,2811,Tillverkning av motorer och turbiner utom för luftfartyg och fordon
+sni_2812,sni_281,2812,Tillverkning av fluidteknisk utrustning
+sni_2813,sni_281,2813,Tillverkning av andra pumpar och kompressorer
+sni_2814,sni_281,2814,Tillverkning av andra kranar och ventiler
+sni_2815,sni_281,2815,Tillverkning av lager, kugghjul och andra delar för kraftöverföring
+sni_2821,sni_282,2821,Tillverkning av ugnar och brännare
+sni_2822,sni_282,2822,Tillverkning av lyft- och godshanteringsanordningar
+sni_2823,sni_282,2823,Tillverkning av kontorsmaskiner och kontorsutrustning (utom datorer och kringutrustning)
+sni_2824,sni_282,2824,Tillverkning av motordrivna handverktyg
+sni_2825,sni_282,2825,Tillverkning av maskiner och apparater för kyla och ventilation utom för hushåll
+sni_2829,sni_282,2829,Övrig tillverkning av maskiner för allmänt ändamål
+sni_2830,sni_283,2830,Tillverkning av jord- och skogsbruksmaskiner
+sni_2841,sni_284,2841,Tillverkning av verktygsmaskiner för metallbearbetning
+sni_2849,sni_284,2849,Tillverkning av övriga verktygsmaskiner
+sni_2891,sni_289,2891,Tillverkning av maskiner för metallurgi
+sni_2892,sni_289,2892,Tillverkning av gruv-, bergbrytnings- och byggmaskiner
+sni_2893,sni_289,2893,Tillverkning av maskiner för framställning av livsmedel, drycker och tobaksvaror
+sni_2894,sni_289,2894,Tillverkning av maskiner för produktion av textil-, beklädnads- och lädervaror
+sni_2895,sni_289,2895,Tillverkning av maskiner för produktion av massa, papper och papp
+sni_2896,sni_289,2896,Tillverkning av maskiner för gummi och plast
+sni_2899,sni_289,2899,Tillverkning av övriga specialmaskiner
+sni_2910,sni_291,2910,Motorfordonstillverkning
+sni_2920,sni_292,2920,"Tillverkning av karosserier för motorfordon, tillverkning av släpfordon och påhängsvagnar"
+sni_2931,sni_293,2931,Tillverkning av elektrisk och elektronisk utrustning för motorfordon
+sni_2932,sni_293,2932,Tillverkning av andra delar och tillbehör till motorfordon
+sni_3011,sni_301,3011,Byggande av fartyg och flytande materiel
+sni_3012,sni_301,3012,Byggande av fritidsbåtar
+sni_3020,sni_302,3020,Tillverkning av rälsfordon
+sni_3030,sni_303,3030,Tillverkning av luftfartyg, rymdfarkoster o.d.
+sni_3040,sni_304,3040,Tillverkning av militära stridsfordon
+sni_3091,sni_309,3091,Tillverkning av motorcyklar
+sni_3092,sni_309,3092,Tillverkning av cyklar och invalidfordon
+sni_3099,sni_309,3099,Diverse övrig transportmedelstillverkning
+sni_3101,sni_310,3101,Tillverkning av kontors- och butiksmöbler samt kontors- och butiksinredningar
+sni_3102,sni_310,3102,Tillverkning av köksmöbler och köksinredningar
+sni_3103,sni_310,3103,Tillverkning av madrasser
+sni_3109,sni_310,3109,Tillverkning av andra möbler
+sni_3211,sni_321,3211,Prägling av mynt
+sni_3212,sni_321,3212,Tillverkning av smycken, guld- och silversmedsvaror
+sni_3213,sni_321,3213,Tillverkning av bijouterier o.d.
+sni_3220,sni_322,3220,Tillverkning av musikinstrument
+sni_3230,sni_323,3230,Tillverkning av sportartiklar
+sni_3240,sni_324,3240,Tillverkning av spel och leksaker
+sni_3250,sni_325,3250,Tillverkning av medicinsk och dental utrustning
+sni_3291,sni_329,3291,Tillverkning av borstbinderiarbeten
+sni_3299,sni_329,3299,Diverse övrig tillverkning
+sni_3311,sni_331,3311,Reparation av metallvaror
+sni_3312,sni_331,3312,Reparation av maskiner
+sni_3313,sni_331,3313,Reparation av elektronisk och optisk utrustning
+sni_3314,sni_331,3314,Reparation av elapparatur
+sni_3315,sni_331,3315,Reparation och underhåll av fartyg och båtar
+sni_3316,sni_331,3316,Reparation och underhåll av luftfartyg och rymdfarkoster
+sni_3317,sni_331,3317,Reparation och underhåll av andra transportmedel
+sni_3319,sni_331,3319,Reparation av annan utrustning
+sni_3320,sni_332,3320,Installation av industrimaskiner och -utrustning
+sni_3511,sni_351,3511,Generering av elektricitet
+sni_3512,sni_351,3512,Överföring av elektricitet
+sni_3513,sni_351,3513,Distribution av elektricitet
+sni_3514,sni_351,3514,Handel med elektricitet
+sni_3521,sni_352,3521,Framställning av gas
+sni_3522,sni_352,3522,Distribution av gasformiga bränslen via rörnät
+sni_3523,sni_352,3523,Handel med gas via rörnät
+sni_3530,sni_353,3530,Försörjning av värme och kyla
+sni_3600,sni_360,3600,Vattenförsörjning
+sni_3700,sni_370,3700,Avloppsrening
+sni_3811,sni_381,3811,Insamling av icke-farligt avfall
+sni_3812,sni_381,3812,Insamling av farligt avfall
+sni_3821,sni_382,3821,Behandling och bortskaffande av icke-farligt avfall
+sni_3822,sni_382,3822,Behandling och bortskaffande av farligt avfall
+sni_3831,sni_383,3831,Demontering av uttjänta fordon och maskiner
+sni_3832,sni_383,3832,Återvinning av källsorterat material
+sni_3900,sni_390,3900,Sanering, efterbehandling av jord och vatten samt annan verksamhet för föroreningsbekämpning
+sni_4110,sni_411,4110,Utformning av byggprojekt
+sni_4120,sni_412,4120,Byggande av bostadshus och andra byggnader
+sni_4211,sni_421,4211,Anläggning av vägar och motorvägar
+sni_4212,sni_421,4212,Anläggning av järnvägar och tunnelbanor
+sni_4213,sni_421,4213,Anläggning av broar och tunnlar
+sni_4221,sni_422,4221,Allmännyttiga anläggningsarbeten för värme, vatten och avlopp
+sni_4222,sni_422,4222,Anläggningsarbeten för el och telekommunikation
+sni_4291,sni_429,4291,Vattenbyggnad
+sni_4299,sni_429,4299,Övriga anläggningsarbeten
+sni_4311,sni_431,4311,Rivning av hus och byggnader
+sni_4312,sni_431,4312,Mark- och grundarbeten
+sni_4313,sni_431,4313,Markundersökning
+sni_4321,sni_432,4321,Elinstallationer
+sni_4322,sni_432,4322,VVS-arbeten
+sni_4329,sni_432,4329,Andra bygginstallationer
+sni_4331,sni_433,4331,Puts-, fasad- och stuckatörsarbeten
+sni_4332,sni_433,4332,Byggnadssnickeriarbeten
+sni_4333,sni_433,4333,Golv- och väggbeläggningsarbeten
+sni_4334,sni_433,4334,Måleri- och glasmästeriarbeten
+sni_4339,sni_433,4339,Annan slutbehandling av byggnader
+sni_4391,sni_439,4391,Takarbeten
+sni_4399,sni_439,4399,Övrig specialiserad bygg- och anläggningsverksamhet
+sni_4511,sni_451,4511,Handel med personbilar och lätta motorfordon
+sni_4519,sni_451,4519,Handel med andra motorfordon utom motorcyklar
+sni_4520,sni_452,4520,Underhåll och reparation av motorfordon utom motorcyklar
+sni_4531,sni_453,4531,Parti- och provisionshandel med reservdelar och tillbehör till motorfordon utom motorcyklar
+sni_4532,sni_453,4532,Detaljhandel med reservdelar och tillbehör till motorfordon utom motorcyklar
+sni_4540,sni_454,4540,Handel med och service av motorcyklar inklusive reservdelar och tillbehör
+sni_4611,sni_461,4611,Provisionshandel med jordbruksråvaror, levande djur, textilråvaror och textilhalvfabrikat
+sni_4612,sni_461,4612,Provisionshandel med bränsle, malm, metaller och industrikemikalier
+sni_4613,sni_461,4613,Provisionshandel med virke och byggmaterial
+sni_4614,sni_461,4614,Provisionshandel med maskiner, industriell utrustning, fartyg och luftfartyg
+sni_4615,sni_461,4615,Provisionshandel med möbler, hushålls- och järnhandelsvaror
+sni_4616,sni_461,4616,Provisionshandel med textilier, kläder, skodon och lädervaror
+sni_4617,sni_461,4617,Provisionshandel med livsmedel, drycker och tobak
+sni_4618,sni_461,4618,Provisionshandel med annat specialsortiment
+sni_4619,sni_461,4619,Provisionshandel med blandat sortiment
+sni_4621,sni_462,4621,Partihandel med spannmål, råtobak, utsäde och djurfoder
+sni_4622,sni_462,4622,Partihandel med blommor och växter
+sni_4623,sni_462,4623,Partihandel med levande djur
+sni_4624,sni_462,4624,Partihandel med hudar, skinn och läder
+sni_4631,sni_463,4631,Partihandel med frukt och grönsaker
+sni_4632,sni_463,4632,Partihandel med kött- och köttvaror
+sni_4633,sni_463,4633,Partihandel med mejeriprodukter, ägg, matolja och matfett
+sni_4634,sni_463,4634,Partihandel med drycker
+sni_4635,sni_463,4635,Partihandel med tobak
+sni_4636,sni_463,4636,Partihandel med socker, choklad och sockerkonfektyrer
+sni_4637,sni_463,4637,Partihandel med kaffe, te, kakao och kryddor
+sni_4638,sni_463,4638,Partihandel med andra livsmedel, bl.a. fisk samt skal- och blötdjur
+sni_4639,sni_463,4639,Icke specialiserad partihandel med livsmedel, drycker och tobak
+sni_4641,sni_464,4641,Partihandel med textilier
+sni_4642,sni_464,4642,Partihandel med kläder och skodon
+sni_4643,sni_464,4643,Partihandel med hushållsapparater, samt elartiklar
+sni_4644,sni_464,4644,Partihandel med glas och porslin, rengöringsmedel
+sni_4645,sni_464,4645,Partihandel med parfym och kosmetika
+sni_4646,sni_464,4646,Partihandel med medicinsk utrustning och apoteksvaror
+sni_4647,sni_464,4647,Partihandel med möbler, mattor och belysningsartiklar
+sni_4648,sni_464,4648,Partihandel med ur och guldsmedsvaror
+sni_4649,sni_464,4649,Partihandel med andra hushållsvaror
+sni_4651,sni_465,4651,Partihandel med datorer och kringutrustning samt programvara
+sni_4652,sni_465,4652,Partihandel med elektronik- och telekommunikationsutrustning
+sni_4661,sni_466,4661,Partihandel med jordbruksmaskiner och -utrustning
+sni_4662,sni_466,4662,Partihandel med verktygsmaskiner
+sni_4663,sni_466,4663,Partihandel med gruv-, bygg- och anläggningsmaskiner
+sni_4664,sni_466,4664,Partihandel med textil-, sy- och stickmaskiner
+sni_4665,sni_466,4665,Partihandel med kontorsmöbler
+sni_4666,sni_466,4666,Partihandel med andra kontorsmaskiner och kontorsutrustning
+sni_4669,sni_466,4669,Partihandel med andra maskiner och annan utrustning
+sni_4671,sni_467,4671,Partihandel med bränslen
+sni_4672,sni_467,4672,Partihandel med metaller och metallmalmer
+sni_4673,sni_467,4673,Partihandel med virke, andra byggmaterial och sanitetsgods
+sni_4674,sni_467,4674,Partihandel med järnhandelsvaror och VVS-armatur
+sni_4675,sni_467,4675,Partihandel med kemiska produkter
+sni_4676,sni_467,4676,Partihandel med andra insatsvaror
+sni_4677,sni_467,4677,Partihandel med avfallsprodukter och skrot
+sni_4690,sni_469,4690,Övrig partihandel
+sni_4711,sni_471,4711,Detaljhandel med brett sortiment, mest livsmedel, drycker och tobak
+sni_4719,sni_471,4719,Annan detaljhandel med brett sortiment
+sni_4721,sni_472,4721,Specialiserad butikshandel med frukt och grönsaker
+sni_4722,sni_472,4722,Specialiserad butikshandel med kött och charkuterier
+sni_4723,sni_472,4723,Specialiserad butikshandel med fisk, skal- och blötdjur
+sni_4724,sni_472,4724,Specialiserad butikshandel med bröd, konditorivaror och konfektyrer
+sni_4725,sni_472,4725,Specialiserad butikshandel med alkoholhaltiga och andra drycker
+sni_4726,sni_472,4726,Specialiserad butikshandel med tobaksvaror
+sni_4729,sni_472,4729,Annan specialiserad butikshandel med livsmedel
+sni_4730,sni_473,4730,Specialiserad detaljhandel med drivmedel
+sni_4741,sni_474,4741,Specialiserad butikshandel med datorer, programvara, data- och tv-spel
+sni_4742,sni_474,4742,Specialiserad butikshandel med telekommunikationsutrustning
+sni_4743,sni_474,4743,Specialiserad butikshandel med ljud- och bildanläggningar samt videoutrustning
+sni_4751,sni_475,4751,Specialiserad butikshandel med textilier
+sni_4752,sni_475,4752,Specialiserad butikshandel med bygg-, järn- och VVS-varor samt färger och glas
+sni_4753,sni_475,4753,Specialiserad butikshandel med mattor och inredningstextilier
+sni_4754,sni_475,4754,Specialiserad butikshandel med elektriska hushållsmaskiner och hushållsapparater
+sni_4759,sni_475,4759,Specialiserad butikshandel med möbler, belysnings- och heminredningsartiklar
+sni_4761,sni_476,4761,Specialiserad butikshandel med böcker
+sni_4762,sni_476,4762,Specialiserad butikshandel med tidningar och kontorsförbrukningsvaror
+sni_4763,sni_476,4763,Specialiserad butikshandel med inspelade och oinspelade band och skivor för musik och bild
+sni_4764,sni_476,4764,Specialiserad butikshandel med sport- och fritidsartiklar
+sni_4765,sni_476,4765,Specialiserad butikshandel med spel och leksaker
+sni_4771,sni_477,4771,Specialiserad butikshandel med kläder
+sni_4772,sni_477,4772,Specialiserad butikshandel med skodon och lädervaror
+sni_4773,sni_477,4773,Apotekshandel
+sni_4774,sni_477,4774,Specialiserad butikshandel med sjukvårdsartiklar
+sni_4775,sni_477,4775,Specialiserad butikshandel med kosmetika och hygienartiklar
+sni_4776,sni_477,4776,Specialiserad butikshandel med blommor och andra växter, frön och gödselmedel samt små sällskapsdjur
+sni_4777,sni_477,4777,Specialiserad butikshandel med ur, guldsmedsvaror och smycken
+sni_4778,sni_477,4778,Annan specialiserad butikshandel med nya varor
+sni_4779,sni_477,4779,Specialiserad butikshandel med antikviteter och andra begagnade varor
+sni_4781,sni_478,4781,Torg- och marknadshandel med livsmedel, drycker och tobak
+sni_4782,sni_478,4782,Torg- och marknadshandel med textilier, kläder och skodon
+sni_4789,sni_478,4789,Torg- och marknadshandel med övriga varor
+sni_4791,sni_479,4791,Postorderhandel och detaljhandel på Internet
+sni_4799,sni_479,4799,Övrig detaljhandel ej i butik, på torg eller marknad
+sni_4910,sni_491,4910,Järnvägstransport, passagerartrafik
+sni_4920,sni_492,4920,Järnvägstransport, godstrafik
+sni_4931,sni_493,4931,Kollektivtrafik
+sni_4932,sni_493,4932,Taxitrafik
+sni_4939,sni_493,4939,Annan landtransport av passagerare
+sni_4941,sni_494,4941,Vägtransport, godstrafik
+sni_4942,sni_494,4942,Flyttjänster
+sni_4950,sni_495,4950,Transport i rörsystem
+sni_5010,sni_501,5010,Havs- och kustsjöfart, passagerartrafik
+sni_5020,sni_502,5020,Havs- och kustsjöfart, godstrafik
+sni_5030,sni_503,5030,Sjöfart på inre vattenvägar, passagerartrafik
+sni_5040,sni_504,5040,Sjöfart på inre vattenvägar, godstrafik
+sni_5110,sni_511,5110,Lufttransport, passagerartrafik
+sni_5121,sni_512,5121,Lufttransport, godstrafik
+sni_5122,sni_512,5122,Rymdfart
+sni_5210,sni_521,5210,Magasinering och varulagring
+sni_5221,sni_522,5221,Stödtjänster till landtransport
+sni_5222,sni_522,5222,Stödtjänster till sjötransport
+sni_5223,sni_522,5223,Stödtjänster till lufttransport
+sni_5224,sni_522,5224,Godshantering
+sni_5229,sni_522,5229,Övriga stödtjänster till transport
+sni_5310,sni_531,5310,Postbefordran via nationella posten
+sni_5320,sni_532,5320,Annan postbefordran samt kurirverksamhet
+sni_5510,sni_551,5510,Hotellverksamhet
+sni_5520,sni_552,5520,Semesterbostäder och annan korttidsinkvartering
+sni_5530,sni_553,5530,Campingplatsverksamhet
+sni_5590,sni_559,5590,Annan logiverksamhet
+sni_5610,sni_561,5610,Restaurangverksamhet
+sni_5621,sni_562,5621,Cateringverksamhet vid enskilda evenemang
+sni_5629,sni_562,5629,Annan catering- och centralköksverksamhet
+sni_5630,sni_563,5630,Barverksamhet
+sni_5811,sni_581,5811,Bokutgivning
+sni_5812,sni_581,5812,Publicering av kataloger och sändlistor
+sni_5813,sni_581,5813,Tidningsutgivning
+sni_5814,sni_581,5814,Utgivning av tidskrifter
+sni_5819,sni_581,5819,Annan förlagsverksamhet
+sni_5821,sni_582,5821,Utgivning av dataspel
+sni_5829,sni_582,5829,Utgivning av annan programvara
+sni_5911,sni_591,5911,Produktion av film, video och TV-program
+sni_5912,sni_591,5912,Efterproduktion av film, video och TV-program
+sni_5913,sni_591,5913,Film-, video- och TV-programdistribution
+sni_5914,sni_591,5914,Filmvisning
+sni_5920,sni_592,5920,Ljudinspelning och fonogramutgivning
+sni_6010,sni_601,6010,Sändning av radioprogram
+sni_6020,sni_602,6020,Planering av TV-program och sändningsverksamhet
+sni_6110,sni_611,6110,Trådbunden telekommunikation
+sni_6120,sni_612,6120,Trådlös telekommunikation
+sni_6130,sni_613,6130,Telekommunikation via satellit
+sni_6190,sni_619,6190,Annan telekommunikation
+sni_6201,sni_620,6201,Dataprogrammering
+sni_6202,sni_620,6202,Datakonsultverksamhet
+sni_6203,sni_620,6203,Datordrifttjänster
+sni_6209,sni_620,6209,Andra IT- och datatjänster
+sni_6311,sni_631,6311,Databehandling, hosting o.d.
+sni_6312,sni_631,6312,Webbportaler
+sni_6391,sni_639,6391,Nyhetsservice
+sni_6399,sni_639,6399,Övriga informationstjänster
+sni_6411,sni_641,6411,Centralbanksverksamhet
+sni_6419,sni_641,6419,Annan monetär finansförmedling
+sni_6420,sni_642,6420,Holdingverksamhet
+sni_6430,sni_643,6430,Fonder och liknande finansiella enheter
+sni_6491,sni_649,6491,Finansiell leasing
+sni_6492,sni_649,6492,Annan kreditgivning
+sni_6499,sni_649,6499,Diverse övriga finansiella tjänster utom försäkring och pensionsfondsverksamhet
+sni_6511,sni_651,6511,Livförsäkring
+sni_6512,sni_651,6512,Skadeförsäkring
+sni_6520,sni_652,6520,Återförsäkring
+sni_6530,sni_653,6530,Pensionsfondsverksamhet
+sni_6611,sni_661,6611,Administrativa tjänster till finansiella marknader
+sni_6612,sni_661,6612,Verksamhet utförd av värdepappers- och varumäklare
+sni_6619,sni_661,6619,Andra stödtjänster till finansiella tjänster utom försäkring och pensionsfondsverksamhet
+sni_6621,sni_662,6621,Risk- och skadebedömning
+sni_6622,sni_662,6622,Verksamhet utförd av försäkringsombud och försäkringsmäklare
+sni_6629,sni_662,6629,Andra stödtjänster till försäkring och pensionsfondsverksamhet
+sni_6630,sni_663,6630,Fondförvaltning
+sni_6810,sni_681,6810,Handel med egna fastigheter
+sni_6820,sni_682,6820,Uthyrning och förvaltning av egna eller arrenderade fastigheter
+sni_6831,sni_683,6831,Fastighetsförmedling
+sni_6832,sni_683,6832,Fastighetsförvaltning på uppdrag
+sni_6910,sni_691,6910,Juridisk verksamhet
+sni_6920,sni_692,6920,Redovisning och bokföring, revision, skatterådgivning
+sni_7010,sni_701,7010,Verksamheter som utövas av huvudkontor
+sni_7021,sni_702,7021,PR och kommunikation
+sni_7022,sni_702,7022,Konsultverksamhet avseende företags organisation
+sni_7111,sni_711,7111,Arkitektverksamhet
+sni_7112,sni_711,7112,Teknisk konsultverksamhet o.d.
+sni_7120,sni_712,7120,Teknisk provning och analys
+sni_7211,sni_721,7211,Bioteknisk forskning och utveckling
+sni_7219,sni_721,7219,Annan naturvetenskaplig och teknisk forskning och utveckling
+sni_7220,sni_722,7220,Samhällsvetenskaplig och humanistisk forskning och utveckling
+sni_7311,sni_731,7311,Reklambyråverksamhet o.d.
+sni_7312,sni_731,7312,Mediebyråverksamhet och annonsförsäljning
+sni_7320,sni_732,7320,Marknads- och opinionsundersökning
+sni_7410,sni_741,7410,Specialiserad designverksamhet
+sni_7420,sni_742,7420,Fotoverksamhet
+sni_7430,sni_743,7430,Översättning och tolkning
+sni_7490,sni_749,7490,Övrig verksamhet inom juridik, ekonomi, vetenskap och teknik
+sni_7500,sni_750,7500,Veterinärverksamhet
+sni_7711,sni_771,7711,Uthyrning och leasing av personbilar och lätta motorfordon
+sni_7712,sni_771,7712,Uthyrning och leasing av lastbilar och andra tunga motorfordon
+sni_7721,sni_772,7721,Uthyrning och leasing av fritids- och sportutrustning
+sni_7722,sni_772,7722,Uthyrning av videokassetter och dvd-skivor
+sni_7729,sni_772,7729,Uthyrning och leasing av andra hushållsartiklar och varor för personligt bruk
+sni_7731,sni_773,7731,Uthyrning och leasing av jordbruksmaskiner och jordbruksredskap
+sni_7732,sni_773,7732,Uthyrning och leasing av bygg- och anläggningsmaskiner
+sni_7733,sni_773,7733,Uthyrning och leasing av kontorsmaskiner och kontorsutrustning (inklusive datorer)
+sni_7734,sni_773,7734,Uthyrning och leasing av fartyg och båtar
+sni_7735,sni_773,7735,Uthyrning och leasing av flygplan
+sni_7739,sni_773,7739,Uthyrning och leasing av övrig utrustning och övriga maskiner och materiella tillgångar
+sni_7740,sni_774,7740,Leasing av immateriell egendom och liknande produkter, med undantag för upphovsrättsskyddade verk
+sni_7810,sni_781,7810,Arbetsförmedling och rekrytering
+sni_7820,sni_782,7820,Personaluthyrning
+sni_7830,sni_783,7830,Övrigt tillhandahållande av personalfunktioner
+sni_7911,sni_791,7911,Resebyråverksamhet
+sni_7912,sni_791,7912,Researrangemang
+sni_7990,sni_799,7990,Turist- och bokningsservice
+sni_8010,sni_801,8010,Säkerhetsverksamhet
+sni_8020,sni_802,8020,Säkerhetssystemtjänster
+sni_8030,sni_803,8030,Spanings- och detektivverksamhet
+sni_8110,sni_811,8110,Fastighetsrelaterade stödtjänster
+sni_8121,sni_812,8121,Lokalvård
+sni_8122,sni_812,8122,Rengöring och sotning av byggnader
+sni_8129,sni_812,8129,Annan rengöring
+sni_8130,sni_813,8130,Skötsel och underhåll av grönytor
+sni_8211,sni_821,8211,Kombinerade kontorstjänster
+sni_8219,sni_821,8219,Kopiering, dokumentsammanställning och andra specialiserade kontorstjänster
+sni_8220,sni_822,8220,Callcenterverksamhet
+sni_8230,sni_823,8230,Arrangemang av kongresser och mässor
+sni_8291,sni_829,8291,Inkassoföretags och kreditupplysningsföretags verksamhet
+sni_8292,sni_829,8292,Förpackningsverksamhet
+sni_8299,sni_829,8299,Övriga företagstjänster
+sni_8411,sni_841,8411,Övergripande offentlig förvaltning
+sni_8412,sni_841,8412,Administration av vård, utbildning, kulturell verksamhet och annan samhällsservice
+sni_8413,sni_841,8413,Administration av näringslivsprogram
+sni_8421,sni_842,8421,Utrikesförvaltning
+sni_8422,sni_842,8422,Totalförsvar
+sni_8423,sni_842,8423,Rättskipning
+sni_8424,sni_842,8424,Polisverksamhet
+sni_8425,sni_842,8425,Brand- och räddningsverksamhet
+sni_8430,sni_843,8430,Obligatorisk socialförsäkring
+sni_8510,sni_851,8510,Förskoleutbildning
+sni_8520,sni_852,8520,Grundskoleutbildning
+sni_8531,sni_853,8531,Studieförberedande gymnasial utbildning m.m.
+sni_8532,sni_853,8532,Gymnasial yrkesutbildning m.m.
+sni_8541,sni_854,8541,Eftergymnasial utbildning vid annat än universitet och högskola
+sni_8542,sni_854,8542,Universitets- eller högskoleutbildning
+sni_8551,sni_855,8551,Sport- och fritidsutbildning
+sni_8552,sni_855,8552,Musik-, dans- och övrig kulturell utbildning
+sni_8553,sni_855,8553,Trafikskoleverksamhet
+sni_8559,sni_855,8559,Övrig utbildning
+sni_8560,sni_856,8560,Stödverksamhet för utbildningsväsendet
+sni_8610,sni_861,8610,Sluten sjukvård
+sni_8621,sni_862,8621,Allmänpraktiserande läkarverksamhet
+sni_8622,sni_862,8622,Specialistläkarverksamhet inom öppenvård
+sni_8623,sni_862,8623,Tandläkarverksamhet
+sni_8690,sni_869,8690,Annan hälso- och sjukvård
+sni_8710,sni_871,8710,Boende med sjuksköterskevård
+sni_8720,sni_872,8720,Boende med särskild service för personer med utvecklingsstörning, psykiska funktionshinder eller missbruksproblem
+sni_8730,sni_873,8730,Vård och omsorg i särskilda boendeformer för äldre och funktionshindrade personer
+sni_8790,sni_879,8790,Annan vård och omsorg med boende
+sni_8810,sni_881,8810,Öppna sociala insatser för äldre och funktionshindrade personer
+sni_8891,sni_889,8891,Dagbarnvård
+sni_8899,sni_889,8899,Övriga öppna sociala insatser
+sni_9001,sni_900,9001,Artistisk verksamhet
+sni_9002,sni_900,9002,Stödtjänster till artistisk verksamhet
+sni_9003,sni_900,9003,Litterärt och konstnärligt skapande
+sni_9004,sni_900,9004,Drift av teatrar, konserthus o.d.
+sni_9101,sni_910,9101,Biblioteks- och arkivverksamhet
+sni_9102,sni_910,9102,Museiverksamhet
+sni_9103,sni_910,9103,Vård av historiska minnesmärken och byggnader och liknande sevärdheter
+sni_9104,sni_910,9104,Drift av botaniska trädgårdar, djurparker och naturreservat
+sni_9200,sni_920,9200,Spel- och vadhållningsverksamhet
+sni_9311,sni_931,9311,Drift av sportanläggningar
+sni_9312,sni_931,9312,Sportklubbars och idrottsföreningars verksamhet
+sni_9313,sni_931,9313,Drift av gymanläggningar
+sni_9319,sni_931,9319,Annan sportverksamhet
+sni_9321,sni_932,9321,Nöjes- och temaparksverksamhet
+sni_9329,sni_932,9329,Övrig fritids- och nöjesverksamhet
+sni_9411,sni_941,9411,Intressebevakning inom bransch- och arbetsgivarorganisationer
+sni_9412,sni_941,9412,Intressebevakning inom yrkesorganisationer
+sni_9420,sni_942,9420,Intressebevakning inom arbetstagarorganisationer
+sni_9491,sni_949,9491,Verksamhet i religiösa samfund
+sni_9492,sni_949,9492,Verksamhet i politiska organisationer
+sni_9499,sni_949,9499,Verksamhet i andra intresseorganisationer
+sni_9511,sni_951,9511,Reparation av datorer och kringutrustning
+sni_9512,sni_951,9512,Reparation av kommunikationsutrustning
+sni_9521,sni_952,9521,Reparation av hemelektronik
+sni_9522,sni_952,9522,Reparation av hushållsapparater samt av utrustning för hem och trädgård
+sni_9523,sni_952,9523,Lagning av skodon och lädervaror
+sni_9524,sni_952,9524,Reparation av möbler och heminredning
+sni_9525,sni_952,9525,Reparation av ur och guldsmedsvaror
+sni_9529,sni_952,9529,Reparation av andra hushållsartiklar och personliga artiklar
+sni_9601,sni_960,9601,Tvätteriverksamhet
+sni_9602,sni_960,9602,Hår- och skönhetsvård
+sni_9603,sni_960,9603,Begravningsverksamhet
+sni_9604,sni_960,9604,Kroppsvård
+sni_9609,sni_960,9609,Övriga konsumenttjänster
+sni_9700,sni_970,9700,Förvärvsarbete i hushåll
+sni_9810,sni_981,9810,Hushållens produktion av diverse varor för eget bruk
+sni_9820,sni_982,9820,Hushållens produktion av diverse tjänster för eget bruk
+sni_9900,sni_990,9900,Verksamhet vid internationella organisationer, utländska ambassader o.d.
+sni_01110,sni_0111,01110,Odling av spannmål (utom ris), baljväxter och oljeväxter
+sni_01120,sni_0112,01120,Odling av ris
+sni_01131,sni_0113,01131,Potatisodling
+sni_01132,sni_0113,01132,Sockerbetsodling
+sni_01133,sni_0113,01133,Odling av grönsaker (köksväxter) på friland
+sni_01134,sni_0113,01134,Odling av grönsaker (köksväxter) i växthus
+sni_01135,sni_0113,01135,Svampodling m.m.
+sni_01140,sni_0114,01140,Odling av sockerrör
+sni_01150,sni_0115,01150,Odling av tobak
+sni_01160,sni_0116,01160,Odling av fiberväxter
+sni_01191,sni_0119,01191,Odling av prydnadsväxter i växthus
+sni_01199,sni_0119,01199,Odling av övriga ett- och tvååriga växter
+sni_01210,sni_0121,01210,Odling av druvor
+sni_01220,sni_0122,01220,Odling av tropiska och subtropiska frukter
+sni_01230,sni_0123,01230,Odling av citrusfrukter
+sni_01240,sni_0124,01240,Odling av kärnfrukter och stenfrukter
+sni_01250,sni_0125,01250,Odling av andra frukter och bär samt nötter
+sni_01260,sni_0126,01260,Odling av oljehaltiga frukter
+sni_01270,sni_0127,01270,Odling av växter för dryckesframställning
+sni_01280,sni_0128,01280,Odling av kryddväxter, drog- och medicinalväxter
+sni_01290,sni_0129,01290,Odling av andra fleråriga växter
+sni_01301,sni_0130,01301,Odling av plantskoleväxter i växthus
+sni_01302,sni_0130,01302,Odling av plantskoleväxter m.m. på friland
+sni_01410,sni_0141,01410,Mjölkproduktion och uppfödning av nötkreatur av mjölkras
+sni_01420,sni_0142,01420,Uppfödning av andra nötkreatur och bufflar
+sni_01430,sni_0143,01430,Uppfödning av hästar och andra hästdjur
+sni_01440,sni_0144,01440,Uppfödning av kameler och kameldjur
+sni_01450,sni_0145,01450,Uppfödning av får och getter
+sni_01461,sni_0146,01461,Uppfödning av smågrisar
+sni_01462,sni_0146,01462,Uppfödning av slaktsvin
+sni_01471,sni_0147,01471,Äggproduktion (för försäljning)
+sni_01472,sni_0147,01472,Uppfödning av fjäderfä, ej äggproduktion
+sni_01491,sni_0149,01491,Renskötsel
+sni_01492,sni_0149,01492,Uppfödning av sällskapsdjur
+sni_01499,sni_0149,01499,Övrig uppfödning av andra djur
+sni_01500,sni_0150,01500,Blandat jordbruk
+sni_01610,sni_0161,01610,Service till växtodling
+sni_01620,sni_0162,01620,Service till husdjursskötsel
+sni_01630,sni_0163,01630,Bearbetning av skördade växter
+sni_01640,sni_0164,01640,Bearbetning av utsäde
+sni_01700,sni_0170,01700,Jakt och service i anslutning härtill
+sni_02101,sni_0210,02101,Skogsförvaltning
+sni_02102,sni_0210,02102,Skogsskötsel
+sni_02109,sni_0210,02109,Övrig skoglig verksamhet
+sni_02200,sni_0220,02200,Drivning
+sni_02300,sni_0230,02300,Insamling av annat vilt växande skogsmaterial än trä
+sni_02401,sni_0240,02401,Virkesmätning
+sni_02409,sni_0240,02409,Övrig service till skogsbruk
+sni_03111,sni_0311,03111,Trålfiske i saltvatten
+sni_03119,sni_0311,03119,Övrigt saltvattensfiske
+sni_03120,sni_0312,03120,Sötvattensfiske
+sni_03210,sni_0321,03210,Fiskodling i saltvatten
+sni_03220,sni_0322,03220,Fiskodling i sötvatten
+sni_05100,sni_0510,05100,Stenkolsutvinning
+sni_05200,sni_0520,05200,Brunkolsutvinning
+sni_06100,sni_0610,06100,Utvinning av råpetroleum
+sni_06200,sni_0620,06200,Utvinning av naturgas
+sni_07100,sni_0710,07100,Järnmalmsutvinning
+sni_07210,sni_0721,07210,Utvinning av uran- och toriummalm
+sni_07290,sni_0729,07290,Utvinning av annan malm
+sni_08110,sni_0811,08110,Brytning av natursten, kalk- och gipssten, krita och skiffer
+sni_08120,sni_0812,08120,"Utvinning av sand, grus och berg, utvinning av lera och kaolin"
+sni_08910,sni_0891,08910,Brytning av kemiska mineral
+sni_08920,sni_0892,08920,Torvutvinning
+sni_08930,sni_0893,08930,Saltutvinning
+sni_08990,sni_0899,08990,Diverse övrig utvinning av mineral
+sni_09100,sni_0910,09100,Stödtjänster till råpetroleum- och naturgasutvinning
+sni_09900,sni_0990,09900,Stödtjänster till annan utvinning
+sni_10111,sni_1011,10111,Kreatursslakt
+sni_10112,sni_1011,10112,Styckning av kött
+sni_10120,sni_1012,10120,Beredning och hållbarhetsbehandling av fjäderfäkött
+sni_10130,sni_1013,10130,Charkuteri- och annan köttvarutillverkning
+sni_10200,sni_1020,10200,Beredning och hållbarhetsbehandling av fisk samt skal- och blötdjur
+sni_10310,sni_1031,10310,Beredning och hållbarhetsbehandling av potatis
+sni_10320,sni_1032,10320,Juice- och safttillverkning
+sni_10390,sni_1039,10390,Annan beredning och hållbarhetsbehandling av frukt, bär och grönsaker
+sni_10410,sni_1041,10410,Framställning av oljor och fetter
+sni_10420,sni_1042,10420,Matfettstillverkning
+sni_10511,sni_1051,10511,Osttillverkning
+sni_10519,sni_1051,10519,Annan mejerivarutillverkning
+sni_10520,sni_1052,10520,Glasstillverkning
+sni_10611,sni_1061,10611,Mjöltillverkning
+sni_10612,sni_1061,10612,Tillverkning av frukostflingor, mixer och andra livsmedelsberedningar av kvarnprodukter
+sni_10620,sni_1062,10620,Stärkelsetillverkning
+sni_10710,sni_1071,10710,Tillverkning av mjukt matbröd och färska bakverk
+sni_10721,sni_1072,10721,Knäckebrödstillverkning
+sni_10722,sni_1072,10722,Tillverkning av kex och konserverade bakverk
+sni_10730,sni_1073,10730,Tillverkning av pastaprodukter
+sni_10810,sni_1081,10810,Sockertillverkning
+sni_10821,sni_1082,10821,Tillverkning av sockerkonfektyrer
+sni_10822,sni_1082,10822,Tillverkning av choklad och chokladkonfektyrer
+sni_10830,sni_1083,10830,Framställning av te och kaffe
+sni_10840,sni_1084,10840,Tillverkning av senap, ketchup, kryddor och andra smaksättningsmedel
+sni_10850,sni_1085,10850,Tillverkning av lagad mat och färdigrätter
+sni_10860,sni_1086,10860,Tillverkning av homogeniserade livsmedelspreparat inklusive dietmat
+sni_10890,sni_1089,10890,Framställning av andra livsmedel
+sni_10910,sni_1091,10910,Framställning av beredda fodermedel
+sni_10920,sni_1092,10920,Framställning av mat till sällskapsdjur
+sni_11010,sni_1101,11010,Destillering, rening och tillblandning av spritdrycker
+sni_11020,sni_1102,11020,Framställning av vin från druvor
+sni_11030,sni_1103,11030,Framställning av cider och andra fruktviner
+sni_11040,sni_1104,11040,Framställning av andra icke-destillerade jästa drycker
+sni_11050,sni_1105,11050,Framställning av öl
+sni_11060,sni_1106,11060,Framställning av malt
+sni_11070,sni_1107,11070,Framställning av läskedrycker, mineralvatten och annat vatten på flaska
+sni_12000,sni_1200,12000,Tobaksvarutillverkning
+sni_13100,sni_1310,13100,Garntillverkning
+sni_13200,sni_1320,13200,Vävnadstillverkning
+sni_13300,sni_1330,13300,Blekning, färgning och annan textilberedning
+sni_13910,sni_1391,13910,Tillverkning av trikåväv
+sni_13921,sni_1392,13921,Sömnad av gardiner, sängkläder och linnevaror
+sni_13922,sni_1392,13922,Tillverkning av presenningar, tält, segel o.d.
+sni_13930,sni_1393,13930,Tillverkning av mattor
+sni_13940,sni_1394,13940,Tågvirkes- och bindgarnstillverkning
+sni_13950,sni_1395,13950,Tillverkning av bondad duk
+sni_13960,sni_1396,13960,Tillverkning av andra tekniska textilier och industritextilier
+sni_13990,sni_1399,13990,Övrig textilietillverkning
+sni_14110,sni_1411,14110,Tillverkning av läder- och skinnkläder
+sni_14120,sni_1412,14120,Tillverkning av arbets-, skydds- och överdragskläder
+sni_14130,sni_1413,14130,Tillverkning av andra gång- och ytterkläder
+sni_14140,sni_1414,14140,Tillverkning av underkläder, skjortor och blusar
+sni_14190,sni_1419,14190,Tillverkning av andra beklädnadsvaror och tillbehör
+sni_14200,sni_1420,14200,Tillverkning av pälsvaror
+sni_14310,sni_1431,14310,Tillverkning av strumpor
+sni_14390,sni_1439,14390,Tillverkning av andra trikåvaror
+sni_15110,sni_1511,15110,"Garvning och annan läderberedning, pälsberedning"
+sni_15120,sni_1512,15120,Tillverkning av reseffekter, handväskor, sadel- och seldon m. m.
+sni_15200,sni_1520,15200,Tillverkning av skodon
+sni_16101,sni_1610,16101,Sågning av trä
+sni_16102,sni_1610,16102,Hyvling av trä
+sni_16103,sni_1610,16103,Träimpregnering
+sni_16210,sni_1621,16210,Tillverkning av fanér och träbaserade skivor
+sni_16220,sni_1622,16220,Tillverkning av sammansatta parkettgolv
+sni_16231,sni_1623,16231,Tillverkning av monteringsfärdiga trähus
+sni_16232,sni_1623,16232,Tillverkning av dörrar av trä
+sni_16233,sni_1623,16233,Tillverkning av fönster av trä
+sni_16239,sni_1623,16239,Tillverkning av övriga byggnads- och inredningssnickerier
+sni_16240,sni_1624,16240,Träförpackningstillverkning
+sni_16291,sni_1629,16291,Tillverkning av förädlade trädbränslen
+sni_16292,sni_1629,16292,Övrig trävarutillverkning
+sni_16293,sni_1629,16293,Tillverkning av varor av kork, halm, rotting o.d.
+sni_17111,sni_1711,17111,Tillverkning av mekanisk eller halvkemisk massa
+sni_17112,sni_1711,17112,Sulfatmassatillverkning
+sni_17113,sni_1711,17113,Sulfitmassatillverkning
+sni_17121,sni_1712,17121,Tillverkning av tidnings- och journalpapper
+sni_17122,sni_1712,17122,Tryckpapperstillverkning, ej tidnings- och journalpapper
+sni_17123,sni_1712,17123,Tillverkning av kraftpapper och kraftpapp
+sni_17129,sni_1712,17129,Övrig tillverkning av papper och papp
+sni_17211,sni_1721,17211,Tillverkning av wellpapp och wellpappförpackningar
+sni_17219,sni_1721,17219,Övrig tillverkning av pappers- och pappförpackningar
+sni_17220,sni_1722,17220,Tillverkning av hushålls- och hygienartiklar av papper
+sni_17230,sni_1723,17230,Tillverkning av skrivpapper, kuvert o.d.
+sni_17240,sni_1724,17240,Tapettillverkning
+sni_17290,sni_1729,17290,Tillverkning av andra pappers- och pappvaror
+sni_18110,sni_1811,18110,Tryckning av dagstidningar
+sni_18121,sni_1812,18121,Tryckning av tidskrifter
+sni_18122,sni_1812,18122,Tryckning av böcker och övriga trycksaker
+sni_18130,sni_1813,18130,Grafiska tjänster före tryckning (prepress/premedia)
+sni_18140,sni_1814,18140,Bokbindning och andra tjänster i samband med tryckning
+sni_18200,sni_1820,18200,Reproduktion av inspelningar
+sni_19100,sni_1910,19100,Tillverkning av stenkolsprodukter
+sni_19200,sni_1920,19200,Petroleumraffinering
+sni_20110,sni_2011,20110,Industrigasframställning
+sni_20120,sni_2012,20120,Tillverkning av färgämnen
+sni_20130,sni_2013,20130,Tillverkning av andra oorganiska baskemikalier
+sni_20140,sni_2014,20140,Tillverkning av andra organiska baskemikalier
+sni_20150,sni_2015,20150,Tillverkning av gödselmedel och kväveprodukter
+sni_20160,sni_2016,20160,Basplastframställning
+sni_20170,sni_2017,20170,Tillverkning av syntetiskt basgummi
+sni_20200,sni_2020,20200,Tillverkning av bekämpningsmedel och andra lantbrukskemiska produkter
+sni_20300,sni_2030,20300,Tillverkning av färg, lack, tryckfärg m.m.
+sni_20410,sni_2041,20410,Tillverkning av tvål, såpa, tvättmedel och polermedel
+sni_20420,sni_2042,20420,Tillverkning av parfymer och toalettartiklar
+sni_20510,sni_2051,20510,Sprängämnestillverkning
+sni_20520,sni_2052,20520,Tillverkning av lim
+sni_20530,sni_2053,20530,Tillverkning av eteriska oljor
+sni_20590,sni_2059,20590,Tillverkning av övriga kemiska produkter
+sni_20600,sni_2060,20600,Konstfibertillverkning
+sni_21100,sni_2110,21100,Tillverkning av farmaceutiska basprodukter
+sni_21200,sni_2120,21200,Tillverkning av läkemedel
+sni_22110,sni_2211,22110,"Tillverkning av däck och slangar, regummering"
+sni_22190,sni_2219,22190,Annan gummivarutillverkning
+sni_22210,sni_2221,22210,Tillverkning av plasthalvfabrikat
+sni_22220,sni_2222,22220,Plastförpackningstillverkning
+sni_22230,sni_2223,22230,Byggplastvarutillverkning
+sni_22290,sni_2229,22290,Annan plastvarutillverkning
+sni_23110,sni_2311,23110,Framställning av planglas
+sni_23120,sni_2312,23120,Bearbetning av planglas
+sni_23130,sni_2313,23130,Tillverkning av buteljer, glasförpackningar och husgeråd av glas
+sni_23140,sni_2314,23140,Tillverkning av glasfiber
+sni_23190,sni_2319,23190,Tillverkning av andra glasvaror inklusive tekniska glasvaror
+sni_23200,sni_2320,23200,Tillverkning av eldfasta produkter
+sni_23310,sni_2331,23310,Tillverkning av keramiska golv- och väggplattor
+sni_23320,sni_2332,23320,Tillverkning av murtegel, takpannor och andra byggvaror av tegel
+sni_23410,sni_2341,23410,Tillverkning av keramiska hushålls- och prydnadsartiklar
+sni_23420,sni_2342,23420,Tillverkning av keramiska sanitetsartiklar
+sni_23430,sni_2343,23430,Tillverkning av keramiska isolatorer o.d.
+sni_23440,sni_2344,23440,Tillverkning av andra tekniska keramiska produkter
+sni_23490,sni_2349,23490,Tillverkning av andra keramiska produkter
+sni_23510,sni_2351,23510,Tillverkning av cement
+sni_23520,sni_2352,23520,Tillverkning av kalk och gips
+sni_23610,sni_2361,23610,Tillverkning av betongvaror  för byggändamål
+sni_23620,sni_2362,23620,Tillverkning av gipsvaror  för byggändamål
+sni_23630,sni_2363,23630,Tillverkning av fabriksblandad betong
+sni_23640,sni_2364,23640,Tillverkning av murbruk
+sni_23650,sni_2365,23650,Tillverkning av fibercementvaror
+sni_23690,sni_2369,23690,Tillverkning av andra varor av betong, cement och gips
+sni_23701,sni_2370,23701,Huggning, formning och slutlig bearbetning av sten för byggnadsändamål
+sni_23709,sni_2370,23709,Huggning, formning och slutlig bearbetning av sten för prydnadsändamål
+sni_23910,sni_2391,23910,Slipmedelstillverkning
+sni_23991,sni_2399,23991,Tillverkning av varor av sten- och mineralull
+sni_23999,sni_2399,23999,Diverse övrig tillverkning av icke-metalliska mineraliska produkter
+sni_24100,sni_2410,24100,Framställning av järn och stål samt ferrolegeringar
+sni_24200,sni_2420,24200,Tillverkning av rör, ledningar, ihåliga profiler och tillbehör av stål
+sni_24310,sni_2431,24310,Tillverkning av kalldragen stålstång
+sni_24320,sni_2432,24320,Tillverkning av kallvalsade stålband
+sni_24330,sni_2433,24330,Tillverkning av andra kallformade produkter av stål
+sni_24340,sni_2434,24340,Tillverkning av kalldragen ståltråd
+sni_24410,sni_2441,24410,Framställning av ädla metaller
+sni_24420,sni_2442,24420,Framställning av aluminium
+sni_24430,sni_2443,24430,Framställning av bly, zink och tenn
+sni_24440,sni_2444,24440,Framställning av koppar
+sni_24450,sni_2445,24450,Framställning av andra metaller
+sni_24460,sni_2446,24460,Tillverkning av kärnbränsle
+sni_24510,sni_2451,24510,Gjutning av järn
+sni_24520,sni_2452,24520,Gjutning av stål
+sni_24530,sni_2453,24530,Gjutning av lättmetall
+sni_24540,sni_2454,24540,Gjutning av andra metaller
+sni_25110,sni_2511,25110,Tillverkning av metallstommar och delar därav
+sni_25120,sni_2512,25120,Tillverkning av dörrar och fönster av metall
+sni_25210,sni_2521,25210,Tillverkning av radiatorer och pannor för centraluppvärmning
+sni_25290,sni_2529,25290,Tillverkning av andra cisterner, tankar, kar och andra behållare av metall
+sni_25300,sni_2530,25300,Tillverkning av ånggeneratorer utom varmvattenpannor för centraluppvärmning
+sni_25400,sni_2540,25400,Tillverkning av vapen och ammunition
+sni_25500,sni_2550,25500,"Smidning, pressning, prägling och valsning av metall, pulvermetallurgi"
+sni_25610,sni_2561,25610,Beläggning och överdragning av metall
+sni_25620,sni_2562,25620,Metallegoarbeten
+sni_25710,sni_2571,25710,Tillverkning av bestick
+sni_25720,sni_2572,25720,Tillverkning av lås och gångjärn
+sni_25730,sni_2573,25730,Tillverkning av verktyg och redskap
+sni_25910,sni_2591,25910,Tillverkning av stålfat o.d. behållare
+sni_25920,sni_2592,25920,Tillverkning av lättmetallförpackningar
+sni_25930,sni_2593,25930,Tillverkning av metalltrådvaror, kedjor och fjädrar
+sni_25940,sni_2594,25940,Tillverkning av nitar och skruvar
+sni_25991,sni_2599,25991,Tillverkning av diskbänkar, sanitetsgods m. m. av metall för byggändamål
+sni_25999,sni_2599,25999,Diverse övrig metallvarutillverkning
+sni_26110,sni_2611,26110,Tillverkning av elektroniska komponenter
+sni_26120,sni_2612,26120,Tillverkning av kretskort
+sni_26200,sni_2620,26200,Tillverkning av datorer och kringutrustning
+sni_26300,sni_2630,26300,Tillverkning av kommunikationsutrustning
+sni_26400,sni_2640,26400,Tillverkning av hemelektronik
+sni_26510,sni_2651,26510,Tillverkning av instrument och apparater för mätning, provning och navigering
+sni_26520,sni_2652,26520,Urtillverkning
+sni_26600,sni_2660,26600,Tillverkning av strålningsutrustning samt elektromedicinsk och elektroterapeutisk utrustning
+sni_26700,sni_2670,26700,Tillverkning av optiska instrument och fotoutrustning
+sni_26800,sni_2680,26800,Tillverkning av magnetiska och optiska medier
+sni_27110,sni_2711,27110,Tillverkning av elmotorer, generatorer och transformatorer
+sni_27120,sni_2712,27120,Tillverkning av eldistributions- och elkontrollapparater
+sni_27200,sni_2720,27200,Batteri- och ackumulatortillverkning
+sni_27310,sni_2731,27310,Tillverkning av optiska fiberkablar
+sni_27320,sni_2732,27320,Tillverkning av andra elektroniska och elektriska ledningar och kablar
+sni_27330,sni_2733,27330,Tillverkning av kabeltillbehör
+sni_27400,sni_2740,27400,Tillverkning av belysningsarmatur
+sni_27510,sni_2751,27510,Tillverkning av elektriska hushållsmaskiner och hushållsapparater
+sni_27520,sni_2752,27520,Tillverkning av icke-elektriska hushållsmaskiner och hushållsapparater
+sni_27900,sni_2790,27900,Tillverkning av annan elapparatur
+sni_28110,sni_2811,28110,Tillverkning av motorer och turbiner utom för luftfartyg och fordon
+sni_28120,sni_2812,28120,Tillverkning av fluidteknisk utrustning
+sni_28130,sni_2813,28130,Tillverkning av andra pumpar och kompressorer
+sni_28140,sni_2814,28140,Tillverkning av andra kranar och ventiler
+sni_28150,sni_2815,28150,Tillverkning av lager, kugghjul och andra delar för kraftöverföring
+sni_28210,sni_2821,28210,Tillverkning av ugnar och brännare
+sni_28220,sni_2822,28220,Tillverkning av lyft- och godshanteringsanordningar
+sni_28230,sni_2823,28230,Tillverkning av kontorsmaskiner och kontorsutrustning (utom datorer och kringutrustning)
+sni_28240,sni_2824,28240,Tillverkning av motordrivna handverktyg
+sni_28250,sni_2825,28250,Tillverkning av maskiner och apparater för kyla och ventilation utom för hushåll
+sni_28290,sni_2829,28290,Övrig tillverkning av maskiner för allmänt ändamål
+sni_28300,sni_2830,28300,Tillverkning av jord- och skogsbruksmaskiner
+sni_28410,sni_2841,28410,Tillverkning av verktygsmaskiner för metallbearbetning
+sni_28490,sni_2849,28490,Tillverkning av övriga verktygsmaskiner
+sni_28910,sni_2891,28910,Tillverkning av maskiner för metallurgi
+sni_28920,sni_2892,28920,Tillverkning av gruv-, bergbrytnings- och byggmaskiner
+sni_28930,sni_2893,28930,Tillverkning av maskiner för framställning av livsmedel, drycker och tobaksvaror
+sni_28940,sni_2894,28940,Tillverkning av maskiner för produktion av textil-, beklädnads- och lädervaror
+sni_28950,sni_2895,28950,Tillverkning av maskiner för produktion av massa, papper och papp
+sni_28960,sni_2896,28960,Tillverkning av maskiner för gummi och plast
+sni_28990,sni_2899,28990,Tillverkning av övriga specialmaskiner
+sni_29101,sni_2910,29101,Tillverkning av personbilar och andra lätta motorfordon
+sni_29102,sni_2910,29102,Tillverkning av lastbilar och andra tunga motorfordon
+sni_29200,sni_2920,29200,"Tillverkning av karosserier för motorfordon, tillverkning av släpfordon och påhängsvagnar"
+sni_29310,sni_2931,29310,Tillverkning av elektrisk och elektronisk utrustning för motorfordon
+sni_29320,sni_2932,29320,Tillverkning av andra delar och tillbehör till motorfordon
+sni_30110,sni_3011,30110,Byggande av fartyg och flytande materiel
+sni_30120,sni_3012,30120,Byggande av fritidsbåtar
+sni_30200,sni_3020,30200,Tillverkning av rälsfordon
+sni_30300,sni_3030,30300,Tillverkning av luftfartyg, rymdfarkoster o.d.
+sni_30400,sni_3040,30400,Tillverkning av militära stridsfordon
+sni_30910,sni_3091,30910,Tillverkning av motorcyklar
+sni_30920,sni_3092,30920,Tillverkning av cyklar och invalidfordon
+sni_30990,sni_3099,30990,Diverse övrig transportmedelstillverkning
+sni_31011,sni_3101,31011,Tillverkning av kontors- och butiksmöbler
+sni_31012,sni_3101,31012,Tillverkning av kontors- och butiksinredningar
+sni_31021,sni_3102,31021,Tillverkning av köksmöbler
+sni_31022,sni_3102,31022,Tillverkning av köksinredningar
+sni_31030,sni_3103,31030,Tillverkning av madrasser
+sni_31090,sni_3109,31090,Tillverkning av andra möbler
+sni_32110,sni_3211,32110,Prägling av mynt
+sni_32120,sni_3212,32120,Tillverkning av smycken, guld- och silversmedsvaror
+sni_32130,sni_3213,32130,Tillverkning av bijouterier o.d.
+sni_32200,sni_3220,32200,Tillverkning av musikinstrument
+sni_32300,sni_3230,32300,Tillverkning av sportartiklar
+sni_32400,sni_3240,32400,Tillverkning av spel och leksaker
+sni_32501,sni_3250,32501,Tillverkning av medicinska och dentala instrument och tillbehör
+sni_32502,sni_3250,32502,Tillverkning av tandproteser
+sni_32910,sni_3291,32910,Tillverkning av borstbinderiarbeten
+sni_32990,sni_3299,32990,Diverse övrig tillverkning
+sni_33110,sni_3311,33110,Reparation av metallvaror
+sni_33120,sni_3312,33120,Reparation av maskiner
+sni_33130,sni_3313,33130,Reparation av elektronisk och optisk utrustning
+sni_33140,sni_3314,33140,Reparation av elapparatur
+sni_33150,sni_3315,33150,Reparation och underhåll av fartyg och båtar
+sni_33160,sni_3316,33160,Reparation och underhåll av luftfartyg och rymdfarkoster
+sni_33170,sni_3317,33170,Reparation och underhåll av andra transportmedel
+sni_33190,sni_3319,33190,Reparation av annan utrustning
+sni_33200,sni_3320,33200,Installation av industrimaskiner och -utrustning
+sni_35110,sni_3511,35110,Generering av elektricitet
+sni_35120,sni_3512,35120,Överföring av elektricitet
+sni_35130,sni_3513,35130,Distribution av elektricitet
+sni_35140,sni_3514,35140,Handel med elektricitet
+sni_35210,sni_3521,35210,Framställning av gas
+sni_35220,sni_3522,35220,Distribution av gasformiga bränslen via rörnät
+sni_35230,sni_3523,35230,Handel med gas via rörnät
+sni_35300,sni_3530,35300,Försörjning av värme och kyla
+sni_36001,sni_3600,36001,Grundvattenförsörjning
+sni_36002,sni_3600,36002,Ytvattenförsörjning
+sni_37000,sni_3700,37000,Avloppsrening
+sni_38110,sni_3811,38110,Insamling av icke-farligt avfall
+sni_38120,sni_3812,38120,Insamling av farligt avfall
+sni_38210,sni_3821,38210,Behandling och bortskaffande av icke-farligt avfall
+sni_38220,sni_3822,38220,Behandling och bortskaffande av farligt avfall
+sni_38311,sni_3831,38311,Demontering av uttjänta fordon
+sni_38312,sni_3831,38312,Demontering av elektrisk och elektronisk utrustning
+sni_38319,sni_3831,38319,Demontering av övrig kasserad utrustning
+sni_38320,sni_3832,38320,Återvinning av källsorterat material
+sni_39000,sni_3900,39000,Sanering, efterbehandling av jord och vatten samt annan verksamhet för föroreningsbekämpning
+sni_41100,sni_4110,41100,Utformning av byggprojekt
+sni_41200,sni_4120,41200,Byggande av bostadshus och andra byggnader
+sni_42110,sni_4211,42110,Anläggning av vägar och motorvägar
+sni_42120,sni_4212,42120,Anläggning av järnvägar och tunnelbanor
+sni_42130,sni_4213,42130,Anläggning av broar och tunnlar
+sni_42210,sni_4221,42210,Allmännyttiga anläggningsarbeten för värme, vatten och avlopp
+sni_42220,sni_4222,42220,Anläggningsarbeten för el och telekommunikation
+sni_42910,sni_4291,42910,Vattenbyggnad
+sni_42990,sni_4299,42990,Övriga anläggningsarbeten
+sni_43110,sni_4311,43110,Rivning av hus och byggnader
+sni_43120,sni_4312,43120,Mark- och grundarbeten
+sni_43130,sni_4313,43130,Markundersökning
+sni_43210,sni_4321,43210,Elinstallationer
+sni_43221,sni_4322,43221,Värme- och sanitetsarbeten
+sni_43222,sni_4322,43222,Ventilationsarbeten
+sni_43223,sni_4322,43223,Kyl- och frysinstallationsarbeten
+sni_43229,sni_4322,43229,Övriga VVS-arbeten
+sni_43290,sni_4329,43290,Andra bygginstallationer
+sni_43310,sni_4331,43310,Puts-, fasad- och stuckatörsarbeten
+sni_43320,sni_4332,43320,Byggnadssnickeriarbeten
+sni_43330,sni_4333,43330,Golv- och väggbeläggningsarbeten
+sni_43341,sni_4334,43341,Måleriarbeten
+sni_43342,sni_4334,43342,Glasmästeriarbeten
+sni_43390,sni_4339,43390,Annan slutbehandling av byggnader
+sni_43911,sni_4391,43911,Takarbeten av plåt
+sni_43912,sni_4391,43912,Takarbeten av andra material än plåt
+sni_43991,sni_4399,43991,Uthyrning av bygg- och anläggningsmaskiner med förare
+sni_43999,sni_4399,43999,Diverse övrig specialiserad bygg- och anläggningsverksamhet
+sni_45110,sni_4511,45110,Handel med personbilar och lätta motorfordon
+sni_45191,sni_4519,45191,Handel med lastbilar, bussar och specialfordon
+sni_45192,sni_4519,45192,Handel med husvagnar, husbilar, släpfordon och påhängsvagnar
+sni_45201,sni_4520,45201,Allmän service och reparation av motorfordon utom motorcyklar
+sni_45202,sni_4520,45202,Plåt-, lack- och glasreparationer på motorfordon utom motorcyklar
+sni_45203,sni_4520,45203,Installationer och reparationer av elsystem till motorfordon utom motorcyklar
+sni_45204,sni_4520,45204,Däckservice
+sni_45310,sni_4531,45310,Parti- och provisionshandel med reservdelar och tillbehör till motorfordon utom motorcyklar
+sni_45320,sni_4532,45320,Detaljhandel med reservdelar och tillbehör till motorfordon utom motorcyklar
+sni_45400,sni_4540,45400,Handel med och service av motorcyklar inklusive reservdelar och tillbehör
+sni_46110,sni_4611,46110,Provisionshandel med jordbruksråvaror, levande djur, textilråvaror och textilhalvfabrikat
+sni_46120,sni_4612,46120,Provisionshandel med bränsle, malm, metaller och industrikemikalier
+sni_46130,sni_4613,46130,Provisionshandel med virke och byggmaterial
+sni_46141,sni_4614,46141,Provisionshandel med maskiner, industriell utrustning, fartyg och luftfartyg utom kontorsutrustning och datorer
+sni_46142,sni_4614,46142,Provisionshandel med kontorsutrustning och datorer
+sni_46150,sni_4615,46150,Provisionshandel med möbler, hushålls- och järnhandelsvaror
+sni_46160,sni_4616,46160,Provisionshandel med textilier, kläder, skodon och lädervaror
+sni_46170,sni_4617,46170,Provisionshandel med livsmedel, drycker och tobak
+sni_46180,sni_4618,46180,Provisionshandel med annat specialsortiment
+sni_46190,sni_4619,46190,Provisionshandel med blandat sortiment
+sni_46210,sni_4621,46210,Partihandel med spannmål, råtobak, utsäde och djurfoder
+sni_46220,sni_4622,46220,Partihandel med blommor och växter
+sni_46230,sni_4623,46230,Partihandel med levande djur
+sni_46240,sni_4624,46240,Partihandel med hudar, skinn och läder
+sni_46310,sni_4631,46310,Partihandel med frukt och grönsaker
+sni_46320,sni_4632,46320,Partihandel med kött- och köttvaror
+sni_46330,sni_4633,46330,Partihandel med mejeriprodukter, ägg, matolja och matfett
+sni_46340,sni_4634,46340,Partihandel med drycker
+sni_46350,sni_4635,46350,Partihandel med tobak
+sni_46360,sni_4636,46360,Partihandel med socker, choklad och sockerkonfektyrer
+sni_46370,sni_4637,46370,Partihandel med kaffe, te, kakao och kryddor
+sni_46380,sni_4638,46380,Partihandel med andra livsmedel, bl.a. fisk samt skal- och blötdjur
+sni_46390,sni_4639,46390,Icke specialiserad partihandel med livsmedel, drycker och tobak
+sni_46410,sni_4641,46410,Partihandel med textilier
+sni_46420,sni_4642,46420,Partihandel med kläder och skodon
+sni_46431,sni_4643,46431,Partihandel med elektriska hushållsmaskiner och -apparater
+sni_46432,sni_4643,46432,Partihandel med ljud- och bildanläggningar samt videoutrustning
+sni_46433,sni_4643,46433,Partihandel med inspelade band och skivor för musik och bild
+sni_46434,sni_4643,46434,Partihandel med elartiklar
+sni_46435,sni_4643,46435,Partihandel med fotografiska och optiska produkter
+sni_46440,sni_4644,46440,Partihandel med glas och porslin, rengöringsmedel
+sni_46450,sni_4645,46450,Partihandel med parfym och kosmetika
+sni_46460,sni_4646,46460,Partihandel med medicinsk utrustning och apoteksvaror
+sni_46470,sni_4647,46470,Partihandel med möbler, mattor och belysningsartiklar
+sni_46480,sni_4648,46480,Partihandel med ur och guldsmedsvaror
+sni_46491,sni_4649,46491,Partihandel med sport- och fritidsartiklar
+sni_46492,sni_4649,46492,Partihandel med kontorsförbrukningsvaror
+sni_46499,sni_4649,46499,Partihandel med övriga hushållsvaror
+sni_46510,sni_4651,46510,Partihandel med datorer och kringutrustning samt programvara
+sni_46521,sni_4652,46521,Partihandel med elektronikkomponenter
+sni_46522,sni_4652,46522,Partihandel med teleprodukter
+sni_46610,sni_4661,46610,Partihandel med jordbruksmaskiner och -utrustning
+sni_46620,sni_4662,46620,Partihandel med verktygsmaskiner
+sni_46630,sni_4663,46630,Partihandel med gruv-, bygg- och anläggningsmaskiner
+sni_46640,sni_4664,46640,Partihandel med textil-, sy- och stickmaskiner
+sni_46650,sni_4665,46650,Partihandel med kontorsmöbler
+sni_46660,sni_4666,46660,Partihandel med andra kontorsmaskiner och kontorsutrustning
+sni_46691,sni_4669,46691,Partihandel med mät- och precisionsinstrument
+sni_46692,sni_4669,46692,Partihandel med datoriserad materialhanteringsutrustning
+sni_46699,sni_4669,46699,Partihandel med diverse övriga maskiner och utrustning
+sni_46710,sni_4671,46710,Partihandel med bränslen
+sni_46720,sni_4672,46720,Partihandel med metaller och metallmalmer
+sni_46731,sni_4673,46731,Partihandel med virke och andra byggmaterial
+sni_46732,sni_4673,46732,Partihandel med sanitetsgods
+sni_46741,sni_4674,46741,Partihandel med järnhandelsvaror
+sni_46742,sni_4674,46742,Partihandel med VVS-varor
+sni_46750,sni_4675,46750,Partihandel med kemiska produkter
+sni_46761,sni_4676,46761,Partihandel med industriförnödenheter
+sni_46762,sni_4676,46762,Partihandel med emballage
+sni_46769,sni_4676,46769,Partihandel med övriga insatsvaror
+sni_46771,sni_4677,46771,Partihandel med uttjänta fordon
+sni_46772,sni_4677,46772,Partihandel med metallavfall och metallskrot
+sni_46773,sni_4677,46773,Partihandel med avfall och skrot av icke-metall
+sni_46900,sni_4690,46900,Övrig partihandel
+sni_47111,sni_4711,47111,Varuhus- och stormarknadshandel, mest livsmedel, drycker och tobak
+sni_47112,sni_4711,47112,Livsmedelshandel med brett sortiment, ej varuhus eller stormarknad
+sni_47191,sni_4719,47191,Annan varuhus- och stormarknadshandel
+sni_47199,sni_4719,47199,Övrig detaljhandel med brett sortiment
+sni_47210,sni_4721,47210,Specialiserad butikshandel med frukt och grönsaker
+sni_47220,sni_4722,47220,Specialiserad butikshandel med kött och charkuterier
+sni_47230,sni_4723,47230,Specialiserad butikshandel med fisk, skal- och blötdjur
+sni_47241,sni_4724,47241,Specialiserad butikshandel med bröd och konditorivaror
+sni_47242,sni_4724,47242,Specialiserad butikshandel med konfektyrer
+sni_47250,sni_4725,47250,Specialiserad butikshandel med alkoholhaltiga och andra drycker
+sni_47260,sni_4726,47260,Specialiserad butikshandel med tobaksvaror
+sni_47291,sni_4729,47291,Specialiserad butikshandel med hälsokost
+sni_47299,sni_4729,47299,Övrig specialiserad butikshandel med livsmedel
+sni_47300,sni_4730,47300,Specialiserad detaljhandel med drivmedel
+sni_47410,sni_4741,47410,Specialiserad butikshandel med datorer, programvara, data- och tv-spel
+sni_47420,sni_4742,47420,Specialiserad butikshandel med telekommunikationsutrustning
+sni_47430,sni_4743,47430,Specialiserad butikshandel med ljud- och bildanläggningar samt videoutrustning
+sni_47510,sni_4751,47510,Specialiserad butikshandel med textilier
+sni_47521,sni_4752,47521,Specialiserad butikshandel med virke och byggvaror
+sni_47522,sni_4752,47522,Specialiserad butikshandel med järn- och VVS-varor
+sni_47523,sni_4752,47523,Specialiserad butikshandel med färger, fernissor och lacker
+sni_47531,sni_4753,47531,Specialiserad butikshandel med mattor och annan vägg- och golvbeklädnad
+sni_47532,sni_4753,47532,Specialiserad butikshandel med inredningstextilier
+sni_47540,sni_4754,47540,Specialiserad butikshandel med elektriska hushållsmaskiner och hushållsapparater
+sni_47591,sni_4759,47591,Specialiserad butikshandel med möbler för hemmet
+sni_47592,sni_4759,47592,Specialiserad butikshandel med kontorsmöbler
+sni_47593,sni_4759,47593,Specialiserad butikshandel med glas, porslin och andra bosättningsvaror
+sni_47594,sni_4759,47594,Specialiserad butikshandel med belysningsartiklar
+sni_47595,sni_4759,47595,Specialiserad butikshandel med musikinstrument och noter
+sni_47610,sni_4761,47610,Specialiserad butikshandel med böcker
+sni_47621,sni_4762,47621,Specialiserad butikshandel med tidningar
+sni_47622,sni_4762,47622,Specialiserad butikshandel med kontorsförbrukningsvaror
+sni_47630,sni_4763,47630,Specialiserad butikshandel med inspelade och oinspelade band och skivor för musik och bild
+sni_47641,sni_4764,47641,Specialiserad butikshandel med sport- och fritidsartiklar utom cyklar och båtar
+sni_47642,sni_4764,47642,Specialiserad butikshandel med cyklar
+sni_47643,sni_4764,47643,Specialiserad butikshandel med båtar
+sni_47650,sni_4765,47650,Specialiserad butikshandel med spel och leksaker
+sni_47711,sni_4771,47711,Specialiserad butikshandel med herr-, dam- och barnkläder, blandat
+sni_47712,sni_4771,47712,Specialiserad butikshandel med herrkläder
+sni_47713,sni_4771,47713,Specialiserad butikshandel med damkläder
+sni_47714,sni_4771,47714,Specialiserad butikshandel med barnkläder
+sni_47715,sni_4771,47715,Specialiserad butikshandel med pälsar
+sni_47721,sni_4772,47721,Specialiserad butikshandel med skodon
+sni_47722,sni_4772,47722,Specialiserad butikshandel med väskor, reseffekter och lädervaror
+sni_47730,sni_4773,47730,Apotekshandel
+sni_47740,sni_4774,47740,Specialiserad butikshandel med sjukvårdsartiklar
+sni_47750,sni_4775,47750,Specialiserad butikshandel med kosmetika och hygienartiklar
+sni_47761,sni_4776,47761,Specialiserad butikshandel med blommor och andra växter, frön och gödselmedel
+sni_47762,sni_4776,47762,Specialiserad butikshandel med små sällskapsdjur
+sni_47771,sni_4777,47771,Specialiserad butikshandel med ur
+sni_47772,sni_4777,47772,Specialiserad butikshandel med guldsmedsvaror och smycken
+sni_47781,sni_4778,47781,Specialiserad butikshandel med glasögon och andra optiska artiklar utom fotoutrustning
+sni_47782,sni_4778,47782,Specialiserad butikshandel med fotoutrustning
+sni_47783,sni_4778,47783,Specialiserad butikshandel med konst samt galleriverksamhet
+sni_47784,sni_4778,47784,Specialiserad butikshandel med mynt och frimärken
+sni_47789,sni_4778,47789,Övrig specialiserad butikshandel
+sni_47791,sni_4779,47791,Specialiserad butikshandel med antikviteter och begagnade böcker
+sni_47792,sni_4779,47792,Specialiserad butikshandel med övriga begagnade varor
+sni_47793,sni_4779,47793,Auktioner i butik
+sni_47810,sni_4781,47810,Torg- och marknadshandel med livsmedel, drycker och tobak
+sni_47820,sni_4782,47820,Torg- och marknadshandel med textilier, kläder och skodon
+sni_47890,sni_4789,47890,Torg- och marknadshandel med övriga varor
+sni_47911,sni_4791,47911,Postorderhandel och detaljhandel på Internet med brett sortiment
+sni_47912,sni_4791,47912,Postorderhandel och detaljhandel på Internet med beklädnadsvaror
+sni_47913,sni_4791,47913,Postorderhandel och detaljhandel på Internet med böcker och andra mediavaror
+sni_47914,sni_4791,47914,Postorderhandel och detaljhandel på Internet med datorer och annan elektronisk utrustning
+sni_47915,sni_4791,47915,Postorderhandel och detaljhandel på Internet med sport- och fritidsutrustning
+sni_47916,sni_4791,47916,Postorderhandel och detaljhandel på Internet med bosättningsvaror
+sni_47917,sni_4791,47917,Auktioner på Internet
+sni_47919,sni_4791,47919,Postorderhandel och detaljhandel på Internet med övriga varor
+sni_47991,sni_4799,47991,Provisionsdetaljhandel (ej auktioner)
+sni_47992,sni_4799,47992,Ambulerande och tillfällig handel med livsmedel
+sni_47993,sni_4799,47993,Ambulerande och tillfällig handel med övriga varor
+sni_47994,sni_4799,47994,Auktioner ej i butik eller på Internet
+sni_47999,sni_4799,47999,Övrig detaljhandel ej i butik
+sni_49100,sni_4910,49100,Järnvägstransport, passagerartrafik
+sni_49200,sni_4920,49200,Järnvägstransport, godstrafik
+sni_49311,sni_4931,49311,Linjebussverksamhet
+sni_49319,sni_4931,49319,Övrig kollektivtrafik
+sni_49320,sni_4932,49320,Taxitrafik
+sni_49390,sni_4939,49390,Annan landtransport av passagerare
+sni_49410,sni_4941,49410,Vägtransport, godstrafik
+sni_49420,sni_4942,49420,Flyttjänster
+sni_49500,sni_4950,49500,Transport i rörsystem
+sni_50101,sni_5010,50101,Reguljär sjötrafik över hav och kust av passagerare
+sni_50102,sni_5010,50102,Icke reguljär sjötrafik över hav och kust av passagerare
+sni_50201,sni_5020,50201,Reguljär sjötrafik över hav och kust av gods
+sni_50202,sni_5020,50202,Icke reguljär sjötrafik över hav och kust av gods
+sni_50301,sni_5030,50301,Reguljär sjötrafik på inre vattenvägar av passagerare
+sni_50302,sni_5030,50302,Icke reguljär sjötrafik på inre vattenvägar av passagerare
+sni_50401,sni_5040,50401,Reguljär sjötrafik på inre vattenvägar av gods
+sni_50402,sni_5040,50402,Icke reguljär sjötrafik på inre vattenvägar av gods
+sni_51101,sni_5110,51101,Reguljär lufttransport av passagerare
+sni_51102,sni_5110,51102,Icke reguljär lufttransport av passagerare
+sni_51211,sni_5121,51211,Reguljär lufttransport av gods
+sni_51212,sni_5121,51212,Icke reguljär lufttransport av gods
+sni_51220,sni_5122,51220,Rymdfart
+sni_52100,sni_5210,52100,Magasinering och varulagring
+sni_52211,sni_5221,52211,Bärgning för landtransport
+sni_52219,sni_5221,52219,Övriga stödtjänster till landtransport
+sni_52220,sni_5222,52220,Stödtjänster till sjötransport
+sni_52230,sni_5223,52230,Stödtjänster till lufttransport
+sni_52241,sni_5224,52241,Hamngodshantering
+sni_52249,sni_5224,52249,Övrig godshantering
+sni_52290,sni_5229,52290,Övriga stödtjänster till transport
+sni_53100,sni_5310,53100,Postbefordran via nationella posten
+sni_53201,sni_5320,53201,Annan postbefordran
+sni_53202,sni_5320,53202,Bud- och kurirverksamhet
+sni_53203,sni_5320,53203,Tidningsdistribution
+sni_55101,sni_5510,55101,Hotellverksamhet med restaurangrörelse
+sni_55102,sni_5510,55102,Drift av konferensanläggningar
+sni_55103,sni_5510,55103,Hotellverksamhet utan restaurangrörelse
+sni_55201,sni_5520,55201,Vandrarhemsverksamhet
+sni_55202,sni_5520,55202,Stugbyverksamhet m.m.
+sni_55300,sni_5530,55300,Campingplatsverksamhet
+sni_55900,sni_5590,55900,Annan logiverksamhet
+sni_56100,sni_5610,56100,Restaurangverksamhet
+sni_56210,sni_5621,56210,Cateringverksamhet vid enskilda evenemang
+sni_56291,sni_5629,56291,Drift av personalmatsalar
+sni_56292,sni_5629,56292,Centralköksverksamhet för sjukhus
+sni_56293,sni_5629,56293,Centralköksverksamhet för skolor, omsorgs- och andra institutioner
+sni_56294,sni_5629,56294,Cateringverksamhet för transportsektorn
+sni_56299,sni_5629,56299,Övrig cateringverksamhet
+sni_56300,sni_5630,56300,Barverksamhet
+sni_58110,sni_5811,58110,Bokutgivning
+sni_58120,sni_5812,58120,Publicering av kataloger och sändlistor
+sni_58131,sni_5813,58131,Dagstidningsutgivning
+sni_58132,sni_5813,58132,Annonstidningsutgivning
+sni_58140,sni_5814,58140,Utgivning av tidskrifter
+sni_58190,sni_5819,58190,Annan förlagsverksamhet
+sni_58210,sni_5821,58210,Utgivning av dataspel
+sni_58290,sni_5829,58290,Utgivning av annan programvara
+sni_59110,sni_5911,59110,Produktion av film, video och TV-program
+sni_59120,sni_5912,59120,Efterproduktion av film, video och TV-program
+sni_59130,sni_5913,59130,Film-, video- och TV-programdistribution
+sni_59140,sni_5914,59140,Filmvisning
+sni_59200,sni_5920,59200,Ljudinspelning och fonogramutgivning
+sni_60100,sni_6010,60100,Sändning av radioprogram
+sni_60200,sni_6020,60200,Planering av TV-program och sändningsverksamhet
+sni_61100,sni_6110,61100,Trådbunden telekommunikation
+sni_61200,sni_6120,61200,Trådlös telekommunikation
+sni_61300,sni_6130,61300,Telekommunikation via satellit
+sni_61900,sni_6190,61900,Annan telekommunikation
+sni_62010,sni_6201,62010,Dataprogrammering
+sni_62020,sni_6202,62020,Datakonsultverksamhet
+sni_62030,sni_6203,62030,Datordrifttjänster
+sni_62090,sni_6209,62090,Andra IT- och datatjänster
+sni_63110,sni_6311,63110,Databehandling, hosting o.d.
+sni_63120,sni_6312,63120,Webbportaler
+sni_63910,sni_6391,63910,Nyhetsservice
+sni_63990,sni_6399,63990,Övriga informationstjänster
+sni_64110,sni_6411,64110,Centralbanksverksamhet
+sni_64190,sni_6419,64190,Annan monetär finansförmedling
+sni_64201,sni_6420,64201,Holdingverksamhet i finansiella koncerner
+sni_64202,sni_6420,64202,Holdingverksamhet i icke-finansiella koncerner
+sni_64301,sni_6430,64301,Investeringsfonder
+sni_64309,sni_6430,64309,Andra fonder och liknande finansiella enheter
+sni_64910,sni_6491,64910,Finansiell leasing
+sni_64920,sni_6492,64920,Annan kreditgivning
+sni_64991,sni_6499,64991,Investment- och riskkapitalbolagsverksamhet
+sni_64992,sni_6499,64992,Handel med och förvaltning av värdepapper, för egen räkning
+sni_64993,sni_6499,64993,Förvaltning av och handel med värdepapper för en begränsad och sluten krets av ägare
+sni_64999,sni_6499,64999,Diverse övrig finansförmedling
+sni_65111,sni_6511,65111,Fondanknuten livförsäkring
+sni_65119,sni_6511,65119,Övrig livförsäkring
+sni_65120,sni_6512,65120,Skadeförsäkring
+sni_65200,sni_6520,65200,Återförsäkring
+sni_65300,sni_6530,65300,Pensionsfondsverksamhet
+sni_66110,sni_6611,66110,Administrativa tjänster till finansiella marknader
+sni_66120,sni_6612,66120,Verksamhet utförd av värdepappers- och varumäklare
+sni_66190,sni_6619,66190,Andra stödtjänster till finansiella tjänster utom försäkring och pensionsfondsverksamhet
+sni_66210,sni_6621,66210,Risk- och skadebedömning
+sni_66220,sni_6622,66220,Verksamhet utförd av försäkringsombud och försäkringsmäklare
+sni_66290,sni_6629,66290,Andra stödtjänster till försäkring och pensionsfondsverksamhet
+sni_66301,sni_6630,66301,Förvaltning av investeringsfonder
+sni_66309,sni_6630,66309,Annan fondförvaltning
+sni_68100,sni_6810,68100,Handel med egna fastigheter
+sni_68201,sni_6820,68201,Uthyrning och förvaltning av egna eller arrenderade bostäder
+sni_68202,sni_6820,68202,Uthyrning och förvaltning av egna eller arrenderade industrilokaler
+sni_68203,sni_6820,68203,Uthyrning och förvaltning av egna eller arrenderade, andra lokaler
+sni_68204,sni_6820,68204,Förvaltning i bostadsrättsföreningar
+sni_68209,sni_6820,68209,Övrig förvaltning av egna eller arrenderade fastigheter
+sni_68310,sni_6831,68310,Fastighetsförmedling
+sni_68320,sni_6832,68320,Fastighetsförvaltning på uppdrag
+sni_69101,sni_6910,69101,Advokatbyråverksamhet
+sni_69102,sni_6910,69102,Juridiska byråers verksamhet m.m.
+sni_69103,sni_6910,69103,Patentbyråverksamhet m.m.
+sni_69201,sni_6920,69201,Redovisning och bokföring
+sni_69202,sni_6920,69202,Revision
+sni_69203,sni_6920,69203,Skatterådgivning
+sni_70100,sni_7010,70100,Verksamheter som utövas av huvudkontor
+sni_70210,sni_7021,70210,PR och kommunikation
+sni_70220,sni_7022,70220,Konsultverksamhet avseende företags organisation
+sni_71110,sni_7111,71110,Arkitektverksamhet
+sni_71121,sni_7112,71121,Teknisk konsultverksamhet inom bygg- och anläggningsteknik
+sni_71122,sni_7112,71122,Teknisk konsultverksamhet inom industriteknik
+sni_71123,sni_7112,71123,Teknisk konsultverksamhet inom elteknik
+sni_71124,sni_7112,71124,Teknisk konsultverksamhet inom energi-, miljö- och VVS-teknik
+sni_71129,sni_7112,71129,Övrig teknisk konsultverksamhet
+sni_71200,sni_7120,71200,Teknisk provning och analys
+sni_72110,sni_7211,72110,Bioteknisk forskning och utveckling
+sni_72190,sni_7219,72190,Annan naturvetenskaplig och teknisk forskning och utveckling
+sni_72200,sni_7220,72200,Samhällsvetenskaplig och humanistisk forskning och utveckling
+sni_73111,sni_7311,73111,Reklambyråverksamhet
+sni_73112,sni_7311,73112,Direktreklamverksamhet
+sni_73119,sni_7311,73119,Övrig reklamverksamhet
+sni_73120,sni_7312,73120,Mediebyråverksamhet och annonsförsäljning
+sni_73200,sni_7320,73200,Marknads- och opinionsundersökning
+sni_74101,sni_7410,74101,Industri- och produktdesignverksamhet
+sni_74102,sni_7410,74102,Grafisk designverksamhet
+sni_74103,sni_7410,74103,Inredningsarkitektverksamhet
+sni_74201,sni_7420,74201,Porträttfotoverksamhet
+sni_74202,sni_7420,74202,Reklamfotoverksamhet
+sni_74203,sni_7420,74203,Press- och övrig fotografverksamhet
+sni_74204,sni_7420,74204,Fotolaboratorieverksamhet
+sni_74300,sni_7430,74300,Översättning och tolkning
+sni_74900,sni_7490,74900,Övrig verksamhet inom juridik, ekonomi, vetenskap och teknik
+sni_75000,sni_7500,75000,Veterinärverksamhet
+sni_77110,sni_7711,77110,Uthyrning och leasing av personbilar och lätta motorfordon
+sni_77120,sni_7712,77120,Uthyrning och leasing av lastbilar och andra tunga motorfordon
+sni_77210,sni_7721,77210,Uthyrning och leasing av fritids- och sportutrustning
+sni_77220,sni_7722,77220,Uthyrning av videokassetter och dvd-skivor
+sni_77290,sni_7729,77290,Uthyrning och leasing av andra hushållsartiklar och varor för personligt bruk
+sni_77310,sni_7731,77310,Uthyrning och leasing av jordbruksmaskiner och jordbruksredskap
+sni_77320,sni_7732,77320,Uthyrning och leasing av bygg- och anläggningsmaskiner
+sni_77330,sni_7733,77330,Uthyrning och leasing av kontorsmaskiner och kontorsutrustning (inklusive datorer)
+sni_77340,sni_7734,77340,Uthyrning och leasing av fartyg och båtar
+sni_77350,sni_7735,77350,Uthyrning och leasing av flygplan
+sni_77390,sni_7739,77390,Uthyrning och leasing av övrig utrustning och övriga maskiner och materiella tillgångar
+sni_77400,sni_7740,77400,Leasing av immateriell egendom och liknande produkter, med undantag för upphovsrättsskyddade verk
+sni_78100,sni_7810,78100,Arbetsförmedling och rekrytering
+sni_78200,sni_7820,78200,Personaluthyrning
+sni_78300,sni_7830,78300,Övrigt tillhandahållande av personalfunktioner
+sni_79110,sni_7911,79110,Resebyråverksamhet
+sni_79120,sni_7912,79120,Researrangemang
+sni_79900,sni_7990,79900,Turist- och bokningsservice
+sni_80100,sni_8010,80100,Säkerhetsverksamhet
+sni_80200,sni_8020,80200,Säkerhetssystemtjänster
+sni_80300,sni_8030,80300,Spanings- och detektivverksamhet
+sni_81100,sni_8110,81100,Fastighetsrelaterade stödtjänster
+sni_81210,sni_8121,81210,Lokalvård
+sni_81221,sni_8122,81221,Rengöring av byggnader
+sni_81222,sni_8122,81222,Skorstensfejarverksamhet
+sni_81290,sni_8129,81290,Annan rengöring
+sni_81300,sni_8130,81300,Skötsel och underhåll av grönytor
+sni_82110,sni_8211,82110,Kombinerade kontorstjänster
+sni_82190,sni_8219,82190,Kopiering, dokumentsammanställning och andra specialiserade kontorstjänster
+sni_82200,sni_8220,82200,Callcenterverksamhet
+sni_82300,sni_8230,82300,Arrangemang av kongresser och mässor
+sni_82910,sni_8291,82910,Inkassoföretags och kreditupplysningsföretags verksamhet
+sni_82920,sni_8292,82920,Förpackningsverksamhet
+sni_82990,sni_8299,82990,Övriga företagstjänster
+sni_84111,sni_8411,84111,Stats- och kommunledning, lagstiftning och övergripande planering
+sni_84112,sni_8411,84112,Inspektion, kontroll, tillståndsgivning
+sni_84113,sni_8411,84113,Skatteförvaltning, indrivning
+sni_84114,sni_8411,84114,Samhällelig informationsförsörjning
+sni_84115,sni_8411,84115,Personalförvaltning och andra allmänna stödtjänster
+sni_84121,sni_8412,84121,Administration av grundskole- och gymnasieskoleutbildning
+sni_84122,sni_8412,84122,Administration av universitets- och högskoleutbildning samt forskning
+sni_84123,sni_8412,84123,Administration av hälso- och sjukvård
+sni_84124,sni_8412,84124,Administration av omsorg och socialtjänst
+sni_84125,sni_8412,84125,Administration av program för kultur, miljö, boende m.m.
+sni_84131,sni_8413,84131,Administration av infrastrukturprogram
+sni_84132,sni_8413,84132,Administration av program för jordbruk, skogsbruk, jakt och fiske
+sni_84133,sni_8413,84133,Administration av arbetsmarknadsprogram
+sni_84139,sni_8413,84139,Administration av andra näringslivsprogram
+sni_84210,sni_8421,84210,Utrikesförvaltning
+sni_84221,sni_8422,84221,Militärt försvar
+sni_84222,sni_8422,84222,Gemensam verksamhet för totalförsvaret
+sni_84223,sni_8422,84223,Civilt försvar och frivilligförsvar
+sni_84231,sni_8423,84231,Åklagarverksamhet
+sni_84232,sni_8423,84232,Domstolsverksamhet
+sni_84233,sni_8423,84233,Kriminalvård
+sni_84240,sni_8424,84240,Polisverksamhet
+sni_84250,sni_8425,84250,Brand- och räddningsverksamhet
+sni_84300,sni_8430,84300,Obligatorisk socialförsäkring
+sni_85100,sni_8510,85100,Förskoleutbildning
+sni_85201,sni_8520,85201,Grundskoleutbildning och förskoleklass
+sni_85202,sni_8520,85202,Utbildning inom grundsärskola
+sni_85311,sni_8531,85311,Studieförberedande gymnasial utbildning
+sni_85312,sni_8531,85312,Kommunal vuxenutbildning o.d.
+sni_85321,sni_8532,85321,Gymnasial yrkesutbildning
+sni_85322,sni_8532,85322,Utbildning inom gymnasiesärskola
+sni_85323,sni_8532,85323,Annan gymnasial utbildning
+sni_85324,sni_8532,85324,Yrkesförarutbildning m.m.
+sni_85410,sni_8541,85410,Eftergymnasial utbildning vid annat än universitet och högskola
+sni_85420,sni_8542,85420,Universitets- eller högskoleutbildning
+sni_85510,sni_8551,85510,Sport- och fritidsutbildning
+sni_85521,sni_8552,85521,Kommunala kulturskolans utbildning
+sni_85522,sni_8552,85522,Övrig musik-, dans- och kulturell utbildning
+sni_85530,sni_8553,85530,Trafikskoleverksamhet
+sni_85591,sni_8559,85591,Arbetsmarknadsutbildning
+sni_85592,sni_8559,85592,Folkhögskoleutbildning
+sni_85593,sni_8559,85593,Studieförbundens och frivilligorganisationernas utbildning
+sni_85594,sni_8559,85594,Personalutbildning
+sni_85599,sni_8559,85599,Diverse övrig utbildning
+sni_85600,sni_8560,85600,Stödverksamhet för utbildningsväsendet
+sni_86101,sni_8610,86101,Sluten primärvård
+sni_86102,sni_8610,86102,Specialiserad sluten somatisk hälso- och sjukvård på sjukhus
+sni_86103,sni_8610,86103,Specialiserad sluten psykiatrisk hälso- och sjukvård på sjukhus
+sni_86211,sni_8621,86211,Primärvårdsmottagningar med läkare m.m.
+sni_86212,sni_8621,86212,Annan allmän öppen hälso- och sjukvård, ej primärvård
+sni_86221,sni_8622,86221,Specialistläkarverksamhet inom öppenvård, på sjukhus
+sni_86222,sni_8622,86222,Specialistläkarverksamhet inom öppenvård, ej på sjukhus
+sni_86230,sni_8623,86230,Tandläkarverksamhet
+sni_86901,sni_8690,86901,Medicinsk laboratorieverksamhet m.m.
+sni_86902,sni_8690,86902,Ambulanstransporter och ambulanssjukvård
+sni_86903,sni_8690,86903,Primärvård, ej läkare
+sni_86904,sni_8690,86904,Tandhygienistverksamhet
+sni_86905,sni_8690,86905,Fysioterapeutisk verksamhet  o.d.
+sni_86909,sni_8690,86909,Annan öppen hälso- och sjukvård, utan läkare
+sni_87100,sni_8710,87100,Boende med sjuksköterskevård
+sni_87201,sni_8720,87201,Boende med särskild service för personer med utvecklingsstörning eller  psykiska funktionshinder
+sni_87202,sni_8720,87202,Boende med särskild service för barn och ungdomar med missbruksproblem
+sni_87203,sni_8720,87203,Boende med särskild service för vuxna med missbruksproblem
+sni_87301,sni_8730,87301,Vård och omsorg i särskilda boendeformer för äldre personer
+sni_87302,sni_8730,87302,Vård och omsorg i särskilda boendeformer för  personer med funktionshinder
+sni_87901,sni_8790,87901,Heldygnsvård med boende för barn och ungdomar med sociala problem
+sni_87902,sni_8790,87902,Omsorg och sociala insatser i övriga boendeformer för vuxna
+sni_88101,sni_8810,88101,Öppna sociala insatser för äldre personer
+sni_88102,sni_8810,88102,Öppna sociala insatser för personer med funktionshinder
+sni_88910,sni_8891,88910,Dagbarnvård
+sni_88991,sni_8899,88991,Öppna sociala insatser för barn och ungdomar med sociala problem
+sni_88992,sni_8899,88992,Öppna sociala insatser för vuxna med missbruksproblem
+sni_88993,sni_8899,88993,Övriga öppna sociala insatser för vuxna
+sni_88994,sni_8899,88994,Humanitära insatser
+sni_88995,sni_8899,88995,Drift av flyktingförläggning
+sni_90010,sni_9001,90010,Artistisk verksamhet
+sni_90020,sni_9002,90020,Stödtjänster till artistisk verksamhet
+sni_90030,sni_9003,90030,Litterärt och konstnärligt skapande
+sni_90040,sni_9004,90040,Drift av teatrar, konserthus o.d.
+sni_91011,sni_9101,91011,Biblioteksverksamhet
+sni_91012,sni_9101,91012,Arkivverksamhet
+sni_91020,sni_9102,91020,Museiverksamhet
+sni_91030,sni_9103,91030,Vård av historiska minnesmärken och byggnader och liknande sevärdheter
+sni_91040,sni_9104,91040,Drift av botaniska trädgårdar, djurparker och naturreservat
+sni_92000,sni_9200,92000,Spel- och vadhållningsverksamhet
+sni_93111,sni_9311,93111,Drift av skidsportanläggningar
+sni_93112,sni_9311,93112,Drift av golfbanor
+sni_93113,sni_9311,93113,Drift av motorbanor
+sni_93114,sni_9311,93114,Drift av trav- och galoppbanor
+sni_93119,sni_9311,93119,Drift av sporthallar, idrottsplatser och andra sportanläggningar
+sni_93120,sni_9312,93120,Sportklubbars och idrottsföreningars verksamhet
+sni_93130,sni_9313,93130,Drift av gymanläggningar
+sni_93191,sni_9319,93191,Tävling med hästar
+sni_93199,sni_9319,93199,Övrig sportverksamhet
+sni_93210,sni_9321,93210,Nöjes- och temaparksverksamhet
+sni_93290,sni_9329,93290,Övrig fritids- och nöjesverksamhet
+sni_94111,sni_9411,94111,Intressebevakning inom branschorganisationer
+sni_94112,sni_9411,94112,Intressebevakning inom arbetsgivarorganisationer
+sni_94120,sni_9412,94120,Intressebevakning inom yrkesorganisationer
+sni_94200,sni_9420,94200,Intressebevakning inom arbetstagarorganisationer
+sni_94910,sni_9491,94910,Verksamhet i religiösa samfund
+sni_94920,sni_9492,94920,Verksamhet i politiska organisationer
+sni_94990,sni_9499,94990,Verksamhet i andra intresseorganisationer
+sni_95110,sni_9511,95110,Reparation av datorer och kringutrustning
+sni_95120,sni_9512,95120,Reparation av kommunikationsutrustning
+sni_95210,sni_9521,95210,Reparation av hemelektronik
+sni_95220,sni_9522,95220,Reparation av hushållsapparater samt av utrustning för hem och trädgård
+sni_95230,sni_9523,95230,Lagning av skodon och lädervaror
+sni_95240,sni_9524,95240,Reparation av möbler och heminredning
+sni_95250,sni_9525,95250,Reparation av ur och guldsmedsvaror
+sni_95290,sni_9529,95290,Reparation av andra hushållsartiklar och personliga artiklar
+sni_96011,sni_9601,96011,Industri- och institutionstvätt
+sni_96012,sni_9601,96012,Konsumenttvätt
+sni_96021,sni_9602,96021,Hårvård
+sni_96022,sni_9602,96022,Skönhetsvård
+sni_96030,sni_9603,96030,Begravningsverksamhet
+sni_96040,sni_9604,96040,Kroppsvård
+sni_96090,sni_9609,96090,Övriga konsumenttjänster
+sni_97000,sni_9700,97000,Förvärvsarbete i hushåll
+sni_98100,sni_9810,98100,Hushållens produktion av diverse varor för eget bruk
+sni_98200,sni_9820,98200,Hushållens produktion av diverse tjänster för eget bruk
+sni_99000,sni_9900,99000,Verksamhet vid internationella organisationer, utländska ambassader o.d.
+,,,
+,,,
+,,,
