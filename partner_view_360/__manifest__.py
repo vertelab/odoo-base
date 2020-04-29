@@ -34,7 +34,9 @@ AFC-102, 103, 140, 183, 192, 213, 210
     'website': 'http://www.vertel.se',
     'depends': ['contacts'],
     'data': [
-			'views/res_partner_view.xml'
+			'views/res_partner_view.xml',
+            "data/arbetssokande/res.partner.csv",
+            "data/arbetsgivare/res.partner.csv",
         ],
     'application': False,
     'installable': True,

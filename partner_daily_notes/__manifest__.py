@@ -40,8 +40,9 @@ This module allowes daily notes for a partner.
     'data': [
 			'views/res_partner_view.xml',
             'security/ir.model.access.csv',
-            'views/res_partner_notes_view.xml'
-            #'data/ir.model.fields.csv',			
+            'views/res_partner_notes_view.xml',
+            #'data/ir.model.fields.csv',
+            "data/res.partner.notes.csv",			
         ],
     'application': False,
     'installable': True,
