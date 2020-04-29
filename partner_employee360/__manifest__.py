@@ -20,7 +20,7 @@
 ##############################################################################
 
 {
-    'name': 'Partner employee 360 view',
+    'name': 'Partner employee 360 view DEPRECATED',
     'version': '12.0.0.1.5',
     'category': '',
     'description': """
@@ -34,7 +34,7 @@ AFC-102, 103, 140, 183, 192, 213, 210
     'website': 'http://www.vertel.se',
     'depends': ['base',],
     'data': [
-			'views/res_partner.xml'
+			#'views/res_partner.xml'
         ],
     'application': False,
     'installable': True,

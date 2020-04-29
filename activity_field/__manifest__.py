@@ -20,7 +20,7 @@
 ##############################################################################
 
 {
-    'name': 'Activity Tab',
+    'name': 'Activity Tab DEPRECATED',
     'version': '12.0.1.3',						# Format 12.0.1.0, för att vi använder Odoo 12
     'category': '',
     'description': """
@@ -31,10 +31,12 @@ AFC-130
     'author': 'Vertel AB',
     'license': 'AGPL-3',
     'website': 'http://www.vertel.se',
-    'depends': ['base', 'partner_employee360'],
+    'depends': ['base', 
+    #'partner_employee360'
+    ],
     'data': [
-			'views/res_partner_view.xml',
-            'security/ir.model.access.csv'
+	#		'views/res_partner_view.xml',
+     #       'security/ir.model.access.csv'
         ],
     'application': False,
     'installable': True,
