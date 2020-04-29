@@ -51,7 +51,7 @@ class ResPartner(models.Model):
     is_employer = fields.Boolean(string="Employer")
 
     jobseeker_category = fields.Char(string="Jobseeker category") #egen modell?
-    jobseeker_since = fields.Datetime(string="Since")
+    customer_since = fields.Datetime(string="Since")
     jobseeker_work = fields.Boolean(string="Work")
     deactualization_date = fields.Datetime(string="Date")
     deactualization_reason = fields.Char(string="Reason") #egen modell?
