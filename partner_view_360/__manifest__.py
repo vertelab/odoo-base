@@ -35,9 +35,12 @@ AFC-102, 103, 140, 183, 192, 213, 210
     'depends': ['contacts'],
     'data': [
 			'views/res_partner_view.xml',
+        ],
+    'demo': [
             "data/arbetssokande/res.partner.csv",
             "data/arbetsgivare/res.partner.csv",
-        ],
+    ],
+
     'application': False,
     'installable': True,
 }
