@@ -235,7 +235,7 @@
         </group>
       </group>
       <notebook>
-        <page string="Söka arbete">
+        <page name="apply_for_jobs" string="Apply for jobs">
                   
         </page>
       </notebook>
@@ -312,13 +312,34 @@
         action="action_jobseekers"
         sequence="4"/>
 
-        <menuitem id="res_partner_jobseekers_config_menu" parent="res_partner_jobseekers_menu" action="" sequence="0" />
+        <menuitem id="res_partner_jobseekers_config_menu" parent="res_partner_jobseekers_menu" name="Configuration" sequence="0" /> <!--base group no one-->
 
         <menuitem id="menu_ssyk_config" parent="res_partner_jobseekers_config_menu" action="res_ssyk.action_ssyk_form" sequence="2" />
         <menuitem id="menu_sun_config" parent="res_partner_jobseekers_config_menu" action="res_sun.action_sun_form" sequence="3" />
         <menuitem id="menu_sni_config" parent="res_partner_jobseekers_config_menu" action="res_sni.action_sni_form" sequence="1" />
         <menuitem id="menu_drivers_license_config" parent="res_partner_jobseekers_config_menu" action="res_drivers_license.action_drivers_license_form" sequence="4" />
 
+
+ <record id="view_partner_form_education1" model="ir.ui.view"> 
+        <field name="name">res.partner.eduacation.form1</field> 
+        <field name="model">res.partner</field> 
+        <field name="inherit_id" ref="view_partner_jobseeker_form" /> 
+        <field name="arch" type="xml"> 
+            <xpath expr="//page[@name='apply_for_jobs']" position="inside">
+                <page name="education" string="Education" > 
+                    <group>
+                        <field name="sun_id" options="{'no_create_edit': True}"/> 
+                        <field name="education_level"/>
+                        <field name="foreign_education"/>
+                        <field name="foreign_education_approved"/>
+                        <field name="has_drivers_license"/>
+                        <field name="drivers_license_id" options="{'no_create_edit': True}"/> 
+                        <field name="has_car"/>
+                    </group>
+                </page>
+            </xpath>
+        </field>
+     </record>
 
 
         <!--

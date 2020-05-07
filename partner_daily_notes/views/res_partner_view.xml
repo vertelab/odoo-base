@@ -37,4 +37,44 @@
             </xpath>
     </field>
   </record> 
+   <record id="view_partner_form1" model="ir.ui.view"> 
+    <field name="name">view.res.partner.form.inherited.notes1</field>
+    <field name="model">res.partner</field> 
+    <field name="inherit_id" ref="partner_view_360.view_partner_jobseeker_form" /> 
+    <field name="arch" type="xml"> 
+      <div name="button_box" position="inside">
+        <!-- <button class="oe_stat_button" type="object"
+            name="view_notes"
+            icon="fa-pencil-square-o"
+            groups="sales_team.group_sale_salesman"
+            context="{'partner_id': active_id, 'partner_name': name}"> 
+            <field string="Notes" name="notes_count" widget="statinfo"/>
+        </button> -->
+        <button class="oe_stat_button" type="object"
+            name="view_notes"
+            icon="fa-pencil-square-o"> 
+            <field string="Notes" name="notes_count" widget="statinfo"/>
+        </button> 
+      </div>
+      <xpath expr="//page[@name='apply_for_jobs']" position="after">
+                <page string="Daily Notes">
+                    <group>
+                      <field name="notes_ids" mode="tree" nolabel="1">
+                        <tree editable="bottom" string="Notes" default_order="note_date">
+                           <field name="name" />    
+                            <field name="note"/>
+                            <field name="note_date" widget="date"/> 
+                            <field name="note_type" options="{'no_create_edit': True}"/>
+                            <field name="note_number" groups="base.group_no_one"/>
+                            <field name="office" options="{'no_create_edit': True}" domain="[('type', '=', 'af office')]"/>
+                        </tree>
+                      </field>
+                    </group>
+                </page>
+            </xpath>
+    </field>
+  </record> 
+
+
+
 </odoo>
