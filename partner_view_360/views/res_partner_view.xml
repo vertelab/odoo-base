@@ -101,7 +101,6 @@
     </field>
   </record>
 
-
   <record id="view_partner_select_employee360" model="ir.ui.view"> 
     <field name="name">res.partner.view.select.inherit.view_360</field>           
     <field name="model">res.partner</field> 
@@ -116,46 +115,41 @@
       </xpath>
     </field>
   </record>
+  
 
-  <!-- försök att ändra kanban vyn, gick inte så bra -->
-  <!-- <record id="view_partner_kanban_employee360" model="ir.ui.view"> 
-    <field name="name">res.partner.select.inherit.employee360</field> 
-    <field name="model">res.partner</field> 
-    <field name="inherit_id" ref="base.res_partner_kanban_view" /> 
-    <field name="arch" type="xml"> 
-      <xpath expr="/kanban/templates/t/div/t/div[hasclass('o_kanban_image_fill_left')]/img" position="attributes">
-        <attribute name="invisible">1</attribute>
-         </xpath>
-<xpath expr="/kanban/templates/t/div/t/div[hasclass('o_kanban_image')]/img" position="attributes">
-        <attribute name="invisible">1</attribute>
-         </xpath>
-<xpath expr="/kanban/templates/t/div/t/img" position="attributes">
-        <attribute name="invisible">1</attribute>
-         </xpath>
-        <xpath expr="/kanban/templates/t/div/t/t/img" position="attributes">
-        <attribute name="invisible">1</attribute>
-         </xpath>
-<xpath expr="/kanban/templates/t/div/t/t/t/img" position="attributes">
-        <attribute name="invisible">1</attribute>
-         </xpath>
-        <xpath expr="/kanban/templates/t/div/t/div[]/img" position="attributes">
-        <attribute name="invisible">1</attribute>
-       
-      </xpath>
-    </field>
-  </record> -->
+    <record id="view_partner_form_education" model="ir.ui.view"> 
+        <field name="name">res.partner.eduacation.form</field> 
+        <field name="model">res.partner</field> 
+        <field name="inherit_id" ref="base.view_partner_form" /> 
+        <field name="arch" type="xml"> 
+            <xpath expr="//page[@name='internal_notes']" position="after">
+                <page name="education" string="Education" > 
+                    <group>
+                        <field name="sun_id" options="{'no_create_edit': True}"/> 
+                        <field name="education_level"/>
+                        <field name="foreign_education"/>
+                        <field name="foreign_education_approved"/>
+                        <field name="has_drivers_license"/>
+                        <field name="drivers_license_id" options="{'no_create_edit': True}"/> 
+                        <field name="has_car"/>
+                    </group>
+                </page>
+            </xpath>
+        </field>
+     </record>
+
+       <!-- <record id="view_partner_form" model="ir.ui.view">
+        <field name="name">res.partner.form.inherit.drivers_license</field>
+        <field name="model">res.partner</field>
+        <field name="inherit_id" ref="base.view_partner_form" />
+        <field name="arch" type="xml">
+            <xpath expr="//page[@name='education']/group" position="inside">
+             
+            </xpath> 
+        </field>
+    </record> -->
 
 
-<!-- gör inget, tanken är att försöka få den där lilla neråt pilen -->
-  <!-- <record id="view_partner_filter_employee360" model="ir.ui.view">
-    <field name="name">res.partner.select.employee360</field>
-    <field name="model">res.partner</field>
-    <field name="arch" type="xml">
-        <search string="Search Test">
-            <field name="customer_id" />
-       </search>
-    </field>
-</record> -->
 
 
   <record id="action_employers" model="ir.actions.act_window">
@@ -180,6 +174,8 @@
 
 
 
+
+
   <record id="view_partner_jobseeker_form" model="ir.ui.view">
     <field name="name">res.partner.form.jobseeker</field>
     <field name="model">res.partner</field>
@@ -198,23 +194,33 @@
       </div>
       <group>
         <group string="Personuppgifter">
-            <field name="parent_id" attrs="{'invisible' : True}"/>
-            <field name="type" attrs="{'invisible' : True}"/>
-
+          <field name="parent_id" attrs="{'invisible' : True}"/>
+          <field name="type" attrs="{'invisible' : True}"/>
+          <field name="company_registry" attrs="{'invisible': True}"/>
           <field name="social_security_nr"/>
           <field name="customer_id"/> 
-         <!-- <field name="kommun?"/> 
-         folkbokföringsadress, alternativt göra en res partner typ-->
+          
+          <!-- folkbokföringsadress, alternativt göra en res partner typ-->
+
+          <field name="state_id" class="o_address_state" placeholder="State"/>
+          <label for="street" string="Address"/>
           <div class="o_address_format"> 
               <field name="street" placeholder="Street..." class="o_address_street" />
-              <field name="street2" placeholder="Street 2..." class="o_address_street"/>
-              <field name="city" placeholder="City" class="o_address_city"/>
-              <field name="state_id" class="o_address_state" placeholder="State"/>
               <field name="zip" placeholder="ZIP" class="o_address_zip"/>
-              <field name="country_id" placeholder="Country" class="o_address_country"/>
           </div>
 
-          <field name="postal_address" options="{'no_create_edit': True}" domain="[('type', '=', 'postal address')]"/>
+          <field name="street2" placeholder="Street 2..." class="o_address_street" attrs="{'invisible': True}"/>
+          <field name="city" placeholder="City" class="o_address_city" attrs="{'invisible': True}"/>
+          <field name="country_id" placeholder="Country" class="o_address_country" attrs="{'invisible': True}"/>
+
+
+          <label for="postal_address_street" string="Postal address"/>
+          <div class="o_address_format"> 
+              <field name="postal_address_street" placeholder="Street..." class="o_address_street" />
+              <field name="postal_address_zip" placeholder="ZIP" class="o_address_zip"/>
+          </div>
+          <field name="postal_address" domain="[('type', '=', 'postal address')]" attrs="{'invisible': True}"/>
+          
           <field name="phone"/>
           <field name="mobile"/>
           <field name="email"/>
@@ -273,12 +279,13 @@
 
     <record id="action_jobseekers" model="ir.actions.act_window">
         <field name="name">Jobseekers Action</field>
-        <field name="type">ir.actions.act_window</field>
+        <!-- <field name="type">ir.actions.act_window</field> -->
         <field name="res_model">res.partner</field>
-        <field name="view_type">form</field>
+        <!-- <field name="view_type">form</field> -->
         <field name="view_mode">kanban,tree,form,activity</field>
         <field name="search_view_id" ref="base.view_res_partner_filter"/>
         <field name="help" type="html">
+        <field name="view_id" ref="view_jobseeker_kanban"/>
           <p class="o_view_nocontent_smiling_face">
             Create a jobseeker in your address book
           </p>
@@ -287,18 +294,16 @@
     </record>
 
    <record id="action_jobseeker_form_view" model="ir.actions.act_window.view">
-            <field eval="0" name="sequence"/>
+            <field eval="2" name="sequence"/>
             <field name="view_mode">form</field>
             <field name="view_id" ref="view_partner_jobseeker_form"/>
             <field name="act_window_id" ref="action_jobseekers"/>
-            <field name="domain">[('is_jobseeker', '=', True)]</field>
         </record>
  <record id="action_jobseeker_kanban_view" model="ir.actions.act_window.view">
             <field eval="0" name="sequence"/>
             <field name="view_mode">kanban</field>
             <field name="view_id" ref="view_jobseeker_kanban"/>
             <field name="act_window_id" ref="action_jobseekers"/>
-            <field name="domain">[('is_jobseeker', '=', True)]</field>
         </record>
       
 
@@ -307,7 +312,12 @@
         action="action_jobseekers"
         sequence="4"/>
 
+        <menuitem id="res_partner_jobseekers_config_menu" parent="res_partner_jobseekers_menu" action="" sequence="0" />
 
+        <menuitem id="menu_ssyk_config" parent="res_partner_jobseekers_config_menu" action="res_ssyk.action_ssyk_form" sequence="2" />
+        <menuitem id="menu_sun_config" parent="res_partner_jobseekers_config_menu" action="res_sun.action_sun_form" sequence="3" />
+        <menuitem id="menu_sni_config" parent="res_partner_jobseekers_config_menu" action="res_sni.action_sni_form" sequence="1" />
+        <menuitem id="menu_drivers_license_config" parent="res_partner_jobseekers_config_menu" action="res_drivers_license.action_drivers_license_form" sequence="4" />
 
 
 

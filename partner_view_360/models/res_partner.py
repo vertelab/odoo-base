@@ -29,7 +29,7 @@ class ResPartner(models.Model):
     #_name = ""
 
     work_phone = fields.Integer(string='Work phone', help="Work phone number")
-    social_security_nr = fields.Char(string="Social security number")
+    social_security_nr = fields.Char(string="Social security number", related="company_registry")
     company_registry = fields.Char(
         string='Organization number', help="organization number")
     cfar = fields.Char(string='CFAR', help="CFAR number")
@@ -62,4 +62,6 @@ class ResPartner(models.Model):
     registered_through = fields.Char(string="Registered Through")
     share_info_with_employers = fields.Boolean(string="Share name and address with employers")
     sms_reminders = fields.Boolean(string="SMS reminders")
-    postal_address = fields.Many2one('res.partner', string="postal_address")
+    postal_address = fields.Many2one('res.partner', string="Postal address")
+    postal_address_street = fields.Char(string="Postal address", related="postal_address.street")
+    postal_address_zip = fields.Char(related="postal_address.zip")
