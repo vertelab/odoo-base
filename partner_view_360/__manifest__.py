@@ -32,13 +32,18 @@ AFC-102, 103, 140, 183, 192, 213, 210
     'author': 'Vertel AB',
     'license': 'AGPL-3',
     'website': 'http://www.vertel.se',
-    'depends': ['contacts'],
+    'depends': ['contacts', 
+    'res_sun', 
+    'res_drivers_license',
+    'res_ssyk',
+    'res_sni'
+    ],
     'data': [
 			'views/res_partner_view.xml',
         ],
     'demo': [
-            "data/arbetssokande/res.partner.csv",
-            "data/arbetsgivare/res.partner.csv",
+    #        "data/arbetssokande/res.partner.csv",
+    #        "data/arbetsgivare/res.partner.csv",
     ],
 
     'application': False,

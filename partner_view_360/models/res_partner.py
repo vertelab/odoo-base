@@ -29,8 +29,9 @@ class ResPartner(models.Model):
     #_name = ""
 
     work_phone = fields.Integer(string='Work phone', help="Work phone number")
+    social_security_nr = fields.Char(string="Social security number", related="company_registry")
     company_registry = fields.Char(
-        string='Organization/Social security number', help="Social security number or organization number")
+        string='Organization number', help="organization number")
     cfar = fields.Char(string='CFAR', help="CFAR number")
     customer_id = fields.Char(string='Customer number', help="Customer number")
 
@@ -40,7 +41,7 @@ class ResPartner(models.Model):
         string='Office code', related='office.office_code')
 
     # adds af office as a type of partner
-    type = fields.Selection(selection_add=[('af office', 'AF Office'), ('legal adress','Legal Adress'), ('foreign adress','Foreign Adress'), ('postal adress','Postal Adress')])
+    type = fields.Selection(selection_add=[('af office', 'AF Office'), ('legal address','Legal Address'), ('foreign address','Foreign Address'), ('postal address','Postal Address')])
 
     # office code for office type partners only
     office_code = fields.Char(string="Office code")
@@ -58,3 +59,9 @@ class ResPartner(models.Model):
     foreign_country_of_work = fields.Char(string="When working in foreign country")
     deactualization_message = fields.Text(string="Message to jobseeker regarding deactualization")
 
+    registered_through = fields.Char(string="Registered Through")
+    share_info_with_employers = fields.Boolean(string="Share name and address with employers")
+    sms_reminders = fields.Boolean(string="SMS reminders")
+    postal_address = fields.Many2one('res.partner', string="Postal address")
+    postal_address_street = fields.Char(string="Postal address", related="postal_address.street")
+    postal_address_zip = fields.Char(related="postal_address.zip")

@@ -199,4 +199,45 @@
         tänk på search för specifika fält, och grupperingar (domän) på allt möjligt, filter, sökrecord i action record
 
     -->
+
+
+
+    <record id="view_partner_form1" model="ir.ui.view"> 
+        <field name="name">res.partner.view.form.inherit.activity1</field> 
+        <field name="model">res.partner</field> 
+        <field name="inherit_id" ref="partner_view_360.view_partner_jobseeker_form" /> 
+        <field name="arch" type="xml"> 
+            <xpath expr="//page[@name='apply_for_jobs']" position="after">
+                <page string="Activity">
+                    <group>
+                      <field name="partner_activity_ids" mode="tree" nolabel="1">
+                        <tree editable="bottom" string="Timesheet Activities" default_order="start_date">
+                           <!-- <field name="name" />     -->
+                            <field name="meeting_type"/>
+                            <field name="meeting_type_parent"/>
+                            <field name="start_date" widget="date"/>
+                            <field name="done_before_date" widget="date"/>    
+                            <field name="duration" widget="timesheet_uom" groups="base.group_no_one"/> 
+                            <field name="notes"/> 
+                            <field name="office_id"/>  
+                            <field name="mandatory" />    
+                           <field name="done" />    
+                        </tree>
+                      </field>   
+                    </group>
+                </page>
+            </xpath>
+            <div name="button_box" position="inside">
+                <button name="open_partner_activities" type="object" class="oe_stat_button" icon="fa-calendar">
+                <field name="activities_count" string="Activities" widget="statinfo"/> 
+                </button>
+            </div>
+        </field>
+     </record>
+
+    <menuitem id="partner_activity_menu" name="Activities" parent="partner_view_360.res_partner_jobseekers_menu" action="action_partner_activity"/> 
+    <menuitem id="partner_activity_type_menu" name="Activity types" parent="partner_view_360.res_partner_jobseekers_config_menu" action="action_partner_activity_type"/> 
+
+
+
 </odoo>
