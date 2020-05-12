@@ -434,7 +434,7 @@
         sequence="4"/> -->
 
     <record id="action_employers" model="ir.actions.act_window">
-        <field name="name">employers Action</field>
+        <field name="name">Employers Action</field>
         <!-- <field name="type">ir.actions.act_window</field> -->
         <field name="res_model">res.partner</field>
         <!-- <field name="view_type">form</field> -->
@@ -464,7 +464,7 @@
       
 
     <menuitem id="res_partner_employers_menu"
-        name="employers"
+        name="Employers"
         action="action_employers"
         sequence="3"/>
 

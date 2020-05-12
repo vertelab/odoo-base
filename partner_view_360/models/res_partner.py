@@ -78,6 +78,7 @@ class ResPartner(models.Model):
         today = date.today()
         if len(self.company_registry.split("-")[1]) != 4:
             wrong_input = True
+            _logger.error("Incorrectly formated social security number (company_registry)")
         social_sec_stripped = self.company_registry[:-4]
         social_sec_stripped = social_sec_stripped.split("-")[0]
         date_of_birth = date(1980,1,1)
@@ -107,6 +108,7 @@ class ResPartner(models.Model):
                 _logger.error("Could not convert social security number (company_registry) to date")
         else: 
             wrong_input = True
+            _logger.error("Incorrectly formated social security number (company_registry)")
         
         if not wrong_input:
             years = today.year - date_of_birth.year
