@@ -62,6 +62,9 @@ class ResPartner(models.Model):
     registered_through = fields.Char(string="Registered Through")
     share_info_with_employers = fields.Boolean(string="Share name and address with employers")
     sms_reminders = fields.Boolean(string="SMS reminders")
-    postal_address = fields.Many2one('res.partner', string="Postal address")
+    postal_address_id = fields.Many2one('res.partner', string="Postal address")
     postal_address_street = fields.Char(string="Postal address", related="postal_address.street")
     postal_address_zip = fields.Char(related="postal_address.zip")
+    postal_address_city = fields.Char(related="postal_address.city")
+
+    #postal_address = fields.Char('res.partner')
