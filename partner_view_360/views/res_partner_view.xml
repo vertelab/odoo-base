@@ -200,7 +200,7 @@
           <field name="mobile"/>
           <field name="email"/>
         </group>
-        <group string="Arbetsförmedlingens uppgifter">
+        <group string="Employment service information">
           <field name="registered_through"/>
           <field name="jobseeker_category"/>
           <field name="customer_since"/>
@@ -365,7 +365,7 @@
           <field name="mobile"/>
           <field name="email"/>
         </group>
-        <group string="Arbetsförmedlingens uppgifter">
+        <group string="Employment service information">
           <field name="customer_since"/>
           <field name="office" options="{'no_create_edit': True}" domain="[('type', '=', 'af office')]"/>
         </group>
