@@ -171,6 +171,7 @@
           <field name="type" attrs="{'invisible' : True}"/>
           <label for="company_registry" string="Social security number"/>
           <field name="company_registry" nolabel="1"/>
+          <field name="age"/>
           <field name="customer_id"/> 
           
           <!-- folkbokföringsadress, alternativt göra en res partner typ-->
