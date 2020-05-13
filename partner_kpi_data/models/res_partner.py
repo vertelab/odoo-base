@@ -63,16 +63,17 @@ class ResPartnerKpi(models.Model):
     
     @api.one
     def compute_profit_percent(self):
-        decimal = (float(self.profit) / self.turnover)
-        if decimal > 1:
-            decimal = decimal -1
-        else:
-            decimal = 1 - decimal
-            decimal = decimal * -1
+        if self.turnover != 0:
+            decimal = (float(self.profit) / self.turnover)
+            if decimal > 1:
+                decimal = decimal -1
+            else:
+                decimal = 1 - decimal
+                decimal = decimal * -1
 
-        decimal = decimal * 100
-        decimal = round(decimal, 0)
-        self.profit_percent = int(decimal)
+            decimal = decimal * 100
+            decimal = round(decimal, 0)
+            self.profit_percent = int(decimal)
     
     @api.one
     def compute_change(self):
