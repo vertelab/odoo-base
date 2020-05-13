@@ -107,10 +107,10 @@
    
     <record id="view_partner_form_kpi1" model="ir.ui.view"> 
         <field name="name">res.partner.kpi.form</field> 
-        <field name="model">res.partner.</field> 
-        <field name="inherit_id" ref="partner_view_360.view_partner_jobseeker_form" /> 
+        <field name="model">res.partner</field> 
+        <field name="inherit_id" ref="partner_view_360.view_partner_employer_form" /> 
         <field name="arch" type="xml"> 
-            <xpath expr="//notebook" position="inside">
+        <xpath expr="//page[@name='contacts_addresses']" position="after">
                 <page string="KPI">
                     <group>
                       <field name="kpi_ids" mode="tree" nolabel="1">

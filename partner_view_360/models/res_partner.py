@@ -53,7 +53,7 @@ class ResPartner(models.Model):
     is_employer = fields.Boolean(string="Employer")
 
     jobseeker_category = fields.Char(string="Jobseeker category") #egen modell?
-    customer_since = fields.Datetime(string="Since")
+    customer_since = fields.Datetime(string="Customer since")
     jobseeker_work = fields.Boolean(string="Work")
     deactualization_date = fields.Datetime(string="Date")
     deactualization_reason = fields.Char(string="Reason") #egen modell?
@@ -67,7 +67,9 @@ class ResPartner(models.Model):
     postal_address_street = fields.Char(string="Postal address", related="postal_address_id.street")
     postal_address_zip = fields.Char(related="postal_address_id.zip")
     postal_address_city = fields.Char(related="postal_address_id.city")
-        
+
+    employer_class = fields.Selection(selection=[('1','1'), ('2','2'), ('3','3'), ('4','4')])
+
 
     def calculate_age(self):
         wrong_input = False
