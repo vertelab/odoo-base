@@ -21,6 +21,7 @@
 
 from odoo import models, fields, api, _
 import logging
+from datetime import date
 _logger = logging.getLogger(__name__)
 
 
@@ -29,7 +30,7 @@ class ResPartner(models.Model):
     #_name = ""
 
     work_phone = fields.Integer(string='Work phone', help="Work phone number")
-    social_security_nr = fields.Char(string="Social security number", related="company_registry")
+    age = fields.Char(string="Age", compute="calculate_age")
     company_registry = fields.Char(
         string='Organization number', help="organization number")
     cfar = fields.Char(string='CFAR', help="CFAR number")
@@ -62,6 +63,55 @@ class ResPartner(models.Model):
     registered_through = fields.Char(string="Registered Through")
     share_info_with_employers = fields.Boolean(string="Share name and address with employers")
     sms_reminders = fields.Boolean(string="SMS reminders")
-    postal_address = fields.Many2one('res.partner', string="Postal address")
-    postal_address_street = fields.Char(string="Postal address", related="postal_address.street")
-    postal_address_zip = fields.Char(related="postal_address.zip")
+    postal_address_id = fields.Many2one('res.partner', string="Postal address")
+    postal_address_street = fields.Char(string="Postal address", related="postal_address_id.street")
+    postal_address_zip = fields.Char(related="postal_address_id.zip")
+    postal_address_city = fields.Char(related="postal_address_id.city")
+        
+
+    def calculate_age(self):
+        wrong_input = False
+        today = date.today()
+        social_sec = self.company_registry
+        if social_sec != False:
+            if len(social_sec.split("-")[1]) != 4:
+                wrong_input = True
+                _logger.error("Incorrectly formated social security number (company_registry)")
+            social_sec_stripped = self.company_registry[:-4]
+            social_sec_stripped = social_sec_stripped.split("-")[0]
+            date_of_birth = date(1980,1,1)
+            if len(social_sec_stripped) == 6:
+                yr = social_sec_stripped[:2]
+                year = int("20"+yr)
+                month = int(social_sec_stripped[2:4])
+                day = int(social_sec_stripped[4:6])
+                try:
+                    date_of_birth = date(year, month, day)
+                except:
+                    wrong_input = True
+                    _logger.error("Could not convert social security number (company_registry) to date")
+                if today.year - date_of_birth.year < 18:
+                    year = int("19"+yr)
+                    try:
+                        date_of_birth = date(year, month, day)
+                    except:
+                        wrong_input = True
+                        _logger.error("Could not convert social security number (company_registry) to date")
+        
+            elif len(social_sec_stripped) > 6:
+                try:
+                    date_of_birth = date(int(social_sec_stripped[:4]),int(social_sec_stripped[4:6]),int(social_sec_stripped[6:8]))
+                except:
+                    wrong_input = True
+                    _logger.error("Could not convert social security number (company_registry) to date")
+            else: 
+                wrong_input = True
+                _logger.error("Incorrectly formated social security number (company_registry)")
+            
+            if not wrong_input:
+                years = today.year - date_of_birth.year
+                if today.month < date_of_birth.month or (today.month == date_of_birth.month and today.day < date_of_birth.day):
+                    years -= 1
+                self.age = years
+            else: 
+                self.age = "Error calculating age"
