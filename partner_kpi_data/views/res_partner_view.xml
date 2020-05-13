@@ -133,7 +133,11 @@
         </field>
     </record>
 
+<<<<<<< Updated upstream
     <menuitem id="partner_kpi_menu_tree_employer" name="KPI" parent="partner_view_360.res_partner_jobseekers_menu" action="action_kpi"/> 
+=======
+    <menuitem id="partner_kpi_menu_tree_employer" name="KPI" parent="partner_view_360.res_partner_employers_menu" action="kpi_action"/> 
+>>>>>>> Stashed changes
 
 
 </odoo>
