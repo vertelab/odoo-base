@@ -339,8 +339,6 @@
           <field name="company_registry"/>
           <field name="customer_id"/> 
           
-          <!-- folkbokföringsadress, alternativt göra en res partner typ-->
-
           <field name="state_id" class="o_address_state" placeholder="State"/>
           <label for="street" string="Address"/>
           <div class="o_address_format"> 
@@ -359,7 +357,7 @@
               <field name="postal_address_zip" placeholder="ZIP" class="o_address_zip"/>
               <field name="postal_address_city" placeholder="City" class="o_address_city"/>
           </div>
-          <field name="postal_address_id" domain="[('type', '=', 'postal address')]" attrs="{'invisible': True}"/>
+          <field name="postal_address_id" domain="[('type', '=', 'postal address')]" groups="base.group_no_one"/> 
           
           <field name="phone"/>
           <field name="mobile"/>
