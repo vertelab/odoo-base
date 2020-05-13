@@ -89,19 +89,19 @@
     </record>    
 
       <!-- <record id="action_view_view_kpi_pivot" model="ir.actions.act_window.view">
-        <field name="act_window_id" ref="action_kpi"/>
+        <field name="act_window_id" ref="kpi_action"/>
         <field name="sequence" eval="2"/>
         <field name="view_mode">pivot</field>
         <field name="view_id" ref="view_kpi_pivot"/>
     </record>    
 
       <record id="action_view_view_kpi_graph" model="ir.actions.act_window.view">
-        <field name="act_window_id" ref="action_kpi"/>
+        <field name="act_window_id" ref="kpi_action"/>
         <field name="sequence" eval="3"/>
         <field name="view_mode">graph</field>
         <field name="view_id" ref="view_kpi_graph"/>
     </record>     -->
-    <menuitem id="partner_kpi_menu_tree" name="KPI" parent="contacts.menu_contacts" action="action_kpi"/> 
+    <menuitem id="partner_kpi_menu_tree" name="KPI" parent="contacts.menu_contacts" action="kpi_action"/> 
    
     <record id="view_partner_form_kpi1" model="ir.ui.view"> 
         <field name="name">res.partner.kpi.form</field> 
@@ -133,7 +133,7 @@
         </field>
     </record>
 
-    <menuitem id="partner_kpi_menu_tree_employer" name="KPI" parent="partner_view_360.res_partner_jobseekers_menu" action="action_kpi"/> 
+    <menuitem id="partner_kpi_menu_tree_employer" name="KPI" parent="partner_view_360.res_partner_jobseekers_menu" action="kpi_action"/> 
 
 
 </odoo>
