@@ -76,11 +76,12 @@ class ResPartner(models.Model):
         today = date.today()
         social_sec = self.company_registry
         if social_sec != False:
-            if len(social_sec.split("-")[1]) != 4:
-                wrong_input = True
-                _logger.error("Incorrectly formated social security number (company_registry)")
-            social_sec_stripped = self.company_registry[:-4]
-            social_sec_stripped = social_sec_stripped.split("-")[0]
+            social_sec_split = social_sec.split("-")
+            if len(social_sec_split) > 1:
+                if len(social_sec_split[1]) != 4 or len(social_sec_split) > 2:
+                    wrong_input = True
+                    _logger.error("Incorrectly formated social security number (company_registry)")
+            social_sec_stripped = social_sec_split[0]
             date_of_birth = date(1980,1,1)
             if len(social_sec_stripped) == 6:
                 yr = social_sec_stripped[:2]
