@@ -53,7 +53,7 @@ class ResPartner(models.Model):
     is_employer = fields.Boolean(string="Employer")
 
     jobseeker_category = fields.Char(string="Jobseeker category") #egen modell?
-    customer_since = fields.Datetime(string="Since")
+    customer_since = fields.Datetime(string="Customer since")
     jobseeker_work = fields.Boolean(string="Work")
     deactualization_date = fields.Datetime(string="Date")
     deactualization_reason = fields.Char(string="Reason") #egen modell?
@@ -67,18 +67,21 @@ class ResPartner(models.Model):
     postal_address_street = fields.Char(string="Postal address", related="postal_address_id.street")
     postal_address_zip = fields.Char(related="postal_address_id.zip")
     postal_address_city = fields.Char(related="postal_address_id.city")
-        
+
+    employer_class = fields.Selection(selection=[('1','1'), ('2','2'), ('3','3'), ('4','4')])
+
 
     def calculate_age(self):
         wrong_input = False
         today = date.today()
         social_sec = self.company_registry
         if social_sec != False:
-            if len(social_sec.split("-")[1]) != 4:
-                wrong_input = True
-                _logger.error("Incorrectly formated social security number (company_registry)")
-            social_sec_stripped = self.company_registry[:-4]
-            social_sec_stripped = social_sec_stripped.split("-")[0]
+            social_sec_split = social_sec.split("-")
+            if len(social_sec_split) > 1:
+                if len(social_sec_split[1]) != 4 or len(social_sec_split) > 2:
+                    wrong_input = True
+                    _logger.error("Incorrectly formated social security number (company_registry)")
+            social_sec_stripped = social_sec_split[0]
             date_of_birth = date(1980,1,1)
             if len(social_sec_stripped) == 6:
                 yr = social_sec_stripped[:2]
