@@ -20,7 +20,7 @@
 ##############################################################################
 
 {
-    'name': 'Daily notes',
+    'name': 'Daily notes DEPRECATED',
     'version': '12.0.1.2',
     'category': '',
     'description': """
@@ -34,13 +34,13 @@ This module allowes daily notes for a partner.
     'license': 'AGPL-3',
     'website': 'http://www.vertel.se',
     'depends': [
-        'base',
-        'base_map',
-	'partner_employee360',
+      #  'base',
+     #   'base_map',
+	#'partner_employee360',
     ],
     'data': [
-			'views/res_partner.xml',
-            'security/ir.model.access.csv',
+		#	'views/res_partner.xml',
+        #    'security/ir.model.access.csv',
             #'data/ir.model.fields.csv',			
         ],
     'application': False,

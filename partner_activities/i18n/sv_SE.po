@@ -1,0 +1,196 @@
+# Translation of Odoo Server.
+# This file contains the translation of the following modules:
+# 	* partner_activities
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: Odoo Server 12.0-20190808\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2020-04-21 15:10+0000\n"
+"PO-Revision-Date: 2020-04-22 10:45+0200\n"
+"Last-Translator: <>\n"
+"Language-Team: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: \n"
+"Language: sv_SE\n"
+"X-Generator: Poedit 2.0.6\n"
+
+#. module: partner_activities
+#: code:addons/partner_activities/models/res_partner.py:41
+#: model:ir.ui.menu,name:partner_activities.partner_activity_menu
+#: model_terms:ir.ui.view,arch_db:partner_activities.view_partner_activity_graph
+#: model_terms:ir.ui.view,arch_db:partner_activities.view_partner_activity_pivot
+#: model_terms:ir.ui.view,arch_db:partner_activities.view_partner_form
+#, python-format
+msgid "Activities"
+msgstr "Aktiviteter"
+
+#. module: partner_activities
+#: model:ir.model.fields,field_description:partner_activities.field_res_partner__activities_count
+#: model:ir.model.fields,field_description:partner_activities.field_res_users__activities_count
+msgid "Activities Count"
+msgstr "Antal Ativiteter"
+
+#. module: partner_activities
+#: model:ir.model.fields,field_description:partner_activities.field_res_partner_activity_type__activity_id
+#: model_terms:ir.ui.view,arch_db:partner_activities.view_partner_form
+msgid "Activity"
+msgstr "Aktivitet"
+
+#. module: partner_activities
+#: model:ir.actions.act_window,name:partner_activities.action_partner_activity
+msgid "Activity Action"
+msgstr ""
+
+#. module: partner_activities
+#: model:ir.model.fields,field_description:partner_activities.field_res_partner_activity__name
+msgid "Activity Description"
+msgstr "Aktivitetsbeskrivning"
+
+#. module: partner_activities
+#: model:ir.actions.act_window,name:partner_activities.action_partner_activity_type
+msgid "Activity Type Action"
+msgstr ""
+
+#. module: partner_activities
+#: model:ir.ui.menu,name:partner_activities.partner_activity_type_menu
+#: model_terms:ir.ui.view,arch_db:partner_activities.view_partner_activity_type_tree
+msgid "Activity types"
+msgstr "Aktivitetstyper"
+
+#. module: partner_activities
+#: model_terms:ir.ui.view,arch_db:partner_activities.view_partner_activity_calendar
+msgid "Appointments"
+msgstr "Bokade tider"
+
+#. module: partner_activities
+#: model:ir.model,name:partner_activities.model_res_partner
+msgid "Contact"
+msgstr "Kontakt"
+
+#. module: partner_activities
+#: model:ir.model.fields,field_description:partner_activities.field_res_partner_activity__create_uid
+#: model:ir.model.fields,field_description:partner_activities.field_res_partner_activity_type__create_uid
+msgid "Created by"
+msgstr "Skapad av"
+
+#. module: partner_activities
+#: model:ir.model.fields,field_description:partner_activities.field_res_partner_activity__create_date
+#: model:ir.model.fields,field_description:partner_activities.field_res_partner_activity_type__create_date
+msgid "Created on"
+msgstr "Skapad den"
+
+#. module: partner_activities
+#: model:ir.model.fields,field_description:partner_activities.field_res_partner_activity_type__description
+msgid "Description"
+msgstr "Beskrivning"
+
+#. module: partner_activities
+#: model:ir.model.fields,field_description:partner_activities.field_res_partner_activity__display_name
+#: model:ir.model.fields,field_description:partner_activities.field_res_partner_activity_type__display_name
+msgid "Display Name"
+msgstr "Visningsnamn"
+
+#. module: partner_activities
+#: model:ir.model.fields,field_description:partner_activities.field_res_partner_activity__done
+msgid "Done"
+msgstr "Avslutad"
+
+#. module: partner_activities
+#: model:ir.model.fields,field_description:partner_activities.field_res_partner_activity__done_before_date
+msgid "Done before date"
+msgstr "Avslutad före datum"
+
+#. module: partner_activities
+#: model:ir.model.fields,field_description:partner_activities.field_res_partner_activity__duration
+msgid "Duration"
+msgstr "Varaktighet"
+
+#. module: partner_activities
+#: model:ir.model.fields,field_description:partner_activities.field_res_partner_activity__id
+#: model:ir.model.fields,field_description:partner_activities.field_res_partner_activity_type__id
+msgid "ID"
+msgstr ""
+
+#. module: partner_activities
+#: model:ir.model.fields,field_description:partner_activities.field_res_partner_activity____last_update
+#: model:ir.model.fields,field_description:partner_activities.field_res_partner_activity_type____last_update
+msgid "Last Modified on"
+msgstr "Senast redigerad"
+
+#. module: partner_activities
+#: model:ir.model.fields,field_description:partner_activities.field_res_partner_activity__write_uid
+#: model:ir.model.fields,field_description:partner_activities.field_res_partner_activity_type__write_uid
+msgid "Last Updated by"
+msgstr "Senast uppdaterad av"
+
+#. module: partner_activities
+#: model:ir.model.fields,field_description:partner_activities.field_res_partner_activity__write_date
+#: model:ir.model.fields,field_description:partner_activities.field_res_partner_activity_type__write_date
+msgid "Last Updated on"
+msgstr "Senast uppdaterad"
+
+#. module: partner_activities
+#: model:ir.model.fields,field_description:partner_activities.field_res_partner_activity__office_id
+msgid "Location"
+msgstr "Plats"
+
+#. module: partner_activities
+#: model:ir.model.fields,field_description:partner_activities.field_res_partner_activity__mandatory
+msgid "Mandatory"
+msgstr "Obligatorisk"
+
+#. module: partner_activities
+#: model:ir.model.fields,field_description:partner_activities.field_res_partner_activity__meeting_type
+msgid "Meeting Type"
+msgstr "Mötestyp"
+
+#. module: partner_activities
+#: model:ir.model.fields,field_description:partner_activities.field_res_partner_activity_type__name
+msgid "Meeting type"
+msgstr "Mötestyp"
+
+#. module: partner_activities
+#: model:ir.model.fields,field_description:partner_activities.field_res_partner_activity__notes
+msgid "Notes"
+msgstr "Anteckningar"
+
+#. module: partner_activities
+#: model:ir.model.fields,field_description:partner_activities.field_res_partner_activity__meeting_type_parent
+#: model:ir.model.fields,field_description:partner_activities.field_res_partner_activity_type__parent_id
+msgid "Parent"
+msgstr "Överordnad"
+
+#. module: partner_activities
+#: model:ir.model.fields,field_description:partner_activities.field_res_partner_activity__partner_id
+msgid "Partner"
+msgstr "Samarbetspartner"
+
+#. module: partner_activities
+#: model:ir.model.fields,field_description:partner_activities.field_res_partner__partner_activity_ids
+#: model:ir.model.fields,field_description:partner_activities.field_res_users__partner_activity_ids
+msgid "Partner Activity"
+msgstr ""
+
+#. module: partner_activities
+#: model:ir.model.fields,field_description:partner_activities.field_res_partner_activity__start_date
+msgid "Start date"
+msgstr "Start datum"
+
+#. module: partner_activities
+#: model_terms:ir.ui.view,arch_db:partner_activities.view_partner_activity_tree
+#: model_terms:ir.ui.view,arch_db:partner_activities.view_partner_form
+msgid "Timesheet Activities"
+msgstr ""
+
+#. module: partner_activities
+#: model:ir.model,name:partner_activities.model_res_partner_activity
+msgid "res.partner.activity"
+msgstr ""
+
+#. module: partner_activities
+#: model:ir.model,name:partner_activities.model_res_partner_activity_type
+msgid "res.partner.activity.type"
+msgstr ""

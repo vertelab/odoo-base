@@ -1,0 +1,201 @@
+"id","name","company_registry","street","zip","city","country_id/id","phone","email","website","lang","is_employer","is_company"
+"part_employee_001","Apotek AB","202100-1868","Kastellgatan 1",413 07,"GÖTEBORG","base.se","078 347 81 76","info@apotek.se","www.apotek.se","sv_SE",SANT,SANT
+"part_employee_002","Europabagaren AB","202100-1868","Klippgatan 1-3",171 47,"SOLNA","base.se","078 357 92 45","info@europabagaren.se","www.europabagaren.se","sv_SE",1,SANT
+"part_employee_003","Tomra Systems AB","202100-0704","Djupdalsvägen 32",191 21,"SOLLENTUNA","base.se","073 398 72 97","info@tomra.se","www.tomra.se","sv_SE",1,SANT
+"part_employee_004","Vemmab AB","224846-7373","Annelund Skälby",724 76,"VÄSTERÅS","base.se","070 926 80 12","info@vemmab.se","www.vemmab.se","sv_SE",1,SANT
+"part_employee_005","Lidens Möbler AB","288823-2463","Box 85",783 22,"SÄTER","base.se","075 957 57 30","info@lidens.se","www.lidens.se","sv_SE",1,SANT
+"part_employee_006","Golvcentralen L Westergren AB","354483-7389","Spillings Othem",620 30,"SLITE","base.se","073 453 23 22","info@golvcentralen.se","www.golvcentralen.se","sv_SE",1,SANT
+"part_employee_007","Kantarellen AB","717699-8896","Storgatan 103",921 32,"LYCKSELE","base.se","072 616 84 21","info@kantarellen.se","www.kantarellen.se","sv_SE",1,SANT
+"part_employee_008","Treston Group AB","489184-5844","Vargmötesvägen 13",186 30,"VALLENTUNA","base.se","076 408 89 83","info@treston.se","www.treston.se","sv_SE",1,SANT
+"part_employee_009","Agaria AB","447712-8228","Box 140",184 22,"ÅKERSBERGA","base.se","072 210 65 60","info@agaria.se","www.agaria.se","sv_SE",1,SANT
+"part_employee_010","Sea Bell AB","977552-4825","Hallmästarvägen 2-8",121 05,"JOHANNESHOV","base.se","071 705 08 25","info@sea.se","www.sea.se","sv_SE",1,SANT
+"part_employee_011","Ljungmarks Industrier AB","539763-7238","Årstaskolgränd 16 A",117 43,"STOCKHOLM","base.se","071 996 00 55","info@ljungmarks.se","www.ljungmarks.se","sv_SE",1,SANT
+"part_employee_012","Elfcon Containerservice AB","436524-9946","Nordatlanten",418 34,"GÖTEBORG","base.se","073 905 12 85","info@elfcon.se","www.elfcon.se","sv_SE",1,SANT
+"part_employee_013","Spectrogon AB","453397-3198","kanalvägen 15",183 02,"TÄBY","base.se","075 137 07 67","info@spectrogon.se","www.spectrogon.se","sv_SE",1,SANT
+"part_employee_014","Lipac Liftar AB","397194-3519","Missionsvägen 60-62",167 33,"BROMMA","base.se","079 371 53 29","info@lipac.se","www.lipac.se","sv_SE",1,SANT
+"part_employee_015","Exclusive Cars i Stockholm AB","166834-6165","Elektravägen 16",126 30,"HÄGERSTEN","base.se","071 260 85 59","info@exclusive.se","www.exclusive.se","sv_SE",1,SANT
+"part_employee_016","Oxelösunds Rör AB","438528-5323","Torggatan 24",613 31,"OXELÖSUND","base.se","070 408 38 22","info@oxelösunds.se","www.oxelösunds.se","sv_SE",1,SANT
+"part_employee_017","Floristhörnan i Bro AB","539229-5436","Bro Centrum",197 31,"BRO","base.se","073 719 73 82","info@floristhörnan.se","www.floristhörnan.se","sv_SE",1,SANT
+"part_employee_018","A-Plast AB","331497-2661","Högsbyvägen 5",360 76,"ÄLGHULT","base.se","071 357 61 48","info@a.se","www.a.se","sv_SE",1,SANT
+"part_employee_019","Tennant Holding AB","741574-3349","Attundafältet 6",183 14,"TÄBY","base.se","072 911 15 22","info@tennant.se","www.tennant.se","sv_SE",1,SANT
+"part_employee_020","Dekoform AB","633157-7471","Hamngatan 18-20",111 77,"STOCKHOLM","base.se","076 816 20 39","info@dekoform.se","www.dekoform.se","sv_SE",1,SANT
+"part_employee_021","Salong Eva Pellas AB","342947-2622","Storgatan 9",795 30,"RÄTTVIK","base.se","073 062 86 52","info@salong.se","www.salong.se","sv_SE",1,SANT
+"part_employee_022","Tac Protect Systems AB","136813-1659","Raseborgsgatan 13",164 74,"KISTA","base.se","075 941 96 39","info@tac.se","www.tac.se","sv_SE",1,SANT
+"part_employee_023","Conto AB","762896-8439","Vintergatan 6",172 30,"SUNDBYBERG","base.se","074 206 98 91","info@conto.se","www.conto.se","sv_SE",1,SANT
+"part_employee_024","Promacom AB","467653-1145","Pyramidvägen 2D",169 03,"SOLNA","base.se","072 356 63 47","info@promacom.se","www.promacom.se","sv_SE",1,SANT
+"part_employee_025","Bax Global AB","588169-7155","Västra Tallgatan 32",252 27,"HELSINGBORG","base.se","073 686 11 00","info@bax.se","www.bax.se","sv_SE",1,SANT
+"part_employee_026","Hela Kroppen Fysioterapi & Friskvård Södermalm AB","233183-8748","Kapellgränd 7",116 25,"STOCKHOLM","base.se","075 326 11 37","info@hela.se","www.hela.se","sv_SE",1,SANT
+"part_employee_027","Meda AB","888752-9113","Alvägen 5",183 03,"TÄBY","base.se","074 018 17 65","info@meda.se","www.meda.se","sv_SE",1,SANT
+"part_employee_028","Qa Maximum","588972-9472","Sveavägen 75",291 53,"KRISTIANSTAD","base.se","072 395 01 36","info@qa.se","www.qa.se","sv_SE",1,SANT
+"part_employee_029","Horizon Scandinavia AB","339953-5531","Måttbandsvägen 12",187 13,"TÄBY","base.se","073 869 14 62","info@horizon.se","www.horizon.se","sv_SE",1,SANT
+"part_employee_030","Almstedts Blommor AB","339173-8883","Nordanåsvägen 5",705 94,"ÖREBRO","base.se","079 096 02 74","info@almstedts.se","www.almstedts.se","sv_SE",1,SANT
+"part_employee_031","Viab Högtrycksteknik AB","248644-7514","Sjöuddev 14",350 53,"VÄXJÖ","base.se","074 946 11 97","info@viab.se","www.viab.se","sv_SE",1,SANT
+"part_employee_032","Idus AB","375435-5931","Varvsgatan 10",871 45,"HÄRNÖSAND","base.se","077 547 52 46","info@idus.se","www.idus.se","sv_SE",1,SANT
+"part_employee_033","Värtans Släp- och Trailerservice AB","454847-8213","Vallbyberg Finsta",762 92,"RIMBO","base.se","077 668 17 42","info@värtans.se","www.värtans.se","sv_SE",1,SANT
+"part_employee_034","Nallebjörn Alternativ Förskola AB","183748-7662","Gullmarsvägen 114",120 39,"ÅRSTA","base.se","075 591 55 68","info@nallebjörn.se","www.nallebjörn.se","sv_SE",1,SANT
+"part_employee_035","Mazars Set Revisionsbyrå AB","229934-1785","Kungsgatan 36",111 83,"STOCKHOLM","base.se","073 291 12 69","info@mazars.se","www.mazars.se","sv_SE",1,SANT
+"part_employee_036","GE Sensing & Inspection Technologies AB","519496-9333","Länsmansvägen 8",147 23,"TUMBA","base.se","076 768 50 39","info@ge.se","www.ge.se","sv_SE",1,SANT
+"part_employee_037","Kokalite AB","951618-9828","Allevägen 120",191 76,"SOLLENTUNA","base.se","070 087 44 94","info@kokalite.se","www.kokalite.se","sv_SE",1,SANT
+"part_employee_038","Svea Inkasso AB","362916-9965","Solnavägen 102 A",171 27,"SOLNA","base.se","070 140 37 60","info@svea.se","www.svea.se","sv_SE",1,SANT
+"part_employee_039","Halton AB","849314-8989","Fogdevägen 2",183 21,"TÄBY","base.se","074 575 35 54","info@halton.se","www.halton.se","sv_SE",1,SANT
+"part_employee_040","Svedab i Sveg AB","794896-4238","Berggatan 23",842 32,"SVEG","base.se","075 727 89 34","info@svedab.se","www.svedab.se","sv_SE",1,SANT
+"part_employee_041","Talinspelningar S & S AB","531586-5231","Västra vägen 11 A",169 61,"SOLNA","base.se","070 060 01 52","info@talinspelningar.se","www.talinspelningar.se","sv_SE",1,SANT
+"part_employee_042","Lekhuset i Bromma AB","979217-6737","Albygatan 114",171 04,"SOLNA","base.se","072 217 33 77","info@lekhuset.se","www.lekhuset.se","sv_SE",1,SANT
+"part_employee_043","Wm-Data Infra Solutions Outsourcing AB","374597-7153","S:t Eriksgatan 117",113 43,"STOCKHOLM","base.se","072 289 62 31","info@wm.se","www.wm.se","sv_SE",1,SANT
+"part_employee_044","Elmontage Jkg AB","575997-8597","Sågvägen 36",184 40,"ÅKERSBERGA","base.se","075 808 72 06","info@elmontage.se","www.elmontage.se","sv_SE",1,SANT
+"part_employee_045","Assemblin Installation AB","774263-3813","Sjöuddevägen 7",350 43,"VÄXJÖ","base.se","070 557 11 59","info@assemblin.se","www.assemblin.se","sv_SE",1,SANT
+"part_employee_046","Hammar Invest AB","994127-4595","Grevgatan 48",114 58,"STOCKHOLM","base.se","076 094 97 95","info@hammar.se","www.hammar.se","sv_SE",1,SANT
+"part_employee_047","Pullman - Ermator AB","939836-5382","Viggbyholmsvägen 85",183 77,"TÄBY","base.se","078 087 56 17","info@pullman.se","www.pullman.se","sv_SE",1,SANT
+"part_employee_048","Fastighets Corallen AB","728377-2574","Lasarettsgatan 3 B",331 21,"VÄRNAMO","base.se","076 795 22 77","info@fastighets.se","www.fastighets.se","sv_SE",1,SANT
+"part_employee_049","Processkontroll Pid AB","637676-4874","Stora Höga ind.omr.",444 02,"STENUNGSUND","base.se","073 918 54 50","info@processkontroll.se","www.processkontroll.se","sv_SE",1,SANT
+"part_employee_050","Sander Konsult AB","375496-6347","Järnvägsgatan 39",252 25,"HELSINGBORG","base.se","073 248 66 20","info@sander.se","www.sander.se","sv_SE",1,SANT
+"part_employee_051","Christiansson Holding AB","282285-1712","Storgatan 51",574 31,"VETLANDA","base.se","070 995 82 91","info@christiansson.se","www.christiansson.se","sv_SE",1,SANT
+"part_employee_052","Arne Vittrup & Co AB","691375-7136","Skärsnäsvägen 8",182 05,"DJURSHOLM","base.se","076 239 10 52","info@arne.se","www.arne.se","sv_SE",1,SANT
+"part_employee_053","Image Group AB","776816-1266","Upplandsgatan 17 B",113 60,"STOCKHOLM","base.se","070 322 93 53","info@image.se","www.image.se","sv_SE",1,SANT
+"part_employee_054","Expoline AB","352466-3695","Fältarpsvägen 400",256 69,"HELSINGBORG","base.se","070 935 04 80","info@expoline.se","www.expoline.se","sv_SE",1,SANT
+"part_employee_055","Miljöhälsan i Klarälvdalen AB","897899-7753","Uvedsvägen 22",683 33,"HAGFORS","base.se","076 595 63 42","info@miljöhälsan.se","www.miljöhälsan.se","sv_SE",1,SANT
+"part_employee_056","Nordako AB","898531-7855","Ulvsundavägen 181",168 67,"BROMMA","base.se","078 123 65 17","info@nordako.se","www.nordako.se","sv_SE",1,SANT
+"part_employee_057","Oscarssons Åkeri i Sollefteå AB","627752-7224","Lägervägen 1",881 51,"SOLLEFTEÅ","base.se","077 788 90 77","info@oscarssons.se","www.oscarssons.se","sv_SE",1,SANT
+"part_employee_058","Apb Budbilar i Gävle AB","333487-4728","Norra Gatan 1-3",803 21,"GÄVLE","base.se","077 866 11 44","info@apb.se","www.apb.se","sv_SE",1,SANT
+"part_employee_059","Södertörns Marktjänst AB","841873-8939","Vendelsömalmsvägen 202",136 21,"HANINGE","base.se","074 263 77 14","info@södertörns.se","www.södertörns.se","sv_SE",1,SANT
+"part_employee_060","Keyex Electronic AB","272992-2751","Vretenborgsvägen 28",126 12,"STOCKHOLM","base.se","071 117 29 07","info@keyex.se","www.keyex.se","sv_SE",1,SANT
+"part_employee_061","3 Plus AB","339515-1511","Hägerstensvägen 223",126 53,"HÄGERSTEN","base.se","076 919 29 29","info@3 plus.se","www.3plus.se","sv_SE",1,SANT
+"part_employee_062","Esl Sweden AB","242864-2621","Forelltorget 2",141 47,"HUDDINGE","base.se","073 250 66 54","info@esl.se","www.esl.se","sv_SE",1,SANT
+"part_employee_063","Berndtsson & Schutzler AB","914733-7724","Nybrogatan 34",114 39,"STOCKHOLM","base.se","070 238 22 06","info@berndtsson.se","www.berndtsson.se","sv_SE",1,SANT
+"part_employee_064","Tändensum AB","451249-8835","Artillerigatan 48",114 45,"STOCKHOLM","base.se","073 567 72 22","info@tändensum.se","www.tändensum.se","sv_SE",1,SANT
+"part_employee_065","Englunds Kök & Tvätt i Nyköping AB","493591-8125","Gumsbackevägen 8",611 38,"NYKÖPING","base.se","072 060 51 33","info@englunds.se","www.englunds.se","sv_SE",1,SANT
+"part_employee_066","Revisionsbyrån Venemyr AB","567889-9781","Rådhusgatan 7",541 27,"SKÖVDE","base.se","074 798 70 09","info@revisionsbyrån.se","www.revisionsbyrån.se","sv_SE",1,SANT
+"part_employee_067","Lidbergs Grafiska i Stockholm AB","174721-3231","Tulegatan 49",104 32,"STOCKHOLM","base.se","078 296 78 89","info@lidbergs.se","www.lidbergs.se","sv_SE",1,SANT
+"part_employee_068","Servicepunkten Athena AB","678596-4465","Chalmers Teknikpark",412 88,"GÖTEBORG","base.se","072 394 66 87","info@servicepunkten.se","www.servicepunkten.se","sv_SE",1,SANT
+"part_employee_069","Shine Nordic Formats AB","441686-8314","Magasin 5",115 93,"STOCKHOLM","base.se","079 387 19 90","info@shine.se","www.shine.se","sv_SE",1,SANT
+"part_employee_070","Pl-Tryck Allrelief AB","746622-7214","Hagagatan 18",113 48,"STOCKHOLM","base.se","076 939 59 63","info@pl.se","www.pl.se","sv_SE",1,SANT
+"part_employee_071","E.H. Betong AB","253583-7341","Järnvägsgatan 1",722 33,"VÄSTERÅS","base.se","076 904 47 95","info@e.se","www.e.se","sv_SE",1,SANT
+"part_employee_072","Ekblomma AB","462536-8433","Tre liljor 6",113 44,"STOCKHOLM","base.se","075 878 80 31","info@ekblomma.se","www.ekblomma.se","sv_SE",1,SANT
+"part_employee_073","AMH Sverige AB","953655-9895","Murmästarvägen 33",127 35,"SKÄRHOLMEN","base.se","078 351 40 94","info@amh.se","www.amh.se","sv_SE",1,SANT
+"part_employee_074","Lawena Sport AB","379465-3368","Sågverksgatan 32",652 21,"KARLSTAD","base.se","078 345 03 87","info@lawena.se","www.lawena.se","sv_SE",1,SANT
+"part_employee_075","Marconsult Jacobsson & Hedström AB","944491-1141","Näckrosvägen 12",171 28,"SOLNA","base.se","079 034 99 26","info@marconsult.se","www.marconsult.se","sv_SE",1,SANT
+"part_employee_076","Cordon Bleu AB","397659-3883","Vasagatan 48",111 20,"STOCKHOLM","base.se","079 960 28 72","info@cordon.se","www.cordon.se","sv_SE",1,SANT
+"part_employee_077","Jarlsäter Chefsrekrytering AB","189266-6877","Kungsgatan 62",111 22,"STOCKHOLM","base.se","072 233 84 53","info@jarlsäter.se","www.jarlsäter.se","sv_SE",1,SANT
+"part_employee_078","Karlstads Maskin & Cellulosamontage AB","369852-4773","Kolvgatan 5",653 41,"KARLSTAD","base.se","076 330 43 98","info@karlstads.se","www.karlstads.se","sv_SE",1,SANT
+"part_employee_079","Alvetec Kontest AB","289178-9699","Huddingevägen 5",141 05,"HUDDINGE","base.se","079 168 15 56","info@alvetec.se","www.alvetec.se","sv_SE",1,SANT
+"part_employee_080","Enco AB","146519-7245","Hedens Gård 125",791 91,"FALUN","base.se","079 408 15 62","info@enco.se","www.enco.se","sv_SE",1,SANT
+"part_employee_081","Frövi Styrteknik AB","748585-5345","Forskarvägen 1",701 83,"ÖREBRO","base.se","079 476 10 55","info@frövi.se","www.frövi.se","sv_SE",1,SANT
+"part_employee_082","Pmp Marknadskonsult AB","458645-9672","Olaigatan 34",703 61,"ÖREBRO","base.se","072 338 03 54","info@pmp.se","www.pmp.se","sv_SE",1,SANT
+"part_employee_083","Kungsborg Fastigheter AB","267955-2982","Konstgjutarvägen 44",121 44,"JOHANNESHOV","base.se","078 534 58 36","info@kungsborg.se","www.kungsborg.se","sv_SE",1,SANT
+"part_employee_084","Optagon AB","776853-2885","Vallhallavägen 91",114 86,"STOCKHOLM","base.se","075 005 52 84","info@optagon.se","www.optagon.se","sv_SE",1,SANT
+"part_employee_085","Birgitta Melanders Advokatbyrå AB","559367-1363","Karlavägen 40",102 47,"STOCKHOLM","base.se","074 019 26 79","info@birgitta.se","www.birgitta.se","sv_SE",1,SANT
+"part_employee_086","Tullinge Servicecenter AB","839479-7811","Huddingevägen 425",146 30,"TULLINGE","base.se","075 675 69 46","info@tullinge.se","www.tullinge.se","sv_SE",1,SANT
+"part_employee_087","Millesund AB","614266-1526","Askrikegatan 3",115 57,"STOCKHOLM","base.se","073 138 70 33","info@millesund.se","www.millesund.se","sv_SE",1,SANT
+"part_employee_088","Dr G. Strindbergs Produkter i Sverige AB","484419-2939","Hagavägen 78",834 21,"BRUNFLO","base.se","075 447 18 05","info@dr.se","www.dr.se","sv_SE",1,SANT
+"part_employee_089","Rågårds i Karlskrona AB","452218-9857","Ronnebygatan 46",371 33,"KARLSKRONA","base.se","079 757 37 44","info@rågårds.se","www.rågårds.se","sv_SE",1,SANT
+"part_employee_090","Ke Levin AB","654744-1754","Anderbäcksvägen 13",611 75,"ENSTABERGA","base.se","075 518 85 26","info@ke.se","www.ke.se","sv_SE",1,SANT
+"part_employee_091","Bidroom AB","612975-6864","BOX 165",651 05,"KARLSTAD","base.se","072 472 57 64","info@bidroom.se","www.bidroom.se","sv_SE",1,SANT
+"part_employee_092","Affärsstrategerna AB","982194-1525","Artillerigatan 6",114 51,"STOCKHOLM","base.se","074 764 10 74","info@affärsstrategerna.se","www.affärsstrategerna.se","sv_SE",1,SANT
+"part_employee_093","Stefan Helbro Laminated Teeth AB","666727-9191","Surbrunnsgatan 62",113 27,"STOCKHOLM","base.se","076 032 61 80","info@stefan.se","www.stefan.se","sv_SE",1,SANT
+"part_employee_094","Carwash City i Stockholm AB","548964-7451","S:t Eriksgatan 112",113 31,"STOCKHOLM","base.se","077 304 45 76","info@carwash.se","www.carwash.se","sv_SE",1,SANT
+"part_employee_095","Frejborg Fastighets AB","497579-1258","Leverantörsvägen 17",187 66,"TÄBY","base.se","070 909 23 19","info@frejborg.se","www.frejborg.se","sv_SE",1,SANT
+"part_employee_096","Adductus AB","175763-2184","Skolgatan 8",921 23,"LYCKSELE","base.se","075 010 23 01","info@adductus.se","www.adductus.se","sv_SE",1,SANT
+"part_employee_097","Swedish Factoring AB","899853-2962","Romansvägen 6",131 04,"NACKA","base.se","078 851 28 63","info@swedish.se","www.swedish.se","sv_SE",1,SANT
+"part_employee_098","Optisys AB","645657-7999","Ekbacksvägen 20",161 11,"BROMMA","base.se","070 587 04 02","info@optisys.se","www.optisys.se","sv_SE",1,SANT
+"part_employee_099","Båt- & Trailer i Stockholm AB","826283-3466","Svensborgsvägen 1",141 38,"HUDDINGE","base.se","070 283 17 12","info@båt.se","www.båt.se","sv_SE",1,SANT
+"part_employee_100","Juab Jämställdhetsutveckling AB","316889-1374","Drottninggatan 50",111 21,"STOCKHOLM","base.se","077 831 13 86","info@juab.se","www.juab.se","sv_SE",1,SANT
+"part_employee_101","Svenska Stadsnät Transit AB","791419-3672","Bergtorpsvägen 43A",183 64,"TÄBY","base.se","075 944 36 29","info@svenska.se","www.svenska.se","sv_SE",1,SANT
+"part_employee_102","Hem & Hus i Tumba AB","854926-2894","Bergfotsvägen 7",147 21,"TUMBA","base.se","073 044 07 04","info@hem.se","www.hem.se","sv_SE",1,SANT
+"part_employee_103","Ruminantia AB","444779-6155","Raftsjöhöjden 49",830 70,"HAMMERDAL","base.se","078 730 48 08","info@ruminantia.se","www.ruminantia.se","sv_SE",1,SANT
+"part_employee_104","Dockab AB","766275-7688","Bergsmansvägen 5",694 91,"HALLSBERG","base.se","077 153 70 50","info@dockab.se","www.dockab.se","sv_SE",1,SANT
+"part_employee_105","Espingen AB","335226-6382","Åldermansvägen 21",171 48,"SOLNA","base.se","075 146 20 37","info@espingen.se","www.espingen.se","sv_SE",1,SANT
+"part_employee_106","Dorianmabb AB","799911-5723","Hornsbruksgatan 19",102 73,"STOCKHOLM","base.se","073 571 38 34","info@dorianmabb.se","www.dorianmabb.se","sv_SE",1,SANT
+"part_employee_107","Jonsson & Liden Annonsbyrå AB","112367-2435","Idungatan 14",113 85,"STOCKHOLM","base.se","074 738 41 49","info@jonsson.se","www.jonsson.se","sv_SE",1,SANT
+"part_employee_108","Mekonomen Örebro AB","976233-5215","Radiatorvägen 7",701 44,"ÖREBRO","base.se","073 326 88 69","info@mekonomen.se","www.mekonomen.se","sv_SE",1,SANT
+"part_employee_109","Hermansson & Co AB","981266-6454","Norra Hamnvägen 3-5",100 52,"STOCKHOLM","base.se","074 083 46 61","info@hermansson.se","www.hermansson.se","sv_SE",1,SANT
+"part_employee_110","K-E Liljendahl Byggnads AB","274456-2196","Bernt Anders väg 21",430 31,"ÅSA","base.se","074 400 48 81","info@k.se","www.k.se","sv_SE",1,SANT
+"part_employee_111","Compugroup Medical Sweden AB","828913-8681","Kungsgatan 64",751 48,"UPPSALA","base.se","078 450 18 97","info@compugroup.se","www.compugroup.se","sv_SE",1,SANT
+"part_employee_112","Jane & Monje Scandinavia Import & Export AB","818338-1454","Vallhallavägen 73",116 22,"STOCKHOLM","base.se","074 248 99 81","info@jane.se","www.jane.se","sv_SE",1,SANT
+"part_employee_113","New Team Stockholm AB","769573-3464","Karlavägen 5",102 44,"STOCKHOLM","base.se","073 966 70 00","info@new.se","www.new.se","sv_SE",1,SANT
+"part_employee_114","Bild & Ram Center i Stockholm AB","179821-2472","PUB 18",111 71,"STOCKHOLM","base.se","075 989 35 13","info@bild.se","www.bild.se","sv_SE",1,SANT
+"part_employee_115","Inrederiet AB","375738-8441","Sollentunavägen 52",191 22,"SOLLENTUNA","base.se","075 954 79 70","info@inrederiet.se","www.inrederiet.se","sv_SE",1,SANT
+"part_employee_116","Stockholms Enskilda Bokhandel AB","759261-6976","NK",111 77,"STOCKHOLM","base.se","077 851 85 84","info@stockholms.se","www.stockholms.se","sv_SE",1,SANT
+"part_employee_117","El-Construction Seger AB","149683-6155","Boställsvägen 4",702 27,"ÖREBRO","base.se","078 108 81 33","info@el.se","www.el.se","sv_SE",1,SANT
+"part_employee_118","Zorro Frakt AB","722742-2824","Gärdevägen 9",856 50,"SUNDSVALL","base.se","074 668 71 45","info@zorro.se","www.zorro.se","sv_SE",1,SANT
+"part_employee_119","Bondi AB","977853-8118","Nybrokajen 7",102 14,"STOCKHOLM","base.se","075 740 84 73","info@bondi.se","www.bondi.se","sv_SE",1,SANT
+"part_employee_120","Termino C 939 AB","684942-7281","Krukmakargatan 62",117 41,"STOCKHOLM","base.se","070 108 28 84","info@termino.se","www.termino.se","sv_SE",1,SANT
+"part_employee_121","Stig Larsson Bygg AB","554917-6821","Vallbyvägen 14",762 51,"RIMBO","base.se","071 826 35 99","info@stig.se","www.stig.se","sv_SE",1,SANT
+"part_employee_122","Dentikalix AB","255781-9672","Hantverkargatan 1 A",952 34,"KALIX","base.se","070 992 34 66","info@dentikalix.se","www.dentikalix.se","sv_SE",1,SANT
+"part_employee_123","C.F.S. Medical AB","472373-4699","Skiffervägen 19 C",224 78,"LUND","base.se","071 140 83 14","info@c.se","www.c.se","sv_SE",1,SANT
+"part_employee_124","Mpm Industriprodukter AB","286226-2656","Gesällvägen 4",360 10,"RYD","base.se","078 245 33 05","info@mpm.se","www.mpm.se","sv_SE",1,SANT
+"part_employee_125","Björngärdet AB","535218-4917","Hållvastbynäs 59",762 92,"RIMBO","base.se","074 925 10 15","info@björngärdet.se","www.björngärdet.se","sv_SE",1,SANT
+"part_employee_126","Your Thing Entertainment AB","725523-7131","Pusterviksgatan 13",413 01,"GÖTEBORG","base.se","077 091 57 54","info@your.se","www.your.se","sv_SE",1,SANT
+"part_employee_127","Skåne Marin AB","369717-5762","Hamnen Skälderviken",262 23,"ÄNGELHOLM","base.se","072 957 15 72","info@skåne.se","www.skåne.se","sv_SE",1,SANT
+"part_employee_128","Kista församling","533961-7418","Kista Torg",164 25,"KISTA","base.se","073 251 97 23","info@kista.se","www.kista.se","sv_SE",1,SANT
+"part_employee_129","Hans Bäckströms Radio & TV AB","162634-7896","Storgatan 12",915 31,"ROBERTSFORS","base.se","074 707 52 47","info@hans.se","www.hans.se","sv_SE",1,SANT
+"part_employee_130","Twinström AB","488437-4395","Gustavslundsvägen 12",161 14,"BROMMA","base.se","078 647 20 44","info@twinström.se","www.twinström.se","sv_SE",1,SANT
+"part_employee_131","Npb Automation AB","777542-7622","Instrumentvägen 6",553 02,"JÖNKÖPING","base.se","070 874 30 56","info@npb.se","www.npb.se","sv_SE",1,SANT
+"part_employee_132","Iptor Supply Chain Systems Sweden AB","345728-2924","Solåsvägen 7 D",553 03,"JÖNKÖPING","base.se","070 622 75 50","info@iptor.se","www.iptor.se","sv_SE",1,SANT
+"part_employee_133","Baltic Gaming AB","222491-2186","Österängsvägen 2B",550 06,"JÖNKÖPING","base.se","076 807 57 05","info@baltic.se","www.baltic.se","sv_SE",1,SANT
+"part_employee_134","Lars Allenmark AB","256587-7491","Kungsgatan 5",611 31,"NYKÖPING","base.se","073 328 34 54","info@lars.se","www.lars.se","sv_SE",1,SANT
+"part_employee_135","Lsi Logic AB","797396-7996","finlandsgatan 14",164 74,"KISTA","base.se","070 530 33 57","info@lsi.se","www.lsi.se","sv_SE",1,SANT
+"part_employee_136","Gps Perimeterlarm Solutions 1 AB","627991-6369","Ormbergsvägen 1",117 67,"STOCKHOLM","base.se","073 656 22 16","info@gps.se","www.gps.se","sv_SE",1,SANT
+"part_employee_137","Allfrukt i Stockholm AB","524785-2481","Partihandlarvägen 2",120 44,"ÅRSTA","base.se","076 329 04 08","info@allfrukt.se","www.allfrukt.se","sv_SE",1,SANT
+"part_employee_138","Kransens VVS AB","253851-5483","Kransenvägen 55",117 43,"STOCKHOLM","base.se","071 195 19 01","info@kransens.se","www.kransens.se","sv_SE",1,SANT
+"part_employee_139","Eva Abrahamsson Textil AB","849636-3961","Hägerstensvägen 100",126 49,"HÄGERSTEN","base.se","075 145 45 16","info@eva.se","www.eva.se","sv_SE",1,SANT
+"part_employee_140","Headsite AB","642791-8414","Svärdvägen 23",182 33,"DANDERYD","base.se","073 972 18 15","info@headsite.se","www.headsite.se","sv_SE",1,SANT
+"part_employee_141","Fastighet Lännersta 357 AB","454239-7288","Fågelkärrsvägen 10",122 32,"ENSKEDE","base.se","078 380 80 27","info@fastighet.se","www.fastighet.se","sv_SE",1,SANT
+"part_employee_142","Parrots In Sweden AB","553494-5419","Sadelmakarvägen 11",146 33,"TULLINGE","base.se","078 659 99 52","info@parrots.se","www.parrots.se","sv_SE",1,SANT
+"part_employee_143","Höstbäck Gård AB","282633-2562","Höstbäck Björsäter",597 94,"ÅTVIDABERG","base.se","074 272 82 71","info@höstbäck.se","www.höstbäck.se","sv_SE",1,SANT
+"part_employee_144","Grönvallens Cementvaru AB","699827-5182","Grönvallen 6",774 92,"AVESTA","base.se","078 539 03 54","info@grönvallens.se","www.grönvallens.se","sv_SE",1,SANT
+"part_employee_145","Mekonomen Detaljist AB","642797-1944","Stensätravägen 6",127 39,"SKÄRHOLMEN","base.se","075 430 34 65","info@mekonomen.se","www.mekonomen.se","sv_SE",1,SANT
+"part_employee_146","Louis Poulsen Sweden AB","761758-4838","Maskinvägen 2",183 25,"TÄBY","base.se","077 326 95 10","info@louis.se","www.louis.se","sv_SE",1,SANT
+"part_employee_147","Våxtorp Partners AB","515395-7491","Enevägen 30",163 03,"SPÅNGA","base.se","074 030 27 24","info@våxtorp.se","www.våxtorp.se","sv_SE",1,SANT
+"part_employee_148","C. Lindgren Bilvård AB","927536-4785","Birger Jarlsgatan 120",114 20,"STOCKHOLM","base.se","070 599 12 08","info@c.se","www.c.se","sv_SE",1,SANT
+"part_employee_149","Eskilstuna Teknik & Fastighet AB","739847-6733","Hermansvägen 43",632 23,"ESKILSTUNA","base.se","077 932 66 29","info@eskilstuna.se","www.eskilstuna.se","sv_SE",1,SANT
+"part_employee_150","Slutplattan Erpil 98802 AB","638599-9359","Färgfabriksgatan 3",417 05,"GÖTEBORG","base.se","072 283 99 66","info@slutplattan.se","www.slutplattan.se","sv_SE",1,SANT
+"part_employee_151","WOYIW XVGT 90649 AB","753211-1731","Havsvägen 78",435 35,"MÖLNLYCKE","base.se","077 307 98 92","info@woyiw.se","www.woyiw.se","sv_SE",1,SANT
+"part_employee_152","Studieförb Näringsliv och Samhälles (Sns) Servic","598651-7139","Grev Turegatan 77",114 86,"STOCKHOLM","base.se","077 140 41 46","info@studieförb.se","www.studieförb.se","sv_SE",1,SANT
+"part_employee_153","Campus Roslagen AB","924457-9531","Roslagsvägen 55",761 46,"NORRTÄLJE","base.se","073 664 39 88","info@campus.se","www.campus.se","sv_SE",1,SANT
+"part_employee_154","Niphälsan AB","173158-9224","Storgatan 49",881 30,"SOLLEFTEÅ","base.se","071 559 91 53","info@niphälsan.se","www.niphälsan.se","sv_SE",1,SANT
+"part_employee_155","Sb Produktion AB","796478-1689","Björnstigen 4",183 62,"TÄBY","base.se","078 512 10 85","info@sb.se","www.sb.se","sv_SE",1,SANT
+"part_employee_156","Vätö Stenhuggeri AB","585224-3913","Karlsängen 1368",760 21,"VÄTÖ","base.se","079 571 63 74","info@vätö.se","www.vätö.se","sv_SE",1,SANT
+"part_employee_157","El-Wicke i Skärholmen AB","762113-2812","Bredholmsgatan 22",127 23,"SKÄRHOLMEN","base.se","079 730 40 91","info@el.se","www.el.se","sv_SE",1,SANT
+"part_employee_158","Vikgren International AB","731275-8993","Gröna Gatan 67",414 54,"GÖTEBORG","base.se","070 215 38 40","info@vikgren.se","www.vikgren.se","sv_SE",1,SANT
+"part_employee_159","Huc AB","554925-6757","Faluvägen 34",780 61,"ÖJE","base.se","078 775 55 07","info@huc.se","www.huc.se","sv_SE",1,SANT
+"part_employee_160","Sista Versen 27713 AB","896173-2141","Gästrikegatan 17",113 62,"STOCKHOLM","base.se","075 357 81 49","info@sista.se","www.sista.se","sv_SE",1,SANT
+"part_employee_161","Atlantis AB","371126-7415","Storgatan 303",183 34,"TÄBY","base.se","075 987 40 55","info@atlantis.se","www.atlantis.se","sv_SE",1,SANT
+"part_employee_162","The Syndicate Entertainment AB","812147-1523","Grevgatan 53",114 58,"STOCKHOLM","base.se","070 577 86 79","info@the.se","www.the.se","sv_SE",1,SANT
+"part_employee_163","Fox Data AB","274978-4518","Sjöängsvägen 15",192 72,"SOLLENTUNA","base.se","070 544 03 69","info@fox.se","www.fox.se","sv_SE",1,SANT
+"part_employee_164","Itaab Trading AB","212779-3636","Droskvägen 10",701 12,"ÖREBRO","base.se","070 073 41 51","info@itaab.se","www.itaab.se","sv_SE",1,SANT
+"part_employee_165","Naturell AB","913333-7978","Sågvägen 39",184 40,"ÅKERSBERGA","base.se","075 430 37 37","info@naturell.se","www.naturell.se","sv_SE",1,SANT
+"part_employee_166","Carlshems Motor AB","612129-6933","Vallmovägen 39",905 96,"UMEÅ","base.se","074 287 83 86","info@carlshems.se","www.carlshems.se","sv_SE",1,SANT
+"part_employee_167","SKF Transmission AB","174498-7352","Kämpevägen 22",550 03,"JÖNKÖPING","base.se","074 980 01 28","info@skf.se","www.skf.se","sv_SE",1,SANT
+"part_employee_168","Siffror & Människor i Solna AB","326367-5256","Vintervägen 32 B",169 54,"SOLNA","base.se","076 515 94 58","info@siffror.se","www.siffror.se","sv_SE",1,SANT
+"part_employee_169","Information & Communication Ifab AB","828691-3612","Wallingatan 24",111 24,"STOCKHOLM","base.se","078 259 19 95","info@information.se","www.information.se","sv_SE",1,SANT
+"part_employee_170","Näsby Parks Bokhandel AB","697221-7916","Eskadervägen 4",183 03,"TÄBY","base.se","071 495 01 66","info@näsby.se","www.näsby.se","sv_SE",1,SANT
+"part_employee_171","Tandläkarpraktiken Barbro Goldman AB","682473-1644","Alpstigen 2",181 62,"LIDINGÖ","base.se","075 666 36 08","info@tandläkarpraktiken.se","www.tandläkarpraktiken.se","sv_SE",1,SANT
+"part_employee_172","West-Pool AB","283265-5943","Nybrogatan 34",102 45,"STOCKHOLM","base.se","071 218 67 29","info@west.se","www.west.se","sv_SE",1,SANT
+"part_employee_173","Telia Electronic Commerce AB","998847-7921","Gustavsvägen 143",161 24,"BROMMA","base.se","077 990 94 51","info@telia.se","www.telia.se","sv_SE",1,SANT
+"part_employee_174","Scandinavian Dynamics AB","337172-2551","Polygonvägen 11",187 14,"TÄBY","base.se","071 782 76 90","info@scandinavian.se","www.scandinavian.se","sv_SE",1,SANT
+"part_employee_175","Sea Power International AB","313139-5581","Solna Torg 19",171 45,"Solna","base.se","071 544 94 85","info@sea.se","www.sea.se","sv_SE",1,SANT
+"part_employee_176","Elanders Handels AB","777729-1434","Nygatan 2",434 22,"KUNGSBACKA","base.se","073 388 39 30","info@elanders.se","www.elanders.se","sv_SE",1,SANT
+"part_employee_177","Medivir AB","461841-8253","Lunastigen 7",141 44,"HUDDINGE","base.se","079 083 94 33","info@medivir.se","www.medivir.se","sv_SE",1,SANT
+"part_employee_178","Attribut Design och Försäljning AB","749527-7373","Västerlånggatan 27",111 29,"STOCKHOLM","base.se","078 137 02 81","info@attribut.se","www.attribut.se","sv_SE",1,SANT
+"part_employee_179","Målar-Lisa & Masters Artistmaterial AB","715417-4151","Skiffervägen 10",141 40,"HUDDINGE","base.se","073 868 13 71","info@målar.se","www.målar.se","sv_SE",1,SANT
+"part_employee_180","Miljötekniska Entreprenad AB","723999-1738","Götlundagatan 3, Älvsjö ind.område",100 26,"STOCKHOLM","base.se","079 707 57 35","info@miljötekniska.se","www.miljötekniska.se","sv_SE",1,SANT
+"part_employee_181","Kiilto AB","665144-6744","Mallslingan 32",187 12,"TÄBY","base.se","074 576 73 65","info@kiilto.se","www.kiilto.se","sv_SE",1,SANT
+"part_employee_182","Garpco AB","893954-2176","Kortebovägen 4",564 22,"BANKERYD","base.se","070 732 02 30","info@garpco.se","www.garpco.se","sv_SE",1,SANT
+"part_employee_183","Cary Camping AB","359418-7312","Stora Sällskapetsväg 5",127 31,"SKÄRHOLMEN","base.se","074 657 23 21","info@cary.se","www.cary.se","sv_SE",1,SANT
+"part_employee_184","Gunnerius Invest AB","436987-5515","Kraftgatan 8",776 23,"HEDEMORA","base.se","076 764 13 13","info@gunnerius.se","www.gunnerius.se","sv_SE",1,SANT
+"part_employee_185","Bil O Motor i Rättvik AB","659184-2274","Gjutarvägen 7",795 22,"RÄTTVIK","base.se","070 538 27 51","info@bil.se","www.bil.se","sv_SE",1,SANT
+"part_employee_186","Elkington AB","357269-9754","Artillerigatan 40",114 45,"STOCKHOLM","base.se","075 391 45 50","info@elkington.se","www.elkington.se","sv_SE",1,SANT
+"part_employee_187","Majock AB","347978-5977","Vegagatan 2",224 57,"LUND","base.se","073 011 78 29","info@majock.se","www.majock.se","sv_SE",1,SANT
+"part_employee_188","Täby-Vallentuna Sotningsdistrikt AB","454959-3518","Värtavägen 54",183 63,"TÄBY","base.se","070 856 83 40","info@täby.se","www.täby.se","sv_SE",1,SANT
+"part_employee_189","Fontbolaget AB","571794-2429","Tulegatan 15A",113 54,"STOCKHOLM","base.se","075 603 60 69","info@fontbolaget.se","www.fontbolaget.se","sv_SE",1,SANT
+"part_employee_190","Termino C 1222 AB","612786-1692","DanviksCenter",131 30,"NACKA","base.se","071 027 05 78","info@termino.se","www.termino.se","sv_SE",1,SANT
+"part_employee_191","Legitimerad Tandläkare A Torbjörn Johansson AB","841719-2334","Nybrogatan 44",114 40,"STOCKHOLM","base.se","071 453 53 91","info@legitimerad.se","www.legitimerad.se","sv_SE",1,SANT
+"part_employee_192","Binus Invest AB","895994-3351","Birgerjarlsgatan 41 a",115 22,"STOCKHOLM","base.se","074 327 72 00","info@binus.se","www.binus.se","sv_SE",1,SANT
+"part_employee_193","World Trade Center Stockholm AB","128192-5938","Klarabergsviadukten 70",107 24,"STOCKHOLM","base.se","074 750 08 71","info@world.se","www.world.se","sv_SE",1,SANT
+"part_employee_194","Aurum Scandinavia AB","247477-4599","Fabriksgatan 2",221 00,"LUND","base.se","079 299 65 41","info@aurum.se","www.aurum.se","sv_SE",1,SANT
+"part_employee_195","Slutfas AB","552784-9765","Stortorget 131",183 34,"TÄBY","base.se","074 507 99 12","info@slutfas.se","www.slutfas.se","sv_SE",1,SANT
+"part_employee_196","Bromill AB","154242-3668","Barlastplan 4",391 21,"KALMAR","base.se","074 298 80 30","info@bromill.se","www.bromill.se","sv_SE",1,SANT
+"part_employee_197","Inter IKEA Systems Service AB","414448-1515","Marknadsvägen 15",260 36,"ÖDÅKRA-VÄLA","base.se","079 170 27 50","info@inter.se","www.inter.se","sv_SE",1,SANT
+"part_employee_198","Tamtron AB","295263-3587","Engelbrektsgatan 6",702 12,"ÖREBRO","base.se","074 191 61 29","info@tamtron.se","www.tamtron.se","sv_SE",1,SANT
+"part_employee_199","Engzell Consulting","333255-4899","Artillerigatan 99",115 30,"STOCKHOLM","base.se","078 301 76 23","info@engzell.se","www.engzell.se","sv_SE",1,SANT
+"part_employee_200","Polypart AB","369841-9697","Hyltevägen 4",310 83,"UNNARYD","base.se","078 399 63 68","info@polypart.se","www.polypart.se","sv_SE",1,SANT
