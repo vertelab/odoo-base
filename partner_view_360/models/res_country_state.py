@@ -19,34 +19,15 @@
 #
 ##############################################################################
 
-{
-    'name': 'Partner 360 view',
-    'version': '12.0.0.1.2',
-    'category': '',
-    'description': """
-Module for employee 360 view
-================================================================================================
-This module alters, adds, removes and shuffles around fields in the partner view
-Also adds new menus and views for partners of type jobseeker and employer
-AFC-102, 103, 140, 183, 192, 213, 210, 241, 259, 260
-""",
-    'author': 'Vertel AB',
-    'license': 'AGPL-3',
-    'website': 'http://www.vertel.se',
-    'depends': ['contacts', 
-    'res_sun', 
-    'res_drivers_license',
-    'res_ssyk',
-    'res_sni'
-    ],
-    'data': [
-			'views/res_partner_view.xml',
-        ],
-    'demo': [
-            "data/jobseekers/res.partner.csv",
-            "data/employers/res.partner.csv",
-    ],
+from odoo import models, fields, api, _
+import logging
+_logger = logging.getLogger(__name__)
 
-    'application': False,
-    'installable': True,
-}
+
+class ResPartner(models.Model):
+    _inherit = "res.country.state" 
+
+    display_name = fields.Char(compute="state_name_and_code")
+
+    def state_name_and_code(self):
+        self.display_name = self.name + " " + self.code
