@@ -194,7 +194,7 @@
               <field name="postal_address_zip" placeholder="ZIP" class="o_address_zip"/>
               <field name="postal_address_city" placeholder="City" class="o_address_city"/>
           </div>
-          <field name="postal_address_id" domain="[('type', '=', 'postal address')]" attrs="{'invisible': True}"/>
+          <field name="postal_address_id" domain="[('type', '=', 'postal address')]"/> <!--group debug-->
           
           <field name="phone"/>
           <field name="mobile"/>
@@ -259,7 +259,7 @@
         <!-- <field name="view_type">form</field> -->
         <field name="view_mode">kanban,tree,form,activity</field>
         <field name="search_view_id" ref="base.view_res_partner_filter"/>
-        <field name="help" type="html">
+       <field name="help" type="html">
         <field name="view_id" ref="view_jobseeker_kanban"/>
           <p class="o_view_nocontent_smiling_face">
             Create a jobseeker in your address book
@@ -347,8 +347,8 @@
           <label for="street" string="Address"/>
           <div class="o_address_format"> 
               <field name="street" placeholder="Street..." class="o_address_street"/>
-              <field name="city" placeholder="City" class="o_address_city"/>
               <field name="zip" placeholder="ZIP" class="o_address_zip"/>
+              <field name="city" placeholder="City" class="o_address_city"/>
           </div>
 
           <field name="street2" placeholder="Street 2..." class="o_address_street" attrs="{'invisible': True}"/>
@@ -446,9 +446,9 @@
                                     <div class="o_address_format" name="div_address">
                                         <field name="street" placeholder="Street..." class="o_address_street"/>
                                         <field name="street2" placeholder="Street 2..." class="o_address_street"/>
-                                        <field name="city" placeholder="City" class="o_address_city"/>
-                                        <field name="state_id" class="o_address_state" placeholder="State" options="{&quot;no_open&quot;: True}" context="{'country_id': country_id, 'zip': zip}"/>
                                         <field name="zip" placeholder="ZIP" class="o_address_zip"/>
+                                        <field name="city" placeholder="City" class="o_address_city"/>
+                                        <field name="state_id" class="o_address_state" placeholder="State" options="{&quot;no_open&quot;: True}" context="{'country_id': country_id, 'zip': zip}"/> 
                                         <field name="country_id" placeholder="Country" class="o_address_country" options="{&quot;no_open&quot;: True, &quot;no_create&quot;: True}"/>
                                     </div>
                                 </div>

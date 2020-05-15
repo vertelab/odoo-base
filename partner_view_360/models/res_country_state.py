@@ -30,4 +30,4 @@ class ResPartner(models.Model):
     display_name = fields.Char(compute="state_name_and_code")
 
     def state_name_and_code(self):
-        self.display_name = self.name + " " + self.code
+        self.display_name = self.name + "\t" + self.code
