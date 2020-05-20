@@ -66,7 +66,7 @@ msgstr ""
 #: model:ir.model.fields,help:partner_view_360.field_res_partner__cfar
 #: model:ir.model.fields,help:partner_view_360.field_res_users__cfar
 msgid "CFAR number"
-msgstr "CFAR nummer"
+msgstr "CFAR-nummer"
 
 #. module: partner_view_360
 #: model:ir.model.fields,field_description:partner_view_360.field_res_partner__postal_address_city
@@ -74,7 +74,7 @@ msgstr "CFAR nummer"
 #: model_terms:ir.ui.view,arch_db:partner_view_360.view_partner_employer_form
 #: model_terms:ir.ui.view,arch_db:partner_view_360.view_partner_jobseeker_form
 msgid "City"
-msgstr "Stad"
+msgstr "Ort"
 
 #. module: partner_view_360
 #: model:ir.ui.menu,name:partner_view_360.res_partner_employers_config_menu
@@ -112,7 +112,7 @@ msgstr "Land"
 #. module: partner_view_360
 #: model:ir.model,name:partner_view_360.model_res_country_state
 msgid "Country state"
-msgstr "Län/delstat"
+msgstr "Region/Län"
 
 #. module: partner_view_360
 #: model_terms:ir.actions.act_window,help:partner_view_360.action_employers
@@ -267,7 +267,7 @@ msgstr "Arbetssökande"
 #. module: partner_view_360
 #: selection:res.partner,type:0
 msgid "Legal Address"
-msgstr "Folkbokföringsadress"
+msgstr "Primär Adress"
 
 #. module: partner_view_360
 #: model_terms:ir.ui.view,arch_db:partner_view_360.view_partner_employer_form
@@ -360,7 +360,7 @@ msgstr "Anledning"
 #: model:ir.model.fields,field_description:partner_view_360.field_res_partner__registered_through
 #: model:ir.model.fields,field_description:partner_view_360.field_res_users__registered_through
 msgid "Registered Through"
-msgstr "Inskriven via"
+msgstr "Registrerad Av"
 
 #. module: partner_view_360
 #: model:ir.model.fields,field_description:partner_view_360.field_res_partner__sms_reminders
@@ -409,13 +409,13 @@ msgstr "Status"
 #: model_terms:ir.ui.view,arch_db:partner_view_360.view_partner_employer_form
 #: model_terms:ir.ui.view,arch_db:partner_view_360.view_partner_jobseeker_form
 msgid "Street 2..."
-msgstr "Gata 2..."
+msgstr "Adressrad 2..."
 
 #. module: partner_view_360
 #: model_terms:ir.ui.view,arch_db:partner_view_360.view_partner_employer_form
 #: model_terms:ir.ui.view,arch_db:partner_view_360.view_partner_jobseeker_form
 msgid "Street..."
-msgstr "Gata..."
+msgstr "Adress..."
 
 #. module: partner_view_360
 #: model:ir.model.fields,help:partner_view_360.field_res_partner__type
@@ -477,7 +477,7 @@ msgstr "Arbetsgivare"
 #. module: partner_view_360
 #: model_terms:ir.ui.view,arch_db:partner_view_360.view_partner_employer_form
 msgid "internal note..."
-msgstr "intern anteckning..."
+msgstr "intern notering..."
 
 #. module: partner_view_360
 #: model:ir.model.fields,help:partner_view_360.field_res_partner__company_registry

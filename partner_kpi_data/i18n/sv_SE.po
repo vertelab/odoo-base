@@ -143,7 +143,7 @@ msgstr "Senast uppdaterad"
 #. module: partner_kpi_data
 #: model:ir.model.fields,field_description:partner_kpi_data.field_res_partner_kpi__partner_id
 msgid "Partner"
-msgstr "Samarbetspartner"
+msgstr "Kund"
 
 #. module: partner_kpi_data
 #: model:ir.model.fields,field_description:partner_kpi_data.field_res_partner_kpi__profit

@@ -155,7 +155,7 @@ msgstr "Mötestyp"
 #. module: partner_activities
 #: model:ir.model.fields,field_description:partner_activities.field_res_partner_activity__notes
 msgid "Notes"
-msgstr "Anteckningar"
+msgstr "Noteringar"
 
 #. module: partner_activities
 #: model:ir.model.fields,field_description:partner_activities.field_res_partner_activity__meeting_type_parent
@@ -166,7 +166,7 @@ msgstr "Överordnad"
 #. module: partner_activities
 #: model:ir.model.fields,field_description:partner_activities.field_res_partner_activity__partner_id
 msgid "Partner"
-msgstr "Samarbetspartner"
+msgstr "Kund"
 
 #. module: partner_activities
 #: model:ir.model.fields,field_description:partner_activities.field_res_partner__partner_activity_ids

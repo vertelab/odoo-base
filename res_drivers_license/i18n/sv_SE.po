@@ -105,7 +105,7 @@ msgstr "Namn"
 #. module: res_drivers_license
 #: model:ir.model.fields,field_description:res_drivers_license.field_res_drivers_license__partner_id
 msgid "Partner"
-msgstr "Samarbetspartner"
+msgstr "Kund"
 
 #. module: res_drivers_license
 #: model_terms:ir.ui.view,arch_db:res_drivers_license.res_view_drivers_license_filter
