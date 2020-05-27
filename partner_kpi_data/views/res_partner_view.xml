@@ -161,6 +161,14 @@
                 <field name="employees_change_percent"/> -->
 
                 <filter name="size" string="Size class 1" domain="[('size', '=', '1')]"/>
+                <filter name="size" string="Size class 2" domain="[('size', '=', '2')]"/>
+                <filter name="size" string="Size class 3" domain="[('size', '=', '3')]"/>
+                <filter name="size" string="Size class 4" domain="[('size', '=', '4')]"/>
+                <filter name="size" string="Size class 5" domain="[('size', '=', '5')]"/>
+                <filter name="size" string="Size class 6" domain="[('size', '=', '6')]"/>
+                <filter name="size" string="Size class 7" domain="[('size', '=', '7')]"/>
+                <filter name="size" string="Size class 8" domain="[('size', '=', '8')]"/>
+                <filter name="size" string="Size class 9" domain="[('size', '=', '9')]"/>
 
             </search>
         </field>
