@@ -101,6 +101,10 @@
         <field name="view_mode">graph</field>
         <field name="view_id" ref="view_kpi_graph"/>
     </record>     -->
+
+
+
+
     <menuitem id="partner_kpi_menu_tree" name="KPI" parent="contacts.menu_contacts" action="kpi_action"/> 
    
     <record id="view_partner_form_kpi1" model="ir.ui.view"> 
@@ -135,6 +139,40 @@
 
     <menuitem id="partner_kpi_menu_tree_employer" name="KPI" parent="partner_view_360.res_partner_employers_menu" action="kpi_action"/> 
 
+     <record id="partner_kpi_search" model="ir.ui.view">
+        <field name="name">res.partner.kpi.search</field>
+        <field name="model">res.partner.kpi</field>
+        <field name="arch" type="xml">
+            <search string="Search KPI">
+                
+                <field name="partner_id" domain="[('partner_id', 'ilike', self)]"/>
+                <!-- <field name="fiscal_year" />
+
+                <field name="turnover" />
+                <field name="profit"/>
+                <field name="employees" />
+
+                <field name="turnover_change" />
+                <field name="profit_change"/>
+                <field name="employees_change" />
+
+                <field name="turnover_change_percent"/>
+                <field name="profit_change_percent"/>
+                <field name="employees_change_percent"/> -->
+
+                <filter name="size" string="Size class 1" domain="[('size', '=', '1')]"/>
+                <filter name="size" string="Size class 2" domain="[('size', '=', '2')]"/>
+                <filter name="size" string="Size class 3" domain="[('size', '=', '3')]"/>
+                <filter name="size" string="Size class 4" domain="[('size', '=', '4')]"/>
+                <filter name="size" string="Size class 5" domain="[('size', '=', '5')]"/>
+                <filter name="size" string="Size class 6" domain="[('size', '=', '6')]"/>
+                <filter name="size" string="Size class 7" domain="[('size', '=', '7')]"/>
+                <filter name="size" string="Size class 8" domain="[('size', '=', '8')]"/>
+                <filter name="size" string="Size class 9" domain="[('size', '=', '9')]"/>
+
+            </search>
+        </field>
+    </record>
 
 </odoo>
 
