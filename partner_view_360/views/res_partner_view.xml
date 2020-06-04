@@ -74,22 +74,7 @@
   </record>
 
 
- <!-- endast när account är installerad
-   <record id="view_partner_property_form_employee360" model="ir.ui.view"> 
-    <field name="name">res.partner.property.form.inherit.employee360</field> 
-    <field name="model">res.partner</field> 
-    <field name="inherit_id" ref="account.view_partner_property_form" /> 
-    <field name="arch" type="xml"> 
-       <xpath expr="//group[@name='fiscal_information']" position="attributes">
-         <attribute name="invisible">1</attribute>
-      </xpath> 
 
-        <xpath expr="//page[@name='accounting']" position="attributes">
-         <attribute name="invisible">1</attribute>
-      </xpath> 
-    </field>
-  </record>
--->
   <record id="view_partner_tree" model="ir.ui.view"> 
     <field name="name">res.partner.view.tree.inherit.view_360</field>      
     <field name="model">res.partner</field> 
@@ -137,17 +122,6 @@
             </xpath>
         </field>
      </record>
-
-       <!-- <record id="view_partner_form" model="ir.ui.view">
-        <field name="name">res.partner.form.inherit.drivers_license</field>
-        <field name="model">res.partner</field>
-        <field name="inherit_id" ref="base.view_partner_form" />
-        <field name="arch" type="xml">
-            <xpath expr="//page[@name='education']/group" position="inside">
-             
-            </xpath> 
-        </field>
-    </record> -->
 
   <record id="view_partner_jobseeker_form" model="ir.ui.view">
     <field name="name">res.partner.form.jobseeker</field>
@@ -197,7 +171,7 @@
               <field name="postal_address_zip" placeholder="ZIP" class="o_address_zip"/>
               <field name="postal_address_city" placeholder="City" class="o_address_city"/>
           </div>
-          <field name="postal_address_id" domain="[('type', '=', 'postal address')]"/> <!--group debug-->
+          <field name="postal_address_id" domain="[('type', '=', 'postal address')]" groups="base.group_no_one"/> 
           
           <field name="phone"/>
           <field name="mobile"/>
@@ -257,9 +231,7 @@
 
     <record id="action_jobseekers" model="ir.actions.act_window">
         <field name="name">Jobseekers Action</field>
-        <!-- <field name="type">ir.actions.act_window</field> -->
         <field name="res_model">res.partner</field>
-        <!-- <field name="view_type">form</field> -->
         <field name="view_mode">kanban,tree,form,activity</field>
         <field name="search_view_id" ref="base.view_res_partner_filter"/>
        <field name="help" type="html">
@@ -290,7 +262,7 @@
         action="action_jobseekers"
         sequence="4"/>
 
-        <menuitem id="res_partner_jobseekers_config_menu" parent="res_partner_jobseekers_menu" name="Configuration" sequence="0" /> <!--base group no one-->
+        <menuitem id="res_partner_jobseekers_config_menu" parent="res_partner_jobseekers_menu" name="Configuration" sequence="0" groups="base.group_no_one"/> 
 
         <menuitem id="menu_ssyk_config" parent="res_partner_jobseekers_config_menu" action="res_ssyk.action_ssyk_form" sequence="2" />
         <menuitem id="menu_sun_config" parent="res_partner_jobseekers_config_menu" action="res_sun.action_sun_form" sequence="3" />
@@ -514,31 +486,10 @@
             </field>
         </record>
 
-         <!-- <record id="action_employers" model="ir.actions.act_window">
-    <field name="name">Employers Action</field>
-    <field name="type">ir.actions.act_window</field>
-    <field name="res_model">res.partner</field>
-    <field name="view_type">form</field>
-    <field name="view_mode">kanban,tree,form,activity</field>
-    <field name="search_view_id" ref="base.view_res_partner_filter"/>
-    <field name="help" type="html">
-      <p class="o_view_nocontent_smiling_face">
-        Create an employer in your address book
-      </p>
-    </field>
-    <field name="domain" eval="[('is_employer', '=', True)]"/>
-  </record>
-
-  <menuitem id="res_partner_employers_menu"
-        name="Employers"
-        action="action_employers"
-        sequence="4"/> -->
 
     <record id="action_employers" model="ir.actions.act_window">
         <field name="name">Employers Action</field>
-        <!-- <field name="type">ir.actions.act_window</field> -->
         <field name="res_model">res.partner</field>
-        <!-- <field name="view_type">form</field> -->
         <field name="view_mode">kanban,tree,form,activity</field>
         <field name="search_view_id" ref="base.view_res_partner_filter"/>
         <field name="help" type="html">
@@ -569,7 +520,7 @@
         action="action_employers"
         sequence="3"/>
 
-        <menuitem id="res_partner_employers_config_menu" parent="res_partner_employers_menu" name="Configuration" sequence="0" /> <!--base group no one-->
+        <menuitem id="res_partner_employers_config_menu" parent="res_partner_employers_menu" name="Configuration" sequence="0" groups="base.group_no_one"/> 
 
         <menuitem id="menu_ssyk_config" parent="res_partner_employers_config_menu" action="res_ssyk.action_ssyk_form" sequence="2" />
         <menuitem id="menu_sni_config" parent="res_partner_employers_config_menu" action="res_sni.action_sni_form" sequence="1" />

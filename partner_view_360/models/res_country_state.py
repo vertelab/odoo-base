@@ -24,10 +24,10 @@ import logging
 _logger = logging.getLogger(__name__)
 
 
-class ResPartner(models.Model):
+class ResCountryState(models.Model):
     _inherit = "res.country.state" 
 
     display_name = fields.Char(compute="state_name_and_code")
 
     def state_name_and_code(self):
-        self.display_name = self.name + "\t" + self.code
+        self.display_name = "%s %s" % (self.name, self.code)
