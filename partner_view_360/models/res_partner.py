@@ -69,9 +69,9 @@ class ResPartner(models.Model):
     postal_address_street = fields.Char(string="Postal address", related="postal_address_id.street")
     postal_address_zip = fields.Char(related="postal_address_id.zip")
     postal_address_city = fields.Char(related="postal_address_id.city")
-
     employer_class = fields.Selection(selection=[('1','1'), ('2','2'), ('3','3'), ('4','4')])
 
+    state_code = fields.Char(string="State code", related="state_id.code")
 
     def calculate_age(self):
         wrong_input = False
