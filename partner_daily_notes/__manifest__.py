@@ -44,8 +44,8 @@ This module allowes daily notes for a partner.
             #'data/ir.model.fields.csv', 
     ],
     'demo': [
-            #"data/res.partner.note.type.csv",
-            #"data/res.partner.notes.csv",
+            "data/res.partner.note.type.csv",
+            "data/res.partner.notes.csv",
     ],
     'application': False,
     'installable': True,
