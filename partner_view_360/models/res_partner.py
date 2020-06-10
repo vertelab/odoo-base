@@ -33,6 +33,7 @@ class ResPartner(models.Model):
     age = fields.Char(string="Age", compute="calculate_age")
     company_registry = fields.Char(
         string='Organization number', help="organization number")
+    social_sec_nr_age = fields.Char(string="Social security number", compute="combine_social_sec_nr_age")
     cfar = fields.Char(string='CFAR', help="CFAR number")
     customer_id = fields.Char(string='Customer number', help="Customer number")
 
@@ -72,6 +73,14 @@ class ResPartner(models.Model):
     employer_class = fields.Selection(selection=[('1','1'), ('2','2'), ('3','3'), ('4','4')])
 
     state_code = fields.Char(string="State code", related="state_id.code")
+    state_name_code = fields.Char(string="State", compute="combine_state_name_code")
+
+
+    def combine_social_sec_nr_age(self):
+        self.social_sec_nr_age = "%s (%s years old)" % (self.company_registry, self.age)
+    def combine_state_name_code(self):
+        self.state_name_code = "%s %s" % (self.state_id.name, self.state_id.code)
+    
 
     def calculate_age(self):
         wrong_input = False
