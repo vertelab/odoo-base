@@ -526,6 +526,10 @@
         <menuitem id="menu_sni_config" parent="res_partner_employers_config_menu" action="res_sni.action_sni_form" sequence="1" />
 
         
+    <!-- <menuitem id="search_employers_menu"
+        name="Search Employers"
+        action="partner_view_360.search_partner_wizard" can't be found
+        sequence="3"/> -->
 
 
 
