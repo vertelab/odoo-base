@@ -25,7 +25,7 @@ msgstr ""
 #: model_terms:ir.ui.view,arch_db:partner_activities.view_partner_form
 #, python-format
 msgid "Activities"
-msgstr "Aktiviteter"
+msgstr "Relationsaktiviteter"
 
 #. module: partner_activities
 #: model:ir.model.fields,field_description:partner_activities.field_res_partner__activities_count
@@ -37,7 +37,7 @@ msgstr "Antal Ativiteter"
 #: model:ir.model.fields,field_description:partner_activities.field_res_partner_activity_type__activity_id
 #: model_terms:ir.ui.view,arch_db:partner_activities.view_partner_form
 msgid "Activity"
-msgstr "Aktivitet"
+msgstr "Relationsaktivitet"
 
 #. module: partner_activities
 #: model:ir.actions.act_window,name:partner_activities.action_partner_activity
