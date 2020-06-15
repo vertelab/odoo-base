@@ -75,13 +75,14 @@ class ResPartner(models.Model):
     state_code = fields.Char(string="State code", related="state_id.code")
     state_name_code = fields.Char(string="State", compute="combine_state_name_code")
 
-
+    @api.one
     def combine_social_sec_nr_age(self):
         self.social_sec_nr_age = "%s (%s years old)" % (self.company_registry, self.age)
+    @api.one
     def combine_state_name_code(self):
         self.state_name_code = "%s %s" % (self.state_id.name, self.state_id.code)
     
-
+    @api.one
     def calculate_age(self):
         wrong_input = False
         today = date.today()
