@@ -41,7 +41,7 @@ AFC-102, 103, 140, 183, 192, 213, 210, 241, 259, 260
     ],
     'data': [
 			'views/res_partner_view.xml',
-            'wizards/search_partner.xml'
+            #'wizards/res_partner_search_wizard.xml'
         ],
     'demo': [
             "data/jobseekers/res.partner.csv",
