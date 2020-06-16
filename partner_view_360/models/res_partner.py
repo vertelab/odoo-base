@@ -33,6 +33,7 @@ class ResPartner(models.Model):
     age = fields.Char(string="Age", compute="calculate_age")
     company_registry = fields.Char(
         string='Organization number', help="organization number")
+    social_sec_nr_age = fields.Char(string="Social security number", compute="combine_social_sec_nr_age")
     cfar = fields.Char(string='CFAR', help="CFAR number")
     customer_id = fields.Char(string='Customer number', help="Customer number")
 
@@ -69,10 +70,19 @@ class ResPartner(models.Model):
     postal_address_street = fields.Char(string="Postal address", related="postal_address_id.street")
     postal_address_zip = fields.Char(related="postal_address_id.zip")
     postal_address_city = fields.Char(related="postal_address_id.city")
-
     employer_class = fields.Selection(selection=[('1','1'), ('2','2'), ('3','3'), ('4','4')])
 
+    state_code = fields.Char(string="State code", related="state_id.code")
+    state_name_code = fields.Char(string="State", compute="combine_state_name_code")
 
+    @api.one
+    def combine_social_sec_nr_age(self):
+        self.social_sec_nr_age = "%s (%s years old)" % (self.company_registry, self.age)
+    @api.one
+    def combine_state_name_code(self):
+        self.state_name_code = "%s %s" % (self.state_id.name, self.state_id.code)
+    
+    @api.one
     def calculate_age(self):
         wrong_input = False
         today = date.today()
