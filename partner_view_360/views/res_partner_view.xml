@@ -147,14 +147,20 @@
         <group string="Personal Information">
           <field name="parent_id" attrs="{'invisible' : True}"/>
           <field name="type" attrs="{'invisible' : True}"/>
-          <label for="company_registry" string="Social security number"/>
-          <field name="company_registry" nolabel="1"/>
-          <field name="age"/>
+          <label for="company_registry" string="Social security number" class="oe_edit_only"/>
+          <field name="company_registry" nolabel="1" class="oe_edit_only"/>
+           
+          <field name="social_sec_nr_age" class="oe_read_only"/>
           <field name="customer_id"/> 
           
           <!-- folkbokföringsadress, alternativt göra en res partner typ-->
 
-          <field name="state_id" class="o_address_state" placeholder="State"/>
+        <label for="state_name_code" string="State" class="oe_read_only"/>
+          <field name="state_name_code" class="oe_read_only" placeholder="State" nolabel="1" />
+          <label for="state_id" string="State" class="oe_edit_only"/>
+          <field name="state_id" class="oe_edit_only" nolabel="1" />
+          <!-- <field name="state_code"/> -->
+
           <label for="street" string="Address"/>
           <div class="o_address_format"> 
               <field name="street" placeholder="Street..." class="o_address_street" />
@@ -320,7 +326,11 @@
           <field name="cfar"/>
           <field name="customer_id"/> 
           
-          <field name="state_id" class="o_address_state" placeholder="State"/>
+            <label for="state_name_code" string="State" class="oe_read_only"/>
+          <field name="state_name_code" class="oe_read_only" placeholder="State" nolabel="1" />
+          <label for="state_id" string="State" class="oe_edit_only"/>
+          <field name="state_id" class="oe_edit_only" nolabel="1" />
+          <!-- <field name="state_code"/> -->
           <label for="street" string="Address"/>
           <div class="o_address_format"> 
               <field name="street" placeholder="Street..." class="o_address_street"/>
@@ -426,7 +436,11 @@
                                         <field name="street2" placeholder="Street 2..." class="o_address_street"/>
                                         <field name="zip" placeholder="ZIP" class="o_address_zip"/>
                                         <field name="city" placeholder="City" class="o_address_city"/>
-                                        <field name="state_id" class="o_address_state" placeholder="State" options="{&quot;no_open&quot;: True}" context="{'country_id': country_id, 'zip': zip}"/> 
+                                        <label for="state_name_code" string="State" class="oe_read_only"/>
+                                        <field name="state_name_code" class="oe_read_only" placeholder="State" nolabel="1" />
+                                        <label for="state_id" string="State" class="oe_edit_only"/>
+                                        <field name="state_id" class="oe_edit_only" nolabel="1" />
+                                        <!-- <field name="state_code"/> -->
                                         <field name="country_id" placeholder="Country" class="o_address_country" options="{&quot;no_open&quot;: True, &quot;no_create&quot;: True}"/>
                                     </div>
                                 </div>
