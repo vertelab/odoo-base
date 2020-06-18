@@ -6,15 +6,15 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Odoo Server 12.0-20190808\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2020-06-18 08:58+0000\n"
-"PO-Revision-Date: 2020-06-18 11:20+0200\n"
+"POT-Creation-Date: 2020-06-18 10:14+0000\n"
+"PO-Revision-Date: 2020-06-18 12:15+0200\n"
 "Last-Translator: <>\n"
 "Language-Team: \n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: \n"
-"Language: sv_SE\n"
+"Language: sv\n"
 "X-Generator: Poedit 2.0.6\n"
 
 #. module: partner_view_360
@@ -35,6 +35,11 @@ msgid "Address Type"
 msgstr "Adresstyp"
 
 #. module: partner_view_360
+#: selection:res.partner.jobseeker.search.wizard,search_reason:0
+msgid "Administration av rekryteringsträff/gruppaktivitet/projekt"
+msgstr ""
+
+#. module: partner_view_360
 #: model_terms:ir.ui.view,arch_db:partner_view_360.view_partner_employer_form
 #: model_terms:ir.ui.view,arch_db:partner_view_360.view_partner_form
 msgid "Administrative officer"
@@ -47,6 +52,11 @@ msgid "Age"
 msgstr "Ålder"
 
 #. module: partner_view_360
+#: selection:res.partner.jobseeker.search.wizard,search_reason:0
+msgid "Annan orsak"
+msgstr ""
+
+#. module: partner_view_360
 #: model_terms:ir.ui.view,arch_db:partner_view_360.view_partner_jobseeker_form
 msgid "Apply for jobs"
 msgstr "Söka arbete"
@@ -54,6 +64,11 @@ msgstr "Söka arbete"
 #. module: partner_view_360
 #: model_terms:ir.ui.view,arch_db:partner_view_360.view_partner_employer_form
 msgid "Avatar"
+msgstr ""
+
+#. module: partner_view_360
+#: selection:res.partner.jobseeker.search.wizard,search_reason:0
+msgid "Beslut åt annan handläggare"
 msgstr ""
 
 #. module: partner_view_360
@@ -175,12 +190,6 @@ msgid "Display Name"
 msgstr "Visningsnamn"
 
 #. module: partner_view_360
-#: model:ir.model.fields,field_description:partner_view_360.field_res_partner_employer_search_wizard__search_domain
-#: model:ir.model.fields,field_description:partner_view_360.field_res_partner_jobseeker_search_wizard__search_domain
-msgid "Domain"
-msgstr "Domän"
-
-#. module: partner_view_360
 #: model:ir.ui.menu,name:partner_view_360.menu_drivers_license_config
 msgid "Drivers licenses"
 msgstr "Körkort"
@@ -204,8 +213,7 @@ msgid "Employer Class"
 msgstr "Arbetsgivarklass"
 
 #. module: partner_view_360
-#: code:addons/partner_view_360/wizards/res_partner_search_wizard.py:50
-#: code:addons/partner_view_360/wizards/res_partner_search_wizard.py:80
+#: code:addons/partner_view_360/wizards/res_partner_search_wizard.py:51
 #: model:ir.ui.menu,name:partner_view_360.res_partner_employers_menu
 #: model_terms:ir.ui.view,arch_db:partner_view_360.view_partner_select_employee360
 #, python-format
@@ -243,6 +251,21 @@ msgstr "Myndighet"
 #: model:ir.model.fields,field_description:partner_view_360.field_res_partner_employer_search_wizard__id
 #: model:ir.model.fields,field_description:partner_view_360.field_res_partner_jobseeker_search_wizard__id
 msgid "ID"
+msgstr ""
+
+#. module: partner_view_360
+#: selection:res.partner.jobseeker.search.wizard,identification:0
+msgid "ID-Handling"
+msgstr ""
+
+#. module: partner_view_360
+#: model:ir.model.fields,field_description:partner_view_360.field_res_partner_jobseeker_search_wizard__identification
+msgid "Identification"
+msgstr "Identifikation"
+
+#. module: partner_view_360
+#: selection:res.partner.jobseeker.search.wizard,identification:0
+msgid "Identifierad genom intygsgivare"
 msgstr ""
 
 #. module: partner_view_360
@@ -290,7 +313,9 @@ msgid "Jobseeker info"
 msgstr "Arbetssökande info"
 
 #. module: partner_view_360
+#: code:addons/partner_view_360/wizards/res_partner_search_wizard.py:83
 #: model:ir.ui.menu,name:partner_view_360.res_partner_jobseekers_menu
+#, python-format
 msgid "Jobseekers"
 msgstr "Arbetssökande"
 
@@ -298,6 +323,21 @@ msgstr "Arbetssökande"
 #: model:ir.actions.act_window,name:partner_view_360.action_jobseekers
 msgid "Jobseekers Action"
 msgstr "Arbetssökande"
+
+#. module: partner_view_360
+#: selection:res.partner.jobseeker.search.wizard,identification:0
+msgid "Kontrollfrågor"
+msgstr ""
+
+#. module: partner_view_360
+#: selection:res.partner.jobseeker.search.wizard,identification:0
+msgid "Känd (tidigare identifierad)"
+msgstr ""
+
+#. module: partner_view_360
+#: selection:res.partner.jobseeker.search.wizard,identification:0
+msgid "LMA-kort/Uppehållstillståndskort"
+msgstr ""
 
 #. module: partner_view_360
 #: model:ir.model.fields,field_description:partner_view_360.field_res_partner_employer_search_wizard____last_update
@@ -328,6 +368,11 @@ msgid "Logo"
 msgstr "Logotyp"
 
 #. module: partner_view_360
+#: selection:res.partner.jobseeker.search.wizard,search_reason:0
+msgid "Matchning"
+msgstr ""
+
+#. module: partner_view_360
 #: model:ir.model.fields,field_description:partner_view_360.field_res_partner__deactualization_message
 #: model:ir.model.fields,field_description:partner_view_360.field_res_users__deactualization_message
 msgid "Message to jobseeker regarding deactualization"
@@ -339,14 +384,24 @@ msgid "Mobile:"
 msgstr "Mobil:"
 
 #. module: partner_view_360
+#: selection:res.partner.jobseeker.search.wizard,identification:0
+msgid "Mobilt BankID"
+msgstr ""
+
+#. module: partner_view_360
+#: selection:res.partner.jobseeker.search.wizard,search_reason:0
+msgid "Motringning"
+msgstr ""
+
+#. module: partner_view_360
 #: model_terms:ir.ui.view,arch_db:partner_view_360.view_partner_employer_form
 #: model_terms:ir.ui.view,arch_db:partner_view_360.view_partner_jobseeker_form
 msgid "Name"
 msgstr "Namn"
 
 #. module: partner_view_360
-#: code:addons/partner_view_360/wizards/res_partner_search_wizard.py:45
-#: code:addons/partner_view_360/wizards/res_partner_search_wizard.py:75
+#: code:addons/partner_view_360/wizards/res_partner_search_wizard.py:46
+#: code:addons/partner_view_360/wizards/res_partner_search_wizard.py:78
 #, python-format
 msgid "No id found"
 msgstr "Kunde inte hitta id"
@@ -414,7 +469,6 @@ msgstr "Privat adress"
 #: model:ir.model.fields,field_description:partner_view_360.field_res_partner__deactualization_reason
 #: model:ir.model.fields,field_description:partner_view_360.field_res_users__deactualization_reason
 #: selection:res.partner.employer.search.wizard,search_reason:0
-#: selection:res.partner.jobseeker.search.wizard,search_reason:0
 msgid "Reason"
 msgstr "Anledning"
 
@@ -423,6 +477,16 @@ msgstr "Anledning"
 #: model:ir.model.fields,field_description:partner_view_360.field_res_users__registered_through
 msgid "Registered Through"
 msgstr "Registrerad Av"
+
+#. module: partner_view_360
+#: selection:res.partner.jobseeker.search.wizard,search_reason:0
+msgid "Registervård"
+msgstr ""
+
+#. module: partner_view_360
+#: selection:res.partner.jobseeker.search.wizard,search_reason:0
+msgid "Registrera inkomna handlingar"
+msgstr ""
 
 #. module: partner_view_360
 #: model:ir.model.fields,field_description:partner_view_360.field_res_partner__sms_reminders
@@ -449,6 +513,12 @@ msgstr ""
 #: model:ir.ui.menu,name:partner_view_360.res_partner_employers_search_wizard_menu
 msgid "Search Employers"
 msgstr "Sök Arbetsgivare"
+
+#. module: partner_view_360
+#: model:ir.model.fields,field_description:partner_view_360.field_res_partner_employer_search_wizard__search_domain
+#: model:ir.model.fields,field_description:partner_view_360.field_res_partner_jobseeker_search_wizard__search_domain
+msgid "Search Filter"
+msgstr ""
 
 #. module: partner_view_360
 #: model:ir.ui.menu,name:partner_view_360.res_partner_jobseeker_search_wizard_menu
@@ -521,9 +591,19 @@ msgid "The state code."
 msgstr "Kommunkoden."
 
 #. module: partner_view_360
+#: selection:res.partner.jobseeker.search.wizard,search_reason:0
+msgid "Uppföljning av arbetssökands planering"
+msgstr ""
+
+#. module: partner_view_360
 #: model:ir.model.fields,help:partner_view_360.field_res_partner__type
 #: model:ir.model.fields,help:partner_view_360.field_res_users__type
 msgid "Used by Sales and Purchase Apps to select the relevant address depending on the context."
+msgstr ""
+
+#. module: partner_view_360
+#: selection:res.partner.jobseeker.search.wizard,search_reason:0
+msgid "Utredning"
 msgstr ""
 
 #. module: partner_view_360

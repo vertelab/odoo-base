@@ -39,6 +39,7 @@
             <form string="Search Partner">
                 <group>
                     <field name="search_reason" /> <!--widget="radio" options="{'horizontal': true}"-->
+                    <field name="identification"/>
                     <field name="search_domain" widget="domain" options="{'model' : 'res.partner'}"> </field>
 
                 </group>
