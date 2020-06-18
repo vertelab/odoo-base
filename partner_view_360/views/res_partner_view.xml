@@ -541,9 +541,4 @@
 
         <menuitem id="menu_ssyk_config" parent="res_partner_employers_config_menu" action="res_ssyk.action_ssyk_form" sequence="2" />
         <menuitem id="menu_sni_config" parent="res_partner_employers_config_menu" action="res_sni.action_sni_form" sequence="1" />
-
-        
-
-
-
 </odoo>

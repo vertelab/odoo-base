@@ -33,6 +33,7 @@ class ResPartner(models.Model):
     age = fields.Char(string="Age", compute="calculate_age")
     company_registry = fields.Char(
         string='Organization number', help="organization number")
+    social_sec_nr = fields.Char(string="Social security number", related="company_registry")
     social_sec_nr_age = fields.Char(string="Social security number", compute="combine_social_sec_nr_age")
     cfar = fields.Char(string='CFAR', help="CFAR number")
     customer_id = fields.Char(string='Customer number', help="Customer number")
