@@ -1,40 +1,67 @@
 <?xml version="1.0" encoding="utf-8"?>
 <odoo>
 
-    <record id="search_employer_form" model="ir.ui.view">
-        <field name="name">search.partner.wizard</field>
+      <record id="search_employer_form" model="ir.ui.view">
+        <field name="name">search.employer.wizard</field>
         <field name="model">res.partner.employer.search.wizard</field>
-        <field name="arch"> 
+        <field name="arch" type="xml"> 
             <form string="Search Partner">
                 <group>
                     <field name="search_reason"/>
-                    <field name="search_string"/>
+                    <field name="search_domain" widget="domain" options="{'model' : 'res.partner'}"> </field>
+
                 </group>
                 <footer>
-                    <button name="search" type="object"/>
+                    <button name="search_employer" string="search" type="object" class="btn-primary"/>
+                    <button string="Cancel" class="btn-secondary" special="cancel"/>
                 </footer>
             </form>
         </field>
     </record>
-    <!-- <record id="search_employer_wizard" model="ir.actions.act_window">
-        <field name="name">Search Partner</field>
-        <field name="type">ir.actions.act_window</field>
-        <field name="res_model">res.partner.employer.search.wizard</field>
-        <field name="view_mode">form</field>
-        <field name="view_id" ref="search_employer_form"/>
-        <field name="target">new</field>
-    </record> -->
 
     <act_window id="search_employer_wizard"
             name="Search Partner"
             src_model="res.partner"
-            res_model="res.partner.search.employer"
+            res_model="res.partner.employer.search.wizard"
             view_mode="form"
             target="new"
-            key2="client_action_multi"/>
+            key2="client_action_multi"/> 
 
-    <menuitem id="res_partner_employers_search_wizard_menu"
+   <menuitem id="res_partner_employers_search_wizard_menu"
         name="Search Employers"
         action="search_employer_wizard" 
         sequence="3"/>
+
+         <record id="search_employer_form" model="ir.ui.view">
+        <field name="name">search.jobseeker.wizard</field>
+        <field name="model">res.partner.jobseeker.search.wizard</field>
+        <field name="arch" type="xml"> 
+            <form string="Search Partner">
+                <group>
+                    <field name="search_reason" /> <!--widget="radio" options="{'horizontal': true}"-->
+                    <field name="search_domain" widget="domain" options="{'model' : 'res.partner'}"> </field>
+
+                </group>
+                <group></group>
+                <footer>
+                    <button name="search_jobseeker" string="search" type="object" class="btn-primary"/>
+                    <button string="Cancel" class="btn-secondary" special="cancel"/>
+                </footer>
+            </form>
+        </field>
+    </record>
+
+    <act_window id="search_jobseeker_wizard"
+            name="Search Partner"
+            src_model="res.partner"
+            res_model="res.partner.jobseeker.search.wizard"
+            view_mode="form"
+            target="new"
+            key2="client_action_multi"/> 
+
+   <menuitem id="res_partner_jobseeker_search_wizard_menu"
+        name="Search Jobseekers"
+        action="search_jobseeker_wizard" 
+        sequence="3"/>
+
 </odoo>
