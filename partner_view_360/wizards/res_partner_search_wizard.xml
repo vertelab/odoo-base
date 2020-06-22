@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <odoo>
 
-      <record id="search_employer_form" model="ir.ui.view">
+      <!-- <record id="search_employer_form" model="ir.ui.view">
         <field name="name">search.employer.wizard</field>
         <field name="model">res.partner.employer.search.wizard</field>
         <field name="arch" type="xml"> 
@@ -30,9 +30,9 @@
    <menuitem id="res_partner_employers_search_wizard_menu"
         name="Search Employers"
         action="search_employer_wizard" 
-        sequence="3"/>
+        sequence="3"/> -->
 
-         <record id="search_employer_form" model="ir.ui.view">
+         <record id="search_jobseeker_form" model="ir.ui.view">
         <field name="name">search.jobseeker.wizard</field>
         <field name="model">res.partner.jobseeker.search.wizard</field>
         <field name="arch" type="xml"> 

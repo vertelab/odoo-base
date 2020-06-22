@@ -93,8 +93,10 @@
     <field name="inherit_id" ref="base.view_res_partner_filter" /> 
     <field name="arch" type="xml"> 
       <xpath expr="//field[@name='user_id']" position="after"> 
-        <field name="customer_id" />         <!-- filter_domain="[('customer','=',True), ('parent_id', '=', False)]" --> <!-- kommenterad för att jag inte har någon customer, behöver testas -->
-        <filter string="Job seekers" name="is_jobseeker" domain="[('is_jobseeker','=',True)]"/> 
+        <field name="company_registry" />
+        <field name="cfar" />
+        <field name="customer_id"/>         <!-- filter_domain="[('customer','=',True), ('parent_id', '=', False)]" --> <!-- kommenterad för att jag inte har någon customer, behöver testas -->
+        <filter string="Job seekers" name="is_jobseeker" domain="[('is_jobseeker','=',True)]" /> 
         <filter string="Employers" name="is_employer" domain="[('is_employer','=',True)]"/>
         <filter string="Government body" name="is_government" domain="[('is_government','=',True)]"/>
         <filter string="Independent partners" name="is_independent_partner" domain="[('is_independent_partner','=',True)]"/>
@@ -241,11 +243,42 @@
             </field>
         </record>
 
+         <record id="view_jobseeker_filter" model="ir.ui.view">
+            <field name="name">res.partner.select</field>
+            <field name="model">res.partner</field>
+            <field name="arch" type="xml">
+                <search string="Search Partner">
+                   <field name="name"
+                       filter_domain="['|','|',('display_name','ilike',self),('ref','=',self),('email','ilike',self)]"/>
+                   <field name="parent_id" domain="[('is_company','=',True)]" operator="child_of"/>
+                    <field name="social_sec_nr"/>
+                   <filter name="filter_my_partners" help="My Contacts"
+                           domain="[('user_id','=',uid)]"/>
+                   <separator/>
+                   <filter string="Individuals" name="type_person" domain="[('is_company','=',False)]"/>
+                   <filter string="Companies" name="type_company" domain="[('is_company','=',True)]"/>
+                   <separator/>
+                   <filter string="Customers" name="customer" domain="[('customer','=',True), ('parent_id', '=', False)]"/>
+                   <filter string="Vendors" name="supplier" domain="[('supplier','=',True), ('parent_id', '=', False)]"/>
+                   <filter string="Archived" name="inactive" domain="[('active','=',False)]"/>
+                   <separator/>
+                   <field name="category_id" string="Tag" filter_domain="[('category_id','ilike', self)]"/>
+                   <!-- <field name="user_id"/> -->
+                   <field name="phone" filter_domain="['|',('phone','ilike',self),('mobile','=',self)]"/>
+                   <group expand="0" name="group_by" string="Group By">
+                       <filter name="salesperson" string="Salesperson" domain="[]" context="{'group_by' : 'user_id'}" />
+                       <filter name="group_company" string="Company" context="{'group_by': 'parent_id'}"/>
+                       <filter name="group_country" string="Country" context="{'group_by': 'country_id'}"/>
+                   </group>
+               </search>
+            </field>
+        </record>
+
     <record id="action_jobseekers" model="ir.actions.act_window">
         <field name="name">Jobseekers Action</field>
         <field name="res_model">res.partner</field>
         <field name="view_mode">kanban,tree,form,activity</field>
-        <field name="search_view_id" ref="base.view_res_partner_filter"/>
+        <field name="search_view_id" ref="view_jobseeker_filter"/>
        <field name="help" type="html">
         <field name="view_id" ref="view_jobseeker_kanban"/>
           <p class="o_view_nocontent_smiling_face">
@@ -512,11 +545,46 @@
         </record>
 
 
+            <record id="view_employer_filter" model="ir.ui.view">
+            <field name="name">res.partner.select</field>
+            <field name="model">res.partner</field>
+            <field name="arch" type="xml">
+                <search string="Search Partner">
+                   <field name="name"
+                       filter_domain="['|','|',('display_name','ilike',self),('ref','=',self),('email','ilike',self)]"/>
+                   <field name="parent_id" domain="[('is_company','=',True)]" operator="child_of"/>
+                   <field name="company_registry" />
+                   <field name="cfar" />
+                   <field name="customer_id"/>   
+                   <filter name="filter_my_partners" help="My Contacts"
+                           domain="[('user_id','=',uid)]"/>
+                   <separator/>
+                   <filter string="Individuals" name="type_person" domain="[('is_company','=',False)]"/>
+                   <filter string="Companies" name="type_company" domain="[('is_company','=',True)]"/>
+                   <separator/>
+                   <filter string="Customers" name="customer" domain="[('customer','=',True), ('parent_id', '=', False)]"/>
+                   <filter string="Vendors" name="supplier" domain="[('supplier','=',True), ('parent_id', '=', False)]"/>
+                   <filter string="Archived" name="inactive" domain="[('active','=',False)]"/>
+                   <separator/>
+                   <field name="category_id" string="Tag" filter_domain="[('category_id','ilike', self)]"/>
+                   <!-- <field name="user_id"/> -->
+                   <field name="phone" filter_domain="['|',('phone','ilike',self),('mobile','=',self)]"/>
+                   <group expand="0" name="group_by" string="Group By">
+                       <filter name="salesperson" string="Salesperson" domain="[]" context="{'group_by' : 'user_id'}" />
+                       <filter name="group_company" string="Company" context="{'group_by': 'parent_id'}"/>
+                       <filter name="group_country" string="Country" context="{'group_by': 'country_id'}"/>
+                   </group>
+               </search>
+            </field>
+        </record>
+
+
+
     <record id="action_employers" model="ir.actions.act_window">
         <field name="name">Employers Action</field>
         <field name="res_model">res.partner</field>
         <field name="view_mode">kanban,tree,form,activity</field>
-        <field name="search_view_id" ref="base.view_res_partner_filter"/>
+        <field name="search_view_id" ref="view_employer_filter"/>
         <field name="help" type="html">
         <field name="view_id" ref="view_employer_kanban"/>
           <p class="o_view_nocontent_smiling_face">
