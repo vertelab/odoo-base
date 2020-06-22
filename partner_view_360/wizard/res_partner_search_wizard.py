@@ -86,7 +86,16 @@ class ResPartnerJobseekerSearchWizard(models.TransientModel):
             'default_partner_ids': partner_ids,
         }
         action['domain'] = [('id', '=', partner_ids)]
-        action['view_mode'] = "(self.env.ref('partner_view_360.view_jobseeker_kanban').id,'kanban'),(self.env.ref('partner_view_360.view_partner_jobseeker_form').id,'form'),(False,'tree')"
+        # ~ action['view_mode'] = "(self.env.ref('partner_view_360.view_jobseeker_kanban').id,'kanban'),(self.env.ref('partner_view_360.view_partner_jobseeker_form').id,'form'),(False,'tree')"
+        action['view_mode'] = "tree,form,kanban"
+        
+        # ~ action["view_ids"] = [  (5, 0, 0),
+                                # ~ (0, 0, {'view_mode': 'tree', 'view_id': ref('xml.id.of.tree.view')}),
+                                # ~ (0, 0, {'view_mode': 'form', 'view_id': ref('xml.id.of.form.view')})
+                            # ~ ]
+        action['form_view_id'] = self.env.ref('partner_view_360.view_partner_jobseeker_form').id
+        action['kanban_view_id'] = self.env.ref('partner_view_360.view_jobseeker_kanban').id
+        action['tree_view_id'] = self.env.ref('partner_view_360.view_employer_tree').id
         return action
             
             
