@@ -33,7 +33,7 @@ from odoo.tools.safe_eval import safe_eval
     #gdpr_id = fields.Many2one('gdpr') #some gdpr object
     # search_reason = fields.Selection(string="Search reason" ,selection=[('reason','Reason')])#
     # search_domain = fields.Char(string="Search Filter", default=[('company_registry', '=', '')])
-
+    
     # @api.multi
     # def search_employer(self):
     #     raise Warning("Inte implementerat än")
