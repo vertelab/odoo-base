@@ -257,7 +257,7 @@
                    <filter string="Archived" name="inactive" domain="[('active','=',False)]"/>
                    <separator/>
                    <field name="category_id" string="Tag" filter_domain="[('category_id','ilike', self)]"/>
-                   <field name="user_id"/>
+                   <!-- <field name="user_id"/> -->
                    <field name="phone" filter_domain="['|',('phone','ilike',self),('mobile','=',self)]"/>
                    <group expand="0" name="group_by" string="Group By">
                        <filter name="salesperson" string="Salesperson" domain="[]" context="{'group_by' : 'user_id'}" />
@@ -556,7 +556,7 @@
                    <filter string="Archived" name="inactive" domain="[('active','=',False)]"/>
                    <separator/>
                    <field name="category_id" string="Tag" filter_domain="[('category_id','ilike', self)]"/>
-                   <field name="user_id"/>
+                   <!-- <field name="user_id"/> -->
                    <field name="phone" filter_domain="['|',('phone','ilike',self),('mobile','=',self)]"/>
                    <group expand="0" name="group_by" string="Group By">
                        <filter name="salesperson" string="Salesperson" domain="[]" context="{'group_by' : 'user_id'}" />
