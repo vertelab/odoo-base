@@ -38,7 +38,7 @@ msgstr "Skapad den"
 #: model_terms:ir.ui.view,arch_db:partner_desired_jobs.view_partner_form_applied_for_jobs
 #: model_terms:ir.ui.view,arch_db:partner_desired_jobs.view_partner_jobs_tree
 msgid "Desired jobs"
-msgstr "Sökta jobb"
+msgstr "Önskade Yrken"
 
 #. module: partner_desired_jobs
 #: model:ir.model.fields,field_description:partner_desired_jobs.field_res_partner_jobs__display_name
