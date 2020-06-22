@@ -62,6 +62,11 @@ msgid "Apply for jobs"
 msgstr "Söka arbete"
 
 #. module: partner_view_360
+#: model_terms:ir.ui.view,arch_db:partner_view_360.view_partner_jobseeker_form
+msgid "Desired jobs"
+msgstr "Önskare Yrken"
+
+#. module: partner_view_360
 #: model_terms:ir.ui.view,arch_db:partner_view_360.view_partner_employer_form
 msgid "Avatar"
 msgstr ""
@@ -518,7 +523,7 @@ msgstr "Sök Arbetsgivare"
 #: model:ir.model.fields,field_description:partner_view_360.field_res_partner_employer_search_wizard__search_domain
 #: model:ir.model.fields,field_description:partner_view_360.field_res_partner_jobseeker_search_wizard__search_domain
 msgid "Search Filter"
-msgstr ""
+msgstr "Sök Filter"
 
 #. module: partner_view_360
 #: model:ir.ui.menu,name:partner_view_360.res_partner_jobseeker_search_wizard_menu
