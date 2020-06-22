@@ -27,36 +27,36 @@ from odoo.exceptions import Warning
 from odoo.tools.safe_eval import safe_eval
 
 
-class ResPartnerEmployerSearchWizard(models.TransientModel):
-    _name = "res.partner.employer.search.wizard"
+# class ResPartnerEmployerSearchWizard(models.TransientModel):
+#     _name = "res.partner.employer.search.wizard"
 
     #gdpr_id = fields.Many2one('gdpr') #some gdpr object
     # search_reason = fields.Selection(string="Search reason" ,selection=[('reason','Reason')])#
-    search_domain = fields.Char(string="Search Filter", default=[('company_registry', '=', '')])
+    # search_domain = fields.Char(string="Search Filter", default=[('company_registry', '=', '')])
 
-    @api.multi
-    def search_employer(self):
-        raise Warning("Inte implementerat än")
-        something = True #byt ut mot en check efter om det är ett eller många resultat
-        view_type = "tree"
-        view_id = "view_partner_employer_kanban"
-        partner_id = self.env['res.partner'].search([('company_registry', '=', self.company_registry)]).mapped('id')
-        if len(partner_id) > 0:
-            partner_id = partner_id[0]
-        else:
-            raise Warning(_("No id found"))
-        if something:
-            view_type = "form"
-            view_id = "view_partner_employer_form"
-        return{
-            'name': _('Employers'), #vad gör den?
-            'domain':[('id', '=', partner_id)],
-            'view_type': view_type,
-            'res_model': 'res.partner',
-            'view_id':  view_id,
-            'view_mode': 'form',
-            'type': 'ir.actions.act_window',
-        }
+    # @api.multi
+    # def search_employer(self):
+    #     raise Warning("Inte implementerat än")
+    #     something = True #byt ut mot en check efter om det är ett eller många resultat
+    #     view_type = "tree"
+    #     view_id = "view_partner_employer_kanban"
+    #     partner_id = self.env['res.partner'].search([('company_registry', '=', self.company_registry)]).mapped('id')
+    #     if len(partner_id) > 0:
+    #         partner_id = partner_id[0]
+    #     else:
+    #         raise Warning(_("No id found"))
+    #     if something:
+    #         view_type = "form"
+    #         view_id = "view_partner_employer_form"
+    #     return{
+    #         'name': _('Employers'), #vad gör den?
+    #         'domain':[('id', '=', partner_id)],
+    #         'view_type': view_type,
+    #         'res_model': 'res.partner',
+    #         'view_id':  view_id,
+    #         'view_mode': 'form',
+    #         'type': 'ir.actions.act_window',
+    #     }
 
 class ResPartnerJobseekerSearchWizard(models.TransientModel):
     _name = "res.partner.jobseeker.search.wizard"
@@ -69,7 +69,7 @@ class ResPartnerJobseekerSearchWizard(models.TransientModel):
 
     @api.multi
     def search_jobseeker(self):
-        #raise Warning("Inte implementerat än")
+        raise Warning("Inte implementerat än")
         view_type = "tree"
         view_id = self.env.ref("partner_view_360.view_partner_jobseeker_form").id
         partner_id = self.env['res.partner'].search(safe_eval(self.search_domain)).mapped('id')
