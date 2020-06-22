@@ -69,23 +69,34 @@ class ResPartnerJobseekerSearchWizard(models.TransientModel):
 
     @api.multi
     def search_jobseeker(self):
-        raise Warning("Inte implementerat än")
+        # ~ raise Warning("Inte implementerat än")
         view_type = "tree"
         view_id = self.env.ref("partner_view_360.view_partner_jobseeker_form").id
-        partner_id = self.env['res.partner'].search(safe_eval(self.search_domain)).mapped('id')
-        if len(partner_id) == 1:
-            partner_id = partner_id[0]
-        elif len(partner_id) > 1:
-            view_id = self.env.ref("partner_view_360.view_partner_jobseeker_kanban").id
+        partner_ids = self.env['res.partner'].search(safe_eval(self.search_domain)).mapped('id')
+        if len(partner_ids) == 1:
+            partner_id = partner_ids[0]
+        elif len(partner_ids) > 1:
+            view_id = self.env.ref("partner_view_360.view_jobseeker_kanban").id
         else:
             raise Warning(_("No id found"))
+            
+            
+        action = self.env['ir.actions.act_window'].for_xml_id('contacts', 'action_contacts')
+        action['context'] = {
+            'default_partner_ids': partner_ids,
+        }
+        action['domain'] = [('id', '=', partner_ids)]
+        action['view_mode'] = "(self.env.ref('partner_view_360.view_jobseeker_kanban').id,'kanban'),(self.env.ref('partner_view_360.view_partner_jobseeker_form').id,'form'),(False,'tree')"
+        return action
+            
+            
         return{
             'name': _('Jobseekers'),
             'domain':[('id', '=', partner_id)],
             #'view_type': 'tree',
             'res_model': 'res.partner',
             'view_id':  view_id,
-            'view_mode': 'form',
+            'view_mode': 'tree,form,kanban',
             'type': 'ir.actions.act_window',
         }
     
