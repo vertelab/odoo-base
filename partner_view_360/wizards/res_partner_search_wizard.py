@@ -24,6 +24,7 @@ import logging
 from datetime import date
 _logger = logging.getLogger(__name__)
 from odoo.exceptions import Warning
+from odoo.tools.safe_eval import safe_eval
 
 
 class ResPartnerEmployerSearchWizard(models.TransientModel):
@@ -35,7 +36,7 @@ class ResPartnerEmployerSearchWizard(models.TransientModel):
 
     @api.multi
     def search_employer(self):
-        raise Warning("Inte implementerat än")
+        #raise Warning("Inte implementerat än")
         something = True #byt ut mot en check efter om det är ett eller många resultat
         view_type = "tree"
         view_id = "view_partner_employer_kanban"
@@ -67,25 +68,25 @@ class ResPartnerJobseekerSearchWizard(models.TransientModel):
 
     @api.multi
     def search_jobseeker(self):
-        raise Warning("Inte implementerat än")
+        #raise Warning("Inte implementerat än")
         something = True #byt ut mot en check efter om det är ett eller många resultat
         view_type = "tree"
-        view_id = "view_partner_jobseeker_kanban"
-        partner_id = self.env['res.partner'].search([('company_registry', '=', self.social_sec_nr)]).mapped('id')
+        view_id = self.env.ref("partner_view_360.view_partner_jobseeker_form").id
+        partner_id = self.env['res.partner'].search(safe_eval(self.search_domain)).mapped('id')
         if len(partner_id) > 0:
             partner_id = partner_id[0]
         else:
             raise Warning(_("No id found"))
         if something:
             view_type = "form"
-            view_id = "view_partner_jobseeker_form"
+            view_id = self.env.ref("partner_view_360.view_partner_jobseeker_form").id
         return{
-            'name': _('Jobseekers'), #vad gör den?
+            'name': _('Jobseekers'),
             'domain':[('id', '=', partner_id)],
-            'view_type': view_type,
+            'view_type': 'form',
             'res_model': 'res.partner',
             'view_id':  view_id,
-            'view_mode': 'kanban,tree,form',
+            'view_mode': 'form',
             'type': 'ir.actions.act_window',
         }
     

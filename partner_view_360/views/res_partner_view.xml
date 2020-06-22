@@ -164,7 +164,9 @@
           <label for="street" string="Address"/>
           <div class="o_address_format"> 
               <field name="street" placeholder="Street..." class="o_address_street" />
+              <span style="margin-right:1em;">
               <field name="zip" placeholder="ZIP" class="o_address_zip"/>
+              </span>
               <field name="city" placeholder="City" class="o_address_city"/>
           </div>
 
@@ -175,7 +177,9 @@
           <label for="postal_address_street" string="Postal address"/>
           <div class="o_address_format"> 
               <field name="postal_address_street" placeholder="Street..." class="o_address_street" />
+              <span style="margin-right:1em;">
               <field name="postal_address_zip" placeholder="ZIP" class="o_address_zip"/>
+              </span>
               <field name="postal_address_city" placeholder="City" class="o_address_city"/>
           </div>
           <field name="postal_address_id" domain="[('type', '=', 'postal address')]" groups="base.group_no_one"/> 
@@ -334,7 +338,9 @@
           <label for="street" string="Address"/>
           <div class="o_address_format"> 
               <field name="street" placeholder="Street..." class="o_address_street"/>
+              <span style="margin-right:1em;">
               <field name="zip" placeholder="ZIP" class="o_address_zip"/>
+              </span>
               <field name="city" placeholder="City" class="o_address_city"/>
           </div>
 
@@ -434,7 +440,9 @@
                                     <div class="o_address_format" name="div_address">
                                         <field name="street" placeholder="Street..." class="o_address_street"/>
                                         <field name="street2" placeholder="Street 2..." class="o_address_street"/>
+                                        <span style="margin-right:1em;">
                                         <field name="zip" placeholder="ZIP" class="o_address_zip"/>
+                                        </span>
                                         <field name="city" placeholder="City" class="o_address_city"/>
                                         <label for="state_name_code" string="State" class="oe_read_only"/>
                                         <field name="state_name_code" class="oe_read_only" placeholder="State" nolabel="1" />
