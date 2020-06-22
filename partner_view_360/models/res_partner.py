@@ -40,6 +40,7 @@ class ResPartner(models.Model):
 
     # office selection field for partners connected to an office, my_office_code filled in by office_code for the office
     office = fields.Many2one('res.partner', string="Office")
+    office_ids = fields.Many2many('res.partner', relation='res_partner_office_partner_rel', column1='partner_id', column2='office_id', string='Offices')
     my_office_code = fields.Char(
         string='Office code', related='office.office_code')
 

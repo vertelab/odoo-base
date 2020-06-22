@@ -36,6 +36,7 @@
       <field name="barcode" position="after">
         <field name="office" options="{'no_create_edit': True}" domain="[('type', '=', 'af office')]"/>
         <field name="my_office_code" />
+        <field name="office_ids" widget="many2many_tags" options="{'no_create_edit': True}" domain="[('type', '=', 'af office')]"/>
         <field name="is_jobseeker" />
         <field name="is_independent_partner" />
         <field name="is_government" />
@@ -165,7 +166,9 @@
           <label for="street" string="Address"/>
           <div class="o_address_format"> 
               <field name="street" placeholder="Street..." class="o_address_street" />
+              <span style="margin-right:1em;">
               <field name="zip" placeholder="ZIP" class="o_address_zip"/>
+              </span>
               <field name="city" placeholder="City" class="o_address_city"/>
           </div>
 
@@ -176,7 +179,9 @@
           <label for="postal_address_street" string="Postal address"/>
           <div class="o_address_format"> 
               <field name="postal_address_street" placeholder="Street..." class="o_address_street" />
+              <span style="margin-right:1em;">
               <field name="postal_address_zip" placeholder="ZIP" class="o_address_zip"/>
+              </span>
               <field name="postal_address_city" placeholder="City" class="o_address_city"/>
           </div>
           <field name="postal_address_id" domain="[('type', '=', 'postal address')]" groups="base.group_no_one"/> 
@@ -190,6 +195,7 @@
           <field name="jobseeker_category"/>
           <field name="customer_since"/>
           <field name="office" options="{'no_create_edit': True}" domain="[('type', '=', 'af office')]"/>
+          <field name="office_ids" widget="many2many_tags" options="{'no_create_edit': True}" domain="[('type', '=', 'af office')]"/>
           <field name="share_info_with_employers"/> 
           <field name="sms_reminders"/>
         </group>
@@ -365,7 +371,9 @@
           <label for="street" string="Address"/>
           <div class="o_address_format"> 
               <field name="street" placeholder="Street..." class="o_address_street"/>
+              <span style="margin-right:1em;">
               <field name="zip" placeholder="ZIP" class="o_address_zip"/>
+              </span>
               <field name="city" placeholder="City" class="o_address_city"/>
           </div>
 
@@ -385,6 +393,7 @@
           <label for="user_id" string="Administrative officer"/>
           <field name="user_id" nolabel="1"/>
           <field name="office" options="{'no_create_edit': True}" domain="[('type', '=', 'af office')]"/>
+          <field name="office_ids" widget="many2many_tags" options="{'no_create_edit': True}" domain="[('type', '=', 'af office')]"/>
         </group>
       </group>
       <notebook>
@@ -464,7 +473,9 @@
                                     <div class="o_address_format" name="div_address">
                                         <field name="street" placeholder="Street..." class="o_address_street"/>
                                         <field name="street2" placeholder="Street 2..." class="o_address_street"/>
+                                        <span style="margin-right:1em;">
                                         <field name="zip" placeholder="ZIP" class="o_address_zip"/>
+                                        </span>
                                         <field name="city" placeholder="City" class="o_address_city"/>
                                         <label for="state_name_code" string="State" class="oe_read_only"/>
                                         <field name="state_name_code" class="oe_read_only" placeholder="State" nolabel="1" />
