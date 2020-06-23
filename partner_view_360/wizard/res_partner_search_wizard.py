@@ -81,7 +81,7 @@ class ResPartnerJobseekerSearchWizard(models.TransientModel):
         action['context'] = {
             'default_partner_ids': partner_ids,
         }
-        action['domain'] = [('id', '=', partner_ids)]
+        action['domain'] = [('id', '=', partner_ids), ('is_jobseeker', '=', True)]
 
 
         # ~ action['view_mode'] = "(self.env.ref('partner_view_360.view_jobseeker_kanban').id,'kanban'),(self.env.ref('partner_view_360.view_partner_jobseeker_form').id,'form'),(False,'tree')"
