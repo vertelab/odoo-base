@@ -187,6 +187,18 @@
       </form>
     </field>
   </record>
+  <record model="ir.ui.view" id="view_jobseeker_tree">
+    <field name="name">res.partner.jobseeker.tree</field>
+    <field name="model">res.partner</field>
+    <field name="arch" type="xml">
+      <tree>
+        <field name="name" />
+        <field name="city" />
+        <field name="email" />
+        <field name="office" />
+      </tree>
+    </field>
+  </record>
   <record model="ir.ui.view" id="view_jobseeker_kanban">
     <field name="name">res.partner.jobseeker.kanban</field>
     <field name="model">res.partner</field>
