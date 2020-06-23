@@ -29,7 +29,7 @@ class ResPartner(models.Model):
     _inherit = "res.partner"  # odoo inheritance från res.partner
     #_name = ""
 
-    work_phone = fields.Integer(string='Work phone', help="Work phone number")
+    work_phone = fields.Char(string='Work phone', help="Work phone number")
     age = fields.Char(string="Age", compute="calculate_age")
     company_registry = fields.Char(
         string='Organization number', help="organization number")
