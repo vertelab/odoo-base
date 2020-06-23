@@ -35,7 +35,7 @@ Updated header in /data/res_ssyk.csv
 """,
     'author': 'Vertel AB',
     'website': 'http://www.vertel.se',
-    'depends': ['base',],
+    'depends': ['contacts',],
     'data': [
         'views/res_partner_view.xml',
         'security/ir.model.access.csv', 
