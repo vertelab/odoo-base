@@ -70,14 +70,10 @@ class ResPartnerJobseekerSearchWizard(models.TransientModel):
     @api.multi
     def search_jobseeker(self):
         # ~ raise Warning("Inte implementerat än")
-        view_type = "tree"
-        view_id = self.env.ref("partner_view_360.view_partner_jobseeker_form").id
+        #view_type = "tree"
+        #view_id = self.env.ref("partner_view_360.view_partner_jobseeker_form").id
         partner_ids = self.env['res.partner'].search(safe_eval(self.search_domain)).mapped('id')
-        if len(partner_ids) == 1:
-            partner_id = partner_ids[0]
-        elif len(partner_ids) > 1:
-            view_id = self.env.ref("partner_view_360.view_jobseeker_kanban").id
-        else:
+        if len(partner_ids) < 1:
             raise Warning(_("No id found"))
             
             
@@ -86,6 +82,8 @@ class ResPartnerJobseekerSearchWizard(models.TransientModel):
             'default_partner_ids': partner_ids,
         }
         action['domain'] = [('id', '=', partner_ids)]
+
+
         # ~ action['view_mode'] = "(self.env.ref('partner_view_360.view_jobseeker_kanban').id,'kanban'),(self.env.ref('partner_view_360.view_partner_jobseeker_form').id,'form'),(False,'tree')"
         action['view_mode'] = "tree,form,kanban"
         
@@ -95,18 +93,18 @@ class ResPartnerJobseekerSearchWizard(models.TransientModel):
                             # ~ ]
         action['form_view_id'] = self.env.ref('partner_view_360.view_partner_jobseeker_form').id
         action['kanban_view_id'] = self.env.ref('partner_view_360.view_jobseeker_kanban').id
-        action['tree_view_id'] = self.env.ref('partner_view_360.view_employer_tree').id
+        action['tree_view_id'] = self.env.ref('partner_view_360.view_jobseeker_tree').id
         return action
             
             
-        return{
-            'name': _('Jobseekers'),
-            'domain':[('id', '=', partner_id)],
-            #'view_type': 'tree',
-            'res_model': 'res.partner',
-            'view_id':  view_id,
-            'view_mode': 'tree,form,kanban',
-            'type': 'ir.actions.act_window',
-        }
+        # return{
+        #     'name': _('Jobseekers'),
+        #     'domain':[('id', '=', partner_id)],
+        #     #'view_type': 'tree',
+        #     'res_model': 'res.partner',
+        #     'view_id':  view_id,
+        #     'view_mode': 'tree,form,kanban',
+        #     'type': 'ir.actions.act_window',
+        # }
     
 
