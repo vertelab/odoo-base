@@ -79,7 +79,7 @@ class ResPartner(models.Model):
 
     @api.one
     def combine_social_sec_nr_age(self):
-        self.social_sec_nr_age = "%s (%s years old)" % (self.company_registry, self.age)
+        self.social_sec_nr_age = _("%s (%s years old)" % (self.company_registry, self.age))
     @api.one
     def combine_state_name_code(self):
         self.state_name_code = "%s %s" % (self.state_id.name, self.state_id.code)
