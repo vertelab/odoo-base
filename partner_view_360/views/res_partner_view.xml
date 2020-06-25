@@ -108,7 +108,7 @@
             <field name="education_level" />
             <field name="foreign_education" />
             <field name="foreign_education_approved" />
-            <field name="has_drivers_license" />
+            <!-- <field name="has_drivers_license" /> -->
             <field name="drivers_license_id" options="{'no_create_edit': True}" />
             <field name="has_car" />
           </group>
@@ -304,7 +304,7 @@
             <field name="education_level" />
             <field name="foreign_education" />
             <field name="foreign_education_approved" />
-            <field name="has_drivers_license" />
+            <!-- <field name="has_drivers_license" /> -->
             <field name="drivers_license_id" options="{'no_create_edit': True}" />
             <field name="has_car" />
           </group>
