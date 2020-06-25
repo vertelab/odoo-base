@@ -73,6 +73,8 @@ class ResPartnerJobseekerSearchWizard(models.TransientModel):
         # ~ raise Warning("Inte implementerat än")
         if ("social_sec_nr" in self.search_domain or "company_registry" in self.search_domain) and "=" not in self.search_domain:
             raise Warning(_("Social security number has to be searched in full"))
+        if self.search_reason == False and self.identification == False:
+            raise Warning(_("Search reason or identification must be set before searching"))
         
         partner_ids = self.env['res.partner'].search(safe_eval(self.search_domain)).mapped('id')
         if len(partner_ids) < 1:
