@@ -47,7 +47,7 @@
                 <div style="min-height:25em;"> </div>
                 <group></group>
                 <footer>
-                    <button name="search_jobseeker" string="search" type="object" class="btn-primary"/>
+                    <button name="search_jobseeker" string="search" type="object" class="btn-primary" attrs="{'invisible': [('search_reason','=',False), ('identification', '=', False)]}"/>
                     <button string="Cancel" class="btn-secondary" special="cancel"/>
                 </footer>
             </form>
