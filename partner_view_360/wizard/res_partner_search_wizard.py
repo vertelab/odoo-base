@@ -63,6 +63,7 @@ class ResPartnerJobseekerSearchWizard(models.TransientModel):
 
     #gdpr_id = fields.Many2one('gdpr.inventory') 
     #gdpr_reasons = fields.Many2one(related="gdpr_id.reasons?")
+    reason_or_id = fields.Selection(string="Access by reason or identification?", selection=[('reason', 'Reason'), ('id', 'Identification')])
     search_reason = fields.Selection(string="Search reason",selection=[('registrera inkomna handlingar','Registrera inkomna handlingar'), ('uppföljning av arbetssökands planering','Uppföljning av arbetssökands planering'), ('registervård','Registervård'), ('matchning','Matchning'), ('beslut åt annan handläggare','Beslut åt annan handläggare'),('administration av rekryteringsträff/gruppaktivitet/projekt','Administration av rekryteringsträff/gruppaktivitet/projekt'),('utredning','Utredning'),('motringning','Motringning'),('annan orsak','Annan orsak')])#
     identification = fields.Selection(string="Identification",selection=[('id-handling','ID-Handling'), ('lma-kort/uppehållstillståndskort','LMA-kort/Uppehållstillståndskort'), ('känd (tidigare identifierad)','Känd (tidigare identifierad)'), ('identifierad genom intygsgivare','Identifierad genom intygsgivare'), ('kontrollfrågor','Kontrollfrågor'),('mobilt bankid','Mobilt BankID')])#
     search_domain = fields.Char(string="Search Filter", default=[('social_sec_nr', '=', '')] )
