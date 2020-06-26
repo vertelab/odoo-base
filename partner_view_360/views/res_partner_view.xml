@@ -117,7 +117,7 @@
       </xpath>
     </field>
   </record>
-  <record id="view_partner_jobseeker_form" model="ir.ui.view">
+  <record id="view_jobseeker_form" model="ir.ui.view">
     <field name="name">res.partner.form.jobseeker</field>
     <field name="model">res.partner</field>
     <field name="arch" type="xml">
@@ -278,7 +278,7 @@
   <record id="action_jobseeker_form_view" model="ir.actions.act_window.view">
     <field eval="2" name="sequence" />
     <field name="view_mode">form</field>
-    <field name="view_id" ref="view_partner_jobseeker_form" />
+    <field name="view_id" ref="view_jobseeker_form" />
     <field name="act_window_id" ref="action_jobseekers" />
   </record>
   <record id="action_jobseeker_kanban_view" model="ir.actions.act_window.view">
@@ -296,7 +296,7 @@
   <record id="view_partner_form_education1" model="ir.ui.view">
     <field name="name">res.partner.eduacation.form1</field>
     <field name="model">res.partner</field>
-    <field name="inherit_id" ref="view_partner_jobseeker_form" />
+    <field name="inherit_id" ref="view_jobseeker_form" />
     <field name="arch" type="xml">
       <xpath expr="//page[@name='apply_for_jobs']" position="inside">
         <page name="education" string="Education">

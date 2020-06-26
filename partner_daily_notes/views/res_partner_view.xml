@@ -40,7 +40,7 @@
    <record id="view_partner_form1" model="ir.ui.view"> 
     <field name="name">view.res.partner.form.inherited.notes1</field>
     <field name="model">res.partner</field> 
-    <field name="inherit_id" ref="partner_view_360.view_partner_jobseeker_form" /> 
+    <field name="inherit_id" ref="partner_view_360.view_jobseeker_form" /> 
     <field name="arch" type="xml"> 
       <div name="button_box" position="inside">
         <!-- <button class="oe_stat_button" type="object"
