@@ -45,7 +45,7 @@ class ResPartner(models.Model):
         string='Office code', related='office.office_code')
 
     # adds af office as a type of partner
-    type = fields.Selection(selection_add=[('af office', 'AF Office'), ('legal address','Legal Address'), ('foreign address','Foreign Address'), ('postal address','Postal Address'), ('visitation address','Visitation Address')])
+    type = fields.Selection(selection_add=[('af office', 'AF Office'), ('foreign address','Foreign Address'), ('given address','Given address'), ('visitation address','Visitation Address')])
 
     # office code for office type partners only
     office_code = fields.Char(string="Office code")
@@ -68,10 +68,10 @@ class ResPartner(models.Model):
     sms_reminders = fields.Boolean(string="SMS reminders")
     visitation_address_id = fields.Many2one('res.partner', string="Visitation address")
 
-    postal_address_id = fields.Many2one('res.partner', string="Postal address")
-    postal_address_street = fields.Char(string="Postal address", related="postal_address_id.street")
-    postal_address_zip = fields.Char(related="postal_address_id.zip")
-    postal_address_city = fields.Char(related="postal_address_id.city")
+    given_address_id = fields.Many2one('res.partner', string="given address")
+    given_address_street = fields.Char(string="given address", related="given_address_id.street")
+    given_address_zip = fields.Char(related="given_address_id.zip")
+    given_address_city = fields.Char(related="given_address_id.city")
     employer_class = fields.Selection(selection=[('1','1'), ('2','2'), ('3','3'), ('4','4')])
 
     state_code = fields.Char(string="State code", related="state_id.code")

@@ -117,7 +117,7 @@
       </xpath>
     </field>
   </record>
-  <record id="view_partner_jobseeker_form" model="ir.ui.view">
+  <record id="view_jobseeker_form" model="ir.ui.view">
     <field name="name">res.partner.form.jobseeker</field>
     <field name="model">res.partner</field>
     <field name="arch" type="xml">
@@ -148,25 +148,27 @@
               <label for="state_id" string="State" class="oe_edit_only" />
               <field name="state_id" class="oe_edit_only" nolabel="1" />
               <!-- <field name="state_code"/> -->
-              <label for="street" string="Address" />
-              <div class="o_address_format">
+              <label for="street" string="Address"/>
+              <div class="o_address_format" >
+                <span class="oe_read_only">
                 <field name="street" placeholder="Street..." class="o_address_street" />
+                <field name="street2" placeholder="Street 2..." class="o_address_street"  />
                 <span style="margin-right:1em;">
                   <field name="zip" placeholder="ZIP" class="o_address_zip" />
                 </span>
                 <field name="city" placeholder="City" class="o_address_city" />
-              </div>
-              <field name="street2" placeholder="Street 2..." class="o_address_street" attrs="{'invisible': True}" />
-              <field name="country_id" placeholder="Country" class="o_address_country" attrs="{'invisible': True}" />
-              <label for="postal_address_street" string="Postal address" />
-              <div class="o_address_format">
-                <field name="postal_address_street" placeholder="Street..." class="o_address_street" />
-                <span style="margin-right:1em;">
-                  <field name="postal_address_zip" placeholder="ZIP" class="o_address_zip" />
                 </span>
-                <field name="postal_address_city" placeholder="City" class="o_address_city" />
               </div>
-              <field name="postal_address_id" domain="[('type', '=', 'postal address')]" groups="base.group_no_one" />
+              <field name="country_id" placeholder="Country" class="o_address_country" attrs="{'invisible': True}" />
+              <label for="given_address_street" string="given address" />
+              <div class="o_address_format">
+                <field name="given_address_street" placeholder="Street..." class="o_address_street" />
+                <span style="margin-right:1em;">
+                  <field name="given_address_zip" placeholder="ZIP" class="o_address_zip" />
+                </span>
+                <field name="given_address_city" placeholder="City" class="o_address_city" />
+              </div>
+              <field name="given_address_id" domain="[('type', '=', 'given address')]" groups="base.group_no_one" />
               <field name="phone" />
               <field name="mobile" />
               <field name="email" />
@@ -278,7 +280,7 @@
   <record id="action_jobseeker_form_view" model="ir.actions.act_window.view">
     <field eval="2" name="sequence" />
     <field name="view_mode">form</field>
-    <field name="view_id" ref="view_partner_jobseeker_form" />
+    <field name="view_id" ref="view_jobseeker_form" />
     <field name="act_window_id" ref="action_jobseekers" />
   </record>
   <record id="action_jobseeker_kanban_view" model="ir.actions.act_window.view">
@@ -296,7 +298,7 @@
   <record id="view_partner_form_education1" model="ir.ui.view">
     <field name="name">res.partner.eduacation.form1</field>
     <field name="model">res.partner</field>
-    <field name="inherit_id" ref="view_partner_jobseeker_form" />
+    <field name="inherit_id" ref="view_jobseeker_form" />
     <field name="arch" type="xml">
       <xpath expr="//page[@name='apply_for_jobs']" position="inside">
         <page name="education" string="Education">
