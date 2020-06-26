@@ -42,9 +42,10 @@ This module allowes daily notes for a partner.
             'security/ir.model.access.csv',
             'views/res_partner_notes_view.xml',
             #'data/ir.model.fields.csv', 
+            "data/res.partner.note.type.csv",
+
     ],
     'demo': [
-            "data/res.partner.note.type.csv",
             "data/res.partner.notes.csv",
     ],
     'application': False,
