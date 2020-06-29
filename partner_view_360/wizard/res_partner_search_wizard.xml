@@ -41,8 +41,8 @@
                     <field name="reason_or_id" widget="radio" options="{'horizontal': true}"/>
                     <field name="search_reason" attrs="{'invisible': [('reason_or_id','!=','reason')]}"/> <!--widget="radio" options="{'horizontal': true}"-->
                     <field name="identification" attrs="{'invisible': [('reason_or_id','!=','id')]}"/>
+                    <field name="other_reason" attrs="{'invisible': [('search_reason','!=','other reason')]}"/>
                     <field name="search_domain" widget="domain" options="{'model' : 'res.partner'}"> </field>
-
                 </group>
                 <div style="min-height:25em;"> </div>
                 <group></group>

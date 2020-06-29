@@ -64,9 +64,10 @@ class ResPartnerJobseekerSearchWizard(models.TransientModel):
     #gdpr_id = fields.Many2one('gdpr.inventory') 
     #gdpr_reasons = fields.Many2one(related="gdpr_id.reasons?")
     reason_or_id = fields.Selection(string="Access by reason or identification?", selection=[('reason', 'Reason'), ('id', 'Identification')])
-    search_reason = fields.Selection(string="Search reason",selection=[('registrera inkomna handlingar','Registrera inkomna handlingar'), ('uppföljning av arbetssökands planering','Uppföljning av arbetssökands planering'), ('registervård','Registervård'), ('matchning','Matchning'), ('beslut åt annan handläggare','Beslut åt annan handläggare'),('administration av rekryteringsträff/gruppaktivitet/projekt','Administration av rekryteringsträff/gruppaktivitet/projekt'),('utredning','Utredning'),('motringning','Motringning'),('annan orsak','Annan orsak')])#
-    identification = fields.Selection(string="Identification",selection=[('id-handling','ID-Handling'), ('lma-kort/uppehållstillståndskort','LMA-kort/Uppehållstillståndskort'), ('känd (tidigare identifierad)','Känd (tidigare identifierad)'), ('identifierad genom intygsgivare','Identifierad genom intygsgivare'), ('kontrollfrågor','Kontrollfrågor'),('mobilt bankid','Mobilt BankID')])#
+    search_reason = fields.Selection(string="Search reason",selection=[('record incoming documents','Record incoming documents'), ("follow-up of job seekers' planning","Follow-up of job seekers' planning"), ('directory Assistance','Directory Assistance'), ('matching','Matching'), ('decisions for other officer','Decisions for other officer'),('administration of recruitment meeting/group activity/project','Administration of recruitment meeting/group activity/project'),('investigation','Investigation'),('callback','Callback'),('other reason','Other reason')])#
+    identification = fields.Selection(string="Identification",selection=[('id document','ID Document'), ('id document-card/residence permit card','ID document-card/Residence permit card'), ('known (previously identified)','Known (previously identified)'), ('identified by certifier','Identified by certifier'), ('control questions','Control questions'),('mobile bankid','Mobile BankID')])#
     search_domain = fields.Char(string="Search Filter", default=[('social_sec_nr', '=', '')] )
+    other_reason = fields.Char(string="Other reason")
 
     @api.multi
     def search_jobseeker(self):
@@ -75,6 +76,8 @@ class ResPartnerJobseekerSearchWizard(models.TransientModel):
             raise Warning(_("Social security number has to be searched in full"))
         if self.search_reason == False and self.identification == False:
             raise Warning(_("Search reason or identification must be set before searching"))
+        elif self.search_reason == "other reason" and self.other_reason == False:
+            raise Warning(_("Other reason selected but other reason field is not filled in"))
         
         partner_ids = self.env['res.partner'].search(safe_eval(self.search_domain)).mapped('id')
         if len(partner_ids) < 1:
