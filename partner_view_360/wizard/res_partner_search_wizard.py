@@ -63,6 +63,7 @@ class ResPartnerJobseekerSearchWizard(models.TransientModel):
 
     #gdpr_id = fields.Many2one('gdpr.inventory') 
     #gdpr_reasons = fields.Many2one(related="gdpr_id.reasons?")
+    reason_or_id = fields.Selection(string="Access by reason or identification?", selection=[('reason', 'Reason'), ('id', 'Identification')])
     search_reason = fields.Selection(string="Search reason",selection=[('registrera inkomna handlingar','Registrera inkomna handlingar'), ('uppföljning av arbetssökands planering','Uppföljning av arbetssökands planering'), ('registervård','Registervård'), ('matchning','Matchning'), ('beslut åt annan handläggare','Beslut åt annan handläggare'),('administration av rekryteringsträff/gruppaktivitet/projekt','Administration av rekryteringsträff/gruppaktivitet/projekt'),('utredning','Utredning'),('motringning','Motringning'),('annan orsak','Annan orsak')])#
     identification = fields.Selection(string="Identification",selection=[('id-handling','ID-Handling'), ('lma-kort/uppehållstillståndskort','LMA-kort/Uppehållstillståndskort'), ('känd (tidigare identifierad)','Känd (tidigare identifierad)'), ('identifierad genom intygsgivare','Identifierad genom intygsgivare'), ('kontrollfrågor','Kontrollfrågor'),('mobilt bankid','Mobilt BankID')])#
     search_domain = fields.Char(string="Search Filter", default=[('social_sec_nr', '=', '')] )
@@ -70,41 +71,27 @@ class ResPartnerJobseekerSearchWizard(models.TransientModel):
     @api.multi
     def search_jobseeker(self):
         # ~ raise Warning("Inte implementerat än")
-        #view_type = "tree"
-        #view_id = self.env.ref("partner_view_360.view_partner_jobseeker_form").id
+        if ("social_sec_nr" in self.search_domain or "company_registry" in self.search_domain) and "=" not in self.search_domain:
+            raise Warning(_("Social security number has to be searched in full"))
+        if self.search_reason == False and self.identification == False:
+            raise Warning(_("Search reason or identification must be set before searching"))
+        
         partner_ids = self.env['res.partner'].search(safe_eval(self.search_domain)).mapped('id')
         if len(partner_ids) < 1:
-            raise Warning(_("No id found"))
+            raise Warning(_("No id found"))       
             
-            
-        action = self.env['ir.actions.act_window'].for_xml_id('contacts', 'action_contacts')
-        action['context'] = {
-            'default_partner_ids': partner_ids,
+        action = {
+            'name': _('Jobseekers'),
+            'domain': [('id', '=', partner_ids), ('is_jobseeker', '=', True)],
+            #'view_type': 'tree',
+            'res_model': 'res.partner',
+            'view_ids':  [self.env.ref("partner_view_360.view_jobseeker_kanban").id, self.env.ref("partner_view_360.view_jobseeker_form").id, self.env.ref("partner_view_360.view_jobseeker_tree").id], 
+            'view_mode': 'kanban,tree,form',
+            'type': 'ir.actions.act_window',
         }
-        action['domain'] = [('id', '=', partner_ids)]
+        if len(partner_ids) == 1:
+            action['view_id'] = self.env.ref("partner_view_360.view_jobseeker_form").id
+            action['res_id'] = partner_ids[0]
+            action['view_mode'] = 'form'
 
-
-        # ~ action['view_mode'] = "(self.env.ref('partner_view_360.view_jobseeker_kanban').id,'kanban'),(self.env.ref('partner_view_360.view_partner_jobseeker_form').id,'form'),(False,'tree')"
-        action['view_mode'] = "tree,form,kanban"
-        
-        # ~ action["view_ids"] = [  (5, 0, 0),
-                                # ~ (0, 0, {'view_mode': 'tree', 'view_id': ref('xml.id.of.tree.view')}),
-                                # ~ (0, 0, {'view_mode': 'form', 'view_id': ref('xml.id.of.form.view')})
-                            # ~ ]
-        action['form_view_id'] = self.env.ref('partner_view_360.view_partner_jobseeker_form').id
-        action['kanban_view_id'] = self.env.ref('partner_view_360.view_jobseeker_kanban').id
-        action['tree_view_id'] = self.env.ref('partner_view_360.view_jobseeker_tree').id
         return action
-            
-            
-        # return{
-        #     'name': _('Jobseekers'),
-        #     'domain':[('id', '=', partner_id)],
-        #     #'view_type': 'tree',
-        #     'res_model': 'res.partner',
-        #     'view_id':  view_id,
-        #     'view_mode': 'tree,form,kanban',
-        #     'type': 'ir.actions.act_window',
-        # }
-    
-
