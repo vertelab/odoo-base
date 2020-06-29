@@ -1,10 +1,10 @@
 # Translation of Odoo Server.
 # This file contains the translation of the following modules:
-# 	* partner_view_360
+#	* partner_view_360
 #
 msgid ""
 msgstr ""
-"Project-Id-Version: Odoo Server 12.0-20190808\n"
+"Project-Id-Version: Odoo Server 12.0-20200622\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2020-06-29 14:21+0000\n"
 "PO-Revision-Date: 2020-06-29 16:22+0200\n"
@@ -12,10 +12,14 @@ msgstr ""
 "Language-Team: \n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
-"Content-Transfer-Encoding: 8bit\n"
+"Content-Transfer-Encoding: \n"
 "Plural-Forms: \n"
-"Language: sv\n"
-"X-Generator: Poedit 2.0.6\n"
+
+#. module: partner_view_360
+#: code:addons/partner_view_360/models/res_partner.py:82
+#, python-format
+msgid "%s (%s years old)"
+msgstr "år"
 
 #. module: partner_view_360
 #: selection:res.partner,type:0
@@ -62,12 +66,14 @@ msgid "Apply for jobs"
 msgstr "Sökta jobb"
 
 #. module: partner_view_360
+
 #: model_terms:ir.ui.view,arch_db:partner_view_360.view_employer_filter
 #: model_terms:ir.ui.view,arch_db:partner_view_360.view_jobseeker_filter
 msgid "Archived"
 msgstr "Arkiverad"
 
 #. module: partner_view_360
+
 #: model_terms:ir.ui.view,arch_db:partner_view_360.view_partner_employer_form
 msgid "Avatar"
 msgstr ""
@@ -91,6 +97,7 @@ msgstr "CFAR-nummer"
 
 #. module: partner_view_360
 #: code:addons/partner_view_360/models/res_partner.py:138
+
 #: model_terms:ir.ui.view,arch_db:partner_view_360.view_jobseeker_form
 #, python-format
 msgid "Calendar"
@@ -141,7 +148,7 @@ msgstr "Kontakt"
 #. module: partner_view_360
 #: model_terms:ir.ui.view,arch_db:partner_view_360.view_partner_employer_form
 msgid "Contact / Address"
-msgstr "Kontakt/adress"
+msgstr "Kontakt/Adress"
 
 #. module: partner_view_360
 #: model_terms:ir.ui.view,arch_db:partner_view_360.view_partner_employer_form
@@ -454,13 +461,13 @@ msgstr "Namn"
 #: code:addons/partner_view_360/wizard/res_partner_search_wizard.py:84
 #, python-format
 msgid "No id found"
-msgstr "Kunde inte hitta ID"
+msgstr "Finns inget id"
 
 #. module: partner_view_360
 #: model:ir.model.fields,field_description:partner_view_360.field_res_partner__office
 #: model:ir.model.fields,field_description:partner_view_360.field_res_users__office
 msgid "Office"
-msgstr "Kontor"
+msgstr "Primärt Kontor"
 
 #. module: partner_view_360
 #: model:ir.model.fields,field_description:partner_view_360.field_res_partner__my_office_code
@@ -474,7 +481,8 @@ msgstr "Kontorskod"
 #: model:ir.model.fields,field_description:partner_view_360.field_res_partner__office_ids
 #: model:ir.model.fields,field_description:partner_view_360.field_res_users__office_ids
 msgid "Offices"
-msgstr "Kontor"
+msgstr "Sekundärt Kontor"
+
 
 #. module: partner_view_360
 #: model_terms:ir.ui.view,arch_db:partner_view_360.view_partner_employer_form
@@ -531,7 +539,7 @@ msgstr "Postadress"
 #. module: partner_view_360
 #: selection:res.partner,type:0
 msgid "Private Address"
-msgstr "Privat adress"
+msgstr "Privatadress"
 
 #. module: partner_view_360
 #: model:ir.model.fields,field_description:partner_view_360.field_res_partner__deactualization_reason
@@ -594,7 +602,7 @@ msgstr "Sök Arbetssökande"
 #: model_terms:ir.ui.view,arch_db:partner_view_360.view_employer_filter
 #: model_terms:ir.ui.view,arch_db:partner_view_360.view_jobseeker_filter
 msgid "Search Partner"
-msgstr "Sök efter partner"
+msgstr "Sök efter kund"
 
 #. module: partner_view_360
 #: model:ir.model.fields,field_description:partner_view_360.field_res_partner_jobseeker_search_wizard__search_reason
@@ -771,4 +779,4 @@ msgstr ""
 #. module: partner_view_360
 #: model_terms:ir.ui.view,arch_db:partner_view_360.search_jobseeker_form
 msgid "search"
-msgstr "sök"
+msgstr "Sök"

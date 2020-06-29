@@ -77,6 +77,8 @@ class ResPartner(models.Model):
     state_code = fields.Char(string="State code", related="state_id.code")
     state_name_code = fields.Char(string="State", compute="combine_state_name_code")
 
+    temp_officer_id = fields.Many2many(comodel_name='res.users', relation='res_partner_temp_officer_rel', string='Temporary Officers')
+
     @api.one
     def combine_social_sec_nr_age(self):
         self.social_sec_nr_age = "%s (%s years old)" % (self.company_registry, self.age)
@@ -89,14 +91,21 @@ class ResPartner(models.Model):
         wrong_input = False
         today = date.today()
         social_sec = self.company_registry
+        social_sec_stripped = ""
         if social_sec != False:
             social_sec_split = social_sec.split("-")
             if len(social_sec_split) > 1:
                 if len(social_sec_split[1]) != 4 or len(social_sec_split) > 2:
                     wrong_input = True
                     _logger.error("Incorrectly formated social security number (company_registry)")
-            social_sec_stripped = social_sec_split[0]
+                social_sec_stripped = social_sec_split[0]
+            elif len(social_sec_split) == 1:
+                if len(social_sec_split[0]) == 10:
+                    social_sec_stripped = social_sec_split[0][:6]
+                elif len(social_sec_split[0]) == 12:
+                    social_sec_stripped = social_sec_split[0][:8]
             date_of_birth = date(1980,1,1)
+            #9708131111
             if len(social_sec_stripped) == 6:
                 yr = social_sec_stripped[:2]
                 year = int("20"+yr)
@@ -114,7 +123,6 @@ class ResPartner(models.Model):
                     except:
                         wrong_input = True
                         _logger.error("Could not convert social security number (company_registry) to date")
-        
             elif len(social_sec_stripped) > 6:
                 try:
                     date_of_birth = date(int(social_sec_stripped[:4]),int(social_sec_stripped[4:6]),int(social_sec_stripped[6:8]))
@@ -129,9 +137,15 @@ class ResPartner(models.Model):
                 years = today.year - date_of_birth.year
                 if today.month < date_of_birth.month or (today.month == date_of_birth.month and today.day < date_of_birth.day):
                     years -= 1
-                self.age = years
+                if years > 67:
+                    self.age = "This person is too old, at %s years old" % years
+                    _logger.error("A person older than 67 should not be in the system, a person is %s years old" % years)
+                else:
+                    self.age = years
+                
             else: 
                 self.age = "Error calculating age"
+    
     @api.multi
     def open_partner_calendar(self):
         return{
