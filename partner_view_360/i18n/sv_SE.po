@@ -6,8 +6,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Odoo Server 12.0-20190808\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2020-06-29 13:33+0000\n"
-"PO-Revision-Date: 2020-06-29 15:34+0200\n"
+"POT-Creation-Date: 2020-06-29 14:21+0000\n"
+"PO-Revision-Date: 2020-06-29 16:22+0200\n"
 "Last-Translator: <>\n"
 "Language-Team: \n"
 "MIME-Version: 1.0\n"
@@ -154,11 +154,6 @@ msgid "Contacts & Addresses"
 msgstr "Kontakter & Adresser"
 
 #. module: partner_view_360
-#: selection:res.partner.jobseeker.search.wizard,identification:0
-msgid "Control questions"
-msgstr "Kontrollfrågor"
-
-#. module: partner_view_360
 #: model_terms:ir.ui.view,arch_db:partner_view_360.view_employer_filter
 #: model_terms:ir.ui.view,arch_db:partner_view_360.view_jobseeker_filter
 #: model_terms:ir.ui.view,arch_db:partner_view_360.view_jobseeker_form
@@ -221,6 +216,11 @@ msgstr "beslut åt annan handläggare"
 #: model_terms:ir.ui.view,arch_db:partner_view_360.view_partner_employer_form
 msgid "Delivery"
 msgstr "Leverans"
+
+#. module: partner_view_360
+#: selection:res.partner.jobseeker.search.wizard,identification:0
+msgid "Digital ID"
+msgstr "E-legitimation"
 
 #. module: partner_view_360
 #: selection:res.partner.jobseeker.search.wizard,search_reason:0
@@ -306,8 +306,8 @@ msgstr ""
 
 #. module: partner_view_360
 #: selection:res.partner.jobseeker.search.wizard,identification:0
-msgid "ID Document"
-msgstr "ID-Handling"
+msgid "ID document"
+msgstr "ID-handling"
 
 #. module: partner_view_360
 #: selection:res.partner.jobseeker.search.wizard,identification:0
@@ -434,11 +434,6 @@ msgid "Message to jobseeker regarding deactualization"
 msgstr "Meddelande till arbetssökande gällande avaktualisering"
 
 #. module: partner_view_360
-#: selection:res.partner.jobseeker.search.wizard,identification:0
-msgid "Mobile BankID"
-msgstr "Mobilt BankID"
-
-#. module: partner_view_360
 #: model_terms:ir.ui.view,arch_db:partner_view_360.view_partner_employer_form
 msgid "Mobile:"
 msgstr "Mobil:"
@@ -548,7 +543,7 @@ msgstr "Anledning"
 #. module: partner_view_360
 #: selection:res.partner.jobseeker.search.wizard,search_reason:0
 msgid "Record incoming documents"
-msgstr ""
+msgstr "Registrera inkomna handlingar"
 
 #. module: partner_view_360
 #: model:ir.model.fields,field_description:partner_view_360.field_res_partner__registered_through

@@ -65,7 +65,7 @@ class ResPartnerJobseekerSearchWizard(models.TransientModel):
     #gdpr_reasons = fields.Many2one(related="gdpr_id.reasons?")
     reason_or_id = fields.Selection(string="Access by reason or identification?", selection=[('reason', 'Reason'), ('id', 'Identification')])
     search_reason = fields.Selection(string="Search reason",selection=[('record incoming documents','Record incoming documents'), ("follow-up of job seekers' planning","Follow-up of job seekers' planning"), ('directory Assistance','Directory Assistance'), ('matching','Matching'), ('decisions for other officer','Decisions for other officer'),('administration of recruitment meeting/group activity/project','Administration of recruitment meeting/group activity/project'),('investigation','Investigation'),('callback','Callback'),('other reason','Other reason')])#
-    identification = fields.Selection(string="Identification",selection=[('id document','ID Document'), ('id document-card/residence permit card','ID document-card/Residence permit card'), ('known (previously identified)','Known (previously identified)'), ('identified by certifier','Identified by certifier'), ('control questions','Control questions'),('mobile bankid','Mobile BankID')])#
+    identification = fields.Selection(string="Identification",selection=[('id document','ID document'), ('Digital ID','Digital ID'), ('id document-card/residence permit card','ID document-card/Residence permit card'), ('known (previously identified)','Known (previously identified)'), ('identified by certifier','Identified by certifier')])#
     search_domain = fields.Char(string="Search Filter", default=[('social_sec_nr', '=', '')] )
     other_reason = fields.Char(string="Other reason")
 
