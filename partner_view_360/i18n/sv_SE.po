@@ -6,8 +6,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Odoo Server 12.0-20190808\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2020-06-29 10:33+0000\n"
-"PO-Revision-Date: 2020-06-29 12:40+0200\n"
+"POT-Creation-Date: 2020-06-29 13:33+0000\n"
+"PO-Revision-Date: 2020-06-29 15:34+0200\n"
 "Last-Translator: <>\n"
 "Language-Team: \n"
 "MIME-Version: 1.0\n"
@@ -71,6 +71,11 @@ msgstr "Arkiverad"
 #: model_terms:ir.ui.view,arch_db:partner_view_360.view_partner_employer_form
 msgid "Avatar"
 msgstr ""
+
+#. module: partner_view_360
+#: model_terms:ir.ui.view,arch_db:partner_view_360.search_jobseeker_form
+msgid "Based on the needs of the authority"
+msgstr "Utifrån myndighetens behov"
 
 #. module: partner_view_360
 #: model:ir.model.fields,field_description:partner_view_360.field_res_partner__cfar
@@ -693,6 +698,11 @@ msgstr "Besöksadress"
 #: model:ir.model.fields,field_description:partner_view_360.field_res_users__visitation_address_id
 msgid "Visitation address"
 msgstr "Besöksadress"
+
+#. module: partner_view_360
+#: model_terms:ir.ui.view,arch_db:partner_view_360.search_jobseeker_form
+msgid "When in contact"
+msgstr "Vid kontakt"
 
 #. module: partner_view_360
 #: model:ir.model.fields,field_description:partner_view_360.field_res_partner__foreign_country_of_work
