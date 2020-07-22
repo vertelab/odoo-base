@@ -75,7 +75,7 @@ class ResPartner(models.Model):
     employer_class = fields.Selection(selection=[('1','1'), ('2','2'), ('3','3'), ('4','4')])
 
     state_code = fields.Char(string="State code", related="state_id.code")
-    state_name_code = fields.Char(string="State", compute="combine_state_name_code")
+    state_name_code = fields.Char(string="Municipality", compute="combine_state_name_code")
 
     temp_officer_id = fields.Many2many(comodel_name='res.users', relation='res_partner_temp_officer_rel', string='Temporary Officers')
 
