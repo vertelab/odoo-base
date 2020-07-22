@@ -25,6 +25,6 @@ _logger = logging.getLogger(__name__)
 class Partner(models.Model):
     _inherit = 'res.partner'
 
-    has_drivers_license = fields.Boolean(string="Has drivers license")
+    #has_drivers_license = fields.Boolean(string="Has drivers license")
     drivers_license_id = fields.Many2one(comodel_name='res.drivers_license', string='Drivers license class')
     has_car = fields.Boolean(string="Has access to car")

@@ -54,7 +54,7 @@
                     <field name="other_reason" attrs="{'invisible': [('search_reason','!=','other reason')]}"/>
                     <field name="search_domain" widget="domain" options="{'model' : 'res.partner'}"> </field>
                 </group>
-                <div style="min-height:25em;"> </div>
+                <div style="min-height:20em;"> </div>
                 <group></group>
                 </page>
             </notebook>
@@ -72,8 +72,8 @@
             src_model="res.partner"
             res_model="res.partner.jobseeker.search.wizard"
             view_mode="form"
-            target="new" 
-            key2="client_action_multi"/> <!-- target="current"/"main"-->
+            target="current" 
+            key2="client_action_multi"/> <!-- target="new"/"current"/"main"-->
 
    <menuitem id="res_partner_jobseeker_search_wizard_menu"
         name="Search Jobseekers"
