@@ -143,9 +143,9 @@
               <field name="social_sec_nr_age" class="oe_read_only" />
               <field name="customer_id" />
               <!-- folkbokföringsadress, alternativt göra en res partner typ-->
-              <label for="state_name_code" string="State" class="oe_read_only" />
+              <label for="state_name_code" string="Municipality" class="oe_read_only" />
               <field name="state_name_code" class="oe_read_only" placeholder="State" nolabel="1" />
-              <label for="state_id" string="State" class="oe_edit_only" />
+              <label for="state_id" string="Municipality" class="oe_edit_only" />
               <field name="state_id" class="oe_edit_only" nolabel="1" />
               <!-- <field name="state_code"/> -->
               <label for="street" string="Address"/>
@@ -276,9 +276,9 @@
                               <field name="zip" placeholder="ZIP" class="o_address_zip" />
                             </span>
                             <field name="city" placeholder="City" class="o_address_city" />
-                            <label for="state_name_code" string="State" class="oe_read_only" />
+                            <label for="state_name_code" string="Municipality" class="oe_read_only" />
                             <field name="state_name_code" class="oe_read_only" placeholder="State" nolabel="1" />
-                            <label for="state_id" string="State" class="oe_edit_only" />
+                            <label for="state_id" string="Municipality" class="oe_edit_only" />
                             <field name="state_id" class="oe_edit_only" nolabel="1" />
                             <!-- <field name="state_code"/> -->
                             <field name="country_id" placeholder="Country" class="o_address_country" options="{&quot;no_open&quot;: True, &quot;no_create&quot;: True}" />
@@ -466,9 +466,9 @@
               <field name="company_registry" />
               <field name="cfar" />
               <field name="customer_id" />
-              <label for="state_name_code" string="State" class="oe_read_only" />
+              <label for="state_name_code" string="Municipality" class="oe_read_only" />
               <field name="state_name_code" class="oe_read_only" placeholder="State" nolabel="1" />
-              <label for="state_id" string="State" class="oe_edit_only" />
+              <label for="state_id" string="Municipality" class="oe_edit_only" />
               <field name="state_id" class="oe_edit_only" nolabel="1" />
               <!-- <field name="state_code"/> -->
               <label for="street" string="Address" />
@@ -588,9 +588,9 @@
                               <field name="zip" placeholder="ZIP" class="o_address_zip" />
                             </span>
                             <field name="city" placeholder="City" class="o_address_city" />
-                            <label for="state_name_code" string="State" class="oe_read_only" />
+                            <label for="state_name_code" string="Municipality" class="oe_read_only" />
                             <field name="state_name_code" class="oe_read_only" placeholder="State" nolabel="1" />
-                            <label for="state_id" string="State" class="oe_edit_only" />
+                            <label for="state_id" string="Municipality" class="oe_edit_only" />
                             <field name="state_id" class="oe_edit_only" nolabel="1" />
                             <!-- <field name="state_code"/> -->
                             <field name="country_id" placeholder="Country" class="o_address_country" options="{&quot;no_open&quot;: True, &quot;no_create&quot;: True}" />
