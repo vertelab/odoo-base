@@ -79,6 +79,9 @@ class ResPartner(models.Model):
 
     temp_officer_id = fields.Many2many(comodel_name='res.users', relation='res_partner_temp_officer_rel', string='Temporary Officers')
 
+    segment_jobseeker = fields.Selection(string="Segment", selection=[('a','A'), ('b','B'), ('c1','C1'), ('c2','C2'), ('c3','C3')]) 
+    segment_employer = fields.Selection(string="Segment", selection=[('including 1','Including 1'), ('including 2',' Including 2'), ('entry job','Entry job'), ('national agreement','National agreement'), ('employment subsidy','Employment subsidy')])
+
     @api.one
     def combine_social_sec_nr_age(self):
         self.social_sec_nr_age = _("%s (%s år gammal)" % (self.company_registry, self.age))
@@ -153,7 +156,7 @@ class ResPartner(models.Model):
             'domain':[('partner_id', '=', self.ids)],
             'view_type': 'calendar',
             'res_model': 'calendar.event',
-            'view_id':  False,
+            'view_id':  False, #bör vara view_id för standard kalendern
             'view_mode': 'calendar,tree,kanban,form',
             'type': 'ir.actions.act_window',
         }
