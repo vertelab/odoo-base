@@ -183,7 +183,9 @@
               <field name="office_ids" widget="many2many_tags" options="{'no_create_edit': True}" domain="[('type', '=', 'af office')]" />
               <field name="share_info_with_employers" />
               <field name="sms_reminders" />
-              <field name="segment_employer">
+              <field name="segment_jobseeker">
+              <label for="user_id" string="Administrative officer" />
+              <field name="user_id" nolabel="1" />
             </group>
           </group>
           <notebook>
