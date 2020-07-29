@@ -84,7 +84,7 @@ class ResPartner(models.Model):
 
     @api.one
     def combine_social_sec_nr_age(self):
-        self.social_sec_nr_age = _("%s (%s år gammal)" % (self.company_registry, self.age))
+        self.social_sec_nr_age = _("%s (%s years old)") % (self.company_registry, self.age)
     @api.one
     def combine_state_name_code(self):
         self.state_name_code = "%s %s" % (self.state_id.name, self.state_id.code)
@@ -141,7 +141,7 @@ class ResPartner(models.Model):
                 if today.month < date_of_birth.month or (today.month == date_of_birth.month and today.day < date_of_birth.day):
                     years -= 1
                 if years > 67:
-                    self.age = _("This person is too old, at %s years old" % years)
+                    self.age = _("This person is too old, at %s years old") % years
                     _logger.error("A person older than 67 should not be in the system, a person is %s years old" % years)
                 else:
                     self.age = years

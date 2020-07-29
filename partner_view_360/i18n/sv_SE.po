@@ -6,8 +6,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Odoo Server 12.0-20190808\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2020-07-24 13:07+0000\n"
-"PO-Revision-Date: 2020-07-24 15:10+0200\n"
+"POT-Creation-Date: 2020-07-29 12:22+0000\n"
+"PO-Revision-Date: 2020-07-29 14:23+0200\n"
 "Last-Translator: <>\n"
 "Language-Team: \n"
 "MIME-Version: 1.0\n"
@@ -18,7 +18,12 @@ msgstr ""
 "X-Generator: Poedit 2.0.6\n"
 
 #. module: partner_view_360
-#: code:addons/partner_view_360/models/res_partner.py:84
+#: selection:res.partner,segment_employer:0
+msgid " Including 2"
+msgstr ""
+
+#. module: partner_view_360
+#: code:addons/partner_view_360/models/res_partner.py:87
 #, python-format
 msgid "%s (%s years old)"
 msgstr "%s (%s år gammal)"
@@ -51,6 +56,7 @@ msgid "Administration of recruitment meeting/group activity/project"
 msgstr "Administration av rekryteringsträff/gruppaktivitet/projekt"
 
 #. module: partner_view_360
+#: model_terms:ir.ui.view,arch_db:partner_view_360.view_jobseeker_form
 #: model_terms:ir.ui.view,arch_db:partner_view_360.view_partner_employer_form
 #: model_terms:ir.ui.view,arch_db:partner_view_360.view_partner_form
 msgid "Administrative officer"
@@ -85,6 +91,21 @@ msgid "Based on the needs of the authority"
 msgstr "Utifrån myndighetens behov"
 
 #. module: partner_view_360
+#: selection:res.partner,segment_jobseeker:0
+msgid "C1"
+msgstr ""
+
+#. module: partner_view_360
+#: selection:res.partner,segment_jobseeker:0
+msgid "C2"
+msgstr ""
+
+#. module: partner_view_360
+#: selection:res.partner,segment_jobseeker:0
+msgid "C3"
+msgstr ""
+
+#. module: partner_view_360
 #: model:ir.model.fields,field_description:partner_view_360.field_res_partner__cfar
 #: model:ir.model.fields,field_description:partner_view_360.field_res_users__cfar
 msgid "CFAR"
@@ -97,7 +118,7 @@ msgid "CFAR number"
 msgstr "CFAR-nummer"
 
 #. module: partner_view_360
-#: code:addons/partner_view_360/models/res_partner.py:152
+#: code:addons/partner_view_360/models/res_partner.py:155
 #: model_terms:ir.ui.view,arch_db:partner_view_360.view_jobseeker_form
 #, python-format
 msgid "Calendar"
@@ -284,7 +305,17 @@ msgid "Employment service information"
 msgstr "Arbetsförmedlingens uppgifter"
 
 #. module: partner_view_360
-#: code:addons/partner_view_360/models/res_partner.py:147
+#: selection:res.partner,segment_employer:0
+msgid "Employment subsidy"
+msgstr ""
+
+#. module: partner_view_360
+#: selection:res.partner,segment_employer:0
+msgid "Entry job"
+msgstr ""
+
+#. module: partner_view_360
+#: code:addons/partner_view_360/models/res_partner.py:150
 #, python-format
 msgid "Error calculating age"
 msgstr "Ålderkalkyleringsfel"
@@ -346,6 +377,11 @@ msgstr "Identifikation"
 #: selection:res.partner.jobseeker.search.wizard,identification:0
 msgid "Identified by certifier"
 msgstr "Identifierad genom intygsgivare"
+
+#. module: partner_view_360
+#: selection:res.partner,segment_employer:0
+msgid "Including 1"
+msgstr ""
 
 #. module: partner_view_360
 #: model:ir.model.fields,field_description:partner_view_360.field_res_partner__is_independent_partner
@@ -477,6 +513,11 @@ msgstr ""
 #: model_terms:ir.ui.view,arch_db:partner_view_360.view_partner_employer_form
 msgid "Name"
 msgstr "Namn"
+
+#. module: partner_view_360
+#: selection:res.partner,segment_employer:0
+msgid "National agreement"
+msgstr ""
 
 #. module: partner_view_360
 #: code:addons/partner_view_360/wizard/res_partner_search_wizard.py:84
@@ -623,6 +664,14 @@ msgid "Search reason or identification must be set before searching"
 msgstr "Sök orsak eller identifieringsmetod måste vara vald före sökning"
 
 #. module: partner_view_360
+#: model:ir.model.fields,field_description:partner_view_360.field_res_partner__segment_employer
+#: model:ir.model.fields,field_description:partner_view_360.field_res_partner__segment_jobseeker
+#: model:ir.model.fields,field_description:partner_view_360.field_res_users__segment_employer
+#: model:ir.model.fields,field_description:partner_view_360.field_res_users__segment_jobseeker
+msgid "Segment"
+msgstr ""
+
+#. module: partner_view_360
 #: model:ir.model.fields,field_description:partner_view_360.field_res_partner__share_info_with_employers
 #: model:ir.model.fields,field_description:partner_view_360.field_res_users__share_info_with_employers
 msgid "Share name and address with employers"
@@ -691,7 +740,7 @@ msgid "The state code."
 msgstr "Kommunkoden."
 
 #. module: partner_view_360
-#: code:addons/partner_view_360/models/res_partner.py:141
+#: code:addons/partner_view_360/models/res_partner.py:144
 #, python-format
 msgid "This person is too old, at %s years old"
 msgstr "Den här personen är för gammal, vid %s års ålder"
