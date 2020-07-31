@@ -514,6 +514,11 @@
                 </strong>
                 <div class="o_kanban_tags_section">
                   <ul>
+                  <li>
+                  <b>
+                      <field name="company_registry" />
+                  </b>
+                    </li>
                     <li>
                       <field name="city" />
                     </li>
@@ -538,6 +543,7 @@
     <field name="arch" type="xml">
       <tree>
         <field name="name" />
+        <field name="company_registry"/>
         <field name="city" />
         <field name="email" />
         <field name="office" />
@@ -595,6 +601,12 @@
     <field eval="0" name="sequence" />
     <field name="view_mode">kanban</field>
     <field name="view_id" ref="view_employer_kanban" />
+    <field name="act_window_id" ref="action_employers" />
+  </record>
+<record id="action_employer_tree_view" model="ir.actions.act_window.view">
+    <field eval="1" name="sequence" />
+    <field name="view_mode">tree</field>
+    <field name="view_id" ref="view_employer_tree" />
     <field name="act_window_id" ref="action_employers" />
   </record>
   <menuitem id="res_partner_employers_menu" name="Employers" action="action_employers" sequence="3" />
