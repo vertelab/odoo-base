@@ -76,7 +76,7 @@
   </record> 
 
   <record id="view_partner_form2" model="ir.ui.view"> 
-    <field name="name">view.res.partner.form.inherited.notes1</field>
+    <field name="name">view.res.partner.form.inherited.notes2</field>
     <field name="model">res.partner</field> 
     <field name="inherit_id" ref="partner_view_360.view_partner_employer_form" /> 
     <field name="arch" type="xml"> 
