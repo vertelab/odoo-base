@@ -10,7 +10,10 @@ AFC-84
     'author': 'Vertel AB',
     'license': 'AGPL-3',
     'website': 'http://www.vertel.se',
-    'depends': ['base'],
+    'depends': [
+        'base', 
+        'partner_view_360'
+    ],
     'data': [
 			'views/res_partner_view.xml',
             'security/ir.model.access.csv'

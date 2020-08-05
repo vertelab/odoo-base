@@ -22,4 +22,25 @@
             </xpath>
         </field>
     </record>
+      <record id="view_partner_form_applied_for_jobs1" model="ir.ui.view">
+        <field name="name">res.partner.applied_for_jobs1</field>
+        <field name="model">res.partner</field> 
+        <field name="inherit_id" ref="partner_view_360.view_jobseeker_form" />
+        <field name="arch" type="xml"> 
+            <xpath expr="//page[@name='apply_for_jobs']" position="after" attrs="{'invisible':[('is_jobseeker', '=', False)]}">
+                <page string="Desired jobs">
+                    <group>
+                      <field name="job_ids" mode="tree" nolabel="1">
+                        <tree editable="bottom" string="Desired jobs" default_order="name">
+                           <field name="ssyk_code"/> 
+                           <field name="name"  options="{'no_create_edit': True}"/>  
+                            <field name="education"/>
+                            <field name="experience"/>
+                        </tree>
+                      </field>
+                    </group>
+                </page>
+            </xpath>
+        </field>
+    </record>
 </odoo>
