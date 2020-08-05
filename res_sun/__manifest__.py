@@ -32,12 +32,13 @@ AFC-191, 209
 """,
     'author': 'Vertel AB',
     'website': 'http://www.vertel.se',
-    'depends': ['base',],
+    'depends': ['contacts',],
     'data': [
-        'views/res_partner_view.xml',
+        #'views/res_partner_view.xml',
         'security/ir.model.access.csv', 
         'views/res_sun_view.xml',
-        'data/res.sun.csv'
+        'data/res.sun.csv',
+        'data/res.partner.education_level.csv'
         ],
     'application': False,
     'installable': True,

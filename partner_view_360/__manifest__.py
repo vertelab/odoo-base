@@ -21,21 +21,34 @@
 
 {
     'name': 'Partner 360 view',
-    'version': '12.0.0.1.1',
+    'version': '12.0.0.1.4',
     'category': '',
     'description': """
 Module for employee 360 view
 ================================================================================================
-This module alters, adds, removes and shuffles around fields in the partner view 
-AFC-102, 103, 140, 183, 192, 213, 210
+This module alters, adds, removes and shuffles around fields in the partner view
+Also adds new menus and views for partners of type jobseeker and employer
+AFC-102, 103, 140, 183, 192, 213, 210, 241, 259, 260, 346
 """,
     'author': 'Vertel AB',
     'license': 'AGPL-3',
     'website': 'http://www.vertel.se',
-    'depends': ['contacts'],
+    'depends': ['base','contacts', 
+    'res_sun', 
+    'res_drivers_license',
+    'res_ssyk',
+    'res_sni'
+    ],
     'data': [
-			'views/res_partner_view.xml'
+			'views/res_partner_view.xml',
+            'wizard/res_partner_search_wizard.xml',
+            #'security/ir.model.access.csv'
         ],
+    'demo': [
+            "data/jobseekers/res.partner.csv",
+            "data/employers/res.partner.csv",
+    ],
+
     'application': False,
     'installable': True,
 }

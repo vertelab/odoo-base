@@ -33,7 +33,7 @@ AFC-193
     'website': 'http://www.vertel.se',
     'depends': ['base','hr_skill','hr',],
     'data': [
-        'views/hr_skill.xml', 
+        'views/hr_skill_view.xml', 
         ],
     'application': False,
     'installable': True,

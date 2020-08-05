@@ -19,23 +19,16 @@
 #
 ##############################################################################
 
-{
-    'name': 'Partner employee 360 view',
-    'version': '12.0.0.1.5',
-    'category': '',
-    'description': """
-Module for employee 360 view
-================================================================================================
-This module alters, adds, removes and shuffles around fields in the partner view 
-AFC-102, 103, 140, 183, 192, 213, 210
-""",
-    'author': 'Vertel AB',
-    'license': 'AGPL-3',
-    'website': 'http://www.vertel.se',
-    'depends': ['base',],
-    'data': [
-			'views/res_partner.xml'
-        ],
-    'application': False,
-    'installable': True,
-}
+from odoo import models, fields, api, _
+import logging
+_logger = logging.getLogger(__name__)
+
+
+class ResCountryState(models.Model):
+    _inherit = "res.country.state" 
+
+    display_name = fields.Char(compute="state_name_and_code")
+
+    @api.one
+    def state_name_and_code(self):
+        self.display_name = "%s %s" % (self.name, self.code)

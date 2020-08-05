@@ -1,0 +1,1 @@
+from . import res_partner_search_wizard
