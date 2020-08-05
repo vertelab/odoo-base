@@ -37,8 +37,8 @@ AFC-168
     'res_ssyk'
     ], 
     'data': [
-			'views/res_partner.xml',
-            'views/desired_jobs.xml',
+			'views/res_partner_view.xml',
+            'views/desired_jobs_view.xml',
             'security/ir.model.access.csv'
         ],
     'application': False,
