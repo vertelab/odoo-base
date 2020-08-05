@@ -75,13 +75,16 @@ class ResPartner(models.Model):
     employer_class = fields.Selection(selection=[('1','1'), ('2','2'), ('3','3'), ('4','4')])
 
     state_code = fields.Char(string="State code", related="state_id.code")
-    state_name_code = fields.Char(string="State", compute="combine_state_name_code")
+    state_name_code = fields.Char(string="Municipality", compute="combine_state_name_code")
 
     temp_officer_id = fields.Many2many(comodel_name='res.users', relation='res_partner_temp_officer_rel', string='Temporary Officers')
 
+    segment_jobseeker = fields.Selection(string="Segment", selection=[('a','A'), ('b','B'), ('c1','C1'), ('c2','C2'), ('c3','C3')]) 
+    segment_employer = fields.Selection(string="Segment", selection=[('including 1','Including 1'), ('including 2',' Including 2'), ('entry job','Entry job'), ('national agreement','National agreement'), ('employment subsidy','Employment subsidy')])
+
     @api.one
     def combine_social_sec_nr_age(self):
-        self.social_sec_nr_age = "%s (%s years old)" % (self.company_registry, self.age)
+        self.social_sec_nr_age = _("%s (%s years old)") % (self.company_registry, self.age)
     @api.one
     def combine_state_name_code(self):
         self.state_name_code = "%s %s" % (self.state_id.name, self.state_id.code)
@@ -138,13 +141,13 @@ class ResPartner(models.Model):
                 if today.month < date_of_birth.month or (today.month == date_of_birth.month and today.day < date_of_birth.day):
                     years -= 1
                 if years > 67:
-                    self.age = "This person is too old, at %s years old" % years
+                    self.age = _("This person is too old, at %s years old") % years
                     _logger.error("A person older than 67 should not be in the system, a person is %s years old" % years)
                 else:
                     self.age = years
                 
             else: 
-                self.age = "Error calculating age"
+                self.age = _("Error calculating age")
     
     @api.multi
     def open_partner_calendar(self):
@@ -153,7 +156,7 @@ class ResPartner(models.Model):
             'domain':[('partner_id', '=', self.ids)],
             'view_type': 'calendar',
             'res_model': 'calendar.event',
-            'view_id':  False,
+            'view_id':  False, #bör vara view_id för standard kalendern
             'view_mode': 'calendar,tree,kanban,form',
             'type': 'ir.actions.act_window',
         }
