@@ -98,9 +98,9 @@
         <menuitem id="partner_notes_menu_action" name="Daily notes" parent="contacts.menu_contacts" action="partner_notes_action_view_tree" sequence="50" />
    
         <menuitem id="partner_note_type_menu_action_jobseeker" name="Note types" parent="partner_view_360.res_partner_jobseekers_config_menu" action="partner_note_type_action_view_tree" sequence="50" />
-        <menuitem id="partner_notes_menu_action_jobseeker" name="Daily notes" parent="partner_view_360.res_partner_jobseekers_menu" action="action_partner_notes_tree" sequence="50" />
+        <menuitem id="partner_notes_menu_action_jobseeker" name="Daily notes" parent="partner_view_360.res_partner_jobseekers_menu" action="partner_notes_action_view_tree" sequence="50" />
         
         <menuitem id="partner_note_type_menu_action_employer" name="Note types" parent="partner_view_360.res_partner_employers_config_menu" action="partner_note_type_action_view_tree" sequence="50" />
-        <menuitem id="partner_notes_menu_action_employer" name="Daily notes" parent="partner_view_360.res_partner_employers_menu" action="action_partner_notes_tree" sequence="50" />
+        <menuitem id="partner_notes_menu_action_employer" name="Daily notes" parent="partner_view_360.res_partner_employers_menu" action="partner_notes_action_view_tree" sequence="50" />
     </data>
 </odoo>
