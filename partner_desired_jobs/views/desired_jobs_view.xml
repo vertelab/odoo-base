@@ -35,20 +35,20 @@
     </record>
 
      <record id="partner_jobs_action_view_tree" model="ir.actions.act_window.view">
-        <field name="act_window_id" ref="action_jobs"/>
+        <field name="act_window_id" ref="partner_jobs_action"/>
         <field name="sequence" eval="2"/>
         <field name="view_mode">tree</field>
         <field name="view_id" ref="partner_jobs_view_tree"/>
     </record>
 
     <!-- <record id="action_view_partner_jobs_pivot" model="ir.actions.act_window.view">
-        <field name="act_window_id" ref="action_jobs"/>
+        <field name="act_window_id" ref="partner_jobs_action"/>
         <field name="sequence" eval="4"/>
         <field name="view_mode">pivot</field>
         <field name="view_id" ref="view_partner_jobs_pivot"/>
     </record> -->
 
-    <menuitem action="action_jobs" id="partner_jobs_menu_action" parent="contacts.menu_contacts"/>
+    <menuitem action="partner_jobs_action" id="partner_jobs_menu_action" parent="contacts.menu_contacts"/>
 
   
 
