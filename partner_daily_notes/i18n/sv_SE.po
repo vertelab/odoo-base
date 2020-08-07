@@ -6,8 +6,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Odoo Server 12.0-20190808\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2020-04-21 15:08+0000\n"
-"PO-Revision-Date: 2020-04-22 10:40+0200\n"
+"POT-Creation-Date: 2020-08-03 08:57+0000\n"
+"PO-Revision-Date: 2020-08-03 10:58+0200\n"
 "Last-Translator: <>\n"
 "Language-Team: \n"
 "MIME-Version: 1.0\n"
@@ -52,6 +52,8 @@ msgstr "Kundnummmer"
 
 #. module: partner_daily_notes
 #: model_terms:ir.ui.view,arch_db:partner_daily_notes.view_partner_form
+#: model_terms:ir.ui.view,arch_db:partner_daily_notes.view_partner_form1
+#: model_terms:ir.ui.view,arch_db:partner_daily_notes.view_partner_form2
 msgid "Daily Notes"
 msgstr "Daganteckningar"
 
@@ -60,6 +62,8 @@ msgstr "Daganteckningar"
 #: model:ir.model.fields,field_description:partner_daily_notes.field_res_partner__notes_ids
 #: model:ir.model.fields,field_description:partner_daily_notes.field_res_users__notes_ids
 #: model:ir.ui.menu,name:partner_daily_notes.partner_notes_menu_action
+#: model:ir.ui.menu,name:partner_daily_notes.partner_notes_menu_action_employer
+#: model:ir.ui.menu,name:partner_daily_notes.partner_notes_menu_action_jobseeker
 #, python-format
 msgid "Daily notes"
 msgstr "Daganteckningar"
@@ -125,21 +129,25 @@ msgid "Note Type"
 msgstr "Noteringstyp"
 
 #. module: partner_daily_notes
-#: model:ir.actions.act_window,name:partner_daily_notes.partner_note_type_action_view_tree
+#: model:ir.actions.act_window,name:partner_daily_notes.action_partner_note_type_tree
 msgid "Note Types Action"
 msgstr ""
 
 #. module: partner_daily_notes
 #: model:ir.ui.menu,name:partner_daily_notes.partner_note_type_menu_action
-#: model_terms:ir.ui.view,arch_db:partner_daily_notes.partner_note_type_view_tree
+#: model:ir.ui.menu,name:partner_daily_notes.partner_note_type_menu_action_employer
+#: model:ir.ui.menu,name:partner_daily_notes.partner_note_type_menu_action_jobseeker
+#: model_terms:ir.ui.view,arch_db:partner_daily_notes.view_partner_note_type_tree
 msgid "Note types"
 msgstr "Noteringstyper"
 
 #. module: partner_daily_notes
 #: model:ir.model.fields,field_description:partner_daily_notes.field_res_partner_notes__note
-#: model_terms:ir.ui.view,arch_db:partner_daily_notes.partner_notes_view_tree
-#: model_terms:ir.ui.view,arch_db:partner_daily_notes.partner_notes_view_tree_button
 #: model_terms:ir.ui.view,arch_db:partner_daily_notes.view_partner_form
+#: model_terms:ir.ui.view,arch_db:partner_daily_notes.view_partner_form1
+#: model_terms:ir.ui.view,arch_db:partner_daily_notes.view_partner_form2
+#: model_terms:ir.ui.view,arch_db:partner_daily_notes.view_partner_notes_tree
+#: model_terms:ir.ui.view,arch_db:partner_daily_notes.view_partner_notes_tree_button
 msgid "Notes"
 msgstr "Noteringar"
 
@@ -155,7 +163,7 @@ msgid "Office"
 msgstr "Kontor"
 
 #. module: partner_daily_notes
-#: model:ir.actions.act_window,name:partner_daily_notes.partner_notes_action_view_tree
+#: model:ir.actions.act_window,name:partner_daily_notes.action_partner_notes_tree
 msgid "Partner Daily Notes Action"
 msgstr ""
 

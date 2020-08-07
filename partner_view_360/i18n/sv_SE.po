@@ -1,25 +1,32 @@
 # Translation of Odoo Server.
 # This file contains the translation of the following modules:
-#	* partner_view_360
+# 	* partner_view_360
 #
 msgid ""
 msgstr ""
-"Project-Id-Version: Odoo Server 12.0-20200622\n"
+"Project-Id-Version: Odoo Server 12.0-20190808\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2020-06-29 14:21+0000\n"
-"PO-Revision-Date: 2020-06-29 16:22+0200\n"
+"POT-Creation-Date: 2020-07-29 12:22+0000\n"
+"PO-Revision-Date: 2020-07-29 14:23+0200\n"
 "Last-Translator: <>\n"
 "Language-Team: \n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
-"Content-Transfer-Encoding: \n"
+"Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: \n"
+"Language: sv\n"
+"X-Generator: Poedit 2.0.6\n"
 
 #. module: partner_view_360
-#: code:addons/partner_view_360/models/res_partner.py:82
+#: selection:res.partner,segment_employer:0
+msgid " Including 2"
+msgstr ""
+
+#. module: partner_view_360
+#: code:addons/partner_view_360/models/res_partner.py:87
 #, python-format
 msgid "%s (%s years old)"
-msgstr "år"
+msgstr "%s (%s år gammal)"
 
 #. module: partner_view_360
 #: selection:res.partner,type:0
@@ -49,6 +56,7 @@ msgid "Administration of recruitment meeting/group activity/project"
 msgstr "Administration av rekryteringsträff/gruppaktivitet/projekt"
 
 #. module: partner_view_360
+#: model_terms:ir.ui.view,arch_db:partner_view_360.view_jobseeker_form
 #: model_terms:ir.ui.view,arch_db:partner_view_360.view_partner_employer_form
 #: model_terms:ir.ui.view,arch_db:partner_view_360.view_partner_form
 msgid "Administrative officer"
@@ -72,6 +80,7 @@ msgid "Archived"
 msgstr "Arkiverad"
 
 #. module: partner_view_360
+#: model_terms:ir.ui.view,arch_db:partner_view_360.view_jobseeker_form
 #: model_terms:ir.ui.view,arch_db:partner_view_360.view_partner_employer_form
 msgid "Avatar"
 msgstr ""
@@ -80,6 +89,21 @@ msgstr ""
 #: model_terms:ir.ui.view,arch_db:partner_view_360.search_jobseeker_form
 msgid "Based on the needs of the authority"
 msgstr "Utifrån myndighetens behov"
+
+#. module: partner_view_360
+#: selection:res.partner,segment_jobseeker:0
+msgid "C1"
+msgstr ""
+
+#. module: partner_view_360
+#: selection:res.partner,segment_jobseeker:0
+msgid "C2"
+msgstr ""
+
+#. module: partner_view_360
+#: selection:res.partner,segment_jobseeker:0
+msgid "C3"
+msgstr ""
 
 #. module: partner_view_360
 #: model:ir.model.fields,field_description:partner_view_360.field_res_partner__cfar
@@ -94,7 +118,7 @@ msgid "CFAR number"
 msgstr "CFAR-nummer"
 
 #. module: partner_view_360
-#: code:addons/partner_view_360/models/res_partner.py:138
+#: code:addons/partner_view_360/models/res_partner.py:155
 #: model_terms:ir.ui.view,arch_db:partner_view_360.view_jobseeker_form
 #, python-format
 msgid "Calendar"
@@ -111,8 +135,8 @@ msgid "Cancel"
 msgstr "Avbryt"
 
 #. module: partner_view_360
-#: model:ir.model.fields,field_description:partner_view_360.field_res_partner__postal_address_city
-#: model:ir.model.fields,field_description:partner_view_360.field_res_users__postal_address_city
+#: model:ir.model.fields,field_description:partner_view_360.field_res_partner__given_address_city
+#: model:ir.model.fields,field_description:partner_view_360.field_res_users__given_address_city
 #: model_terms:ir.ui.view,arch_db:partner_view_360.view_jobseeker_form
 #: model_terms:ir.ui.view,arch_db:partner_view_360.view_partner_employer_form
 msgid "City"
@@ -143,16 +167,19 @@ msgid "Contact"
 msgstr "Kontakt"
 
 #. module: partner_view_360
+#: model_terms:ir.ui.view,arch_db:partner_view_360.view_jobseeker_form
 #: model_terms:ir.ui.view,arch_db:partner_view_360.view_partner_employer_form
 msgid "Contact / Address"
 msgstr "Kontakt/Adress"
 
 #. module: partner_view_360
+#: model_terms:ir.ui.view,arch_db:partner_view_360.view_jobseeker_form
 #: model_terms:ir.ui.view,arch_db:partner_view_360.view_partner_employer_form
 msgid "Contact Name"
 msgstr "Kontaktnamn"
 
 #. module: partner_view_360
+#: model_terms:ir.ui.view,arch_db:partner_view_360.view_jobseeker_form
 #: model_terms:ir.ui.view,arch_db:partner_view_360.view_partner_employer_form
 msgid "Contacts & Addresses"
 msgstr "Kontakter & Adresser"
@@ -217,6 +244,7 @@ msgid "Decisions for other officer"
 msgstr "beslut åt annan handläggare"
 
 #. module: partner_view_360
+#: model_terms:ir.ui.view,arch_db:partner_view_360.view_jobseeker_form
 #: model_terms:ir.ui.view,arch_db:partner_view_360.view_partner_employer_form
 msgid "Delivery"
 msgstr "Leverans"
@@ -277,6 +305,22 @@ msgid "Employment service information"
 msgstr "Arbetsförmedlingens uppgifter"
 
 #. module: partner_view_360
+#: selection:res.partner,segment_employer:0
+msgid "Employment subsidy"
+msgstr ""
+
+#. module: partner_view_360
+#: selection:res.partner,segment_employer:0
+msgid "Entry job"
+msgstr ""
+
+#. module: partner_view_360
+#: code:addons/partner_view_360/models/res_partner.py:150
+#, python-format
+msgid "Error calculating age"
+msgstr "Ålderkalkyleringsfel"
+
+#. module: partner_view_360
 #: selection:res.partner.jobseeker.search.wizard,search_reason:0
 msgid "Follow-up of job seekers' planning"
 msgstr "Uppföljning av arbetssökandes planering"
@@ -285,6 +329,11 @@ msgstr "Uppföljning av arbetssökandes planering"
 #: selection:res.partner,type:0
 msgid "Foreign Address"
 msgstr "Utländsk Adress"
+
+#. module: partner_view_360
+#: selection:res.partner,type:0
+msgid "Given address"
+msgstr "Egen angiven adress"
 
 #. module: partner_view_360
 #: model:ir.model.fields,field_description:partner_view_360.field_res_partner__is_government
@@ -330,6 +379,11 @@ msgid "Identified by certifier"
 msgstr "Identifierad genom intygsgivare"
 
 #. module: partner_view_360
+#: selection:res.partner,segment_employer:0
+msgid "Including 1"
+msgstr ""
+
+#. module: partner_view_360
 #: model:ir.model.fields,field_description:partner_view_360.field_res_partner__is_independent_partner
 #: model:ir.model.fields,field_description:partner_view_360.field_res_users__is_independent_partner
 msgid "Independent partner"
@@ -352,6 +406,7 @@ msgid "Investigation"
 msgstr "Utredning"
 
 #. module: partner_view_360
+#: model_terms:ir.ui.view,arch_db:partner_view_360.view_jobseeker_form
 #: model_terms:ir.ui.view,arch_db:partner_view_360.view_partner_employer_form
 msgid "Invoice"
 msgstr "Faktura"
@@ -417,11 +472,7 @@ msgid "Last Updated on"
 msgstr "Senast uppdaterad"
 
 #. module: partner_view_360
-#: selection:res.partner,type:0
-msgid "Legal Address"
-msgstr "Primär Adress"
-
-#. module: partner_view_360
+#: model_terms:ir.ui.view,arch_db:partner_view_360.view_jobseeker_form
 #: model_terms:ir.ui.view,arch_db:partner_view_360.view_partner_employer_form
 msgid "Logo"
 msgstr "Logotyp"
@@ -438,9 +489,18 @@ msgid "Message to jobseeker regarding deactualization"
 msgstr "Meddelande till arbetssökande gällande avaktualisering"
 
 #. module: partner_view_360
+#: model_terms:ir.ui.view,arch_db:partner_view_360.view_jobseeker_form
 #: model_terms:ir.ui.view,arch_db:partner_view_360.view_partner_employer_form
 msgid "Mobile:"
 msgstr "Mobil:"
+
+#. module: partner_view_360
+#: model:ir.model.fields,field_description:partner_view_360.field_res_partner__state_name_code
+#: model:ir.model.fields,field_description:partner_view_360.field_res_users__state_name_code
+#: model_terms:ir.ui.view,arch_db:partner_view_360.view_jobseeker_form
+#: model_terms:ir.ui.view,arch_db:partner_view_360.view_partner_employer_form
+msgid "Municipality"
+msgstr "Kommun"
 
 #. module: partner_view_360
 #: model_terms:ir.ui.view,arch_db:partner_view_360.view_employer_filter
@@ -455,6 +515,11 @@ msgid "Name"
 msgstr "Namn"
 
 #. module: partner_view_360
+#: selection:res.partner,segment_employer:0
+msgid "National agreement"
+msgstr ""
+
+#. module: partner_view_360
 #: code:addons/partner_view_360/wizard/res_partner_search_wizard.py:84
 #, python-format
 msgid "No id found"
@@ -464,7 +529,7 @@ msgstr "Finns inget id"
 #: model:ir.model.fields,field_description:partner_view_360.field_res_partner__office
 #: model:ir.model.fields,field_description:partner_view_360.field_res_users__office
 msgid "Office"
-msgstr "Primärt Kontor"
+msgstr "Kontor"
 
 #. module: partner_view_360
 #: model:ir.model.fields,field_description:partner_view_360.field_res_partner__my_office_code
@@ -479,7 +544,6 @@ msgstr "Kontorskod"
 #: model:ir.model.fields,field_description:partner_view_360.field_res_users__office_ids
 msgid "Offices"
 msgstr "Sekundärt Kontor"
-
 
 #. module: partner_view_360
 #: model_terms:ir.ui.view,arch_db:partner_view_360.view_partner_employer_form
@@ -515,23 +579,10 @@ msgid "Personal Information"
 msgstr "Personlig information"
 
 #. module: partner_view_360
+#: model_terms:ir.ui.view,arch_db:partner_view_360.view_jobseeker_form
 #: model_terms:ir.ui.view,arch_db:partner_view_360.view_partner_employer_form
 msgid "Phone:"
 msgstr "Telefon:"
-
-#. module: partner_view_360
-#: selection:res.partner,type:0
-msgid "Postal Address"
-msgstr "Postadress"
-
-#. module: partner_view_360
-#: model:ir.model.fields,field_description:partner_view_360.field_res_partner__postal_address_id
-#: model:ir.model.fields,field_description:partner_view_360.field_res_partner__postal_address_street
-#: model:ir.model.fields,field_description:partner_view_360.field_res_users__postal_address_id
-#: model:ir.model.fields,field_description:partner_view_360.field_res_users__postal_address_street
-#: model_terms:ir.ui.view,arch_db:partner_view_360.view_jobseeker_form
-msgid "Postal address"
-msgstr "Postadress"
 
 #. module: partner_view_360
 #: selection:res.partner,type:0
@@ -613,6 +664,14 @@ msgid "Search reason or identification must be set before searching"
 msgstr "Sök orsak eller identifieringsmetod måste vara vald före sökning"
 
 #. module: partner_view_360
+#: model:ir.model.fields,field_description:partner_view_360.field_res_partner__segment_employer
+#: model:ir.model.fields,field_description:partner_view_360.field_res_partner__segment_jobseeker
+#: model:ir.model.fields,field_description:partner_view_360.field_res_users__segment_employer
+#: model:ir.model.fields,field_description:partner_view_360.field_res_users__segment_jobseeker
+msgid "Segment"
+msgstr ""
+
+#. module: partner_view_360
 #: model:ir.model.fields,field_description:partner_view_360.field_res_partner__share_info_with_employers
 #: model:ir.model.fields,field_description:partner_view_360.field_res_users__share_info_with_employers
 msgid "Share name and address with employers"
@@ -639,8 +698,6 @@ msgid "Social security number has to be searched in full"
 msgstr "Personnummer måste sökas på i sin helhet"
 
 #. module: partner_view_360
-#: model:ir.model.fields,field_description:partner_view_360.field_res_partner__state_name_code
-#: model:ir.model.fields,field_description:partner_view_360.field_res_users__state_name_code
 #: model_terms:ir.ui.view,arch_db:partner_view_360.view_jobseeker_form
 #: model_terms:ir.ui.view,arch_db:partner_view_360.view_partner_employer_form
 msgid "State"
@@ -671,10 +728,22 @@ msgid "Tag"
 msgstr "Tagg"
 
 #. module: partner_view_360
+#: model:ir.model.fields,field_description:partner_view_360.field_res_partner__temp_officer_id
+#: model:ir.model.fields,field_description:partner_view_360.field_res_users__temp_officer_id
+msgid "Temporary Officers"
+msgstr ""
+
+#. module: partner_view_360
 #: model:ir.model.fields,help:partner_view_360.field_res_partner__state_code
 #: model:ir.model.fields,help:partner_view_360.field_res_users__state_code
 msgid "The state code."
 msgstr "Kommunkoden."
+
+#. module: partner_view_360
+#: code:addons/partner_view_360/models/res_partner.py:144
+#, python-format
+msgid "This person is too old, at %s years old"
+msgstr "Den här personen är för gammal, vid %s års ålder"
 
 #. module: partner_view_360
 #: model:ir.model.fields,help:partner_view_360.field_res_partner__type
@@ -735,17 +804,19 @@ msgid "ZIP"
 msgstr "Postnummer"
 
 #. module: partner_view_360
-#: model:ir.model.fields,field_description:partner_view_360.field_res_partner__postal_address_zip
-#: model:ir.model.fields,field_description:partner_view_360.field_res_users__postal_address_zip
+#: model:ir.model.fields,field_description:partner_view_360.field_res_partner__given_address_zip
+#: model:ir.model.fields,field_description:partner_view_360.field_res_users__given_address_zip
 msgid "Zip"
 msgstr "Postnummer"
 
 #. module: partner_view_360
+#: model_terms:ir.ui.view,arch_db:partner_view_360.view_jobseeker_form
 #: model_terms:ir.ui.view,arch_db:partner_view_360.view_partner_employer_form
 msgid "e.g. Mr."
 msgstr "t.ex. Herr"
 
 #. module: partner_view_360
+#: model_terms:ir.ui.view,arch_db:partner_view_360.view_jobseeker_form
 #: model_terms:ir.ui.view,arch_db:partner_view_360.view_partner_employer_form
 msgid "e.g. Sales Director"
 msgstr "t.ex. försäljningschef"
@@ -756,6 +827,15 @@ msgid "employer"
 msgstr "Arbetsgivare"
 
 #. module: partner_view_360
+#: model:ir.model.fields,field_description:partner_view_360.field_res_partner__given_address_id
+#: model:ir.model.fields,field_description:partner_view_360.field_res_partner__given_address_street
+#: model:ir.model.fields,field_description:partner_view_360.field_res_users__given_address_id
+#: model:ir.model.fields,field_description:partner_view_360.field_res_users__given_address_street
+msgid "given address"
+msgstr "Egen angiven adress"
+
+#. module: partner_view_360
+#: model_terms:ir.ui.view,arch_db:partner_view_360.view_jobseeker_form
 #: model_terms:ir.ui.view,arch_db:partner_view_360.view_partner_employer_form
 msgid "internal note..."
 msgstr "intern notering..."
