@@ -153,17 +153,14 @@ class ResPartner(models.Model):
 
     @api.multi
     def close_view(self):
-        # ValueError: Field `name` does not exist
-        # Error context:
-        # View `res.bank.form`
-        # [view_id: 121, xml_id: base.view_res_bank_form, model: res.bank, parent_id: n/a]
         return{
             'name': _("Search Partner"),
-            'view_id': self.env.ref("partner_view_360.search_jobseeker_wizard").id,
+            'view_type': 'form',
             #'src_model': "res.partner",
             'res_model': "res.partner.jobseeker.search.wizard",
+            'view_id': False, #self.env.ref("partner_view_360.search_jobseeker_wizard").id,
             'view_mode':"form",
-            'target': "current", 
+            #'target': "current", 
             #'key2': "client_action_multi",
             'type': 'ir.actions.act_window',
         }
