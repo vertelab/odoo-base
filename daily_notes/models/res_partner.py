@@ -33,7 +33,7 @@ class ResPartnerNotes(models.Model):
     administrative_officer = fields.Many2one('res.users', string='Administrative officer', default=lambda self: self.env.user)
     note = fields.Text(string="Notes")
     note_date = fields.Datetime(string="Refers to date") 
-    note_type = fields.Many2many(comodel_name="res.partner.note.type", inverse_name="note_id") 
+    note_type = fields.Many2many(comodel_name="res.partner.note.type") 
     note_number = fields.Char(string="AIS number")
     
     office = fields.Many2one('res.partner', string="Office")

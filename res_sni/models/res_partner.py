@@ -25,4 +25,4 @@ _logger = logging.getLogger(__name__)
 class Partner(models.Model):
     _inherit = 'res.partner'
 
-    sni_ids = fields.Many2many(comodel_name='res.sni', string='SNI', inverse_name="partner_id")
+    sni_ids = fields.Many2many(comodel_name='res.sni', string='SNI')

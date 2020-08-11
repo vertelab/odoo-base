@@ -7,7 +7,7 @@
         <field name="arch" type="xml">
             <xpath expr="//page[@name='education']/group" position="inside">
                 <!-- <field name="has_drivers_license"/> -->
-                <field name="drivers_license_id" options="{'no_create_edit': True}"/> 
+                <field name="drivers_license_ids" options="{'no_create_edit': True}"/> 
                 <field name="has_car"/>
             </xpath> 
         </field>
