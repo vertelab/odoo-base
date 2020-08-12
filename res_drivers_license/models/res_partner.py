@@ -26,5 +26,5 @@ class Partner(models.Model):
     _inherit = 'res.partner'
 
     has_drivers_license = fields.Boolean(string="Has drivers license")
-    drivers_license_id = fields.Many2one(comodel_name='res.drivers_license', string='Drivers license class')
+    drivers_license_ids = fields.Many2many(comodel_name='res.drivers_license', string='Drivers license class')
     has_car = fields.Boolean(string="Has access to car")

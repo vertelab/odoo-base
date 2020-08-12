@@ -149,17 +149,7 @@ class ResPartner(models.Model):
             else: 
                 self.age = _("Error calculating age")
     
-    @api.multi
-    def open_partner_calendar(self):
-        return{
-            'name': _('Calendar'),
-            'domain':[('partner_id', '=', self.ids)],
-            'view_type': 'calendar',
-            'res_model': 'calendar.event',
-            'view_id':  False, #bör vara view_id för standard kalendern
-            'view_mode': 'calendar,tree,kanban,form',
-            'type': 'ir.actions.act_window',
-        }
+    
 
 
     

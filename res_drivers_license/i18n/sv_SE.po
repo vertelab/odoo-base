@@ -54,8 +54,8 @@ msgid "Drivers License"
 msgstr "Körkort"
 
 #. module: res_drivers_license
-#: model:ir.model.fields,field_description:res_drivers_license.field_res_partner__drivers_license_id
-#: model:ir.model.fields,field_description:res_drivers_license.field_res_users__drivers_license_id
+#: model:ir.model.fields,field_description:res_drivers_license.field_res_partner__drivers_license_ids
+#: model:ir.model.fields,field_description:res_drivers_license.field_res_users__drivers_license_ids
 msgid "Drivers license class"
 msgstr "Körkortsklass"
 

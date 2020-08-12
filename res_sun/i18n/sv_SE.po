@@ -127,8 +127,8 @@ msgid "Partner"
 msgstr "Kund"
 
 #. module: res_sun
-#: model:ir.model.fields,field_description:res_sun.field_res_partner__sun_id
-#: model:ir.model.fields,field_description:res_sun.field_res_users__sun_id
+#: model:ir.model.fields,field_description:res_sun.field_res_partner__sun_ids
+#: model:ir.model.fields,field_description:res_sun.field_res_users__sun_ids
 msgid "SUN Code"
 msgstr "SUN-Kod"
 
