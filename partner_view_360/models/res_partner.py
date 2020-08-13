@@ -85,6 +85,8 @@ class ResPartner(models.Model):
     @api.one
     def combine_social_sec_nr_age(self):
         self.social_sec_nr_age = _("%s (%s years old)") % (self.company_registry, self.age)
+        if self.age == "Error calculating age, incorrect format on social security number":
+            self.social_sec_nr_age = self.age
     @api.one
     def combine_state_name_code(self):
         self.state_name_code = "%s %s" % (self.state_id.name, self.state_id.code)
@@ -104,11 +106,11 @@ class ResPartner(models.Model):
                 social_sec_stripped = social_sec_split[0]
             elif len(social_sec_split) == 1:
                 if len(social_sec_split[0]) == 10:
+                    wrong_input = True
                     social_sec_stripped = social_sec_split[0][:6]
                 elif len(social_sec_split[0]) == 12:
                     social_sec_stripped = social_sec_split[0][:8]
             date_of_birth = date(1980,1,1)
-            #9708131111
             if len(social_sec_stripped) == 6:
                 yr = social_sec_stripped[:2]
                 year = int("20"+yr)
@@ -119,7 +121,7 @@ class ResPartner(models.Model):
                 except:
                     wrong_input = True
                     _logger.error("Could not convert social security number (company_registry) to date")
-                if today.year - date_of_birth.year < 18:
+                if today.year - date_of_birth.year < 18: #if social security numbers with 10 numbers are reallowed, change this to something more reasonable in case children are allowed to register
                     year = int("19"+yr)
                     try:
                         date_of_birth = date(year, month, day)
@@ -147,7 +149,7 @@ class ResPartner(models.Model):
                     self.age = years
                 
             else: 
-                self.age = _("Error calculating age")
+                self.age = _("Error calculating age, incorrect format on social security number")
     
     
 
