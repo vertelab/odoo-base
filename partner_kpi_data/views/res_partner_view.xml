@@ -45,7 +45,7 @@
         <field name="arch" type="xml">           
             <tree editable="bottom" string="KPI">
                 <field name="partner_id" groups="base.group_no_one"/>
-                    <field name="fiscal_year" />  
+                    <field name="fiscal_year" widget="date" />  
                     <field name="size"/>
                     <field name="turnover" />    
                     <field name="turnover_change" />    
