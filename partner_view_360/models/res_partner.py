@@ -63,6 +63,7 @@ class ResPartner(models.Model):
     foreign_country_of_work = fields.Char(string="When working in foreign country")
     deactualization_message = fields.Text(string="Message to jobseeker regarding deactualization")
 
+    registered_by = fields.Many2one(string="Registered by", comodel_name="res.user")
     registered_through = fields.Char(string="Registered Through")
     share_info_with_employers = fields.Boolean(string="Share name and address with employers")
     sms_reminders = fields.Boolean(string="SMS reminders")

@@ -6,8 +6,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Odoo Server 12.0-20190808\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2020-08-13 08:48+0000\n"
-"PO-Revision-Date: 2020-08-13 10:56+0200\n"
+"POT-Creation-Date: 2020-08-13 10:05+0000\n"
+"PO-Revision-Date: 2020-08-13 12:06+0200\n"
 "Last-Translator: <>\n"
 "Language-Team: \n"
 "MIME-Version: 1.0\n"
@@ -23,7 +23,7 @@ msgid " Including 2"
 msgstr ""
 
 #. module: partner_view_360
-#: code:addons/partner_view_360/models/res_partner.py:87
+#: code:addons/partner_view_360/models/res_partner.py:88
 #, python-format
 msgid "%s (%s years old)"
 msgstr "%s (%s år gammal)"
@@ -308,7 +308,7 @@ msgid "Entry job"
 msgstr ""
 
 #. module: partner_view_360
-#: code:addons/partner_view_360/models/res_partner.py:152
+#: code:addons/partner_view_360/models/res_partner.py:153
 #, python-format
 msgid "Error calculating age, incorrect format on social security number"
 msgstr "Fel vid ålderskalkyl, inkorrekt format på personnummer"
@@ -595,6 +595,12 @@ msgid "Registered Through"
 msgstr "Registrerad Av"
 
 #. module: partner_view_360
+#: model:ir.model.fields,field_description:partner_view_360.field_res_partner__registered_by
+#: model:ir.model.fields,field_description:partner_view_360.field_res_users__registered_by
+msgid "Registered by"
+msgstr "Registrerad av"
+
+#. module: partner_view_360
 #: model:ir.model.fields,field_description:partner_view_360.field_res_partner__sms_reminders
 #: model:ir.model.fields,field_description:partner_view_360.field_res_users__sms_reminders
 msgid "SMS reminders"
@@ -727,7 +733,7 @@ msgid "The state code."
 msgstr "Kommunkoden."
 
 #. module: partner_view_360
-#: code:addons/partner_view_360/models/res_partner.py:146
+#: code:addons/partner_view_360/models/res_partner.py:147
 #, python-format
 msgid "This person is too old, at %s years old"
 msgstr "Den här personen är för gammal, vid %s års ålder"
