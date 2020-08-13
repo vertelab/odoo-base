@@ -153,5 +153,19 @@ class ResPartner(models.Model):
     
     
 
+    @api.multi
+    def close_view(self):
+        return{
+            'name': _("Search Partner"),
+            'view_type': 'form',
+            #'src_model': "res.partner",
+            'res_model': "res.partner.jobseeker.search.wizard",
+            'view_id': False, #self.env.ref("partner_view_360.search_jobseeker_wizard").id,
+            'view_mode':"form",
+            #'target': "current", 
+            #'key2': "client_action_multi",
+            'type': 'ir.actions.act_window',
+        }
+
 
     
