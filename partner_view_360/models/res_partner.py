@@ -23,7 +23,7 @@ from odoo import models, fields, api, _
 import logging
 from datetime import date
 _logger = logging.getLogger(__name__)
-from odoo.exceptions import Warning
+from odoo.exceptions import ValidationError
 
 
 
@@ -100,6 +100,7 @@ class ResPartner(models.Model):
         self.state_name_code = "%s %s" % (self.state_id.name, self.state_id.code)
     
     @api.one
+    @api.constrains('company_registry')
     def calculate_age(self):
         wrong_input = False
         today = date.today()
@@ -161,8 +162,12 @@ class ResPartner(models.Model):
                     self.age = years
                 
             else: 
-                self.age = "Error"
-                #raise Warning(_("Please input a correctly formated social security number"))
+                self.social_sec_nr = ""
+                self.age = ""
+                #return {
+                #'warning': {'title': "Warning", 'message': "What is this?"},
+                #}
+                raise ValidationError(_("Please input a correctly formated social security number"))
                 
     
     

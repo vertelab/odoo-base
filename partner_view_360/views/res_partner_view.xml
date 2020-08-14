@@ -139,7 +139,8 @@
               <field name="type" attrs="{'invisible' : True}" />
               <label for="company_registry" string="Social security number" class="oe_edit_only" />
               <field name="company_registry" nolabel="1" class="oe_edit_only" />
-              <field name="social_sec_nr_age" class="oe_read_only" />
+              <label for="social_sec_nr_age" string="Social security number" class="oe_read_only"/>
+              <field name="social_sec_nr_age" class="oe_read_only" nolabel="1" />
               <field name="customer_id" />
               <!-- folkbokföringsadress, alternativt göra en res partner typ-->
               <label for="state_name_code" string="Municipality" class="oe_read_only" />
