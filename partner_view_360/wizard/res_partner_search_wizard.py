@@ -70,10 +70,33 @@ class ResPartnerJobseekerSearchWizard(models.TransientModel):
     other_reason = fields.Char(string="Other reason")
 
     @api.multi
-    def search_jobseeker(self):
-        # ~ raise Warning("Inte implementerat än")
-        if ("social_sec_nr" in self.search_domain or "company_registry" in self.search_domain) and "=" not in self.search_domain:
-            raise Warning(_("Social security number has to be searched in full"))
+    def search_jobseeker(self):        
+        domains = self.search_domain.split("[")
+        _logger.info("domains: %s" % domains)
+        corrected_domains = []
+        for domain in domains:
+            domain_stripped = domain[:-2]
+            _logger.info("domain_stripped: %s" % domain_stripped)
+
+            if ("social_sec_nr" in domain_stripped or "company_registry" in domain_stripped):
+                if "=" not in domain_stripped:
+                    raise Warning(_("Social security number has to be searched in full"))
+                _logger.info("removed quotes: %s" % domain_stripped.split(",")[2].strip('"'))
+                social_sec_nr = domain_stripped.split(",")[2].strip('"')
+                if len(social_sec_nr) == 13 and social_sec_nr[:9] == "-":
+                    corrected_domains.append('"social_sec_nr", "=", "%s"' % social_sec_nr)
+                elif len(social_sec_nr) == 12:
+                    corrected_domains.append('["social_sec_nr", "=", "%s"],' % social_sec_nr)
+                else:
+                    raise Warning(_("Incorrectly formated social security number: %s" % social_sec_nr))
+            else:
+                if "|" in domain or "&" in domain:
+                    corrected_domains.append(domain)
+                else:
+                    corrected_domains.append('[%s' % domain)
+        self.search_domain = ''.join(corrected_domains)
+        _logger.info("domain: %s" % self.search_domain)
+        
         if self.search_reason == False and self.identification == False:
             raise Warning(_("Search reason or identification must be set before searching"))
         elif self.search_reason == "other reason" and self.other_reason == False:
