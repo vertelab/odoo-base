@@ -177,7 +177,7 @@ class WebsiteBlog(http.Controller):
  
         _logger.warn('opencustomerview %s' % post)
         token = hashlib.sha1('hemlighet' + fields.DateTime.now().tostring[:13].replace(' ','-') + post.get('personnummer') ).hexdigest()
-
+cd 
         if not token == post.get('token'):
             raise Warning(_('Error checking token'))
         #TODO do something more    
