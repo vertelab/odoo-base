@@ -19,7 +19,7 @@
             <field string="Notes" name="notes_count" widget="statinfo"/>
         </button> 
       </div>
-      <xpath expr="//page[@name='sales_purchases']" position="after">
+      <!-- <xpath expr="//page[@name='sales_purchases']" position="after">
                 <page string="Daily Notes">
                     <group>
                       <field name="notes_ids" mode="tree" nolabel="1">
@@ -34,7 +34,7 @@
                       </field>
                     </group>
                 </page>
-            </xpath>
+            </xpath> -->
     </field>
   </record> 
    <record id="view_partner_form1" model="ir.ui.view"> 
@@ -56,7 +56,7 @@
             <field string="Notes" name="notes_count" widget="statinfo"/>
         </button> 
       </div>
-      <xpath expr="//page[@name='apply_for_jobs']" position="after">
+      <!-- <xpath expr="//page[@name='apply_for_jobs']" position="after">
                 <page string="Daily Notes">
                     <group>
                       <field name="notes_ids" mode="tree" nolabel="1">
@@ -71,7 +71,7 @@
                       </field>
                     </group>
                 </page>
-            </xpath>
+            </xpath> -->
     </field>
   </record> 
 
@@ -94,7 +94,7 @@
             <field string="Notes" name="notes_count" widget="statinfo"/>
         </button> 
       </div>
-      <xpath expr="//page[@name='contacts_addresses']" position="after">
+      <!-- <xpath expr="//page[@name='contacts_addresses']" position="after">
                 <page string="Daily Notes">
                     <group>
                       <field name="notes_ids" mode="tree" nolabel="1">
@@ -109,7 +109,7 @@
                       </field>
                     </group>
                 </page>
-            </xpath>
+            </xpath> -->
     </field>
   </record> 
 

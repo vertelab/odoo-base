@@ -23,6 +23,8 @@ from odoo import models, fields, api, _
 import logging
 from datetime import date
 _logger = logging.getLogger(__name__)
+from odoo.exceptions import ValidationError
+
 
 
 class ResPartner(models.Model):
@@ -63,6 +65,7 @@ class ResPartner(models.Model):
     foreign_country_of_work = fields.Char(string="When working in foreign country")
     deactualization_message = fields.Text(string="Message to jobseeker regarding deactualization")
 
+    registered_by = fields.Many2one(string="Registered by", comodel_name="res.user")
     registered_through = fields.Char(string="Registered Through")
     share_info_with_employers = fields.Boolean(string="Share name and address with employers")
     sms_reminders = fields.Boolean(string="SMS reminders")
@@ -83,15 +86,21 @@ class ResPartner(models.Model):
     segment_employer = fields.Selection(string="Segment", selection=[('including 1','Including 1'), ('including 2',' Including 2'), ('entry job','Entry job'), ('national agreement','National agreement'), ('employment subsidy','Employment subsidy')])
 
     @api.one
-    def combine_social_sec_nr_age(self):
-        self.social_sec_nr_age = _("%s (%s years old)") % (self.company_registry, self.age)
-        if self.age == "Error calculating age, incorrect format on social security number":
-            self.social_sec_nr_age = self.age
+    def combine_social_sec_nr_age(self): #How to do the popup???
+        if self.age == "Error":
+            self.social_sec_nr_age = ""
+            self.social_sec_nr = ""
+            self.company_registry = ""
+        if self.company_registry != False:
+            self.social_sec_nr_age = _("%s (%s years old)") % (self.company_registry, self.age)
+        else:
+            self.social_sec_nr_age = ""
     @api.one
     def combine_state_name_code(self):
         self.state_name_code = "%s %s" % (self.state_id.name, self.state_id.code)
     
     @api.one
+    @api.constrains('company_registry')
     def calculate_age(self):
         wrong_input = False
         today = date.today()
@@ -110,6 +119,10 @@ class ResPartner(models.Model):
                     social_sec_stripped = social_sec_split[0][:6]
                 elif len(social_sec_split[0]) == 12:
                     social_sec_stripped = social_sec_split[0][:8]
+                    self.company_registry = "%s-%s" %(social_sec_stripped, social_sec_split[0][8:12])
+                else:
+                    wrong_input = True
+                    _logger.error("Social security number (company_registry) field lenght is incorrect, should be 12")
             date_of_birth = date(1980,1,1)
             if len(social_sec_stripped) == 6:
                 yr = social_sec_stripped[:2]
@@ -128,7 +141,7 @@ class ResPartner(models.Model):
                     except:
                         wrong_input = True
                         _logger.error("Could not convert social security number (company_registry) to date")
-            elif len(social_sec_stripped) > 6:
+            elif len(social_sec_stripped) == 8:
                 try:
                     date_of_birth = date(int(social_sec_stripped[:4]),int(social_sec_stripped[4:6]),int(social_sec_stripped[6:8]))
                 except:
@@ -149,7 +162,13 @@ class ResPartner(models.Model):
                     self.age = years
                 
             else: 
-                self.age = _("Error calculating age, incorrect format on social security number")
+                self.social_sec_nr = ""
+                self.age = ""
+                #return {
+                #'warning': {'title': "Warning", 'message': "What is this?"},
+                #}
+                raise ValidationError(_("Please input a correctly formated social security number"))
+                
     
     
 
