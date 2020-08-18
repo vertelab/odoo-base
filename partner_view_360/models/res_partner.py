@@ -151,5 +151,44 @@ class ResPartner(models.Model):
     
     
 
+# ~ from odoo.addons.http_routing.models.ir_http import slug, unslug
+from odoo import http
+from odoo.http import request
+import werkzeug
+import hashlib
 
-    
+
+class WebsiteBlog(http.Controller):
+
+    @http.route([
+        '/opencustomerview'
+    ], type='http', auth="public", website=True)
+    def opencustomerview(self, **post):
+        """        
+        personnummer=<12 tecken>
+        signatur=<5 tecken>
+        arendetyp=<tre tecken, t ex P92>
+        kontaktid=<10 siffror, för uppföljning/loggning id i ACE>
+        bankid=<OK/annat>
+        token= <sha1 hemlighet + yyyy-mm-dd-hh + personnummer>
+
+        P92 första planeringssamtal
+        """
+ 
+        _logger.warn('opencustomerview %s' % post)
+        token = hashlib.sha1('hemlighet' + fields.DateTime.now().tostring[:13].replace(' ','-') + post.get('personnummer') ).hexdigest()
+
+        if not token == post.get('token'):
+            raise Warning(_('Error checking token'))
+        #TODO do something more    
+        
+        # ~ action = self.env['ir.actions.act_window'].for_xml_id('partner_view_360', 'action_jobseekers')
+        action = self.ref('partner_view_360.action_jobseekers')
+        # ~ return action
+        partner = self.env['res.partner'].search([('social_sec_nr','=',post.get('personnummer'))])
+ 
+ 
+        # ~ return werkzeug.utils.redirect('/web?debug=true#id=242&action=337&model=res.partner&view_type=form&menu_id=219')
+        return werkzeug.utils.redirect('/web?id=%s&action=%s&model=res.partner&view_type=form' % (partner.id,action.id))
+
+
