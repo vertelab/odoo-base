@@ -151,7 +151,7 @@
               <label for="state_id" string="Municipality" class="oe_edit_only" />
               <field name="state_id" class="oe_edit_only" nolabel="1" />
               <!-- <field name="state_code"/> -->
-              <label for="street" string="Address"/>
+              <label for="street" string="Registered address"/>
               <div class="oe_read_only">
                 <div class="o_address_format" >
                   <span class="oe_read_only">
