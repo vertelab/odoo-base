@@ -149,7 +149,7 @@ msgstr "Noteringstyper"
 #: model_terms:ir.ui.view,arch_db:partner_daily_notes.view_partner_notes_tree
 #: model_terms:ir.ui.view,arch_db:partner_daily_notes.view_partner_notes_tree_button
 msgid "Notes"
-msgstr "Noteringar"
+msgstr "Daganteckningar"
 
 #. module: partner_daily_notes
 #: model:ir.model.fields,field_description:partner_daily_notes.field_res_partner__notes_count

@@ -87,10 +87,6 @@ class ResPartner(models.Model):
 
     @api.one
     def combine_social_sec_nr_age(self): #How to do the popup???
-        if self.age == "Error":
-            self.social_sec_nr_age = ""
-            self.social_sec_nr = ""
-            self.company_registry = ""
         if self.company_registry != False:
             self.social_sec_nr_age = _("%s (%s years old)") % (self.company_registry, self.age)
         else:
@@ -162,12 +158,13 @@ class ResPartner(models.Model):
                     self.age = years
                 
             else: 
-                self.social_sec_nr = ""
-                self.age = ""
                 #return {
                 #'warning': {'title': "Warning", 'message': "What is this?"},
                 #}
-                raise ValidationError(_("Please input a correctly formated social security number"))
+                if self.is_jobseeker:
+                    self.social_sec_nr = ""
+                    self.age = ""
+                    raise ValidationError(_("Please input a correctly formated social security number"))
                 
     
     
