@@ -294,7 +294,7 @@ msgstr "Arbetsgivare"
 
 #. module: partner_view_360
 #: model:ir.actions.act_window,name:partner_view_360.action_employers
-msgid "Employers Action"
+msgid "Employers"
 msgstr "Arbetsgivare"
 
 #. module: partner_view_360
@@ -447,7 +447,7 @@ msgstr "Arbetssökande"
 
 #. module: partner_view_360
 #: model:ir.actions.act_window,name:partner_view_360.action_jobseekers
-msgid "Jobseekers Action"
+msgid "Jobseekers"
 msgstr "Arbetssökande"
 
 #. module: partner_view_360

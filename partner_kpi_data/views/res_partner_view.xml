@@ -32,7 +32,7 @@
      </record>
 
     <record id="kpi_action" model="ir.actions.act_window">
-        <field name="name">KPI Action</field>
+        <field name="name">KPI</field>
         <field name="type">ir.actions.act_window</field>
         <field name="res_model">res.partner.kpi</field>
         <field name="view_type">form</field>

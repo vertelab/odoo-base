@@ -130,7 +130,7 @@ msgstr "Noteringstyp"
 
 #. module: partner_daily_notes
 #: model:ir.actions.act_window,name:partner_daily_notes.action_partner_note_type_tree
-msgid "Note Types Action"
+msgid "Note Types"
 msgstr ""
 
 #. module: partner_daily_notes
@@ -164,7 +164,7 @@ msgstr "Kontor"
 
 #. module: partner_daily_notes
 #: model:ir.actions.act_window,name:partner_daily_notes.action_partner_notes_tree
-msgid "Partner Daily Notes Action"
+msgid "Partner Daily Notes"
 msgstr ""
 
 #. module: partner_daily_notes

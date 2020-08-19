@@ -399,7 +399,7 @@
     </field>
   </record>
   <record id="action_jobseekers" model="ir.actions.act_window">
-    <field name="name">Jobseekers Action</field>
+    <field name="name">Jobseekers</field>
     <field name="res_model">res.partner</field>
     <field name="view_mode">kanban,tree,form,activity</field>
     <field name="search_view_id" ref="view_jobseeker_filter" />
@@ -723,7 +723,7 @@
     </field>
   </record>
   <record id="action_employers" model="ir.actions.act_window">
-    <field name="name">Employers Action</field>
+    <field name="name">Employers</field>
     <field name="res_model">res.partner</field>
     <field name="view_mode">kanban,tree,form,activity</field>
     <field name="search_view_id" ref="view_employer_filter" />
