@@ -151,7 +151,7 @@
               <label for="state_id" string="Municipality" class="oe_edit_only" />
               <field name="state_id" class="oe_edit_only" nolabel="1" />
               <!-- <field name="state_code"/> -->
-              <label for="street" string="Address"/>
+              <label for="street" string="Registered address"/>
               <div class="oe_read_only">
                 <div class="o_address_format" >
                   <span class="oe_read_only">
@@ -399,7 +399,7 @@
     </field>
   </record>
   <record id="action_jobseekers" model="ir.actions.act_window">
-    <field name="name">Jobseekers Action</field>
+    <field name="name">Jobseekers</field>
     <field name="res_model">res.partner</field>
     <field name="view_mode">kanban,tree,form,activity</field>
     <field name="search_view_id" ref="view_jobseeker_filter" />
@@ -723,7 +723,7 @@
     </field>
   </record>
   <record id="action_employers" model="ir.actions.act_window">
-    <field name="name">Employers Action</field>
+    <field name="name">Employers</field>
     <field name="res_model">res.partner</field>
     <field name="view_mode">kanban,tree,form,activity</field>
     <field name="search_view_id" ref="view_employer_filter" />

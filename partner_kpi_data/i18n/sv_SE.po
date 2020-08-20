@@ -116,7 +116,7 @@ msgstr ""
 
 #. module: partner_kpi_data
 #: model:ir.actions.act_window,name:partner_kpi_data.kpi_action
-msgid "KPI Action"
+msgid "KPI"
 msgstr ""
 
 #. module: partner_kpi_data
