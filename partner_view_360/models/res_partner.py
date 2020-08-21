@@ -23,6 +23,8 @@ from odoo import models, fields, api, _
 import logging
 from datetime import date
 _logger = logging.getLogger(__name__)
+from odoo.exceptions import ValidationError
+
 
 
 class ResPartner(models.Model):
@@ -40,7 +42,7 @@ class ResPartner(models.Model):
 
     # office selection field for partners connected to an office, my_office_code filled in by office_code for the office
     office = fields.Many2one('res.partner', string="Office")
-    office_ids = fields.Many2many('res.partner', relation='res_partner_office_partner_rel', column1='partner_id', column2='office_id', string='Offices')
+    #office_ids = fields.Many2many('res.partner', relation='res_partner_office_partner_rel', column1='partner_id', column2='office_id', string='Offices')
     my_office_code = fields.Char(
         string='Office code', related='office.office_code')
 
@@ -63,6 +65,7 @@ class ResPartner(models.Model):
     foreign_country_of_work = fields.Char(string="When working in foreign country")
     deactualization_message = fields.Text(string="Message to jobseeker regarding deactualization")
 
+    registered_by = fields.Many2one(string="Registered by", comodel_name="res.user")
     registered_through = fields.Char(string="Registered Through")
     share_info_with_employers = fields.Boolean(string="Share name and address with employers")
     sms_reminders = fields.Boolean(string="SMS reminders")
@@ -83,13 +86,17 @@ class ResPartner(models.Model):
     segment_employer = fields.Selection(string="Segment", selection=[('including 1','Including 1'), ('including 2',' Including 2'), ('entry job','Entry job'), ('national agreement','National agreement'), ('employment subsidy','Employment subsidy')])
 
     @api.one
-    def combine_social_sec_nr_age(self):
-        self.social_sec_nr_age = _("%s (%s years old)") % (self.company_registry, self.age)
+    def combine_social_sec_nr_age(self): #How to do the popup???
+        if self.company_registry != False:
+            self.social_sec_nr_age = _("%s (%s years old)") % (self.company_registry, self.age)
+        else:
+            self.social_sec_nr_age = ""
     @api.one
     def combine_state_name_code(self):
         self.state_name_code = "%s %s" % (self.state_id.name, self.state_id.code)
     
     @api.one
+    @api.constrains('company_registry')
     def calculate_age(self):
         wrong_input = False
         today = date.today()
@@ -104,11 +111,15 @@ class ResPartner(models.Model):
                 social_sec_stripped = social_sec_split[0]
             elif len(social_sec_split) == 1:
                 if len(social_sec_split[0]) == 10:
+                    wrong_input = True
                     social_sec_stripped = social_sec_split[0][:6]
                 elif len(social_sec_split[0]) == 12:
                     social_sec_stripped = social_sec_split[0][:8]
+                    self.company_registry = "%s-%s" %(social_sec_stripped, social_sec_split[0][8:12])
+                else:
+                    wrong_input = True
+                    _logger.error("Social security number (company_registry) field lenght is incorrect, should be 12")
             date_of_birth = date(1980,1,1)
-            #9708131111
             if len(social_sec_stripped) == 6:
                 yr = social_sec_stripped[:2]
                 year = int("20"+yr)
@@ -119,14 +130,14 @@ class ResPartner(models.Model):
                 except:
                     wrong_input = True
                     _logger.error("Could not convert social security number (company_registry) to date")
-                if today.year - date_of_birth.year < 18:
+                if today.year - date_of_birth.year < 18: #if social security numbers with 10 numbers are reallowed, change this to something more reasonable in case children are allowed to register
                     year = int("19"+yr)
                     try:
                         date_of_birth = date(year, month, day)
                     except:
                         wrong_input = True
                         _logger.error("Could not convert social security number (company_registry) to date")
-            elif len(social_sec_stripped) > 6:
+            elif len(social_sec_stripped) == 8:
                 try:
                     date_of_birth = date(int(social_sec_stripped[:4]),int(social_sec_stripped[4:6]),int(social_sec_stripped[6:8]))
                 except:
@@ -147,9 +158,14 @@ class ResPartner(models.Model):
                     self.age = years
                 
             else: 
-                self.age = _("Error calculating age")
-    
-    
+                #return {
+                #'warning': {'title': "Warning", 'message': "What is this?"},
+                #}
+                if self.is_jobseeker:
+                    self.social_sec_nr = ""
+                    self.age = ""
+                    raise ValidationError(_("Please input a correctly formated social security number"))
+                
 
 # ~ from odoo.addons.http_routing.models.ir_http import slug, unslug
 from odoo import http
@@ -190,5 +206,20 @@ class WebsiteBlog(http.Controller):
  
         # ~ return werkzeug.utils.redirect('/web?debug=true#id=242&action=337&model=res.partner&view_type=form&menu_id=219')
         return werkzeug.utils.redirect('/web?id=%s&action=%s&model=res.partner&view_type=form' % (partner.id,action.id))
+
+    @api.multi
+    def close_view(self):
+        return{
+            'name': _("Search Partner"),
+            'view_type': 'form',
+            #'src_model': "res.partner",
+            'res_model': "res.partner.jobseeker.search.wizard",
+            'view_id': False, #self.env.ref("partner_view_360.search_jobseeker_wizard").id,
+            'view_mode':"form",
+            #'target': "current", 
+            #'key2': "client_action_multi",
+            'type': 'ir.actions.act_window',
+        }
+
 
 

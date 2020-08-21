@@ -31,7 +31,7 @@
       <field name="barcode" position="after">
         <field name="office" options="{'no_create_edit': True}" domain="[('type', '=', 'af office')]" />
         <field name="my_office_code" />
-        <field name="office_ids" widget="many2many_tags" options="{'no_create_edit': True}" domain="[('type', '=', 'af office')]" />
+        <!-- <field name="office_ids" widget="many2many_tags" options="{'no_create_edit': True}" domain="[('type', '=', 'af office')]" /> -->
         <field name="temp_officer_id" widget="many2many_tags" options="{'no_create_edit': True}" />
         <field name="is_jobseeker" />
         <field name="is_independent_partner" />
@@ -123,6 +123,9 @@
     <field name="arch" type="xml">
       <form string="Jobseeker">
         <sheet>
+        <div style="margin-bottom:1em;">
+            <button name="close_view" type="object">Close</button>
+          </div>
           <div class="oe_button_box" name="button_box">
             <button name="toggle_active" type="object" class="oe_stat_button" icon="fa-archive">
               <field name="active" widget="boolean_button" options="{&quot;terminology&quot;: &quot;archive&quot;}" />
@@ -139,7 +142,8 @@
               <field name="type" attrs="{'invisible' : True}" />
               <label for="company_registry" string="Social security number" class="oe_edit_only" />
               <field name="company_registry" nolabel="1" class="oe_edit_only" />
-              <field name="social_sec_nr_age" class="oe_read_only" />
+              <label for="social_sec_nr_age" string="Social security number" class="oe_read_only"/>
+              <field name="social_sec_nr_age" class="oe_read_only" nolabel="1" />
               <field name="customer_id" />
               <!-- folkbokföringsadress, alternativt göra en res partner typ-->
               <label for="state_name_code" string="Municipality" class="oe_read_only" />
@@ -147,7 +151,7 @@
               <label for="state_id" string="Municipality" class="oe_edit_only" />
               <field name="state_id" class="oe_edit_only" nolabel="1" />
               <!-- <field name="state_code"/> -->
-              <label for="street" string="Address"/>
+              <label for="street" string="Registered address"/>
               <div class="oe_read_only">
                 <div class="o_address_format" >
                   <span class="oe_read_only">
@@ -175,11 +179,12 @@
               <field name="email" />
             </group>
             <group string="Employment service information">
+              <field name="registered_by"/>
               <field name="registered_through" />
               <field name="jobseeker_category" />
-              <field name="customer_since" />
+              <!-- <field name="customer_since" /> -->
               <field name="office" options="{'no_create_edit': True}" domain="[('type', '=', 'af office')]" />
-              <field name="office_ids" widget="many2many_tags" options="{'no_create_edit': True}" domain="[('type', '=', 'af office')]" />
+              <!-- <field name="office_ids" widget="many2many_tags" options="{'no_create_edit': True}" domain="[('type', '=', 'af office')]" /> -->
               <field name="share_info_with_employers" />
               <field name="sms_reminders" />
               <field name="segment_jobseeker"/>
@@ -394,7 +399,7 @@
     </field>
   </record>
   <record id="action_jobseekers" model="ir.actions.act_window">
-    <field name="name">Jobseekers Action</field>
+    <field name="name">Jobseekers</field>
     <field name="res_model">res.partner</field>
     <field name="view_mode">kanban,tree,form,activity</field>
     <field name="search_view_id" ref="view_jobseeker_filter" />
@@ -430,12 +435,12 @@
       <xpath expr="//page[@name='apply_for_jobs']" position="inside">
         <page name="education" string="Education">
           <group>
-            <field name="sun_ids" options="{'no_create_edit': True}" />
-            <field name="education_level" />
+            <field name="sun_ids" options="{'no_create_edit': True}" widget="many2many_tags" />
+            <field name="education_level"/>
             <field name="foreign_education" />
             <field name="foreign_education_approved" />
             <!-- <field name="has_drivers_license" /> -->
-            <field name="drivers_license_ids" options="{'no_create_edit': True}" />
+            <field name="drivers_license_ids" options="{'no_create_edit': True}" widget="many2many_tags" />
             <field name="has_car" />
           </group>
         </page>
@@ -448,6 +453,9 @@
     <field name="arch" type="xml">
       <form string="employer">
         <sheet>
+          <div style="margin-bottom:1em;">
+            <button name="close_view">Close</button>
+          </div>
           <div class="oe_button_box" name="button_box">
             <button name="toggle_active" type="object" class="oe_stat_button" icon="fa-archive">
               <field name="active" widget="boolean_button" options="{&quot;terminology&quot;: &quot;archive&quot;}" />
@@ -489,6 +497,7 @@
               <field name="website" />
             </group>
             <group string="Employment service information">
+              <field name="registered_by"/>
               <field name="registered_through" />
               <field name="customer_since" />
               <field name="sni_ids" widget="many2many_tags" />
@@ -496,7 +505,7 @@
               <label for="user_id" string="Administrative officer" />
               <field name="user_id" nolabel="1" />
               <field name="office" options="{'no_create_edit': True}" domain="[('type', '=', 'af office')]" />
-              <field name="office_ids" widget="many2many_tags" options="{'no_create_edit': True}" domain="[('type', '=', 'af office')]" />
+              <!-- <field name="office_ids" widget="many2many_tags" options="{'no_create_edit': True}" domain="[('type', '=', 'af office')]" /> -->
               <field name="segment_employer"/>
             </group>
           </group>
@@ -714,7 +723,7 @@
     </field>
   </record>
   <record id="action_employers" model="ir.actions.act_window">
-    <field name="name">Employers Action</field>
+    <field name="name">Employers</field>
     <field name="res_model">res.partner</field>
     <field name="view_mode">kanban,tree,form,activity</field>
     <field name="search_view_id" ref="view_employer_filter" />

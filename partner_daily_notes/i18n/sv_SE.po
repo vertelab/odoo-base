@@ -130,7 +130,7 @@ msgstr "Noteringstyp"
 
 #. module: partner_daily_notes
 #: model:ir.actions.act_window,name:partner_daily_notes.action_partner_note_type_tree
-msgid "Note Types Action"
+msgid "Note Types"
 msgstr ""
 
 #. module: partner_daily_notes
@@ -149,7 +149,7 @@ msgstr "Noteringstyper"
 #: model_terms:ir.ui.view,arch_db:partner_daily_notes.view_partner_notes_tree
 #: model_terms:ir.ui.view,arch_db:partner_daily_notes.view_partner_notes_tree_button
 msgid "Notes"
-msgstr "Noteringar"
+msgstr "Daganteckningar"
 
 #. module: partner_daily_notes
 #: model:ir.model.fields,field_description:partner_daily_notes.field_res_partner__notes_count
@@ -164,7 +164,7 @@ msgstr "Kontor"
 
 #. module: partner_daily_notes
 #: model:ir.actions.act_window,name:partner_daily_notes.action_partner_notes_tree
-msgid "Partner Daily Notes Action"
+msgid "Partner Daily Notes"
 msgstr ""
 
 #. module: partner_daily_notes

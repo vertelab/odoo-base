@@ -20,6 +20,7 @@
 ##############################################################################
 
 from odoo import models, fields, api, _
+from datetime import datetime
 import logging
 _logger = logging.getLogger(__name__)
 
@@ -32,7 +33,7 @@ class ResPartnerNotes(models.Model):
 
     administrative_officer = fields.Many2one('res.users', string='Administrative officer', default=lambda self: self.env.user)
     note = fields.Text(string="Notes")
-    note_date = fields.Datetime(string="Refers to date") 
+    note_date = fields.Datetime(string="Refers to date", default=datetime.now())
     note_type = fields.Many2one(comodel_name="res.partner.note.type") 
     note_number = fields.Char(string="AIS number")
 
