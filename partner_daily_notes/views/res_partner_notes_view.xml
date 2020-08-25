@@ -25,7 +25,8 @@
                     <field name="partner_id"/>
                     <field name="name" />    
                     <field name="note"/>
-                    <field name="note_date" widget="date"/> 
+                    <field name="note_date" widget="date"/>
+                    <field name="is_confidential"/>
                     <field name="note_type" options="{'no_create_edit': True}"/>
                     <field name="note_number" groups="base.group_no_one"/>
                     <field name="office" options="{'no_create_edit': True}" domain="[('type', '=', 'af office')]"/>
@@ -40,7 +41,8 @@
                 <tree editable="bottom" string="Notes" default_order="note_date">
                     <field name="name"/>    
                     <field name="note"/>
-                    <field name="note_date" widget="date"/> 
+                    <field name="note_date" widget="date"/>
+                    <field name="is_confidential"/>
                     <field name="note_type" options="{'no_create_edit': True}"/>
                     <field name="note_number" groups="base.group_no_one"/>
                     <field name="office" options="{'no_create_edit': True}" domain="[('type', '=', 'af office')]"/>
