@@ -96,8 +96,8 @@ class ResPartnerJobseekerSearchWizard(models.TransientModel):
         
         partner_ids = self.env['res.partner'].search(safe_eval(self.search_domain)).mapped('id')
         if len(partner_ids) < 1:
-            raise Warning(_("No id found"))       
-            
+            raise Warning(_("No id found"))
+                   
         action = {
             'name': _('Jobseekers'),
             'domain': [('id', '=', partner_ids), ('is_jobseeker', '=', True)],
