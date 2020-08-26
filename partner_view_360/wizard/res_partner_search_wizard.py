@@ -66,35 +66,27 @@ class ResPartnerJobseekerSearchWizard(models.TransientModel):
     reason_or_id = fields.Selection(string="Access by reason or identification?", selection=[('reason', 'Reason'), ('id', 'Identification')])
     search_reason = fields.Selection(string="Search reason",selection=[('record incoming documents','Record incoming documents'), ("follow-up of job seekers' planning","Follow-up of job seekers' planning"), ('directory Assistance','Directory Assistance'), ('matching','Matching'), ('decisions for other officer','Decisions for other officer'),('administration of recruitment meeting/group activity/project','Administration of recruitment meeting/group activity/project'),('investigation','Investigation'),('callback','Callback'),('other reason','Other reason')])#
     identification = fields.Selection(string="Identification",selection=[('id document','ID document'), ('Digital ID','Digital ID'), ('id document-card/residence permit card','ID document-card/Residence permit card'), ('known (previously identified)','Known (previously identified)'), ('identified by certifier','Identified by certifier')])#
+    
+    social_sec_nr_search = fields.Char(string="Social security number")
+    customer_id_search = fields.Char(string="Customer number")
+    email_search = fields.Char(string="Email")
+
     search_domain = fields.Char(string="Search Filter", default='["|","|",("social_sec_nr","=",""),("customer_id","=",""),("email","=","")]')
     other_reason = fields.Char(string="Other reason")
 
     @api.multi
-    def search_jobseeker(self):        
-        domains = self.search_domain.split("[")
-        _logger.info("domains: %s" % domains)
-        corrected_domains = []
-        for domain in domains:
-            domain_stripped = domain[:-2]
-            _logger.info("domain_stripped: %s" % domain_stripped)
-
-            if ("social_sec_nr" in domain_stripped or "company_registry" in domain_stripped):
-                if "=" not in domain_stripped:
-                    raise Warning(_("Social security number has to be searched in full"))
-                _logger.info("removed quotes: %s" % domain_stripped.split(",")[2].strip('"'))
-                social_sec_nr = domain_stripped.split(",")[2].strip('"')
-                if len(social_sec_nr) == 13 and social_sec_nr[:9] == "-":
-                    corrected_domains.append('"social_sec_nr", "=", "%s"' % social_sec_nr)
-                elif len(social_sec_nr) == 12:
-                    corrected_domains.append('["social_sec_nr", "=", "%s"],' % social_sec_nr)
-                else:
-                    raise Warning(_("Incorrectly formated social security number: %s" % social_sec_nr))
-            else:
-                if "|" in domain or "&" in domain:
-                    corrected_domains.append(domain)
-                else:
-                    corrected_domains.append('[%s' % domain)
-        self.search_domain = ''.join(corrected_domains)
+    def search_jobseeker(self):
+        domains = ['["|","|",']   
+        if len(self.social_sec_nr_search) == 13 and self.social_sec_nr_search[8] == "-":
+            domains.append('["social_sec_nr", "=", "%s"]' % self.social_sec_nr_search)
+        elif len(self.social_sec_nr_search) == 12:
+            domains.append('["social_sec_nr", "=", "%s-%s"]' % (self.social_sec_nr_search[:8],self.social_sec_nr_search[8:12]))
+        else:
+            raise Warning(_("Incorrectly formated social security number: %s" % self.social_sec_nr_search))
+        domains.append(',["customer_id","=","%s"]' % self.customer_id_search)
+        domains.append(',["email","=","%s"]' % self.email_search)
+        domains.append(']')
+        self.search_domain = ''.join(domains)
         _logger.info("domain: %s" % self.search_domain)
         
         if self.search_reason == False and self.identification == False:

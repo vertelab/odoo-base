@@ -40,20 +40,30 @@
             <notebook>
                 <page string="When in contact">
                     <group>
+                    <group>
+                        <field name="identification" />
+                        <field name="other_reason" attrs="{'invisible': [('search_reason','!=','other reason')]}"/>
+                        <!-- <field name="search_domain" widget="domain" options="{'model' : 'res.partner'}"> </field> -->
                     
-                    <field name="identification" />
-                    <field name="other_reason" attrs="{'invisible': [('search_reason','!=','other reason')]}"/>
-                    <field name="search_domain" widget="domain" options="{'model' : 'res.partner'}"> </field>
+                        <field name="social_sec_nr_search"/>
+                        <!-- <field name="customer_id_search"/>
+                        <field name="email_search"/> -->
+                    </group>
                 </group>
                 <div style="min-height:25em;"> </div>
                 <group></group>
                 </page>
                 <page string="Based on the needs of the authority">
                     <group>
-                    <field name="search_reason"/> <!--widget="radio" options="{'horizontal': true}"-->
-                    <field name="other_reason" attrs="{'invisible': [('search_reason','!=','other reason')]}"/>
-                    <field name="search_domain" widget="domain" options="{'model' : 'res.partner'}"> </field>
-                </group>
+                        <group>
+                            <field name="search_reason"/> <!--widget="radio" options="{'horizontal': true}"-->
+                            <field name="other_reason" attrs="{'invisible': [('search_reason','!=','other reason')]}"/>
+                            
+                            <field name="social_sec_nr_search"/>
+                            <field name="customer_id_search"/>
+                            <field name="email_search"/>     
+                        </group>           
+                    </group>
                 <div style="min-height:20em;"> </div>
                 <group></group>
                 </page>
