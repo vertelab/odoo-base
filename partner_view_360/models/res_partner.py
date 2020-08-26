@@ -176,46 +176,46 @@ import hashlib
 
 
 class WebsiteBlog(http.Controller):
-
     @http.route([
         '/opencustomerview'
-    ], type='http', auth="public", website=True)
+    ], type='http', auth="public", website=False, csrf=False)
     def opencustomerview(self, **post):
-        """        
+        """
         personnummer=<12 tecken>
         signatur=<5 tecken>
         arendetyp=<tre tecken, t ex P92>
         kontaktid=<10 siffror, för uppföljning/loggning id i ACE>
         bankid=<OK/annat>
-        token= <sha1 hemlighet + yyyy-mm-dd-hh + personnummer>
         datatime=yyyy-mm-dd-hh
         reason=<text string>
         
+        token= <sha1 hemlighet + yyyy-mm-dd-hh + personnummer>
         
         P92 första planeringssamtal
         """
- 
         _logger.warn('opencustomerview %s' % post)
-        
-        secret = self.env['ir.config_parameter'].sudo().get_param('partner_view_360.secret', 'hemligt')
-
+        secret = request.env['ir.config_parameter'].sudo().get_param('partner_view_360.secret', 'hemligt')
         # ~ token = hashlib.sha1(secret + fields.DateTime.now().tostring[:13].replace(' ','-') + post.get('personnummer') ).hexdigest()
-        token = hashlib.sha1(secret + post.get('datatime') + post.get('personnummer','20010203-1234') + post.get('bankid') ).hexdigest()
-
+        token = hashlib.sha1((secret + post.get('datatime', '0000-00-00-00') + post.get('personnummer','20010203-1234') + post.get('bankid', 'None') ).encode('utf-8')).hexdigest()
+        _logger.warn("\n\ntoken: %s" % token)
         if not token == post.get('token'):
             raise Warning(_('Error checking token'))
-        
         # ~ action = self.env['ir.actions.act_window'].for_xml_id('partner_view_360', 'action_jobseekers')
-        action = self.ref('partner_view_360.action_jobseekers')
+        action = request.env.ref('partner_view_360.action_jobseekers')
+        _logger.warn("action: %s" % action)
         # ~ return action
-        partner = self.env['res.partner'].search([('social_sec_nr','=',post.get('personnummer','20010203-1234'))])
- 
+        partner = request.env['res.partner'].sudo().search([('company_registry','=',post.get('personnummer','20010203-1234'))]) # not granted yet
+        _logger.warn("partner: %s pnr: %s " % (partner, post.get('personnummer','20010203-1234')))
         if partner and len(partner) == 1:
             # partner._grant_jobseeker_access(post.get('reason','None'))
             partner.eidentification = post.get('bankid')
-            return werkzeug.utils.redirect('/web?id=%s&action=%s&model=res.partner&view_type=form' % (partner.id if partner else 0,action.id if action else 0))
+            # ~ res_url = '/web?id=%s&action=%s&model=res.partner&view_type=form' % (partner.id if partner else 0,action.id if action else 0)
+            res_url = '/web?id=%s&action=%s&model=res.partner&view_type=form#id=%s&active_id=40&model=res.partner&view_type=form' % (partner.id if partner else 0,action.id if action else 0,partner.id if partner else 0)
+            #'/web?id=823&action=371&model=res.partner&active_id=39&model=res.partner&view_type=form&menu_id=252#id=823&active_id=40&model=res.partner&view_type=form&menu_id='
+            _logger.warn("res_url: %s" % res_url)
+            return werkzeug.utils.redirect(res_url)
+            # return werkzeug.utils.redirect('/web?id=%s&action=%s&model=res.partner&view_type=form' % (partner.id if partner else 0,action.id if action else 0))
         # ~ return werkzeug.utils.redirect('/web?debug=true#id=242&action=337&model=res.partner&view_type=form&menu_id=219')
-
         else:
             pass
             
