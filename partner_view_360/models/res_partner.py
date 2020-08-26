@@ -201,8 +201,8 @@ class WebsiteBlog(http.Controller):
         bankid=<OK/annat>
         datatime=yyyy-mm-dd-hh
         reason=<text string>
-        
         token= <sha1 hemlighet + yyyy-mm-dd-hh + personnummer>
+        debug=True 
         
         P92 första planeringssamtal
         """
@@ -212,7 +212,7 @@ class WebsiteBlog(http.Controller):
         token = hashlib.sha1((secret + post.get('datatime', '0000-00-00-00') + post.get('personnummer','20010203-1234') + post.get('bankid', 'None') ).encode('utf-8')).hexdigest()
         _logger.warn("\n\ntoken: %s" % token)
         if not token == post.get('token'):
-            raise Warning(_('Error checking token'))
+            return request.render('partner_view_360.403', {'error': 'ERROR: Token missmatch','our_token': token, 'ext_token': post.get('token'), 'partner': None, 'action': None, 'url': None, 'post': post,'secret': secret})
         # ~ action = self.env['ir.actions.act_window'].for_xml_id('partner_view_360', 'action_jobseekers')
         action = request.env.ref('partner_view_360.action_jobseekers')
         _logger.warn("action: %s" % action)
@@ -220,14 +220,18 @@ class WebsiteBlog(http.Controller):
         partner = request.env['res.partner'].sudo().search([('company_registry','=',post.get('personnummer','20010203-1234'))]) # not granted yet
         _logger.warn("partner: %s pnr: %s " % (partner, post.get('personnummer','20010203-1234')))
         if partner and len(partner) == 1:
-            # partner._grant_jobseeker_access(post.get('reason','None'))
+            # if not partner._grant_jobseeker_access(post.get('reason','None'))
+            #     return request.render('partner_view_360.403', {'error': 'ERROR: Could not grant access','our_token': token, 'ext_token': post.get('token'), 'partner': partner, 'action': action,'url': None,'post': post})
+            #
             partner.eidentification = post.get('bankid')
             # ~ res_url = '/web?id=%s&action=%s&model=res.partner&view_type=form' % (partner.id if partner else 0,action.id if action else 0)
             res_url = '/web?id=%s&action=%s&model=res.partner&view_type=form#id=%s&active_id=40&model=res.partner&view_type=form' % (partner.id if partner else 0,action.id if action else 0,partner.id if partner else 0)
             #'/web?id=823&action=371&model=res.partner&active_id=39&model=res.partner&view_type=form&menu_id=252#id=823&active_id=40&model=res.partner&view_type=form&menu_id='
             _logger.warn("res_url: %s" % res_url)
+            if post.get('debug'):
+                return request.render('partner_view_360.403', {'message': 'Debug','our_token': token, 'ext_token': post.get('token'), 'partner': partner, 'action': action,'url': res_url, 'post': post,'secret': secret})
             return werkzeug.utils.redirect(res_url)
             # return werkzeug.utils.redirect('/web?id=%s&action=%s&model=res.partner&view_type=form' % (partner.id if partner else 0,action.id if action else 0))
         # ~ return werkzeug.utils.redirect('/web?debug=true#id=242&action=337&model=res.partner&view_type=form&menu_id=219')
         else:
-            pass
+            return request.render('partner_view_360.403', {'error': 'ERROR: No partner found', 'our_token': token, 'ext_token': post.get('token'), 'partner': partner, 'action': action, 'post': post,'secret': secret})
