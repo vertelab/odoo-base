@@ -208,7 +208,7 @@ class WebsiteBlog(http.Controller):
         # ~ action = self.env['ir.actions.act_window'].for_xml_id('partner_view_360', 'action_jobseekers')
         action = self.ref('partner_view_360.action_jobseekers')
         # ~ return action
-        partner = self.env['res.partner'].search([('social_sec_nr','=',post.get('personnummer','20010203-1234'))])
+        partner = self.env['res.partner'].search([('company_registry','=',post.get('personnummer','20010203-1234'))])
  
         if partner and len(partner) == 1:
             # partner._grant_jobseeker_access(post.get('reason','None'))
