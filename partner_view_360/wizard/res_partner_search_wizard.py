@@ -71,7 +71,7 @@ class ResPartnerJobseekerSearchWizard(models.TransientModel):
     customer_id_search = fields.Char(string="Customer number")
     email_search = fields.Char(string="Email")
 
-    search_domain = fields.Char(string="Search Filter", default='["|","|",("social_sec_nr","=",""),("customer_id","=",""),("email","=","")]')
+    search_domain = fields.Char(string="Search Filter")
     other_reason = fields.Char(string="Other reason")
 
     @api.multi
