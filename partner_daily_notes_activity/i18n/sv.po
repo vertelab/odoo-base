@@ -1,0 +1,50 @@
+# Translation of Odoo Server.
+# This file contains the translation of the following modules:
+#	* partner_daily_notes_activity
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: Odoo Server 12.0\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2020-08-25 19:53+0000\n"
+"PO-Revision-Date: 2020-08-25 19:53+0000\n"
+"Last-Translator: <>\n"
+"Language-Team: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: \n"
+"Plural-Forms: \n"
+
+#. module: partner_daily_notes_activity
+#: code:addons/partner_daily_notes_activity/models/res_partner.py:34
+#, python-format
+msgid " - Future Events"
+msgstr ""
+
+#. module: partner_daily_notes_activity
+#: model:ir.model,name:partner_daily_notes_activity.model_res_partner
+msgid "Contact"
+msgstr ""
+
+#. module: partner_daily_notes_activity
+#: model:ir.model.fields,field_description:partner_daily_notes_activity.field_res_partner__last_contact
+#: model:ir.model.fields,field_description:partner_daily_notes_activity.field_res_users__last_contact
+msgid "Last Contact"
+msgstr "Senaste kontakt"
+
+#. module: partner_daily_notes_activity
+#: model:ir.model.fields,field_description:partner_daily_notes_activity.field_res_partner__next_contact
+#: model:ir.model.fields,field_description:partner_daily_notes_activity.field_res_users__next_contact
+msgid "Next Contact"
+msgstr "Nästa kontakt"
+
+#. module: partner_daily_notes_activity
+#: model:ir.model.fields,field_description:partner_daily_notes_activity.field_res_partner__next_event_count
+#: model:ir.model.fields,field_description:partner_daily_notes_activity.field_res_users__next_event_count
+msgid "Next Event"
+msgstr "Nästa kontakter"
+
+#. module: partner_daily_notes_activity
+#: model_terms:ir.ui.view,arch_db:partner_daily_notes_activity.partner_daily_notes_activity_form_view
+msgid "Next Events"
+msgstr "Nästa kontakter"
