@@ -68,6 +68,7 @@ class ResPartner(models.Model):
 
     registered_by = fields.Many2one(string="Registered by", comodel_name="res.users")
     registered_through = fields.Selection(selection=[('pdm','PDM'),('self service','Self service'),('local office','Local office')], string="Registered Through")
+    match_area = fields.Boolean(string="Match Area")
     share_info_with_employers = fields.Boolean(string="Share name and address with employers")
     sms_reminders = fields.Boolean(string="SMS reminders")
     visitation_address_id = fields.Many2one('res.partner', string="Visitation address")

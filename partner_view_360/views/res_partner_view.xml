@@ -186,6 +186,7 @@
               <field name="jobseeker_category" />
               <!-- <field name="customer_since" /> -->
               <field name="office" options="{'no_create_edit': True}" domain="[('type', '=', 'af office')]" />
+              <field name="match_area"/>
               <!-- <field name="office_ids" widget="many2many_tags" options="{'no_create_edit': True}" domain="[('type', '=', 'af office')]" /> -->
               <field name="share_info_with_employers" />
               <field name="sms_reminders" />
