@@ -66,8 +66,9 @@ class ResPartner(models.Model):
     foreign_country_of_work = fields.Char(string="When working in foreign country")
     deactualization_message = fields.Text(string="Message to jobseeker regarding deactualization")
 
-    registered_by = fields.Many2one(string="Registered by", comodel_name="res.users")
+    #registered_by = fields.Many2one(string="Registered by", comodel_name="res.users")
     registered_through = fields.Selection(selection=[('pdm','PDM'),('self service','Self service'),('local office','Local office')], string="Registered Through")
+    match_area = fields.Boolean(string="Match Area")
     share_info_with_employers = fields.Boolean(string="Share name and address with employers")
     sms_reminders = fields.Boolean(string="SMS reminders")
     visitation_address_id = fields.Many2one('res.partner', string="Visitation address")
@@ -166,7 +167,19 @@ class ResPartner(models.Model):
                     self.social_sec_nr = ""
                     self.age = ""
                     raise ValidationError(_("Please input a correctly formated social security number"))
-                
+    @api.multi
+    def close_view(self):
+        return{
+            'name': _("Search Partner"),
+            'view_type': 'form',
+            #'src_model': "res.partner",
+            'res_model': "res.partner.jobseeker.search.wizard",
+            'view_id': False, #self.env.ref("partner_view_360.search_jobseeker_wizard").id,
+            'view_mode':"form",
+            #'target': "current", 
+            #'key2': "client_action_multi",
+            'type': 'ir.actions.act_window',
+        }
 
 # ~ from odoo.addons.http_routing.models.ir_http import slug, unslug
 from odoo import http
@@ -218,20 +231,3 @@ class WebsiteBlog(http.Controller):
         # ~ return werkzeug.utils.redirect('/web?debug=true#id=242&action=337&model=res.partner&view_type=form&menu_id=219')
         else:
             pass
-            
-    @api.multi
-    def close_view(self):
-        return{
-            'name': _("Search Partner"),
-            'view_type': 'form',
-            #'src_model': "res.partner",
-            'res_model': "res.partner.jobseeker.search.wizard",
-            'view_id': False, #self.env.ref("partner_view_360.search_jobseeker_wizard").id,
-            'view_mode':"form",
-            #'target': "current", 
-            #'key2': "client_action_multi",
-            'type': 'ir.actions.act_window',
-        }
-
-
-
