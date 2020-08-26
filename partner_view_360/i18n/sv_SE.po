@@ -1,21 +1,19 @@
 # Translation of Odoo Server.
 # This file contains the translation of the following modules:
-# 	* partner_view_360
+#	* partner_view_360
 #
 msgid ""
 msgstr ""
-"Project-Id-Version: Odoo Server 12.0-20190808\n"
+"Project-Id-Version: Odoo Server 12.0-20200812\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2020-08-26 11:56+0000\n"
-"PO-Revision-Date: 2020-08-26 13:58+0200\n"
+"POT-Creation-Date: 2020-08-26 15:07+0000\n"
+"PO-Revision-Date: 2020-08-26 15:07+0000\n"
 "Last-Translator: <>\n"
 "Language-Team: \n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
-"Content-Transfer-Encoding: 8bit\n"
+"Content-Transfer-Encoding: \n"
 "Plural-Forms: \n"
-"Language: sv\n"
-"X-Generator: Poedit 2.0.6\n"
 
 #. module: partner_view_360
 #: selection:res.partner,segment_employer:0
@@ -23,7 +21,7 @@ msgid " Including 2"
 msgstr ""
 
 #. module: partner_view_360
-#: code:addons/partner_view_360/models/res_partner.py:92
+#: code:addons/partner_view_360/models/res_partner.py:93
 #, python-format
 msgid "%s (%s years old)"
 msgstr "%s (%s år gammal)"
@@ -146,7 +144,7 @@ msgstr "Stäng"
 #: model_terms:ir.ui.view,arch_db:partner_view_360.view_employer_filter
 #: model_terms:ir.ui.view,arch_db:partner_view_360.view_jobseeker_filter
 msgid "Companies"
-msgstr "Företag"
+msgstr "Bolag"
 
 #. module: partner_view_360
 #: model_terms:ir.ui.view,arch_db:partner_view_360.view_employer_filter
@@ -225,7 +223,7 @@ msgstr "Kundnummmer"
 #: model:ir.model.fields,field_description:partner_view_360.field_res_partner__customer_since
 #: model:ir.model.fields,field_description:partner_view_360.field_res_users__customer_since
 msgid "Customer since"
-msgstr "Kund sedan"
+msgstr "Inskriven sedan"
 
 #. module: partner_view_360
 #: model_terms:ir.ui.view,arch_db:partner_view_360.view_employer_filter
@@ -323,7 +321,7 @@ msgid "Entry job"
 msgstr ""
 
 #. module: partner_view_360
-#: code:addons/partner_view_360/models/res_partner.py:206
+#: code:addons/partner_view_360/models/res_partner.py:219
 #, python-format
 msgid "Error checking token"
 msgstr ""
@@ -446,7 +444,7 @@ msgstr "Arbetssökande"
 #: model:ir.model.fields,field_description:partner_view_360.field_res_partner__jobseeker_category
 #: model:ir.model.fields,field_description:partner_view_360.field_res_users__jobseeker_category
 msgid "Jobseeker category"
-msgstr "Arbetssökande kategori"
+msgstr "Arbetssökandekategori"
 
 #. module: partner_view_360
 #: model_terms:ir.ui.view,arch_db:partner_view_360.view_partner_form
@@ -491,6 +489,12 @@ msgstr ""
 #: model_terms:ir.ui.view,arch_db:partner_view_360.view_partner_employer_form
 msgid "Logo"
 msgstr "Logotyp"
+
+#. module: partner_view_360
+#: model:ir.model.fields,field_description:partner_view_360.field_res_partner__match_area
+#: model:ir.model.fields,field_description:partner_view_360.field_res_users__match_area
+msgid "Match Area"
+msgstr "Rusta och matcha-område"
 
 #. module: partner_view_360
 #: selection:res.partner.jobseeker.search.wizard,search_reason:0
@@ -604,7 +608,7 @@ msgid "Phone:"
 msgstr "Telefon:"
 
 #. module: partner_view_360
-#: code:addons/partner_view_360/models/res_partner.py:168
+#: code:addons/partner_view_360/models/res_partner.py:169
 #, python-format
 msgid "Please input a correctly formated social security number"
 msgstr "Skriv in ett personnummer i rätt format"
@@ -675,7 +679,7 @@ msgid "Search Jobseekers"
 msgstr "Sök Arbetssökande"
 
 #. module: partner_view_360
-#: code:addons/partner_view_360/models/res_partner.py:225
+#: code:addons/partner_view_360/models/res_partner.py:173
 #: model:ir.actions.act_window,name:partner_view_360.search_jobseeker_wizard
 #: model_terms:ir.ui.view,arch_db:partner_view_360.search_jobseeker_form
 #: model_terms:ir.ui.view,arch_db:partner_view_360.view_employer_filter
@@ -772,7 +776,7 @@ msgid "The state code."
 msgstr "Kommunkoden."
 
 #. module: partner_view_360
-#: code:addons/partner_view_360/models/res_partner.py:156
+#: code:addons/partner_view_360/models/res_partner.py:157
 #, python-format
 msgid "This person is too old, at %s years old"
 msgstr "Den här personen är för gammal, vid %s års ålder"
@@ -889,3 +893,4 @@ msgstr ""
 #: model_terms:ir.ui.view,arch_db:partner_view_360.search_jobseeker_form
 msgid "search"
 msgstr "Sök"
+
