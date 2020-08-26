@@ -39,6 +39,7 @@ class ResPartner(models.Model):
     social_sec_nr_age = fields.Char(string="Social security number", compute="combine_social_sec_nr_age")
     cfar = fields.Char(string='CFAR', help="CFAR number")
     customer_id = fields.Char(string='Customer number', help="Customer number")
+    eidentification = fields.Char(string='E-Identification', help="BankId or other e-identification done OK or other")
 
     # office selection field for partners connected to an office, my_office_code filled in by office_code for the office
     office = fields.Many2one('res.partner', string="Office")
@@ -187,26 +188,37 @@ class WebsiteBlog(http.Controller):
         kontaktid=<10 siffror, för uppföljning/loggning id i ACE>
         bankid=<OK/annat>
         token= <sha1 hemlighet + yyyy-mm-dd-hh + personnummer>
-
+        datatime=yyyy-mm-dd-hh
+        reason=<text string>
+        
+        
         P92 första planeringssamtal
         """
  
         _logger.warn('opencustomerview %s' % post)
-        token = hashlib.sha1('hemlighet' + fields.DateTime.now().tostring[:13].replace(' ','-') + post.get('personnummer') ).hexdigest()
+        
+        secret = self.env['ir.config_parameter'].sudo().get_param('partner_view_360.secret', 'hemligt')
+
+        # ~ token = hashlib.sha1(secret + fields.DateTime.now().tostring[:13].replace(' ','-') + post.get('personnummer') ).hexdigest()
+        token = hashlib.sha1(secret + post.get('datatime') + post.get('personnummer','20010203-1234') + post.get('bankid') ).hexdigest()
 
         if not token == post.get('token'):
             raise Warning(_('Error checking token'))
-        #TODO do something more    
         
         # ~ action = self.env['ir.actions.act_window'].for_xml_id('partner_view_360', 'action_jobseekers')
         action = self.ref('partner_view_360.action_jobseekers')
         # ~ return action
-        partner = self.env['res.partner'].search([('social_sec_nr','=',post.get('personnummer'))])
+        partner = self.env['res.partner'].search([('social_sec_nr','=',post.get('personnummer','20010203-1234'))])
  
- 
+        if partner and len(partner) == 1:
+            # partner._grant_jobseeker_access(post.get('reason','None'))
+            partner.eidentification = post.get('bankid')
+            return werkzeug.utils.redirect('/web?id=%s&action=%s&model=res.partner&view_type=form' % (partner.id if partner else 0,action.id if action else 0))
         # ~ return werkzeug.utils.redirect('/web?debug=true#id=242&action=337&model=res.partner&view_type=form&menu_id=219')
-        return werkzeug.utils.redirect('/web?id=%s&action=%s&model=res.partner&view_type=form' % (partner.id,action.id))
 
+        else:
+            pass
+            
     @api.multi
     def close_view(self):
         return{

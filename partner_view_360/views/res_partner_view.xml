@@ -27,6 +27,8 @@
              </span> -->
         <field name="company_registry" />
         <field name="cfar" attrs="{'invisible':[('is_company', '=', False)]}" />
+
+        
       </field>
       <field name="barcode" position="after">
         <field name="office" options="{'no_create_edit': True}" domain="[('type', '=', 'af office')]" />
@@ -188,6 +190,7 @@
               <field name="share_info_with_employers" />
               <field name="sms_reminders" />
               <field name="segment_jobseeker"/>
+              <field name="eidentification" />
               <label for="user_id" string="Administrative officer" />
               <field name="user_id" nolabel="1" />
             </group>
