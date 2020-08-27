@@ -42,7 +42,7 @@ AFC-102, 103, 140, 183, 192, 213, 210, 241, 259, 260, 346
     'data': [
 			'views/res_partner_template.xml',
 			'views/res_partner_view.xml',
-            'wizard/res_partner_search_wizard.xml',
+            #'wizard/res_partner_search_wizard.xml',
             #'security/ir.model.access.csv',
             "data/res.country.state.csv",
         ],
