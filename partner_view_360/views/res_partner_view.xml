@@ -445,7 +445,8 @@
             <field name="foreign_education_approved" />
             <!-- <field name="has_drivers_license" /> -->
             <field name="drivers_license_ids" options="{'no_create_edit': True}" widget="many2many_tags" />
-            <field name="has_car" />
+            <!-- bortkommenterad för att vi inte vet om vi kan få en integration i tid (Fredrik) -->
+			<field name="has_car" groups="base.group_no_one" />
           </group>
         </page>
       </xpath>
