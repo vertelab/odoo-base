@@ -140,6 +140,7 @@
           </div>
           <group>
             <group string="Personal Information">
+              <field name="is_jobseeker" invisible="1" />
               <field name="parent_id" attrs="{'invisible' : True}" />
               <field name="type" attrs="{'invisible' : True}" />
               <label for="company_registry" string="Social security number" class="oe_edit_only" />
@@ -412,6 +413,7 @@
       <p class="o_view_nocontent_smiling_face">Create a jobseeker in your address book</p>
     </field>
     <field name="domain" eval="[('is_jobseeker', '=', True)]" />
+    <field name="context" eval="{'default_is_jobseeker': True}" />
   </record>
   <record id="action_jobseeker_form_view" model="ir.actions.act_window.view">
     <field eval="2" name="sequence" />
