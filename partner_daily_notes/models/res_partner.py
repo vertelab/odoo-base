@@ -20,7 +20,6 @@
 ##############################################################################
 
 from odoo import models, fields, api, _
-from datetime import datetime
 import logging
 _logger = logging.getLogger(__name__)
 
@@ -33,13 +32,13 @@ class ResPartnerNotes(models.Model):
 
     administrative_officer = fields.Many2one('res.users', string='Administrative officer', default=lambda self: self.env.user)
     note = fields.Text(string="Notes")
-    note_date = fields.Datetime(string="Refers to date", default=datetime.now())
+    note_date = fields.Datetime(string="Refers to date", default=fields.Datetime.now)
     is_confidential = fields.Boolean(string="Confidential")
-    note_type = fields.Many2one(comodel_name="res.partner.note.type") 
+    note_type = fields.Many2one(comodel_name="res.partner.note.type")
     note_number = fields.Char(string="AIS number")
 
     office = fields.Many2one('res.partner', string="Office")
-    customer_id = fields.Char(string="Customer number", related="partner_id.customer_id") 
+    customer_id = fields.Char(string="Customer number", related="partner_id.customer_id")
 
 class ResPartner(models.Model):
     _inherit = 'res.partner'
