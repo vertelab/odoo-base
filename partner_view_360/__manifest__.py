@@ -21,7 +21,7 @@
 
 {
     'name': 'Partner 360 view',
-    'version': '12.0.0.1.6',
+    'version': '12.0.0.1.5',
     'category': '',
     'description': """
 Module for employee 360 view
@@ -30,7 +30,6 @@ This module alters, adds, removes and shuffles around fields in the partner view
 Also adds new menus and views for partners of type jobseeker and employer
 v12.0.0.1.4 AFC-102, 103, 140, 183, 192, 213, 210, 241, 259, 260, 346
 v12.0.0.1.5 AFC-713 Small changes in language
-v12.0.0.1.6 Added dependancy to partner_kpi_data
 
 """,
     'author': 'Vertel AB',
@@ -41,7 +40,6 @@ v12.0.0.1.6 Added dependancy to partner_kpi_data
     'res_drivers_license',
     'res_ssyk',
     'res_sni',
-	'partner_kpi_data',
     ],
     'data': [
 			'views/res_partner_template.xml',
