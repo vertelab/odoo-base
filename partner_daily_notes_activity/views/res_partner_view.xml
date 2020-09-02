@@ -13,7 +13,7 @@
                         <field name="next_event_count" widget="statinfo" string="Next Events"/>
                     </button>
                 </xpath>
-                <field name="customer_since" position="after">
+                <field name="jobseeker_category" position="after">
                     <field name="next_contact"/>
                     <field name="last_contact"/>
                 </field>
