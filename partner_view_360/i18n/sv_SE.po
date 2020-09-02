@@ -76,7 +76,7 @@ msgstr "Arkiverad"
 #: model_terms:ir.ui.view,arch_db:partner_view_360.view_jobseeker_form
 #: model_terms:ir.ui.view,arch_db:partner_view_360.view_partner_employer_form
 msgid "Avatar"
-msgstr ""
+msgstr "Avatar"
 
 #. module: partner_view_360
 #: model:ir.model.fields,help:partner_view_360.field_res_partner__eidentification
@@ -92,7 +92,7 @@ msgstr "Utifrån myndighetens behov"
 #. module: partner_view_360
 #: selection:res.partner,segment_jobseeker:0
 msgid "Segment C1"
-msgstr "Segment C1C1"
+msgstr "Segment C1"
 
 #. module: partner_view_360
 #: selection:res.partner,segment_jobseeker:0
