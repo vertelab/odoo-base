@@ -104,13 +104,16 @@ class ResPartner(models.Model):
         today = date.today()
         social_sec = self.company_registry
         social_sec_stripped = ""
-        if social_sec != False:
+        if self.is_jobseeker and social_sec != False:
             social_sec_split = social_sec.split("-")
             if len(social_sec_split) > 1:
                 if len(social_sec_split[1]) != 4 or len(social_sec_split) > 2:
                     wrong_input = True
                     _logger.error("Incorrectly formated social security number (company_registry)")
                 social_sec_stripped = social_sec_split[0]
+                if len(social_sec_stripped) != 8:
+                    wrong_input = True
+                    _logger.error("Social security number (company_registry) field lenght is incorrect, should be 12")
             elif len(social_sec_split) == 1:
                 if len(social_sec_split[0]) == 10:
                     wrong_input = True
@@ -163,17 +166,16 @@ class ResPartner(models.Model):
                 #return {
                 #'warning': {'title': "Warning", 'message': "What is this?"},
                 #}
-                if self.is_jobseeker:
-                    self.social_sec_nr = ""
-                    self.age = ""
-                    raise ValidationError(_("Please input a correctly formated social security number"))
+                self.social_sec_nr = ""
+                self.age = ""
+                raise ValidationError(_("Please input a correctly formated social security number"))
     @api.multi
     def close_view(self):
         return{
             'name': _("Search Partner"),
             'view_type': 'form',
             #'src_model': "res.partner",
-            'res_model': "res.partner.jobseeker.search.wizard",
+            'res_model': "hr.employee.jobseeker.search.wizard",
             'view_id': False, #self.env.ref("partner_view_360.search_jobseeker_wizard").id,
             'view_mode':"form",
             #'target': "current", 
