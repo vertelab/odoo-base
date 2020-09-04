@@ -36,11 +36,12 @@ v12.0.0.1.6 AFC-713 Small changes in language
     'author': 'Vertel AB',
     'license': 'AGPL-3',
     'website': 'http://www.vertel.se',
-    'depends': ['base','contacts', 
-    'res_sun', 
-    'res_drivers_license',
-    'res_ssyk',
-    'res_sni',
+    'depends': [
+        'base',
+        'contacts', 
+        'res_drivers_license',
+        'res_ssyk',
+        'res_sni',
     ],
     'data': [
 			'views/res_partner_template.xml',

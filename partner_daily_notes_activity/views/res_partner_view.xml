@@ -9,7 +9,7 @@
                     <button name="action_view_next_event"
                         type="object"
                         class="oe_stat_button"
-                        icon="fa-calendar-times-o">
+                        icon="fa-calendar-plus-o">
                         <field name="next_event_count" widget="statinfo" string="Next Events"/>
                     </button>
                 </xpath>
