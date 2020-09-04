@@ -504,7 +504,7 @@ msgstr "Matchning"
 #. module: partner_view_360
 #: model_terms:ir.ui.view,arch_db:partner_view_360.view_jobseeker_form
 msgid "Merits"
-msgstr "Meriter"
+msgstr "Utbildning"
 
 #. module: partner_view_360
 #: model:ir.model.fields,field_description:partner_view_360.field_res_partner__deactualization_message
