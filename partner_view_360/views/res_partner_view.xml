@@ -316,7 +316,8 @@
                 </form>
               </field>
             </page>
-            <page name="apply_for_jobs" string="Merits" />
+            <page name="apply_for_jobs" string="Education" />
+		  <!-- Byt namn på sidans namn också, inte bara string -->
           </notebook>
         </sheet>
         <!-- <div class="oe_chatter" modifiers="{}">
