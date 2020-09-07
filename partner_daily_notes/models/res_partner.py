@@ -68,10 +68,11 @@ class ResPartner(models.Model):
             action['context'] = {'default_partner_id': self.id}
         return action
 
+
 class ResPartnerNoteType(models.Model):
-    _name="res.partner.note.type"
+    _name = "res.partner.note.type"
+    _rec_name = 'description'
 
     note_id = fields.One2many(comodel_name="res.partner.notes", inverse_name="note_type")
-
     name = fields.Char(string="Name")
     description = fields.Char(string="Description")
