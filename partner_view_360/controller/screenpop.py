@@ -69,9 +69,7 @@ class WebsiteScreenpop(http.Controller):
                     # ~ :param start: Datetime. The time when access is to start. Defaults to now. Works in mysterious ways.
                     # ~ Past dates (time seems to be ignored) generates an error. Future times grant access immediately. Ignore it.
                     # ~ :param interval: Integer. How many days access is to last. One of 1, 7, 14, 30, 60, 100 and 365.                
-            partner.grant_jobseeker_access(self, type, user=None, reason_code=None, reason=None, granting_user=None, start=None, interval=1):
-        
-        
+            partner.grant_jobseeker_access(self, type, user=None, reason_code=None, reason=None, granting_user=None, start=None, interval=1)
             # if not partner._grant_jobseeker_access(post.get('reason','None'))
             #     return request.render('partner_view_360.403', {'error': 'ERROR: Could not grant access','our_token': token, 'ext_token': post.get('token'), 'partner': partner, 'action': action,'url': None,'post': post})
             #
@@ -109,12 +107,12 @@ class WebsiteScreenpop(http.Controller):
         _logger.warn('opencustomerview %s' % post)
         secret = request.env['ir.config_parameter'].sudo().get_param('partner_view_360.secret', 'hemligt')
         # ~ token = hashlib.sha1(secret + fields.DateTime.now().tostring[:13].replace(' ','-') + post.get('personnummer') ).hexdigest()
-        token = hashlib.sha1((secret + post.get('datatime', '0000-00-00-00') + post.get('personnummer','20010203-1234') + post.get('bankid', 'None') ).encode('utf-8')).hexdigest()
+        token = hashlib.sha1((secret + post.get('datatime', '0000-00-00-00') + post.get('personnummer','20010203-1234') + post.get('bankid', '') ).encode('utf-8')).hexdigest()
         _logger.warn("\n\ntoken: %s" % token)
         if not token == post.get('token'):
             return request.render('partner_view_360.403', {'error': 'ERROR: Token missmatch','our_token': token, 'ext_token': post.get('token'), 'partner': None, 'action': None, 'url': None, 'post': post,'secret': secret})
         # ~ action = self.env['ir.actions.act_window'].for_xml_id('partner_view_360', 'action_jobseekers')
-        action = request.env.ref('partner_view_360.action_jobseekers')
+        action = request.env.ref('partner_view_360.action_screenpopup')
         _logger.warn("action: %s" % action)
         # ~ return action
         partner = request.env['res.partner'].sudo().search([],limit=1) 
@@ -124,3 +122,90 @@ class WebsiteScreenpop(http.Controller):
         res_url = "/web#id=306&active_id=23&model=res.partner&view_type=form&menu_id=209"
         
         return werkzeug.utils.redirect(res_url)
+        
+        
+    @http.route([
+        '/opencustomerview'
+    ], type='http', auth="public", website=False, csrf=False)
+    def opencustomerview(self, **post):
+        """
+        personnummer=<12 tecken>
+        signatur=<5 tecken>
+        arendetyp=<tre tecken, t ex P92>
+        kontaktid=<10 siffror, för uppföljning/loggning id i ACE>
+        bankid=<OK/annat>
+        datatime=yyyy-mm-dd-hh
+        token= <sha1 hemlighet + yyyy-mm-dd-hh + personnummer>
+        debug=True 
+        
+        P92 första planeringssamtal
+        """
+        _logger.warn('opencustomerview %s' % post)
+        secret = request.env['ir.config_parameter'].sudo().get_param('partner_view_360.secret', 'hemligt')
+        # ~ token = hashlib.sha1(secret + fields.DateTime.now().tostring[:13].replace(' ','-') + post.get('personnummer') ).hexdigest()
+        token = hashlib.sha1((secret + post.get('datatime', '0000-00-00-00') + post.get('personnummer','20010203-1234') + post.get('bankid', '') ).encode('utf-8')).hexdigest()
+        _logger.warn("\n\ntoken: %s" % token)
+        if not token == post.get('token'):
+            return request.render('partner_view_360.403', {'error': 'ERROR: Token missmatch','our_token': token, 'ext_token': post.get('token'), 'partner': None, 'action': None, 'url': None, 'post': post,'secret': secret})
+        # ~ action = self.env['ir.actions.act_window'].for_xml_id('partner_view_360', 'action_jobseekers')
+        action = request.env.ref('partner_view_360.action_screenpopup')
+        _logger.warn("action: %s" % action)
+        # ~ return action
+        partner = request.env['res.partner'].sudo().search([('company_registry','=',post.get('personnummer','20010203-1234'))]) # not granted yet
+        _logger.warn("partner: %s pnr: %s " % (partner, post.get('personnummer','20010203-1234')))
+        
+        
+        if partner and len(partner) == 1:
+           # ~ Grant temporary access to these jobseekers.
+                    # ~ :param type: The type of access. One of 'STARK' and 'MYCKET STARK'.
+                    # ~ :param user: The user that is to be granted permission. Defaults to current user.
+                    # ~ :param reason_code: The reason code for granting extra permissions.
+                    # ~ :param reason: Freetext reason for granting extra permissions.
+                    # ~ :param granting_user: Optional. The user granting this access.
+                    # ~ :param start: Datetime. The time when access is to start. Defaults to now. Works in mysterious ways.
+                    # ~ Past dates (time seems to be ignored) generates an error. Future times grant access immediately. Ignore it.
+                    # ~ :param interval: Integer. How many days access is to last. One of 1, 7, 14, 30, 60, 100 and 365.                
+            partner.grant_jobseeker_access(self, type, user=None, reason_code=None, reason=None, granting_user=None, start=None, interval=1)
+        
+        
+            # if not partner._grant_jobseeker_access(post.get('reason','None'))
+            #     return request.render('partner_view_360.403', {'error': 'ERROR: Could not grant access','our_token': token, 'ext_token': post.get('token'), 'partner': partner, 'action': action,'url': None,'post': post})
+            #
+            partner.eidentification = post.get('bankid')
+            # ~ res_url = '/web?id=%s&action=%s&model=res.partner&view_type=form' % (partner.id if partner else 0,action.id if action else 0)
+            res_url = '/web?id=%s&action=%s&model=res.partner&view_type=form#id=%s&active_id=40&model=res.partner&view_type=form' % (partner.id if partner else 0,action.id if action else 0,partner.id if partner else 0)
+            #'/web?id=823&action=371&model=res.partner&active_id=39&model=res.partner&view_type=form&menu_id=252#id=823&active_id=40&model=res.partner&view_type=form&menu_id='
+            _logger.warn("res_url: %s" % res_url)
+            if post.get('debug'):
+                return request.render('partner_view_360.403', {'message': 'Debug','our_token': token, 'ext_token': post.get('token'), 'partner': partner, 'action': action,'url': res_url, 'post': post,'secret': secret})
+            return werkzeug.utils.redirect(res_url)
+            # return werkzeug.utils.redirect('/web?id=%s&action=%s&model=res.partner&view_type=form' % (partner.id if partner else 0,action.id if action else 0))
+        # ~ return werkzeug.utils.redirect('/web?debug=true#id=242&action=337&model=res.partner&view_type=form&menu_id=219')
+        else:
+            return request.render('partner_view_360.403', {'error': 'ERROR: No partner found', 'our_token': token, 'ext_token': post.get('token'), 'partner': partner, 'action': action, 'post': post,'secret': secret})
+
+
+
+    @http.route([
+        '/opencustomerviewt2'
+    ], type='http', auth="public", website=False, csrf=False)
+    def opencustomerviewt2(self, **post):
+        """
+        personnummer=<12 tecken>
+        signatur=<5 tecken>
+        arendetyp=<tre tecken, t ex P92>
+        kontaktid=<10 siffror, för uppföljning/loggning id i ACE>
+        bankid=<OK/annat>
+        datatime=yyyy-mm-dd-hh
+        token= <sha1 hemlighet + yyyy-mm-dd-hh + personnummer>
+        debug=True 
+        
+        P92 första planeringssamtal
+        """
+        
+        action = request.env.ref('partner_view_360.action_screenpopup')
+        partner = request.env['res.partner'].sudo().search([('company_registry','=',post.get('personnummer','20010203-1234'))]) 
+        secret = request.env['ir.config_parameter'].sudo().get_param('partner_view_360.secret', 'hemligt')
+        token = hashlib.sha1((secret + post.get('datatime', '0000-00-00-00') + post.get('personnummer','20010203-1234') + post.get('bankid', '') ).encode('utf-8')).hexdigest()
+
+        return request.render('partner_view_360.403', {'error': 'ERROR: No partner found', 'our_token': token, 'ext_token': post.get('token'), 'partner': partner, 'action': action, 'post': post,'secret': secret})

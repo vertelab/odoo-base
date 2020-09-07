@@ -763,4 +763,15 @@
   <menuitem id="res_partner_employers_config_menu" parent="res_partner_employers_menu" name="Configuration" sequence="0" groups="base.group_no_one" />
   <menuitem id="menu_ssyk_config" parent="res_partner_employers_config_menu" action="res_ssyk.action_ssyk_form" sequence="2" />
   <menuitem id="menu_sni_config" parent="res_partner_employers_config_menu" action="res_sni.action_sni_form" sequence="1" />
+  
+    <record id="action_screenpopup" model="ir.actions.act_window">
+    <field name="name">Jobseekers</field>
+    <field name="res_model">res.partner</field>
+    <field name="view_id" ref="partner_view_360.view_jobseeker_form"/>
+    <field name="view_mode">form</field>
+    <field name="search_view_id" ref="view_jobseeker_filter" />
+    <field name="domain" eval="[('is_jobseeker', '=', True)]" />
+  </record>
+  
+  
 </odoo>
