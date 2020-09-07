@@ -42,7 +42,7 @@
                     <group>
                     <group>
                         <field name="identification" />
-                        <field name="other_reason" attrs="{'invisible': [('search_reason','!=','other reason')]}"/>
+                        <!-- <field name="other_reason" attrs="{'invisible': [('search_reason','!=','other reason')]}"/>  // Bortkommenterad av Fredrik -->
                         <!-- <field name="search_domain" widget="domain" options="{'model' : 'res.partner'}"> </field> -->
                     
                         <field name="social_sec_nr_search"/>

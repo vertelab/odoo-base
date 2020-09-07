@@ -27,8 +27,6 @@
              </span> -->
         <field name="company_registry" />
         <field name="cfar" attrs="{'invisible':[('is_company', '=', False)]}" />
-
-        
       </field>
       <field name="barcode" position="after">
         <field name="office" options="{'no_create_edit': True}" domain="[('type', '=', 'af office')]" />
@@ -125,14 +123,14 @@
     <field name="arch" type="xml">
       <form string="Jobseeker">
         <sheet>
-        <div style="margin-bottom:1em;">
+          <div style="margin-bottom:1em;">
             <button name="close_view" type="object">Close</button>
           </div>
           <div class="oe_button_box" name="button_box">
             <button name="toggle_active" type="object" class="oe_stat_button" icon="fa-archive">
               <field name="active" widget="boolean_button" options="{&quot;terminology&quot;: &quot;archive&quot;}" />
             </button>
-            </div>
+          </div>
           <div class="oe_title">
             <h1>
               <field name="name" default_focus="1" placeholder="Name" attrs="{'required' : [('type', '=', 'contact')]}" />
@@ -145,7 +143,7 @@
               <field name="type" attrs="{'invisible' : True}" />
               <label for="company_registry" string="Social security number" class="oe_edit_only" />
               <field name="company_registry" nolabel="1" class="oe_edit_only" />
-              <label for="social_sec_nr_age" string="Social security number" class="oe_read_only"/>
+              <label for="social_sec_nr_age" string="Social security number" class="oe_read_only" />
               <field name="social_sec_nr_age" class="oe_read_only" nolabel="1" />
               <field name="customer_id" />
               <!-- folkbokföringsadress, alternativt göra en res partner typ-->
@@ -154,29 +152,29 @@
               <label for="state_id" string="Municipality" class="oe_edit_only" />
               <field name="state_id" class="oe_edit_only" nolabel="1" />
               <!-- <field name="state_code"/> -->
-              <label for="street" string="Registered address"/>
+              <label for="street" string="Registered address" />
               <div class="oe_read_only">
-                <div class="o_address_format" >
+                <div class="o_address_format">
                   <span class="oe_read_only">
-                  <field name="street" placeholder="Street..." class="o_address_street" />
-                  <field name="street2" placeholder="Street 2..." class="o_address_street"  />
-                  <span style="margin-right:1em;">
-                    <field name="zip" placeholder="ZIP" class="o_address_zip" />
-                  </span>
-                  <field name="city" placeholder="City" class="o_address_city" />
+                    <field name="street" placeholder="Street..." class="o_address_street" />
+                    <field name="street2" placeholder="Street 2..." class="o_address_street" />
+                    <span style="margin-right:1em;">
+                      <field name="zip" placeholder="ZIP" class="o_address_zip" />
+                    </span>
+                    <field name="city" placeholder="City" class="o_address_city" />
                   </span>
                 </div>
               </div>
               <field name="country_id" placeholder="Country" class="o_address_country" attrs="{'invisible': True}" />
               <!-- <label for="given_address_street" string="given address" />
-              <div class="o_address_format">
-                <field name="given_address_street" placeholder="Street..." class="o_address_street" />
-                <span style="margin-right:1em;">
-                  <field name="given_address_zip" placeholder="ZIP" class="o_address_zip" />
-                </span>
-                <field name="given_address_city" placeholder="City" class="o_address_city" />
-              </div>
-              <field name="given_address_id" domain="[('type', '=', 'given address')]" groups="base.group_no_one" /> -->
+                   <div class="o_address_format">
+                   <field name="given_address_street" placeholder="Street..." class="o_address_street" />
+                   <span style="margin-right:1em;">
+                   <field name="given_address_zip" placeholder="ZIP" class="o_address_zip" />
+                   </span>
+                   <field name="given_address_city" placeholder="City" class="o_address_city" />
+                   </div>
+                   <field name="given_address_id" domain="[('type', '=', 'given address')]" groups="base.group_no_one" /> -->
               <field name="phone" />
               <field name="mobile" />
               <field name="email" />
@@ -187,18 +185,18 @@
               <field name="jobseeker_category" />
               <!-- <field name="customer_since" /> -->
               <field name="office" options="{'no_create_edit': True}" domain="[('type', '=', 'af office')]" />
-              <field name="match_area"/>
+              <field name="match_area" />
               <!-- <field name="office_ids" widget="many2many_tags" options="{'no_create_edit': True}" domain="[('type', '=', 'af office')]" /> -->
               <field name="share_info_with_employers" />
               <field name="sms_reminders" />
-              <field name="segment_jobseeker" groups="base.group_no_one"/>
+              <field name="segment_jobseeker" groups="base.group_no_one" />
               <field name="eidentification" />
               <label for="user_id" string="Administrative officer" />
               <field name="user_id" nolabel="1" />
             </group>
           </group>
           <notebook>
-          <page name="contacts_addresses" string="Contacts &amp; Addresses" autofocus="autofocus">
+            <page name="contacts_addresses" string="Contacts &amp; Addresses" autofocus="autofocus">
               <field name="child_ids" mode="kanban" context="{'default_parent_id': active_id, 'default_street': street, 'default_street2': street2, 'default_city': city, 'default_state_id': state_id, 'default_zip': zip, 'default_country_id': country_id}">
                 <kanban>
                   <field name="id" />
@@ -316,14 +314,15 @@
                 </form>
               </field>
             </page>
-            <page name="apply_for_jobs" string="Merits" />
+            <page name="apply_for_jobs" string="Education" />
+            <!-- Byt namn på sidans namn också, inte bara string -->
           </notebook>
         </sheet>
         <!-- <div class="oe_chatter" modifiers="{}">
-		<field name="message_follower_ids" widget="mail_followers" modifiers="{}"/>
-		<field name="activity_ids" widget="mail_activity" modifiers="{}"/>
-		<field name="message_ids" widget="mail_thread" modifiers="{}" options="{'display_log_button': True}"/>
-	</div> -->
+             <field name="message_follower_ids" widget="mail_followers" modifiers="{}"/>
+             <field name="activity_ids" widget="mail_activity" modifiers="{}"/>
+             <field name="message_ids" widget="mail_thread" modifiers="{}" options="{'display_log_button': True}"/>
+             </div> -->
       </form>
     </field>
   </record>
@@ -442,13 +441,13 @@
         <page name="education" string="Education">
           <group>
             <field name="sun_ids" options="{'no_create_edit': True}" widget="many2many_tags" />
-            <field name="education_level"/>
+            <field name="education_level" />
             <field name="foreign_education" />
             <field name="foreign_education_approved" />
             <!-- <field name="has_drivers_license" /> -->
             <field name="drivers_license_ids" options="{'no_create_edit': True}" widget="many2many_tags" />
             <!-- bortkommenterad för att vi inte vet om vi kan få en integration i tid (Fredrik) -->
-			<field name="has_car" groups="base.group_no_one" />
+            <field name="has_car" groups="base.group_no_one" />
           </group>
         </page>
       </xpath>
@@ -513,7 +512,7 @@
               <field name="user_id" nolabel="1" />
               <field name="office" options="{'no_create_edit': True}" domain="[('type', '=', 'af office')]" />
               <!-- <field name="office_ids" widget="many2many_tags" options="{'no_create_edit': True}" domain="[('type', '=', 'af office')]" /> -->
-              <field name="segment_employer" groups="base.group_no_one"/>
+              <field name="segment_employer" groups="base.group_no_one" />
             </group>
           </group>
           <notebook>
@@ -637,11 +636,11 @@
             </page>
           </notebook>
         </sheet>
-            <!-- <div class="oe_chatter" modifiers="{}">
-		<field name="message_follower_ids" widget="mail_followers" modifiers="{}"/>
-		<field name="activity_ids" widget="mail_activity" modifiers="{}"/>
-		<field name="message_ids" widget="mail_thread" modifiers="{}" options="{'display_log_button': True}"/>
-	</div> -->
+        <!-- <div class="oe_chatter" modifiers="{}">
+             <field name="message_follower_ids" widget="mail_followers" modifiers="{}"/>
+             <field name="activity_ids" widget="mail_activity" modifiers="{}"/>
+             <field name="message_ids" widget="mail_thread" modifiers="{}" options="{'display_log_button': True}"/>
+             </div> -->
       </form>
     </field>
   </record>
@@ -663,10 +662,10 @@
                 </strong>
                 <div class="o_kanban_tags_section">
                   <ul>
-                  <li>
-                  <b>
-                      <field name="company_registry" />
-                  </b>
+                    <li>
+                      <b>
+                        <field name="company_registry" />
+                      </b>
                     </li>
                     <li>
                       <field name="city" />
@@ -692,7 +691,7 @@
     <field name="arch" type="xml">
       <tree>
         <field name="name" />
-        <field name="company_registry"/>
+        <field name="company_registry" />
         <field name="city" />
         <field name="email" />
         <field name="office" />
@@ -752,7 +751,7 @@
     <field name="view_id" ref="view_employer_kanban" />
     <field name="act_window_id" ref="action_employers" />
   </record>
-<record id="action_employer_tree_view" model="ir.actions.act_window.view">
+  <record id="action_employer_tree_view" model="ir.actions.act_window.view">
     <field eval="1" name="sequence" />
     <field name="view_mode">tree</field>
     <field name="view_id" ref="view_employer_tree" />
@@ -762,4 +761,12 @@
   <menuitem id="res_partner_employers_config_menu" parent="res_partner_employers_menu" name="Configuration" sequence="0" groups="base.group_no_one" />
   <menuitem id="menu_ssyk_config" parent="res_partner_employers_config_menu" action="res_ssyk.action_ssyk_form" sequence="2" />
   <menuitem id="menu_sni_config" parent="res_partner_employers_config_menu" action="res_sni.action_sni_form" sequence="1" />
+  <record id="action_screenpopup" model="ir.actions.act_window">
+    <field name="name">Jobseekers</field>
+    <field name="res_model">res.partner</field>
+    <field name="view_id" ref="partner_view_360.view_jobseeker_form" />
+    <field name="view_mode">form</field>
+    <field name="search_view_id" ref="view_jobseeker_filter" />
+    <field name="domain" eval="[('is_jobseeker', '=', True)]" />
+  </record>
 </odoo>
