@@ -70,6 +70,7 @@ class WebsiteScreenpop(http.Controller):
                     # ~ Past dates (time seems to be ignored) generates an error. Future times grant access immediately. Ignore it.
                     # ~ :param interval: Integer. How many days access is to last. One of 1, 7, 14, 30, 60, 100 and 365.                
             partner.grant_jobseeker_access(self, type, user=None, reason_code=None, reason=None, granting_user=None, start=None, interval=1)
+
             # if not partner._grant_jobseeker_access(post.get('reason','None'))
             #     return request.render('partner_view_360.403', {'error': 'ERROR: Could not grant access','our_token': token, 'ext_token': post.get('token'), 'partner': partner, 'action': action,'url': None,'post': post})
             #
