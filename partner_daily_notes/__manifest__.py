@@ -21,7 +21,7 @@
 
 {
     'name': 'Daily notes',
-    'version': '12.0.1.3',
+    'version': '12.0.1.4',
     'category': '',
     'description': """
 Daily notes
@@ -29,6 +29,7 @@ Daily notes
 AFC-81
 This module allowes daily notes for a partner.
 - 12.0.1.1  Added mapping for Integration platform with the module base_map.
+- 12.0.1.4  Changed display Daily Notes types in "name in Tree-view".
 """,
     'author': 'Vertel AB',
     'license': 'AGPL-3',
