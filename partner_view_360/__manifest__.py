@@ -38,6 +38,7 @@ v12.0.0.1.7 AFC-713 Small changes in language \n
     'license': 'AGPL-3',
     'website': 'http://www.vertel.se',
     'depends': [
+        'mail',
         'partner_firstname', 
         'contacts', 
         'res_drivers_license',
