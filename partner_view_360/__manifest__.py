@@ -40,12 +40,12 @@ v12.0.0.1.7 AFC-713 Small changes in language \n
     'depends': [
         'base',
         'contacts', 
-	'partner_firstname', 
-	'contacts', 
+	    'partner_firstname', 
+	    'contacts', 
         'res_drivers_license',
         'res_ssyk',
         'res_sni',
-	 'partner_kpi_data'.   
+	    'partner_kpi_data',   
         # 'edi_af_appointment',
     ],
     'data': [
