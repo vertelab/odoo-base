@@ -33,7 +33,7 @@ class ResPartnerNotes(models.Model):
     administrative_officer = fields.Many2one('res.users', string='Administrative officer', default=lambda self: self.env.user)
     note = fields.Text(string="Notes")
     note_date = fields.Datetime(string="Refers to date", default=fields.Datetime.now)
-    is_confidential = fields.Boolean(string="Confidential")
+    is_confidential = fields.Boolean(string="Secret", help="Apply/Remove Secret")
     note_type = fields.Many2one(comodel_name="res.partner.note.type")
     note_number = fields.Char(string="AIS number")
 
