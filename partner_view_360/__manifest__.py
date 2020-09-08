@@ -21,7 +21,7 @@
 
 {
     'name': 'Partner 360 view',
-    'version': '12.0.0.1.7',
+    'version': '12.0.0.1.8',
     'category': '',
     'description': """
 Module for employee 360 view
@@ -40,11 +40,12 @@ v12.0.0.1.7 AFC-713 Small changes in language \n
     'depends': [
         'base',
         'contacts', 
-	'partner_firstname', 
-	'contacts', 
+	    'partner_firstname', 
+	    'contacts', 
         'res_drivers_license',
         'res_ssyk',
         'res_sni',
+	    'partner_kpi_data',   
         # 'edi_af_appointment',
     ],
     'data': [
@@ -58,6 +59,9 @@ v12.0.0.1.7 AFC-713 Small changes in language \n
             "data/jobseekers/res.partner.csv",
             "data/employers/res.partner.csv",
     ],
+    'qweb': [
+        'static/src/xml/systray.xml',
+        ],
 
     'application': False,
     'installable': True,

@@ -13,6 +13,9 @@
            
            borde ändra implementering, administrative officer bör vara eget fält, medan user_id är gömd, men används för annat.
       -->
+      <xpath expr="//button[@name='toggle_active']" position="attributes">
+        <attribute name="invisible">1</attribute>
+      </xpath>
       <field name="function" position="after">
         <field name="work_phone" />
       </field>
