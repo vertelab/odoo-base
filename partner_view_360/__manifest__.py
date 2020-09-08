@@ -61,7 +61,8 @@ v12.0.0.1.7 AFC-713 Small changes in language \n
     ],
     'qweb': [
         'static/src/xml/systray.xml',
-    ],
+        ],
+
     'application': False,
     'installable': True,
 }
