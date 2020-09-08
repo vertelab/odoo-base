@@ -77,13 +77,13 @@ class WebsiteScreenpop(http.Controller):
             # return werkzeug.utils.redirect('/web?id=%s&action=%s&model=res.partner&view_type=form' % (partner.id if partner else 0,action.id if action else 0))
         # ~ return werkzeug.utils.redirect('/web?debug=true#id=242&action=337&model=res.partner&view_type=form&menu_id=219')
         else:
-            return request.render('partner_screenpop.403', {'error': 'ERROR: No partner found', 'our_token': token, 'ext_token': post.get('token'), 'partner': partner, 'action': action, 'post': post,'secret': secret})
+            return request.render('partner_screenpop.403', {'error': 'ERROR: No partner found', 'our_token': token, 'ext_token': post.get('token'), 'partner': partner, 'action': action, 'post': post,'secret': secret,'website': request.website})
 
 
 
     @http.route([
         '/jobseekerscreenpoptest'
-    ], type='http', auth="public", website=False, csrf=False)
+    ], type='http', auth="public", website=True, csrf=False)
     def jobseekerscreenpoptest(self, **post):
         """
         personnummer=<12 tecken>
@@ -118,7 +118,7 @@ class WebsiteScreenpop(http.Controller):
 
     @http.route([
         '/jobseekerscreenpopt2'
-    ], type='http', auth="public", website=False, csrf=False)
+    ], type='http', auth="public", website=True, csrf=False)
     def jobseekeerscreenpopt2(self, **post):
         """
         personnummer=<12 tecken>
@@ -138,4 +138,12 @@ class WebsiteScreenpop(http.Controller):
         secret = request.env['ir.config_parameter'].sudo().get_param('partner_screenpop.secret', 'hemligt')
         token = hashlib.sha1((secret + post.get('datatime', '0000-00-00-00') + post.get('personnummer','20010203-1234') + post.get('bankid', '') ).encode('utf-8')).hexdigest()
 
-        return request.render('partner_screenpop.403', {'error': 'ERROR: No partner found', 'our_token': token, 'ext_token': post.get('token'), 'partner': partner, 'action': action, 'post': post,'secret': secret})
+        return request.render('partner_screenpop.403', {'error': 'ERROR: No partner found', 'our_token': token, 'ext_token': post.get('token'), 'partner': partner, 'action': action, 'post': post,'secret': secret,'website': request.website})
+        
+        
+        
+    @http.route([
+        '/jobseekerscreenpopt3'
+    ], type='http', auth="public", website=True,csrf=False)
+    def jobseekeerscreenpopt3(self, **post):
+        return request.render('partner_screenpop.403', {'error': '', 'message': '', 'our_token': '', 'ext_token': '', 'partner': None, 'action': None, 'post': post,'secret': '','website': request.website})

@@ -35,7 +35,8 @@ Module for testing Screenpop
         'edi_af_appointment',
     ],
     'data': [
-			'views/res_partner_template.xml',
+            'views/res_partner_template.xml',
+            'views/res_partner_view.xml',
         ],
     'application': False,
     'installable': True,

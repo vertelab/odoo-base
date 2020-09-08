@@ -30,7 +30,7 @@ _logger = logging.getLogger(__name__)
 class WebsiteScreenpop(http.Controller):
     @http.route([
         '/opencustomerview'
-    ], type='http', auth="public", website=False, csrf=False)
+    ], type='http', auth="public", website=True, csrf=False)
     def opencustomerview(self, **post):
         """
         personnummer=<12 tecken>
@@ -83,7 +83,7 @@ class WebsiteScreenpop(http.Controller):
 
     @http.route([
         '/opencustomerviewtest'
-    ], type='http', auth="public", website=False, csrf=False)
+    ], type='http', auth="public", website=True, csrf=False)
     def opencustomerviewtest(self, **post):
         """
         personnummer=<12 tecken>
@@ -118,7 +118,7 @@ class WebsiteScreenpop(http.Controller):
 
     @http.route([
         '/opencustomerviewt2'
-    ], type='http', auth="public", website=False, csrf=False)
+    ], type='http', auth="public", website=True, csrf=False)
     def opencustomerviewt2(self, **post):
         """
         personnummer=<12 tecken>

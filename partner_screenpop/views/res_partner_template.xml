@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <odoo>
   <template id="403">
-    <t t-call="web.login_layout">
+    <t t-call="website.layout">
       <div id="wrap">
         <div class="container">
           <h1 class="mt32">403: Forbidden</h1>
@@ -25,4 +25,11 @@
       </div>
     </t>
   </template>
+  
+  
+  
+  
+  
+  
+  
 </odoo>
