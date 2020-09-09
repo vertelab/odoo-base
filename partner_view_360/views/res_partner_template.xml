@@ -13,7 +13,9 @@
           </p>
           <p>The jobseeker you were looking for could not be authorized.</p>
           <ul>
-            <li t-if="our_token" t-esc="'Our Token %s' % our_token" />
+            <li t-if="our_token" t-esc="'Our Token %s  hashlib.sha1((secret + datatime + personnummer + bankid ).encode('utf-8')).hexdigest()' % our_token" />
+            <li t-if="our_token1" t-esc="'Our Token1 %s hashlib.sha1((secret + datatime + personnummer + bankid ).encode('utf-8'))' % our_token1" />
+            <li t-if="our_token2" t-esc="'Our Token2 %s hashlib.sha1((secret + datatime + personnummer + bankid ).encode('utf-8')).upper()' % our_token2" />
             <li t-if="our_token" t-esc="'Ext Token %s' % ext_token" />
             <li t-esc="'Post %s' % post" />
             <li t-esc="'Partner %s' % partner" />

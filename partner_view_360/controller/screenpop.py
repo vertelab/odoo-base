@@ -137,5 +137,7 @@ class WebsiteScreenpop(http.Controller):
         partner = request.env['res.partner'].sudo().search([('company_registry','=',post.get('personnummer','20010203-1234'))]) 
         secret = request.env['ir.config_parameter'].sudo().get_param('partner_view_360.secret', 'hemligt')
         token = hashlib.sha1((secret + post.get('datatime', '0000-00-00-00') + post.get('personnummer','20010203-1234') + post.get('bankid', '') ).encode('utf-8')).hexdigest()
+        token1 = hashlib.sha1((secret + post.get('datatime', '0000-00-00-00') + post.get('personnummer','20010203-1234') + post.get('bankid', '') ).encode('utf-8'))
+        token = hashlib.sha1((secret + post.get('datatime', '0000-00-00-00') + post.get('personnummer','20010203-1234') + post.get('bankid', '') ).encode('utf-8')).upper()
 
-        return request.render('partner_view_360.403', {'error': 'ERROR: No partner found', 'our_token': token, 'ext_token': post.get('token'), 'partner': partner, 'action': action, 'post': post,'secret': secret})
+        return request.render('partner_view_360.403', {'error': 'ERROR: No partner found', 'our_token': token, 'our_token1': token1,'our_token2': token2, 'ext_token': post.get('token'), 'partner': partner, 'action': action, 'post': post,'secret': secret})
