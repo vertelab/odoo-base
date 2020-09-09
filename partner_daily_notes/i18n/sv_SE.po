@@ -181,3 +181,8 @@ msgstr "Titel"
 #: model:ir.model,name:partner_daily_notes.model_res_partner_note_type
 msgid "res.partner.note.type"
 msgstr ""
+
+#. module: partner_daily_notes
+#: model:ir.model.fields,field_description:partner_daily_notes.field_res_partner_notes__is_confidential
+msgid "Secret"
+msgstr "Sekretess"
