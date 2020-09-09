@@ -50,7 +50,7 @@ v12.0.0.1.7 AFC-713 Small changes in language \n
         'views/res_partner_view.xml',
         #'wizard/res_partner_search_wizard.xml',
         #'security/ir.model.access.csv',
-        # "data/res.country.state.csv",
+        "data/res.country.state.csv",
     ],
     'demo': [
         "data/jobseekers/res.partner.csv",
