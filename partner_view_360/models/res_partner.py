@@ -29,6 +29,8 @@ from odoo.exceptions import ValidationError
 
 class ResPartner(models.Model):
     _inherit = "res.partner"  # odoo inheritance från res.partner
+    _rec_name = "name_com_reg_num"
+
     #_name = ""
 
     work_phone = fields.Char(string='Work phone', help="Work phone number")
@@ -86,6 +88,8 @@ class ResPartner(models.Model):
 
     segment_jobseeker = fields.Selection(string="Segment", selection=[('a','A'), ('b','B'), ('c1','C1'), ('c2','C2'), ('c3','C3')]) 
     segment_employer = fields.Selection(string="Segment", selection=[('including 1','Including 1'), ('including 2',' Including 2'), ('entry job','Entry job'), ('national agreement','National agreement'), ('employment subsidy','Employment subsidy')])
+
+    name_com_reg_num = fields.Char(compute="_compute_name_com_reg_num", store=True)
 
     @api.one
     def combine_social_sec_nr_age(self): #How to do the popup???
@@ -169,6 +173,7 @@ class ResPartner(models.Model):
                 self.social_sec_nr = ""
                 self.age = ""
                 raise ValidationError(_("Please input a correctly formated social security number"))
+
     @api.multi
     def close_view(self):
         return{
@@ -183,57 +188,29 @@ class ResPartner(models.Model):
             'type': 'ir.actions.act_window',
         }
 
-# ~ from odoo.addons.http_routing.models.ir_http import slug, unslug
-from odoo import http
-from odoo.http import request
-import werkzeug
-import hashlib
+    def update_name_com_reg_number(self):
+        for partner in self:
+            name = partner.name
+            if partner.company_registry:
+                name += ' ' + partner.company_registry
+            partner.name_com_reg_num = name
+            partner.name = partner.name
 
+    @api.depends('name', 'company_registry')
+    def _compute_name_com_reg_num(self):
+        for partner in self:
+            name = partner.name
+            if partner.company_registry:
+                name += ' ' + partner.company_registry
+            partner.name_com_reg_num = name
 
-class WebsiteBlog(http.Controller):
-    @http.route([
-        '/opencustomerview'
-    ], type='http', auth="public", website=False, csrf=False)
-    def opencustomerview(self, **post):
-        """
-        personnummer=<12 tecken>
-        signatur=<5 tecken>
-        arendetyp=<tre tecken, t ex P92>
-        kontaktid=<10 siffror, för uppföljning/loggning id i ACE>
-        bankid=<OK/annat>
-        datatime=yyyy-mm-dd-hh
-        reason=<text string>
-        token= <sha1 hemlighet + yyyy-mm-dd-hh + personnummer>
-        debug=True 
-        
-        P92 första planeringssamtal
-        """
-        _logger.warn('opencustomerview %s' % post)
-        secret = request.env['ir.config_parameter'].sudo().get_param('partner_view_360.secret', 'hemligt')
-        # ~ token = hashlib.sha1(secret + fields.DateTime.now().tostring[:13].replace(' ','-') + post.get('personnummer') ).hexdigest()
-        token = hashlib.sha1((secret + post.get('datatime', '0000-00-00-00') + post.get('personnummer','20010203-1234') + post.get('bankid', 'None') ).encode('utf-8')).hexdigest()
-        _logger.warn("\n\ntoken: %s" % token)
-        if not token == post.get('token'):
-            return request.render('partner_view_360.403', {'error': 'ERROR: Token missmatch','our_token': token, 'ext_token': post.get('token'), 'partner': None, 'action': None, 'url': None, 'post': post,'secret': secret})
-        # ~ action = self.env['ir.actions.act_window'].for_xml_id('partner_view_360', 'action_jobseekers')
-        action = request.env.ref('partner_view_360.action_jobseekers')
-        _logger.warn("action: %s" % action)
-        # ~ return action
-        partner = request.env['res.partner'].sudo().search([('company_registry','=',post.get('personnummer','20010203-1234'))]) # not granted yet
-        _logger.warn("partner: %s pnr: %s " % (partner, post.get('personnummer','20010203-1234')))
-        if partner and len(partner) == 1:
-            # if not partner._grant_jobseeker_access(post.get('reason','None'))
-            #     return request.render('partner_view_360.403', {'error': 'ERROR: Could not grant access','our_token': token, 'ext_token': post.get('token'), 'partner': partner, 'action': action,'url': None,'post': post})
-            #
-            partner.eidentification = post.get('bankid')
-            # ~ res_url = '/web?id=%s&action=%s&model=res.partner&view_type=form' % (partner.id if partner else 0,action.id if action else 0)
-            res_url = '/web?id=%s&action=%s&model=res.partner&view_type=form#id=%s&active_id=40&model=res.partner&view_type=form' % (partner.id if partner else 0,action.id if action else 0,partner.id if partner else 0)
-            #'/web?id=823&action=371&model=res.partner&active_id=39&model=res.partner&view_type=form&menu_id=252#id=823&active_id=40&model=res.partner&view_type=form&menu_id='
-            _logger.warn("res_url: %s" % res_url)
-            if post.get('debug'):
-                return request.render('partner_view_360.403', {'message': 'Debug','our_token': token, 'ext_token': post.get('token'), 'partner': partner, 'action': action,'url': res_url, 'post': post,'secret': secret})
-            return werkzeug.utils.redirect(res_url)
-            # return werkzeug.utils.redirect('/web?id=%s&action=%s&model=res.partner&view_type=form' % (partner.id if partner else 0,action.id if action else 0))
-        # ~ return werkzeug.utils.redirect('/web?debug=true#id=242&action=337&model=res.partner&view_type=form&menu_id=219')
-        else:
-            return request.render('partner_view_360.403', {'error': 'ERROR: No partner found', 'our_token': token, 'ext_token': post.get('token'), 'partner': partner, 'action': action, 'post': post,'secret': secret})
+    @api.multi
+    def name_get(self):
+        result = []
+        for partner in self:
+            name = partner.name
+            if partner.company_registry:
+                name += ' ' + partner.company_registry
+            result.append((partner.id, name))
+        return result
+

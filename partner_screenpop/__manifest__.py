@@ -20,46 +20,24 @@
 ##############################################################################
 
 {
-    'name': 'Partner 360 view',
-    'version': '12.0.0.1.8',
+    'name': 'Partner Screenpop',
+    'version': '12.0.0.1.7',
     'category': '',
     'description': """
-Module for employee 360 view
-================================================================================================
-This module alters, adds, removes and shuffles around fields in the partner view \n
-Also adds new menus and views for partners of type jobseeker and employer \n
-v12.0.0.1.4 AFC-102, 103, 140, 183, 192, 213, 210, 241, 259, 260, 346 \n
-v12.0.0.1.5 AFC-713 Small changes in language \n
-v12.0.0.1.6 AFC-713 Small changes in language \n
-v12.0.0.1.7 AFC-713 Small changes in language \n
-\n
+Module for testing Screenpop
 """,
     'author': 'Vertel AB',
     'license': 'AGPL-3',
     'website': 'http://www.vertel.se',
     'depends': [
-        'mail',
-        'partner_firstname', 
-        'contacts', 
-        'res_drivers_license',
-        'res_ssyk',
-        'res_sni',
-        'partner_fax',
+        'base', 
+        'website', 
+        'edi_af_appointment',
     ],
     'data': [
-        'views/res_partner_template.xml',
-        'views/res_partner_view.xml',
-        #'wizard/res_partner_search_wizard.xml',
-        #'security/ir.model.access.csv',
-        "data/res.country.state.csv",
-    ],
-    'demo': [
-        "data/jobseekers/res.partner.csv",
-        "data/employers/res.partner.csv",
-    ],
-    'qweb': [
-        'static/src/xml/systray.xml',
-    ],
+            'views/res_partner_template.xml',
+            'views/res_partner_view.xml',
+        ],
     'application': False,
     'installable': True,
 }

@@ -4,6 +4,7 @@
 #
 msgid ""
 msgstr ""
+
 "Project-Id-Version: Odoo Server 12.0-20200508\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2020-09-09 11:23+0000\n"
@@ -194,7 +195,7 @@ msgstr "Kundnummmer"
 #: model:ir.model.fields,field_description:partner_view_360.field_res_partner__customer_since
 #: model:ir.model.fields,field_description:partner_view_360.field_res_users__customer_since
 msgid "Customer since"
-msgstr "Inskriven sedan"
+msgstr "Aktuell sedan"
 
 #. module: partner_view_360
 #: model_terms:ir.ui.view,arch_db:partner_view_360.view_employer_filter
@@ -226,6 +227,7 @@ msgid "E-Identification"
 msgstr "E-identifikation"
 
 #. module: partner_view_360
+#: model_terms:ir.ui.view,arch_db:partner_view_360.view_jobseeker_form
 #: model_terms:ir.ui.view,arch_db:partner_view_360.view_partner_form_education
 #: model_terms:ir.ui.view,arch_db:partner_view_360.view_partner_form_education1
 msgid "Education"
@@ -467,7 +469,7 @@ msgstr "Annan orsak vald, men annan orsak fältet är tomt"
 #. module: partner_view_360
 #: selection:res.partner,registered_through:0
 msgid "PDM"
-msgstr "PDM"
+msgstr ""
 
 #. module: partner_view_360
 #: model_terms:ir.ui.view,arch_db:partner_view_360.view_jobseeker_form
@@ -484,7 +486,7 @@ msgstr "Telefon:"
 #: code:addons/partner_view_360/models/res_partner.py:171
 #, python-format
 msgid "Please input a correctly formated social security number"
-msgstr "Fyll i korrekt format person nummer"
+msgstr "Fyll i korrekt format personnummer"
 
 #. module: partner_view_360
 #: selection:res.partner,type:0
@@ -512,7 +514,7 @@ msgstr "Folkbokföringsadress"
 #: model:ir.model.fields,field_description:partner_view_360.field_res_partner__sms_reminders
 #: model:ir.model.fields,field_description:partner_view_360.field_res_users__sms_reminders
 msgid "SMS reminders"
-msgstr "SMS påminnelser"
+msgstr "SMS-påminnelser"
 
 #. module: partner_view_360
 #: model:ir.ui.menu,name:partner_view_360.menu_sni_config
@@ -555,7 +557,7 @@ msgstr "Sök orsak eller identifieringsmetod måste vara vald före sökning"
 #: model:ir.model.fields,field_description:partner_view_360.field_res_users__segment_employer
 #: model:ir.model.fields,field_description:partner_view_360.field_res_users__segment_jobseeker
 msgid "Segment"
-msgstr "Segment"
+msgstr ""
 
 #. module: partner_view_360
 #: selection:res.partner,registered_through:0

@@ -19,37 +19,16 @@
 #
 ##############################################################################
 
-{
-    'name': 'Daily notes',
-    'version': '12.0.1.4',
-    'category': '',
-    'description': """
-Daily notes
-===============================================================================
-AFC-81
-This module allowes daily notes for a partner.
-- 12.0.1.1  Added mapping for Integration platform with the module base_map.
-- 12.0.1.4  Changed display Daily Notes types in "name in Tree-view".
-""",
-    'author': 'Vertel AB',
-    'license': 'AGPL-3',
-    'website': 'http://www.vertel.se',
-    'depends': [
-        'base_map',
-        'partner_view_360'
-    ],
-    'data': [
-		    'views/res_partner_view.xml',
-            'security/ir.model.access.csv',
-            'views/res_partner_notes_view.xml',
-            #'data/ir.model.fields.csv', 
-            "data/res.partner.note.type.csv",
+from odoo import models, fields, api, _
+import logging
+from datetime import date
+_logger = logging.getLogger(__name__)
+from odoo.exceptions import ValidationError
 
-    ],
-    'demo': [
-            "data/res.partner.notes.csv",
-    ],
-    'application': False,
-    'installable': True,
-}
-# vim:expandtab:smartindent:tabstop=4s:softtabstop=4:shiftwidth=4:
+
+
+class ResPartner(models.Model):
+    _inherit = "res.partner"  # odoo inheritance från res.partner
+    #_name = ""
+
+

@@ -33,7 +33,7 @@ class ResPartnerNotes(models.Model):
     administrative_officer = fields.Many2one('res.users', string='Administrative officer', default=lambda self: self.env.user)
     note = fields.Text(string="Notes")
     note_date = fields.Datetime(string="Refers to date", default=fields.Datetime.now)
-    is_confidential = fields.Boolean(string="Confidential")
+    is_confidential = fields.Boolean(string="Secret", help="Apply/Remove Secret")
     note_type = fields.Many2one(comodel_name="res.partner.note.type")
     note_number = fields.Char(string="AIS number")
 
@@ -68,10 +68,11 @@ class ResPartner(models.Model):
             action['context'] = {'default_partner_id': self.id}
         return action
 
+
 class ResPartnerNoteType(models.Model):
-    _name="res.partner.note.type"
+    _name = "res.partner.note.type"
+    _rec_name = 'description'
 
     note_id = fields.One2many(comodel_name="res.partner.notes", inverse_name="note_type")
-
     name = fields.Char(string="Name")
     description = fields.Char(string="Description")
