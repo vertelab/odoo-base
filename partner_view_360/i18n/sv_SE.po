@@ -1,24 +1,27 @@
 # Translation of Odoo Server.
 # This file contains the translation of the following modules:
-#	* partner_view_360
+# 	* partner_view_360
 #
 msgid ""
 msgstr ""
-"Project-Id-Version: Odoo Server 12.0-20200831\n"
+
+"Project-Id-Version: Odoo Server 12.0-20200508\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2020-09-04 16:50+0000\n"
-"PO-Revision-Date: 2020-09-04 16:50+0000\n"
+"POT-Creation-Date: 2020-09-09 11:23+0000\n"
+"PO-Revision-Date: 2020-09-09 13:50+0200\n"
 "Last-Translator: <>\n"
 "Language-Team: \n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
-"Content-Transfer-Encoding: \n"
+"Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: \n"
+"Language: sv_SE\n"
+"X-Generator: Poedit 2.0.6\n"
 
 #. module: partner_view_360
 #: selection:res.partner,segment_employer:0
 msgid " Including 2"
-msgstr ""
+msgstr "Inkluderar 2"
 
 #. module: partner_view_360
 #: code:addons/partner_view_360/models/res_partner.py:93
@@ -71,40 +74,40 @@ msgstr "Arkiverad"
 #: model_terms:ir.ui.view,arch_db:partner_view_360.view_jobseeker_form
 #: model_terms:ir.ui.view,arch_db:partner_view_360.view_partner_employer_form
 msgid "Avatar"
-msgstr ""
+msgstr "Avatar"
 
 #. module: partner_view_360
 #: model:ir.model.fields,help:partner_view_360.field_res_partner__eidentification
 #: model:ir.model.fields,help:partner_view_360.field_res_users__eidentification
 msgid "BankId or other e-identification done OK or other"
-msgstr ""
+msgstr "BankId eller annan e-legitimation genomförd"
 
 #. module: partner_view_360
 #: selection:res.partner,segment_jobseeker:0
 msgid "C1"
-msgstr ""
+msgstr "C1"
 
 #. module: partner_view_360
 #: selection:res.partner,segment_jobseeker:0
 msgid "C2"
-msgstr ""
+msgstr "C2"
 
 #. module: partner_view_360
 #: selection:res.partner,segment_jobseeker:0
 msgid "C3"
-msgstr ""
+msgstr "C3"
 
 #. module: partner_view_360
 #: model:ir.model.fields,field_description:partner_view_360.field_res_partner__cfar
 #: model:ir.model.fields,field_description:partner_view_360.field_res_users__cfar
 msgid "CFAR"
-msgstr ""
+msgstr "CFAR"
 
 #. module: partner_view_360
 #: model:ir.model.fields,help:partner_view_360.field_res_partner__cfar
 #: model:ir.model.fields,help:partner_view_360.field_res_users__cfar
 msgid "CFAR number"
-msgstr ""
+msgstr "CFAR number"
 
 #. module: partner_view_360
 #: model:ir.model.fields,field_description:partner_view_360.field_res_partner__given_address_city
@@ -483,7 +486,7 @@ msgstr "Telefon:"
 #: code:addons/partner_view_360/models/res_partner.py:171
 #, python-format
 msgid "Please input a correctly formated social security number"
-msgstr ""
+msgstr "Fyll i korrekt format personnummer"
 
 #. module: partner_view_360
 #: selection:res.partner,type:0
@@ -494,7 +497,7 @@ msgstr "Privatadress"
 #: model:ir.model.fields,field_description:partner_view_360.field_res_partner__deactualization_reason
 #: model:ir.model.fields,field_description:partner_view_360.field_res_users__deactualization_reason
 msgid "Reason"
-msgstr "Orsak"
+msgstr "Anledning"
 
 #. module: partner_view_360
 #: model:ir.model.fields,field_description:partner_view_360.field_res_partner__registered_through
@@ -516,17 +519,17 @@ msgstr "SMS-påminnelser"
 #. module: partner_view_360
 #: model:ir.ui.menu,name:partner_view_360.menu_sni_config
 msgid "SNI-koder"
-msgstr ""
+msgstr "SNI-koder"
 
 #. module: partner_view_360
 #: model:ir.ui.menu,name:partner_view_360.menu_ssyk_config
 msgid "SSYK-koder"
-msgstr ""
+msgstr "SSYK-koder"
 
 #. module: partner_view_360
 #: model:ir.ui.menu,name:partner_view_360.menu_sun_config
 msgid "SUN-koder"
-msgstr ""
+msgstr "SUN-koder"
 
 #. module: partner_view_360
 #: model_terms:ir.ui.view,arch_db:partner_view_360.view_employer_filter
@@ -620,7 +623,7 @@ msgstr "Temporära Handläggare"
 #. module: partner_view_360
 #: model_terms:ir.ui.view,arch_db:partner_view_360.403
 msgid "The jobseeker you were looking for could not be authorized."
-msgstr ""
+msgstr "Den arbetssökande du sökte kunde inte autoriseras"
 
 #. module: partner_view_360
 #: model:ir.model.fields,help:partner_view_360.field_res_partner__state_code
@@ -655,7 +658,7 @@ msgstr "Besöksadress"
 #: model:ir.model.fields,field_description:partner_view_360.field_res_partner__visitation_address_id
 #: model:ir.model.fields,field_description:partner_view_360.field_res_users__visitation_address_id
 msgid "Visitation address"
-msgstr ""
+msgstr "Besöksadress"
 
 #. module: partner_view_360
 #: model:ir.model.fields,field_description:partner_view_360.field_res_partner__foreign_country_of_work
@@ -708,7 +711,7 @@ msgstr "t.ex. försäljningschef"
 #. module: partner_view_360
 #: model_terms:ir.ui.view,arch_db:partner_view_360.view_partner_employer_form
 msgid "employer"
-msgstr ""
+msgstr "arbetsgivare"
 
 #. module: partner_view_360
 #: model:ir.model.fields,field_description:partner_view_360.field_res_partner__given_address_id
@@ -716,7 +719,7 @@ msgstr ""
 #: model:ir.model.fields,field_description:partner_view_360.field_res_users__given_address_id
 #: model:ir.model.fields,field_description:partner_view_360.field_res_users__given_address_street
 msgid "given address"
-msgstr ""
+msgstr "angiven adress"
 
 #. module: partner_view_360
 #: model_terms:ir.ui.view,arch_db:partner_view_360.view_jobseeker_form
@@ -730,5 +733,4 @@ msgstr "intern anteckning..."
 #: model:ir.model.fields,help:partner_view_360.field_res_users__company_registry
 #: model:ir.model.fields,help:partner_view_360.field_res_users__social_sec_nr
 msgid "organization number"
-msgstr ""
-
+msgstr "organisationsnummer"
