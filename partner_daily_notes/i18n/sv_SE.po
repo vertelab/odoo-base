@@ -4,10 +4,10 @@
 #
 msgid ""
 msgstr ""
-"Project-Id-Version: Odoo Server 12.0-20190808\n"
+"Project-Id-Version: Odoo Server 12.0-20200508\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2020-08-03 08:57+0000\n"
-"PO-Revision-Date: 2020-08-03 10:58+0200\n"
+"POT-Creation-Date: 2020-09-09 11:13+0000\n"
+"PO-Revision-Date: 2020-09-09 13:34+0200\n"
 "Last-Translator: <>\n"
 "Language-Team: \n"
 "MIME-Version: 1.0\n"
@@ -26,6 +26,11 @@ msgstr "AIS nummer"
 #: model:ir.model.fields,field_description:partner_daily_notes.field_res_partner_notes__administrative_officer
 msgid "Administrative officer"
 msgstr "Handläggare"
+
+#. module: partner_daily_notes
+#: model:ir.model.fields,field_description:partner_daily_notes.field_res_partner_notes__is_confidential
+msgid "Confidential"
+msgstr "Konfidentiell"
 
 #. module: partner_daily_notes
 #: model:ir.model,name:partner_daily_notes.model_res_partner
@@ -51,14 +56,7 @@ msgid "Customer number"
 msgstr "Kundnummmer"
 
 #. module: partner_daily_notes
-#: model_terms:ir.ui.view,arch_db:partner_daily_notes.view_partner_form
-#: model_terms:ir.ui.view,arch_db:partner_daily_notes.view_partner_form1
-#: model_terms:ir.ui.view,arch_db:partner_daily_notes.view_partner_form2
-msgid "Daily Notes"
-msgstr "Daganteckningar"
-
-#. module: partner_daily_notes
-#: code:addons/partner_daily_notes/models/res_partner.py:58
+#: code:addons/partner_daily_notes/models/res_partner.py:59
 #: model:ir.model.fields,field_description:partner_daily_notes.field_res_partner__notes_ids
 #: model:ir.model.fields,field_description:partner_daily_notes.field_res_users__notes_ids
 #: model:ir.ui.menu,name:partner_daily_notes.partner_notes_menu_action
@@ -88,7 +86,7 @@ msgstr "Visningsnamn"
 #: model:ir.model.fields,field_description:partner_daily_notes.field_res_partner_note_type__id
 #: model:ir.model.fields,field_description:partner_daily_notes.field_res_partner_notes__id
 msgid "ID"
-msgstr ""
+msgstr "ID"
 
 #. module: partner_daily_notes
 #: model:ir.model.fields,field_description:partner_daily_notes.field_res_partner_notes__partner_id
@@ -121,7 +119,7 @@ msgstr "Namn"
 #. module: partner_daily_notes
 #: model:ir.model.fields,field_description:partner_daily_notes.field_res_partner_note_type__note_id
 msgid "Note"
-msgstr "Notering"
+msgstr "Anteckning"
 
 #. module: partner_daily_notes
 #: model:ir.model.fields,field_description:partner_daily_notes.field_res_partner_notes__note_type
@@ -129,27 +127,27 @@ msgid "Note Type"
 msgstr "Noteringstyp"
 
 #. module: partner_daily_notes
-#: model:ir.actions.act_window,name:partner_daily_notes.action_partner_note_type_tree
+#: model:ir.actions.act_window,name:partner_daily_notes.partner_note_type_action_view_tree
 msgid "Note Types"
-msgstr ""
+msgstr "Noteringstyper"
 
 #. module: partner_daily_notes
 #: model:ir.ui.menu,name:partner_daily_notes.partner_note_type_menu_action
 #: model:ir.ui.menu,name:partner_daily_notes.partner_note_type_menu_action_employer
 #: model:ir.ui.menu,name:partner_daily_notes.partner_note_type_menu_action_jobseeker
-#: model_terms:ir.ui.view,arch_db:partner_daily_notes.view_partner_note_type_tree
+#: model_terms:ir.ui.view,arch_db:partner_daily_notes.partner_note_type_view_tree
 msgid "Note types"
 msgstr "Noteringstyper"
 
 #. module: partner_daily_notes
 #: model:ir.model.fields,field_description:partner_daily_notes.field_res_partner_notes__note
+#: model_terms:ir.ui.view,arch_db:partner_daily_notes.partner_notes_view_tree
+#: model_terms:ir.ui.view,arch_db:partner_daily_notes.partner_notes_view_tree_button
 #: model_terms:ir.ui.view,arch_db:partner_daily_notes.view_partner_form
 #: model_terms:ir.ui.view,arch_db:partner_daily_notes.view_partner_form1
 #: model_terms:ir.ui.view,arch_db:partner_daily_notes.view_partner_form2
-#: model_terms:ir.ui.view,arch_db:partner_daily_notes.view_partner_notes_tree
-#: model_terms:ir.ui.view,arch_db:partner_daily_notes.view_partner_notes_tree_button
 msgid "Notes"
-msgstr "Daganteckningar"
+msgstr "Anteckningar"
 
 #. module: partner_daily_notes
 #: model:ir.model.fields,field_description:partner_daily_notes.field_res_partner__notes_count
@@ -163,9 +161,9 @@ msgid "Office"
 msgstr "Kontor"
 
 #. module: partner_daily_notes
-#: model:ir.actions.act_window,name:partner_daily_notes.action_partner_notes_tree
+#: model:ir.actions.act_window,name:partner_daily_notes.partner_notes_action_view_tree
 msgid "Partner Daily Notes"
-msgstr ""
+msgstr "Partner daganteckningar"
 
 #. module: partner_daily_notes
 #: model:ir.model.fields,field_description:partner_daily_notes.field_res_partner_notes__note_date
@@ -180,4 +178,4 @@ msgstr "Titel"
 #. module: partner_daily_notes
 #: model:ir.model,name:partner_daily_notes.model_res_partner_note_type
 msgid "res.partner.note.type"
-msgstr ""
+msgstr "res.partner.notering.typ"
