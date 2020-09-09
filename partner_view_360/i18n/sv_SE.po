@@ -192,7 +192,7 @@ msgstr "Kundnummmer"
 #: model:ir.model.fields,field_description:partner_view_360.field_res_partner__customer_since
 #: model:ir.model.fields,field_description:partner_view_360.field_res_users__customer_since
 msgid "Customer since"
-msgstr "Inskriven sedan"
+msgstr "Aktuell sedan"
 
 #. module: partner_view_360
 #: model_terms:ir.ui.view,arch_db:partner_view_360.view_employer_filter
