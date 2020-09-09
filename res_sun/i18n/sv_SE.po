@@ -4,10 +4,10 @@
 #
 msgid ""
 msgstr ""
-"Project-Id-Version: Odoo Server 12.0-20190808\n"
+"Project-Id-Version: Odoo Server 12.0-20200508\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2020-04-22 08:56+0000\n"
-"PO-Revision-Date: 2020-04-22 11:01+0200\n"
+"POT-Creation-Date: 2020-09-09 11:28+0000\n"
+"PO-Revision-Date: 2020-09-09 13:58+0200\n"
 "Last-Translator: <>\n"
 "Language-Team: \n"
 "MIME-Version: 1.0\n"
@@ -52,11 +52,6 @@ msgid "Display Name"
 msgstr "Visningsnamn"
 
 #. module: res_sun
-#: model_terms:ir.ui.view,arch_db:res_sun.view_partner_form_education
-msgid "Education"
-msgstr "Utbildning"
-
-#. module: res_sun
 #: model:ir.model.fields,field_description:res_sun.field_res_partner__education_level
 #: model:ir.model.fields,field_description:res_sun.field_res_partner_education_level__name
 #: model:ir.model.fields,field_description:res_sun.field_res_users__education_level
@@ -79,7 +74,7 @@ msgstr "Utländsk utbildning bedömd av berörd instans"
 #: model:ir.model.fields,field_description:res_sun.field_res_partner_education_level__id
 #: model:ir.model.fields,field_description:res_sun.field_res_sun__id
 msgid "ID"
-msgstr ""
+msgstr "ID"
 
 #. module: res_sun
 #: model:ir.model.fields,field_description:res_sun.field_res_partner_education_level____last_update
@@ -113,7 +108,7 @@ msgstr "Officiell Kod"
 #. module: res_sun
 #: model:ir.model.fields,help:res_sun.field_res_sun__code
 msgid "Official code, group, sub-group or detail group."
-msgstr ""
+msgstr "Officiell kod, grupp, undergrupp eller detaljerad grupp."
 
 #. module: res_sun
 #: model:ir.model.fields,field_description:res_sun.field_res_sun__parent_id
@@ -121,10 +116,10 @@ msgid "Parent"
 msgstr "Överordnad"
 
 #. module: res_sun
-#: model:ir.model.fields,field_description:res_sun.field_res_partner_education_level__partner_id
-#: model:ir.model.fields,field_description:res_sun.field_res_sun__partner_id
+#: model:ir.model.fields,field_description:res_sun.field_res_partner_education_level__partner_ids
+#: model:ir.model.fields,field_description:res_sun.field_res_sun__partner_ids
 msgid "Partner"
-msgstr "Kund"
+msgstr "Samarbetspartner"
 
 #. module: res_sun
 #: model:ir.model.fields,field_description:res_sun.field_res_partner__sun_ids
@@ -136,22 +131,22 @@ msgstr "SUN-Kod"
 #: model:ir.actions.act_window,name:res_sun.action_sun_form
 #: model:ir.ui.menu,name:res_sun.menu_sun_form
 msgid "SUN-koder"
-msgstr ""
+msgstr "SUN-koder"
 
 #. module: res_sun
 #: model_terms:ir.ui.view,arch_db:res_sun.view_sun_filter
 msgid "Search sun"
-msgstr ""
+msgstr "Sök sun"
 
 #. module: res_sun
 #: model:ir.model,name:res_sun.model_res_partner_education_level
 msgid "res.partner.education_level"
-msgstr ""
+msgstr "res.partner.utbildningsnivå"
 
 #. module: res_sun
 #: model:ir.model,name:res_sun.model_res_sun
 msgid "res.sun"
-msgstr ""
+msgstr "res.sun"
 
 #. module: res_sun
 #: model_terms:ir.ui.view,arch_db:res_sun.view_sun_form

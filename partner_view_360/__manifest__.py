@@ -44,6 +44,7 @@ v12.0.0.1.7 AFC-713 Small changes in language \n
         'res_drivers_license',
         'res_ssyk',
         'res_sni',
+        'partner_fax',
     ],
     'data': [
         'views/res_partner_template.xml',
