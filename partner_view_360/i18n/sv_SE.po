@@ -224,6 +224,7 @@ msgid "E-Identification"
 msgstr "E-identifikation"
 
 #. module: partner_view_360
+#: model_terms:ir.ui.view,arch_db:partner_view_360.view_jobseeker_form
 #: model_terms:ir.ui.view,arch_db:partner_view_360.view_partner_form_education
 #: model_terms:ir.ui.view,arch_db:partner_view_360.view_partner_form_education1
 msgid "Education"
@@ -510,7 +511,7 @@ msgstr "Folkbokföringsadress"
 #: model:ir.model.fields,field_description:partner_view_360.field_res_partner__sms_reminders
 #: model:ir.model.fields,field_description:partner_view_360.field_res_users__sms_reminders
 msgid "SMS reminders"
-msgstr "SMS påminnelser"
+msgstr "SMS-påminnelser"
 
 #. module: partner_view_360
 #: model:ir.ui.menu,name:partner_view_360.menu_sni_config
