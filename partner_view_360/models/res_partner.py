@@ -29,6 +29,8 @@ from odoo.exceptions import ValidationError
 
 class ResPartner(models.Model):
     _inherit = "res.partner"  # odoo inheritance från res.partner
+    _rec_name = "name_com_reg_num"
+
     #_name = ""
 
     work_phone = fields.Char(string='Work phone', help="Work phone number")
@@ -86,6 +88,8 @@ class ResPartner(models.Model):
 
     segment_jobseeker = fields.Selection(string="Segment", selection=[('a','A'), ('b','B'), ('c1','C1'), ('c2','C2'), ('c3','C3')]) 
     segment_employer = fields.Selection(string="Segment", selection=[('including 1','Including 1'), ('including 2',' Including 2'), ('entry job','Entry job'), ('national agreement','National agreement'), ('employment subsidy','Employment subsidy')])
+
+    name_com_reg_num = fields.Char(compute="_compute_name_com_reg_num", store=True)
 
     @api.one
     def combine_social_sec_nr_age(self): #How to do the popup???
@@ -169,6 +173,7 @@ class ResPartner(models.Model):
                 self.social_sec_nr = ""
                 self.age = ""
                 raise ValidationError(_("Please input a correctly formated social security number"))
+
     @api.multi
     def close_view(self):
         return{
@@ -182,4 +187,30 @@ class ResPartner(models.Model):
             #'key2': "client_action_multi",
             'type': 'ir.actions.act_window',
         }
+
+    def update_name_com_reg_number(self):
+        for partner in self:
+            name = partner.name
+            if partner.company_registry:
+                name += ' ' + partner.company_registry
+            partner.name_com_reg_num = name
+            partner.name = partner.name
+
+    @api.depends('name', 'company_registry')
+    def _compute_name_com_reg_num(self):
+        for partner in self:
+            name = partner.name
+            if partner.company_registry:
+                name += ' ' + partner.company_registry
+            partner.name_com_reg_num = name
+
+    @api.multi
+    def name_get(self):
+        result = []
+        for partner in self:
+            name = partner.name
+            if partner.company_registry:
+                name += ' ' + partner.company_registry
+            result.append((partner.id, name))
+        return result
 
