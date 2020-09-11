@@ -33,7 +33,7 @@ class WebsiteScreenpop(http.Controller):
     ], type='http', auth="public", website=True, csrf=False)
     def opencustomerview(self, **post):
         """
-        personnummer=<12 tecken>
+        personnummer=<12 tecken>, exklusive bindestreck. Ex: '200102031234'
         signatur=<5 tecken>
         arendetyp=<tre tecken, t ex P92>
         kontaktid=<10 siffror, för uppföljning/loggning id i ACE>
@@ -47,7 +47,13 @@ class WebsiteScreenpop(http.Controller):
         _logger.warn('opencustomerview %s' % post)
         secret = request.env['ir.config_parameter'].sudo().get_param('partner_view_360.secret', 'hemligt')
         # ~ token = hashlib.sha1(secret + fields.DateTime.now().tostring[:13].replace(' ','-') + post.get('personnummer') ).hexdigest()
-        token = hashlib.sha1((secret + post.get('datatime', '0000-00-00-00') + post.get('personnummer','20010203-1234') + post.get('bankid', 'None') ).encode('utf-8')).hexdigest()
+        if request.env.user.login != post.get('signatur'):
+            raise Warning("Wrong signature.")
+
+        pnr = post.get('personnummer', '')
+        if pnr and not '-' in pnr:
+            pnr = pnr[:8] + '-' + pnr[8:12]
+        token = hashlib.sha1((secret + post.get('datatime', '0000-00-00-00') + pnr + post.get('bankid', 'None') ).encode('utf-8')).hexdigest()
         _logger.warn("\n\ntoken: %s" % token)
         if not token == post.get('token'):
             return request.render('partner_view_360.403', {'error': 'ERROR: Token missmatch','our_token': token, 'ext_token': post.get('token'), 'partner': None, 'action': None, 'url': None, 'post': post,'secret': secret})
@@ -55,8 +61,8 @@ class WebsiteScreenpop(http.Controller):
         action = request.env.ref('partner_view_360.action_jobseekers')
         _logger.warn("action: %s" % action)
         # ~ return action
-        partner = request.env['res.partner'].sudo().search([('company_registry','=',post.get('personnummer','20010203-1234'))]) # not granted yet
-        _logger.warn("partner: %s pnr: %s " % (partner, post.get('personnummer','20010203-1234')))
+        partner = request.env['res.partner'].sudo().search([('company_registry','=',pnr)]) # not granted yet
+        _logger.warn("partner: %s pnr: %s " % (partner, pnr))
         
         
         if partner and len(partner) == 1:
