@@ -360,6 +360,7 @@ msgstr "Arbetssökande info"
 #: code:addons/partner_view_360/wizard/res_partner_search_wizard.py:102
 #: model:ir.actions.act_window,name:partner_view_360.action_jobseekers
 #: model:ir.ui.menu,name:partner_view_360.res_partner_jobseekers_menu
+#: model:ir.ui.menu,name:partner_view_360.res_partner_jobseekers_action_menu
 #, python-format
 msgid "Jobseekers"
 msgstr "Arbetssökande"
