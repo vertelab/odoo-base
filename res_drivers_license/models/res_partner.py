@@ -28,3 +28,15 @@ class Partner(models.Model):
     has_drivers_license = fields.Boolean(string="Has drivers license")
     drivers_license_ids = fields.Many2many(comodel_name='res.drivers_license', string='Drivers license class')
     has_car = fields.Boolean(string="Has access to car")
+
+
+
+class ResDriversLicense(models.Model): 
+    _name = 'res.drivers_license'
+
+    partner_ids = fields.Many2many(comodel_name="res.partner")
+    
+    name = fields.Char(string='Class', required=True) #A,B etc.
+    description = fields.Char(string='Description')
+
+
