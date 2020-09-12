@@ -48,18 +48,24 @@ class ResPartner(models.Model):
 
     # office selection field for partners connected to an office, my_office_code filled in by office_code for the office
     office = fields.Many2one('res.partner', string="Office") #should check for type = "af office"
-    office_campuses = fields.One2many('res.partner', related="office.campuses") 
-    my_campuses = fields.One2many('res.partner') #should check if if it's in office_locations
+
+
+    # office_ids is a better name, One2many need a help-class that cannot be res.partner with a inverse_name
+    # ~ office_campuses = fields.One2many('res.partner', related="office.campuses") 
+    # ~ my_campuses = fields.One2many('res.partner') #should check if if it's in office_locations
+
+
     #office_ids = fields.Many2many('res.partner', relation='res_partner_office_partner_rel', column1='partner_id', column2='office_id', string='Offices')
-    my_office_code = fields.Char(
-        string='Office code', related='office.office_code')
+    my_office_code = fields.Char(string='Office code', related='office.office_code')
 
     # adds af office as a type of partner
     type = fields.Selection(selection_add=[('af office', 'AF Office'), ('foreign address','Foreign Address'), ('given address','Given address'), ('visitation address','Visitation Address'), ('campus', 'Campus'), ('mailing address', 'Mailing Address')])
 
     # office code for office type partners only
     office_code = fields.Char(string="Office code")
-    campuses = fields.One2many('res.partner', string="Campuses") # should check for type = "campus"
+    
+    # campus_ids is a better name, One2many need a help-class that cannot be res.partner with a inverse_name
+    # ~ campuses = fields.One2many('res.partner', string="Campuses") # should check for type = "campus"
 
     # Location code for campus type partners only
     location_code = fields.Char(string="Location Code") 

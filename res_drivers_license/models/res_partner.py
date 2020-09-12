@@ -25,8 +25,11 @@ _logger = logging.getLogger(__name__)
 class Partner(models.Model):
     _inherit = 'res.partner'
 
-    has_drivers_license = fields.Boolean(string="Has drivers license")
-    drivers_license_ids = fields.Many2many(comodel_name='res.drivers_license', string='Drivers license class')
+    @api.one
+    def _has_drivers_license(self):
+        self.har_drivers_license = len(self.drivers_license_ids) > 0
+    has_drivers_license = fields.Boolean(string="Has drivers license",compute=_has_drivers_license)
+    drivers_license_ids = fields.One2many(comodel_name='res.drivers_license', inverse_name='partner_id',string='Drivers license class')
     has_car = fields.Boolean(string="Has access to car")
 
 
@@ -34,8 +37,7 @@ class Partner(models.Model):
 class ResDriversLicense(models.Model): 
     _name = 'res.drivers_license'
 
-    partner_ids = fields.Many2many(comodel_name="res.partner")
-    
+    partner_id = fields.Many2one(comodel_name="res.partner")
     name = fields.Char(string='Class', required=True) #A,B etc.
     description = fields.Char(string='Description')
 
