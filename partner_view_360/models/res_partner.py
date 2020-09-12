@@ -21,6 +21,9 @@
 
 from odoo import models, fields, api, _
 import logging
+import threading
+import base64
+from odoo.modules import get_module_resource
 from datetime import date
 _logger = logging.getLogger(__name__)
 from odoo.exceptions import ValidationError
@@ -173,6 +176,75 @@ class ResPartner(models.Model):
                 self.social_sec_nr = ""
                 self.age = ""
                 raise ValidationError(_("Please input a correctly formated social security number"))
+
+    def update_partner_images(self):
+        for partner in self:
+            colorize = False
+            if partner.type == 'invoice':
+                img_path = get_module_resource('base', 'static/img', 'money.png')
+            elif partner.type == 'delivery':
+                img_path = get_module_resource('base', 'static/img', 'truck.png')
+            elif partner.type == 'af office':
+                img_path = get_module_resource('partner_view_360', 'static/src/img', 'af_office.png')
+            elif partner.type == 'foreign address':
+                img_path = get_module_resource('partner_view_360', 'static/src/img', 'foreign_address.png')
+            elif partner.type == 'given address':
+                img_path = get_module_resource('partner_view_360', 'static/src/img', 'given_address.png')
+            elif partner.type == 'visitation address':
+                img_path = get_module_resource('partner_view_360', 'static/src/img', 'visitation_address.png')
+            elif partner.type == 'private':
+                img_path = get_module_resource('partner_view_360', 'static/src/img', 'private_address.png')
+            elif partner.is_company:
+                img_path = get_module_resource('base', 'static/img', 'company_image.png')
+            else:
+                img_path = get_module_resource('base', 'static/img', 'avatar.png')
+                colorize = True
+
+            if img_path:
+                with open(img_path, 'rb') as f:
+                    image = f.read()
+            if image and colorize:
+                image = tools.image_colorize(image)
+
+            partner.image = tools.image_resize_image_big(base64.b64encode(image))
+
+    @api.model
+    def _get_default_image(self, partner_type, is_company, parent_id):
+        if getattr(threading.currentThread(), 'testing', False) or self._context.get('install_mode'):
+            return False
+
+        colorize, img_path, image = False, False, False
+        if partner_type in ['other'] and parent_id:
+            parent_image = self.browse(parent_id).image
+            image = parent_image and base64.b64decode(parent_image) or None
+
+        if not image and partner_type == 'invoice':
+            img_path = get_module_resource('base', 'static/img', 'money.png')
+        elif not image and partner_type == 'delivery':
+            img_path = get_module_resource('base', 'static/img', 'truck.png')
+        elif not image and partner_type == 'af office':
+            img_path = get_module_resource('partner_view_360', 'static/src/img', 'af_office.png')
+        elif not image and partner_type == 'foreign address':
+            img_path = get_module_resource('partner_view_360', 'static/src/img', 'foreign_address.png')
+        elif not image and partner_type == 'given address':
+            img_path = get_module_resource('partner_view_360', 'static/src/img', 'given_address.png')
+        elif not image and partner_type == 'visitation address':
+            img_path = get_module_resource('partner_view_360', 'static/src/img', 'visitation_address.png')
+        elif not image and partner_type == 'private':
+            img_path = get_module_resource('partner_view_360', 'static/src/img', 'private_address.png')
+        elif not image and is_company:
+            img_path = get_module_resource('base', 'static/img', 'company_image.png')
+        elif not image:
+            img_path = get_module_resource('base', 'static/img', 'avatar.png')
+            colorize = True
+
+        if img_path:
+            with open(img_path, 'rb') as f:
+                image = f.read()
+        if image and colorize:
+            image = tools.image_colorize(image)
+
+        return tools.image_resize_image_big(base64.b64encode(image))
 
     @api.multi
     def close_view(self):
