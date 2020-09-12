@@ -21,7 +21,7 @@
 
 {
     'name': 'Partner 360 view',
-    'version': '12.0.0.1.8',
+    'version': '12.0.0.1.9',
     'category': '',
     'description': """
 Module for employee 360 view
@@ -32,6 +32,7 @@ v12.0.0.1.4 AFC-102, 103, 140, 183, 192, 213, 210, 241, 259, 260, 346 \n
 v12.0.0.1.5 AFC-713 Small changes in language \n
 v12.0.0.1.6 AFC-713 Small changes in language \n
 v12.0.0.1.7 AFC-713 Small changes in language \n
+v12.0.0.1.9 AFC-816 Changed reload window to partern_360_view.\n
 \n
 """,
     'author': 'Vertel AB',
