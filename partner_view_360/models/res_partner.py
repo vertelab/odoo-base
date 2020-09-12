@@ -47,16 +47,23 @@ class ResPartner(models.Model):
     eidentification = fields.Char(string='E-Identification', help="BankId or other e-identification done OK or other")
 
     # office selection field for partners connected to an office, my_office_code filled in by office_code for the office
-    office = fields.Many2one('res.partner', string="Office")
+    office = fields.Many2one('res.partner', string="Office") #should check for type = "af office"
+    office_campuses = fields.One2many('res.partner', related="office.campuses") 
+    my_campuses = fields.One2many('res.partner') #should check if if it's in office_locations
     #office_ids = fields.Many2many('res.partner', relation='res_partner_office_partner_rel', column1='partner_id', column2='office_id', string='Offices')
     my_office_code = fields.Char(
         string='Office code', related='office.office_code')
 
     # adds af office as a type of partner
-    type = fields.Selection(selection_add=[('af office', 'AF Office'), ('foreign address','Foreign Address'), ('given address','Given address'), ('visitation address','Visitation Address')])
+    type = fields.Selection(selection_add=[('af office', 'AF Office'), ('foreign address','Foreign Address'), ('given address','Given address'), ('visitation address','Visitation Address'), ('campus', 'Campus'), ('mailing address', 'Mailing Address')])
 
     # office code for office type partners only
     office_code = fields.Char(string="Office code")
+    campuses = fields.One2many('res.partner', string="Campuses") # should check for type = "campus"
+
+    # Location code for campus type partners only
+    location_code = fields.Char(string="Location Code") 
+    work_place_code = fields.Char(string="Work place code")
 
     is_jobseeker = fields.Boolean(string="Jobseeker")
     is_independent_partner = fields.Boolean(string="Independent partner")
@@ -89,8 +96,8 @@ class ResPartner(models.Model):
 
     temp_officer_id = fields.Many2many(comodel_name='res.users', relation='res_partner_temp_officer_rel', string='Temporary Officers')
 
-    segment_jobseeker = fields.Selection(string="Segment", selection=[('a','A'), ('b','B'), ('c1','C1'), ('c2','C2'), ('c3','C3')]) 
-    segment_employer = fields.Selection(string="Segment", selection=[('including 1','Including 1'), ('including 2',' Including 2'), ('entry job','Entry job'), ('national agreement','National agreement'), ('employment subsidy','Employment subsidy')])
+    segment_jobseeker = fields.Selection(string="Jobseeker segment", selection=[('a','A'), ('b','B'), ('c1','C1'), ('c2','C2'), ('c3','C3')]) 
+    segment_employer = fields.Selection(string="Employer segment", selection=[('including 1','Including 1'), ('including 2',' Including 2'), ('entry job','Entry job'), ('national agreement','National agreement'), ('employment subsidy','Employment subsidy')])
 
     name_com_reg_num = fields.Char(compute="_compute_name_com_reg_num", store=True)
 
