@@ -192,8 +192,8 @@ class ResPartner(models.Model):
                 img_path = get_module_resource('base', 'static/img', 'money.png')
             elif partner.type == 'delivery':
                 img_path = get_module_resource('base', 'static/img', 'truck.png')
-            elif partner.type == 'af office':
-                img_path = get_module_resource('partner_view_360', 'static/src/img', 'af_office.png')
+            #elif partner.type == 'af office':
+            #    img_path = get_module_resource('partner_view_360', 'static/src/img', 'af_office.png')
             elif partner.type == 'foreign address':
                 img_path = get_module_resource('partner_view_360', 'static/src/img', 'foreign_address.png')
             elif partner.type == 'given address':
@@ -230,8 +230,8 @@ class ResPartner(models.Model):
             img_path = get_module_resource('base', 'static/img', 'money.png')
         elif not image and partner_type == 'delivery':
             img_path = get_module_resource('base', 'static/img', 'truck.png')
-        elif not image and partner_type == 'af office':
-            img_path = get_module_resource('partner_view_360', 'static/src/img', 'af_office.png')
+        # elif not image and partner_type == 'af office':
+        #     img_path = get_module_resource('partner_view_360', 'static/src/img', 'af_office.png')
         elif not image and partner_type == 'foreign address':
             img_path = get_module_resource('partner_view_360', 'static/src/img', 'foreign_address.png')
         elif not image and partner_type == 'given address':
