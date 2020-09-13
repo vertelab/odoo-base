@@ -984,7 +984,7 @@
         </field>
     </record>
     <record id="action_af_office" model="ir.actions.act_window">
-        <field name="name">AF Officers</field>
+        <field name="name">AF Office</field>
         <field name="res_model">res.partner</field>
         <field name="view_mode">kanban,tree,form,activity</field>
         <field name="search_view_id" ref="base.view_res_partner_filter"/>
@@ -1012,6 +1012,6 @@
         <field name="view_id" ref="base.res_partner_kanban_view"/>
         <field name="act_window_id" ref="action_af_office"/>
     </record>
-    <menuitem id="res_partner_af_office_menu" name="AF Officers" action="action_af_office" sequence="74"
+    <menuitem id="res_partner_af_office_menu" name="AF Office" action="action_af_office" sequence="74"
               groups="base.group_no_one"/>  
 </odoo>
