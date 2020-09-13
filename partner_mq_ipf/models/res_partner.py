@@ -21,88 +21,271 @@
 
 from odoo import models, fields, api, _
 
-
+import json
+import logging
 import stomp
 import ssl
 import sys
+import time
 import xmltodict
 
-
-def parse_message(message):
-    xml = None
-    try:
-        xml = xmltodict.parse(message, dict_constructor=dict)
-
-        if (
-            not isinstance(xml, dict)
-            or not "msg" in xml.keys()
-            or not isinstance(xml["msg"], dict)
-            or not "key" in xml["msg"].keys()
-            or not "data" in xml["msg"].keys()
-        ):
-            print("Incorrect XML format: %s" % message)
-    except:
-        # log parse error
-        # ex = sys.exc_info()
-        # print("Oops! %s occurred: %s" % (ex[0], ex[1]))
-        print("Illegal XML format: '%s'" % message)
-
-    return xml
-
-
-
-import logging
 _logger = logging.getLogger(__name__)
 
+def connect_and_subscribe(mqconn, user, pwd, target, clientid=4):
 
+    mqconn.connect(user, pwd, wait=True)
+    mqconn.subscribe(destination=target, clientid=4, ack="client")
 
+PREN="prenumerera-arbetssokande"
+PNR="personnummer"
+SID="sokandeId"
+MSGTYPE="meddelandetyp"
+TIMESTAMP="tidpunkt"
 
-class MyListener(stomp.ConnectionListener):
-    def on_error(self, frame):
-        pass
-        # ~ print('received an error "%s"' % frame.body)
-    def on_message(self, frame):
-        pass
-        # ~ print('received a message "%s"' % frame.body)
+class AsokResPartnerListener(stomp.ConnectionListener):
+    __conn = None
+    __user = None 
+    __pwd = None
+    __target = None
+    __clientid = None
 
+    def __init__(self, mqconn, user, pwd, target, clientid=4):
+        self.__conn = mqconn
+        self.__user = user
+        self.__pwd = pwd
+        self.__target = target
+        self.__clientid = clientid
+
+    def __parse_message(self, message):
+        xmldict = None
+        try:
+            xmldict = xmltodict.parse(message, dict_constructor=dict)
+            # Validate xml dict
+
+            if (
+                not isinstance(xmldict, dict)
+                or not PREN in xmldict.keys()
+                or not isinstance(xmldict[PREN], dict)
+                or not PNR in xmldict[PREN].keys()
+                or not SID in xmldict[PREN].keys()
+                or not MSGTYPE in xmldict[PREN].keys()
+            ):
+                xmldict = None
+                raise ValueError("Illegal XMLFormat")
+        except:
+            # log parse error
+            # ex = sys.exc_info()
+            # print("Oops! %s occurred: %s" % (ex[0], ex[1]))
+            _logger.warning("Illegal XML format: '%s'" % message)
+            return None
+
+        return xmldict[PREN]
+
+    def _handle_message(self, message):
+        data = self.__parse_message(message)
+
+        if data:
+            # Call the method
+            _logger.info("Asok MQ Listener calling method")
+            # env["res.partner"].methodtocall(data.get(PNR), data.get(SID), data.get(MSGTYPE))
+            pass
+        else:
+            pass
+
+    def on_error(self, headers, body):
+        """
+        Called by the STOMP connection when an ERROR frame is received.
+
+        :param dict headers: a dictionary containing all headers sent by the server as key/value pairs.
+        :param body: the frame's payload - usually a detailed error description.
+        """
+        _logger.error("Asok MQ Listener error: %s - %s" % (headers, body))
+ 
+    def on_message(self, headers, msg):
+        _logger.debug("Asok MQ Listener on_message: {0} - {1}".format(headers, msg))
+        self._handle_message(msg)
+        # tell MQ we handled the message
+        self.__conn.ack(headers["message-id"], 4)
+    
+    def on_disconnected(self):
+        _logger.waring('Asok MQ Listener disconnected from MQ - Tring to reconnect')
+        connect_and_subscribe(self.__conn, self.__user, self.__pwd, self.__target, self.__clientid)
+
+    def on_connecting(self, host_and_port):
+        """
+        Called by the STOMP connection once a TCP/IP connection to the
+        STOMP server has been established or re-established. Note that
+        at this point, no connection has been established on the STOMP
+        protocol level. For this, you need to invoke the "connect"
+        method on the connection.
+
+        :param (str,int) host_and_port: a tuple containing the host name and port number to which the connection
+            has been established.
+        """
+        _logger.debug("Asok MQ Listener on_conecting: {0}".format(host_and_port))
+
+    def on_connected(self, headers, body):
+        """
+        Called by the STOMP connection when a CONNECTED frame is
+        received (after a connection has been established or
+        re-established).
+
+        :param dict headers: a dictionary containing all headers sent by the server as key/value pairs.
+        :param body: the frame's payload. This is usually empty for CONNECTED frames.
+        """
+        _logger.debug("Asok MQ Listener on_connected: %s - %s" % (headers, body))
+
+class STOMResPartnerListener(stomp.ConnectionListener):
+    __conn = None
+    __user = None 
+    __pwd = None
+    __target = None
+    __clientid = None
+
+    def __init__(self, mqconn, user, pwd, target, clientid=4):
+        self.__conn = mqconn
+        self.__user = user
+        self.__pwd = pwd
+        self.__target = target
+        self.__clientid = clientid
+
+    def __parse_message(self, message):
+        try:
+            # Assume JSON
+            stom_list = json.loads(message)
+            # Assume list of dicts or get exception
+            return list(filter(lambda s: s["stom_track"] == 1, stom_list))
+        except:
+            _logger.warning("Invalid JSON format %s" % message)
+            return None
+
+    def _handle_message(self, message):
+        stomlist = self.__parse_message(message)
+
+        if stomlist and len(stomlist) > 0:
+            # Call the method
+            _logger.info("STOM MQ Listener calling res.partner with list of %s" % len(stomlist))
+            # env["res.partner"].methodtocall(stomlist)
+            pass
+        else:
+            _logger.info("STOM MQ Listener nothing found")
+            pass
+
+    def on_error(self, headers, body):
+        """
+        Called by the STOMP connection when an ERROR frame is received.
+
+        :param dict headers: a dictionary containing all headers sent by the server as key/value pairs.
+        :param body: the frame's payload - usually a detailed error description.
+        """
+        _logger.error("STOM MQ Listener error: %s - %s" % (headers, body))
+ 
+    def on_message(self, headers, msg):
+        _logger.debug("STOM MQ Listener on_message: {0} - {1}".format(headers, msg))
+        self._handle_message(msg)
+        # tell MQ we handled the message
+        self.__conn.ack(headers["message-id"])
+    
+    def on_disconnected(self):
+        _logger.waring('STOM MQ Listener disconnected from MQ - Tring to reconnect')
+        connect_and_subscribe(self.__conn, self.__user, self.__pwd, self.__target, self.__clientid)
+
+    def on_connecting(self, host_and_port):
+        """
+        Called by the STOMP connection once a TCP/IP connection to the
+        STOMP server has been established or re-established. Note that
+        at this point, no connection has been established on the STOMP
+        protocol level. For this, you need to invoke the "connect"
+        method on the connection.
+
+        :param (str,int) host_and_port: a tuple containing the host name and port number to which the connection
+            has been established.
+        """
+        _logger.debug("STOM MQ Listener on_conecting: {0}".format(host_and_port))
+
+    def on_connected(self, headers, body):
+        """
+        Called by the STOMP connection when a CONNECTED frame is
+        received (after a connection has been established or
+        re-established).
+
+        :param dict headers: a dictionary containing all headers sent by the server as key/value pairs.
+        :param body: the frame's payload. This is usually empty for CONNECTED frames.
+        """
+        _logger.debug("STOM MQ Listener on_connected: %s - %s" % (headers, body))
 
 class ResPartner(models.Model):
     _inherit = "res.partner"  
 
     @api.model
-    def mq_listener(self): 
+    def mq_asok_listener(self): 
+        _logger.info("Asok MQ Listener started.")
         host_port = (self.env['ir.config_parameter'].get_param('partner_mq_ipf.mqhost', '172.16.36.27'), self.env['ir.config_parameter'].get_param('partner_mq_ipf.mqport', '61613'))
-        target = self.env['ir.config_parameter'].get_param('partner_mq_ipf.mqtarget', '/queue/Consumer.crm.VirtualTopic.arbetssokande.andring')
+        target = self.env['ir.config_parameter'].get_param('partner_mq_ipf.asok_target', '/topic/Consumer.crm.VirtualTopic.arbetssokande.andring')
+        usr = self.env['ir.config_parameter'].get_param('partner_mq_ipf.asok_user', 'crm')
+        pwd = self.env['ir.config_parameter'].get_param('partner_mq_ipf.asok_pwd', 'topsecret')
+
+        _logger.debug("Asok MQ Listener patameters - %s %s - %s %s" % ([host_port], target, usr, pwd))
+
         mqconn = stomp.Connection10([host_port])
         
         if self.env['ir.config_parameter'].get_param('partner_mq_ipf.mqusessl', '1') == '1':
             mqconn.set_ssl(for_hosts=[host_port], ssl_version=ssl.PROTOCOL_TLS)
+            _logger.debug("Asok MQ Listener - Using TLS")
+        else:
+            _logger.debug("Asok MQ Listener - Not using TLS")
 
-        mqconn.set_listener('', MyListener())
-
-        mqconn.connect(
-                    self.env['ir.config_parameter'].get_param('partner_mq_ipf.mquser', 'crm'),
-                    self.env['ir.config_parameter'].get_param('partner_mq_ipf.mqpwd', 'hemligt'),
-                    wait=True)
-        # ~ conn = stomp.Connection()
-        mqconn.subscribe(destination=target, id=1, ack='auto')
-        # ~ mqconn.disconnect()
-
-
-        # ~ try:
-            # ~ while self.__keepgoing:
-                # ~ time.sleep(1)
-        # ~ finally:
-            # ~ self.__conn.unsubscribe(self.__target)
-            # ~ time.sleep(1)
-            # ~ self.__conn.disconnect()
-            # ~ self.debug_print("Stopped")
+        respartnerlsnr = AsokResPartnerListener(mqconn,usr,pwd,target,4)
+        mqconn.set_listener('', respartnerlsnr)
         
 
+        try:
+            connect_and_subscribe(
+                mqconn,
+                usr,
+                pwd,
+                target
+            )
 
+            #while True:
+            time.sleep(30) # wait for a bit
+        finally:
+            mqconn.unsubscribe(target)
+            time.sleep(1)
+            mqconn.disconnect()
 
+    def mq_stom_listener(self): 
+        _logger.info("STOM MQ Listener started.")
+        host_port = (self.env['ir.config_parameter'].get_param('partner_mq_ipf.mqhost', '172.16.36.27'), self.env['ir.config_parameter'].get_param('partner_mq_ipf.mqport', '61613'))
+        target = self.env['ir.config_parameter'].get_param('partner_mq_ipf.STOM_target', '/topic/Consumer.crm.VirtualTopic.arbetssokande.andring')
+        usr = self.env['ir.config_parameter'].get_param('partner_mq_ipf.STOM_user', 'crm')
+        pwd = self.env['ir.config_parameter'].get_param('partner_mq_ipf.STOM_pwd', 'topsecret')
 
+        _logger.debug("STOM MQ Listener patameters - %s %s - %s %s" % ([host_port], target, usr, pwd))
 
-        # ~ self.env['ir.config_parameter'].get_param('partner_mq_ipf.mqdbglevel', '0')
+        mqconn = stomp.Connection10([host_port])
+        
+        if self.env['ir.config_parameter'].get_param('partner_mq_ipf.mqusessl', '1') == '1':
+            mqconn.set_ssl(for_hosts=[host_port], ssl_version=ssl.PROTOCOL_TLS)
+            _logger.debug("STOM MQ Listener - Using TLS")
+        else:
+            _logger.debug("STOM MQ Listener - Not using TLS")
 
+        respartnerlsnr = STOMResPartnerListener(mqconn,usr,pwd,target,4)
+        mqconn.set_listener('', respartnerlsnr)
+        
 
+        try:
+            connect_and_subscribe(
+                mqconn,
+                usr,
+                pwd,
+                target
+            )
+
+            #while True:
+            time.sleep(30) # wait for a bit
+        finally:
+            mqconn.unsubscribe(target)
+            time.sleep(1)
+            mqconn.disconnect()

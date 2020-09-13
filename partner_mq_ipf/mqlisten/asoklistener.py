@@ -52,6 +52,45 @@ class AsokListener(stomp.ConnectionListener):
             pass
         else:
             self.print("Anruf fehlt!")
+
+
+    def handle_json_message(self, message):
+        import json
+
+#         message = """[
+#     {
+#         "pnr": "121212-1212",
+#         "stom_track": 0,
+#         "stom_description": "Låg risk för behov av stöd och matchning."
+#     },
+#     {
+#         "pnr": "121212-1212",
+#         "stom_track": 1,
+#         "stom_description": "Grundläggande stöd och matchning med eller utan språkstöd."
+#     },
+#     {
+#         "pnr": "121212-1212",
+#         "stom_track": 2,
+#         "stom_description": "Förstärkt stöd och matchning med eller utan spåkstöd."
+#     }
+# ]"""
+        try:
+            # Assume JSON
+            stom_list = json.loads(message)
+            # Assume list of dicts or get exception
+            the_ones = list(filter(lambda s: s["stom_track"] == 1, stom_list))
+        except:
+            print("Invalid JSON format %s" % message)
+            return
+
+        if the_ones and len(the_ones) > 0:
+            # Handle the result from the call
+            self.print("Alles gut mit anruf!")
+            self.print(the_ones)
+        else:
+            self.print("Anruf fehlt!")
+        
+        
     
     def on_connecting(self, host_and_port):
         """
@@ -79,8 +118,9 @@ class AsokListener(stomp.ConnectionListener):
 
     def on_message(self, headers, msg):
         self.debug_print("on_message: {0} - {1}".format(msg, headers["message-id"]))
-        self.handle_message(msg)
-        self.__conn.ack(headers["message-id"], 4)
+        self.handle_json_message(msg)
+        self.print("HAndle message done")
+        self.__conn.ack(headers["message-id"])
     
     def on_error(self, headers, body):
         """
@@ -94,9 +134,12 @@ class AsokListener(stomp.ConnectionListener):
     def listen(self):
         self.print("Listening on %s:%s %s" % (self.__host, self.__port, self.__target))
         self.__conn = stomp.Connection10([(self.__host, self.__port)])
-        
-        if self.__ssl != 0:
+
+        self.print("MHXXX ssl: %s : %s" % (type(self.__ssl), self.__ssl))
+
+        if self.__ssl != "0":
             self.__conn.set_ssl(for_hosts=[(self.__host, self.__port)], ssl_version=ssl.PROTOCOL_TLS)
+            self.print("Using SSL")
 
         self.__conn.set_listener("AsokListener", self)
         #self.__conn.start()

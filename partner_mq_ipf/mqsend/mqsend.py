@@ -31,12 +31,12 @@ def parse():
     return dest, msgfile, arguments
 
 
-class SampleListener(object):
-    def on_message(self, headers, msg):
-        print(msg)
-        print(headers["message-id"])
+# class SampleListener(object):
+#     def on_message(self, headers, msg):
+#         print(msg)
+#         print(headers["message-id"])
 
-        conn.ack(headers["message-id"], 4)
+#         conn.ack(headers["message-id"], 4)
 
 
 def readfile(filename):
@@ -53,9 +53,9 @@ def readfile(filename):
 dest, filename, args = parse()
 
 print(dest, args)
-l = SampleListener()
+#l = SampleListener()
 conn = stomp.Connection()
-conn.set_listener("SampleLister", l)
+#conn.set_listener("SampleLister", l)
 #conn.start()
 conn.connect()
 filedata = ""
