@@ -118,12 +118,6 @@ msgid "KPI"
 msgstr "KPI"
 
 #. module: partner_kpi_data
-#: model:ir.model.fields,field_description:partner_kpi_data.field_res_partner__kpi_ids
-#: model:ir.model.fields,field_description:partner_kpi_data.field_res_users__kpi_ids
-msgid "Kpi"
-msgstr "Kpi"
-
-#. module: partner_kpi_data
 #: model:ir.model.fields,field_description:partner_kpi_data.field_res_partner_kpi____last_update
 msgid "Last Modified on"
 msgstr "Senast redigerad"
