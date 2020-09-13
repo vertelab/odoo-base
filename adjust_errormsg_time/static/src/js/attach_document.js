@@ -1,6 +1,8 @@
 odoo.define('adjust_errormsg_time.AttachDocument', function (require) {
     "use strict";
     var AttachDocument = require('web.AttachDocument');
+    var core = require('web.core');
+    var _t = core._t;
 
     AttachDocument.include({
         _notifyInvalidFields: function (invalidFields) {

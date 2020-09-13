@@ -21,6 +21,9 @@
 
 from odoo import models, fields, api, _
 import logging
+import threading
+import base64
+from odoo.modules import get_module_resource
 from datetime import date
 _logger = logging.getLogger(__name__)
 from odoo.exceptions import ValidationError
@@ -44,16 +47,24 @@ class ResPartner(models.Model):
     eidentification = fields.Char(string='E-Identification', help="BankId or other e-identification done OK or other")
 
     # office selection field for partners connected to an office, my_office_code filled in by office_code for the office
-    office = fields.Many2one('res.partner', string="Office") #should check for type = "af office"
+    office = fields.Many2one('hr.department', string="Office") #should check for type = "af office"
+
+
+    # office_ids is a better name, One2many need a help-class that cannot be res.partner with a inverse_name
+    # ~ office_campuses = fields.One2many('res.partner', related="office.campuses") 
+    # ~ my_campuses = fields.One2many('res.partner') #should check if if it's in office_locations
+
+
     #office_ids = fields.Many2many('res.partner', relation='res_partner_office_partner_rel', column1='partner_id', column2='office_id', string='Offices')
-    my_office_code = fields.Char(
-        string='Office code', related='office.office_code')
+    my_office_code = fields.Char(string='Office code', related='office.office_code')
 
     # adds af office as a type of partner
-    type = fields.Selection(selection_add=[('af office', 'AF Office'), ('foreign address','Foreign Address'), ('given address','Given address'), ('visitation address','Visitation Address'), ('campus', 'Campus'), ('mailing address', 'Mailing Address')])
+    type = fields.Selection(selection_add=[('foreign address','Foreign Address'), ('given address','Given address'), ('visitation address','Visitation Address'), ('mailing address', 'Mailing Address')])
 
-    # office code for office type partners only
-    office_code = fields.Char(string="Office code")
+    
+    # campus_ids is a better name, One2many need a help-class that cannot be res.partner with a inverse_name
+    # ~ campuses = fields.One2many('res.partner', string="Campuses") # should check for type = "campus"
+
 
     is_jobseeker = fields.Boolean(string="Jobseeker")
     is_independent_partner = fields.Boolean(string="Independent partner")
@@ -174,16 +185,85 @@ class ResPartner(models.Model):
                 self.age = ""
                 raise ValidationError(_("Please input a correctly formated social security number"))
 
+    def update_partner_images(self):
+        for partner in self:
+            colorize = False
+            if partner.type == 'invoice':
+                img_path = get_module_resource('base', 'static/img', 'money.png')
+            elif partner.type == 'delivery':
+                img_path = get_module_resource('base', 'static/img', 'truck.png')
+            elif partner.type == 'af office':
+                img_path = get_module_resource('partner_view_360', 'static/src/img', 'af_office.png')
+            elif partner.type == 'foreign address':
+                img_path = get_module_resource('partner_view_360', 'static/src/img', 'foreign_address.png')
+            elif partner.type == 'given address':
+                img_path = get_module_resource('partner_view_360', 'static/src/img', 'given_address.png')
+            elif partner.type == 'visitation address':
+                img_path = get_module_resource('partner_view_360', 'static/src/img', 'visitation_address.png')
+            elif partner.type == 'private':
+                img_path = get_module_resource('partner_view_360', 'static/src/img', 'private_address.png')
+            elif partner.is_company:
+                img_path = get_module_resource('base', 'static/img', 'company_image.png')
+            else:
+                img_path = get_module_resource('base', 'static/img', 'avatar.png')
+                colorize = True
+
+            if img_path:
+                with open(img_path, 'rb') as f:
+                    image = f.read()
+            if image and colorize:
+                image = tools.image_colorize(image)
+
+            partner.image = tools.image_resize_image_big(base64.b64encode(image))
+
+    @api.model
+    def _get_default_image(self, partner_type, is_company, parent_id):
+        if getattr(threading.currentThread(), 'testing', False) or self._context.get('install_mode'):
+            return False
+
+        colorize, img_path, image = False, False, False
+        if partner_type in ['other'] and parent_id:
+            parent_image = self.browse(parent_id).image
+            image = parent_image and base64.b64decode(parent_image) or None
+
+        if not image and partner_type == 'invoice':
+            img_path = get_module_resource('base', 'static/img', 'money.png')
+        elif not image and partner_type == 'delivery':
+            img_path = get_module_resource('base', 'static/img', 'truck.png')
+        elif not image and partner_type == 'af office':
+            img_path = get_module_resource('partner_view_360', 'static/src/img', 'af_office.png')
+        elif not image and partner_type == 'foreign address':
+            img_path = get_module_resource('partner_view_360', 'static/src/img', 'foreign_address.png')
+        elif not image and partner_type == 'given address':
+            img_path = get_module_resource('partner_view_360', 'static/src/img', 'given_address.png')
+        elif not image and partner_type == 'visitation address':
+            img_path = get_module_resource('partner_view_360', 'static/src/img', 'visitation_address.png')
+        elif not image and partner_type == 'private':
+            img_path = get_module_resource('partner_view_360', 'static/src/img', 'private_address.png')
+        elif not image and is_company:
+            img_path = get_module_resource('base', 'static/img', 'company_image.png')
+        elif not image:
+            img_path = get_module_resource('base', 'static/img', 'avatar.png')
+            colorize = True
+
+        if img_path:
+            with open(img_path, 'rb') as f:
+                image = f.read()
+        if image and colorize:
+            image = tools.image_colorize(image)
+
+        return tools.image_resize_image_big(base64.b64encode(image))
+
     @api.multi
     def close_view(self):
         return{
-            'name': _("Search Partner"),
+            'name': _("Search Jobseekers"),
             'view_type': 'form',
             #'src_model': "res.partner",
             'res_model': "hr.employee.jobseeker.search.wizard",
-            'view_id': False, #self.env.ref("partner_view_360.search_jobseeker_wizard").id,
+            'view_id': False, # self.env.ref("partner_view_360.search_jobseeker_wizard").id,
             'view_mode':"form",
-            #'target': "current", 
+            #'target': "inline", 
             #'key2': "client_action_multi",
             'type': 'ir.actions.act_window',
         }
