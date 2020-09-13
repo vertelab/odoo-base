@@ -45,8 +45,6 @@ class ResPartner(models.Model):
 
     # office selection field for partners connected to an office, my_office_code filled in by office_code for the office
     office = fields.Many2one('res.partner', string="Office") #should check for type = "af office"
-    office_campuses = fields.One2many('res.partner', related="office.campuses") 
-    my_campuses = fields.One2many('res.partner') #should check if if it's in office_locations
     #office_ids = fields.Many2many('res.partner', relation='res_partner_office_partner_rel', column1='partner_id', column2='office_id', string='Offices')
     my_office_code = fields.Char(
         string='Office code', related='office.office_code')
@@ -56,11 +54,6 @@ class ResPartner(models.Model):
 
     # office code for office type partners only
     office_code = fields.Char(string="Office code")
-    campuses = fields.One2many('res.partner', string="Campuses") # should check for type = "campus"
-
-    # Location code for campus type partners only
-    location_code = fields.Char(string="Location Code") 
-    work_place_code = fields.Char(string="Work place code")
 
     is_jobseeker = fields.Boolean(string="Jobseeker")
     is_independent_partner = fields.Boolean(string="Independent partner")
