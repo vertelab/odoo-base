@@ -42,11 +42,10 @@ v12.0.0.1.9 AFC-816 Changed reload window to partern_360_view.\n
         'mail',
         'partner_firstname', 
         'contacts', 
-        'res_drivers_license',
         'res_ssyk',
         'res_sni',
         'partner_fax',
-        # 'edi_af_appointment',
+        'edi_af_appointment',
     ],
     'data': [
         'views/res_partner_template.xml',
