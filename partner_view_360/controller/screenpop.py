@@ -54,7 +54,7 @@ class WebsiteScreenpop(http.Controller):
         pnr = post.get('personnummer', '')
         if pnr and not '-' in pnr:
             pnr = pnr[:8] + '-' + pnr[8:12]
-        token = hashlib.sha1((secret + post.get('datatime', '0000-00-00-00') + pnr + post.get('bankid', 'None') ).encode('utf-8')).hexdigest()
+        token = hashlib.sha1((secret + post.get('datatime', '0000-00-00-00') + pnr.replace('-', '') + post.get('bankid', 'None') ).encode('utf-8')).hexdigest()
         _logger.warn("\n\ntoken: %s" % token)
         if not token == post.get('token'):
             return request.render('partner_view_360.403', {'error': 'ERROR: Token missmatch','our_token': token, 'ext_token': post.get('token'), 'partner': None, 'action': None, 'url': None, 'post': post,'secret': secret})

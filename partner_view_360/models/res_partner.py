@@ -27,7 +27,7 @@ from odoo.modules import get_module_resource
 from datetime import date
 _logger = logging.getLogger(__name__)
 from odoo.exceptions import ValidationError
-
+from odoo.tools import image_resize_image_big, image_colorize
 
 
 class ResPartner(models.Model):
@@ -212,9 +212,9 @@ class ResPartner(models.Model):
                 with open(img_path, 'rb') as f:
                     image = f.read()
             if image and colorize:
-                image = tools.image_colorize(image)
+                image = image_colorize(image)
 
-            partner.image = tools.image_resize_image_big(base64.b64encode(image))
+            partner.image = image_resize_image_big(base64.b64encode(image))
 
     @api.model
     def _get_default_image(self, partner_type, is_company, parent_id):
@@ -250,9 +250,9 @@ class ResPartner(models.Model):
             with open(img_path, 'rb') as f:
                 image = f.read()
         if image and colorize:
-            image = tools.image_colorize(image)
+            image = image_colorize(image)
 
-        return tools.image_resize_image_big(base64.b64encode(image))
+        return image_resize_image_big(base64.b64encode(image))
 
     @api.multi
     def close_view(self):
