@@ -44,7 +44,7 @@
       </field>
       <!-- endast för om is_customer är true-->
       <field name="vat" position="after">
-        <field name="customer_id" attrs="{'invisible':[('customer', '=', False)]}" />
+        <field name="customer_id" attrs="{'invisible':[('customer', '=', False)]}" groups="base.group_no_one" />
         <field name="office_code" attrs="{'invisible':[('type', '!=', 'af office')]}" />
       </field>
       <field name="vat" position="attributes">
@@ -78,7 +78,7 @@
     <field name="inherit_id" ref="base.view_partner_tree" />
     <field name="arch" type="xml">
       <xpath expr="/tree" position="inside">
-        <field name="customer_id" />
+        <field name="customer_id" groups="base.group_no_one" />
       </xpath>
     </field>
   </record>
@@ -90,7 +90,7 @@
       <xpath expr="//field[@name='user_id']" position="after">
         <field name="company_registry" />
         <field name="cfar" />
-        <field name="customer_id" />
+        <field name="customer_id" groups="base.group_no_one" />
         <!-- filter_domain="[('customer','=',True), ('parent_id', '=', False)]" -->
         <!-- kommenterad för att jag inte har någon customer, behöver testas -->
         <filter string="Job seekers" name="is_jobseeker" domain="[('is_jobseeker','=',True)]" />
@@ -148,7 +148,7 @@
               <field name="company_registry" nolabel="1" class="oe_edit_only" />
               <label for="social_sec_nr_age" string="Social security number" class="oe_read_only" />
               <field name="social_sec_nr_age" class="oe_read_only" nolabel="1" />
-              <field name="customer_id" />
+              <field name="customer_id" groups="base.group_no_one" />
               <!-- folkbokföringsadress, alternativt göra en res partner typ-->
               <label for="state_name_code" string="Municipality" class="oe_read_only" />
               <field name="state_name_code" class="oe_read_only" placeholder="State" nolabel="1" />
@@ -485,7 +485,7 @@
               <field name="customer" attrs="{'invisible' : True}" />
               <field name="company_registry" />
               <field name="cfar" />
-              <field name="customer_id" />
+              <field name="customer_id" groups="base.group_no_one" />
               <label for="state_name_code" string="Municipality" class="oe_read_only" />
               <field name="state_name_code" class="oe_read_only" placeholder="State" nolabel="1" />
               <label for="state_id" string="Municipality" class="oe_edit_only" />
@@ -711,7 +711,7 @@
         <field name="parent_id" domain="[('is_company','=',True)]" operator="child_of" />
         <field name="company_registry" />
         <field name="cfar" />
-        <field name="customer_id" />
+        <!-- <field name="customer_id" /> -->
         <filter name="filter_my_partners" help="My Contacts" domain="[('user_id','=',uid)]" />
         <separator />
         <filter string="Individuals" name="type_person" domain="[('is_company','=',False)]" />
