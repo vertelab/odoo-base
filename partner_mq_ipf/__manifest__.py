@@ -31,6 +31,7 @@ Listen for updates on th MQ-bus
     'license': 'AGPL-3',
     'website': 'http://www.vertel.se',
     'depends': ['base'],
+    'external_dependencies': {'python': ['stomp', 'xmltodict']},
     'data': [ ],
     'application': False,
     'installable': True,
