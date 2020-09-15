@@ -222,8 +222,8 @@ class ResPartner(models.Model):
         _logger.info("Asok MQ Listener started.")
         host_port = (self.env['ir.config_parameter'].get_param('partner_mq_ipf.mqhost', '172.16.36.27'), self.env['ir.config_parameter'].get_param('partner_mq_ipf.mqport', '61613'))
         target = self.env['ir.config_parameter'].get_param('partner_mq_ipf.asok_target', '/topic/Consumer.crm.VirtualTopic.arbetssokande.andring')
-        usr = self.env['ir.config_parameter'].get_param('partner_mq_ipf.asok_user', 'crm')
-        pwd = self.env['ir.config_parameter'].get_param('partner_mq_ipf.asok_pwd', 'topsecret')
+        usr = self.env['ir.config_parameter'].get_param('partner_mq_ipf.mquser', 'crm')
+        pwd = self.env['ir.config_parameter'].get_param('partner_mq_ipf.mqpwd', 'topsecret')
 
         _logger.debug("Asok MQ Listener patameters - %s %s - %s %s" % ([host_port], target, usr, pwd))
 
@@ -258,8 +258,8 @@ class ResPartner(models.Model):
         _logger.info("STOM MQ Listener started.")
         host_port = (self.env['ir.config_parameter'].get_param('partner_mq_ipf.mqhost', '172.16.36.27'), self.env['ir.config_parameter'].get_param('partner_mq_ipf.mqport', '61613'))
         target = self.env['ir.config_parameter'].get_param('partner_mq_ipf.STOM_target', '/topic/Consumer.crm.VirtualTopic.arbetssokande.andring')
-        usr = self.env['ir.config_parameter'].get_param('partner_mq_ipf.STOM_user', 'crm')
-        pwd = self.env['ir.config_parameter'].get_param('partner_mq_ipf.STOM_pwd', 'topsecret')
+        usr = self.env['ir.config_parameter'].get_param('partner_mq_ipf.mquser', 'crm')
+        pwd = self.env['ir.config_parameter'].get_param('partner_mq_ipf.mqpwd', 'topsecret')
 
         _logger.debug("STOM MQ Listener patameters - %s %s - %s %s" % ([host_port], target, usr, pwd))
 
