@@ -130,9 +130,6 @@
             <button name="close_view" type="object">Close</button>
           </div>
           <div class="oe_button_box" name="button_box">
-            <button name="toggle_active" type="object" class="oe_stat_button" icon="fa-archive">
-              <field name="active" widget="boolean_button" options="{&quot;terminology&quot;: &quot;archive&quot;}" />
-            </button>
           </div>
           <div class="oe_title">
             <h1>
@@ -466,9 +463,6 @@
             <button name="close_view">Close</button>
           </div>
           <div class="oe_button_box" name="button_box">
-            <button name="toggle_active" type="object" class="oe_stat_button" icon="fa-archive">
-              <field name="active" widget="boolean_button" options="{&quot;terminology&quot;: &quot;archive&quot;}" />
-            </button>
           </div>
           <div class="oe_title">
             <h1>
