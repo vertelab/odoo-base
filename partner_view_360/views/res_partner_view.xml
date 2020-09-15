@@ -32,8 +32,12 @@
         <field name="cfar" attrs="{'invisible':[('is_company', '=', False)]}" />
       </field>
       <field name="barcode" position="after">
+<!--
         <field name="office" options="{'no_create_edit': True}" domain="[('type', '=', 'af office')]" />
+-->
+<!--
         <field name="my_office_code" />
+-->
         <!-- <field name="office_ids" widget="many2many_tags" options="{'no_create_edit': True}" domain="[('type', '=', 'af office')]" /> -->
         <field name="temp_officer_id" widget="many2many_tags" options="{'no_create_edit': True}" />
         <field name="is_jobseeker" />
@@ -45,7 +49,9 @@
       <!-- endast för om is_customer är true-->
       <field name="vat" position="after">
         <field name="customer_id" attrs="{'invisible':[('customer', '=', False)]}" groups="base.group_no_one" />
+<!--
         <field name="office_code" attrs="{'invisible':[('type', '!=', 'af office')]}" />
+-->
       </field>
       <field name="vat" position="attributes">
         <attribute name="invisible">1</attribute>
@@ -184,7 +190,9 @@
               <field name="registered_through" />
               <field name="jobseeker_category" />
               <field name="customer_since" />
+<!--
               <field name="office" options="{'no_create_edit': True}" domain="[('type', '=', 'af office')]" />
+-->
               <field name="match_area" />
               <!-- <field name="office_ids" widget="many2many_tags" options="{'no_create_edit': True}" domain="[('type', '=', 'af office')]" /> -->
               <field name="share_info_with_employers" />
@@ -334,7 +342,9 @@
         <field name="name" />
         <field name="city" />
         <field name="email" />
+<!--
         <field name="office" />
+-->
       </tree>
     </field>
   </record>
@@ -346,7 +356,9 @@
         <field name="name" />
         <field name="city" />
         <field name="email" />
+<!--
         <field name="office" />
+-->
         <templates>
           <t t-name="kanban-box">
             <div class="oe_kanban_global_click">
@@ -363,7 +375,9 @@
                       <field name="email" />
                     </li>
                     <li>
+<!--
                       <field name="office" />
+-->
                     </li>
                   </ul>
                 </div>
@@ -426,6 +440,8 @@
     <field name="view_id" ref="view_jobseeker_kanban" />
     <field name="act_window_id" ref="action_jobseekers" />
   </record>
+  
+  <menuitem id="res_partner_jobseekers_menu" name="Jobseekers" action="action_jobseekers" sequence="4" groups="base.group_no_one" />
   <menuitem id="res_partner_jobseekers_action_menu" name="Jobseekers" parent="res_partner_jobseekers_menu" action="action_jobseekers" sequence="10" groups="base.group_no_one" />
   <menuitem id="res_partner_jobseekers_config_menu" parent="res_partner_jobseekers_menu" name="Configuration" sequence="100" groups="base.group_no_one" />
   <menuitem id="menu_sni_config" parent="res_partner_jobseekers_config_menu" action="res_sni.action_sni_form" sequence="10"  groups="base.group_no_one" />
@@ -507,7 +523,9 @@
               <field name="employer_class" />
               <label for="user_id" string="Administrative officer" />
               <field name="user_id" nolabel="1" />
+<!--
               <field name="office" options="{'no_create_edit': True}" domain="[('type', '=', 'af office')]" />
+-->
               <!-- <field name="office_ids" widget="many2many_tags" options="{'no_create_edit': True}" domain="[('type', '=', 'af office')]" /> -->
               <field name="segment_employer" groups="base.group_no_one" />
             </group>
@@ -649,7 +667,9 @@
         <field name="name" />
         <field name="city" />
         <field name="email" />
+<!--
         <field name="office" />
+-->
         <templates>
           <t t-name="kanban-box">
             <div class="oe_kanban_global_click">
@@ -671,7 +691,9 @@
                       <field name="email" />
                     </li>
                     <li>
+<!--
                       <field name="office" />
+-->
                     </li>
                   </ul>
                 </div>
@@ -691,7 +713,9 @@
         <field name="company_registry" />
         <field name="city" />
         <field name="email" />
+<!--
         <field name="office" />
+-->
       </tree>
     </field>
   </record>
@@ -820,7 +844,9 @@
                             </div>
                             <field name="country_id" placeholder="Country" class="o_address_country"
                                    attrs="{'invisible': True}"/>
+<!--
                             <field name="office_code"/>
+-->
                         </group>
                         <group>
                             <field name="phone"/>
