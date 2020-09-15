@@ -32,24 +32,27 @@ import xmltodict
 _logger = logging.getLogger(__name__)
 
 def connect_and_subscribe(mqconn, user, pwd, target, clientid=4):
-
     mqconn.connect(user, pwd, wait=True)
     mqconn.subscribe(destination=target, clientid=4, ack="client")
 
 PREN="prenumerera-arbetssokande"
 PNR="personnummer"
+PREVPNR="tidigarePersonnummer"
 SID="sokandeId"
 MSGTYPE="meddelandetyp"
 TIMESTAMP="tidpunkt"
 
 class AsokResPartnerListener(stomp.ConnectionListener):
+    __env = None
     __conn = None
     __user = None 
     __pwd = None
     __target = None
+    __msglist = list()
     __clientid = None
 
-    def __init__(self, mqconn, user, pwd, target, clientid=4):
+    def __init__(self, env, mqconn, user, pwd, target, clientid=4):
+        self.__env = env
         self.__conn = mqconn
         self.__user = user
         self.__pwd = pwd
@@ -85,12 +88,14 @@ class AsokResPartnerListener(stomp.ConnectionListener):
         data = self.__parse_message(message)
 
         if data:
-            # Call the method
-            _logger.info("Asok MQ Listener calling method")
-            # env["res.partner"].methodtocall(data.get(PNR), data.get(SID), data.get(MSGTYPE))
-            pass
-        else:
-            pass
+            # Add message to list
+            self.__msglist.append(data)
+
+    def get_list(self):
+        return self.__msglist
+
+    def clear_list(self):
+        self.__msglist = list()
 
     def on_error(self, headers, body):
         """
@@ -105,7 +110,7 @@ class AsokResPartnerListener(stomp.ConnectionListener):
         _logger.debug("Asok MQ Listener on_message: {0} - {1}".format(headers, msg))
         self._handle_message(msg)
         # tell MQ we handled the message
-        self.__conn.ack(headers["message-id"], 4)
+        self.__conn.ack(headers["message-id"])
     
     def on_disconnected(self):
         _logger.waring('Asok MQ Listener disconnected from MQ - Tring to reconnect')
@@ -133,16 +138,19 @@ class AsokResPartnerListener(stomp.ConnectionListener):
         :param dict headers: a dictionary containing all headers sent by the server as key/value pairs.
         :param body: the frame's payload. This is usually empty for CONNECTED frames.
         """
-        _logger.debug("Asok MQ Listener on_connected: %s - %s" % (headers, body))
+        _logger.info("Asok MQ Listener on_connected: %s - %s" % (headers, body))
 
 class STOMResPartnerListener(stomp.ConnectionListener):
+    __env = None
     __conn = None
     __user = None 
     __pwd = None
     __target = None
     __clientid = None
+    __msglist = list()
 
-    def __init__(self, mqconn, user, pwd, target, clientid=4):
+    def __init__(self, env, mqconn, user, pwd, target, clientid=4):
+        self.__env = env
         self.__conn = mqconn
         self.__user = user
         self.__pwd = pwd
@@ -164,12 +172,16 @@ class STOMResPartnerListener(stomp.ConnectionListener):
 
         if stomlist and len(stomlist) > 0:
             # Call the method
-            _logger.info("STOM MQ Listener calling res.partner with list of %s" % len(stomlist))
-            # env["res.partner"].methodtocall(stomlist)
-            pass
+            _logger.debug("STOM MQ Listener adding to list, %s " % len(stomlist))
+            self.__msglist.append(stomlist)
         else:
-            _logger.info("STOM MQ Listener nothing found")
-            pass
+            _logger.debug("STOM MQ Listener nothing found")
+
+    def get_list(self):
+        return self.__msglist
+
+    def clear_list(self):
+        self.__msglist = list()
 
     def on_error(self, headers, body):
         """
@@ -221,7 +233,7 @@ class ResPartner(models.Model):
     def mq_asok_listener(self): 
         _logger.info("Asok MQ Listener started.")
         host_port = (self.env['ir.config_parameter'].get_param('partner_mq_ipf.mqhost', '172.16.36.27'), self.env['ir.config_parameter'].get_param('partner_mq_ipf.mqport', '61613'))
-        target = self.env['ir.config_parameter'].get_param('partner_mq_ipf.asok_target', '/topic/Consumer.crm.VirtualTopic.arbetssokande.andring')
+        target = self.env['ir.config_parameter'].get_param('partner_mq_ipf.target_asok', '/topic/Consumer.crm.VirtualTopic.arbetssokande.andring')
         usr = self.env['ir.config_parameter'].get_param('partner_mq_ipf.mquser', 'crm')
         pwd = self.env['ir.config_parameter'].get_param('partner_mq_ipf.mqpwd', 'topsecret')
 
@@ -235,7 +247,8 @@ class ResPartner(models.Model):
         else:
             _logger.debug("Asok MQ Listener - Not using TLS")
 
-        respartnerlsnr = AsokResPartnerListener(mqconn,usr,pwd,target,4)
+        
+        respartnerlsnr = AsokResPartnerListener(self.env, mqconn, usr, pwd, target, 4)
         mqconn.set_listener('', respartnerlsnr)
         
 
@@ -247,17 +260,30 @@ class ResPartner(models.Model):
                 target
             )
 
-            #while True:
-            time.sleep(30) # wait for a bit
+            while True:
+                time.sleep(10) # wait for a bit
+                mqconn.unsubscribe(target)
+                # handle list of messages
+                for msg in respartnerlsnr.get_list():
+                    customer_id = msg.get(SID)
+                    social_security_number = msg.get(PNR)
+                    former_social_security_number = msg.get(PREVPNR, None)
+                    message_type = msg.get(MSGTYPE) 
+                    self.env['res.partner'].rask_controller(customer_id, social_security_number, former_social_security_number, message_type)
+
+                respartnerlsnr.clear_list()
+                mqconn.subscribe(target)
+                break
         finally:
-            mqconn.unsubscribe(target)
+            
             time.sleep(1)
-            mqconn.disconnect()
+            if mqconn.is_connected():
+                mqconn.disconnect()
 
     def mq_stom_listener(self): 
         _logger.info("STOM MQ Listener started.")
         host_port = (self.env['ir.config_parameter'].get_param('partner_mq_ipf.mqhost', '172.16.36.27'), self.env['ir.config_parameter'].get_param('partner_mq_ipf.mqport', '61613'))
-        target = self.env['ir.config_parameter'].get_param('partner_mq_ipf.STOM_target', '/topic/Consumer.crm.VirtualTopic.arbetssokande.andring')
+        target = self.env['ir.config_parameter'].get_param('partner_mq_ipf.target_STOM', '/topic/Consumer.crm.VirtualTopic.arbetssokande.andring')
         usr = self.env['ir.config_parameter'].get_param('partner_mq_ipf.mquser', 'crm')
         pwd = self.env['ir.config_parameter'].get_param('partner_mq_ipf.mqpwd', 'topsecret')
 
@@ -271,7 +297,7 @@ class ResPartner(models.Model):
         else:
             _logger.debug("STOM MQ Listener - Not using TLS")
 
-        respartnerlsnr = STOMResPartnerListener(mqconn,usr,pwd,target,4)
+        respartnerlsnr = STOMResPartnerListener(self.env, mqconn,usr,pwd,target,4)
         mqconn.set_listener('', respartnerlsnr)
         
 
@@ -283,9 +309,21 @@ class ResPartner(models.Model):
                 target
             )
 
-            #while True:
-            time.sleep(30) # wait for a bit
+            while True:
+                time.sleep(10) # wait for a bit
+                mqconn.unsubscribe(target)
+
+                # handle list of messages
+                for msg in respartnerlsnr.get_list():
+                    _logger.debug("STMO MQ Listener - calling method")
+                    # env['res.partner'].send_to_stom_track(msg)
+                    
+                respartnerlsnr.clear_list()
+                mqconn.subscribe(target)
+                break
         finally:
-            mqconn.unsubscribe(target)
+            
             time.sleep(1)
-            mqconn.disconnect()
+            if mqconn.is_connected():
+                mqconn.disconnect()
+
