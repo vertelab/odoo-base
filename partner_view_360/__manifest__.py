@@ -46,6 +46,8 @@ v12.0.0.1.9 AFC-816 Changed reload window to partern_360_view.\n
         'res_ssyk',
         'res_sni',
         'partner_fax',
+        'hr_office',
+        'af_security'
         # 'edi_af_appointment',
     ],
     'data': [
