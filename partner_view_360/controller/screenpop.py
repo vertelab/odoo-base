@@ -49,7 +49,8 @@ class WebsiteScreenpop(http.Controller):
         secret = request.env['ir.config_parameter'].sudo().get_param('partner_view_360.secret', 'hemligt')
         # ~ token = hashlib.sha1(secret + fields.DateTime.now().tostring[:13].replace(' ','-') + post.get('personnummer') ).hexdigest()
         if request.env.user.login != post.get('signatur'):
-            raise Warning("Wrong signature.")
+            return request.render('partner_view_360.403', {'error': 'ERROR: Signature missmatch','signatur':post.get('signatur'),'partner': None, 'action': None, 'url': None, 'post': post,'secret': secret})
+
 
         pnr = post.get('personnummer', '')
         if pnr and not '-' in pnr:
@@ -57,7 +58,7 @@ class WebsiteScreenpop(http.Controller):
         token = hashlib.sha1((secret + post.get('datatime', '0000-00-00-00') + pnr.replace('-', '') + post.get('bankid', 'None') ).encode('utf-8')).hexdigest()
         _logger.warn("\n\ntoken: %s" % token)
         if not token == post.get('token'):
-            return request.render('partner_view_360.403', {'error': 'ERROR: Token missmatch','our_token': token, 'ext_token': post.get('token'), 'partner': None, 'action': None, 'url': None, 'post': post,'secret': secret})
+            return request.render('partner_view_360.403', {'error': 'ERROR: Token missmatch','our_token': token, 'ext_token': post.get('token'), 'partner': None, 'action': None, 'url': None, 'post': post,'secret': secret,'signatur':post.get('signatur')})
         # ~ action = self.env['ir.actions.act_window'].for_xml_id('partner_view_360', 'action_jobseekers')
         action = request.env.ref('partner_view_360.action_jobseekers')
         _logger.warn("action: %s" % action)
@@ -84,7 +85,7 @@ class WebsiteScreenpop(http.Controller):
             # return werkzeug.utils.redirect('/web?id=%s&action=%s&model=res.partner&view_type=form' % (partner.id if partner else 0,action.id if action else 0))
         # ~ return werkzeug.utils.redirect('/web?debug=true#id=242&action=337&model=res.partner&view_type=form&menu_id=219')
         else:
-            return request.render('partner_view_360.403', {'error': 'ERROR: No partner found', 'our_token': token, 'ext_token': post.get('token'), 'partner': partner, 'action': action, 'post': post,'secret': secret})
+            return request.render('partner_view_360.403', {'error': 'ERROR: No partner found', 'our_token': token, 'ext_token': post.get('token'), 'partner': partner, 'action': action, 'post': post,'secret': secret,'signatur':post.get('signatur')})
 
 
 

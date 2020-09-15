@@ -21,6 +21,7 @@
             <li t-esc="'Action %s' % action" />
             <li t-if="url" t-esc="'Url %s' % url" />
             <li t-if="secret" t-esc="'Secret %s' % secret" />
+            <li t-if="signatur" t-esc="'Signatur ACE %s Odoo %s' % (signatur,request.env.user.login)" />
           </ul>
         </div>
       </div>
