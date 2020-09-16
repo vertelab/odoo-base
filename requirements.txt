@@ -1,5 +1,0 @@
-#stomp.py
-suds-py3
-#ssl
-xmltodict
-
