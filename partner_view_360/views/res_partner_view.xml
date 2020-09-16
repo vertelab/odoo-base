@@ -426,6 +426,7 @@
     <field name="view_id" ref="view_jobseeker_kanban" />
     <field name="act_window_id" ref="action_jobseekers" />
   </record>
+  <menuitem id="res_partner_jobseekers_menu" name="Jobseekers" action="" sequence="4" groups="base.group_no_one" />
   <menuitem id="res_partner_jobseekers_action_menu" name="Jobseekers" parent="res_partner_jobseekers_menu" action="action_jobseekers" sequence="10" groups="base.group_no_one" />
   <menuitem id="res_partner_jobseekers_config_menu" parent="res_partner_jobseekers_menu" name="Configuration" sequence="100" groups="base.group_no_one" />
   <menuitem id="menu_sni_config" parent="res_partner_jobseekers_config_menu" action="res_sni.action_sni_form" sequence="10"  groups="base.group_no_one" />

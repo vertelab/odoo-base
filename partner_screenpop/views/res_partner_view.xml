@@ -426,12 +426,12 @@
     <field name="view_id" ref="view_jobseeker_kanban" />
     <field name="act_window_id" ref="action_jobseekers" />
   </record>
-    <menuitem id="res_partner_jobseekers_menu" name="Jobseekers" action="action_jobseekers" sequence="4" groups="base.group_no_one" />
-  <menuitem id="res_partner_jobseekers_config_menu" parent="res_partner_jobseekers_menu" name="Configuration" sequence="0" groups="base.group_no_one" />
+    <!--
   <menuitem id="menu_sni_config" parent="res_partner_jobseekers_config_menu" action="res_sni.action_sni_form" sequence="1"  groups="base.group_no_one" />
   <menuitem id="menu_ssyk_config" parent="res_partner_jobseekers_config_menu" action="res_ssyk.action_ssyk_form" sequence="2"  groups="base.group_no_one" />
     <menuitem id="menu_sun_config" parent="res_partner_jobseekers_config_menu" action="res_sun.action_sun_form" sequence="3"  groups="base.group_no_one" />
   <menuitem id="menu_drivers_license_config" parent="res_partner_jobseekers_config_menu" action="res_drivers_license.action_drivers_license_form" sequence="4" groups="base.group_no_one" />
+  -->
   <record id="view_partner_form_education1" model="ir.ui.view">
     <field name="name">res.partner.eduacation.form1</field>
     <field name="model">res.partner</field>
