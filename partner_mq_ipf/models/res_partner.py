@@ -270,6 +270,7 @@ class ResPartner(models.Model):
                     social_security_number = msg.get(PNR)
                     former_social_security_number = msg.get(PREVPNR, None)
                     message_type = msg.get(MSGTYPE) 
+                    _logger.debug("Asok MQ Listener - calling send_to_stom_track with %s" % msg)
                     self.env['res.partner'].rask_controller(customer_id, social_security_number, former_social_security_number, message_type)
 
                 respartnerlsnr.clear_list()
