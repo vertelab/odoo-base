@@ -230,7 +230,7 @@ class ResPartner(models.Model):
     _inherit = "res.partner"  
 
     @api.model
-    def mq_asok_listener(self): 
+    def mq_asok_listener(self, minutes_to_live = 10): 
         _logger.info("Asok MQ Listener started.")
         host_port = (self.env['ir.config_parameter'].get_param('partner_mq_ipf.mqhost', '172.16.36.27'), self.env['ir.config_parameter'].get_param('partner_mq_ipf.mqport', '61613'))
         target = self.env['ir.config_parameter'].get_param('partner_mq_ipf.target_asok', '/topic/Consumer.crm.VirtualTopic.arbetssokande.andring')
@@ -260,8 +260,9 @@ class ResPartner(models.Model):
                 target
             )
 
-            while True:
-                time.sleep(10) # wait for a bit
+            counter = 12 * minutes_to_live # Number of 5 sek slices to wait
+            while counter > 0:
+                time.sleep(5) # wait for a bit
                 mqconn.unsubscribe(target)
                 # handle list of messages
                 for msg in respartnerlsnr.get_list():
@@ -273,14 +274,15 @@ class ResPartner(models.Model):
 
                 respartnerlsnr.clear_list()
                 mqconn.subscribe(target)
-                break
+                counter -= 1
+                
         finally:
             
             time.sleep(1)
             if mqconn.is_connected():
                 mqconn.disconnect()
 
-    def mq_stom_listener(self): 
+    def mq_stom_listener(self, minutes_to_live = 10): 
         _logger.info("STOM MQ Listener started.")
         host_port = (self.env['ir.config_parameter'].get_param('partner_mq_ipf.mqhost', '172.16.36.27'), self.env['ir.config_parameter'].get_param('partner_mq_ipf.mqport', '61613'))
         target = self.env['ir.config_parameter'].get_param('partner_mq_ipf.target_STOM', '/topic/Consumer.crm.VirtualTopic.arbetssokande.andring')
@@ -308,19 +310,20 @@ class ResPartner(models.Model):
                 pwd,
                 target
             )
-
-            while True:
-                time.sleep(10) # wait for a bit
+            counter = 12 * minutes_to_live # Number of 5 sek slices to wait
+            while counter > 0:
+                time.sleep(5) # wait for a bit
                 mqconn.unsubscribe(target)
 
                 # handle list of messages
                 for msg in respartnerlsnr.get_list():
-                    _logger.debug("STMO MQ Listener - calling method")
-                    # env['res.partner'].send_to_stom_track(msg)
-                    
+                    _logger.debug("STMO MQ Listener - calling send_to_stom_track with %s" % msg)
+                    self.env['res.partner'].send_to_stom_track(msg)
+
                 respartnerlsnr.clear_list()
                 mqconn.subscribe(target)
-                break
+                counter -= 1 
+                
         finally:
             
             time.sleep(1)

@@ -30,7 +30,7 @@ Listen for updates on th MQ-bus
     'author': 'Vertel AB',
     'license': 'AGPL-3',
     'website': 'http://www.vertel.se',
-    'depends': ['base'],
+    'depends': ['base', 'calendar_af', 'edi_af_aisf_rask'],
     'external_dependencies': {'python': ['stomp', 'xmltodict']},
     'data': [ ],
     'application': False,
