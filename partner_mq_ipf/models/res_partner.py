@@ -138,7 +138,7 @@ class AsokResPartnerListener(stomp.ConnectionListener):
         :param dict headers: a dictionary containing all headers sent by the server as key/value pairs.
         :param body: the frame's payload. This is usually empty for CONNECTED frames.
         """
-        _logger.info("Asok MQ Listener on_connected: %s - %s" % (headers, body))
+        _logger.debug("Asok MQ Listener on_connected: %s - %s" % (headers, body))
 
 class STOMResPartnerListener(stomp.ConnectionListener):
     __env = None
@@ -229,20 +229,26 @@ class STOMResPartnerListener(stomp.ConnectionListener):
 class ResPartner(models.Model):
     _inherit = "res.partner"  
 
+    def __get_host_port(self):
+        str = self.env['ir.config_parameter'].get_param('partner_mq_ipf.mqhostport', '172.16.36.27:61613')
+        hosts = list()
+        for vals in str.split(','):
+            hosts.append(tuple(vals.split(':')))
+
+        return hosts
+
     @api.model
     def mq_asok_listener(self, minutes_to_live = 10): 
         _logger.info("Asok MQ Listener started.")
-        host_port = (self.env['ir.config_parameter'].get_param('partner_mq_ipf.mqhost', '172.16.36.27'), self.env['ir.config_parameter'].get_param('partner_mq_ipf.mqport', '61613'))
+        host_port = self.__get_host_port()
         target = self.env['ir.config_parameter'].get_param('partner_mq_ipf.target_asok', '/topic/Consumer.crm.VirtualTopic.arbetssokande.andring')
         usr = self.env['ir.config_parameter'].get_param('partner_mq_ipf.mquser', 'crm')
         pwd = self.env['ir.config_parameter'].get_param('partner_mq_ipf.mqpwd', 'topsecret')
 
-        _logger.debug("Asok MQ Listener patameters - %s %s - %s %s" % ([host_port], target, usr, pwd))
-
-        mqconn = stomp.Connection10([host_port])
+        mqconn = stomp.Connection10(host_port)
         
         if self.env['ir.config_parameter'].get_param('partner_mq_ipf.mqusessl', '1') == '1':
-            mqconn.set_ssl(for_hosts=[host_port], ssl_version=ssl.PROTOCOL_TLS)
+            mqconn.set_ssl(for_hosts=host_port, ssl_version=ssl.PROTOCOL_TLS)
             _logger.debug("Asok MQ Listener - Using TLS")
         else:
             _logger.debug("Asok MQ Listener - Not using TLS")
@@ -270,7 +276,8 @@ class ResPartner(models.Model):
                     social_security_number = msg.get(PNR)
                     former_social_security_number = msg.get(PREVPNR, None)
                     message_type = msg.get(MSGTYPE) 
-                    _logger.debug("Asok MQ Listener - calling send_to_stom_track with %s" % msg)
+                    _logger.info("Asok MQ Listener - calling rask_controller")
+                    _logger.debug("Asok MQ Listener - rask_controller: %s" % msg)
                     self.env['res.partner'].rask_controller(customer_id, social_security_number, former_social_security_number, message_type)
 
                 respartnerlsnr.clear_list()
@@ -285,17 +292,17 @@ class ResPartner(models.Model):
 
     def mq_stom_listener(self, minutes_to_live = 10): 
         _logger.info("STOM MQ Listener started.")
-        host_port = (self.env['ir.config_parameter'].get_param('partner_mq_ipf.mqhost', '172.16.36.27'), self.env['ir.config_parameter'].get_param('partner_mq_ipf.mqport', '61613'))
+        host_port = self.__get_host_port()
         target = self.env['ir.config_parameter'].get_param('partner_mq_ipf.target_STOM', '/topic/Consumer.crm.VirtualTopic.arbetssokande.andring')
         usr = self.env['ir.config_parameter'].get_param('partner_mq_ipf.mquser', 'crm')
         pwd = self.env['ir.config_parameter'].get_param('partner_mq_ipf.mqpwd', 'topsecret')
 
         _logger.debug("STOM MQ Listener patameters - %s %s - %s %s" % ([host_port], target, usr, pwd))
 
-        mqconn = stomp.Connection10([host_port])
+        mqconn = stomp.Connection10(host_port)
         
         if self.env['ir.config_parameter'].get_param('partner_mq_ipf.mqusessl', '1') == '1':
-            mqconn.set_ssl(for_hosts=[host_port], ssl_version=ssl.PROTOCOL_TLS)
+            mqconn.set_ssl(for_hosts=host_port, ssl_version=ssl.PROTOCOL_TLS)
             _logger.debug("STOM MQ Listener - Using TLS")
         else:
             _logger.debug("STOM MQ Listener - Not using TLS")
@@ -318,7 +325,8 @@ class ResPartner(models.Model):
 
                 # handle list of messages
                 for msg in respartnerlsnr.get_list():
-                    _logger.debug("STMO MQ Listener - calling send_to_stom_track with %s" % msg)
+                    _logger.info("STOM MQ Listener - calling send_to_stom_track")
+                    _logger.debug("STOM MQ Listener - send_to_stom_track: %s" % msg)
                     self.env['res.partner'].send_to_stom_track(msg)
 
                 respartnerlsnr.clear_list()
