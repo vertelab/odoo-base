@@ -45,6 +45,7 @@ v12.0.0.1.9 AFC-816 Changed reload window to partern_360_view.\n
         'res_ssyk',
         'res_sni',
         'partner_fax',
+        'res_drivers_license'
     ],
     'data': [
         'views/res_partner_template.xml',
