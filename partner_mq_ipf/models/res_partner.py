@@ -292,7 +292,7 @@ class ResPartner(models.Model):
 
     def mq_stom_listener(self, minutes_to_live = 10): 
         _logger.info("STOM MQ Listener started.")
-        host_port = list(self.__get_host_port())
+        host_port = self.__get_host_port()
         target = self.env['ir.config_parameter'].get_param('partner_mq_ipf.target_STOM', '/topic/Consumer.crm.VirtualTopic.arbetssokande.andring')
         usr = self.env['ir.config_parameter'].get_param('partner_mq_ipf.mquser', 'crm')
         pwd = self.env['ir.config_parameter'].get_param('partner_mq_ipf.mqpwd', 'topsecret')
