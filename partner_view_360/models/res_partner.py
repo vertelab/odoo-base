@@ -2,7 +2,7 @@
 ##############################################################################
 #
 #    Odoo, Open Source Management Solution, third party addon
-#    Copyright (C) 2004-2019 Vertel AB (<http://vertel.se>).
+#    Copyright (C) 2004-2020 Vertel AB (<http://vertel.se>).
 #
 #    This program is free software: you can redistribute it and/or modify
 #    it under the terms of the GNU Affero General Public License as
@@ -63,7 +63,7 @@ class ResPartner(models.Model):
 
     # office code for office type partners only
     office_code = fields.Char(string="Office code")
-    
+
     # campus_ids is a better name, One2many need a help-class that cannot be res.partner with a inverse_name
     # ~ campuses = fields.One2many('res.partner', string="Campuses") # should check for type = "campus"
 
@@ -265,7 +265,7 @@ class ResPartner(models.Model):
             'name': _("Search Jobseekers"),
             'view_type': 'form',
             #'src_model': "res.partner",
-            'res_model': "hr.employee.jobseeker.search.wizard",
+            'res_model': "res.partner.jobseeker.search.wizard",
             'view_id': False, # self.env.ref("partner_view_360.search_jobseeker_wizard").id,
             'view_mode':"form",
             #'target': "inline", 
@@ -298,4 +298,14 @@ class ResPartner(models.Model):
                 name += ' ' + partner.company_registry
             result.append((partner.id, name))
         return result
+
+
+#  Grant temporary access to these jobseekers or set this user as responsible for the jobseeker            
+    @api.multi
+    def escalate_jobseeker_access(self,arendetyp,user):
+        return (250,'OK')
+        
+            # ~ res = request.env['edi.ace_errand'].escalate_jobseeker_access(partner,post.get('arendetyp'))
+            # ~ if res[0] != 250:  # OK
+                # ~ return request.render('partner_view_360.403', {'error': 'ERROR: Escalate rights [%s] %s' % res, 'partner': partner, 'signatur':post.get('signatur')})
 
