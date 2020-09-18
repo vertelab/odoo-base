@@ -26,11 +26,22 @@ import hashlib
 import logging
 _logger = logging.getLogger(__name__)
 
+from odoo import models, fields, api, _
+# ~ from suds.client import *   # SOAP
+from zeep.client import CachingClient
+from zeep.helpers import serialize_object
+from zeep import xsd
+
+
+import logging
+_logger = logging.getLogger(__name__)
+
 
 class WebsiteScreenpop(http.Controller):
-    @http.route([
-        '/opencustomerview'
-    ], type='http', auth="public", website=True, csrf=False)
+    
+    
+    
+    @http.route(['/opencustomerview'], type='http', auth="public", website=True, csrf=False)
     def opencustomerview(self, **post):
         """
         personnummer=<12 tecken>, exklusive bindestreck. Ex: '200102031234'
@@ -51,47 +62,84 @@ class WebsiteScreenpop(http.Controller):
         if request.env.user.login != post.get('signatur'):
             return request.render('partner_view_360.403', {'error': 'ERROR: Signature missmatch','signatur':post.get('signatur'),'partner': None, 'action': None, 'url': None, 'post': post,'secret': secret})
 
+        token = hashlib.sha1((secret + post.get('datatime', '0000-00-00-00') + post.get('personnummer', '').replace('-', '') + post.get('bankid', 'None') ).encode('utf-8')).hexdigest()
+        if not token == post.get('token'):
+            return request.render('partner_view_360.403', {'error': 'ERROR: Token missmatch','our_token': token, 'ext_token': post.get('token'), 'partner': None, 'action': None, 'url': None, 'post': post,'secret': secret,'signatur':post.get('signatur')})
 
         pnr = post.get('personnummer', '')
         if pnr and not '-' in pnr:
             pnr = pnr[:8] + '-' + pnr[8:12]
-        token = hashlib.sha1((secret + post.get('datatime', '0000-00-00-00') + pnr.replace('-', '') + post.get('bankid', 'None') ).encode('utf-8')).hexdigest()
-        _logger.warn("\n\ntoken: %s" % token)
-        if not token == post.get('token'):
-            return request.render('partner_view_360.403', {'error': 'ERROR: Token missmatch','our_token': token, 'ext_token': post.get('token'), 'partner': None, 'action': None, 'url': None, 'post': post,'secret': secret,'signatur':post.get('signatur')})
-        # ~ action = self.env['ir.actions.act_window'].for_xml_id('partner_view_360', 'action_jobseekers')
-        action = request.env.ref('partner_view_360.action_jobseekers')
-        _logger.warn("action: %s" % action)
-        # ~ return action
         partner = request.env['res.partner'].sudo().search([('company_registry','=',pnr)]) # not granted yet
-        _logger.warn("partner: %s pnr: %s " % (partner, pnr))
         
-        
-        if partner and len(partner) == 1:
-           # ~ Grant temporary access to these jobseekers or set this user as responsible for the jobseeker            
-            request.env['edi.ace_errand'].escalate_jobseeker_access(partner,post.get('arendetyp'))
-
-            # if not partner._grant_jobseeker_access(post.get('reason','None'))
-            #     return request.render('partner_view_360.403', {'error': 'ERROR: Could not grant access','our_token': token, 'ext_token': post.get('token'), 'partner': partner, 'action': action,'url': None,'post': post})
-            #
+        if not partner:
+            return request.render('partner_view_360.403', {'error': 'ERROR: No partner found', 'our_token': token, 'ext_token': post.get('token'), 'partner': partner, 'action': action, 'post': post,'secret': secret,'signatur':post.get('signatur')})
+        elif partner and len(partner) == 1:
+            action = request.env.ref('partner_view_360.action_jobseekers')
             partner.eidentification = post.get('bankid')
-            # ~ res_url = '/web?id=%s&action=%s&model=res.partner&view_type=form' % (partner.id if partner else 0,action.id if action else 0)
-            res_url = '/web?id=%s&action=%s&model=res.partner&view_type=form#id=%s&active_id=40&model=res.partner&view_type=form' % (partner.id if partner else 0,action.id if action else 0,partner.id if partner else 0)
-            #'/web?id=823&action=371&model=res.partner&active_id=39&model=res.partner&view_type=form&menu_id=252#id=823&active_id=40&model=res.partner&view_type=form&menu_id='
-            _logger.warn("res_url: %s" % res_url)
+            res_url = '%s/web?id=%s&action=%s&model=res.partner&view_type=form#id=%s&active_id=40&model=res.partner&view_type=form' % (
+                                                                request.env['ir.config_parameter'].sudo().get_param('web.base.url',''),
+                                                                partner.id if partner else 0,action.id if action else 0,partner.id if partner else 0
+                                                            )            
+            if post.get('bankid') != 'OK':
+                return request.render('partner_view_360.bankid', {
+                    'message': _('You have to initiate BankID-identification'),
+                    'partner': partner,
+                    'token': token,
+                    'datatime': post.get('datatime'),
+                    'signatur': post.get('signatur'),
+                    'personnummer': post.get('personnummer'),
+                    'arendetyp': post.get('arendetyp'),
+                    'kontaktid': post.get('kontaktid'),
+                    })
+           # ~ Grant temporary access to these jobseekers or set this user as responsible for the jobseeker            
+            res = partner.escalate_jobseeker_access(post.get('arendetyp'))
+            if res[0] != 250:  # OK
+                return request.render('partner_view_360.403', {'error': 'ERROR: Escalate rights [%s] %s' % res, 'partner': partner, 'signatur':post.get('signatur')})
             if post.get('debug'):
                 return request.render('partner_view_360.403', {'message': 'Debug','our_token': token, 'ext_token': post.get('token'), 'partner': partner, 'action': action,'url': res_url, 'post': post,'secret': secret})
             return werkzeug.utils.redirect(res_url)
-            # return werkzeug.utils.redirect('/web?id=%s&action=%s&model=res.partner&view_type=form' % (partner.id if partner else 0,action.id if action else 0))
-        # ~ return werkzeug.utils.redirect('/web?debug=true#id=242&action=337&model=res.partner&view_type=form&menu_id=219')
         else:
             return request.render('partner_view_360.403', {'error': 'ERROR: No partner found', 'our_token': token, 'ext_token': post.get('token'), 'partner': partner, 'action': action, 'post': post,'secret': secret,'signatur':post.get('signatur')})
 
 
-
-    @http.route([
-        '/opencustomerviewtest'
-    ], type='http', auth="public", website=True, csrf=False)
+    @http.route(['/opencustomerview/bankid'], type='http', auth="public", website=True, csrf=False)
+    def opencustomerview_bankid(self, **post):
+        """
+        personnummer=<12 tecken>
+        signatur=<5 tecken>
+        arendetyp=<tre tecken, t ex P92>
+        kontaktid=<10 siffror, för uppföljning/loggning id i ACE>
+        bankid=<OK/annat>
+        datatime=yyyy-mm-dd-hh
+        token= <sha1 hemlighet + yyyy-mm-dd-hh + personnummer>
+        debug=True 
+        
+        P92 första planeringssamtal
+        """
+        message = _('You have to initiate BankID-identification') 
+        bankid = res = None       
+        pnr = post.get('personnummer', '')
+        if pnr and not '-' in pnr:
+            pnr = pnr[:8] + '-' + pnr[8:12]
+        partner = request.env['res.partner'].sudo().search([('company_registry','=',pnr)]) # not granted yet
+        if post.get('bankid_init'):
+            message = _('Initiating BankID-identification, try to authenticate')
+            bankid = CachingClient(request.env['ir.config_parameter'].sudo().get_param('partner_view_360.bankid_wsdl', 'http://bhipws.arbetsformedlingen.se/Integrationspunkt/ws/mobiltbankidinterntjanst?wsdl'))  # create a Client instance
+            res = bankid.service.MobiltBankIDInternTjanst(post.get('personnummer'))
+        return request.render('partner_view_360.bankid', {
+                    'partner': partner,
+                    'token': post.get('token'),
+                    'datatime': post.get('datatime'),
+                    'signatur': post.get('signatur'),
+                    'personnummer': post.get('personnummer'),
+                    'arendetyp': post.get('arendetyp'),
+                    'kontaktid': post.get('kontaktid'),
+                    'bankid_soap': bankid,
+                    'bankid_res': res,
+                    })
+        
+        
+    @http.route(['/opencustomerviewtest'], type='http', auth="public", website=True, csrf=False)
     def opencustomerviewtest(self, **post):
         """
         personnummer=<12 tecken>
@@ -124,9 +172,7 @@ class WebsiteScreenpop(http.Controller):
         
         return werkzeug.utils.redirect(res_url)
 
-    @http.route([
-        '/opencustomerviewt2'
-    ], type='http', auth="public", website=True, csrf=False)
+    @http.route(['/opencustomerviewt2'], type='http', auth="public", website=True, csrf=False)
     def opencustomerviewt2(self, **post):
         """
         personnummer=<12 tecken>
