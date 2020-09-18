@@ -92,7 +92,7 @@ class WebsiteScreenpop(http.Controller):
                     'kontaktid': post.get('kontaktid'),
                     })
            # ~ Grant temporary access to these jobseekers or set this user as responsible for the jobseeker            
-            res = partner.escalate_jobseeker_access(post.get('arendetyp'))
+            res = partner.escalate_jobseeker_access(post.get('arendetyp'), request.env.user)
             if res[0] != 250:  # OK
                 return request.render('partner_view_360.403', {'error': 'ERROR: Escalate rights [%s] %s' % res, 'partner': partner, 'signatur':post.get('signatur')})
             if post.get('debug'):

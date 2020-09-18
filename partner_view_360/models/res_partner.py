@@ -302,7 +302,7 @@ class ResPartner(models.Model):
 
 #  Grant temporary access to these jobseekers or set this user as responsible for the jobseeker            
     @api.multi
-    def escalate_jobseeker_access(self,arendetyp):
+    def escalate_jobseeker_access(self,arendetyp,user):
         return (250,'OK')
         
             # ~ res = request.env['edi.ace_errand'].escalate_jobseeker_access(partner,post.get('arendetyp'))
