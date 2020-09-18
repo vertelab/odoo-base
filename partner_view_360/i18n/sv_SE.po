@@ -7,7 +7,7 @@ msgstr ""
 "Project-Id-Version: Odoo Server 12.0-20200508\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2020-09-15 11:57+0000\n"
-"PO-Revision-Date: 2020-09-15 14:00+0200\n"
+"PO-Revision-Date: 2020-09-18 13:45+0200\n"
 "Last-Translator: <>\n"
 "Language-Team: \n"
 "MIME-Version: 1.0\n"
@@ -407,7 +407,7 @@ msgstr "Arbetssökande info"
 #: model:ir.model.fields,field_description:partner_view_360.field_res_partner__segment_jobseeker
 #: model:ir.model.fields,field_description:partner_view_360.field_res_users__segment_jobseeker
 msgid "Jobseeker segment"
-msgstr ""
+msgstr "Arbetssökande segment"
 
 #. module: partner_view_360
 #: code:addons/partner_view_360/wizard/res_partner_search_wizard.py:102
@@ -428,7 +428,7 @@ msgstr "Lokalkontor"
 #: model:ir.model.fields,field_description:partner_view_360.field_res_partner__location_code
 #: model:ir.model.fields,field_description:partner_view_360.field_res_users__location_code
 msgid "Location Code"
-msgstr ""
+msgstr "Plats kod"
 
 #. module: partner_view_360
 #: model_terms:ir.ui.view,arch_db:partner_view_360.af_office_contact_form_view
@@ -440,7 +440,7 @@ msgstr "Logotyp"
 #. module: partner_view_360
 #: selection:res.partner,type:0
 msgid "Mailing Address"
-msgstr ""
+msgstr "E-mail adress"
 
 #. module: partner_view_360
 #: model:ir.model.fields,field_description:partner_view_360.field_res_partner__match_area
@@ -459,7 +459,7 @@ msgstr "Meddelande till arbetssökande gällande avaktualisering"
 #: code:addons/partner_view_360/static/src/xml/systray.xml:22
 #, python-format
 msgid "Messages"
-msgstr ""
+msgstr "Meddelanden"
 
 #. module: partner_view_360
 #: model_terms:ir.ui.view,arch_db:partner_view_360.af_office_contact_form_view
