@@ -76,7 +76,10 @@ class WebsiteScreenpop(http.Controller):
         elif partner and len(partner) == 1:
             action = request.env.ref('partner_view_360.action_jobseekers')
             partner.eidentification = post.get('bankid')
-            res_url = '/web?id=%s&action=%s&model=res.partner&view_type=form#id=%s&active_id=40&model=res.partner&view_type=form' % (partner.id if partner else 0,action.id if action else 0,partner.id if partner else 0)
+            res_url = '%s/web?id=%s&action=%s&model=res.partner&view_type=form#id=%s&active_id=40&model=res.partner&view_type=form' % (
+                                                                request.env['ir.config_parameter'].sudo().get_param('web.base.url',''),
+                                                                partner.id if partner else 0,action.id if action else 0,partner.id if partner else 0
+                                                            )            
             if post.get('bankid') != 'OK':
                 return request.render('partner_view_360.bankid', {
                     'message': _('You have to initiate BankID-identification'),
