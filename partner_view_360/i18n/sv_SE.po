@@ -349,7 +349,7 @@ msgstr "Arbetssökande"
 #: model:ir.model.fields,field_description:partner_view_360.field_res_partner__jobseeker_category
 #: model:ir.model.fields,field_description:partner_view_360.field_res_users__jobseeker_category
 msgid "Jobseeker category"
-msgstr "Arbetssökandekategori"
+msgstr "Sökandekategori"
 
 #. module: partner_view_360
 #: model_terms:ir.ui.view,arch_db:partner_view_360.view_partner_form

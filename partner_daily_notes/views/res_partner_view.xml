@@ -13,7 +13,7 @@
             context="{'partner_id': active_id, 'partner_name': name}"> 
             <field string="Notes" name="notes_count" widget="statinfo"/>
         </button> -->
-        <button class="oe_stat_button" type="object"
+        <button class="oe_stat_button" type="object" groups="base.group_no_one"
             name="view_notes"
             icon="fa-pencil-square-o"> 
             <field string="Notes" name="notes_count" widget="statinfo"/>

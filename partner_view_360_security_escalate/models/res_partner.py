@@ -2,7 +2,7 @@
 ##############################################################################
 #
 #    Odoo, Open Source Management Solution, third party addon
-#    Copyright (C) 2004-2019 Vertel AB (<http://vertel.se>).
+#    Copyright (C) 2004-2020 Vertel AB (<http://vertel.se>).
 #
 #    This program is free software: you can redistribute it and/or modify
 #    it under the terms of the GNU Affero General Public License as
@@ -21,14 +21,22 @@
 
 from odoo import models, fields, api, _
 import logging
-from datetime import date
 _logger = logging.getLogger(__name__)
-from odoo.exceptions import ValidationError
-
 
 
 class ResPartner(models.Model):
     _inherit = "res.partner"  # odoo inheritance från res.partner
-    #_name = ""
 
+#  Grant temporary access to these jobseekers or set this user as responsible for the jobseeker            
+    @api.multi
+    def escalate_jobseeker_access(self,arendetyp, user):
+        res = (250,'OK')
+        for partner in self:
+            res = super(ResPartner,self).escalate_jobseeker_access(arendetyp, user)
+            res = self.env['edi.ace_errand'].escalate_jobseeker_access(partner,arendetyp,user)
+        return res
+        
+            # ~ res = request.env['edi.ace_errand'].escalate_jobseeker_access(partner,post.get('arendetyp'))
+            # ~ if res[0] != 250:  # OK
+                # ~ return request.render('partner_view_360.403', {'error': 'ERROR: Escalate rights [%s] %s' % res, 'partner': partner, 'signatur':post.get('signatur')})
 

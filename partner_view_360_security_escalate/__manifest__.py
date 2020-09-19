@@ -2,7 +2,7 @@
 ##############################################################################
 #
 #    Odoo, Open Source Management Solution, third party addon
-#    Copyright (C) 2004-2019 Vertel AB (<http://vertel.se>).
+#    Copyright (C) 2004-2020 Vertel AB (<http://vertel.se>).
 #
 #    This program is free software: you can redistribute it and/or modify
 #    it under the terms of the GNU Affero General Public License as
@@ -20,24 +20,23 @@
 ##############################################################################
 
 {
-    'name': 'Partner Screenpop',
-    'version': '12.0.0.1.7',
+    'name': 'Partner 360 view security escalate',
+    'version': '12.0.0.1.9',
     'category': '',
     'description': """
-Module for testing Screenpop
+Module for employee 360 view with enhanced security escalation
 """,
     'author': 'Vertel AB',
     'license': 'AGPL-3',
     'website': 'http://www.vertel.se',
     'depends': [
-        'base', 
-        'website', 
+        'partner_view_360', 
         'edi_af_appointment',
     ],
     'data': [
-            'views/res_partner_template.xml',
-            'views/res_partner_view.xml',
-        ],
+    ],
+    'demo': [
+    ],
     'application': False,
     'installable': True,
 }

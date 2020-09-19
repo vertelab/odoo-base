@@ -2,7 +2,7 @@
 ##############################################################################
 #
 #    Odoo, Open Source Management Solution, third party addon
-#    Copyright (C) 2004-2019 Vertel AB (<http://vertel.se>).
+#    Copyright (C) 2004-2020 Vertel AB (<http://vertel.se>).
 #
 #    This program is free software: you can redistribute it and/or modify
 #    it under the terms of the GNU Affero General Public License as
@@ -42,13 +42,12 @@ v12.0.0.1.9 AFC-816 Changed reload window to partern_360_view.\n
         'mail',
         'partner_firstname', 
         'contacts', 
-        'res_drivers_license',
         'res_ssyk',
         'res_sni',
         'partner_fax',
         'hr_office',
         'af_security'
-        # 'edi_af_appointment',
+        'res_drivers_license'
     ],
     'data': [
         'views/res_partner_template.xml',
