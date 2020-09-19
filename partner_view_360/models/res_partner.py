@@ -48,23 +48,13 @@ class ResPartner(models.Model):
 
     # office selection field for partners connected to an office, my_office_code filled in by office_code for the office
     office_id = fields.Many2one('hr.department', string="Office") #should check for type = "af office"
-
-
-    # office_ids is a better name, One2many need a help-class that cannot be res.partner with a inverse_name
-    # ~ office_campuses = fields.One2many('res.partner', related="office.campuses") 
-    # ~ my_campuses = fields.One2many('res.partner') #should check if if it's in office_locations
-
+    location_id = fields.Many2one('hr.location', string="Location")
 
     #office_ids = fields.Many2many('res.partner', relation='res_partner_office_partner_rel', column1='partner_id', column2='office_id', string='Offices')
     my_office_code = fields.Char(string='Office code', related='office_id.office_code')
 
     # adds af office as a type of partner
     type = fields.Selection(selection_add=[('foreign address','Foreign Address'), ('given address','Given address'), ('visitation address','Visitation Address'), ('mailing address', 'Mailing Address')])
-
-    
-    # campus_ids is a better name, One2many need a help-class that cannot be res.partner with a inverse_name
-    # ~ campuses = fields.One2many('res.partner', string="Campuses") # should check for type = "campus"
-
 
     is_jobseeker = fields.Boolean(string="Jobseeker")
     is_independent_partner = fields.Boolean(string="Independent partner")
