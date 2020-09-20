@@ -246,7 +246,7 @@ class ResPartner(models.Model):
             'name': _("Search Jobseekers"),
             'view_type': 'form',
             #'src_model': "res.partner",
-            'res_model': "res.partner.jobseeker.search.wizard",
+            'res_model': "hr.employee.jobseeker.search.wizard",
             'view_id': False, # self.env.ref("partner_view_360.search_jobseeker_wizard").id,
             'view_mode':"form",
             #'target': "inline", 
