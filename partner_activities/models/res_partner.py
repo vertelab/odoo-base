@@ -59,7 +59,7 @@ class ResPartnerActivity(models.Model):
     done_before_date = fields.Datetime(string="Done before date")
     duration = fields.Float(string="Duration", help="")
     notes = fields.Char(string="Notes", help="")
-    office_id = fields.Many2one('res.partner', related="partner_id.office", string="Location")
+    office_id = fields.Many2one('hr.department', related="partner_id.office", string="Location")
     mandatory = fields.Boolean(string="Mandatory")
     done = fields.Boolean(string="Done")
 

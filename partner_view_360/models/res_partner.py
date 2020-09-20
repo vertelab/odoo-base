@@ -47,30 +47,15 @@ class ResPartner(models.Model):
     eidentification = fields.Char(string='E-Identification', help="BankId or other e-identification done OK or other")
 
     # office selection field for partners connected to an office, my_office_code filled in by office_code for the office
-    office = fields.Many2one('res.partner', string="Office") #should check for type = "af office"
-
-
-    # office_ids is a better name, One2many need a help-class that cannot be res.partner with a inverse_name
-    # ~ office_campuses = fields.One2many('res.partner', related="office.campuses") 
-    # ~ my_campuses = fields.One2many('res.partner') #should check if if it's in office_locations
-
+    office_id = fields.Many2one('hr.department', string="Office") #should check for type = "af office"
+    location_id = fields.Many2one('hr.location', string="Location")
 
     #office_ids = fields.Many2many('res.partner', relation='res_partner_office_partner_rel', column1='partner_id', column2='office_id', string='Offices')
-    my_office_code = fields.Char(string='Office code', related='office.office_code')
+    my_office_code = fields.Char(string='Office code', related='office_id.office_code')
 
     # adds af office as a type of partner
-    type = fields.Selection(selection_add=[('af office', 'AF Office'), ('foreign address','Foreign Address'), ('given address','Given address'), ('visitation address','Visitation Address'), ('campus', 'Campus'), ('mailing address', 'Mailing Address')])
-
-    # office code for office type partners only
-    office_code = fields.Char(string="Office code")
-
-    # campus_ids is a better name, One2many need a help-class that cannot be res.partner with a inverse_name
-    # ~ campuses = fields.One2many('res.partner', string="Campuses") # should check for type = "campus"
-
-    # Location code for campus type partners only
-    location_code = fields.Char(string="Location Code") 
-    work_place_code = fields.Char(string="Work place code")
-
+    type = fields.Selection(selection_add=[('foreign address','Foreign Address'), ('given address','Given address'), ('visitation address','Visitation Address'), ('mailing address', 'Mailing Address')])
+    
     is_jobseeker = fields.Boolean(string="Jobseeker")
     is_independent_partner = fields.Boolean(string="Independent partner")
     is_government = fields.Boolean(string="Government")
@@ -85,7 +70,7 @@ class ResPartner(models.Model):
     deactualization_message = fields.Text(string="Message to jobseeker regarding deactualization")
 
     #registered_by = fields.Many2one(string="Registered by", comodel_name="res.users")
-    registered_through = fields.Selection(selection=[('pdm','PDM'),('self service','Self service'),('local office','Local office')], string="Registered Through")
+    registered_through = fields.Selection(selection=[('pdm','PDM'),('self service','Self service')], string="Registered Through")
     match_area = fields.Boolean(string="Match Area")
     share_info_with_employers = fields.Boolean(string="Share name and address with employers")
     sms_reminders = fields.Boolean(string="SMS reminders")
@@ -197,8 +182,6 @@ class ResPartner(models.Model):
                 img_path = get_module_resource('base', 'static/img', 'money.png')
             elif partner.type == 'delivery':
                 img_path = get_module_resource('base', 'static/img', 'truck.png')
-            elif partner.type == 'af office':
-                img_path = get_module_resource('partner_view_360', 'static/src/img', 'af_office.png')
             elif partner.type == 'foreign address':
                 img_path = get_module_resource('partner_view_360', 'static/src/img', 'foreign_address.png')
             elif partner.type == 'given address':
@@ -235,8 +218,6 @@ class ResPartner(models.Model):
             img_path = get_module_resource('base', 'static/img', 'money.png')
         elif not image and partner_type == 'delivery':
             img_path = get_module_resource('base', 'static/img', 'truck.png')
-        elif not image and partner_type == 'af office':
-            img_path = get_module_resource('partner_view_360', 'static/src/img', 'af_office.png')
         elif not image and partner_type == 'foreign address':
             img_path = get_module_resource('partner_view_360', 'static/src/img', 'foreign_address.png')
         elif not image and partner_type == 'given address':

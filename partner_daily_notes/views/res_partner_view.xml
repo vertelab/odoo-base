@@ -31,7 +31,7 @@
                             <field name="note_date" widget="date"/> 
                             <field name="note_type" options="{'no_create_edit': True}"/>
                             <field name="note_number" groups="base.group_no_one"/>
-                            <field name="office" options="{'no_create_edit': True}" domain="[('type', '=', 'af office')]"/>
+                            <field name="office_id" options="{'no_create_edit': True}" />
                         </tree>
                       </field>
                     </group>
@@ -68,7 +68,7 @@
                             <field name="note_date" widget="date"/> 
                             <field name="note_type" options="{'no_create_edit': True}"/>
                             <field name="note_number" groups="base.group_no_one"/>
-                            <field name="office" options="{'no_create_edit': True}" domain="[('type', '=', 'af office')]"/>
+                            <field name="office_id" options="{'no_create_edit': True}" />
                         </tree>
                       </field>
                     </group>
@@ -106,7 +106,7 @@
                             <field name="note_date" widget="date"/> 
                             <field name="note_type" options="{'no_create_edit': True}"/>
                             <field name="note_number" groups="base.group_no_one"/>
-                            <field name="office" options="{'no_create_edit': True}" domain="[('type', '=', 'af office')]"/>
+                            <field name="office_id" options="{'no_create_edit': True}" />
                         </tree>
                       </field>
                     </group>

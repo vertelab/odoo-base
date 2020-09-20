@@ -32,13 +32,8 @@
         <field name="cfar" attrs="{'invisible':[('is_company', '=', False)]}" />
       </field>
       <field name="barcode" position="after">
-<!--
-        <field name="office" options="{'no_create_edit': True}" domain="[('type', '=', 'af office')]" />
--->
-<!--
+        <field name="office_id" options="{'no_create_edit': True}"  />
         <field name="my_office_code" />
--->
-        <!-- <field name="office_ids" widget="many2many_tags" options="{'no_create_edit': True}" domain="[('type', '=', 'af office')]" /> -->
         <field name="temp_officer_id" widget="many2many_tags" options="{'no_create_edit': True}" />
         <field name="is_jobseeker" />
         <field name="is_independent_partner" />
@@ -50,7 +45,7 @@
       <field name="vat" position="after">
         <field name="customer_id" attrs="{'invisible':[('customer', '=', False)]}" groups="base.group_no_one" />
 <!--
-        <field name="office_code" attrs="{'invisible':[('type', '!=', 'af office')]}" />
+        <field name="office_code"  />
 -->
       </field>
       <field name="vat" position="attributes">
@@ -191,11 +186,9 @@
               <field name="registered_through" />
               <field name="jobseeker_category" />
               <field name="customer_since" />
-<!--
-              <field name="office" options="{'no_create_edit': True}" domain="[('type', '=', 'af office')]" />
--->
+              <field name="office_id" options="{'no_create_edit': True}"  />
               <field name="match_area" />
-              <!-- <field name="office_ids" widget="many2many_tags" options="{'no_create_edit': True}" domain="[('type', '=', 'af office')]" /> -->
+              <!-- <field name="office_ids" widget="many2many_tags" options="{'no_create_edit': True}"  /> -->
               <field name="share_info_with_employers" />
               <field name="sms_reminders" />
               <field name="segment_jobseeker" groups="base.group_no_one" />
@@ -343,9 +336,7 @@
         <field name="name" />
         <field name="city" />
         <field name="email" />
-<!--
-        <field name="office" />
--->
+        <field name="office_id" />
       </tree>
     </field>
   </record>
@@ -357,9 +348,7 @@
         <field name="name" />
         <field name="city" />
         <field name="email" />
-<!--
-        <field name="office" />
--->
+        <field name="office_id" />
         <templates>
           <t t-name="kanban-box">
             <div class="oe_kanban_global_click">
@@ -376,9 +365,7 @@
                       <field name="email" />
                     </li>
                     <li>
-<!--
-                      <field name="office" />
--->
+                      <field name="office_id" />
                     </li>
                   </ul>
                 </div>
@@ -524,10 +511,8 @@
               <field name="employer_class" />
               <label for="user_id" string="Administrative officer" />
               <field name="user_id" nolabel="1" />
-<!--
-              <field name="office" options="{'no_create_edit': True}" domain="[('type', '=', 'af office')]" />
--->
-              <!-- <field name="office_ids" widget="many2many_tags" options="{'no_create_edit': True}" domain="[('type', '=', 'af office')]" /> -->
+              <field name="office_id" options="{'no_create_edit': True}"  />
+              <!-- <field name="office_ids" widget="many2many_tags" options="{'no_create_edit': True}"  /> -->
               <field name="segment_employer" groups="base.group_no_one" />
             </group>
           </group>
@@ -668,9 +653,7 @@
         <field name="name" />
         <field name="city" />
         <field name="email" />
-<!--
-        <field name="office" />
--->
+        <field name="office_id" />
         <templates>
           <t t-name="kanban-box">
             <div class="oe_kanban_global_click">
@@ -692,9 +675,7 @@
                       <field name="email" />
                     </li>
                     <li>
-<!--
-                      <field name="office" />
--->
+                      <field name="office_id" />
                     </li>
                   </ul>
                 </div>
@@ -714,9 +695,7 @@
         <field name="company_registry" />
         <field name="city" />
         <field name="email" />
-<!--
-        <field name="office" />
--->
+        <field name="office_id" />
       </tree>
     </field>
   </record>
@@ -800,7 +779,7 @@
               records.update_name_com_reg_number()
       </field>
   </record>
-    <record id="af_office_contact_form_view" model="ir.ui.view">
+    <!-- <record id="af_office_contact_form_view" model="ir.ui.view">
         <field name="name">res.partner.form.af.office</field>
         <field name="model">res.partner</field>
         <field name="arch" type="xml">
@@ -845,9 +824,7 @@
                             </div>
                             <field name="country_id" placeholder="Country" class="o_address_country"
                                    attrs="{'invisible': True}"/>
-<!--
-                            <field name="office_code"/>
--->
+                            <field name="office_code"/> 
                         </group>
                         <group>
                             <field name="phone"/>
@@ -955,7 +932,7 @@
                                                         <label for="state_id" string="Municipality"
                                                                class="oe_edit_only"/>
                                                         <field name="state_id" class="oe_edit_only" nolabel="1"/>
-                                                        <!-- <field name="state_code"/> -->
+                                                         <field name="state_code"/> 
                                                         <field name="country_id" placeholder="Country"
                                                                class="o_address_country"
                                                                options="{&quot;no_open&quot;: True, &quot;no_create&quot;: True}"/>
@@ -990,9 +967,9 @@
                 </div>
             </form>
         </field>
-    </record>
+    </record> 
 
-    <record model="ir.ui.view" id="af_office_contact_tree_view">
+     <record model="ir.ui.view" id="af_office_contact_tree_view">
         <field name="name">res.partner.af.office.tree</field>
         <field name="model">res.partner</field>
         <field name="arch" type="xml">
@@ -1002,7 +979,7 @@
                 <field name="state_id"/>
             </tree>
         </field>
-    </record>
+    </record> 
     <record id="action_af_office" model="ir.actions.act_window">
         <field name="name">AF Office</field>
         <field name="res_model">res.partner</field>
@@ -1013,7 +990,7 @@
         </field>
         <field name="domain" eval="[('type', '=', 'af office')]"/>
         <field name="context">{'default_type':'af office'}</field>
-    </record>
+    </record> 
     <record id="action_af_office_tree_view" model="ir.actions.act_window.view">
         <field eval="1" name="sequence"/>
         <field name="view_mode">tree</field>
@@ -1032,6 +1009,6 @@
         <field name="view_id" ref="base.res_partner_kanban_view"/>
         <field name="act_window_id" ref="action_af_office"/>
     </record>
-    <menuitem id="res_partner_af_office_menu" name="AF Office" action="action_af_office" sequence="74"
-              groups="base.group_no_one"/>  
+    <menuitem id="res_partner_af_office_menu" name="AF Officers" action="action_af_office" sequence="74"
+              groups="base.group_no_one"/>   -->
 </odoo>
