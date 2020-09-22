@@ -46,6 +46,16 @@ class ResPartner(models.Model):
     customer_id = fields.Char(string='Customer number', help="Customer number")
     eidentification = fields.Char(string='E-Identification', help="BankId or other e-identification done OK or other")
 
+    # office selection field for partners connected to an office, my_office_code filled in by office_code for the office
+    office_id = fields.Many2one('hr.department', string="Office") #should check for type = "af office"
+    location_id = fields.Many2one('hr.location', string="Location")
+
+    #office_ids = fields.Many2many('res.partner', relation='res_partner_office_partner_rel', column1='partner_id', column2='office_id', string='Offices')
+    my_office_code = fields.Char(string='Office code', related='office_id.office_code')
+
+    # adds af office as a type of partner
+    type = fields.Selection(selection_add=[('foreign address','Foreign Address'), ('given address','Given address'), ('visitation address','Visitation Address'), ('mailing address', 'Mailing Address')])
+    
     is_jobseeker = fields.Boolean(string="Jobseeker")
     is_independent_partner = fields.Boolean(string="Independent partner")
     is_government = fields.Boolean(string="Government")
@@ -60,7 +70,7 @@ class ResPartner(models.Model):
     deactualization_message = fields.Text(string="Message to jobseeker regarding deactualization")
 
     #registered_by = fields.Many2one(string="Registered by", comodel_name="res.users")
-    registered_through = fields.Selection(selection=[('pdm','PDM'),('self service','Self service'),('local office','Local office')], string="Registered Through")
+    registered_through = fields.Selection(selection=[('pdm','PDM'),('self service','Self service')], string="Registered Through")
     match_area = fields.Boolean(string="Match Area")
     share_info_with_employers = fields.Boolean(string="Share name and address with employers")
     sms_reminders = fields.Boolean(string="SMS reminders")
@@ -172,8 +182,6 @@ class ResPartner(models.Model):
                 img_path = get_module_resource('base', 'static/img', 'money.png')
             elif partner.type == 'delivery':
                 img_path = get_module_resource('base', 'static/img', 'truck.png')
-            elif partner.type == 'af office':
-                img_path = get_module_resource('partner_view_360', 'static/src/img', 'af_office.png')
             elif partner.type == 'foreign address':
                 img_path = get_module_resource('partner_view_360', 'static/src/img', 'foreign_address.png')
             elif partner.type == 'given address':
@@ -210,8 +218,6 @@ class ResPartner(models.Model):
             img_path = get_module_resource('base', 'static/img', 'money.png')
         elif not image and partner_type == 'delivery':
             img_path = get_module_resource('base', 'static/img', 'truck.png')
-        elif not image and partner_type == 'af office':
-            img_path = get_module_resource('partner_view_360', 'static/src/img', 'af_office.png')
         elif not image and partner_type == 'foreign address':
             img_path = get_module_resource('partner_view_360', 'static/src/img', 'foreign_address.png')
         elif not image and partner_type == 'given address':
@@ -240,7 +246,7 @@ class ResPartner(models.Model):
             'name': _("Search Jobseekers"),
             'view_type': 'form',
             #'src_model': "res.partner",
-            'res_model': "res.partner.jobseeker.search.wizard",
+            'res_model': "hr.employee.jobseeker.search.wizard",
             'view_id': False, # self.env.ref("partner_view_360.search_jobseeker_wizard").id,
             'view_mode':"form",
             #'target': "inline", 
@@ -277,7 +283,7 @@ class ResPartner(models.Model):
 
 #  Grant temporary access to these jobseekers or set this user as responsible for the jobseeker            
     @api.multi
-    def escalate_jobseeker_access(self,arendetyp):
+    def escalate_jobseeker_access(self,arendetyp,user):
         return (250,'OK')
         
             # ~ res = request.env['edi.ace_errand'].escalate_jobseeker_access(partner,post.get('arendetyp'))

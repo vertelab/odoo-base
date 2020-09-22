@@ -13,11 +13,13 @@
             context="{'partner_id': active_id, 'partner_name': name}"> 
             <field string="Notes" name="notes_count" widget="statinfo"/>
         </button> -->
+<!-- AFC-995
         <button class="oe_stat_button" type="object" groups="base.group_no_one"
             name="view_notes"
             icon="fa-pencil-square-o"> 
             <field string="Notes" name="notes_count" widget="statinfo"/>
         </button> 
+-->
       </div>
       <!-- <xpath expr="//page[@name='sales_purchases']" position="after">
                 <page string="Daily Notes">
@@ -29,7 +31,7 @@
                             <field name="note_date" widget="date"/> 
                             <field name="note_type" options="{'no_create_edit': True}"/>
                             <field name="note_number" groups="base.group_no_one"/>
-                            <field name="office" options="{'no_create_edit': True}" domain="[('type', '=', 'af office')]"/>
+                            <field name="office_id" options="{'no_create_edit': True}" />
                         </tree>
                       </field>
                     </group>
@@ -66,7 +68,7 @@
                             <field name="note_date" widget="date"/> 
                             <field name="note_type" options="{'no_create_edit': True}"/>
                             <field name="note_number" groups="base.group_no_one"/>
-                            <field name="office" options="{'no_create_edit': True}" domain="[('type', '=', 'af office')]"/>
+                            <field name="office_id" options="{'no_create_edit': True}" />
                         </tree>
                       </field>
                     </group>
@@ -104,7 +106,7 @@
                             <field name="note_date" widget="date"/> 
                             <field name="note_type" options="{'no_create_edit': True}"/>
                             <field name="note_number" groups="base.group_no_one"/>
-                            <field name="office" options="{'no_create_edit': True}" domain="[('type', '=', 'af office')]"/>
+                            <field name="office_id" options="{'no_create_edit': True}" />
                         </tree>
                       </field>
                     </group>
