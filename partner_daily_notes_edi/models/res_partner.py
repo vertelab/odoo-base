@@ -2,8 +2,7 @@ from odoo import models, fields, api, _
 
 
 class ResPartnerNotes(models.Model):
-    _description = 'Daily notes for a partner'
-    _name = 'res.partner.notes'
+    _inherit = 'res.partner.notes'
 
     route_id = fields.Many2one(comodel_name="edi.route")
     
