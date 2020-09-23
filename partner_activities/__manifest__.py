@@ -20,13 +20,14 @@
 ##############################################################################
 
 {
-    'name': 'Activity Tab',
-    'version': '12.0.1.3',						# Format 12.0.1.0, för att vi använder Odoo 12
+    'name': 'Depreciated Activity Tab',
+    'version': '12.0.1.4',						# Format 12.0.1.0, för att vi använder Odoo 12
     'category': '',
     'description': """
 This module adds adds a tab for managing jobseeker activities
 ===============================================================
 AFC-130
+Changed name on the Display-name.
 """,
     'author': 'Vertel AB',
     'license': 'AGPL-3',
