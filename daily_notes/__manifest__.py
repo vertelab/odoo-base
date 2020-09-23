@@ -20,8 +20,8 @@
 ##############################################################################
 
 {
-    'name': 'Daily notes DEPRECATED',
-    'version': '12.0.1.2',
+    'name': 'Depreciated Daily notes',
+    'version': '12.0.1.3',
     'category': '',
     'description': """
 Daily notes
@@ -29,6 +29,7 @@ Daily notes
 AFC-81
 This module allowes daily notes for a partner.
 - 12.0.1.1  Added mapping for Integration platform with the module base_map.
+- 12.0.1.3 Added Depreciated prefix in name
 """,
     'author': 'Vertel AB',
     'license': 'AGPL-3',
