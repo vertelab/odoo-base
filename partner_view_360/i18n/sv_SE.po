@@ -503,7 +503,7 @@ msgstr "Anledning"
 #: model:ir.model.fields,field_description:partner_view_360.field_res_partner__registered_through
 #: model:ir.model.fields,field_description:partner_view_360.field_res_users__registered_through
 msgid "Registered Through"
-msgstr "Inskriven via"
+msgstr "Inskriven på"
 
 #. module: partner_view_360
 #: model_terms:ir.ui.view,arch_db:partner_view_360.view_jobseeker_form
