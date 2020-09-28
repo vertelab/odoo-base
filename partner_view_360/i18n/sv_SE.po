@@ -55,7 +55,7 @@ msgstr "Adresstyp"
 #: model_terms:ir.ui.view,arch_db:partner_view_360.view_partner_employer_form
 #: model_terms:ir.ui.view,arch_db:partner_view_360.view_partner_form
 msgid "Administrative officer"
-msgstr "Handläggare"
+msgstr "Ansvarig handläggare"
 
 #. module: partner_view_360
 #: model:ir.model.fields,field_description:partner_view_360.field_res_partner__age
