@@ -6,8 +6,13 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Odoo Server 12.0-20200508\n"
 "Report-Msgid-Bugs-To: \n"
+<<<<<<< HEAD
 "POT-Creation-Date: 2020-09-28 08:10+0000\n"
 "PO-Revision-Date: 2020-09-28 10:34+0200\n"
+=======
+"POT-Creation-Date: 2020-09-09 11:23+0000\n"
+"PO-Revision-Date: 2020-09-10 09:40+0200\n"
+>>>>>>> parent of 66c1e58... partner_view_360: edits po file
 "Last-Translator: <>\n"
 "Language-Team: \n"
 "MIME-Version: 1.0\n"
@@ -26,7 +31,7 @@ msgstr "Inkluderar 2"
 #: code:addons/partner_view_360/models/res_partner.py:98
 #, python-format
 msgid "%s (%s years old)"
-msgstr "%s (%s år)"
+msgstr ""
 
 #. module: partner_view_360
 #: model_terms:ir.ui.view,arch_db:partner_view_360.403
@@ -526,7 +531,7 @@ msgstr "Annan orsak är vald men annan orsak fältet är inte ifyllt"
 #. module: partner_view_360
 #: selection:res.partner,registered_through:0
 msgid "PDM"
-msgstr "PDM"
+msgstr ""
 
 #. module: partner_view_360
 #: model_terms:ir.ui.view,arch_db:partner_view_360.view_jobseeker_form
@@ -615,7 +620,19 @@ msgstr "Sök efter kontakter"
 #: code:addons/partner_view_360/wizard/res_partner_search_wizard.py:93
 #, python-format
 msgid "Search reason or identification must be set before searching"
+<<<<<<< HEAD
 msgstr "Sök orsak eller identifikation måste anges innan sökning"
+=======
+msgstr "Sök orsak eller identifieringsmetod måste vara vald före sökning"
+
+#. module: partner_view_360
+#: model:ir.model.fields,field_description:partner_view_360.field_res_partner__segment_employer
+#: model:ir.model.fields,field_description:partner_view_360.field_res_partner__segment_jobseeker
+#: model:ir.model.fields,field_description:partner_view_360.field_res_users__segment_employer
+#: model:ir.model.fields,field_description:partner_view_360.field_res_users__segment_jobseeker
+msgid "Segment"
+msgstr ""
+>>>>>>> parent of 66c1e58... partner_view_360: edits po file
 
 #. module: partner_view_360
 #: selection:res.partner,registered_through:0
@@ -676,7 +693,7 @@ msgstr "Tagg"
 #: model:ir.model.fields,field_description:partner_view_360.field_res_partner__temp_officer_id
 #: model:ir.model.fields,field_description:partner_view_360.field_res_users__temp_officer_id
 msgid "Temporary Officers"
-msgstr "Temporära handläggare"
+msgstr "Temporära Handläggare"
 
 #. module: partner_view_360
 #: model_terms:ir.ui.view,arch_db:partner_view_360.403
