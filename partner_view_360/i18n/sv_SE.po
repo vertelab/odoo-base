@@ -7,7 +7,7 @@ msgstr ""
 "Project-Id-Version: Odoo Server 12.0-20200508\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2020-09-09 11:23+0000\n"
-"PO-Revision-Date: 2020-09-10 09:40+0200\n"
+"PO-Revision-Date: 2020-09-28 09:33+0200\n"
 "Last-Translator: <>\n"
 "Language-Team: \n"
 "MIME-Version: 1.0\n"
@@ -26,7 +26,7 @@ msgstr "Inkluderar 2"
 #: code:addons/partner_view_360/models/res_partner.py:93
 #, python-format
 msgid "%s (%s years old)"
-msgstr ""
+msgstr "%s (%s år)"
 
 #. module: partner_view_360
 #: model_terms:ir.ui.view,arch_db:partner_view_360.403
@@ -469,7 +469,7 @@ msgstr "Annan orsak vald, men annan orsak fältet är tomt"
 #. module: partner_view_360
 #: selection:res.partner,registered_through:0
 msgid "PDM"
-msgstr ""
+msgstr "PDM"
 
 #. module: partner_view_360
 #: model_terms:ir.ui.view,arch_db:partner_view_360.view_jobseeker_form
@@ -557,7 +557,7 @@ msgstr "Sök orsak eller identifieringsmetod måste vara vald före sökning"
 #: model:ir.model.fields,field_description:partner_view_360.field_res_users__segment_employer
 #: model:ir.model.fields,field_description:partner_view_360.field_res_users__segment_jobseeker
 msgid "Segment"
-msgstr ""
+msgstr "Segment"
 
 #. module: partner_view_360
 #: selection:res.partner,registered_through:0
@@ -618,7 +618,7 @@ msgstr "Tagg"
 #: model:ir.model.fields,field_description:partner_view_360.field_res_partner__temp_officer_id
 #: model:ir.model.fields,field_description:partner_view_360.field_res_users__temp_officer_id
 msgid "Temporary Officers"
-msgstr "Temporära Handläggare"
+msgstr "Temporära handläggare"
 
 #. module: partner_view_360
 #: model_terms:ir.ui.view,arch_db:partner_view_360.403
