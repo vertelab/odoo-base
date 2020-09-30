@@ -6,8 +6,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Odoo Server 12.0-20200508\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2020-09-09 11:26+0000\n"
-"PO-Revision-Date: 2020-09-09 13:56+0200\n"
+"POT-Creation-Date: 2020-09-30 09:58+0000\n"
+"PO-Revision-Date: 2020-09-30 12:00+0200\n"
 "Last-Translator: <>\n"
 "Language-Team: \n"
 "MIME-Version: 1.0\n"
@@ -76,12 +76,12 @@ msgstr "Namn"
 #. module: res_ssyk
 #: model:ir.model.fields,field_description:res_ssyk.field_res_ssyk__code
 msgid "Official Code"
-msgstr "Officiell Kod"
+msgstr "Officiell kod"
 
 #. module: res_ssyk
 #: model:ir.model.fields,help:res_ssyk.field_res_ssyk__code
 msgid "Official code, group, sub-group or detail group."
-msgstr "Officiell kod, grupp, undergrupp eller detaljerad grupp."
+msgstr "Officiel kod, grupp, undergrupp eller detaljerad grupp."
 
 #. module: res_ssyk
 #: model:ir.model.fields,field_description:res_ssyk.field_res_ssyk__parent_id
@@ -97,25 +97,25 @@ msgstr "Samarbetspartner"
 #: model:ir.model.fields,field_description:res_ssyk.field_res_partner__ssyk_ids
 #: model:ir.model.fields,field_description:res_ssyk.field_res_users__ssyk_ids
 msgid "SSYK"
-msgstr ""
+msgstr "SSYK"
 
 #. module: res_ssyk
 #: model:ir.actions.act_window,name:res_ssyk.action_ssyk_form
 #: model:ir.ui.menu,name:res_ssyk.menu_ssyk_form
 msgid "SSYK-koder"
-msgstr ""
+msgstr "SSYK-koder"
 
 #. module: res_ssyk
 #: model_terms:ir.ui.view,arch_db:res_ssyk.view_ssyk_filter
 msgid "Search ssyk"
-msgstr ""
+msgstr "Sök ssyk"
 
 #. module: res_ssyk
 #: model:ir.model,name:res_ssyk.model_res_ssyk
 msgid "res.ssyk"
-msgstr ""
+msgstr "res.ssyk"
 
 #. module: res_ssyk
 #: model_terms:ir.ui.view,arch_db:res_ssyk.view_ssyk_form
 msgid "ssyk"
-msgstr ""
+msgstr "ssyk"
