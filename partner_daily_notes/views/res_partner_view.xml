@@ -54,7 +54,7 @@
         </button> -->
         <button class="oe_stat_button" type="object"
             name="view_notes"
-            icon="fa-pencil-square-o"> 
+            icon="fa-pencil-square-o" group="base.group_no_one"> 
             <field string="Notes" name="notes_count" widget="statinfo"/>
         </button> 
       </div>
