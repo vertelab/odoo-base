@@ -6,8 +6,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Odoo Server 12.0-20200508\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2020-09-09 11:25+0000\n"
-"PO-Revision-Date: 2020-09-09 13:55+0200\n"
+"POT-Creation-Date: 2020-09-30 09:46+0000\n"
+"PO-Revision-Date: 2020-09-30 11:52+0200\n"
 "Last-Translator: <>\n"
 "Language-Team: \n"
 "MIME-Version: 1.0\n"
@@ -50,7 +50,7 @@ msgstr "Visningsnamn"
 #. module: res_sni
 #: model:ir.model.fields,field_description:res_sni.field_res_sni__id
 msgid "ID"
-msgstr "ID"
+msgstr ""
 
 #. module: res_sni
 #: model:ir.model.fields,field_description:res_sni.field_res_sni____last_update
@@ -76,12 +76,12 @@ msgstr "Namn"
 #. module: res_sni
 #: model:ir.model.fields,field_description:res_sni.field_res_sni__code
 msgid "Official Code"
-msgstr "Officiell Kod"
+msgstr "Officiell kod"
 
 #. module: res_sni
 #: model:ir.model.fields,help:res_sni.field_res_sni__code
 msgid "Official code, group, sub-group or detail group."
-msgstr "Officiell kod, grupp, undergrupp eller detaljerad grupp."
+msgstr "Officiel kod, grupp, undergrupp eller detaljerad grupp."
 
 #. module: res_sni
 #: model:ir.model.fields,field_description:res_sni.field_res_sni__parent_id
@@ -98,13 +98,13 @@ msgstr "Samarbetspartner"
 #: model:ir.model.fields,field_description:res_sni.field_res_users__sni_ids
 #: model_terms:ir.ui.view,arch_db:res_sni.view_sni_form
 msgid "SNI"
-msgstr "SNI"
+msgstr ""
 
 #. module: res_sni
 #: model:ir.actions.act_window,name:res_sni.action_sni_form
 #: model:ir.ui.menu,name:res_sni.menu_sni_form
 msgid "SNI-koder"
-msgstr "SNI-koder"
+msgstr ""
 
 #. module: res_sni
 #: model_terms:ir.ui.view,arch_db:res_sni.view_sni_filter
@@ -114,4 +114,4 @@ msgstr "Sök SNI"
 #. module: res_sni
 #: model:ir.model,name:res_sni.model_res_sni
 msgid "res.sni"
-msgstr "res.sni"
+msgstr ""
