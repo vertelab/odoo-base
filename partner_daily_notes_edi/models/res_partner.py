@@ -22,3 +22,4 @@ class ResPartnerNotes(models.Model):
         """
         rec = super(ResPartnerNotes,self).create(values)
         rec._edi_message_create('edi_af_as_notes_post')
+        return rec
