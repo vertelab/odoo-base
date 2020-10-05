@@ -6,8 +6,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Odoo Server 12.0-20200508\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2020-10-02 09:34+0000\n"
-"PO-Revision-Date: 2020-10-02 11:50+0200\n"
+"POT-Creation-Date: 2020-10-05 07:50+0000\n"
+"PO-Revision-Date: 2020-10-05 09:59+0200\n"
 "Last-Translator: <>\n"
 "Language-Team: \n"
 "MIME-Version: 1.0\n"
@@ -86,13 +86,13 @@ msgstr "Avatar"
 #. module: partner_view_360
 #: model_terms:ir.ui.view,arch_db:partner_view_360.bankid
 msgid "BankID"
-msgstr "BankId"
+msgstr "BankID"
 
 #. module: partner_view_360
 #: model:ir.model.fields,help:partner_view_360.field_res_partner__eidentification
 #: model:ir.model.fields,help:partner_view_360.field_res_users__eidentification
 msgid "BankId or other e-identification done OK or other"
-msgstr "BankId eller annan e-legitimation genomförd"
+msgstr "BankID eller annan e-legitimation genomförd"
 
 #. module: partner_view_360
 #: selection:res.partner,segment_jobseeker:0
@@ -296,7 +296,7 @@ msgstr "Ingångsjobb"
 #. module: partner_view_360
 #: selection:res.partner,type:0
 msgid "Foreign Address"
-msgstr "Utländsk Adress"
+msgstr "Utländsk adress"
 
 #. module: partner_view_360
 #: selection:res.partner,type:0
@@ -386,7 +386,7 @@ msgstr "Sökandekategori"
 #. module: partner_view_360
 #: model_terms:ir.ui.view,arch_db:partner_view_360.view_partner_form
 msgid "Jobseeker info"
-msgstr "Arbetssökande-info"
+msgstr "Arbetssökande info"
 
 #. module: partner_view_360
 #: model:ir.model.fields,field_description:partner_view_360.field_res_partner__segment_jobseeker
@@ -425,7 +425,7 @@ msgstr "Logotyp"
 #. module: partner_view_360
 #: selection:res.partner,type:0
 msgid "Mailing Address"
-msgstr "E-postadress"
+msgstr "Postadress"
 
 #. module: partner_view_360
 #: model:ir.model.fields,field_description:partner_view_360.field_res_partner__match_area
@@ -543,7 +543,7 @@ msgstr "Telefon:"
 #: code:addons/partner_view_360/models/res_partner.py:176
 #, python-format
 msgid "Please input a correctly formated social security number"
-msgstr "Fyll i korrekt formaterat personnummer"
+msgstr "Fyll i korrekt format personnummer"
 
 #. module: partner_view_360
 #: model_terms:ir.ui.view,arch_db:partner_view_360.view_jobseeker_form
@@ -657,7 +657,7 @@ msgstr "Status"
 #: model:ir.model.fields,field_description:partner_view_360.field_res_partner__state_code
 #: model:ir.model.fields,field_description:partner_view_360.field_res_users__state_code
 msgid "State code"
-msgstr "ort"
+msgstr "Kommunkod"
 
 #. module: partner_view_360
 #: model_terms:ir.ui.view,arch_db:partner_view_360.view_jobseeker_form
@@ -681,13 +681,13 @@ msgstr "Tagg"
 #: model:ir.model.fields,field_description:partner_view_360.field_res_partner__temp_officer_id
 #: model:ir.model.fields,field_description:partner_view_360.field_res_users__temp_officer_id
 msgid "Temporary Officers"
-msgstr "Tillfälliga handläggare"
+msgstr "Temporära handläggare"
 
 #. module: partner_view_360
 #: model_terms:ir.ui.view,arch_db:partner_view_360.403
 #: model_terms:ir.ui.view,arch_db:partner_view_360.bankid
 msgid "The jobseeker you were looking for could not be authorized."
-msgstr "Den arbetssökande du sökte kunde inte identifieras."
+msgstr "Den arbetssökande du sökte kunde inte autoriseras"
 
 #. module: partner_view_360
 #: model:ir.model.fields,help:partner_view_360.field_res_partner__state_code
@@ -699,7 +699,7 @@ msgstr "Kommunkod"
 #: code:addons/partner_view_360/models/res_partner.py:165
 #, python-format
 msgid "This person is too old, at %s years old"
-msgstr "Den här personens ålder är för hög,( %s år)."
+msgstr "Den här personen är för gammal, vid %s års ålder"
 
 #. module: partner_view_360
 #: model_terms:ir.ui.view,arch_db:partner_view_360.view_jobseeker_form
