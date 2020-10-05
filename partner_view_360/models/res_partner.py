@@ -61,7 +61,7 @@ class ResPartner(models.Model):
     is_government = fields.Boolean(string="Government")
     is_employer = fields.Boolean(string="Employer")
 
-    jobseeker_category = fields.Char(string="Jobseeker category") #egen modell?
+    jobseeker_category = fields.Char(string="Jobseeker category") #bygg egen modell
     customer_since = fields.Datetime(string="Customer since")
     jobseeker_work = fields.Boolean(string="Work")
     deactualization_date = fields.Datetime(string="Date")
@@ -146,13 +146,13 @@ class ResPartner(models.Model):
                         date_of_birth = date(year, month, day)
                     except:
                         wrong_input = True
-                        _logger.error("Could not convert social security number (company_registry) to date")
+                        _logger.error("Could not convert social security number (company_registry) to date%s" % social_sec_stripped)
             elif len(social_sec_stripped) == 8:
                 try:
                     date_of_birth = date(int(social_sec_stripped[:4]),int(social_sec_stripped[4:6]),int(social_sec_stripped[6:8]))
                 except:
                     wrong_input = True
-                    _logger.error("Could not convert social security number (company_registry) to date")
+                    _logger.error("Could not convert social security number (company_registry) to date %s" % social_sec_stripped)
             else: 
                 wrong_input = True
                 _logger.error("Incorrectly formated social security number (company_registry)")
