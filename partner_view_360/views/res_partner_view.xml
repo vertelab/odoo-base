@@ -184,7 +184,9 @@
             <group string="Employment service information">
               <!-- <field name="registered_by"/> -->
               <field name="registered_through" />
-              <field name="jobseeker_category" />
+              <label for="jobseeker_category_id" string="Jobseeker category" class="oe_edit_only"/>
+              <field name="jobseeker_category_id" options="{'no_create_edit': True}" class="oe_edit_only" nolabel="1"/>
+              <field name="jobseeker_category" class="oe_read_only"/>
               <field name="customer_since" />
               <field name="office_id" options="{'no_create_edit': True}"  />
               <field name="match_area" />
