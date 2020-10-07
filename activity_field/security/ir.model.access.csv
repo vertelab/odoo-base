@@ -1,5 +1,0 @@
-id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
-access_activity_manager,res.partner.activity,activity_field.model_res_partner_activity,base.group_partner_manager,1,1,1,1 
-access_activity_user,res.partner.activity.user,activity_field.model_res_partner_activity,base.group_user,1,0,0,0
-access_activity_type_manager,res.partner.activity.type,activity_field.model_res_partner_activity_type,base.group_partner_manager,1,1,1,1 
-access_activity_type_user,res.partner.activity.type.user,activity_field.model_res_partner_activity_type,base.group_user,1,0,0,0 

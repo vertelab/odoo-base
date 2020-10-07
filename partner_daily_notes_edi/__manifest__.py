@@ -2,7 +2,7 @@
 ##############################################################################
 #
 #    Odoo, Open Source Management Solution, third party addon
-#    Copyright (C) 2004-2020 Vertel AB (<http://vertel.se>).
+#    Copyright (C) 2004-2019 Vertel AB (<http://vertel.se>).
 #
 #    This program is free software: you can redistribute it and/or modify
 #    it under the terms of the GNU Affero General Public License as
@@ -20,25 +20,25 @@
 ##############################################################################
 
 {
-    'name': 'DEPRECATED Activity Tab',
-    'version': '12.0.1.4',						# Format 12.0.1.0, för att vi använder Odoo 12
+    'name': 'Partner Daily Notes EDI',
+    'version': '12.0.1.2',
     'category': '',
     'description': """
-This module adds adds a tab for managing jobseeker activities
-===============================================================
-AFC-130
-Added Depreciated Prefix
+Partner Daily Notes EDI
+===============================================================================
+AFC-1067
+
+When a note is created add an EDI-message to the queue (edi_af_as_notes)
 """,
     'author': 'Vertel AB',
     'license': 'AGPL-3',
     'website': 'http://www.vertel.se',
-    'depends': ['base', 
-    #'partner_employee360'
+    'depends': [
+        'partner_daily_notes',
+        'edi_af_as_notes',
     ],
-    'data': [
-	#		'views/res_partner_view.xml',
-     #       'security/ir.model.access.csv'
-        ],
+    'data': [],
     'application': False,
     'installable': True,
 }
+# vim:expandtab:smartindent:tabstop=4s:softtabstop=4:shiftwidth=4:

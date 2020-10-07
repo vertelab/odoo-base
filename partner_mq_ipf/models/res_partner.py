@@ -113,7 +113,7 @@ class AsokResPartnerListener(stomp.ConnectionListener):
         self.__conn.ack(headers["message-id"])
     
     def on_disconnected(self):
-        _logger.waring('Asok MQ Listener disconnected from MQ - Tring to reconnect')
+        _logger.warning('Asok MQ Listener disconnected from MQ - Tring to reconnect')
         connect_and_subscribe(self.__conn, self.__user, self.__pwd, self.__target, self.__clientid)
 
     def on_connecting(self, host_and_port):
@@ -199,7 +199,7 @@ class STOMResPartnerListener(stomp.ConnectionListener):
         self.__conn.ack(headers["message-id"])
     
     def on_disconnected(self):
-        _logger.waring('STOM MQ Listener disconnected from MQ - Tring to reconnect')
+        _logger.warning('STOM MQ Listener disconnected from MQ - Tring to reconnect')
         connect_and_subscribe(self.__conn, self.__user, self.__pwd, self.__target, self.__clientid)
 
     def on_connecting(self, host_and_port):

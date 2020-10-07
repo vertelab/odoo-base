@@ -1,7 +1,0 @@
-id;map_system;map_field;map_table;map_type;map_odoo_master
-daily_notes.field_res_partner_notes__administrative_officer;AIS-F;reg_sign;dagant_ag;;False
-daily_notes.field_res_partner_notes__customer_nr;AIS-F;kundnr;dagant_ag;;False
-daily_notes.field_res_partner_notes__name;AIS-F;rubrik;dagant_ag;;False
-daily_notes.field_res_partner_notes__note_number;AIS-F;handelselopnr;dagant_ag;;False
-daily_notes.field_res_partner_notes__note_type;AIS-F;typ;dagant_ag;;False
-daily_notes.field_res_partner_notes__office;AIS-F;reg_kontor_kod;dagant_ag;;False
