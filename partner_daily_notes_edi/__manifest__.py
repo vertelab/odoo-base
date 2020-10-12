@@ -20,7 +20,7 @@
 ##############################################################################
 
 {
-    'name': 'Partner Daily Notes EDI',
+    'name': 'Partner Daily Notes EDI - DEPRECIATED',
     'version': '12.0.1.2',
     'category': '',
     'description': """
@@ -39,6 +39,6 @@ When a note is created add an EDI-message to the queue (edi_af_as_notes)
     ],
     'data': [],
     'application': False,
-    'installable': True,
+    'installable': False,
 }
 # vim:expandtab:smartindent:tabstop=4s:softtabstop=4:shiftwidth=4:

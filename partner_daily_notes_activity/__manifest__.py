@@ -20,7 +20,7 @@
 ##############################################################################
 
 {
-    'name': 'Partner Daily Notes Activity',
+    'name': 'Partner Daily Notes Activity - DEPRECIATED',
     'version': '12.0.1.2',
     'category': '',
     'description': """
@@ -41,10 +41,10 @@ This module shows daily notes activities for a partner.
 
     ],
     'data': [
-        'views/res_partner_view.xml'
+        # 'views/res_partner_view.xml'
 
         ],
     'application': False,
-    'installable': True,
+    'installable': False,
 }
 # vim:expandtab:smartindent:tabstop=4s:softtabstop=4:shiftwidth=4:
