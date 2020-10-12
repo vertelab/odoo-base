@@ -7,13 +7,19 @@ class ResPartnerNotes(models.Model):
     route_id = fields.Many2one(comodel_name="edi.route")
     
     @api.multi
-    def _edi_message_create(self, edi_type, check_double=False):
+    def _edi_message_create(self):
         for note in self:
-            self.env['edi.message']._edi_message_create(
-                edi_type=edi_type,
-                obj=note,
-                route=note.route_id,
-                check_double=check_double)
+            vals = {
+                'name': 'set contact msg',
+                'edi_type': env.ref('edi_af_as.asok_contact').id,
+                'model': note._name,
+                'res_id': note.id,
+                'route_id': self.env.ref('edi_af_as.asok_contact_route').id,,
+                'route_type': 'edi_af_as_contact',
+            }
+            message = self.env['edi.message'].create(vals)
+            message.pack()
+            route.run()
 
     @api.model
     def create(self, values):
@@ -21,5 +27,5 @@ class ResPartnerNotes(models.Model):
         Trigger new notes and creates edi-messages for them
         """
         rec = super(ResPartnerNotes,self).create(values)
-        rec._edi_message_create('edi_af_as_notes_post')
+        rec._edi_message_create()
         return rec
