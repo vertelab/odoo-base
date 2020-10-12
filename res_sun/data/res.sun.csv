@@ -1,74 +1,532 @@
 id,parent_id/id,code,name
-sun_0,,0,Förskoleutbildning
-sun_1,,1,Förgymnasial utbildning, kortare än 9 år
-sun_2,,2,Förgymnasial utbildning, 9 (10) år
-sun_3,,3,Gymnasial utbildning
-sun_4,,4,Eftergymnasial utbildning, kortare än 2 år
-sun_5,,5,Eftergymnasial utbildning, minst 2 år
-sun_6,,6,Forskarutbildning
-sun_00,sun_0,00,Förskoleutbildning
-sun_10,sun_1,10,Förgymnasial utbildning kortare än 9 år
-sun_20,sun_2,20,Förgymnasial utbildning, 9 (10) år
-sun_31,sun_3,31,Gymnasial utbildning, kortare än 2 år
-sun_32,sun_3,32,Gymnasial utbildning, 2 år 
-sun_33,sun_3,33,Gymnasial utbildning, 3 år
-sun_41,sun_4,41,Eftergymnasial utbildning, kortare än 2 år
-sun_52,sun_5,52,Eftergymnasial utbildning, 2 år
-sun_53,sun_5,53,Eftergymnasial utbildning, 3 år
-sun_54,sun_5,54,Eftergymnasial utbildning, 4 år
-sun_55,sun_5,55,Eftergymnasial utbildning, 5 år eller längre
-sun_60,sun_6,60,Övrig forskarutbildning
-sun_62,sun_6,62,Licentiatutbildning
-sun_64,sun_6,64,Doktorsutbildning
-sun_000,sun_00,000,Övrig förskoleutbildning
-sun_001,sun_00,001,Förskola
-sun_002,sun_00,002,Förskoleklass
-sun_100,sun_10,100,Övrig förgymnasial utbildning, kortare än 9 år
-sun_102,sun_10,102,Grundskoleutbildning, årskurs 1–6
-sun_106,sun_10,106,Folkskoleutbildning
-sun_200,sun_20,200,Övrig förgymnasial utbildning, 9 (10) år
-sun_204,sun_20,204,Realskoleutbildning
-sun_206,sun_20,206,Grundskoleutbildning, årskurs 7–9 (10)
-sun_310,sun_31,310,Övrig gymnasial utbildning, kortare än 2 år
-sun_312,sun_31,312,Gymnasial utbildning, studieförberedande, ej examen, kortare än 2 år
-sun_313,sun_31,313,Gymnasial utbildning, yrkesinriktad, ej examen, kortare än 2 år
-sun_316,sun_31,316,Gymnasial utbildning, studieförberedande, kortare än 2 år
-sun_317,sun_31,317,Gymnasial utbildning, yrkesinriktad, kortare än 2 år
-sun_320,sun_32,320,Övrig gymnasial utbildning, 2 år
-sun_322,sun_32,322,Gymnasial utbildning, studieförberedande, ej examen, 2 år
-sun_323,sun_32,323,Gymnasial utbildning, yrkesinriktad, ej examen, 2 år
-sun_326,sun_32,326,Gymnasial utbildning, studieförberedande, 2 år
-sun_327,sun_32,327,Gymnasial utbildning, yrkesinriktad, 2 år
-sun_330,sun_33,330,Övrig gymnasial utbildning, 3 år
-sun_332,sun_33,332,Gymnasial utbildning, studieförberedande, ej examen, 3 år
-sun_333,sun_33,333,Gymnasial utbildning, yrkesinriktad, ej examen, 3 år
-sun_336,sun_33,336,Gymnasial utbildning, studieförberedande, 3 år
-sun_337,sun_33,337,Gymnasial utbildning, yrkesinriktad, 3 år
-sun_410,sun_41,410,Övrig eftergymnasial utbildning, kortare än 2 år 
-sun_412,sun_41,412,Högskoleutbildning, minst 30 högskolepoäng, ej examen, kortare än 2 år
-sun_413,sun_41,413,Gymnasial påbyggnadsutbildning, kortare än 2 år
-sun_415,sun_41,415,Eftergymnasial utbildning, ej vid universitet och högskola, yrkesinriktad, kortare än 2 år
-sun_417,sun_41,417,Högskoleutbildning, yrkesinriktad, kortare än 2 år
-sun_520,sun_52,520,Övrig eftergymnasial utbildning, 2 år
-sun_522,sun_52,522,Högskoleutbildning, 120 högskolepoäng, ej examen, 2 år
-sun_525,sun_52,525,Eftergymnasial utbildning, ej vid universitet och högskola, yrkesinriktad, 2 år
-sun_526,sun_52,526,Högskoleutbildning, generell, 2 år
-sun_527,sun_52,527,Högskoleutbildning, yrkesinriktad, 2 år
-sun_530,sun_53,530,Övrig eftergymnasial utbildning, 3 år
-sun_532,sun_53,532,Högskoleutbildning, minst 180 högskolepoäng, ej examen, 3 år
-sun_535,sun_53,535,Eftergymnasial utbildning, ej vid universitet och högskola, yrkesinriktad, 3 år
-sun_536,sun_53,536,Högskoleutbildning, generell, 3 år
-sun_537,sun_53,537,Högskoleutbildning, yrkesinriktad, 3 år
-sun_540,sun_54,540,Övrig eftergymnasial utbildning, 4 år
-sun_545,sun_54,545,Eftergymnasial utbildning, ej vid universitet och högskola, yrkesinriktad, 4 år
-sun_546,sun_54,546,Högskoleutbildning, generell, 4 år
-sun_547,sun_54,547,Högskoleutbildning, yrkesinriktad, 4 år
-sun_550,sun_55,550,Övrig eftergymnasial utbildning, 5 år eller längre
-sun_555,sun_55,555,Eftergymnasial utbildning, ej vid universitet och högskola, yrkesinriktad, 5 år
-sun_556,sun_55,556,Högskoleutbildning, generell, 5 år eller längre
-sun_557,sun_55,557,Högskoleutbildning, yrkesinriktad, 5 år eller längre
-sun_600,sun_60,600,Övrig forskarutbildning
-sun_620,sun_62,620,Licentiatutbildning
-sun_640,sun_64,640,Doktorsutbildning
-,,,
-,,,
+sun_0,,0,Allmän utbildning
+sun_1,,1,Pedagogik och lärarutbildning
+sun_2,,2,Humaniora och konst
+sun_3,,3,Samhällsvetenskap, juridik, handel, administration 
+sun_4,,4,Naturvetenskap, matematik och informations- och kommunikationsteknik (IKT)
+sun_5,,5,Teknik och tillverkning
+sun_6,,6,Lant- och skogsbruk samt djursjukvård
+sun_7,,7,Hälso- och sjukvård samt social omsorg
+sun_8,,8,Tjänster
+sun_9,,9,Okänd 
+sun_01,sun_0,01,Bred, generell utbildning
+sun_08,sun_0,08,Läs- och skrivinlärning för vuxna
+sun_09,sun_0,09,Personlig utveckling
+sun_14,sun_1,14,Pedagogik och lärarutbildning
+sun_21,sun_2,21,Konst och media
+sun_22,sun_2,22,Humaniora
+sun_31,sun_3,31,Samhälls- och beteendevetenskap
+sun_32,sun_3,32,Journalistik och information
+sun_34,sun_3,34,Företagsekonomi, handel och administration
+sun_38,sun_3,38,Juridik och rättsvetenskap
+sun_42,sun_4,42,Biologi och miljövetenskap
+sun_44,sun_4,44,Fysik, kemi och geovetenskap
+sun_46,sun_4,46,Matematik och övrig naturvetenskap
+sun_48,sun_4,48,Informations- och kommunikationsteknik (IKT)
+sun_52,sun_5,52,Teknik och teknisk industri
+sun_54,sun_5,54,Material och tillverkning
+sun_58,sun_5,58,Samhällsbyggnad och byggnadsteknik
+sun_62,sun_6,62,Lantbruk, trädgård, skog och fiske
+sun_64,sun_6,64,Djursjukvård
+sun_72,sun_7,72,Hälso- och sjukvård
+sun_76,sun_7,76,Socialt arbete och omsorg
+sun_81,sun_8,81,Personliga tjänster
+sun_84,sun_8,84,Transporttjänster
+sun_85,sun_8,85,Arbetsmiljö och renhållning
+sun_86,sun_8,86,Säkerhetstjänster
+sun_99,sun_9,99,Okänd
+sun_010,sun_01,010,Bred, generell utbildning
+sun_080,sun_08,080,Läs- och skrivinlärning för vuxna
+sun_090,sun_09,090,Personlig utveckling
+sun_140,sun_14,140,Pedagogik och lärarutbildning, allmän utbildning
+sun_142,sun_14,142,Pedagogik
+sun_143,sun_14,143,Lärarutbildning för förskola och fritidsverksamhet
+sun_144,sun_14,144,Lärarutbildning för grundskolans tidiga åldrar
+sun_145,sun_14,145,Ämneslärarutbildning
+sun_146,sun_14,146,Lärarutbildning i yrkesämne och praktisk-estetiska ämnen
+sun_149,sun_14,149,Pedagogik och lärarutbildning, övrig och ospecificerad utbildning
+sun_210,sun_21,210,Konst och media, allmän utbildning
+sun_211,sun_21,211,Bild- och formkonst
+sun_212,sun_21,212,Musik, dans och dramatik
+sun_213,sun_21,213,Medieproduktion
+sun_214,sun_21,214,Formgivning
+sun_215,sun_21,215,Konsthantverk
+sun_219,sun_21,219,Konst och media, övrig och ospecificerad utbildning
+sun_220,sun_22,220,Humaniora, allmän utbildning
+sun_221,sun_22,221,Religion
+sun_222,sun_22,222,Främmande språk och språkvetenskap
+sun_223,sun_22,223,Svenska och litteraturvetenskap
+sun_225,sun_22,225,Historia och arkeologi
+sun_226,sun_22,226,Filosofi och logik
+sun_229,sun_22,229,Humaniora, övrig och ospecificerad utbildning
+sun_310,sun_31,310,Samhälls- och beteendevetenskap, allmän utbildning                                                    
+sun_311,sun_31,311,Psykologi
+sun_312,sun_31,312,Sociologi, etnologi och kulturgeografi
+sun_313,sun_31,313,Statsvetenskap
+sun_314,sun_31,314,Nationalekonomi och ekonomisk historia
+sun_319,sun_31,319,Samhälls- och beteendevetenskap, övrig och ospecificerad utbildning
+sun_320,sun_32,320,Journalistik och information, allmän utbildning
+sun_321,sun_32,321,Journalistik och medievetenskap
+sun_322,sun_32,322,Biblioteks- och dokumentationsvetenskap
+sun_329,sun_32,329,Journalistik och information, övrig och ospecificerad utbildning
+sun_340,sun_34,340,Företagsekonomi, handel och administration, allmän utbildning
+sun_341,sun_34,341,Inköp, försäljning och distribution
+sun_342,sun_34,342,Marknadsföring
+sun_343,sun_34,343,Bank, försäkring och finansiering
+sun_344,sun_34,344,Redovisning och beskattning
+sun_345,sun_34,345,Ledning och administration
+sun_346,sun_34,346,Kontorsservice och sekreterartjänster
+sun_347,sun_34,347,Arbetsplatsrelaterad utbildning
+sun_349,sun_34,349,Företagsekonomi, handel och administration, övrig och ospecificerad utbildning
+sun_380,sun_38,380,Juridik och rättsvetenskap
+sun_420,sun_42,420,Biologi och miljövetenskap, allmän utbildning
+sun_421,sun_42,421,Biologi och biokemi 
+sun_422,sun_42,422,Miljövetenskap
+sun_423,sun_42,423,Miljövård och miljöskydd
+sun_424,sun_42,424,Naturvård och djurskydd
+sun_429,sun_42,429,Biologi och miljövetenskap, övrig och ospecificerad utbildning
+sun_440,sun_44,440,Fysik, kemi och geovetenskap, allmän utbildning
+sun_441,sun_44,441,Fysik
+sun_442,sun_44,442,Kemi
+sun_443,sun_44,443,Geovetenskap och naturgeografi
+sun_449,sun_44,449,Fysik, kemi och geovetenskap, övrig och ospecificerad utbildning
+sun_460,sun_46,460,Matematik och naturvetenskap, allmän utbildning
+sun_461,sun_46,461,Matematik
+sun_462,sun_46,462,Statistik
+sun_469,sun_46,469,Matematik och naturvetenskap, övrig och ospecificerad utbildning
+sun_480,sun_48,480,Informations- och kommunikationsteknik (IKT), allmän utbildning
+sun_481,sun_48,481,Datavetenskap och systemvetenskap
+sun_482,sun_48,482,Datoranvändning
+sun_489,sun_48,489,Informations- och kommunikationsteknik (IKT), övrig och ospecificerad utbildning
+sun_520,sun_52,520,Teknik och teknisk industri, allmän utbildning
+sun_521,sun_52,521,Maskinteknik och verkstadsteknik
+sun_522,sun_52,522,Energi- och elektroteknik
+sun_523,sun_52,523,Elektronik, datateknik och automation
+sun_524,sun_52,524,Kemi- och bioteknik
+sun_525,sun_52,525,Fordons- och farkostteknik
+sun_526,sun_52,526,Industriell ekonomi och organisation
+sun_527,sun_52,527,Miljöteknik och miljökontroll
+sun_529,sun_52,529,Teknik och teknisk industri, övrig och ospecificerad utbildning
+sun_540,sun_54,540,Material och tillverkning, allmän utbildning
+sun_541,sun_54,541,Tillverkning och hantering av livsmedel
+sun_542,sun_54,542,Tillverkning av textilier, konfektion och lädervaror
+sun_543,sun_54,543,Tillverkning av produkter av trä, papper, glas, porslin och plast
+sun_544,sun_54,544,Berg- och mineralteknik
+sun_549,sun_54,549,Material och tillverkning, övrig och ospecificerad utbildning
+sun_580,sun_58,580,Samhällsbyggnad och byggnadsteknik, allmän utbildning
+sun_581,sun_58,581,Samhällsbyggnad och arkitektur
+sun_582,sun_58,582,Byggnadsteknik och anläggningsteknik
+sun_589,sun_58,589,Samhällsbyggnad och byggnadsteknik, övrig och ospecificerad utbildning
+sun_620,sun_62,620,Lantbruk, trädgård, skog och fiske, allmän utbildning
+sun_621,sun_62,621,Lantbruk
+sun_622,sun_62,622,Trädgård
+sun_623,sun_62,623,Skog
+sun_624,sun_62,624,Fiske och vattenbruk
+sun_629,sun_62,629,Lantbruk, trädgård, skog och fiske, övrig och ospecificerad utbildning
+sun_640,sun_64,640,Djursjukvård
+sun_720,sun_72,720,Hälso- och sjukvård, allmän utbildning
+sun_721,sun_72,721,Medicin
+sun_723,sun_72,723,Omvårdnad
+sun_724,sun_72,724,Tandvård
+sun_725,sun_72,725,Tekniskt inriktad vårdutbildning
+sun_726,sun_72,726,Terapi, rehabilitering och kostbehandling
+sun_727,sun_72,727,Farmaci
+sun_729,sun_72,729,Hälso- och sjukvård, övrig och ospecificerad utbildning
+sun_760,sun_76,760,Socialt arbete och socialt omsorgsarbete, allmän utbildning
+sun_761,sun_76,761,Barn och ungdom
+sun_762,sun_76,762,Socialt arbete
+sun_769,sun_76,769,Socialt arbete och socialt omsorgsarbete, övrig och ospecificerad utbildning
+sun_810,sun_81,810,Personliga tjänster, allmän utbildning
+sun_811,sun_81,811,Hotell, restaurang och storhushåll
+sun_812,sun_81,812,Turism, resor och fritid
+sun_813,sun_81,813,Idrott och friskvård
+sun_814,sun_81,814,Hushållstjänster och lokalvård
+sun_815,sun_81,815,Hårvård, skönhetsvård och massage
+sun_819,sun_81,819,Personliga tjänster, övrig och ospecificerad utbildning
+sun_840,sun_84,840,Transporttjänster
+sun_850,sun_85,850,Arbetsmiljö och renhållning, allmän utbildning
+sun_851,sun_85,851,Arbetsmiljö och arbetarskydd
+sun_852,sun_85,852,Renhållning och avfallshantering
+sun_859,sun_85,859,Arbetsmiljö och renhållning, övrig och ospecificerad utbildning
+sun_860,sun_86,860,Säkerhetstjänster, allmän utbildning
+sun_861,sun_86,861,Säkerhet i samhället
+sun_863,sun_86,863,Militär utbildning
+sun_869,sun_86,869,Säkerhetstjänster, övrig och ospecificerad utbildning
+sun_999,sun_99,999,Okänd
+sun_010a,sun_010,010a,Bred, generell utbildning, allmän inriktning
+sun_010b,sun_010,010b,Bred, generell utbildning, samhällsvetenskaplig och humanistisk inriktning
+sun_010c,sun_010,010c,Bred, generell utbildning, naturvetenskaplig inriktning
+sun_010x,sun_010,010x,Bred, generell utbildning, annan inriktning
+sun_080z,sun_080,080z,Läs- och skrivinlärning för vuxna
+sun_090z,sun_090,090z,Personlig utveckling
+sun_140z,sun_140,140z,Pedagogik och lärarutbildning, allmän utbildning
+sun_142z,sun_142,142z,Pedagogik
+sun_143a,sun_143,143a,Lärarutbildning, förskola
+sun_143b,sun_143,143b,Lärarutbildning, fritidsverksamhet
+sun_143x,sun_143,143x,Annan lärarutbildning för förskola och fritidsverksamhet
+sun_144a,sun_144,144a,Lärarutbildning, grundskolans tidiga åldrar, allmän ämnesinriktning
+sun_144b,sun_144,144b,Lärarutbildning, grundskolans tidiga åldrar, matematik och naturorienterande ämnen                  
+sun_144c,sun_144,144c,Lärarutbildning, grundskolans tidiga åldrar, svenska och samhällsorienterade ämnen                    
+sun_144d,sun_144,144d,Lärarutbildning, grundskolans tidiga åldrar, praktisk-estetiska ämnen                    
+sun_144x,sun_144,144x,Annan lärarutbildning för grundskolans tidiga åldrar
+sun_145a,sun_145,145a,Ämneslärarutbildning, matematik, data, naturvetenskap och teknik                             
+sun_145b,sun_145,145b,Ämneslärarutbildning, historia, samhällsvetenskap och företagsekonomi                        
+sun_145c,sun_145,145c,Ämneslärarutbildning, språk                                                     
+sun_145d,sun_145,145d,Ämneslärarutbildning, matematik, data, naturvetenskap och teknik i kombination med historia, samhällsvetenskap och företagsekonomi
+sun_145e,sun_145,145e,Ämneslärarutbildning, matematik, data, naturvetenskap och teknik i kombination med språk
+sun_145f,sun_145,145f,Ämneslärarutbildning, historia, samhällsvetenskap och företagsekonomi i kombination med språk
+sun_145g,sun_145,145g,Ämneslärarutbildning, matematik, data, naturvetenskap och teknik i kombination med praktisk-estetiska ämnen
+sun_145h,sun_145,145h,Ämneslärarutbildning, historia, samhällsvetenskap och företagsekonomi i kombination med praktisk-estetiska ämnen                       
+sun_145i,sun_145,145i,Ämneslärarutbildning, språk, i kombination med praktisk-estetiska ämnen                       
+sun_145x,sun_145,145x,Annan ämneslärarutbildning  
+sun_146a,sun_146,146a,Lärarutbildning, industri och hantverk                                          
+sun_146b,sun_146,146b,Lärarutbildning, handel och administration                                      
+sun_146c,sun_146,146c,Lärarutbildning, hotell och restaurang                                          
+sun_146d,sun_146,146d,Lärarutbildning, naturbruk                                                      
+sun_146e,sun_146,146e,Lärarutbildning, vård och omsorg                                                
+sun_146f,sun_146,146f,Lärarutbildning, medieproduktion                                                
+sun_146g,sun_146,146g,Lärarutbildning, musik                                                          
+sun_146h,sun_146,146h,Lärarutbildning, bild och formkonst                                             
+sun_146i,sun_146,146i,Lärarutbildning, dans och teater                                                
+sun_146j,sun_146,146j,Lärarutbildning, trä- och metallslöjd samt textilslöjd                          
+sun_146k,sun_146,146k,Lärarutbildning, idrott och hälsa                                               
+sun_146l,sun_146,146l,Lärarutbildning, hem- och konsumentkunskap                                              
+sun_146x,sun_146,146x,Lärarutbildning i annat yrkesämne och praktisk-estetiska ämnen                
+sun_149a,sun_149,149a,Specialpedagogutbildning                                          
+sun_149b,sun_149,149b,Modersmålslärarutbildning                                      
+sun_149c,sun_149,149c,Skolledarutbildning                                          
+sun_149d,sun_149,149d,Speciallärarutbildning                                          
+sun_149x,sun_149,149x,Annan utbildning inom pedagogik och lärarutbildning
+sun_210z,sun_210,210z,Konst och media, allmän utbildning
+sun_211a,sun_211,211a,Bild- och formkonstnärlig utbildning
+sun_211b,sun_211,211b,Konstvetenskap och konsthistoria
+sun_211x,sun_211,211x,Annan utbildning inom bild- och formkonst
+sun_212a,sun_212,212a,Musik
+sun_212b,sun_212,212b,Dans, teater och dramatik
+sun_212c,sun_212,212c,Musik-, dans-, film- och teatervetenskap samt -historia
+sun_212x,sun_212,212x,Annan utbildning inom musik, dans och dramatik
+sun_213a,sun_213,213a,Medieproduktion, allmän utbildning
+sun_213b,sun_213,213b,Film-, radio- och tv-produktion
+sun_213c,sun_213,213c,Grafisk teknik
+sun_213d,sun_213,213d,Grafisk design och foto
+sun_213x,sun_213,213x,Annan utbildning inom medieproduktion
+sun_214a,sun_214,214a,Modedesign
+sun_214b,sun_214,214b,Inredningsarkitektur och inredningsdesign
+sun_214c,sun_214,214c,Industri- och produktdesign
+sun_214x,sun_214,214x,Annan utbildning inom formgivning
+sun_215z,sun_215,215z,Konsthantverk
+sun_219z,sun_219,219z,Konst och media, övrig och ospecificerad utbildning
+sun_220z,sun_220,220z,Humaniora, allmän utbildning
+sun_221a,sun_221,221a,Religionsvetenskap och teologi
+sun_221b,sun_221,221b,Pastors-, missionärs- och diakonutbildning
+sun_221x,sun_221,221x,Annan utbildning i religion
+sun_222a,sun_222,222a,Allmän språkkunskap och allmänt språkliga utbildningar                          
+sun_222b,sun_222,222b,Engelska
+sun_222c,sun_222,222c,Tyska
+sun_222d,sun_222,222d,Franska
+sun_222e,sun_222,222e,Spanska
+sun_222f,sun_222,222f,Ryska
+sun_222g,sun_222,222g,Svenska som främmande språk
+sun_222h,sun_222,222h,Arabiska
+sun_222i,sun_222,222i,Kinesiska
+sun_222j,sun_222,222j,Japanska
+sun_222k,sun_222,222k,Översättning och tolkning
+sun_222x,sun_222,222x,Annan utbildning i främmande språk                                              
+sun_223a,sun_223,223a,Svenska och nordiska språk                          
+sun_223b,sun_223,223b,Svenska minoritetsspråk
+sun_223c,sun_223,223c,Modersmålsutbildning och teckenspråk
+sun_223d,sun_223,223d,Litteraturvetenskap och litteraturhistoria
+sun_223x,sun_223,223x,Annan utbildning i svenska och litteraturvetenskap 
+sun_225a,sun_225,225a,Historia
+sun_225b,sun_225,225b,Arkeologi
+sun_225c,sun_225,225c,Kulturvård, kulturadministration och museivetenskap
+sun_225x,sun_225,225x,Annan utbildning inom historia och arkeologi
+sun_226z,sun_226,226z,Filosofi och logik
+sun_229z,sun_229,229z,Humaniora, övrig och ospecificerad utbildning
+sun_310a,sun_310,310a,Beteendevetenskap, allmän utbildning
+sun_310b,sun_310,310b,Samhällsvetenskap, allmän utbildning
+sun_310x,sun_310,310x,Annan bred utbildning i samhälls- och beteendevetenskap
+sun_311a,sun_311,311a,Psykologutbildning
+sun_311b,sun_311,311b,Psykologutbildning, inklusive fullgjord praktiktjänstgöring (PTP)
+sun_311c,sun_311,311c,Psykoterapeututbildning
+sun_311x,sun_311,311x,Annan utbildning i psykologi
+sun_312a,sun_312,312a,Sociologi
+sun_312b,sun_312,312b,Socialantropologi och etnologi
+sun_312c,sun_312,312c,Kultur- och samhällsgeografi
+sun_312x,sun_312,312x,Annan utbildning i sociologi, etnologi och kulturgeografi
+sun_313z,sun_313,313z,Statsvetenskap
+sun_314a,sun_314,314a,Nationalekonomi 
+sun_314b,sun_314,314b,Ekonomisk historia
+sun_314x,sun_314,314x,Annan utbildning i nationalekonomi och ekonomisk historia
+sun_319z,sun_319,319z,Samhälls- och beteendevetenskap, övrig och ospecificerad utbildning
+sun_320z,sun_320,320z,Journalistik och information, allmän utbildning
+sun_321a,sun_321,321a,Journalistik
+sun_321b,sun_321,321b,Medie- och kommunikationsvetenskap
+sun_321x,sun_321,321x,Annan utbildning i journalistik och medievetenskap
+sun_322a,sun_322,322a,Bibliotekarieutbildning samt biblioteks- och informationsvetenskap
+sun_322b,sun_322,322b,Dokumentations- och informationsvetenskap
+sun_322x,sun_322,322x,Annan utbildning i biblioteks- och dokumentationsvetenskap
+sun_329z,sun_329,329z,Journalistik och information, övrig och ospecificerad utbildning
+sun_340a,sun_340,340a,Företagsekonomi, allmän utbildning 
+sun_340b,sun_340,340b,Företagsekonomi, finansiering
+sun_340c,sun_340,340c,Företagsekonomi, marknadsföring
+sun_340d,sun_340,340d,Företagsekonomi, organisation och management
+sun_340e,sun_340,340e,Företagsekonomi, redovisning 
+sun_340f,sun_340,340f,Företagsekonomi, annan inriktning 
+sun_340g,sun_340,340g,Handel och administration 
+sun_340x,sun_340,340x,Annan bred utbildning i företagsekonomi, handel och administration
+sun_341z,sun_341,341z,Inköp, försäljning och distribution
+sun_342z,sun_342,342z,Marknadsföring
+sun_343z,sun_343,343z,Bank, försäkring och finansiering
+sun_344z,sun_344,344z,Redovisning och beskattning
+sun_345a,sun_345,345a,Ledarskap, organisation och styrning
+sun_345b,sun_345,345b,Administration och förvaltning
+sun_345c,sun_345,345c,Personal- och löneadministration
+sun_345x,sun_345,345x,Annan utbildning i ledning och administration
+sun_346a,sun_346,346a,Utbildning till medicinsk sekreterare
+sun_346x,sun_346,346x,Annan utbildning i kontorsservice och sekreterartjänster
+sun_347z,sun_347,347z,Arbetsplatsrelaterad utbildning
+sun_349z,sun_349,349z,Företagsekonomi, handel och administration, övrig och ospecificerad utbildning
+sun_380a,sun_380,380a,Juristutbildning (juristexamen)
+sun_380b,sun_380,380b,Juristutbildning (juristexamen), inklusive fullgjord notarietjänstgöring
+sun_380c,sun_380,380c,Rättsvetenskaplig utbildning
+sun_380x,sun_380,380x,Annan utbildning i juridik och rättsvetenskap
+sun_420z,sun_420,420z,Biologi och miljövetenskap, allmän utbildning
+sun_421a,sun_421,421a,Biologi
+sun_421b,sun_421,421b,Biokemi, toxikologi, farmakologi och nutrition
+sun_421x,sun_421,421x,Annan utbildning i biologi och biokemi
+sun_422z,sun_422,422z,Miljövetenskap
+sun_423z,sun_423,423z,Miljövård och miljöskydd
+sun_424z,sun_424,424z,Naturvård och djurskydd
+sun_429z,sun_429,429z,Biologi och miljövetenskap, övrig och ospecificerad utbildning
+sun_440z,sun_440,440z,Fysik, kemi och geovetenskap, allmän utbildning
+sun_441z,sun_441,441z,Fysik
+sun_442z,sun_442,442z,Kemi
+sun_443z,sun_443,443z,Geovetenskap och naturgeografi
+sun_449z,sun_449,449z,Fysik, kemi och geovetenskap, övrig och ospecificerad utbildning
+sun_460z,sun_460,460z,Matematik och naturvetenskap, allmän utbildning
+sun_461z,sun_461,461z,Matematik
+sun_462z,sun_462,462z,Statistik
+sun_469z,sun_469,469z,Matematik och naturvetenskap, övrig och ospecificerad utbildning
+sun_480z,sun_480,480z,Informations- och kommunikationsteknik (IKT), allmän utbildning
+sun_481a,sun_481,481a,Systemutveckling och programmering
+sun_481b,sun_481,481b,Datavetenskap
+sun_481x,sun_481,481x,Annan utbildning inom datavetenskap och systemvetenskap
+sun_482z,sun_482,482z,Datoranvändning
+sun_489z,sun_489,489z,Informations- och kommunikationsteknik (IKT), övrig och ospecificerad utbildning
+sun_520a,sun_520,520a,Civilingenjörsutbildning, generell teknik och teknisk fysik
+sun_520b,sun_520,520b,Ingenjörsutbildning, generell teknik och teknisk fysik
+sun_520x,sun_520,520x,Annan bred utbildning i teknik och teknisk industri
+sun_521a,sun_521,521a,Civilingenjörsutbildning, maskinteknik
+sun_521b,sun_521,521b,Ingenjörsutbildning, maskinteknik
+sun_521c,sun_521,521c,Industri och verkstadsteknik
+sun_521x,sun_521,521x,Annan utbildning i maskinteknik och verkstadsteknik
+sun_522a,sun_522,522a,Civilingenjörsutbildning, energi- och elektroteknik
+sun_522b,sun_522,522b,Ingenjörsutbildning, energi- och elektroteknik
+sun_522c,sun_522,522c,Elektrisk installation och elmekanik
+sun_522d,sun_522,522d,Energi, drift och underhåll
+sun_522x,sun_522,522x,Annan utbildning i energi- och elektroteknik
+sun_523a,sun_523,523a,Civilingenjörsutbildning, datateknik
+sun_523b,sun_523,523b,Civilingenjörsutbildning, automation och elektronik
+sun_523c,sun_523,523c,Ingenjörsutbildning, datateknik
+sun_523d,sun_523,523d,Ingenjörsutbildning, automation och elektronik
+sun_523e,sun_523,523e,Elektronik-, tele- och datatekniskt arbete
+sun_523f,sun_523,523f,Automation 
+sun_523x,sun_523,523x,Annan utbildning i elektronik, datateknik och automation
+sun_524a,sun_524,524a,Civilingenjörsutbildning, kemi- och bioteknik
+sun_524b,sun_524,524b,Ingenjörsutbildning, kemi- och bioteknik
+sun_524c,sun_524,524c,Laboratorieteknik
+sun_524d,sun_524,524d,Processindustriteknik
+sun_524x,sun_524,524x,Annan utbildning i kemi- och bioteknik
+sun_525a,sun_525,525a,Civilingenjörsutbildning, fordons- och farkostteknik
+sun_525b,sun_525,525b,Ingenjörsutbildning, fordons- och farkostteknik
+sun_525c,sun_525,525c,Fordonsteknik
+sun_525d,sun_525,525d,Fartygs- och flygteknik
+sun_525x,sun_525,525x,Annan utbildning i fordons- och farkostteknik
+sun_526a,sun_526,526a,Civilingenjörsutbildning, industriell ekonomi och organisation
+sun_526b,sun_526,526b,Ingenjörsutbildning, industriell ekonomi och organisation
+sun_526x,sun_526,526x,Annan utbildning i industriell ekonomi och organisation
+sun_527a,sun_527,527a,Civilingenjörsutbildning, miljöteknik
+sun_527b,sun_527,527b,Ingenjörsutbildning, miljöteknik
+sun_527x,sun_527,527x,Annan utbildning i miljöteknik och miljökontroll
+sun_529a,sun_529,529a,Civilingenjörsutbildning, övrig och ospecificerad utbildning
+sun_529b,sun_529,529b,Ingenjörsutbildning, övrig och ospecificerad utbildning
+sun_529x,sun_529,529x,Annan utbildning inom teknik och teknisk industri
+sun_540a,sun_540,540a,Civilingenjörsutbildning, materialteknik
+sun_540b,sun_540,540b,Ingenjörsutbildning, materialteknik
+sun_540x,sun_540,540x,Annan bred utbildning i material och tillverkning
+sun_541a,sun_541,541a,Civilingenjörsutbildning, livsmedel
+sun_541b,sun_541,541b,Ingenjörsutbildning, livsmedel
+sun_541c,sun_541,541c,Tillverkning och hantering av livsmedel, allmän utbildning
+sun_541d,sun_541,541d,Kött och charkuteri
+sun_541e,sun_541,541e,Bageri och konditori
+sun_541x,sun_541,541x,Annan utbildning i tillverkning och hantering av livsmedel
+sun_542a,sun_542,542a,Civilingenjörsutbildning, textilteknologi
+sun_542b,sun_542,542b,Ingenjörsutbildning, textilteknologi
+sun_542c,sun_542,542c,Tillverkning av textilier och konfektion
+sun_542d,sun_542,542d,Sko- och läderarbete
+sun_542x,sun_542,542x,Annan utbildning inom textilier, konfektion och läder
+sun_543a,sun_543,543a,Civilingenjörsutbildning, trä, papper, glas, porslin och plast 
+sun_543b,sun_543,543b,Ingenjörsutbildning, trä, papper, glas, porslin och plast 
+sun_543c,sun_543,543c,Trätekniskt arbete
+sun_543d,sun_543,543d,Pappersmassa- och papperstillverkning
+sun_543e,sun_543,543e,Glas- och porslinstillverkning
+sun_543f,sun_543,543f,Tillverkning av plast- och gummiprodukter
+sun_543x,sun_543,543x,Annan utbildning i tillverkning i specifikt material
+sun_544a,sun_544,544a,Civilingenjörsutbildning, berg- och mineralteknik
+sun_544b,sun_544,544b,Ingenjörsutbildning, berg- och mineralteknik
+sun_544c,sun_544,544c,Gruv- och järnbruksarbete
+sun_544x,sun_544,544x,Annan utbildning inom berg- och mineralteknik
+sun_549z,sun_549,549z,Material och tillverkning, övrig och ospecificerad utbildning
+sun_580a,sun_580,580a,Civilingenjörsutbildning, bred inriktning mot byggande
+sun_580b,sun_580,580b,Ingenjörsutbildning, bred inriktning mot byggande
+sun_580x,sun_580,580x,Annan bred utbildning inom samhällsbyggnad och byggnadsteknik
+sun_581a,sun_581,581a,Civilingenjörsutbildning, samhällsbyggnad och samhällsmiljö
+sun_581b,sun_581,581b,Ingenjörsutbildning, samhällsbyggnad och samhällsmiljö
+sun_581c,sun_581,581c,Arkitektutbildning
+sun_581d,sun_581,581d,Landskapsarkitektutbildning
+sun_581e,sun_581,581e,Landskapsingenjörsutbildning
+sun_581x,sun_581,581x,Annan utbildning inom samhällsbyggnad och arkitektur
+sun_582a,sun_582,582a,Civilingenjörsutbildning, byggnadsteknik
+sun_582b,sun_582,582b,Ingenjörsutbildning, byggnadsteknik
+sun_582c,sun_582,582c,Byggnadsarbete, allmän utbildning
+sun_582d,sun_582,582d,Byggnadssnickeri
+sun_582e,sun_582,582e,Måleri
+sun_582f,sun_582,582f,VVS-utbildning
+sun_582g,sun_582,582g,Betong-, anläggnings- och vägarbete
+sun_582h,sun_582,582h,Murarutbildning
+sun_582i,sun_582,582i,Plåtslageri
+sun_582x,sun_582,582x,Annan utbildning inom byggnads- och anläggningsteknik
+sun_589z,sun_589,589z,Samhällsbyggnad och byggnadsteknik, övrig och ospecificerad utbildning
+sun_620z,sun_620,620z,Lantbruk, trädgård, skog och fiske, allmän utbildning
+sun_621a,sun_621,621a,Agronomutbildning
+sun_621b,sun_621,621b,Lantmästarutbildning
+sun_621c,sun_621,621c,Utbildning i lantbruk
+sun_621d,sun_621,621d,Utbildning i jordbruk
+sun_621e,sun_621,621e,Utbildning i djurhållning
+sun_621f,sun_621,621f,Utbildning i hästhållning 
+sun_621g,sun_621,621g,Utbildning i djurvård
+sun_621x,sun_621,621x,Annan utbildning inom lantbruk
+sun_622a,sun_622,622a,Hortonomutbildning
+sun_622b,sun_622,622b,Trädgårdsingenjörs- och trädgårdsteknikerutbildning
+sun_622c,sun_622,622c,Utbildning i trädgårdsbruk
+sun_622x,sun_622,622x,Annan utbildning inom trädgård
+sun_623a,sun_623,623a,Jägmästar- och skogsvetarutbildning
+sun_623b,sun_623,623b,Skogsmästar-, skogstekniker- och skogsingenjörsutbildning
+sun_623c,sun_623,623c,Utbildning i skogsbruk
+sun_623x,sun_623,623x,Annan utbildning inom skog
+sun_624z,sun_624,624z,Fiske och vattenbruk
+sun_629z,sun_629,629z,Lantbruk, trädgård, skog och fiske, övrig och ospecificerad utbildning
+sun_640a,sun_640,640a,Veterinärutbildning
+sun_640b,sun_640,640b,Djursjukskötarutbildning
+sun_640x,sun_640,640x,Annan utbildning inom djursjukvård
+sun_720z,sun_720,720z,Hälso- och sjukvård, allmän utbildning
+sun_721a,sun_721,721a,Läkarutbildning
+sun_721b,sun_721,721b,Läkarutbildning, inklusive fullgjord allmäntjänstgöring (AT)
+sun_721c,sun_721,721c,Läkarutbildning, kirurgiska specialiteter 
+sun_721d,sun_721,721d,Läkarutbildning, invärtesmedicinska specialiteter
+sun_721e,sun_721,721e,Läkarutbildning, barn- och ungdomsmedicinska specialiteter
+sun_721f,sun_721,721f,Läkarutbildning, enskilda basspecialiteter, exklusive allmänmedicin
+sun_721g,sun_721,721g,Läkarutbildning, allmänmedicin
+sun_721h,sun_721,721h,Läkarutbildning, psykiatriska specialiteter
+sun_721i,sun_721,721i,Läkarutbildning, bild- och funktionsmedicinska specialiteter 
+sun_721j,sun_721,721j,Läkarutbildning, laboratoriemedicinska specialiteter 
+sun_721k,sun_721,721k,Läkarutbildning, neurologiska specialiteter
+sun_721l,sun_721,721l,Läkarutbildning, tilläggsspecialiteter 
+sun_721m,sun_721,721m,Läkarutbildning, annan specialistkompetens
+sun_721x,sun_721,721x,Annan utbildning inom medicin 
+sun_723a,sun_723,723a,Sjuksköterskeutbildning, grundutbildning
+sun_723b,sun_723,723b,Specialistsjuksköterskeutbildning, ambulanssjukvård
+sun_723c,sun_723,723c,Specialistsjuksköterskeutbildning, anestesisjukvård 
+sun_723d,sun_723,723d,Specialistsjuksköterskeutbildning, intensivvård 
+sun_723e,sun_723,723e,Specialistsjuksköterskeutbildning, operationssjukvård 
+sun_723f,sun_723,723f,Specialistsjuksköterskeutbildning, kirurgisk vård
+sun_723g,sun_723,723g,Specialistsjuksköterskeutbildning, medicinsk vård
+sun_723h,sun_723,723h,Specialistsjuksköterskeutbildning, distriktssköterska
+sun_723i,sun_723,723i,Specialistsjuksköterskeutbildning, barn och ungdom
+sun_723j,sun_723,723j,Specialistsjuksköterskeutbildning, onkologisk vård
+sun_723k,sun_723,723k,Specialistsjuksköterskeutbildning, psykiatrisk vård
+sun_723l,sun_723,723l,Specialistsjuksköterskeutbildning, vård av äldre 
+sun_723m,sun_723,723m,Specialistsjuksköterskeutbildning, öppen och annan inriktning 
+sun_723n,sun_723,723n,Barnmorskeutbildning
+sun_723o,sun_723,723o,Annan omvårdnadsutbildning, allmän vård och omsorg
+sun_723p,sun_723,723p,Annan omvårdnadsutbildning, sjukvård 
+sun_723q,sun_723,723q,Annan omvårdnadsutbildning, psykiatrisk vård
+sun_723r,sun_723,723r,Annan omvårdnadsutbildning, äldreomsorg 
+sun_723s,sun_723,723s,Annan omvårdnadsutbildning, psykiskt funktionsnedsatta
+sun_723t,sun_723,723t,Annan omvårdnadsutbildning, funktionsnedsatta
+sun_723u,sun_723,723u,Annan omvårdnadsutbildning, övriga inriktningar 
+sun_723x,sun_723,723x,Annan utbildning inom omvårdnad 
+sun_724a,sun_724,724a,Tandläkarutbildning
+sun_724b,sun_724,724b,Tandläkarutbildning, specialiteter för barn och ungdomar 
+sun_724c,sun_724,724c,Tandläkarutbildning, specialiteter för vuxna
+sun_724d,sun_724,724d,Tandhygienistutbildning
+sun_724e,sun_724,724e,Tandsköterskeutbildning
+sun_724f,sun_724,724f,Tandteknikerutbildning
+sun_724x,sun_724,724x,Annan utbildning inom tandvård
+sun_725a,sun_725,725a,Optikerutbildning
+sun_725b,sun_725,725b,Audionomutbildning
+sun_725c,sun_725,725c,Ortopedingenjörsutbildning
+sun_725d,sun_725,725d,Biomedicinsk analytikerutbildning
+sun_725e,sun_725,725e,Sjukhusfysikerutbildning
+sun_725f,sun_725,725f,Röntgensjuksköterskeutbildning
+sun_725x,sun_725,725x,Annan tekniskt inriktad vårdutbildning
+sun_726a,sun_726,726a,Fysioterapeututbildning
+sun_726b,sun_726,726b,Arbetsterapeututbildning
+sun_726c,sun_726,726c,Logopedutbildning
+sun_726d,sun_726,726d,Dietistutbildning
+sun_726e,sun_726,726e,Kiropraktorutbildning
+sun_726f,sun_726,726f,Naprapatutbildning
+sun_726x,sun_726,726x,Annan utbildning inom terapi, rehabilitering och kostbehandling
+sun_727a,sun_727,727a,Apotekarutbildning
+sun_727b,sun_727,727b,Receptarieutbildning
+sun_727x,sun_727,727x,Annan utbildning inom farmaci
+sun_729z,sun_729,729z,Hälso- och sjukvård, övrig och ospecificerad utbildning
+sun_760z,sun_760,760z,Socialt arbete och socialt omsorgsarbete, allmän utbildning
+sun_761a,sun_761,761a,Barn och ungdom, allmän utbildning
+sun_761b,sun_761,761b,Barnomsorg
+sun_761c,sun_761,761c,Fritidsverksamhet för barn och ungdom
+sun_761x,sun_761,761x,Annan utbildning inom barn och ungdom
+sun_762a,sun_762,762a,Socialt omsorgsarbete, allmän utbildning
+sun_762b,sun_762,762b,Social omsorgsutbildning, äldre och funktionsnedsatta
+sun_762c,sun_762,762c,Social omsorgsutbildning, socialpedagogisk behandling
+sun_762d,sun_762,762d,Socionomutbildning
+sun_762e,sun_762,762e,Hälso- och sjukvårdskuratorutbildning
+sun_762f,sun_762,762f,Studie- och yrkesvägledarutbildning
+sun_762x,sun_762,762x,Annan utbildning inom socialt arbete
+sun_769z,sun_769,769z,Socialt arbete och socialt omsorgsarbete, övrig och ospecificerad utbildning
+sun_810z,sun_810,810z,Personliga tjänster, allmän utbildning
+sun_811a,sun_811,811a,Hotell, restaurang och storhushåll, allmän utbildning
+sun_811b,sun_811,811b,Utbildning för hotell
+sun_811c,sun_811,811c,Utbildning för restaurang
+sun_811d,sun_811,811d,Utbildning för storhushåll
+sun_811x,sun_811,811x,Annan utbildning inom hotell, restaurang och storhushåll
+sun_812z,sun_812,812z,Turism, resor och fritid
+sun_813z,sun_813,813z,Idrott och friskvård
+sun_814a,sun_814,814a,Hem- och hushållsvetenskap, allmän utbildning
+sun_814b,sun_814,814b,Utbildning för lokalvård
+sun_814x,sun_814,814x,Annan utbildning inom hushållstjänster och lokalvård
+sun_815a,sun_815,815a,Utbildning inom hår- och skönhetsvård
+sun_815b,sun_815,815b,Massageutbildning
+sun_815x,sun_815,815x,Annan utbildning inom hår- och skönhetsvård samt massage
+sun_819z,sun_819,819z,Personliga tjänster, övrig och ospecificerad utbildning
+sun_840a,sun_840,840a,Transporttjänster, allmän utbildning
+sun_840b,sun_840,840b,Utbildning för landtransporter
+sun_840c,sun_840,840c,Utbildning för sjöfart
+sun_840d,sun_840,840d,Utbildning för luftfart
+sun_840e,sun_840,840e,Utbildning för postservice
+sun_840x,sun_840,840x,Annan utbildning inom transporttjänster
+sun_850z,sun_850,850z,Arbetsmiljö och renhållning, allmän utbildning
+sun_851z,sun_851,851z,Arbetsmiljö och arbetarskydd
+sun_852z,sun_852,852z,Renhållning och avfallshantering
+sun_859z,sun_859,859z,Arbetsmiljö och renhållning, övrig och ospecificerad utbildning
+sun_860z,sun_860,860z,Säkerhetstjänster, allmän utbildning
+sun_861a,sun_861,861a,Polisutbildning
+sun_861b,sun_861,861b,Utbildning för brandskydd och annan räddningstjänst
+sun_861c,sun_861,861c,Kriminalvårdsutbildning
+sun_861x,sun_861,861x,Annan utbildning inom säkerhet i samhället
+sun_863a,sun_863,863a,Officersutbildning
+sun_863b,sun_863,863b,Chefsutbildning för officerare
+sun_863x,sun_863,863x,Annan militär utbildning
+sun_869z,sun_869,869z,Säkerhetstjänster, övrig och ospecificerad utbildning
+sun_999z,sun_999,999z,Okänd

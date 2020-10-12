@@ -61,7 +61,8 @@ class ResPartner(models.Model):
     is_government = fields.Boolean(string="Government")
     is_employer = fields.Boolean(string="Employer")
 
-    jobseeker_category = fields.Char(string="Jobseeker category") #egen modell?
+    jobseeker_category_id = fields.Many2one(comodel_name='res.partner.skat')
+    jobseeker_category = fields.Char(string="Jobseeker category", compute="combine_category_name_code")
     customer_since = fields.Datetime(string="Customer since")
     jobseeker_work = fields.Boolean(string="Work")
     deactualization_date = fields.Datetime(string="Date")
@@ -101,6 +102,10 @@ class ResPartner(models.Model):
     @api.one
     def combine_state_name_code(self):
         self.state_name_code = "%s %s" % (self.state_id.name, self.state_id.code)
+
+    @api.one
+    def combine_category_name_code(self):
+        self.jobseeker_category = "%s %s" % (self.jobseeker_category_id.name, self.jobseeker_category_id.code)
     
     @api.one
     @api.constrains('company_registry')
@@ -146,13 +151,13 @@ class ResPartner(models.Model):
                         date_of_birth = date(year, month, day)
                     except:
                         wrong_input = True
-                        _logger.error("Could not convert social security number (company_registry) to date")
+                        _logger.error("Could not convert social security number (company_registry) to date%s" % social_sec_stripped)
             elif len(social_sec_stripped) == 8:
                 try:
                     date_of_birth = date(int(social_sec_stripped[:4]),int(social_sec_stripped[4:6]),int(social_sec_stripped[6:8]))
                 except:
                     wrong_input = True
-                    _logger.error("Could not convert social security number (company_registry) to date")
+                    _logger.error("Could not convert social security number (company_registry) to date %s" % social_sec_stripped)
             else: 
                 wrong_input = True
                 _logger.error("Incorrectly formated social security number (company_registry)")
@@ -249,7 +254,7 @@ class ResPartner(models.Model):
             'res_model': "hr.employee.jobseeker.search.wizard",
             'view_id': False, # self.env.ref("partner_view_360.search_jobseeker_wizard").id,
             'view_mode':"form",
-            #'target': "inline", 
+            'target': "inline",
             #'key2': "client_action_multi",
             'type': 'ir.actions.act_window',
         }
@@ -290,3 +295,10 @@ class ResPartner(models.Model):
             # ~ if res[0] != 250:  # OK
                 # ~ return request.render('partner_view_360.403', {'error': 'ERROR: Escalate rights [%s] %s' % res, 'partner': partner, 'signatur':post.get('signatur')})
 
+
+class ResPartnerSKAT(models.Model):
+    _name = 'res.partner.skat'
+
+    partner_id = fields.One2many(comodel_name='res.partner', inverse_name='jobseeker_category')
+    code = fields.Char(string="code")
+    name = fields.Char(string="name")
