@@ -47,26 +47,8 @@ class ResPartnerNotes(models.Model):
 class ResPartner(models.Model):
     _inherit = 'res.partner'
 
-    notes_ids = fields.One2many(comodel_name='res.partner.notes', 
-                                 string='Daily notes', inverse_name="partner_id")
-    next_contact = fields.Date(string="Next contact", compute='_compute_note_fields',
-                                 store=True)
-    next_contact_time = fields.Datetime(string='Next contact time', 
-                                 compute='_compute_note_fields', store=True)
-    next_contact_type = fields.Selection(string='Next contact type', 
-                                selection=[('T', 'Phone'), ('B', 'Visit'),
-                                 ('E', 'E-mail'), ('P', 'Mail'), ('I', 'Internet')],
-                                  compute='_compute_note_fields', store=True)
-    last_contact = fields.Date(string="Last contact", compute='_compute_note_fields',
-                                 store=True)
-    last_contact_type = fields.Selection(string='Last contact type',
-                                 selection=[('T', 'Phone'), ('B', 'Visit'),
-                                  ('E', 'E-mail'), ('P', 'Mail'), ('I', 'Internet')],
-                                   compute='_compute_note_fields', store=True)
-
     @api.depends('notes_ids')
     def _compute_note_fields(self):
-        route = self.env.ref('edi_af_aisf_trask.asok_contact_route', raise_if_not_found=False)
         for partner in self:
             daily_note_last_contact = self.env['res.partner.notes'].search([
                 ('partner_id', '=', partner.id), ('note_date', '<=', fields.Date.today())],
@@ -86,18 +68,39 @@ class ResPartner(models.Model):
                 # check that we have a linked appointment
                 if daily_note_next_contact.appointment_id:
                     partner.next_contact_type = 'T' if daily_note_next_contact.appointment_id.channel == self.env.ref('calendar_channel.channel_pdm') else 'B'
-            
-            if partner.is_jobseeker:
+
+    @api.multi
+    def _create_next_last_msg(self):
+        if self.is_jobseeker:
+            route = self.env.ref('edi_af_aisf_trask.asok_contact_route', raise_if_not_found=False)
+            if route:
                 vals = {
                     'name': 'set contact msg',
                     'edi_type': self.env.ref('edi_af_aisf_trask.asok_contact').id,
-                    'model': partner._name,
-                    'res_id': partner.id,
+                    'model': self._name,
+                    'res_id': self.id,
                     'route_id': route.id,
                     'route_type': 'edi_af_aisf_trask_contact',
                 }
                 message = self.env['edi.message'].create(vals)
                 message.pack()
+
+    notes_ids = fields.One2many(comodel_name='res.partner.notes', 
+                                 string='Daily notes', inverse_name="partner_id")
+    next_contact = fields.Date(string="Next contact", compute='_compute_note_fields',
+                                 store=True)
+    next_contact_time = fields.Datetime(string='Next contact time', 
+                                 compute='_compute_note_fields', store=True)
+    next_contact_type = fields.Selection(string='Next contact type', 
+                                selection=[('T', 'Phone'), ('B', 'Visit'),
+                                 ('E', 'E-mail'), ('P', 'Mail'), ('I', 'Internet')],
+                                  compute='_compute_note_fields', store=True)
+    last_contact = fields.Date(string="Last contact", compute='_compute_note_fields',
+                                 store=True)
+    last_contact_type = fields.Selection(string='Last contact type',
+                                 selection=[('T', 'Phone'), ('B', 'Visit'),
+                                  ('E', 'E-mail'), ('P', 'Mail'), ('I', 'Internet')],
+                                   compute='_compute_note_fields', store=True)
 
     def action_view_next_event(self):
         action = {
