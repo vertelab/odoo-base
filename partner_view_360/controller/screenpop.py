@@ -139,6 +139,25 @@ class WebsiteScreenpop(http.Controller):
                     })
         
         
+    @http.route(['/opencustomerview/bankidtest'], type='http', auth="public", website=True, csrf=False)
+    def opencustomerview_bankidtest(self, **post):
+        """
+        personnummer=<12 tecken>
+        """
+        bankid = res = None       
+        pnr = post.get('personnummer', '')
+        if pnr and not '-' in pnr:
+            pnr = pnr[:8] + '-' + pnr[8:12]
+        message = _('Initiating BankID-identification, try to authenticate')
+        bankid = CachingClient(request.env['ir.config_parameter'].sudo().get_param('partner_view_360.bankid_wsdl', 'http://bhipws.arbetsformedlingen.se/Integrationspunkt/ws/mobiltbankidinterntjanst?wsdl'))  # create a Client instance
+        res = bankid.service.MobiltBankIDInternTjanst(post.get('personnummer'))
+        return request.render('partner_view_360.bankid', {
+                    'personnummer': post.get('personnummer'),
+                    'bankid_soap': bankid,
+                    'bankid_res': res,
+                    })
+                
+        
     @http.route(['/opencustomerviewtest'], type='http', auth="public", website=True, csrf=False)
     def opencustomerviewtest(self, **post):
         """
