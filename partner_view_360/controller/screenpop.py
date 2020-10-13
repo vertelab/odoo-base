@@ -99,7 +99,7 @@ class WebsiteScreenpop(http.Controller):
                 return request.render('partner_view_360.403', {'message': 'Debug','our_token': token, 'ext_token': post.get('token'), 'partner': partner, 'action': action,'url': res_url, 'post': post,'secret': secret})
             return werkzeug.utils.redirect(res_url)
         else:
-            return request.render('partner_view_360.403', {'error': 'ERROR: No partner found', 'our_token': token, 'ext_token': post.get('token'), 'partner': partner, 'action': action, 'post': post,'secret': secret,'signatur':post.get('signatur')})
+            return request.render('partner_view_360.403', {'error': 'ERROR: More than one partner found', 'our_token': token, 'ext_token': post.get('token'), 'partner': partner, 'action': None, 'post': post,'secret': secret,'signatur':post.get('signatur')})
 
 
     @http.route(['/opencustomerview/bankid'], type='http', auth="public", website=True, csrf=False)
