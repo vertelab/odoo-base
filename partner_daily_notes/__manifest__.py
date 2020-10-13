@@ -37,13 +37,12 @@ This module allowes daily notes for a partner.
     'website': 'http://www.vertel.se',
     'depends': [
         'base_map',
-        'partner_view_360'
+        'partner_view_360',
     ],
     'data': [
-		    'views/res_partner_view.xml',
             'security/ir.model.access.csv',
             'views/res_partner_notes_view.xml',
-            #'data/ir.model.fields.csv', 
+            'views/res_partner_view.xml',
             "data/res.partner.note.type.csv",
 
     ],
