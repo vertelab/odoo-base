@@ -31,10 +31,8 @@ from odoo.tools import image_resize_image_big, image_colorize
 
 
 class ResPartner(models.Model):
-    _inherit = "res.partner"  # odoo inheritance från res.partner
+    _inherit = "res.partner"  
     _rec_name = "name_com_reg_num"
-
-    #_name = ""
 
     work_phone = fields.Char(string='Work phone', help="Work phone number")
     age = fields.Char(string="Age", compute="calculate_age")
@@ -46,14 +44,6 @@ class ResPartner(models.Model):
     customer_id = fields.Char(string='Customer number', help="Customer number")
     eidentification = fields.Char(string='E-Identification', help="BankId or other e-identification done OK or other")
 
-    # office selection field for partners connected to an office, my_office_code filled in by office_code for the office
-    office_id = fields.Many2one('hr.department', string="Office") #should check for type = "af office"
-    location_id = fields.Many2one('hr.location', string="Location")
-
-    #office_ids = fields.Many2many('res.partner', relation='res_partner_office_partner_rel', column1='partner_id', column2='office_id', string='Offices')
-    my_office_code = fields.Char(string='Office code', related='office_id.office_code')
-
-    # adds af office as a type of partner
     type = fields.Selection(selection_add=[('foreign address','Foreign Address'), ('given address','Given address'), ('visitation address','Visitation Address'), ('mailing address', 'Mailing Address')])
     
     is_jobseeker = fields.Boolean(string="Jobseeker")
