@@ -1,22 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <odoo>
     <data>
-        <!-- <record id="view_partner_notes_form" model="ir.ui.view">
-            <field name="name">res.partner_notes.form</field>
-            <field name="model">res.partner_notes</field>
-            <field name="arch" type="xml">
-                <form string="partner_notes">
-                    <sheet>
-                        <h1>
-                            <field name="name" default_focus="1" placeholder="Name" />
-                        </h1>
-                        <group>
-                            <field name="description" />
-                        </group>
-                    </sheet>
-                </form>
-            </field>
-        </record> -->
         <record id="partner_notes_view_tree" model="ir.ui.view">
             <field name="name">res.partner.notes.view.tree</field>
             <field name="model">res.partner.notes</field>
@@ -60,17 +44,7 @@
                 </tree>
             </field>
         </record>
-        <!-- <record id="res_view_partner_notes_filter" model="ir.ui.view">
-            <field name="name">res.partner_notes.select</field>
-            <field name="model">res.partner.notes</field>
-            <field name="arch" type="xml">
-                <search string="Search partner_notes">
-                    <field name="name" filter_domain="[('name','ilike',self),('description','ilike',self)]" />
-                    <field name="description" />
-                    <separator />
-                </search>
-            </field>
-        </record>  -->
+
         <record id="partner_notes_action_view_tree" model="ir.actions.act_window">
             <field name="name">Partner Daily Notes</field>
             <field name="type">ir.actions.act_window</field>
@@ -92,9 +66,6 @@
             <field name="context">{}</field>
             <!-- <field name="search_view_id" ref="res_view_partner_notes_filter" /> -->
         </record> 
-
-
-        
 
         <menuitem id="partner_note_type_menu_action" name="Note types" parent="contacts.res_partner_menu_config" action="partner_note_type_action_view_tree" sequence="50" />
         <menuitem id="partner_notes_menu_action" name="Daily notes" parent="contacts.menu_contacts" action="partner_notes_action_view_tree" sequence="50" />

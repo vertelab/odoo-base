@@ -99,7 +99,7 @@ class WebsiteScreenpop(http.Controller):
                 return request.render('partner_view_360.403', {'message': 'Debug','our_token': token, 'ext_token': post.get('token'), 'partner': partner, 'action': action,'url': res_url, 'post': post,'secret': secret})
             return werkzeug.utils.redirect(res_url)
         else:
-            return request.render('partner_view_360.403', {'error': 'ERROR: No partner found', 'our_token': token, 'ext_token': post.get('token'), 'partner': partner, 'action': action, 'post': post,'secret': secret,'signatur':post.get('signatur')})
+            return request.render('partner_view_360.403', {'error': 'ERROR: More than one partner found', 'our_token': token, 'ext_token': post.get('token'), 'partner': partner, 'action': None, 'post': post,'secret': secret,'signatur':post.get('signatur')})
 
 
     @http.route(['/opencustomerview/bankid'], type='http', auth="public", website=True, csrf=False)
@@ -141,6 +141,25 @@ class WebsiteScreenpop(http.Controller):
 
     @http.route(['/opencustomerview/bankidtest'], type='http', auth="public", website=True, csrf=False)
     def opencustomerview_bankid(self, **post):
+        """
+        personnummer=<12 tecken>
+        """
+        bankid = res = None       
+        pnr = post.get('personnummer', '')
+        if pnr and not '-' in pnr:
+            pnr = pnr[:8] + '-' + pnr[8:12]
+        message = _('Initiating BankID-identification, try to authenticate')
+        bankid = CachingClient(request.env['ir.config_parameter'].sudo().get_param('partner_view_360.bankid_wsdl', 'http://bhipws.arbetsformedlingen.se/Integrationspunkt/ws/mobiltbankidinterntjanst?wsdl'))  # create a Client instance
+        res = bankid.service.MobiltBankIDInternTjanst(post.get('personnummer'))
+        return request.render('partner_view_360.bankid', {
+                    'personnummer': post.get('personnummer'),
+                    'bankid_soap': bankid,
+                    'bankid_res': res,
+                    })
+                
+        
+    @http.route(['/opencustomerview/bankidtest'], type='http', auth="public", website=True, csrf=False)
+    def opencustomerview_bankidtest(self, **post):
         """
         personnummer=<12 tecken>
         """

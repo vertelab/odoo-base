@@ -34,7 +34,7 @@ AFC-168
     'depends': ['base', 
     'partner_view_360', 
     'hr_skill',
-    'res_ssyk'
+    'res_ssyk',
     ], 
     'data': [
 			'views/res_partner_view.xml',

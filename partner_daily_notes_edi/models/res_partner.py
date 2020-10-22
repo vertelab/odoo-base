@@ -14,7 +14,7 @@ class ResPartnerNotes(models.Model):
                 'edi_type': env.ref('edi_af_as.asok_contact').id,
                 'model': note._name,
                 'res_id': note.id,
-                'route_id': self.env.ref('edi_af_as.asok_contact_route').id,,
+                'route_id': self.env.ref('edi_af_as.asok_contact_route').id,
                 'route_type': 'edi_af_as_contact',
             }
             message = self.env['edi.message'].create(vals)

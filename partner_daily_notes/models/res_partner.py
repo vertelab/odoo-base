@@ -30,44 +30,91 @@ class ResPartnerNotes(models.Model):
     name = fields.Char(string="Title") 
     partner_id = fields.Many2one(comodel_name="res.partner", string="Job seeker")
 
-    administrative_officer = fields.Many2one('res.users', string='Administrative officer', default=lambda self: self.env.user)
+    administrative_officer = fields.Many2one('res.users',
+                                 string='Administrative officer',
+                                 default=lambda self: self.env.user)
     note = fields.Text(string="Notes")
     note_date = fields.Datetime(string="Refers to date", default=fields.Datetime.now)
     is_confidential = fields.Boolean(string="Secret", help="Apply/Remove Secret")
     note_type = fields.Many2one(comodel_name="res.partner.note.type")
     note_number = fields.Char(string="AIS number")
-
+    
+    appointment_id = fields.Many2one(comodel_name='calendar.appointment',
+                                 string='Linked meeting')
     office_id = fields.Many2one('hr.department', string="Office")
     customer_id = fields.Char(string="Customer number", related="partner_id.customer_id")
 
 class ResPartner(models.Model):
     _inherit = 'res.partner'
 
-    notes_ids = fields.One2many(comodel_name='res.partner.notes', 
-                                 string='Daily notes', inverse_name="partner_id")
-
-    @api.one
-    def compute_notes_count(self):
+    @api.depends('notes_ids')
+    def _compute_note_fields(self):
         for partner in self:
-            partner.notes_count = len(partner.notes_ids)
+            daily_note_last_contact = self.env['res.partner.notes'].search([
+                ('partner_id', '=', partner.id), ('note_date', '<=', fields.Date.today())],
+                limit=1, order='note_date desc')
+            if daily_note_last_contact:
+                partner.last_contact = daily_note_last_contact.note_date.date()
+                # check that we have a linked appointment
+                if daily_note_last_contact.appointment_id:
+                    partner.last_contact_type = 'T' if daily_note_last_contact.appointment_id.channel == self.env.ref('calendar_channel.channel_pdm') else 'B'
 
-    notes_count = fields.Integer(compute='compute_notes_count')
+            daily_note_next_contact = self.env['res.partner.notes'].search([
+                ('partner_id', '=', partner.id), ('note_date', '>', fields.Date.today())],
+                limit=1, order='note_date desc')
+            if daily_note_next_contact:
+                partner.next_contact = daily_note_next_contact.note_date.date()
+                partner.next_contact_time = daily_note_next_contact.note_date.strftime("%H:%M")
+                # check that we have a linked appointment
+                if daily_note_next_contact.appointment_id:
+                    partner.next_contact_type = 'T' if daily_note_next_contact.appointment_id.channel == self.env.ref('calendar_channel.channel_pdm') else 'B'
 
     @api.multi
-    def view_notes(self):
+    def _create_next_last_msg(self):
+        if self.is_jobseeker:
+            route = self.env.ref('edi_af_aisf_trask.asok_contact_route', raise_if_not_found=False)
+            if route:
+                vals = {
+                    'name': 'set contact msg',
+                    'edi_type': self.env.ref('edi_af_aisf_trask.asok_contact').id,
+                    'model': self._name,
+                    'res_id': self.id,
+                    'route_id': route.id,
+                    'route_type': 'edi_af_aisf_trask_contact',
+                }
+                message = self.env['edi.message'].create(vals)
+                message.pack()
+
+    notes_ids = fields.One2many(comodel_name='res.partner.notes', 
+                                 string='Daily notes', inverse_name="partner_id")
+    next_contact = fields.Date(string="Next contact", compute='_compute_note_fields',
+                                 store=True)
+    next_contact_time = fields.Char(string='Next contact time', 
+                                 compute='_compute_note_fields', store=True)
+    next_contact_type = fields.Selection(string='Next contact type', 
+                                selection=[('T', 'Phone'), ('B', 'Visit'),
+                                 ('E', 'E-mail'), ('P', 'Mail'), ('I', 'Internet')],
+                                  compute='_compute_note_fields', store=True)
+    last_contact = fields.Date(string="Last contact", compute='_compute_note_fields',
+                                 store=True)
+    last_contact_type = fields.Selection(string='Last contact type',
+                                 selection=[('T', 'Phone'), ('B', 'Visit'),
+                                  ('E', 'E-mail'), ('P', 'Mail'), ('I', 'Internet')],
+                                   compute='_compute_note_fields', store=True)
+
+    def action_view_next_event(self):
         action = {
-            'name': _('Daily notes'),
+            'name': _(self.name + ' - notes'),
             'domain': [('partner_id', '=', self.ids)],
             'view_type': 'form',
             'res_model': 'res.partner.notes',
-            'view_id': self.env.ref('partner_daily_notes.partner_notes_view_tree_button').id, #self.env['ir.model.data'].get_object_reference('partner_daily_notes','view_partner_notes_tree_button'),
-            'view_mode': 'tree', 
+            'view_id': self.env.ref('partner_daily_notes.partner_notes_view_tree').id,
+            'view_mode': 'tree',
             'type': 'ir.actions.act_window',
         }
         if len(self) == 1:
             action['context'] = {'default_partner_id': self.id}
         return action
-
 
 class ResPartnerNoteType(models.Model):
     _name = "res.partner.note.type"
