@@ -169,7 +169,9 @@ class WebsiteScreenpop(http.Controller):
             pnr = pnr[:8] + '-' + pnr[8:12]
         message = _('Initiating BankID-identification, try to authenticate')
         bankid = CachingClient(request.env['ir.config_parameter'].sudo().get_param('partner_view_360.bankid_wsdl', 'http://bhipws.arbetsformedlingen.se/Integrationspunkt/ws/mobiltbankidinterntjanst?wsdl'))  # create a Client instance
-        res = bankid.service.MobiltBankIDInternTjanst(post.get('personnummer'))
+        res = bankid.service.MobiltBankIDInternTjanst(post.get('personnummer'),'crm')
+        if res.get('orderRef'):
+            res = bankid.service.verifieraIdentifiering(res['orderRef'],'crm')
         return request.render('partner_view_360.bankid', {
                     'personnummer': post.get('personnummer'),
                     'bankid_soap': bankid,
