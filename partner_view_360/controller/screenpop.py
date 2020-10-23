@@ -2,7 +2,7 @@
 ##############################################################################
 #
 #    Odoo, Open Source Management Solution, third party addon
-#    Copyright (C) 2004-2019 Vertel AB (<http://vertel.se>).
+#    Copyright (C) 2004-2020 Vertel AB (<http://vertel.se>).
 #
 #    This program is free software: you can redistribute it and/or modify
 #    it under the terms of the GNU Affero General Public License as
@@ -137,7 +137,26 @@ class WebsiteScreenpop(http.Controller):
                     'bankid_soap': bankid,
                     'bankid_res': res,
                     })
-        
+
+
+    @http.route(['/opencustomerview/bankidtest'], type='http', auth="public", website=True, csrf=False)
+    def opencustomerview_bankid(self, **post):
+        """
+        personnummer=<12 tecken>
+        """
+        bankid = res = None       
+        pnr = post.get('personnummer', '')
+        if pnr and not '-' in pnr:
+            pnr = pnr[:8] + '-' + pnr[8:12]
+        message = _('Initiating BankID-identification, try to authenticate')
+        bankid = CachingClient(request.env['ir.config_parameter'].sudo().get_param('partner_view_360.bankid_wsdl', 'http://bhipws.arbetsformedlingen.se/Integrationspunkt/ws/mobiltbankidinterntjanst?wsdl'))  # create a Client instance
+        res = bankid.service.MobiltBankIDInternTjanst(post.get('personnummer'))
+        return request.render('partner_view_360.bankid', {
+                    'personnummer': post.get('personnummer'),
+                    'bankid_soap': bankid,
+                    'bankid_res': res,
+                    })
+                
         
     @http.route(['/opencustomerview/bankidtest'], type='http', auth="public", website=True, csrf=False)
     def opencustomerview_bankidtest(self, **post):
@@ -150,7 +169,9 @@ class WebsiteScreenpop(http.Controller):
             pnr = pnr[:8] + '-' + pnr[8:12]
         message = _('Initiating BankID-identification, try to authenticate')
         bankid = CachingClient(request.env['ir.config_parameter'].sudo().get_param('partner_view_360.bankid_wsdl', 'http://bhipws.arbetsformedlingen.se/Integrationspunkt/ws/mobiltbankidinterntjanst?wsdl'))  # create a Client instance
-        res = bankid.service.MobiltBankIDInternTjanst(post.get('personnummer'))
+        res = bankid.service.MobiltBankIDInternTjanst(post.get('personnummer'),'crm')
+        if res.get('orderRef'):
+            res = bankid.service.verifieraIdentifiering(res['orderRef'],'crm')
         return request.render('partner_view_360.bankid', {
                     'personnummer': post.get('personnummer'),
                     'bankid_soap': bankid,
