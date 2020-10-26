@@ -48,6 +48,14 @@
                         <field name="social_sec_nr_search"/>
                         <!-- <field name="customer_id_search"/>
                         <field name="email_search"/> -->
+<!--
+                        screenpop
+-->
+                        <button name="do_bankid"  string="BankID" type="object" attrs="{'invisible': [('identification','!=','Digital ID')]}"/>
+                         <field name="bank_id_text" string="" readonly="1" attrs="{'invisible': [('identification','!=','Digital ID')]}" />
+<!--
+                         screenpop
+-->
                     </group>
                 </group>
                 <group></group>
@@ -76,7 +84,7 @@
     </record>
 
     <act_window id="search_jobseeker_wizard"
-            name="Search Partner"
+            name="Search Partner [TEMP]"
             src_model="res.partner"
             res_model="res.partner.jobseeker.search.wizard"
             view_mode="form"
