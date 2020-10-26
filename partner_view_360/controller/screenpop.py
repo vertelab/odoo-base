@@ -81,6 +81,10 @@ class WebsiteScreenpop(http.Controller):
                                                                 partner.id if partner else 0,action.id if action else 0
                                                             )            
             if post.get('bankid') != 'OK':
+                res_url = '%s/web#id=%s&action=%s&model=res.partner&view_type=form' % (
+                                                                request.env['ir.config_parameter'].sudo().get_param('web.base.url',''),
+                                                                partner.id if partner else 0,action.id if action else 0)
+                return werkzeug.utils.redirect(res_url)
                 return request.render('partner_view_360.bankid', {
                     'message': _('You have to initiate BankID-identification'),
                     'partner': partner,
