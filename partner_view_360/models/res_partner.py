@@ -106,24 +106,30 @@ class ResPartner(models.Model):
         social_sec_stripped = ""
         if self.is_jobseeker and social_sec != False:
             social_sec_split = social_sec.split("-")
+            error_message = ""
             if len(social_sec_split) > 1:
                 if len(social_sec_split[1]) != 4 or len(social_sec_split) > 2:
                     wrong_input = True
-                    _logger.error("Incorrectly formated social security number (company_registry)")
+                    error_message = _("Incorrectly formated social security number %s (company_registry field), incorrectly placed or too many hyphens" % social_sec)
+                    _logger.error(error_message)
                 social_sec_stripped = social_sec_split[0]
                 if len(social_sec_stripped) != 8:
                     wrong_input = True
-                    _logger.error("Social security number (company_registry) field lenght is incorrect, should be 12")
+                    error_message = _("Social security number %s (company_registry field) lenght is incorrect, should be 12" % social_sec)
+                    _logger.error(error_message)
             elif len(social_sec_split) == 1:
                 if len(social_sec_split[0]) == 10:
                     wrong_input = True
+                    error_message = _("Social security number %s (company_registry field) lenght is incorrect, should be 12" % social_sec)
+                    _logger.error(error_message)
                     social_sec_stripped = social_sec_split[0][:6]
                 elif len(social_sec_split[0]) == 12:
                     social_sec_stripped = social_sec_split[0][:8]
                     self.company_registry = "%s-%s" %(social_sec_stripped, social_sec_split[0][8:12])
                 else:
                     wrong_input = True
-                    _logger.error("Social security number (company_registry) field lenght is incorrect, should be 12")
+                    error_message = _("Social security number %s (company_registry field) lenght is incorrect, should be 12" % social_sec)
+                    _logger.error(error_message)
             date_of_birth = date(1980,1,1)
             if len(social_sec_stripped) == 6:
                 yr = social_sec_stripped[:2]
@@ -134,23 +140,27 @@ class ResPartner(models.Model):
                     date_of_birth = date(year, month, day)
                 except:
                     wrong_input = True
-                    _logger.error("Could not convert social security number (company_registry) to date")
+                    error_message = _("Could not convert social security number %s (company_registry field) to date" % social_sec)
+                    _logger.error(error_message)
                 if today.year - date_of_birth.year < 18: #if social security numbers with 10 numbers are reallowed, change this to something more reasonable in case children are allowed to register
                     year = int("19"+yr)
                     try:
                         date_of_birth = date(year, month, day)
                     except:
                         wrong_input = True
-                        _logger.error("Could not convert social security number (company_registry) to date%s" % social_sec_stripped)
+                        error_message = _("Could not convert social security number %s (company_registry field) to date" % social_sec_stripped)
+                        _logger.error(error_message)
             elif len(social_sec_stripped) == 8:
                 try:
                     date_of_birth = date(int(social_sec_stripped[:4]),int(social_sec_stripped[4:6]),int(social_sec_stripped[6:8]))
                 except:
                     wrong_input = True
-                    _logger.error("Could not convert social security number (company_registry) to date %s" % social_sec_stripped)
+                    error_message = _("Could not convert social security number %s (company_registry field) to date" % social_sec_stripped)
+                    _logger.error(error_message)
             else: 
                 wrong_input = True
-                _logger.error("Incorrectly formated social security number (company_registry)")
+                error_message = _("Incorrectly formated social security number %s (company_registry field)" % social_sec)
+                _logger.error(error_message)
             
             if not wrong_input:
                 years = today.year - date_of_birth.year
@@ -158,7 +168,7 @@ class ResPartner(models.Model):
                     years -= 1
                 if years > 67:
                     self.age = _("This person is too old, at %s years old") % years
-                    _logger.error("A person older than 67 should not be in the system, a person is %s years old" % years)
+                    _logger.warn("A person older than 67 should not be in the system, a person is %s years old" % years)
                 else:
                     self.age = years
                 
@@ -168,7 +178,7 @@ class ResPartner(models.Model):
                 #}
                 self.social_sec_nr = ""
                 self.age = ""
-                raise ValidationError(_("Please input a correctly formated social security number"))
+                raise ValidationError(_("Please input a correctly formated social security number %s" % error_message))
 
     def update_partner_images(self):
         for partner in self:
