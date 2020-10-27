@@ -135,7 +135,9 @@ class ResPartner(models.Model):
                 yr = social_sec_stripped[:2]
                 year = int("20"+yr)
                 month = int(social_sec_stripped[2:4])
-                day = int(social_sec_stripped[4:6])
+                day = int(social_sec_stripped[4:6])   
+                if day > 60:
+                    day = day - 60           
                 try:
                     date_of_birth = date(year, month, day)
                 except:
@@ -151,8 +153,13 @@ class ResPartner(models.Model):
                         error_message = _("Could not convert social security number %s (company_registry field) to date" % social_sec_stripped)
                         _logger.error(error_message)
             elif len(social_sec_stripped) == 8:
+                year = int(social_sec_stripped[:4])
+                month = int(social_sec_stripped[4:6])
+                day = int(social_sec_stripped[6:8])
+                if day > 60:
+                    day = day - 60
                 try:
-                    date_of_birth = date(int(social_sec_stripped[:4]),int(social_sec_stripped[4:6]),int(social_sec_stripped[6:8]))
+                    date_of_birth = date(year, month, day)
                 except:
                     wrong_input = True
                     error_message = _("Could not convert social security number %s (company_registry field) to date" % social_sec_stripped)
@@ -178,7 +185,7 @@ class ResPartner(models.Model):
                 #}
                 self.social_sec_nr = ""
                 self.age = ""
-                raise ValidationError(_("Please input a correctly formated social security number %s" % error_message))
+                raise ValidationError(_("Please input a correctly formated social security number.\n %s" % error_message))
 
     def update_partner_images(self):
         for partner in self:
