@@ -53,7 +53,7 @@ v12.0.0.1.10 AFC-704 Changed target for "Close-button".\n
     'data': [
         'views/res_partner_template.xml',
         'views/res_partner_view.xml',
-        #'wizard/res_partner_search_wizard.xml',
+        'wizard/res_partner_search_wizard.xml',
         #'security/ir.model.access.csv',
         "data/res.country.state.csv",
         "data/res.partner.skat.csv",
