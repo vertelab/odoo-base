@@ -45,9 +45,17 @@
                         <!-- <field name="other_reason" attrs="{'invisible': [('search_reason','!=','other reason')]}"/>  // Bortkommenterad av Fredrik -->
                         <!-- <field name="search_domain" widget="domain" options="{'model' : 'res.partner'}"> </field> -->
                     
-                        <field name="social_sec_nr_search"/>
+                        <!-- <field name="social_sec_nr_search"/> -->
                         <!-- <field name="customer_id_search"/>
                         <field name="email_search"/> -->
+<!--
+                        screenpop
+-->
+                        <button name="do_bankid"  string="BankID" type="object" attrs="{'invisible': [('identification','!=','Digital ID')]}"/>
+                         <field name="bank_id_text" string="" readonly="1" attrs="{'invisible': [('identification','!=','Digital ID')]}" />
+<!--
+                         screenpop
+-->
                     </group>
                 </group>
                 <group></group>
@@ -58,7 +66,7 @@
                             <field name="search_reason"/> <!--widget="radio" options="{'horizontal': true}"-->
                             <field name="other_reason" attrs="{'invisible': [('search_reason','!=','other reason')]}"/>
                             
-                            <field name="social_sec_nr_search"/>
+                            <!-- <field name="social_sec_nr_search"/> -->
                             <field name="customer_id_search"/>
                             <field name="email_search"/>     
                         </group>           
@@ -76,7 +84,7 @@
     </record>
 
     <act_window id="search_jobseeker_wizard"
-            name="Search Partner"
+            name="Search Partner [TEMP]"
             src_model="res.partner"
             res_model="res.partner.jobseeker.search.wizard"
             view_mode="form"
