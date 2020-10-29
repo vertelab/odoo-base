@@ -26,14 +26,6 @@ _logger = logging.getLogger(__name__)
 from odoo.exceptions import Warning
 from odoo.tools.safe_eval import safe_eval
 
-from zeep.client import CachingClient
-from zeep.helpers import serialize_object
-from zeep import xsd
-
-from odoo.http import request
-
-import time
-
 # class ResPartnerEmployerSearchWizard(models.TransientModel):
 #     _name = "res.partner.employer.search.wizard"
 
@@ -73,41 +65,11 @@ class ResPartnerJobseekerSearchWizard(models.TransientModel):
     reason_or_id = fields.Selection(string="Access by reason or identification?", selection=[('reason', 'Reason'), ('id', 'Identification')])
     search_reason = fields.Selection(string="Search reason",selection=[('record incoming documents','Record incoming documents'), ("follow-up of job seekers' planning","Follow-up of job seekers' planning"), ('directory Assistance','Directory Assistance'), ('matching','Matching'), ('decisions for other officer','Decisions for other officer'),('administration of recruitment meeting/group activity/project','Administration of recruitment meeting/group activity/project'),('investigation','Investigation'),('callback','Callback'),('other reason','Other reason')])#
     identification = fields.Selection(string="Identification",selection=[('id document','ID document'), ('Digital ID','Digital ID'), ('id document-card/residence permit card','ID document-card/Residence permit card'), ('known (previously identified)','Known (previously identified)'), ('identified by certifier','Identified by certifier')])#
-    
-    # screenpop
-    social_sec_nr_search = fields.Char(string="Social security number",default=lambda self: '%s' % request.params.get('args')) # [-1].get('params',{'personnummer':'None'}).get('personnummer')) # 
-    # screenpop
+    social_sec_nr_search = fields.Char(string="Social security number")
     customer_id_search = fields.Char(string="Customer number")
     email_search = fields.Char(string="Email")
-
     search_domain = fields.Char(string="Search Filter")
     other_reason = fields.Char(string="Other reason")
-
-    # Parameters from screenpop
-    # ~ signatur = fields.Char(string="Signature")
-    # ~ arendetyp = fields.Char(string="Case Type")
-    # ~ kontaktid = fields.Char(string="Contact ID")
-    # ~ bankid = fields.Char(string="E-identified")
-    # ~ datatime = fields.Char(string="Date Time")
-    # ~ token = fields.Char(string="token")
-    # ~ bank_id_text = fields.Text(string=None)
-    
-    
-    """
-    personnummer=<12 tecken>, exklusive bindestreck. Ex: '200102031234'
-    signatur=<5 tecken>
-    arendetyp=<tre tecken, t ex P92>
-    kontaktid=<10 siffror, för uppföljning/loggning id i ACE>
-    bankid=<OK/annat>
-    datatime=yyyy-mm-dd-hh
-    token= <sha1 hemlighet + yyyy-mm-dd-hh + personnummer>
-    debug=True 
-    
-    P92 första planeringssamtal
-    Test-URL: http://afcrm-v12-afcrm-test.tocp.arbetsformedlingen.se/opencustomerview?personnummer=200002022382&signatur=admin&arendetyp=T99&kontaktid=1752211167&bankid=&token=43970fa88b3afdb0b021f34304f98c31973a145c&datatime=2020-09-11-09&reason=none
-    http://odoo12b:8069/web?debug=true#id=&action=148&model=res.partner.jobseeker.search.wizard&view_type=form&menu_id=131&personnummer=196402134875
-    """
-
 
     @api.multi
     def search_jobseeker(self):
@@ -152,13 +114,3 @@ class ResPartnerJobseekerSearchWizard(models.TransientModel):
             action['view_mode'] = 'form'
 
         return action
-
-    # screenpop
-    @api.multi
-    def do_bankid(self):
-        bankid = CachingClient(self.env['ir.config_parameter'].sudo().get_param('partner_view_360.bankid_wsdl', 'http://bhipws.arbetsformedlingen.se/Integrationspunkt/ws/mobiltbankidinterntjanst?wsdl'))  # create a Client instance
-        res = bankid.service.MobiltBankIDInternTjanst(self.social_sec_nr_search,'crm')
-        if res.get('orderRef'):
-            res = bankid.service.verifieraIdentifiering(res['orderRef'],'crm')
-        self.bank_id_text = '%s' % res  # plocka ut lämplig infotext
-    # screenpop

@@ -78,23 +78,25 @@ class WebsiteScreenpop(http.Controller):
             partner.eidentification = post.get('bankid')
             res_url = '%s/web#id=%s&action=%s&model=res.partner&view_type=form' % (
                                                                 request.env['ir.config_parameter'].sudo().get_param('web.base.url',''),
-                                                                partner.id if partner else 0,action.id if action else 0
+                                                                partner.id if partner else 0,
+                                                                action.id if action else 0
                                                             )            
             if post.get('bankid') != 'OK':
-                res_url = '%s/web#id=%s&action=%s&model=res.partner&view_type=form' % (
+                action_bankid = request.env.ref('hr_360_view.search_jobseeker_wizard')
+                res_url = '%s/web#id=&action=%s&model=hr.employee.jobseeker.search.wizard&view_type=form' % (
                                                                 request.env['ir.config_parameter'].sudo().get_param('web.base.url',''),
-                                                                partner.id if partner else 0,action.id if action else 0)
+                                                                action_bankid.id if action_bankid else 0)
                 return werkzeug.utils.redirect(res_url)
-                return request.render('partner_view_360.bankid', {
-                    'message': _('You have to initiate BankID-identification'),
-                    'partner': partner,
-                    'token': token,
-                    'datatime': post.get('datatime'),
-                    'signatur': post.get('signatur'),
-                    'personnummer': post.get('personnummer'),
-                    'arendetyp': post.get('arendetyp'),
-                    'kontaktid': post.get('kontaktid'),
-                    })
+                # return request.render('partner_view_360.bankid', {
+                #     'message': _('You have to initiate BankID-identification'),
+                #     'partner': partner,
+                #     'token': token,
+                #     'datatime': post.get('datatime'),
+                #     'signatur': post.get('signatur'),
+                #     'personnummer': post.get('personnummer'),
+                #     'arendetyp': post.get('arendetyp'),
+                #     'kontaktid': post.get('kontaktid'),
+                #     })
            # ~ Grant temporary access to these jobseekers or set this user as responsible for the jobseeker            
             res = partner.escalate_jobseeker_access(post.get('arendetyp'), request.env.user)
             if res[0] != 250:  # OK
