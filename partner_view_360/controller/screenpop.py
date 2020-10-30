@@ -27,7 +27,6 @@ import logging
 _logger = logging.getLogger(__name__)
 
 from odoo import models, fields, api, _
-# ~ from suds.client import *   # SOAP
 from zeep.client import CachingClient
 from zeep.helpers import serialize_object
 from zeep import xsd
@@ -72,7 +71,7 @@ class WebsiteScreenpop(http.Controller):
         partner = request.env['res.partner'].sudo().search([('company_registry','=',pnr)]) # not granted yet
         
         if not partner:
-            return request.render('partner_view_360.403', {'error': 'ERROR: No partner found', 'our_token': token, 'ext_token': post.get('token'), 'partner': partner, 'action': action, 'post': post,'secret': secret,'signatur':post.get('signatur')})
+            return request.render('partner_view_360.403', {'error': 'ERROR: No partner found', 'our_token': token, 'ext_token': post.get('token'), 'partner': partner, 'action': None, 'post': post,'secret': secret,'signatur':post.get('signatur')})
         elif partner and len(partner) == 1:
             action = request.env.ref('partner_view_360.action_jobseekers')
             partner.eidentification = post.get('bankid')
@@ -83,20 +82,11 @@ class WebsiteScreenpop(http.Controller):
                                                             )            
             if post.get('bankid') != 'OK':
                 action_bankid = request.env.ref('hr_360_view.search_jobseeker_wizard')
+                request.session['ssn'] = post.get('personnummer')
                 res_url = '%s/web#id=&action=%s&model=hr.employee.jobseeker.search.wizard&view_type=form' % (
                                                                 request.env['ir.config_parameter'].sudo().get_param('web.base.url',''),
                                                                 action_bankid.id if action_bankid else 0)
                 return werkzeug.utils.redirect(res_url)
-                # return request.render('partner_view_360.bankid', {
-                #     'message': _('You have to initiate BankID-identification'),
-                #     'partner': partner,
-                #     'token': token,
-                #     'datatime': post.get('datatime'),
-                #     'signatur': post.get('signatur'),
-                #     'personnummer': post.get('personnummer'),
-                #     'arendetyp': post.get('arendetyp'),
-                #     'kontaktid': post.get('kontaktid'),
-                #     })
            # ~ Grant temporary access to these jobseekers or set this user as responsible for the jobseeker            
             res = partner.escalate_jobseeker_access(post.get('arendetyp'), request.env.user)
             if res[0] != 250:  # OK
