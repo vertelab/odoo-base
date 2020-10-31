@@ -288,9 +288,9 @@ class ResPartner(models.Model):
                     counter -= 1
                 else:
                     counter = 0
-                
+        except:
+            _logger.exception("Something went wrong in MQ")
         finally:
-            
             time.sleep(1)
             if mqconn.is_connected():
                 mqconn.disconnect()
