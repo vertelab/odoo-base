@@ -87,8 +87,8 @@ class CalendarAppointmentSuggestion(models.Model):
     _inherit = 'calendar.appointment.suggestion'
 
     @api.multi
-    def select_suggestion(self):
-        super(CalendarAppointmentSuggestion, self).select_suggestion()
+    def _select_suggestion(self):
+        super(CalendarAppointmentSuggestion, self)._select_suggestion()
         #create daily note
         vals = {
                 "name": _("Booked %s" % self.appointment_id.type_id.name),
