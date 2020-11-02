@@ -1,3 +1,3 @@
-import res_country
-import res_district
-import res_partner
+from . import res_country
+from . import res_district
+from . import res_partner

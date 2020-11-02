@@ -8,9 +8,9 @@
             <field name="arch" type="xml">
                 <form string="District">
                     <sheet>
-                        <h1>
+                   <!--      <h1>
                             <field name="name" default_focus="1" placeholder="Name" />
-                        </h1>
+                        </h1> -->
                         <field name="country_id"/>
                         <field name="partner_ids"/>
                     </sheet>
@@ -35,12 +35,11 @@
             <field name="model">res.district</field>
             <field name="arch" type="xml">
                 <search string="Search District">
-                   <field name="name" filter_domain="[('name','ilike',self)]"/>
-                   <separator/>
-                   <filter string="Country" name="country_id" domain="[('country_id','=',1)]"/>
+            <!--        <field name="name" filter_domain="[('name','ilike',self)]"/>
+                                    <filter string="Country" name="country_id" domain="[('country_id','=',1)]"/>
                    <group expand="0" string="Group By">
                        <filter string="Country" context="{'group_by': 'country_id'}"/>
-                   </group>
+                   </group> -->
                </search>
             </field>
         </record>
@@ -49,14 +48,13 @@
             <field name="name">District</field>
             <field name="type">ir.actions.act_window</field>
             <field name="res_model">res.district</field>
-            <field name="view_type">form</field>
             <field name="view_mode">tree,form</field>
             <field name="view_id" ref="view_district_form"/>
             <field name="context">{}</field>
             <field name="search_view_id" ref="view_district_filter"/>
         </record>
 
-        <menuitem id="menu_district_form" parent="base.menu_sales" action="action_district_form" sequence="50"/>
+        <menuitem id="menu_district_form" parent="base.menu_users" action="action_district_form" sequence="50"/>
 
     </data>
 </openerp>
