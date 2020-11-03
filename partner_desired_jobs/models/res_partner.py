@@ -30,7 +30,6 @@ class ResPartner(models.Model):
     job_ids = fields.One2many(comodel_name="res.partner.jobs", inverse_name="partner_id")
 
 
-    
 class Jobs(models.Model):
     _name = 'res.partner.jobs'
 
@@ -38,5 +37,25 @@ class Jobs(models.Model):
     
     name = fields.Many2one('res.ssyk', string="Job title") 
     ssyk_code = fields.Char(string="SSYK", related="name.code")
+    education_level = fields.Many2one(comodel_name="res.partner.education_level", string="Education level")
+    experience_length = fields.Selection([(0, 'No Experience'),
+                                          (1, 'Less than 1 year'),
+                                          (2, '1 to 3 years'),
+                                          (3, 'More than 3 years')
+                                          ])
     education = fields.Boolean(string="Education") 
     experience = fields.Boolean(string="Experience")
+
+    @api.onchange('experience_length')
+    def _tick_untick_experience(self):
+        if self.experience_length != 0:
+            self.experience = True
+        else:
+            self.experience = False
+
+    @api.onchange('education_level')
+    def _tick_untick_education(self):
+        if self.education_level.name != 0:
+            self.education = True
+        else:
+            self.education = False
