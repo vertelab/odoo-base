@@ -64,7 +64,7 @@ class AsokResPartnerListener(stomp.ConnectionListener):
         try:
             xmldict = xmltodict.parse(message, dict_constructor=dict)
             # Validate xml dict
-
+            _logger.debug('__parse_message: %s' % xmldict)
             if (
                 not isinstance(xmldict, dict)
                 or not PREN in xmldict.keys()
