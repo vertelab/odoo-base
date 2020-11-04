@@ -80,13 +80,14 @@ class AsokResPartnerListener(stomp.ConnectionListener):
             # ex = sys.exc_info()
             # print("Oops! %s occurred: %s" % (ex[0], ex[1]))
             _logger.warning("Illegal XML format: '%s'" % message)
+            _logger.exception('XML parsing failed.')
             return None
 
         return xmldict[PREN]
 
     def _handle_message(self, message):
         data = self.__parse_message(message)
-
+        _logger.debug('_handle_message: %s' % data)
         if data:
             # Add message to list
             self.__msglist.append(data)
@@ -110,6 +111,7 @@ class AsokResPartnerListener(stomp.ConnectionListener):
         _logger.debug("Asok MQ Listener on_message: {0} - {1}".format(headers, msg))
         self._handle_message(msg)
         # tell MQ we handled the message
+        _logger.debug('on_message, __msglist: %s' % self.__msglist)
         self.__conn.ack(headers["message-id"])
     
     def on_disconnected(self):
