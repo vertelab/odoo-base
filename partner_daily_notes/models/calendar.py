@@ -32,10 +32,10 @@ class CalendarAppointment(models.Model):
         vals = {
             "name": _("Cancelled %s. Reason: %s" % (self.type_id.name, cancel_reason.name)),
             "partner_id": self.partner_id.id,
-            "administrative_officer": self.user_id.id,
+            "administrative_officer": self.env.user.id,
             "note": _("Cancelled %s: %s. Reason: %s" % (self.type_id.name, self.start, cancel_reason.name)) if self.channel_name == "PDM" else _("Cancelled %s: %s, %s %s. Reason: %s" % (self.type_id.name, self.start, self.office_id.office_code, self.user_id.login, cancel_reason.name)),
             "note_type": self.env.ref('partner_daily_notes.note_type_as_02').id,
-            "office_id": self.partner_id.office_id.id,
+            "office_id": self.env.user.office_ids._ids[0],
             "note_date": self.start,
             "appointment_id": self.id,
         }
@@ -49,10 +49,10 @@ class CalendarAppointment(models.Model):
         vals = {
             "name": _("Meeting moved %s. Reason: %s" % (self.type_id.name, reason.name)),
             "partner_id": self.partner_id.id,
-            "administrative_officer": self.user_id.id,
+            "administrative_officer": self.env.user.id,
             "note": _("Meeting moved %s: %s. Reason: %s" % (self.type_id.name, self.start, reason.name)) if self.channel_name == "PDM" else _("Meeting moved %s: %s, %s %s. Reason: %s" % (self.type_id.name, self.start, self.office_id.office_code, self.user_id.login, reason.name)),
             "note_type": self.env.ref('partner_daily_notes.note_type_as_02').id,
-            "office_id": self.partner_id.office_id.id,
+            "office_id": self.env.user.office_ids._ids[0],
             "appointment_id": self.id,
         }
         self.partner_id.sudo().notes_ids = [(0, 0, vals)]
@@ -70,10 +70,10 @@ class CalendarAppointment(models.Model):
             vals = {
                     "name": _("Booked %s" % self.type_id.name),
                     "partner_id": self.partner_id.id,
-                    "administrative_officer": self.user_id.id,
+                    "administrative_officer": self.env.user.id,
                     "note":_("Booked %s: %s." % (self.type_id.name, self.start)) if self.channel_name == "PDM" else _("Booked %s: %s, %s %s." % (self.type_id.name, self.start, self.office_id.office_code, self.user_id.login)),
                     "note_type": self.env.ref('partner_daily_notes.note_type_as_02').id,
-                    "office_id": self.partner_id.office_id.id,
+                    "office_id": self.env.user.office_ids._ids[0],
                     "note_date": self.start,
                     "appointment_id": self.id,
                 }
@@ -93,10 +93,10 @@ class CalendarAppointmentSuggestion(models.Model):
         vals = {
                 "name": _("Booked %s" % self.appointment_id.type_id.name),
                 "partner_id": self.appointment_id.partner_id.id,
-                "administrative_officer": self.appointment_id.user_id.id,
+                "administrative_officer": self.env.user.id,
                 "note":_("Booked %s: %s." % (self.appointment_id.type_id.name, self.appointment_id.start)) if self.appointment_id.channel_name == "PDM" else _("Booked %s: %s, %s %s." % (self.appointment_id.type_id.name, self.appointment_id.start, self.appointment_id.office_id.office_code, self.appointment_id.user_id.login)),
                 "note_type": self.env.ref('partner_daily_notes.note_type_as_02').id,
-                "office_id": self.appointment_id.partner_id.office_id.id,
+                "office_id": self.env.user.office_ids._ids[0],
                 "note_date": self.appointment_id.start,
                 "appointment_id": self.appointment_id.id,
             }
