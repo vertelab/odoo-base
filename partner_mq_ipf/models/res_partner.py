@@ -29,6 +29,9 @@ import sys
 import time
 import xmltodict
 
+# TODO: Remove extra debugging
+import traceback
+
 _logger = logging.getLogger(__name__)
 
 def connect_and_subscribe(mqconn, user, pwd, target, clientid=4):
@@ -93,9 +96,11 @@ class AsokResPartnerListener(stomp.ConnectionListener):
             self.__msglist.append(data)
 
     def get_list(self):
+        _logger.debug('get_list, __msglist: %s' % self.__msglist)
         return self.__msglist
 
     def clear_list(self):
+        _logger.debug('MQ Asok clear_list: %s\n%s' % (self.__msglist, ''.join(traceback.format_stack())))
         self.__msglist = list()
 
     def on_error(self, headers, body):
@@ -273,6 +278,7 @@ class ResPartner(models.Model):
                 mqconn.unsubscribe(target)
                 # handle list of messages
                 for msg in respartnerlsnr.get_list():
+                    _logger.debug('mq_asok_listener msg: %s' % msg)
                     customer_id = msg.get(SID)
                     social_security_number = msg.get(PNR)
                     former_social_security_number = msg.get(PREVPNR, None)
