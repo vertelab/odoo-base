@@ -37,7 +37,6 @@ This module allowes daily notes for a partner.
     'license': 'AGPL-3',
     'website': 'http://www.vertel.se',
     'depends': [
-        'base_map',
         'partner_view_360',
         'calendar_af'
     ],
