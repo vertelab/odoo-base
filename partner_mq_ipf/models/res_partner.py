@@ -29,9 +29,6 @@ import sys
 import time
 import xmltodict
 
-# TODO: Remove extra debugging
-import traceback
-
 _logger = logging.getLogger(__name__)
 
 def connect_and_subscribe(mqconn, user, pwd, target, clientid=4):
@@ -51,7 +48,6 @@ class AsokResPartnerListener(stomp.ConnectionListener):
     __user = None 
     __pwd = None
     __target = None
-    __msglist = list()
     __clientid = None
 
     def __init__(self, env, mqconn, user, pwd, target, clientid=4):
@@ -61,6 +57,7 @@ class AsokResPartnerListener(stomp.ConnectionListener):
         self.__pwd = pwd
         self.__target = target
         self.__clientid = clientid
+        self.__msglist = list()
 
     def __parse_message(self, message):
         xmldict = None
@@ -83,24 +80,21 @@ class AsokResPartnerListener(stomp.ConnectionListener):
             # ex = sys.exc_info()
             # print("Oops! %s occurred: %s" % (ex[0], ex[1]))
             _logger.warning("Illegal XML format: '%s'" % message)
-            _logger.exception('XML parsing failed.')
             return None
 
         return xmldict[PREN]
 
-    def _handle_message(self, message):
+    def _handle_message(self, headers, message):
         data = self.__parse_message(message)
         _logger.debug('_handle_message: %s' % data)
         if data:
             # Add message to list
-            self.__msglist.append(data)
+            self.__msglist.append((headers, data))
 
     def get_list(self):
-        _logger.debug('get_list, __msglist: %s' % self.__msglist)
         return self.__msglist
 
     def clear_list(self):
-        _logger.debug('MQ Asok clear_list: %s\n%s' % (self.__msglist, ''.join(traceback.format_stack())))
         self.__msglist = list()
 
     def on_error(self, headers, body):
@@ -114,11 +108,14 @@ class AsokResPartnerListener(stomp.ConnectionListener):
  
     def on_message(self, headers, msg):
         _logger.debug("Asok MQ Listener on_message: {0} - {1}".format(headers, msg))
-        self._handle_message(msg)
-        # tell MQ we handled the message
-        _logger.debug('on_message, __msglist: %s' % self.__msglist)
-        self.__conn.ack(headers["message-id"])
+        self._handle_message(headers, msg)
     
+    def ack_message(self, msg):
+        headers, body = msg
+        # tell MQ we handled the message
+        self.__conn.ack(headers["message-id"])
+        self.__msglist.remove(msg)
+
     def on_disconnected(self):
         _logger.warning('Asok MQ Listener disconnected from MQ - Tring to reconnect')
         connect_and_subscribe(self.__conn, self.__user, self.__pwd, self.__target, self.__clientid)
@@ -154,7 +151,6 @@ class STOMResPartnerListener(stomp.ConnectionListener):
     __pwd = None
     __target = None
     __clientid = None
-    __msglist = list()
 
     def __init__(self, env, mqconn, user, pwd, target, clientid=4):
         self.__env = env
@@ -163,6 +159,7 @@ class STOMResPartnerListener(stomp.ConnectionListener):
         self.__pwd = pwd
         self.__target = target
         self.__clientid = clientid
+        self.__msglist = list()
 
     def __parse_message(self, message):
         try:
@@ -277,15 +274,19 @@ class ResPartner(models.Model):
                 time.sleep(5) # wait for a bit
                 mqconn.unsubscribe(target)
                 # handle list of messages
-                for msg in respartnerlsnr.get_list():
-                    _logger.debug('mq_asok_listener msg: %s' % msg)
+                for message in respartnerlsnr.get_list():
+                    headers, msg = message
                     customer_id = msg.get(SID)
                     social_security_number = msg.get(PNR)
                     former_social_security_number = msg.get(PREVPNR, None)
                     message_type = msg.get(MSGTYPE) 
                     _logger.info("Asok MQ Listener - calling rask_controller")
                     _logger.debug("Asok MQ Listener - rask_controller: %s" % msg)
-                    self.env['res.partner'].rask_controller(customer_id, social_security_number, former_social_security_number, message_type)
+                    try:
+                        self.env['res.partner'].rask_controller(customer_id, social_security_number, former_social_security_number, message_type)
+                        respartnerlsnr.ack_message(message)
+                    except:
+                        _logger.exception('MQ rask_controller failed!')
 
                 self.env.cr.commit()
                 respartnerlsnr.clear_list()
