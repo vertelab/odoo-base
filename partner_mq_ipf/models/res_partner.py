@@ -43,12 +43,6 @@ MSGTYPE="meddelandetyp"
 TIMESTAMP="tidpunkt"
 
 class AsokResPartnerListener(stomp.ConnectionListener):
-    __env = None
-    __conn = None
-    __user = None 
-    __pwd = None
-    __target = None
-    __clientid = None
 
     def __init__(self, env, mqconn, user, pwd, target, clientid=4):
         self.__env = env
@@ -114,7 +108,6 @@ class AsokResPartnerListener(stomp.ConnectionListener):
         headers, body = msg
         # tell MQ we handled the message
         self.__conn.ack(headers["message-id"])
-        self.__msglist.remove(msg)
 
     def on_disconnected(self):
         _logger.warning('Asok MQ Listener disconnected from MQ - Tring to reconnect')
@@ -271,9 +264,12 @@ class ResPartner(models.Model):
 
             counter = 12 * minutes_to_live # Number of 5 sek slices to wait
             while counter > 0:
-                time.sleep(5) # wait for a bit
+                # Let messages accumulate
+                time.sleep(5)
+                _logger.debug('__msglist before unsubscribe: %s' % respartnerlsnr.get_list())
+                # Stop listening
                 mqconn.unsubscribe(target)
-                # handle list of messages
+                # Handle list of messages
                 for message in respartnerlsnr.get_list():
                     headers, msg = message
                     customer_id = msg.get(SID)
@@ -289,12 +285,15 @@ class ResPartner(models.Model):
                         _logger.exception('MQ rask_controller failed!')
 
                 self.env.cr.commit()
+                # Clear accumulated messages
                 respartnerlsnr.clear_list()
+                # Check if stop has been called
                 cronstop = self.env['ir.config_parameter'].get_param('partner_mq_ipf.cronstop', '0')
-
                 if cronstop == '0':
-                    mqconn.subscribe(target)
                     counter -= 1
+                    if counter > 0:
+                        # Only subscribe if we haven't reached the end yet
+                        mqconn.subscribe(target)
                 else:
                     counter = 0
         except:
