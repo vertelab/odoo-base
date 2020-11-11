@@ -279,7 +279,7 @@ class ResPartner(models.Model):
                     _logger.info("Asok MQ Listener - calling rask_controller")
                     _logger.debug("Asok MQ Listener - rask_controller: %s" % msg)
                     try:
-                        #self.env['res.partner'].rask_controller(customer_id, social_security_number, former_social_security_number, message_type)
+                        self.env['res.partner'].rask_controller(customer_id, social_security_number, former_social_security_number, message_type)
                         respartnerlsnr.ack_message(message)
                     except:
                         _logger.exception('MQ rask_controller failed!')
