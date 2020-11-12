@@ -29,6 +29,8 @@ import sys
 import time
 import xmltodict
 
+# TODO: Remove uuid after successful debugging.
+from uuid import uuid4 
 _logger = logging.getLogger(__name__)
 
 def connect_and_subscribe(mqconn, user, pwd, target, clientid=4):
@@ -52,6 +54,7 @@ class AsokResPartnerListener(stomp.ConnectionListener):
         self.__target = target
         self.__clientid = clientid
         self.__msglist = list()
+        self.id = uuid4()
 
     def __parse_message(self, message):
         xmldict = None
@@ -80,7 +83,7 @@ class AsokResPartnerListener(stomp.ConnectionListener):
 
     def _handle_message(self, headers, message):
         data = self.__parse_message(message)
-        _logger.debug('_handle_message: %s' % data)
+        _logger.debug('_handle_message: %s %s' % (self.id, data))
         if data:
             # Add message to list
             self.__msglist.append((headers, data))
@@ -110,8 +113,8 @@ class AsokResPartnerListener(stomp.ConnectionListener):
         self.__conn.ack(headers["message-id"])
 
     def on_disconnected(self):
-        _logger.warning('Asok MQ Listener disconnected from MQ - Tring to reconnect')
-        connect_and_subscribe(self.__conn, self.__user, self.__pwd, self.__target, self.__clientid)
+        # Probably happened because we asked to disconnect
+        _logger.warning('Asok MQ Listener disconnected from MQ - NOT Trying to reconnect')
 
     def on_connecting(self, host_and_port):
         """
@@ -193,11 +196,12 @@ class STOMResPartnerListener(stomp.ConnectionListener):
         _logger.debug("STOM MQ Listener on_message: {0} - {1}".format(headers, msg))
         self._handle_message(msg)
         # tell MQ we handled the message
+        # TODO: Should probably move ack to successful message handling. See AsokResPartnerListener
         self.__conn.ack(headers["message-id"])
     
     def on_disconnected(self):
+        # Probably happened because we asked to disconnect
         _logger.warning('STOM MQ Listener disconnected from MQ - Tring to reconnect')
-        connect_and_subscribe(self.__conn, self.__user, self.__pwd, self.__target, self.__clientid)
 
     def on_connecting(self, host_and_port):
         """
@@ -266,7 +270,7 @@ class ResPartner(models.Model):
             while counter > 0:
                 # Let messages accumulate
                 time.sleep(5)
-                _logger.debug('__msglist before unsubscribe: %s' % respartnerlsnr.get_list())
+                _logger.debug('__msglist before unsubscribe: %s %s' % (respartnerlsnr.id, respartnerlsnr.get_list()))
                 # Stop listening
                 mqconn.unsubscribe(target)
                 # Handle list of messages
