@@ -21,7 +21,7 @@
 
 {
     'name': 'Partner 360 view',
-    'version': '12.0.0.1.10',
+    'version': '12.0.0.1.11',
     'category': '',
     'description': """
 Module for employee 360 view
@@ -62,9 +62,6 @@ v12.0.0.1.10 AFC-704 Changed target for "Close-button".\n
     'demo': [
         "data/jobseekers/res.partner.csv",
         "data/employers/res.partner.csv",
-    ],
-    'qweb': [
-        'static/src/xml/systray.xml',
     ],
     'application': False,
     'installable': True,
