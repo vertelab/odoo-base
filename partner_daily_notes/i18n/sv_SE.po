@@ -183,3 +183,15 @@ msgstr "Titel"
 #: model:ir.model,name:partner_daily_notes.model_res_partner_note_type
 msgid "res.partner.note.type"
 msgstr ""
+
+#. module: partner_daily_notes
+#: model:ir.model.fields,field_description:partner_daily_notes.field_res_partner__next_contact
+#: model:ir.model.fields,field_description:partner_daily_notes.field_res_users__next_contact
+msgid "Next contact"
+msgstr "Nästa kontakt"
+
+#. module: partner_daily_notes
+#: model:ir.model.fields,field_description:partner_daily_notes.field_res_partner__last_contact
+#: model:ir.model.fields,field_description:partner_daily_notes.field_res_users__last_contact
+msgid "Last contact"
+msgstr "Sista kontakt"

@@ -5,8 +5,8 @@ class res_partner(models.Model):
     _inherit = 'res.partner'
 
     next_event_count = fields.Integer(string="Next Event", compute='daily_note_record')
-    next_contact = fields.Date(string="Next Contact", compute='daily_note_record')
-    last_contact = fields.Date(string="Last Contact", compute='daily_note_record')
+    next_contact = fields.Date(compute='daily_note_record')
+    last_contact = fields.Date(compute='daily_note_record')
 
     @api.depends('name')
     def daily_note_record(self):
