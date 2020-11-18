@@ -71,7 +71,12 @@ class WebsiteScreenpop(http.Controller):
         partner = request.env['res.partner'].sudo().search([('company_registry','=',pnr)]) # not granted yet
         
         if not partner:
-            return request.render('partner_view_360.403', {'error': 'ERROR: No partner found', 'our_token': token, 'ext_token': post.get('token'), 'partner': partner, 'action': None, 'post': post,'secret': secret,'signatur':post.get('signatur')})
+            action_bankid = request.env.ref('hr_360_view.search_jobseeker_wizard')
+            request.session['ssn_not_found'] = True
+            res_url = '%s/web#id=&action=%s&model=hr.employee.jobseeker.search.wizard&view_type=form' % (
+                                                            request.env['ir.config_parameter'].sudo().get_param('web.base.url',''),
+                                                            action_bankid.id if action_bankid else 0)
+            return werkzeug.utils.redirect(res_url)
         elif partner and len(partner) == 1:
             action = request.env.ref('partner_view_360.action_jobseekers')
             partner.eidentification = post.get('bankid')
