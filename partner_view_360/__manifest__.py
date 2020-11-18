@@ -48,6 +48,7 @@ v12.0.0.1.10 AFC-704 Changed target for "Close-button".\n
         'partner_fax',
         'hr_office',
         'af_security',
+        'res_sun'
     ],
     'data': [
         'views/res_partner_template.xml',
