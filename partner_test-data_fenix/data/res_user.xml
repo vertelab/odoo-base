@@ -1,0 +1,23 @@
+<odoo>
+    <data noupdate="1">
+        <record id="ben_jackson_user" model="res.users">
+            <field name="name">Ben Jackson</field>
+            <field name="login">ben.jackson@example.com</field>
+            <field name="password"></field>
+            <!-- Avoid auto-including this demo user in any default group -->
+            <field name="groups_id" eval="[(6,0,[ref('base.group_user')])]"/>
+            <field name="partner_id" ref="partner_test-data_fenix.partner_ben"/>
+            <field name="active" eval="True"/>
+        </record>
+
+        <record id="drake_water_user" model="res.users">
+            <field name="name">Drake Water</field>
+            <field name="login">drake.water@example.com</field>
+            <field name="password"></field>
+            <!-- Avoid auto-including this demo user in any default group -->
+            <field name="groups_id" eval="[(6,0,[ref('base.group_user')])]"/>
+            <field name="partner_id" ref="partner_test-data_fenix.partner_drake"/>
+            <field name="active" eval="True"/>
+        </record>
+    </data>
+</odoo>
