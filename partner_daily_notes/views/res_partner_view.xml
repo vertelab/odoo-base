@@ -5,6 +5,7 @@
             <field name="model">res.partner</field>
             <field name="inherit_id" ref="partner_view_360.view_jobseeker_form"/>
             <field name="arch" type="xml">
+              <!-- Hidden until we use the daily notes.
                 <xpath expr="//sheet/div[hasclass('oe_button_box')]" position="inside">
                     <button name="action_view_next_event"
                         type="object"
@@ -12,6 +13,7 @@
                         icon="fa-calendar-plus-o"
                         string="Daily notes"/>
                 </xpath>
+              -->
                 <field name="jobseeker_category" position="after">
                     <field name="next_contact"/>
                     <field name="last_contact"/>
