@@ -111,8 +111,8 @@
             <field name="education_level" />
             <field name="foreign_education" />
             <field name="foreign_education_approved" />
-            <field name="drivers_license_ids" options="{'no_create_edit': True}" />
-            <field name="has_car" />
+            <!-- <field name="drivers_license_ids" options="{'no_create_edit': True}" /> -->
+            <!-- <field name="has_car" /> -->
           </group>
         </page>
       </xpath>
@@ -174,9 +174,7 @@
               <field name="jobseeker_category_id" options="{'no_create_edit': True}" class="oe_edit_only" nolabel="1"/>
               <field name="jobseeker_category" class="oe_read_only"/>
               <field name="customer_since" />
-<!--
               <field name="office_id" options="{'no_create_edit': True}"  />
--->
               <field name="match_area" />
               <field name="share_info_with_employers" />
               <field name="sms_reminders" />
@@ -314,9 +312,7 @@
         <field name="name" />
         <field name="city" />
         <field name="email" />
-<!--
         <field name="office_id" />
--->
       </tree>
     </field>
   </record>
@@ -328,9 +324,7 @@
         <field name="name" />
         <field name="city" />
         <field name="email" />
-<!--
         <field name="office_id" />
--->
         <templates>
           <t t-name="kanban-box">
             <div class="oe_kanban_global_click">
@@ -347,9 +341,7 @@
                       <field name="email" />
                     </li>
                     <li>
-<!--
                       <field name="office_id" />
--->
                     </li>
                   </ul>
                 </div>
@@ -419,7 +411,7 @@
   <menuitem id="menu_sni_config" parent="res_partner_jobseekers_config_menu" action="res_sni.action_sni_form" sequence="10"  groups="base.group_no_one" />
   <menuitem id="menu_ssyk_config" parent="res_partner_jobseekers_config_menu" action="res_ssyk.action_ssyk_form" sequence="20"  groups="base.group_no_one" />
   <menuitem id="menu_sun_config" parent="res_partner_jobseekers_config_menu" action="res_sun.action_sun_form" sequence="30"  groups="base.group_no_one" />
-  <menuitem id="menu_drivers_license_config" parent="res_partner_jobseekers_config_menu" action="res_drivers_license.action_drivers_license_form" sequence="4" groups="base.group_no_one" />
+<!-- <menuitem id="menu_drivers_license_config" parent="res_partner_jobseekers_config_menu" action="res_drivers_license.action_drivers_license_form" sequence="4" groups="base.group_no_one" /> -->
 <!--  <record id="view_partner_form_education1" model="ir.ui.view">-->
 <!--    <field name="name">res.partner.eduacation.form1</field>-->
 <!--    <field name="model">res.partner</field>-->
@@ -432,10 +424,9 @@
 <!--            <field name="education_level" />-->
 <!--            <field name="foreign_education" />-->
 <!--            <field name="foreign_education_approved" />-->
-<!--            &lt;!&ndash; <field name="has_drivers_license" /> &ndash;&gt;-->
+<!--            <field name="has_drivers_license" />-->
 <!--            <field name="drivers_license_ids" options="{'no_create_edit': True}" widget="many2many_tags" />-->
-<!--            &lt;!&ndash; bortkommenterad för att vi inte vet om vi kan få en integration i tid (Fredrik) &ndash;&gt;-->
-<!--            <field name="has_car" groups="base.group_no_one" />-->
+<!--            bortkommenterad för att vi inte vet om vi kan få en integration i tid (Fredrik) -->
 <!--          </group>-->
 <!--        </page>-->
 <!--      </xpath>-->
@@ -493,9 +484,7 @@
               <field name="employer_class" />
               <label for="user_id" string="Administrative officer" />
               <field name="user_id" nolabel="1" />
-<!--
               <field name="office_id" options="{'no_create_edit': True}"  />
--->
               <field name="segment_employer" groups="base.group_no_one" />
             </group>
           </group>
@@ -630,9 +619,7 @@
         <field name="name" />
         <field name="city" />
         <field name="email" />
-<!--
         <field name="office_id" />
--->
         <templates>
           <t t-name="kanban-box">
             <div class="oe_kanban_global_click">
@@ -654,9 +641,7 @@
                       <field name="email" />
                     </li>
                     <li>
-<!--
                       <field name="office_id" />
--->
                     </li>
                   </ul>
                 </div>
@@ -676,9 +661,7 @@
         <field name="company_registry" />
         <field name="city" />
         <field name="email" />
-<!--
         <field name="office_id" />
--->
       </tree>
     </field>
   </record>

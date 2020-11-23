@@ -29,6 +29,8 @@ import sys
 import time
 import xmltodict
 
+# TODO: Remove uuid after successful debugging.
+from uuid import uuid4 
 _logger = logging.getLogger(__name__)
 
 def connect_and_subscribe(mqconn, user, pwd, target, clientid=4):
@@ -43,13 +45,6 @@ MSGTYPE="meddelandetyp"
 TIMESTAMP="tidpunkt"
 
 class AsokResPartnerListener(stomp.ConnectionListener):
-    __env = None
-    __conn = None
-    __user = None 
-    __pwd = None
-    __target = None
-    __msglist = list()
-    __clientid = None
 
     def __init__(self, env, mqconn, user, pwd, target, clientid=4):
         self.__env = env
@@ -58,13 +53,15 @@ class AsokResPartnerListener(stomp.ConnectionListener):
         self.__pwd = pwd
         self.__target = target
         self.__clientid = clientid
+        self.__msglist = list()
+        self.id = uuid4()
 
     def __parse_message(self, message):
         xmldict = None
         try:
             xmldict = xmltodict.parse(message, dict_constructor=dict)
             # Validate xml dict
-
+            _logger.debug('__parse_message: %s' % xmldict)
             if (
                 not isinstance(xmldict, dict)
                 or not PREN in xmldict.keys()
@@ -84,12 +81,12 @@ class AsokResPartnerListener(stomp.ConnectionListener):
 
         return xmldict[PREN]
 
-    def _handle_message(self, message):
+    def _handle_message(self, headers, message):
         data = self.__parse_message(message)
-
+        _logger.debug('_handle_message: %s %s' % (self.id, data))
         if data:
             # Add message to list
-            self.__msglist.append(data)
+            self.__msglist.append((headers, data))
 
     def get_list(self):
         return self.__msglist
@@ -108,13 +105,16 @@ class AsokResPartnerListener(stomp.ConnectionListener):
  
     def on_message(self, headers, msg):
         _logger.debug("Asok MQ Listener on_message: {0} - {1}".format(headers, msg))
-        self._handle_message(msg)
+        self._handle_message(headers, msg)
+    
+    def ack_message(self, msg):
+        headers, body = msg
         # tell MQ we handled the message
         self.__conn.ack(headers["message-id"])
-    
+
     def on_disconnected(self):
-        _logger.warning('Asok MQ Listener disconnected from MQ - Tring to reconnect')
-        connect_and_subscribe(self.__conn, self.__user, self.__pwd, self.__target, self.__clientid)
+        # Probably happened because we asked to disconnect
+        _logger.warning('Asok MQ Listener disconnected from MQ - NOT Trying to reconnect')
 
     def on_connecting(self, host_and_port):
         """
@@ -147,7 +147,6 @@ class STOMResPartnerListener(stomp.ConnectionListener):
     __pwd = None
     __target = None
     __clientid = None
-    __msglist = list()
 
     def __init__(self, env, mqconn, user, pwd, target, clientid=4):
         self.__env = env
@@ -156,6 +155,7 @@ class STOMResPartnerListener(stomp.ConnectionListener):
         self.__pwd = pwd
         self.__target = target
         self.__clientid = clientid
+        self.__msglist = list()
 
     def __parse_message(self, message):
         try:
@@ -196,11 +196,12 @@ class STOMResPartnerListener(stomp.ConnectionListener):
         _logger.debug("STOM MQ Listener on_message: {0} - {1}".format(headers, msg))
         self._handle_message(msg)
         # tell MQ we handled the message
+        # TODO: Should probably move ack to successful message handling. See AsokResPartnerListener
         self.__conn.ack(headers["message-id"])
     
     def on_disconnected(self):
+        # Probably happened because we asked to disconnect
         _logger.warning('STOM MQ Listener disconnected from MQ - Tring to reconnect')
-        connect_and_subscribe(self.__conn, self.__user, self.__pwd, self.__target, self.__clientid)
 
     def on_connecting(self, host_and_port):
         """
@@ -267,25 +268,36 @@ class ResPartner(models.Model):
 
             counter = 12 * minutes_to_live # Number of 5 sek slices to wait
             while counter > 0:
-                time.sleep(5) # wait for a bit
+                # Let messages accumulate
+                time.sleep(5)
+                _logger.debug('__msglist before unsubscribe: %s %s' % (respartnerlsnr.id, respartnerlsnr.get_list()))
+                # Stop listening
                 mqconn.unsubscribe(target)
-                # handle list of messages
-                for msg in respartnerlsnr.get_list():
+                # Handle list of messages
+                for message in respartnerlsnr.get_list():
+                    headers, msg = message
                     customer_id = msg.get(SID)
                     social_security_number = msg.get(PNR)
                     former_social_security_number = msg.get(PREVPNR, None)
                     message_type = msg.get(MSGTYPE) 
                     _logger.info("Asok MQ Listener - calling rask_controller")
                     _logger.debug("Asok MQ Listener - rask_controller: %s" % msg)
-                    self.env['res.partner'].rask_controller(customer_id, social_security_number, former_social_security_number, message_type)
+                    try:
+                        self.env['res.partner'].rask_controller(customer_id, social_security_number, former_social_security_number, message_type)
+                        respartnerlsnr.ack_message(message)
+                    except:
+                        _logger.exception('MQ rask_controller failed!')
 
                 self.env.cr.commit()
+                # Clear accumulated messages
                 respartnerlsnr.clear_list()
+                # Check if stop has been called
                 cronstop = self.env['ir.config_parameter'].get_param('partner_mq_ipf.cronstop', '0')
-
                 if cronstop == '0':
-                    mqconn.subscribe(target)
                     counter -= 1
+                    if counter > 0:
+                        # Only subscribe if we haven't reached the end yet
+                        mqconn.subscribe(target)
                 else:
                     counter = 0
         except:

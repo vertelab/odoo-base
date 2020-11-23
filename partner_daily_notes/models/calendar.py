@@ -21,6 +21,7 @@
 
 from odoo import models, fields, api, _
 import logging
+from odoo import SUPERUSER_ID
 _logger = logging.getLogger(__name__)
 
 class CalendarAppointment(models.Model):
@@ -29,13 +30,15 @@ class CalendarAppointment(models.Model):
     def generate_cancel_daily_note(self, cancel_reason, appointment):
         super(CalendarAppointment, self).generate_cancel_daily_note(cancel_reason, appointment)
         #create daily note
+        user = self.env.context.get('uid')
+        user = user and self.env['res.users'].browse(user) or self.env.user
         vals = {
             "name": _("Cancelled %s. Reason: %s" % (self.type_id.name, cancel_reason.name)),
             "partner_id": self.partner_id.id,
-            "administrative_officer": self.user_id.id,
+            "administrative_officer": user if user.id != SUPERUSER_ID else False,
             "note": _("Cancelled %s: %s. Reason: %s" % (self.type_id.name, self.start, cancel_reason.name)) if self.channel_name == "PDM" else _("Cancelled %s: %s, %s %s. Reason: %s" % (self.type_id.name, self.start, self.office_id.office_code, self.user_id.login, cancel_reason.name)),
             "note_type": self.env.ref('partner_daily_notes.note_type_as_02').id,
-            "office_id": self.partner_id.office_id.id,
+            "office_id": user.office_ids._ids[0] if user.office_ids else False,
             "note_date": self.start,
             "appointment_id": self.id,
         }
@@ -46,13 +49,15 @@ class CalendarAppointment(models.Model):
     
     def generate_move_daily_note(self, occasions, reason):
         #create daily note
+        user = self.env.context.get('uid')
+        user = user and self.env['res.users'].browse(user) or self.env.user
         vals = {
             "name": _("Meeting moved %s. Reason: %s" % (self.type_id.name, reason.name)),
             "partner_id": self.partner_id.id,
-            "administrative_officer": self.user_id.id,
+            "administrative_officer": user if user.id != SUPERUSER_ID else False,
             "note": _("Meeting moved %s: %s. Reason: %s" % (self.type_id.name, self.start, reason.name)) if self.channel_name == "PDM" else _("Meeting moved %s: %s, %s %s. Reason: %s" % (self.type_id.name, self.start, self.office_id.office_code, self.user_id.login, reason.name)),
             "note_type": self.env.ref('partner_daily_notes.note_type_as_02').id,
-            "office_id": self.partner_id.office_id.id,
+            "office_id": user.office_ids._ids[0] if user.office_ids else False,
             "appointment_id": self.id,
         }
         self.partner_id.sudo().notes_ids = [(0, 0, vals)]
@@ -64,16 +69,17 @@ class CalendarAppointment(models.Model):
     @api.model
     def create(self, values):
         res = super(CalendarAppointment, self).create(values)
-
+        user = self.env.context.get('uid')
+        user = user and self.env['res.users'].browse(user) or self.env.user
         if res.sudo().partner_id and res.state == 'confirmed':
             #create daily note
             vals = {
                     "name": _("Booked %s" % self.type_id.name),
                     "partner_id": self.partner_id.id,
-                    "administrative_officer": self.user_id.id,
+                    "administrative_officer": user if user.id != SUPERUSER_ID else False,
                     "note":_("Booked %s: %s." % (self.type_id.name, self.start)) if self.channel_name == "PDM" else _("Booked %s: %s, %s %s." % (self.type_id.name, self.start, self.office_id.office_code, self.user_id.login)),
                     "note_type": self.env.ref('partner_daily_notes.note_type_as_02').id,
-                    "office_id": self.partner_id.office_id.id,
+                    "office_id": user.office_ids._ids[0] if user.office_ids else False,
                     "note_date": self.start,
                     "appointment_id": self.id,
                 }
@@ -89,14 +95,16 @@ class CalendarAppointmentSuggestion(models.Model):
     @api.multi
     def _select_suggestion(self):
         super(CalendarAppointmentSuggestion, self)._select_suggestion()
+        user = self.env.context.get('uid')
+        user = user and self.env['res.users'].browse(user) or self.env.user
         #create daily note
         vals = {
                 "name": _("Booked %s" % self.appointment_id.type_id.name),
                 "partner_id": self.appointment_id.partner_id.id,
-                "administrative_officer": self.appointment_id.user_id.id,
+                "administrative_officer": user if user.id != SUPERUSER_ID else False,
                 "note":_("Booked %s: %s." % (self.appointment_id.type_id.name, self.appointment_id.start)) if self.appointment_id.channel_name == "PDM" else _("Booked %s: %s, %s %s." % (self.appointment_id.type_id.name, self.appointment_id.start, self.appointment_id.office_id.office_code, self.appointment_id.user_id.login)),
                 "note_type": self.env.ref('partner_daily_notes.note_type_as_02').id,
-                "office_id": self.appointment_id.partner_id.office_id.id,
+                "office_id": user.office_ids._ids[0] if user.office_ids else False,
                 "note_date": self.appointment_id.start,
                 "appointment_id": self.appointment_id.id,
             }
