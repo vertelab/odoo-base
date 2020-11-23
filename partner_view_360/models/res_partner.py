@@ -55,8 +55,8 @@ class ResPartner(models.Model):
     jobseeker_category = fields.Char(string="Jobseeker category", compute="combine_category_name_code")
     customer_since = fields.Datetime(string="Customer since")
     jobseeker_work = fields.Boolean(string="Work")
-    deactualization_date = fields.Datetime(string="Date")
-    deactualization_reason = fields.Char(string="Reason") #egen modell?
+    deactualization_date = fields.Datetime(string="Deactualization date")
+    deactualization_reason = fields.Char(string="Deactualization reason") #egen modell?
     foreign_country_of_work = fields.Char(string="When working in foreign country")
     deactualization_message = fields.Text(string="Message to jobseeker regarding deactualization")
 

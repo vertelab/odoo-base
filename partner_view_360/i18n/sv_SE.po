@@ -223,12 +223,6 @@ msgid "Customers"
 msgstr "Kunder"
 
 #. module: partner_view_360
-#: model:ir.model.fields,field_description:partner_view_360.field_res_partner__deactualization_date
-#: model:ir.model.fields,field_description:partner_view_360.field_res_users__deactualization_date
-msgid "Date"
-msgstr "Datum"
-
-#. module: partner_view_360
 #: model_terms:ir.ui.view,arch_db:partner_view_360.view_jobseeker_form
 #: model_terms:ir.ui.view,arch_db:partner_view_360.view_partner_employer_form
 msgid "Delivery"
@@ -555,11 +549,6 @@ msgstr "Tidigare möten"
 msgid "Private Address"
 msgstr "Privatadress"
 
-#. module: partner_view_360
-#: model:ir.model.fields,field_description:partner_view_360.field_res_partner__deactualization_reason
-#: model:ir.model.fields,field_description:partner_view_360.field_res_users__deactualization_reason
-msgid "Reason"
-msgstr "Anledning"
 
 #. module: partner_view_360
 #: model:ir.model.fields,field_description:partner_view_360.field_res_partner__registered_through
@@ -815,3 +804,15 @@ msgstr "intern anteckning..."
 #: model:ir.model.fields,help:partner_view_360.field_res_users__social_sec_nr
 msgid "organization number"
 msgstr "organisationsnummer"
+
+#. module: partner_view_360
+#: model:ir.model.fields,field_description:partner_view_360.field_res_partner__deactualization_date
+#: model:ir.model.fields,field_description:partner_view_360.field_res_users__deactualization_date
+msgid "Deactualization date"
+msgstr "Avaktualisering datum"
+
+#. module: partner_view_360
+#: model:ir.model.fields,field_description:partner_view_360.field_res_partner__deactualization_reason
+#: model:ir.model.fields,field_description:partner_view_360.field_res_users__deactualization_reason
+msgid "Deactualization reason"
+msgstr "Avaktualisering orsak"

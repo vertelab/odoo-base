@@ -61,7 +61,7 @@
               <field name="jobseeker_work" attrs="{'invisible':[('is_company', '=', True)]}" />
             </group>
             <group>
-              <field name="deactualization_date" />
+              <field name="deactualization_date" string="Deactualization date" />
               <field name="deactualization_reason" />
               <field name="foreign_country_of_work" />
               <field name="deactualization_message" />
@@ -182,6 +182,8 @@
               <field name="eidentification" />
               <label for="user_id" string="Administrative officer" />
               <field name="user_id" nolabel="1" />
+              <field name="deactualization_date"/>
+              <field name="deactualization_reason"/>
             </group>
           </group>
           <notebook>
