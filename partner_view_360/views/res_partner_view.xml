@@ -297,8 +297,6 @@
                 </form>
               </field>
             </page>
-            <page name="apply_for_jobs" string="Education" />
-            <!-- Byt namn på sidans namn också, inte bara string -->
           </notebook>
         </sheet>
       </form>
