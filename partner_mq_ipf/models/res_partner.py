@@ -242,19 +242,23 @@ class ResPartner(models.Model):
         target = self.env['ir.config_parameter'].get_param('partner_mq_ipf.target_asok', '/topic/Consumer.crm.VirtualTopic.arbetssokande.andring')
         usr = self.env['ir.config_parameter'].get_param('partner_mq_ipf.mquser', 'crm')
         pwd = self.env['ir.config_parameter'].get_param('partner_mq_ipf.mqpwd', 'topsecret')
+        stomp_log_level = self.env['ir.config_parameter'].get_param('partner_mq_ipf.stomp_logger', 'INFO')
+
+        # decide the level of the stomper log level depending on param
+        stomp_logger = logging.getLogger('stomp.py')
+        stomp_logger.setLevel(getattr(logging, stomp_log_level))
 
         mqconn = stomp.Connection10(host_port)
-        
+
         if self.env['ir.config_parameter'].get_param('partner_mq_ipf.mqusessl', '1') == '1':
             mqconn.set_ssl(for_hosts=host_port, ssl_version=ssl.PROTOCOL_TLS)
             _logger.debug("Asok MQ Listener - Using TLS")
         else:
             _logger.debug("Asok MQ Listener - Not using TLS")
 
-        
         respartnerlsnr = AsokResPartnerListener(mqconn, usr, pwd, target, 4)
         mqconn.set_listener('', respartnerlsnr)
-        
+
         try:
             connect_and_subscribe(
                 mqconn,
@@ -311,6 +315,11 @@ class ResPartner(models.Model):
         target = self.env['ir.config_parameter'].get_param('partner_mq_ipf.target_STOM', '/topic/Consumer.crm.VirtualTopic.arbetssokande.andring')
         usr = self.env['ir.config_parameter'].get_param('partner_mq_ipf.mquser', 'crm')
         pwd = self.env['ir.config_parameter'].get_param('partner_mq_ipf.mqpwd', 'topsecret')
+        stomp_log_level = self.env['ir.config_parameter'].get_param('partner_mq_ipf.stomp_logger', 'INFO')
+
+        # decide the level of the stomper log level depending on param
+        stomp_logger = logging.getLogger('stomp.py')
+        stomp_logger.setLevel(getattr(logging, stomp_log_level))
 
         _logger.debug("STOM MQ Listener patameters - %s %s - %s %s" % ([host_port], target, usr, pwd))
 
