@@ -134,6 +134,10 @@
             <h1>
               <field name="name" default_focus="1" placeholder="Name" attrs="{'required' : [('type', '=', 'contact')]}" />
             </h1>
+            <!-- Visa avaktualiserad eller Lagrad om så är fallet så att handläggaren vet. -->
+            <group attrs="{'invisible':[ ('deactualization_date', '=', False ) ]}">
+                <field name="deactualization_date" />
+            </group>
           </div>
           <group>
             <group string="Personal Information">
@@ -182,8 +186,7 @@
               <field name="eidentification" />
               <label for="user_id" string="Administrative officer" />
               <field name="user_id" nolabel="1" />
-              <field name="deactualization_date"/>
-              <field name="deactualization_reason"/>
+              <field name="deactualization_reason" attrs="{'invisible':[ ('deactualization_date', '=', False ) ]}"/>
             </group>
           </group>
           <notebook>

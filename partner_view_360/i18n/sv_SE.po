@@ -809,7 +809,7 @@ msgstr "organisationsnummer"
 #: model:ir.model.fields,field_description:partner_view_360.field_res_partner__deactualization_date
 #: model:ir.model.fields,field_description:partner_view_360.field_res_users__deactualization_date
 msgid "Deactualization date"
-msgstr "Avaktualisering datum"
+msgstr "Avaktualiserad"
 
 #. module: partner_view_360
 #: model:ir.model.fields,field_description:partner_view_360.field_res_partner__deactualization_reason
