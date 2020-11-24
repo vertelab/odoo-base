@@ -29,13 +29,14 @@ import sys
 import time
 import xmltodict
 
-# TODO: Remove uuid after successful debugging.
-from uuid import uuid4 
 _logger = logging.getLogger(__name__)
+
+def subscribe(mqconn, target, clientid=4):
+    mqconn.subscribe(destination=target, clientid=clientid, ack="client")
 
 def connect_and_subscribe(mqconn, user, pwd, target, clientid=4):
     mqconn.connect(user, pwd, wait=True)
-    mqconn.subscribe(destination=target, clientid=4, ack="client")
+    subscribe(mqconn, target, clientid=clientid)
 
 PREN="prenumerera-arbetssokande"
 PNR="personnummer"
@@ -46,15 +47,13 @@ TIMESTAMP="tidpunkt"
 
 class AsokResPartnerListener(stomp.ConnectionListener):
 
-    def __init__(self, env, mqconn, user, pwd, target, clientid=4):
-        self.__env = env
+    def __init__(self, mqconn, user, pwd, target, clientid=4):
         self.__conn = mqconn
         self.__user = user
         self.__pwd = pwd
         self.__target = target
         self.__clientid = clientid
         self.__msglist = list()
-        self.id = uuid4()
 
     def __parse_message(self, message):
         xmldict = None
@@ -83,7 +82,7 @@ class AsokResPartnerListener(stomp.ConnectionListener):
 
     def _handle_message(self, headers, message):
         data = self.__parse_message(message)
-        _logger.debug('_handle_message: %s %s' % (self.id, data))
+        _logger.debug('_handle_message: %s' % data)
         if data:
             # Add message to list
             self.__msglist.append((headers, data))
@@ -141,15 +140,13 @@ class AsokResPartnerListener(stomp.ConnectionListener):
         _logger.debug("Asok MQ Listener on_connected: %s - %s" % (headers, body))
 
 class STOMResPartnerListener(stomp.ConnectionListener):
-    __env = None
     __conn = None
     __user = None 
     __pwd = None
     __target = None
     __clientid = None
 
-    def __init__(self, env, mqconn, user, pwd, target, clientid=4):
-        self.__env = env
+    def __init__(self, mqconn, user, pwd, target, clientid=4):
         self.__conn = mqconn
         self.__user = user
         self.__pwd = pwd
@@ -255,7 +252,7 @@ class ResPartner(models.Model):
             _logger.debug("Asok MQ Listener - Not using TLS")
 
         
-        respartnerlsnr = AsokResPartnerListener(self.env, mqconn, usr, pwd, target, 4)
+        respartnerlsnr = AsokResPartnerListener(mqconn, usr, pwd, target, 4)
         mqconn.set_listener('', respartnerlsnr)
         
         try:
@@ -270,7 +267,7 @@ class ResPartner(models.Model):
             while counter > 0:
                 # Let messages accumulate
                 time.sleep(5)
-                _logger.debug('__msglist before unsubscribe: %s %s' % (respartnerlsnr.id, respartnerlsnr.get_list()))
+                _logger.debug('__msglist before unsubscribe: %s' % respartnerlsnr.get_list())
                 # Stop listening
                 mqconn.unsubscribe(target)
                 # Handle list of messages
@@ -284,6 +281,7 @@ class ResPartner(models.Model):
                     _logger.debug("Asok MQ Listener - rask_controller: %s" % msg)
                     try:
                         self.env['res.partner'].rask_controller(customer_id, social_security_number, former_social_security_number, message_type)
+                        # TODO: It seems like unsubscribe breaks ack. We don't want to ack until the message is handled.
                         respartnerlsnr.ack_message(message)
                     except:
                         _logger.exception('MQ rask_controller failed!')
@@ -297,7 +295,7 @@ class ResPartner(models.Model):
                     counter -= 1
                     if counter > 0:
                         # Only subscribe if we haven't reached the end yet
-                        mqconn.subscribe(target)
+                        subscribe(mqconn, target)
                 else:
                     counter = 0
         except:
@@ -324,7 +322,7 @@ class ResPartner(models.Model):
         else:
             _logger.debug("STOM MQ Listener - Not using TLS")
 
-        respartnerlsnr = STOMResPartnerListener(self.env, mqconn,usr,pwd,target,4)
+        respartnerlsnr = STOMResPartnerListener(mqconn,usr,pwd,target,4)
         mqconn.set_listener('', respartnerlsnr)
         
 
