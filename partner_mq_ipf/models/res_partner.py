@@ -19,7 +19,7 @@
 #
 ##############################################################################
 
-from odoo import models, fields, api, _
+from odoo import models, fields, api, _, registry
 
 import json
 import logging
@@ -28,6 +28,7 @@ import ssl
 import sys
 import time
 import xmltodict
+import threading
 
 _logger = logging.getLogger(__name__)
 
@@ -236,6 +237,50 @@ class ResPartner(models.Model):
         return hosts
 
     @api.model
+    def mq_asok_sender(self, msg_list, ack_list, do_list, lock):
+        """Method run in a seperate thread. Sends requests to RASK."""
+        new_cr = registry(self.env.cr.dbname).cursor()
+        uid, context = self.env.uid, self.env.context
+        with api.Environment.manage():
+            env_new = api.Environment(new_cr, uid, context)
+            processed_list = []
+            # passing a bool in do_list to indicate if we should keep
+            # running this loop. What i-s a better solution?
+            while(do_list[0]):
+                message = False
+                if msg_list:
+                    try:
+                        with lock:
+                            message = msg_list.pop()
+                        if message and (message[0]['message-id'] not in processed_list):
+                            _logger.debug("Asok MQ Sender: sending request to RASK")
+                            headers, msg = message
+                            customer_id = msg.get(SID)
+                            social_security_number = msg.get(PNR)
+                            former_social_security_number = msg.get(PREVPNR, None)
+                            message_type = msg.get(MSGTYPE) 
+                            # Send request to RASK
+                            env_new['res.partner'].rask_controller(customer_id, social_security_number, former_social_security_number, message_type)
+                            # append message to ack_list to let main 
+                            # thread know that this can be ACK'd
+                            with lock:
+                                ack_list.append(message)
+                            # append message to processed_list to keep
+                            # track of what messages have been processed
+                            # This list might become too big if we run
+                            # this loop for too long?
+                            processed_list.append(message[0]['message-id'])
+                        message = False
+                    except:
+                        _logger.exception('Asok MQ Sender: error sending request to RASK!')
+                else:
+                    # slow down so we don't loop all the time
+                    # is this good/bad/unnecessary?
+                    time.sleep(5)
+        # close our new cursor
+        env_new.cr.close()
+
+    @api.model
     def mq_asok_listener(self, minutes_to_live = 10): 
         _logger.info("Asok MQ Listener started.")
         host_port = self.__get_host_port()
@@ -268,27 +313,47 @@ class ResPartner(models.Model):
             )
 
             counter = 12 * minutes_to_live # Number of 5 sek slices to wait
+            # define common lists to be used between threads
+            msg_list = []
+            ack_list = []
+            # passing a bool in do_list to indicate if we should keep
+            # running mq_asok_sender. What is a better solution?
+            do_list = [True]
+            # define a lock so we can lock msg_list while updating it 
+            # in each thread.
+            lock = threading.Lock()
+            # create a new thread running mq_asok_sender function
+            sender_thread = threading.Thread(target=self.mq_asok_sender, args=(msg_list, ack_list, do_list, lock))
+            sender_thread.start()
+            # run loop
             while counter > 0:
                 # Let messages accumulate
                 time.sleep(5)
                 _logger.debug('__msglist before unsubscribe: %s' % respartnerlsnr.get_list())
+                # check if we have ACKs to send out
+                with lock:
+                    _logger.warn("DAER ACK ack_list: %s" % ack_list)
+                    while(len(ack_list) > 0):
+                        try:
+                            # read ack_list and send ACK to MQ queue
+                            ack_message = ack_list.pop()
+                            respartnerlsnr.ack_message(ack_message)
+                            ack_message = False
+                        except:
+                            _logger.exception('Asok MQ Listener: error ACK')
+                    _logger.warn("DAER ACK after ack_list: %s" % ack_list)
                 # Stop listening
                 mqconn.unsubscribe(target)
+                # mqconn.unsubscribe(target)
+                
                 # Handle list of messages
                 for message in respartnerlsnr.get_list():
-                    headers, msg = message
-                    customer_id = msg.get(SID)
-                    social_security_number = msg.get(PNR)
-                    former_social_security_number = msg.get(PREVPNR, None)
-                    message_type = msg.get(MSGTYPE) 
-                    _logger.info("Asok MQ Listener - calling rask_controller")
-                    _logger.debug("Asok MQ Listener - rask_controller: %s" % msg)
+                    _logger.debug("Asok MQ Listener - adding message to internal queue")
                     try:
-                        self.env['res.partner'].rask_controller(customer_id, social_security_number, former_social_security_number, message_type)
-                        # TODO: It seems like unsubscribe breaks ack. We don't want to ack until the message is handled.
-                        respartnerlsnr.ack_message(message)
+                        with lock:
+                            msg_list.append(message)
                     except:
-                        _logger.exception('MQ rask_controller failed!')
+                        _logger.exception('Asok MQ Listener: error adding message to internal queue')
 
                 self.env.cr.commit()
                 # Clear accumulated messages
@@ -305,6 +370,7 @@ class ResPartner(models.Model):
         except:
             _logger.exception("Something went wrong in MQ")
         finally:
+            do_list[0] = False
             time.sleep(1)
             if mqconn.is_connected():
                 mqconn.disconnect()
