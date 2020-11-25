@@ -85,7 +85,7 @@ class CalendarAppointment(models.Model):
                 }
             res.sudo().partner_id.notes_ids = [(0, 0, vals)]
             # create edi message
-            self.appointment_id.sudo().partner_id._create_next_last_msg()
+            res.sudo().partner_id._create_next_last_msg()
 
         return res
 
