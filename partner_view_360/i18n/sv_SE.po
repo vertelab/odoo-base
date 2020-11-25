@@ -549,7 +549,6 @@ msgstr "Tidigare möten"
 msgid "Private Address"
 msgstr "Privatadress"
 
-
 #. module: partner_view_360
 #: model:ir.model.fields,field_description:partner_view_360.field_res_partner__registered_through
 #: model:ir.model.fields,field_description:partner_view_360.field_res_users__registered_through
