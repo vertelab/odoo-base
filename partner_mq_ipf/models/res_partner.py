@@ -245,7 +245,7 @@ class ResPartner(models.Model):
             env_new = api.Environment(new_cr, uid, context)
             processed_list = []
             # passing a bool in do_list to indicate if we should keep
-            # running this loop. What i-s a better solution?
+            # running this loop. What is a better solution?
             while(do_list[0]):
                 message = False
                 if msg_list:
@@ -267,16 +267,15 @@ class ResPartner(models.Model):
                                 ack_list.append(message)
                             # append message to processed_list to keep
                             # track of what messages have been processed
-                            # This list might become too big if we run
-                            # this loop for too long?
+                            # this is needed since we will recieve already
+                            # processed messages until they are ACK'd
                             processed_list.append(message[0]['message-id'])
                         message = False
                     except:
                         _logger.exception('Asok MQ Sender: error sending request to RASK!')
                 else:
                     # slow down so we don't loop all the time
-                    # is this good/bad/unnecessary?
-                    time.sleep(5)
+                    time.sleep(1)
         # close our new cursor
         env_new.cr.close()
 
@@ -289,7 +288,7 @@ class ResPartner(models.Model):
         pwd = self.env['ir.config_parameter'].get_param('partner_mq_ipf.mqpwd', 'topsecret')
         stomp_log_level = self.env['ir.config_parameter'].get_param('partner_mq_ipf.stomp_logger', 'INFO')
 
-        # decide the level of the stomper log level depending on param
+        # decide the stomper log level depending on param
         stomp_logger = logging.getLogger('stomp.py')
         stomp_logger.setLevel(getattr(logging, stomp_log_level))
 
@@ -332,20 +331,18 @@ class ResPartner(models.Model):
                 _logger.debug('__msglist before unsubscribe: %s' % respartnerlsnr.get_list())
                 # check if we have ACKs to send out
                 with lock:
-                    _logger.warn("DAER ACK ack_list: %s" % ack_list)
                     while(len(ack_list) > 0):
                         try:
                             # read ack_list and send ACK to MQ queue
                             ack_message = ack_list.pop()
+                            _logger.warn("Asok MQ Listener - ACK: %s" % ack_message[0]['message-id'])
                             respartnerlsnr.ack_message(ack_message)
                             ack_message = False
                         except:
                             _logger.exception('Asok MQ Listener: error ACK')
-                    _logger.warn("DAER ACK after ack_list: %s" % ack_list)
                 # Stop listening
                 mqconn.unsubscribe(target)
-                # mqconn.unsubscribe(target)
-                
+
                 # Handle list of messages
                 for message in respartnerlsnr.get_list():
                     _logger.debug("Asok MQ Listener - adding message to internal queue")
@@ -383,7 +380,7 @@ class ResPartner(models.Model):
         pwd = self.env['ir.config_parameter'].get_param('partner_mq_ipf.mqpwd', 'topsecret')
         stomp_log_level = self.env['ir.config_parameter'].get_param('partner_mq_ipf.stomp_logger', 'INFO')
 
-        # decide the level of the stomper log level depending on param
+        # decide the stomper log level depending on param
         stomp_logger = logging.getLogger('stomp.py')
         stomp_logger.setLevel(getattr(logging, stomp_log_level))
 
