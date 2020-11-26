@@ -23,11 +23,13 @@ from odoo import models, fields, api, _
 import logging
 import threading
 import base64
-from odoo.modules import get_module_resource
 from datetime import date
-_logger = logging.getLogger(__name__)
+
 from odoo.exceptions import ValidationError
 from odoo.tools import image_resize_image_big, image_colorize
+from odoo.modules import get_module_resource
+
+_logger = logging.getLogger(__name__)
 
 
 class ResPartner(models.Model):
@@ -37,19 +39,19 @@ class ResPartner(models.Model):
     work_phone = fields.Char(string='Work phone', help="Work phone number")
     age = fields.Char(string="Age", compute="calculate_age")
     company_registry = fields.Char(
-        string='Organization number', help="organization number")
-    social_sec_nr = fields.Char(string="Social security number", related="company_registry")
+        string='Organization number', help="organization number", index=True)
+    social_sec_nr = fields.Char(string="Social security number", related="company_registry", index=True)
     social_sec_nr_age = fields.Char(string="Social security number", compute="combine_social_sec_nr_age")
     cfar = fields.Char(string='CFAR', help="CFAR number")
-    customer_id = fields.Char(string='Customer number', help="Customer number")
+    customer_id = fields.Char(string='Customer number', help="Customer number", index=True)
     eidentification = fields.Char(string='E-Identification', help="BankId or other e-identification done OK or other")
 
     type = fields.Selection(selection_add=[('foreign address','Foreign Address'), ('given address','Given address'), ('visitation address','Visitation Address'), ('mailing address', 'Mailing Address')])
     
-    is_jobseeker = fields.Boolean(string="Jobseeker")
+    is_jobseeker = fields.Boolean(string="Jobseeker", index=True)
     is_independent_partner = fields.Boolean(string="Independent partner")
     is_government = fields.Boolean(string="Government")
-    is_employer = fields.Boolean(string="Employer")
+    is_employer = fields.Boolean(string="Employer", index=True)
 
     jobseeker_category_id = fields.Many2one(comodel_name='res.partner.skat')
     jobseeker_category = fields.Char(string="Jobseeker category", compute="combine_category_name_code")
@@ -180,9 +182,6 @@ class ResPartner(models.Model):
                     self.age = years
                 
             else: 
-                #return {
-                #'warning': {'title': "Warning", 'message': "What is this?"},
-                #}
                 self.social_sec_nr = ""
                 self.age = ""
                 raise ValidationError(_("Please input a correctly formated social security number.\n %s" % error_message))
@@ -257,12 +256,10 @@ class ResPartner(models.Model):
         return{
             'name': _("Search Jobseekers"),
             'view_type': 'form',
-            #'src_model': "res.partner",
             'res_model': "hr.employee.jobseeker.search.wizard",
             'view_id': False, # self.env.ref("partner_view_360.search_jobseeker_wizard").id,
             'view_mode':"form",
             'target': "inline",
-            #'key2': "client_action_multi",
             'type': 'ir.actions.act_window',
         }
 
@@ -292,15 +289,10 @@ class ResPartner(models.Model):
             result.append((partner.id, name))
         return result
 
-
 #  Grant temporary access to these jobseekers or set this user as responsible for the jobseeker            
     @api.multi
     def escalate_jobseeker_access(self,arendetyp,user):
         return (250,'OK')
-        
-            # ~ res = request.env['edi.ace_errand'].escalate_jobseeker_access(partner,post.get('arendetyp'))
-            # ~ if res[0] != 250:  # OK
-                # ~ return request.render('partner_view_360.403', {'error': 'ERROR: Escalate rights [%s] %s' % res, 'partner': partner, 'signatur':post.get('signatur')})
 
 
 class ResPartnerSKAT(models.Model):

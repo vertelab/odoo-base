@@ -25,9 +25,9 @@ _logger = logging.getLogger(__name__)
 
 
 class ResPartner(models.Model):
-    _inherit = "res.partner"  # odoo inheritance från res.partner
+    _inherit = "res.partner" 
 
-#  Grant temporary access to these jobseekers or set this user as responsible for the jobseeker            
+    #  Grant temporary access to these jobseekers or set this user as responsible for the jobseeker            
     @api.multi
     def escalate_jobseeker_access(self,arendetyp, user):
         res = (250,'OK')
@@ -35,8 +35,3 @@ class ResPartner(models.Model):
             res = super(ResPartner,self).escalate_jobseeker_access(arendetyp, user)
             res = self.env['edi.ace_errand'].escalate_jobseeker_access(partner,arendetyp,user)
         return res
-        
-            # ~ res = request.env['edi.ace_errand'].escalate_jobseeker_access(partner,post.get('arendetyp'))
-            # ~ if res[0] != 250:  # OK
-                # ~ return request.render('partner_view_360.403', {'error': 'ERROR: Escalate rights [%s] %s' % res, 'partner': partner, 'signatur':post.get('signatur')})
-
