@@ -20,7 +20,7 @@
 ##############################################################################
 
 {
-    'name': 'Partner Daily Notes Activity - DEPRECIATED',
+    'name': 'Depreciated - Partner Daily Notes Activity',
     'version': '12.0.1.2',
     'category': '',
     'description': """
