@@ -243,7 +243,6 @@ class ResPartner(models.Model):
         uid, context = self.env.uid, self.env.context
         with api.Environment.manage():
             env_new = api.Environment(new_cr, uid, context)
-            processed_list = []
             # passing a bool in do_list to indicate if we should keep
             # running this loop. What is a better solution?
             while(do_list[0]):
@@ -252,7 +251,7 @@ class ResPartner(models.Model):
                     try:
                         with lock:
                             message = msg_list.pop()
-                        if message and (message[0]['message-id'] not in processed_list):
+                        if message:
                             _logger.debug("Asok MQ Sender: sending request to RASK")
                             headers, msg = message
                             customer_id = msg.get(SID)
@@ -265,11 +264,6 @@ class ResPartner(models.Model):
                             # thread know that this can be ACK'd
                             with lock:
                                 ack_list.append(message)
-                            # append message to processed_list to keep
-                            # track of what messages have been processed
-                            # this is needed since we will recieve already
-                            # processed messages until they are ACK'd
-                            processed_list.append(message[0]['message-id'])
                         message = False
                     except:
                         _logger.exception('Asok MQ Sender: error sending request to RASK!')
@@ -324,6 +318,8 @@ class ResPartner(models.Model):
             # create a new thread running mq_asok_sender function
             sender_thread = threading.Thread(target=self.mq_asok_sender, args=(msg_list, ack_list, do_list, lock))
             sender_thread.start()
+
+            processed_list = []
             # run loop
             while counter > 0:
                 # Let messages accumulate
@@ -335,8 +331,18 @@ class ResPartner(models.Model):
                         try:
                             # read ack_list and send ACK to MQ queue
                             ack_message = ack_list.pop()
-                            _logger.warn("Asok MQ Listener - ACK: %s" % ack_message[0]['message-id'])
-                            respartnerlsnr.ack_message(ack_message)
+                            # use a generator to find the matching message from current list 
+                            # not sure if this is actually needed but
+                            # I've implemented it to stop problems with
+                            # us ACKing messages that disapear...
+                            ack_message_current = next((msg for msg in respartnerlsnr.get_list() if msg[0]["message-id"] == ack_message[0]['message-id']), False)
+                            if not ack_message_current:
+                                # this message ghosted us????
+                                _logger.warn("Asok MQ Listener - COULD NOT FIND MESSAGE TO ACC: %s" % ack_message[0]['message-id'])
+                            else:
+                                _logger.debug("Asok MQ Listener - ACK: %s" % ack_message_current[0]['message-id'])
+                                respartnerlsnr.ack_message(ack_message_current)
+                            ack_message_current = False
                             ack_message = False
                         except:
                             _logger.exception('Asok MQ Listener: error ACK')
@@ -346,12 +352,18 @@ class ResPartner(models.Model):
                 # Handle list of messages
                 for message in respartnerlsnr.get_list():
                     _logger.debug("Asok MQ Listener - adding message to internal queue")
-                    try:
-                        with lock:
-                            msg_list.append(message)
-                    except:
-                        _logger.exception('Asok MQ Listener: error adding message to internal queue')
-
+                    if message[0]['message-id'] not in processed_list:
+                        try:
+                            with lock:
+                                msg_list.append(message)
+                            # append message to processed_list to keep
+                            # track of what messages have been processed
+                            # this is needed since we will recieve already
+                            # processed messages until they are ACK'd
+                            processed_list.append(message[0]['message-id'])
+                        except:
+                            _logger.exception('Asok MQ Listener: error adding message to internal queue')
+                message = False
                 self.env.cr.commit()
                 # Clear accumulated messages
                 respartnerlsnr.clear_list()
@@ -367,6 +379,7 @@ class ResPartner(models.Model):
         except:
             _logger.exception("Something went wrong in MQ")
         finally:
+            # send signal to stop other thread
             do_list[0] = False
             time.sleep(1)
             if mqconn.is_connected():

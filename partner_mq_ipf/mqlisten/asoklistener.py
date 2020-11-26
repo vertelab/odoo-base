@@ -120,7 +120,7 @@ class AsokListener(stomp.ConnectionListener):
         self.debug_print("on_message: {0} - {1}".format(msg, headers["message-id"]))
         self.handle_json_message(msg)
         self.print("HAndle message done")
-        self.__conn.ack(headers["message-id"])
+        # self.__conn.ack(headers["message-id"])
     
     def on_error(self, headers, body):
         """
