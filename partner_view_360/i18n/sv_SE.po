@@ -805,6 +805,12 @@ msgid "organization number"
 msgstr "organisationsnummer"
 
 #. module: partner_view_360
+#: code:addons/partner_view_360/models/res_partner.py:423
+#, python-format
+msgid "You can't set yourself as responsible case worker"
+msgstr "Du kan inte sätta dig själv som ansvarig handläggare"
+
+#. module: partner_view_360
 #: model:ir.model.fields,field_description:partner_view_360.field_res_partner__deactualization_date
 #: model:ir.model.fields,field_description:partner_view_360.field_res_users__deactualization_date
 msgid "Deactualization date"

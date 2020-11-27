@@ -28,6 +28,7 @@ from datetime import date
 from odoo.exceptions import ValidationError
 from odoo.tools import image_resize_image_big, image_colorize
 from odoo.modules import get_module_resource
+from odoo.exceptions import Warning
 
 _logger = logging.getLogger(__name__)
 
@@ -415,6 +416,14 @@ class ResPartner(models.Model):
     def escalate_jobseeker_access(self, arendetyp, user):
         return (250, "OK")
 
+    @api.one
+    def write(self, vals):
+        user_id = vals.get("user_id", False)
+        if user_id and user_id == self.env.user.id:
+            raise Warning(_("You can't set yourself as responsible case worker"))
+        else:
+            super(ResPartner, self).write(vals)
+        
 
 class ResPartnerSKAT(models.Model):
     _name = "res.partner.skat"
