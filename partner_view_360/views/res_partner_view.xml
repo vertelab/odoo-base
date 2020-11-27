@@ -97,26 +97,6 @@
             </xpath>
         </field>
     </record>
-    <record id="view_partner_form_education" model="ir.ui.view">
-        <field name="name">res.partner.eduacation.form</field>
-        <field name="model">res.partner</field>
-        <field name="inherit_id" ref="base.view_partner_form" />
-        <field name="arch" type="xml">
-            <xpath expr="//page[@name='internal_notes']" position="after">
-                <page name="education" string="Education">
-                    <group>
-                        <field name="sun_ids" options="{'no_create_edit': True}" />
-                        <field name="education_level" />
-                        <field name="foreign_education" />
-                        <field name="foreign_education_approved" />
-                        <!-- <field name="has_drivers_license" /> -->
-                        <field name="drivers_license_ids" options="{'no_create_edit': True}" />
-                        <field name="has_car" />
-                    </group>
-                </page>
-            </xpath>
-        </field>
-    </record>
     <record id="view_jobseeker_form" model="ir.ui.view">
         <field name="name">res.partner.form.jobseeker</field>
         <field name="model">res.partner</field>

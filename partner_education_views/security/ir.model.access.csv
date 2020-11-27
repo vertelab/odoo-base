@@ -1,0 +1,7 @@
+id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
+access_sun_manager,res.sun,model_res_sun,base.group_partner_manager,1,1,1,1
+access_sun_user,res.sun.user,model_res_sun,base.group_user,1,0,0,0
+access_education_level_manager,res.partner.education_level,model_res_partner_education_level,base.group_partner_manager,1,1,1,1
+access_education_level_user,res.partner.user,model_res_partner_education_level,base.group_user,1,0,0,0
+access_drivers_license_manager,res.drivers_license,model_res_drivers_license,base.group_partner_manager,1,1,1,1
+access_drivers_license_user,res.drivers_license.user,model_res_drivers_license,base.group_user,1,0,0,0p_partner_manager,1,1,1,1
