@@ -1,0 +1,120 @@
+.module_graph_main {
+  display: flex;
+  height: 95vh;
+
+
+  .module_graph_nav {
+    flex: 15%;
+    background-color: #ebebf7;
+    border-right: 1px solid black;
+
+    .search-container {
+      padding: 10px;
+      border-bottom: 1px solid black;
+      background-color: #c5c4fc2e;
+
+      input {
+        border-radius: 3px;
+        width: 100%;
+        height: 30px;
+      }
+
+    }
+
+
+    ul.module_graph_nav_list {
+      list-style-type: none;
+      padding-left: 10px;
+      height: 88vh;
+      overflow-y: scroll;
+      overflow-x: hidden;
+
+      li {
+        padding-bottom: 5px;
+        margin-bottom: 5px;
+        cursor: pointer;
+      }
+
+      li:hover {
+        font-weight: bolder;
+      }
+    }
+
+  }
+
+  .module_legend {
+    position: absolute;
+    top: 10px;
+    right: 0;
+    padding-right: 10px;
+    width: 150px;
+
+    h2 {
+      padding-left: 50px;
+      font-weight: 600;
+      font-size: x-large;
+    }
+
+    ul {
+      list-style-type: none;
+
+      li {
+        padding: 5px;
+        margin-top: 10px;
+        position: static;
+
+        .mouse_img {
+          width: 40px;
+        }
+
+        img {
+          width: 90px;
+
+        }
+      }
+
+      .module_legend {
+        border-radius: 50%;
+        border: 1px solid #3b86eb;
+        width: 100px;
+        height: 35px;
+        text-align: center;
+      }
+
+
+      .module_legend_uninstallable {
+        background-color: #eaeaa4;
+      }
+
+      .module_legend_installed {
+        background-color: #97c2fc;
+      }
+
+      .module_legend_uninstalled {
+        background-color: #e5f8fc;
+      }
+
+      .module_legend_to_install {
+        background-color: #939afc;
+      }
+
+      .module_legend_to_upgrade {
+        background-color: #AEFCAB;
+      }
+
+      .module_legend_to_remove {
+        background-color: #fcadb7;
+      }
+    }
+
+  }
+
+  .module_graph {
+    flex: 85%;
+  }
+
+  .module_selected {
+    font-weight: bolder;
+    background-color: #d1d1da;
+  }
+}
