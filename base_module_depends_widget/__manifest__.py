@@ -20,10 +20,10 @@
 ##############################################################################
 
 {
-    'name': 'Base Module',
+    'name': 'Base Module Depends Widget',
     'version': '12.0.1.2',
     'category': 'base',
-    'description': """""",
+    'description': """As a user, I want to see the modules dependencies in the tree view.""",
     'author': 'Vertel AB',
     'license': 'AGPL-3',
     'website': 'http://www.vertel.se',
