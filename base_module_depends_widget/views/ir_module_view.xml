@@ -1,0 +1,14 @@
+<odoo>
+    <data>
+        <record id="app_dependencies_tree_view" model="ir.ui.view">
+            <field name="name">ir.module.tree</field>
+            <field name="model">ir.module.module</field>
+            <field name="inherit_id" ref="base.module_tree"/>
+            <field name="arch" type="xml">
+                <xpath expr="//tree/field[@name='author']" position="after">
+                    <field name="dependencies_id" widget="many2many_tags" />
+                </xpath>
+            </field>
+        </record>
+    </data>
+</odoo>
