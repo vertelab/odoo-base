@@ -6,7 +6,7 @@
             <field name="password"></field>
             <!-- Avoid auto-including this demo user in any default group -->
             <field name="groups_id" eval="[(6,0,[ref('base.group_user')])]"/>
-            <field name="partner_id" ref="partner_test-data_fenix.partner_ben"/>
+            <field name="partner_id" ref="partner_test_data.partner_ben"/>
             <field name="active" eval="True"/>
         </record>
 
@@ -16,7 +16,7 @@
             <field name="password"></field>
             <!-- Avoid auto-including this demo user in any default group -->
             <field name="groups_id" eval="[(6,0,[ref('base.group_user')])]"/>
-            <field name="partner_id" ref="partner_test-data_fenix.partner_drake"/>
+            <field name="partner_id" ref="partner_test_data.partner_drake"/>
             <field name="active" eval="True"/>
         </record>
     </data>
