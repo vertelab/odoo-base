@@ -102,6 +102,9 @@
         <field name="model">res.partner</field>
         <field name="inherit_id" ref="base.view_partner_form" />
         <field name="arch" type="xml">
+            <field name="category_id" position="after">
+                <field name="communication_channel"/>
+            </field>
             <xpath expr="//page[@name='internal_notes']" position="after">
                 <page name="education" string="Education">
                     <group>
@@ -185,6 +188,7 @@
                             <field name="segment_jobseeker" />
                             <label for="user_id" string="Administrative officer" />
                             <field name="user_id" nolabel="1" />
+                            <field name="communication_channel"/>
                         </group>
                     </group>
                     <notebook>

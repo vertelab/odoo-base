@@ -82,6 +82,12 @@ class ResPartner(models.Model):
     segment_jobseeker = fields.Selection(string="Segment", selection=[('a','A'), ('b','B'), ('c1','C1'), ('c2','C2'), ('c3','C3')]) 
     segment_employer = fields.Selection(string="Segment", selection=[('including 1','Including 1'), ('including 2',' Including 2'), ('entry job','Entry job'), ('national agreement','National agreement'), ('employment subsidy','Employment subsidy')])
 
+    communication_channel = fields.Selection([
+        ('email', 'Email'),
+        ('sms', 'SMS'),
+        ('letter', 'Letter')
+    ])
+
     @api.one
     def combine_social_sec_nr_age(self):
         self.social_sec_nr_age = _("%s (%s years old)") % (self.company_registry, self.age)
@@ -148,8 +154,3 @@ class ResPartner(models.Model):
                 
             else: 
                 self.age = _("Error calculating age")
-    
-    
-
-
-    
