@@ -136,7 +136,7 @@
             </h1>
             <!-- Visa avaktualiserad eller Lagrad bara om det är så -->
             <group attrs="{'invisible':[ ('deactualization_date', '=', False ) ]}">
-                <field name="deactualization_date" />
+              <field name="deactualization_date" widget="date"/>
             </group>
           </div>
           <group>
