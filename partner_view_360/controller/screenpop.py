@@ -73,6 +73,7 @@ class WebsiteScreenpop(http.Controller):
         if not partner:
             action_bankid = request.env.ref('hr_360_view.search_jobseeker_wizard')
             request.session['ssn_not_found'] = True
+            request.session['ssn'] = post.get('personnummer')
             res_url = '%s/web#id=&action=%s&model=hr.employee.jobseeker.search.wizard&view_type=form' % (
                                                             request.env['ir.config_parameter'].sudo().get_param('web.base.url',''),
                                                             action_bankid.id if action_bankid else 0)
