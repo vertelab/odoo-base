@@ -83,6 +83,12 @@ class ResPartner(models.Model):
 
     name_com_reg_num = fields.Char(compute="_compute_name_com_reg_num", store=True)
 
+    communication_channel = fields.Selection([
+        ('email', 'Email'),
+        ('sms', 'SMS'),
+        ('letter', 'Letter')
+    ])
+
     @api.one
     def combine_social_sec_nr_age(self): #How to do the popup???
         if self.company_registry != False:
@@ -180,132 +186,4 @@ class ResPartner(models.Model):
                     self.age = years
                 
             else: 
-                #return {
-                #'warning': {'title': "Warning", 'message': "What is this?"},
-                #}
-                self.social_sec_nr = ""
-                self.age = ""
-                raise ValidationError(_("Please input a correctly formated social security number.\n %s" % error_message))
-
-    def update_partner_images(self):
-        for partner in self:
-            colorize = False
-            if partner.type == 'invoice':
-                img_path = get_module_resource('base', 'static/img', 'money.png')
-            elif partner.type == 'delivery':
-                img_path = get_module_resource('base', 'static/img', 'truck.png')
-            elif partner.type == 'foreign address':
-                img_path = get_module_resource('partner_view_360', 'static/src/img', 'foreign_address.png')
-            elif partner.type == 'given address':
-                img_path = get_module_resource('partner_view_360', 'static/src/img', 'given_address.png')
-            elif partner.type == 'visitation address':
-                img_path = get_module_resource('partner_view_360', 'static/src/img', 'visitation_address.png')
-            elif partner.type == 'private':
-                img_path = get_module_resource('partner_view_360', 'static/src/img', 'private_address.png')
-            elif partner.is_company:
-                img_path = get_module_resource('base', 'static/img', 'company_image.png')
-            else:
-                img_path = get_module_resource('base', 'static/img', 'avatar.png')
-                colorize = True
-
-            if img_path:
-                with open(img_path, 'rb') as f:
-                    image = f.read()
-            if image and colorize:
-                image = image_colorize(image)
-
-            partner.image = image_resize_image_big(base64.b64encode(image))
-
-    @api.model
-    def _get_default_image(self, partner_type, is_company, parent_id):
-        if getattr(threading.currentThread(), 'testing', False) or self._context.get('install_mode'):
-            return False
-
-        colorize, img_path, image = False, False, False
-        if partner_type in ['other'] and parent_id:
-            parent_image = self.browse(parent_id).image
-            image = parent_image and base64.b64decode(parent_image) or None
-
-        if not image and partner_type == 'invoice':
-            img_path = get_module_resource('base', 'static/img', 'money.png')
-        elif not image and partner_type == 'delivery':
-            img_path = get_module_resource('base', 'static/img', 'truck.png')
-        elif not image and partner_type == 'foreign address':
-            img_path = get_module_resource('partner_view_360', 'static/src/img', 'foreign_address.png')
-        elif not image and partner_type == 'given address':
-            img_path = get_module_resource('partner_view_360', 'static/src/img', 'given_address.png')
-        elif not image and partner_type == 'visitation address':
-            img_path = get_module_resource('partner_view_360', 'static/src/img', 'visitation_address.png')
-        elif not image and partner_type == 'private':
-            img_path = get_module_resource('partner_view_360', 'static/src/img', 'private_address.png')
-        elif not image and is_company:
-            img_path = get_module_resource('base', 'static/img', 'company_image.png')
-        elif not image:
-            img_path = get_module_resource('base', 'static/img', 'avatar.png')
-            colorize = True
-
-        if img_path:
-            with open(img_path, 'rb') as f:
-                image = f.read()
-        if image and colorize:
-            image = image_colorize(image)
-
-        return image_resize_image_big(base64.b64encode(image))
-
-    @api.multi
-    def close_view(self):
-        return{
-            'name': _("Search Jobseekers"),
-            'view_type': 'form',
-            #'src_model': "res.partner",
-            'res_model': "hr.employee.jobseeker.search.wizard",
-            'view_id': False, # self.env.ref("partner_view_360.search_jobseeker_wizard").id,
-            'view_mode':"form",
-            'target': "inline",
-            #'key2': "client_action_multi",
-            'type': 'ir.actions.act_window',
-        }
-
-    def update_name_com_reg_number(self):
-        for partner in self:
-            name = partner.name
-            if partner.company_registry:
-                name += ' ' + partner.company_registry
-            partner.name_com_reg_num = name
-            partner.name = partner.name
-
-    @api.depends('name', 'company_registry')
-    def _compute_name_com_reg_num(self):
-        for partner in self:
-            name = partner.name
-            if partner.company_registry:
-                name += ' ' + partner.company_registry
-            partner.name_com_reg_num = name
-
-    @api.multi
-    def name_get(self):
-        result = []
-        for partner in self:
-            name = partner.name
-            if partner.company_registry:
-                name += ' ' + partner.company_registry
-            result.append((partner.id, name))
-        return result
-
-
-#  Grant temporary access to these jobseekers or set this user as responsible for the jobseeker            
-    @api.multi
-    def escalate_jobseeker_access(self,arendetyp,user):
-        return (250,'OK')
-        
-            # ~ res = request.env['edi.ace_errand'].escalate_jobseeker_access(partner,post.get('arendetyp'))
-            # ~ if res[0] != 250:  # OK
-                # ~ return request.render('partner_view_360.403', {'error': 'ERROR: Escalate rights [%s] %s' % res, 'partner': partner, 'signatur':post.get('signatur')})
-
-
-class ResPartnerSKAT(models.Model):
-    _name = 'res.partner.skat'
-
-    partner_id = fields.One2many(comodel_name='res.partner', inverse_name='jobseeker_category')
-    code = fields.Char(string="code")
-    name = fields.Char(string="name")
+                self.age = _("Error calculating age")
