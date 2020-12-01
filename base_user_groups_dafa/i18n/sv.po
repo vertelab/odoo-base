@@ -1,0 +1,72 @@
+# Translation of Odoo Server.
+# This file contains the translation of the following modules:
+#	* base_user_groups_dafa
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: Odoo Server 12.0-20201012\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2020-11-26 14:46+0000\n"
+"PO-Revision-Date: 2020-11-26 14:46+0000\n"
+"Last-Translator: <>\n"
+"Language-Team: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: \n"
+"Plural-Forms: \n"
+
+#. module: base_user_groups_dafa
+#: model:ir.module.category,description:base_user_groups_dafa.category_dafa_handle_org_info
+msgid "Category for handling employee rights on organisational level."
+msgstr "Kategori för grupper som hanterar anställdas rättigheter på organisationsnivå."
+
+#. module: base_user_groups_dafa
+#: model:ir.module.category,description:base_user_groups_dafa.category_dafa_handle_department_info
+msgid "Category for handling information and tasks related to jobseekers."
+msgstr "Kategori för grupper som hanterar anställdas rättigheter på utförandeverksamhetsnivå"
+
+#. module: base_user_groups_dafa
+#: model:ir.module.category,name:base_user_groups_dafa.category_dafa_handle_org_info
+msgid "DAFA - Organisational Admin Roles"
+msgstr "Organisationsbundna Admin-roller"
+
+#. module: base_user_groups_dafa
+#: model:res.groups,name:base_user_groups_dafa.group_dafa_admin_accounting_read
+msgid "DAFA Accounting (Read)"
+msgstr "Hantera Ekonomi (Läs)"
+
+#. module: base_user_groups_dafa
+#: model:res.groups,name:base_user_groups_dafa.group_dafa_employees_read
+msgid "DAFA Admin (Read)"
+msgstr "Hantera Anställda (Läs)"
+
+#. module: base_user_groups_dafa
+#: model:res.groups,name:base_user_groups_dafa.group_dafa_employees_write
+msgid "DAFA Admin (Write)"
+msgstr "Hantera Anställda (Skriv)"
+
+#. module: base_user_groups_dafa
+#: model:ir.module.category,name:base_user_groups_dafa.category_dafa_handle_department_info
+msgid "DAFA Department Roles"
+msgstr "Utförandeverksamhetsbundna Roller"
+
+#. module: base_user_groups_dafa
+#: model:res.groups,name:base_user_groups_dafa.group_dafa_org_admin_read
+msgid "DAFA Org Admin (Read)"
+msgstr "Hantera Organisation (Läs)"
+
+#. module: base_user_groups_dafa
+#: model:res.groups,name:base_user_groups_dafa.group_dafa_participants_read
+msgid "DAFA Participants (Read)"
+msgstr "Hantera Deltagare (Läs)"
+
+#. module: base_user_groups_dafa
+#: model:res.groups,name:base_user_groups_dafa.group_dafa_participants_write
+msgid "DAFA Participants (Write)"
+msgstr "Hantera Deltagare (Skriv)"
+
+#. module: base_user_groups_dafa
+#: model:res.groups,name:base_user_groups_dafa.group_dafa_superadmin
+msgid "DAFA Superadmin"
+msgstr "DAFA SuperAdmin Af"
+
