@@ -83,6 +83,16 @@ class ResPartner(models.Model):
 
     name_com_reg_num = fields.Char(compute="_compute_name_com_reg_num", store=True)
 
+    _sql_constraints = [
+        ('company_registry_unique', 
+        'UNIQUE(company_registry)',
+        'company_registry (social security number/organization number) field needs to be unique'
+        ), 
+        ('customer_id_unique', 
+        'UNIQUE(customer_id)',
+        'customer_id field needs to be unique'
+        )]
+
     @api.one
     def combine_social_sec_nr_age(self): #How to do the popup???
         if self.company_registry != False:
