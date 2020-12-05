@@ -40,7 +40,7 @@
     <!-- Hantera Deltagare och Ekonomi (Utförandeverksamhetsnivå) -->
     <!-- ############################################ -->
     <record id="category_dafa_handle_department_info" model="ir.module.category">
-        <field name="name">DAFA Department Roles</field>
+        <field name="name">DAFA - Department Roles</field>
         <field name="description">Category for handling information and tasks related to jobseekers.</field>
     </record>
 
