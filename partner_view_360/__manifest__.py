@@ -57,10 +57,7 @@ v12.0.0.1.10 AFC-704 Changed target for "Close-button".\n
         "data/res.partner.skat.csv",
         "security/ir.model.access.csv"
     ],
-    'demo': [
-        "data/jobseekers/res.partner.csv",
-        "data/employers/res.partner.csv",
-    ],
+    
     'application': False,
     'installable': True,
 }
