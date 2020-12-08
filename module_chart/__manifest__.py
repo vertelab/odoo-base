@@ -23,6 +23,7 @@
     'name': 'Modules Chart',
     'version': '12.0.0.0.1',
     'category': 'Tools',
+    'description': """This module adds a graphical description of the odoo install""",
     'author': "N-development",
     'license': 'AGPL-3',
     'website': 'https://www.n-development.com',
@@ -38,7 +39,6 @@
         'static/src/xml/module_graph.xml',
     ],
     'images': ['static/description/banner.png'],
-    'license': 'AGPL-3',
     'installable': True,
     "application": False,
 }
