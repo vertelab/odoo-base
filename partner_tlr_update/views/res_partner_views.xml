@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<odoo>
+    <record id="update_tlr_data_action" model="ir.actions.server">
+        <field name="name">Update TLR data</field>
+        <field name="type">ir.actions.server</field>
+        <field name="model_id" ref="base.model_res_partner"/>
+        <field name="binding_model_id" ref="base.model_res_partner"/>
+        <field name="state">code</field>
+        <field name="code">record.update_tlr_data_action()</field>
+    </record>
+</odoo>
