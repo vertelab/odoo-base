@@ -42,7 +42,7 @@
             <!-- endast för om is_customer är true-->
             <field name="vat" position="after">
                 <field name="customer_id" attrs="{'invisible':[('customer', '=', False)]}" />
-                <field name="office_code" attrs="{'invisible':[('type', '!=', 'af office')]}" /> 
+                <field name="office_code" attrs="{'invisible':[('type', '!=', 'af office')]}" />
             </field>
             <field name="vat" position="attributes">
                 <attribute name="invisible">1</attribute>
