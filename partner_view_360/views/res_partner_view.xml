@@ -97,6 +97,29 @@
             </xpath>
         </field>
     </record>
+    <record id="view_partner_form_education" model="ir.ui.view">
+        <field name="name">res.partner.eduacation.form</field>
+        <field name="model">res.partner</field>
+        <field name="inherit_id" ref="base.view_partner_form" />
+        <field name="arch" type="xml">
+            <field name="category_id" position="after">
+                <field name="communication_channel"/>
+            </field>
+            <xpath expr="//page[@name='internal_notes']" position="after">
+                <page name="education" string="Education">
+                    <group>
+                        <field name="sun_ids" options="{'no_create_edit': True}" />
+                        <field name="education_level" />
+                        <field name="foreign_education" />
+                        <field name="foreign_education_approved" />
+                        <!-- <field name="has_drivers_license" /> -->
+                        <field name="drivers_license_ids" options="{'no_create_edit': True}" />
+                        <field name="has_car" />
+                    </group>
+                </page>
+            </xpath>
+        </field>
+    </record>
     <record id="view_jobseeker_form" model="ir.ui.view">
         <field name="name">res.partner.form.jobseeker</field>
         <field name="model">res.partner</field>
@@ -128,19 +151,47 @@
                             <field name="state_name_code" class="oe_read_only" placeholder="State" nolabel="1" />
                             <label for="state_id" string="Municipality" class="oe_edit_only" />
                             <field name="state_id" class="oe_edit_only" nolabel="1" />
-                            <field name="country_id" placeholder="Country" class="o_address_country" options="{&quot;no_open&quot;: True, &quot;no_create&quot;: True}" />
-                          </div>
-                        </div>
-                      </group>
-                      <group>
-                        <field name="name" string="Contact Name" attrs="{'required' : [('type', '=', 'contact')]}" />
-                        <field name="title" placeholder="e.g. Mr." attrs="{'invisible': [('type','!=', 'contact')]}" />
-                        <field name="function" placeholder="e.g. Sales Director" attrs="{'invisible': [('type','!=', 'contact')]}" />
-                        <field name="email" />
-                        <field name="phone" widget="phone" />
-                        <field name="mobile" widget="phone" />
-                        <field name="comment" placeholder="internal note..." />
-                      </group>
+                            <!-- <field name="state_code"/> -->
+                            <label for="street" string="Address" />
+                            <div class="oe_read_only">
+                                <div class="o_address_format">
+                                    <span class="oe_read_only">
+                                        <field name="street" placeholder="Street..." class="o_address_street" />
+                                        <field name="street2" placeholder="Street 2..." class="o_address_street" />
+                                        <span style="margin-right:1em;">
+                                            <field name="zip" placeholder="ZIP" class="o_address_zip" />
+                                        </span>
+                                        <field name="city" placeholder="City" class="o_address_city" />
+                                    </span>
+                                </div>
+                            </div>
+                            <field name="country_id" placeholder="Country" class="o_address_country" attrs="{'invisible': True}" />
+                            <!-- <label for="given_address_street" string="given address" />
+                                 <div class="o_address_format">
+                                 <field name="given_address_street" placeholder="Street..." class="o_address_street" />
+                                 <span style="margin-right:1em;">
+                                 <field name="given_address_zip" placeholder="ZIP" class="o_address_zip" />
+                                 </span>
+                                 <field name="given_address_city" placeholder="City" class="o_address_city" />
+                                 </div>
+                                 <field name="given_address_id" domain="[('type', '=', 'given address')]" groups="base.group_no_one" /> -->
+                            <field name="phone" />
+                            <field name="mobile" />
+                            <field name="email" />
+                        </group>
+                        <group string="Employment service information">
+                            <field name="registered_through" />
+                            <field name="jobseeker_category" />
+                            <field name="customer_since" />
+                            <field name="office" options="{'no_create_edit': True}" domain="[('type', '=', 'af office')]" />
+                            <field name="office_ids" widget="many2many_tags" options="{'no_create_edit': True}" domain="[('type', '=', 'af office')]" />
+                            <field name="share_info_with_employers" />
+                            <field name="sms_reminders" />
+                            <field name="segment_jobseeker" />
+                            <label for="user_id" string="Administrative officer" />
+                            <field name="user_id" nolabel="1" />
+                            <field name="communication_channel"/>
+                        </group>
                     </group>
                     <field name="image" invisible="True" />
                   </sheet>
