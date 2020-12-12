@@ -42,7 +42,7 @@
             <!-- endast för om is_customer är true-->
             <field name="vat" position="after">
                 <field name="customer_id" attrs="{'invisible':[('customer', '=', False)]}" />
-                <field name="office_code" attrs="{'invisible':[('type', '!=', 'af office')]}" />
+                <field name="office_code" attrs="{'invisible':[('type', '!=', 'af office')]}" /> 
             </field>
             <field name="vat" position="attributes">
                 <attribute name="invisible">1</attribute>
@@ -114,45 +114,42 @@
                         </h1>
                     </div>
                     <group>
-                      <group attrs="{'invisible': [('type','=', 'contact')]}">
-                        <label for="street" string="Address" />
-                        <div>
-                          <div class="o_address_format" name="div_address">
-                            <field name="street" placeholder="Street..." class="o_address_street" />
-                            <field name="street2" placeholder="Street 2..." class="o_address_street" />
-                            <span style="margin-right:1em;">
-                              <field name="zip" placeholder="ZIP" class="o_address_zip" />
-                            </span>
-                            <field name="city" placeholder="City" class="o_address_city" />
-                            <label for="state_name_code" string="Municipality" class="oe_read_only" />
-                            <field name="state_name_code" class="oe_read_only" placeholder="State" nolabel="1" />
-                            <label for="state_id" string="Municipality" class="oe_edit_only" />
-                            <field name="state_id" class="oe_edit_only" nolabel="1" />
-                            <field name="country_id" placeholder="Country" class="o_address_country" options="{&quot;no_open&quot;: True, &quot;no_create&quot;: True}" />
+                        <group attrs="{'invisible': [('type','=', 'contact')]}">
+                          <label for="street" string="Address" />
+                          <div>
+                              <div class="o_address_format" name="div_address">
+                                  <field name="street" placeholder="Street..." class="o_address_street" />
+                                  <field name="street2" placeholder="Street 2..." class="o_address_street" />
+                                  <span style="margin-right:1em;">
+                                    <field name="zip" placeholder="ZIP" class="o_address_zip" />
+                                  </span>
+                                  <field name="city" placeholder="City" class="o_address_city" />
+                                  <label for="state_name_code" string="Municipality" class="oe_read_only" />
+                                  <field name="state_name_code" class="oe_read_only" placeholder="State" nolabel="1" />
+                                  <label for="state_id" string="Municipality" class="oe_edit_only" />
+                                  <field name="state_id" class="oe_edit_only" nolabel="1" />
+                                  <field name="country_id" placeholder="Country" class="o_address_country" options="{&quot;no_open&quot;: True, &quot;no_create&quot;: True}" />
+                              </div>
                           </div>
-                        </div>
-                      </group>
-                      <group>
-                        <field name="name" string="Contact Name" attrs="{'required' : [('type', '=', 'contact')]}" />
-                        <field name="title" placeholder="e.g. Mr." attrs="{'invisible': [('type','!=', 'contact')]}" />
-                        <field name="function" placeholder="e.g. Sales Director" attrs="{'invisible': [('type','!=', 'contact')]}" />
-                        <field name="email" />
-                        <field name="phone" widget="phone" />
-                        <field name="mobile" widget="phone" />
-                        <field name="comment" placeholder="internal note..." />
-                      </group>
+                        </group>
+                        <group>
+                            <field name="name" string="Contact Name" attrs="{'required' : [('type', '=', 'contact')]}" />
+                            <field name="title" placeholder="e.g. Mr." attrs="{'invisible': [('type','!=', 'contact')]}" />
+                            <field name="function" placeholder="e.g. Sales Director" attrs="{'invisible': [('type','!=', 'contact')]}" />
+                            <field name="email" />
+                            <field name="phone" widget="phone" />
+                            <field name="mobile" widget="phone" />
+                            <field name="comment" placeholder="internal note..." />
+                        </group>
                     </group>
                     <field name="image" invisible="True" />
-                  </sheet>
-                </form>
-              </field>
-            </page>
-            <page name="apply_for_jobs" string="Education" />
-            <!-- Byt namn på sidans namn också, inte bara string -->
-          </notebook>
-        </sheet>
-      </form>
-    </field>
+                    <notebook>
+                        <page name="apply_for_jobs" string="Education" />
+                        <!-- Byt namn på sidans namn också, inte bara string -->
+                    </notebook>
+                </sheet>
+            </form>
+        </field>
   </record>
   <record model="ir.ui.view" id="view_jobseeker_tree">
     <field name="name">res.partner.jobseeker.tree</field>
