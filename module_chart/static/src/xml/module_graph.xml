@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="utf-8"?>
+<template xml:space="preserve">
+    <t t-name="ModuleGraph">
+        <div>
+            <div class="module_graph_main">
+                <div class="module_graph_nav">
+                    <div class="search-container">
+                        <input type="text" placeholder="Search..."/>
+                    </div>
+                    <t t-if="widget.nodes">
+                        <ul class="module_graph_nav_list">
+                            <t t-foreach="widget.nodes" t-as="node">
+                                <li t-attf-data-id="{{ node.id }}" t-attf-data-label="{{ node.label }}">
+                                    <t t-esc="node.shortdesc"/>
+                                    <br/><code><t t-esc="node.label"/></code>
+                                </li>
+                            </t>
+                        </ul>
+                    </t>
+                </div>
+                <div class="module_legend">
+                    <h2>Help:</h2>
+                    <ul>
+                        <li class="module_legend module_legend_uninstallable">uninstallable</li>
+                        <li class="module_legend module_legend_installed">installed</li>
+                        <li class="module_legend module_legend_uninstalled">uninstalled</li>
+                        <li class="module_legend module_legend_to_install">to install</li>
+                        <li class="module_legend module_legend_to_upgrade">to upgrade</li>
+                        <li class="module_legend module_legend_to_remove">to remove</li>
+                        <li><img src="/module_chart/static/src/img/blue_arrow.png"/><span>Dependency</span></li>
+                        <li><img src="/module_chart/static/src/img/red_arrow.png"/><span>Exclusion</span></li>
+                        <li><img class="mouse_img" src="/module_chart/static/src/img/left_click.png"/><span>Info</span></li>
+                        <li><img class="mouse_img" src="/module_chart/static/src/img/right_click.png"/><span>Remove</span></li>
+                    </ul>
+                </div>
+                <div id="mynetwork" class="module_graph"></div>
+            </div>
+        </div>
+    </t>
+
+</template>
