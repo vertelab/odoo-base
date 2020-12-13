@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <record id="module_graph_action" model="ir.actions.client">
+            <field name="name">Module Graph</field>
+            <field name="tag">module_graph</field>
+            <field name="target">main</field>
+        </record>
+
+        <menuitem id="menu_module_graph" name="Module Graph" parent="base.menu_management"
+                  sequence="100"
+                  action="module_graph_action"/>
+    </data>
+</odoo>
