@@ -89,19 +89,32 @@ class ResPartner(models.Model):
                 response = api_client.get_tjansteleverantor(self.legacy_no)
                 if response.status_code == 200:
                     self.parse_xml_tjansteleverantor_data(response.text)
-                response = api_client.get_utforande_verksamhet_id(
-                    self.legacy_no)
+                    _logger.info("PARSED XML")
+                #response = api_client.get_utforande_verksamhet_id()
                 if response.status_code == 200:
                     self.parse_xml_organisationsnummer_data(response.text)
+                    _logger.info("PARSED XML 2")
 
-    def update_from_xml(self, xml, match_name):
+    def update_from_xml(self, xml, match_name):    
         match_fields = self.match_list()[match_name]
+        _logger.info("match_fields %s" % match_fields)
         data = {}
         for field in match_fields:
             country = False
-            elem = xml.find(".//%s" % field[0], namespaces=xml.nsmap)
+            _logger.info("field[0]: %s" % field[0])
+            elem = xml.find(".//%s" % field[0], namespaces={
+                'ns107': 'http://arbetsformedlingen.se/datatyp/tjansteleverantor/tjansteleverantor/v15',
+                'ns25':'http://arbetsformedlingen.se/datatyp/tjansteleverantor/kontaktperson/v17',
+                'ns64': 'http://arbetsformedlingen.se/datatyp/tjansteleverantor/utforandeverksamhet/v15',
+                'ns23':'http://arbetsformedlingen.se/datatyp/tjansteleverantor/adress/v15',
+                'ns26':'http://arbetsformedlingen.se/datatyp/gemensam/personnamn/v0',
+                'ns27':'http://arbetsformedlingen.se/datatyp/tjansteleverantor/teleadress/v4',
+                })
+            _logger.info("elem %s" % elem)
             if elem is not None:
+                _logger.info("field[1] %s" % field[1])
                 if field[1] == 'state_id.name' and country:
+                    _logger.info("field[1] == state_id.name and country")
                     state = self.state_id.search([
                         ('name', '=', elem.text),
                         ('country_id', '=', country)], limit=1)
@@ -110,6 +123,7 @@ class ResPartner(models.Model):
                                               'country_id': country})
                     data['state_id'] = state.id
                 elif '.' in field[1]:
+                    _logger.info("'.' in field[1]")
                     field_model, field_name = field[1].split('.')
                     if field_model in self and field_name in self[field_model]:
                         value_id = self[field_model].search([
@@ -119,6 +133,7 @@ class ResPartner(models.Model):
                             if field[1] == 'country_id.name':
                                 country = value_id.id
                 elif field[1] in self:
+                    _logger.info("field[1] in self")
                     data[field[1]] = elem.text
 
         if data:
@@ -126,28 +141,35 @@ class ResPartner(models.Model):
 
     @api.model
     def parse_xml_tjansteleverantor_data(self, xml):
-        root = etree.XML(xml)
+        root = etree.XML(xml.encode())
         self.update_from_xml(root, 'organization')
+        _logger.info("UPDATE FROM XML")
         contact_persons = root.find(
-            ".//ns107:kontaktpersonLista", namespaces=root.nsmap)
+            ".//ns107:kontaktpersonLista", namespaces={'ns107': 'http://arbetsformedlingen.se/datatyp/tjansteleverantor/tjansteleverantor/v15'})
+        _logger.info("CONTACT PERSONS FOUND")
         if contact_persons is not None:
+            _logger.info("CONTACT PERSONS NOT NONE")
             self.update_contact_person(contact_persons)
 
     @api.model
     def parse_xml_organisationsnummer_data(self, xml):
+        #_logger.info("XML: %s" % xml)
         root = etree.fromstring(self.clearing_xml(xml))
+        _logger.info("ROOT: %s" % root)
         self.update_subsidiary(root)
 
     @api.multi
     def update_contact_person(self, xml):
-        person_id = xml.find(".//ns25:kontaktpersonId", namespaces=xml.nsmap)
+        person_id = xml.find(".//ns25:kontaktpersonId", namespaces={'ns25':'http://arbetsformedlingen.se/datatyp/tjansteleverantor/kontaktperson/v17'})
         if person_id is not None:
             person_id = person_id.text
             children = self.search([('parent_id', '=', self.id),
                                     ('legacy_no', '=', person_id)], limit=1)
             if children:
+                _logger.info("found children contact persons")
                 partner = children
             else:
+                _logger.info("creating contact person partner")
                 partner = self.create([{
                     'name': 'From TLR',
                     'parent_id': self.id,
@@ -157,14 +179,16 @@ class ResPartner(models.Model):
     @api.multi
     def update_subsidiary(self, xml):
         subsidiary_id = xml.find(".//ns64:utforandeVerksamhetId",
-                                 namespaces=xml.nsmap)
+                                 namespaces={'ns64': 'http://arbetsformedlingen.se/datatyp/tjansteleverantor/utforandeverksamhet/v15'})
         if subsidiary_id is not None:
             subsidiary_id = subsidiary_id.text
             children = self.search([('parent_id', '=', self.id),
                                     ('legacy_no', '=', subsidiary_id)], limit=1)
             if children:
+                _logger.info("found children subsidiaries")
                 partner = children
             else:
+                _logger.info("creating subsidiary partner")
                 partner = self.create([{
                     'name': 'From TLR',
                     'parent_id': self.id,
