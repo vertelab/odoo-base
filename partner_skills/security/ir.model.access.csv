@@ -1,0 +1,4 @@
+id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
+access_hr_other_experiences,hr.other.experiences,partner_skills.model_hr_other_experiences,base.group_user,1,1,1,1
+access_hr_strengths,hr.strengths.user,partner_skills.model_hr_strengths,base.group_user,1,1,1,1
+access_hr_interests,hr.interests.user,partner_skills.model_hr_interests,base.group_user,1,1,1,1

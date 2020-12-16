@@ -1,26 +1,47 @@
 <odoo>
-    
+
     <record id="view_partner_form_skills" model="ir.ui.view">
         <field name="name">res.partner.skill</field>
-        <field name="model">res.partner</field> 
-        <field name="inherit_id" ref="base.view_partner_form" />
-        <field name="arch" type="xml"> 
+        <field name="model">res.partner</field>
+        <field name="inherit_id" ref="base.view_partner_form"/>
+        <field name="arch" type="xml">
             <field name="category_id" position="before">
                 <field name="skills" widget="many2many_tags"/>
             </field>
+            <xpath expr="//notebook/page[last()]" position="after">
+                <page string="Skills">
+                    <group>
+                        <field name="partner_skill_ids" nolabel="1">
+                            <tree editable="bottom">
+                                <field name="skill_id"/>
+                                <field name="level" widget="priority"/>
+                            </tree>
+                        </field>
+                    </group>
+                    <group>
+                        <group>
+                            <field name="strengths" widget="many2many_tags"/>
+                            <field name="interests" widget="many2many_tags"/>
+                        </group>
+                        <group>
+                            <field name="other_experiences" widget="many2many_tags"/>
+                        </group>
+                    </group>
+                </page>
+            </xpath>
         </field>
     </record>
 
-  <record id="view_employee_filter_skill" model="ir.ui.view"> 
-    <field name="name">hr.employee.search.inherit.skill</field>           
-    <field name="model">hr.employee</field> 
-    <field name="inherit_id" ref="hr.view_employee_filter" /> 
-    <field name="arch" type="xml"> 
-      <field name="job_id" position="after">
-        <field name="skill"/>
-      </field>
-    </field>
-  </record>
+    <record id="view_employee_filter_skill" model="ir.ui.view">
+        <field name="name">hr.employee.search.inherit.skill</field>
+        <field name="model">hr.employee</field>
+        <field name="inherit_id" ref="hr.view_employee_filter" />
+        <field name="arch" type="xml">
+            <field name="job_id" position="after">
+                <field name="skill"/>
+            </field>
+        </field>
+    </record>
 
 
 

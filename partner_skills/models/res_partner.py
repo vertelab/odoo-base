@@ -23,14 +23,54 @@ from odoo import models, fields, api, _
 import logging
 _logger = logging.getLogger(__name__)
 
+
 class ResPartner(models.Model):
     _inherit = "res.partner" #odoo inheritance från res.partner
 
-    skills = fields.Many2many('hr.skill', string="skill")
-    skill_id = fields.Char(string="skill", related="skills.complete_name")
+    skills = fields.Many2many('hr.skill', string="Skill")
+    skill_id = fields.Char(string="Skill", related="skills.complete_name")
+
+    other_experiences = fields.Many2many('hr.other.experiences', string="Other Experience")
+    strengths = fields.Many2many('hr.strengths', string="Strengths")
+    interests = fields.Many2many('hr.interests', string="Interests")
+    partner_skill_ids = fields.One2many(
+        string='Skills',
+        comodel_name='hr.employee.skill',
+        inverse_name='partner_id',
+    )
+
+
+class PartnerSkill(models.Model):
+    _inherit = 'hr.employee.skill'
+
+    partner_id = fields.Many2one(
+        string='Partner',
+        comodel_name='res.partner',
+    )
+
 
 class HrEmployee(models.Model):
     _inherit = "hr.employee"
 
+    skill = fields.Many2one(string="Skill", related="employee_skill_ids.skill_id")
 
-    skill = fields.Many2one(string="skill", related="employee_skill_ids.skill_id")
+
+class OtherExperiences(models.Model):
+    _name = 'hr.other.experiences'
+    description = "Experiences"
+
+    name = fields.Char(string="Experience")
+
+
+class Strengths(models.Model):
+    _name = 'hr.strengths'
+    description = "Strengths"
+
+    name = fields.Char(string="Strengths")
+
+
+class Interests(models.Model):
+    _name = 'hr.interests'
+    description = "Interests"
+
+    name = fields.Char(string="Interests")
