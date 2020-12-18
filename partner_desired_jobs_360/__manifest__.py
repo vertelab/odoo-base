@@ -20,27 +20,21 @@
 ##############################################################################
 
 {
-    'name': 'Partner desired jobs',
-    'version': '12.0.1.5',
+    'name': 'Partner desired jobs 360',
+    'version': '12.0.1.1',
     'category': '',
     'description': """
 Module to see which jobs a jobseeking partner desires
 ================================================================================================
-AFC-168
-AFC-1151 previous experiences
+
 """,
     'author': 'Vertel AB',
     'license': 'AGPL-3',
     'website': 'http://www.vertel.se',
-    'depends': ['base', 
-    'hr_skill',
-    'res_ssyk',
-    'res_sun',
+    'depends': ['partner_view_360',
     ],
     'data': [
 			'views/res_partner_view.xml',
-            'views/desired_jobs_view.xml',
-            'security/ir.model.access.csv'
         ],
     'application': False,
     'installable': True,
