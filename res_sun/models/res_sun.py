@@ -24,6 +24,7 @@ _logger = logging.getLogger(__name__)
 
 class ResSun(models.Model): 
     _name = 'res.sun'
+    _description = '''Value store for Sun codes.'''
 
     partner_ids = fields.Many2many(comodel_name="res.partner")
     

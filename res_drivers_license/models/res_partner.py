@@ -36,6 +36,7 @@ class Partner(models.Model):
 
 class ResDriversLicense(models.Model): 
     _name = 'res.drivers_license'
+    _description = """Value store for drivers licence"""
 
     partner_id = fields.Many2one(comodel_name="res.partner")
     name = fields.Char(string='Class', required=True) #A,B etc.
