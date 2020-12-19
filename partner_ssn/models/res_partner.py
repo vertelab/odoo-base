@@ -27,7 +27,6 @@ class ResPartner(models.Model):
         'customer_id field needs to be unique'
         )]
 
-#
     @api.one
     @api.constrains("company_registry")
     def calculate_age(self):
