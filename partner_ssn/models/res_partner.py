@@ -21,10 +21,6 @@ class ResPartner(models.Model):
         ('company_registry_unique', 
         'UNIQUE(company_registry)',
         'company_registry (social security number/organization number) field needs to be unique'
-        ), 
-        ('customer_id_unique', 
-        'UNIQUE(customer_id)',
-        'customer_id field needs to be unique'
         )]
 
     @api.one

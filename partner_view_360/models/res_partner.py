@@ -84,6 +84,12 @@ class ResPartner(models.Model):
         ('letter', 'Letter')
     ])
 
+    _sql_constraints = [
+        ('customer_id_unique', 
+        'UNIQUE(customer_id)',
+        'customer_id field needs to be unique'
+        )]
+
     @api.one
     def combine_social_sec_nr_age(self): #How to do the popup???
         if self.company_registry != False:
