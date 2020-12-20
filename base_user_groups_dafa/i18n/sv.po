@@ -33,12 +33,12 @@ msgstr "Organisationsbundna Admin-roller"
 #. module: base_user_groups_dafa
 #: model:res.groups,name:base_user_groups_dafa.group_dafa_admin_accounting_read
 msgid "DAFA Accounting (Read)"
-msgstr "Hantera Ekonomi (Läs)"
+msgstr "DAFA Hantera Ekonomi (Läs)"
 
 #. module: base_user_groups_dafa
 #: model:res.groups,name:base_user_groups_dafa.group_dafa_employees_read
 msgid "DAFA Admin (Read)"
-msgstr "Hantera Anställda (Läs)"
+msgstr "DAFA Hantera Anställda (Läs)"
 
 #. module: base_user_groups_dafa
 #: model:res.groups,name:base_user_groups_dafa.group_dafa_employees_write
@@ -48,22 +48,22 @@ msgstr "Hantera Anställda (Skriv)"
 #. module: base_user_groups_dafa
 #: model:ir.module.category,name:base_user_groups_dafa.category_dafa_handle_department_info
 msgid "DAFA Department Roles"
-msgstr "Utförandeverksamhetsbundna Roller"
+msgstr "DAFA Utförandeverksamhetsbundna Roller"
 
 #. module: base_user_groups_dafa
 #: model:res.groups,name:base_user_groups_dafa.group_dafa_org_admin_read
 msgid "DAFA Org Admin (Read)"
-msgstr "Hantera Organisation (Läs)"
+msgstr "DAFA Hantera Organisation (Läs)"
 
 #. module: base_user_groups_dafa
 #: model:res.groups,name:base_user_groups_dafa.group_dafa_participants_read
 msgid "DAFA Participants (Read)"
-msgstr "Hantera Deltagare (Läs)"
+msgstr "DAFA Hantera Deltagare (Läs)"
 
 #. module: base_user_groups_dafa
 #: model:res.groups,name:base_user_groups_dafa.group_dafa_participants_write
 msgid "DAFA Participants (Write)"
-msgstr "Hantera Deltagare (Skriv)"
+msgstr "DAFA Hantera Deltagare (Skriv)"
 
 #. module: base_user_groups_dafa
 #: model:res.groups,name:base_user_groups_dafa.group_dafa_superadmin
