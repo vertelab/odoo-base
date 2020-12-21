@@ -8,7 +8,9 @@
     "website": "https://arbetsformedlingen.se/",
     "category": "Security",
     "depends": [
-        "web",
+        "hr",
+        "sale",
+        "project",
     ],
     "data": [
         'security/security.xml',
