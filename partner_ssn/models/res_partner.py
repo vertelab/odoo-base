@@ -13,9 +13,10 @@ class ResPartner(models.Model):
 
     age = fields.Char(string="Age", compute="calculate_age")
     company_registry = fields.Char(
-        string='Organization number', help="organization number")
-    social_sec_nr = fields.Char(string="Social security number", related="company_registry")
-    social_sec_nr_age = fields.Char(string="Social security number", compute="combine_social_sec_nr_age")
+        string='Organization number', help="organization number") # Destroys company_registry from l10n_se
+    # ~ social_sec_nr = fields.Char(string="Social security number", related="company_registry")  related this way does not work
+    social_sec_nr = fields.Char(string="Social security number") # social_sec_nr_age will not be correctly calculated
+    social_sec_nr_age = fields.Char(string="Social security number", compute="combine_social_sec_nr_age") # combine_social_sec_nr_age missing
 
     _sql_constraints = [
         ('company_registry_unique', 
@@ -75,7 +76,7 @@ class ResPartner(models.Model):
                         wrong_input = True
                         error_message = _(
                             "Could not convert social security number %s (company_registry field) to date"
-                            % social_sec_stripped
+                            % socompany_registrycial_sec_stripped
                         )
                         _logger.error(error_message)
             elif len(social_sec_stripped) == 8:

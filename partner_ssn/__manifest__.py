@@ -35,6 +35,7 @@ Adds social security number to partners
         'contacts',
     ],
     'data': [
+        'views/res_partner_view.xml',
     ],
     'demo': [
         
