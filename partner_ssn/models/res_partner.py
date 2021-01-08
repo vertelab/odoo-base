@@ -12,24 +12,31 @@ class ResPartner(models.Model):
     _inherit = "res.partner"
 
     age = fields.Char(string="Age", compute="calculate_age")
-    company_registry = fields.Char(
-        string='Organization number', help="organization number") # Destroys company_registry from l10n_se
-    # ~ social_sec_nr = fields.Char(string="Social security number", related="company_registry")  related this way does not work
-    social_sec_nr = fields.Char(string="Social security number") # social_sec_nr_age will not be correctly calculated
-    social_sec_nr_age = fields.Char(string="Social security number", compute="combine_social_sec_nr_age") # combine_social_sec_nr_age missing
+    social_sec_nr = fields.Char(string="Social security number") 
+    social_sec_nr_age = fields.Char(string="Social security number", compute="combine_social_sec_nr_age") 
+
+    @api.one
+    def combine_social_sec_nr_age(self):  
+        if self.social_sec_nr != False:
+            self.social_sec_nr_age = _("%s (%s years old)") % (
+                self.social_sec_nr,
+                self.age,
+            )
+        else:
+            self.social_sec_nr_age = ""
 
     _sql_constraints = [
-        ('company_registry_unique', 
-        'UNIQUE(company_registry)',
-        'company_registry (social security number/organization number) field needs to be unique'
+        ('social_sec_nr_unique', 
+        'UNIQUE(social_sec_nr)',
+        'social security number field needs to be unique'
         )]
 
     @api.one
-    @api.constrains("company_registry")
+    @api.constrains("social_sec_nr")
     def calculate_age(self):
         wrong_input = False
         today = date.today()
-        social_sec = self.company_registry
+        social_sec = self.social_sec_nr
         social_sec_stripped = ""
         if social_sec:
             error_message = ""
@@ -37,14 +44,14 @@ class ResPartner(models.Model):
                 social_sec_stripped = social_sec.split("-")[0]
             elif re.fullmatch("([0-9]){12}", social_sec):
                 social_sec_stripped = social_sec[:8]
-                self.company_registry = "%s-%s" % (
+                self.social_sec_nr = "%s-%s" % (
                     social_sec_stripped,
                     social_sec[8:12],
                 )
             else:
                 wrong_input = True
                 error_message = _(
-                    "Social security number %s (company_registry field) is not correctly formated or an incorrect length"
+                    "Social security number %s is not correctly formated or an incorrect length"
                     % social_sec
                 )
                 _logger.error(error_message)
@@ -61,7 +68,7 @@ class ResPartner(models.Model):
                 except:
                     wrong_input = True
                     error_message = _(
-                        "Could not convert social security number %s (company_registry field) to date"
+                        "Could not convert social security number %s to date"
                         % social_sec
                     )
                     _logger.error(error_message)
@@ -75,8 +82,8 @@ class ResPartner(models.Model):
                     except:
                         wrong_input = True
                         error_message = _(
-                            "Could not convert social security number %s (company_registry field) to date"
-                            % socompany_registrycial_sec_stripped
+                            "Could not convert social security number %s to date"
+                            % social_sec_stripped
                         )
                         _logger.error(error_message)
             elif len(social_sec_stripped) == 8:
@@ -90,14 +97,14 @@ class ResPartner(models.Model):
                 except:
                     wrong_input = True
                     error_message = _(
-                        "Could not convert social security number %s (company_registry field) to date"
+                        "Could not convert social security number %s (social_sec_nr field) to date"
                         % social_sec_stripped
                     )
                     _logger.error(error_message)
             else:
                 wrong_input = True
                 error_message = _(
-                    "Incorrectly formated social security number %s (company_registry field)"
+                    "Incorrectly formated social security number %s (social_sec_nr field)"
                     % social_sec
                 )
                 _logger.error(error_message)
