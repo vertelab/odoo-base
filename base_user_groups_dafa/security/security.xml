@@ -37,7 +37,7 @@
 
     <!-- Superadmin (Write) -->
     <record id="group_dafa_superadmin" model="res.groups">
-        <field name="name">DAFA Superadmin</field>
+        <field name="name">DAFA Org Admin (Write) former SuperAdmin</field>
         <field name="comment">DAFA Superadmin</field>
         <field name="category_id" ref="category_dafa_handle_org_info"/>
         <field name="is_dafa" eval="True"/>
@@ -83,32 +83,33 @@
         <field name="is_dafa" eval="True"/>
         <field name="implied_ids" eval="[(4, ref('group_dafa_admin_accounting_read')), (4, ref('account.group_account_invoice')), (4, ref('account.group_account_manager'))]"/>
     </record>
-    <!-- Support -->
-
+    
+    <!-- DAFA Support -->
     <record model="ir.module.category" id="module_category_af_support">
-        <field name="name">Support</field>
+        <field name="name">DAFA Support</field>
         <field name="description">Allows you to perform technical support.</field>
         <field name="sequence">1</field>
     </record>
 
     <record id="1_line_support" model="res.groups">
-        <field name="name">1st Line</field>
+        <field name="name">DAFA 1st Line</field>
         <field name="category_id" ref="module_category_af_support"/>
-        <field name="comment"></field>
+        <field name="implied_ids" eval="[(4, ref('base_user_groups_dafa.group_dafa_employees_read')), (4, ref('base_user_groups_dafa.group_dafa_participants_read')), (4, ref('base_user_groups_dafa.group_dafa_admin_accounting_read')), (4, ref('base_user_groups_dafa.group_dafa_org_admin_read'))]"/>
+        <field name="comment">DAFA READ-roles</field>
     </record>
 
     <record id="2_line_support" model="res.groups">
-        <field name="name">2nd Line</field>
+        <field name="name">DAFA 2nd Line</field>
         <field name="category_id" ref="module_category_af_support"/>
-        <field name="implied_ids" eval="[(4, ref('1_line_support'))]"/>
-        <field name="comment"></field>
+        <field name="implied_ids" eval="[(4, ref('1_line_support')), (4, ref('base_user_groups_dafa.group_dafa_participants_write')), (4, ref('base_user_groups_dafa.group_dafa_admin_accounting_write')), (4, ref('base_user_groups_dafa.group_dafa_superadmin'))]"/>
+        <field name="comment">DAFA Write-roles</field>
     </record>
 
     <record id="3_line_support" model="res.groups">
-        <field name="name">3rd Line</field>
+        <field name="name">DAFA 3rd Line</field>
         <field name="category_id" ref="module_category_af_support"/>
         <field name="implied_ids" eval="[(4, ref('2_line_support')), (4, ref('base.group_system'))]"/>
-        <field name="comment"></field>
+        <field name="comment">DAFA Write-roles and Odoo Admin</field>
     </record>
 
 </odoo>
