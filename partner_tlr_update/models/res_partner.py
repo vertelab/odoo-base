@@ -110,9 +110,9 @@ class ResPartner(models.Model):
                 'ns26':'http://arbetsformedlingen.se/datatyp/gemensam/personnamn/v0',
                 'ns27':'http://arbetsformedlingen.se/datatyp/tjansteleverantor/teleadress/v4',
                 })
-            _logger.info("elem %s" % elem)
             if elem is not None:
                 _logger.info("field[1] %s" % field[1])
+                _logger.info("elem text %s" % elem.text)
                 if field[1] == 'state_id.name' and country:
                     _logger.info("field[1] == state_id.name and country")
                     state = self.state_id.search([
@@ -135,7 +135,7 @@ class ResPartner(models.Model):
                 elif field[1] in self:
                     _logger.info("field[1] in self")
                     data[field[1]] = elem.text
-
+        _logger.info("data %s" % data)
         if data:
             self.write(data)
 

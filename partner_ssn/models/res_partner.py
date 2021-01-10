@@ -48,10 +48,28 @@ class ResPartner(models.Model):
                     social_sec_stripped,
                     social_sec[8:12],
                 )
+            elif re.fullmatch("([0-9]){6}-([0-9]){4}", social_sec):
+                social_sec_stripped = social_sec.split("-")[0]
+                wrong_input = True
+                error_message = _(
+                    "Social security number %s is formated as YYMMDD-NNNN, this format is not accepted"
+                    % social_sec
+                )
+            elif re.fullmatch("([0-9]){10}", social_sec):
+                social_sec_stripped = social_sec[:8]
+                self.social_sec_nr = "%s-%s" % (
+                    social_sec_stripped,
+                    social_sec[8:12],
+                )
+                wrong_input = True
+                error_message = _(
+                    "Social security number %s is formated as YYMMDDNNNN, this format is not accepted"
+                    % social_sec
+                )
             else:
                 wrong_input = True
                 error_message = _(
-                    "Social security number %s is not correctly formated or an incorrect length"
+                    "Social security number %s is not correctly formated."
                     % social_sec
                 )
                 _logger.error(error_message)
@@ -97,14 +115,14 @@ class ResPartner(models.Model):
                 except:
                     wrong_input = True
                     error_message = _(
-                        "Could not convert social security number %s (social_sec_nr field) to date"
+                        "Could not convert social security number %s to date"
                         % social_sec_stripped
                     )
                     _logger.error(error_message)
             else:
                 wrong_input = True
                 error_message = _(
-                    "Incorrectly formated social security number %s (social_sec_nr field)"
+                    "Incorrectly formated social security number %s"
                     % social_sec
                 )
                 _logger.error(error_message)
@@ -129,7 +147,7 @@ class ResPartner(models.Model):
                 self.age = ""
                 raise ValidationError(
                     _(
-                        "Please input a correctly formated social security number.\n %s"
+                        "Please input a correctly formated social security number.\n the correct format is YYYYMMDDNNNN or YYYYMMDD-NNNN.\n %s"
                         % error_message
                     )
                 )
