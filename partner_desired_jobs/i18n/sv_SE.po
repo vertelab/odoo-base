@@ -1,21 +1,24 @@
 # Translation of Odoo Server.
 # This file contains the translation of the following modules:
-# 	* partner_desired_jobs
+#	* partner_desired_jobs
 #
 msgid ""
 msgstr ""
-"Project-Id-Version: Odoo Server 12.0-20200508\n"
+"Project-Id-Version: Odoo Server 12.0-20201022\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2020-09-09 11:19+0000\n"
-"PO-Revision-Date: 2020-09-09 16:45+0200\n"
+"POT-Creation-Date: 2021-01-10 10:14+0000\n"
+"PO-Revision-Date: 2021-01-10 10:14+0000\n"
 "Last-Translator: <>\n"
 "Language-Team: \n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
-"Content-Transfer-Encoding: 8bit\n"
+"Content-Transfer-Encoding: \n"
 "Plural-Forms: \n"
-"Language: sv_SE\n"
-"X-Generator: Poedit 2.0.6\n"
+
+#. module: partner_desired_jobs
+#: selection:res.partner.jobs,experience_length:0
+msgid "1 to 3 years"
+msgstr "1 till 3 år"
 
 #. module: partner_desired_jobs
 #: model:ir.model,name:partner_desired_jobs.model_res_partner
@@ -41,7 +44,6 @@ msgstr "Önskade yrken utförande"
 #. module: partner_desired_jobs
 #: model_terms:ir.ui.view,arch_db:partner_desired_jobs.partner_jobs_view_tree
 #: model_terms:ir.ui.view,arch_db:partner_desired_jobs.view_partner_form
-#: model_terms:ir.ui.view,arch_db:partner_desired_jobs.view_partner_form_applied_for_jobs1
 msgid "Desired jobs"
 msgstr "Önskade yrken"
 
@@ -56,14 +58,24 @@ msgid "Education"
 msgstr "Utbildning"
 
 #. module: partner_desired_jobs
+#: model:ir.model.fields,field_description:partner_desired_jobs.field_res_partner_jobs__education_level
+msgid "Education level"
+msgstr "Utbildningsnivå"
+
+#. module: partner_desired_jobs
 #: model:ir.model.fields,field_description:partner_desired_jobs.field_res_partner_jobs__experience
 msgid "Experience"
 msgstr "Erfarenhet"
 
 #. module: partner_desired_jobs
+#: model:ir.model.fields,field_description:partner_desired_jobs.field_res_partner_jobs__experience_length
+msgid "Experience Length"
+msgstr "Erfarenhetslängd"
+
+#. module: partner_desired_jobs
 #: model:ir.model.fields,field_description:partner_desired_jobs.field_res_partner_jobs__id
 msgid "ID"
-msgstr "ID"
+msgstr ""
 
 #. module: partner_desired_jobs
 #: model:ir.model.fields,field_description:partner_desired_jobs.field_res_partner__job_ids
@@ -92,9 +104,24 @@ msgid "Last Updated on"
 msgstr "Senast uppdaterad"
 
 #. module: partner_desired_jobs
+#: selection:res.partner.jobs,experience_length:0
+msgid "Less than 1 year"
+msgstr "Mindre än 1 år"
+
+#. module: partner_desired_jobs
+#: selection:res.partner.jobs,experience_length:0
+msgid "More than 3 years"
+msgstr "Mer än 3 år"
+
+#. module: partner_desired_jobs
+#: selection:res.partner.jobs,experience_length:0
+msgid "No Experience"
+msgstr "Ingen erfarenhet"
+
+#. module: partner_desired_jobs
 #: model:ir.model.fields,help:partner_desired_jobs.field_res_partner_jobs__ssyk_code
 msgid "Official code, group, sub-group or detail group."
-msgstr "Officiel kod, grupp, undergrupp eller detaljerad grupp."
+msgstr "Officiell kod, grupp, undergrupp eller detaljerad grupp."
 
 #. module: partner_desired_jobs
 #: model:ir.model.fields,field_description:partner_desired_jobs.field_res_partner_jobs__partner_id
@@ -104,9 +131,10 @@ msgstr "Samarbetspartner"
 #. module: partner_desired_jobs
 #: model:ir.model.fields,field_description:partner_desired_jobs.field_res_partner_jobs__ssyk_code
 msgid "SSYK"
-msgstr "SSYK"
+msgstr ""
 
 #. module: partner_desired_jobs
 #: model:ir.model,name:partner_desired_jobs.model_res_partner_jobs
 msgid "res.partner.jobs"
-msgstr "res.partner.jobs"
+msgstr ""
+
