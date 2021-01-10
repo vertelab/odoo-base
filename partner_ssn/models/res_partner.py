@@ -116,7 +116,7 @@ class ResPartner(models.Model):
             else:
                 wrong_input = True
                 error_message = _(
-                    "Incorrectly formated social security number %s  
+                    "Incorrectly formated social security number %s" 
                 ) % social_sec
                 _logger.error(error_message)
 
