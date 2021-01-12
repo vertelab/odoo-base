@@ -10,7 +10,6 @@
     "category": "Security",
     "depends": [
         "hr",
-        "outplacement"
         "sale",
         "project",
     ],
