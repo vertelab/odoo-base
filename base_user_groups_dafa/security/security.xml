@@ -11,15 +11,15 @@
     </record>
 
     <record id="group_dafa_employees_read" model="res.groups">
-        <field name="name">DAFA Admin (Read)</field>
-        <field name="comment">DAFA Admin - Read</field>
+        <field name="name">DAFA Admin (Read)</field>    
+        <field name="comment">DAFA Admin - Read</field>  # Allows the users  to read the employee related information with the user rights cant edit any info.
         <field name="category_id" ref="category_dafa_handle_org_info"/>
         <field name="is_dafa" eval="True"/>
     </record>
 
     <record id="group_dafa_employees_write" model="res.groups">
         <field name="name">DAFA Admin (Write)</field>
-        <field name="comment">DAFA Admin - Write</field>
+        <field name="comment">DAFA Admin - Write</field> # Allows users to read /edit the employee related information with the user rights and can create/delete the employees
         <field name="category_id" ref="category_dafa_handle_org_info"/>
         <field name="is_dafa" eval="True"/>
         <field name="implied_ids" eval="[(4, ref('group_dafa_employees_read')), (4, ref('hr.group_hr_user'))]"/>
@@ -29,7 +29,7 @@
     <!-- Hantera Organisationsuppgifter (Läs) -->
     <record id="group_dafa_org_admin_read" model="res.groups">
         <field name="name">DAFA Org Admin (Read)</field>
-        <field name="comment">DAFA Org Admin - Read</field>
+        <field name="comment">DAFA Org Admin - Read</field> # Allows users to read information related to the organization and all its departments and cant edit any info.
         <field name="category_id" ref="category_dafa_handle_org_info"/>
         <field name="is_dafa" eval="True"/>
     </record>
@@ -38,7 +38,7 @@
     <!-- Superadmin (Write) -->
     <record id="group_dafa_superadmin" model="res.groups">
         <field name="name">DAFA Org Admin (Write) former SuperAdmin</field>
-        <field name="comment">DAFA Superadmin</field>
+        <field name="comment">DAFA Superadmin</field> # Allows users to manage/edit the information related to the organization and all its departments.
         <field name="category_id" ref="category_dafa_handle_org_info"/>
         <field name="is_dafa" eval="True"/>
         <field name="implied_ids" eval="[(4, ref('sales_team.group_sale_manager')), (4, ref('hr.group_hr_manager')), (4, ref('account.group_account_manager'))]"/>
@@ -55,14 +55,14 @@
 
     <record id="group_dafa_participants_read" model="res.groups">
         <field name="name">DAFA Participants (Read)</field>
-        <field name="comment">DAFA Participants - Read</field>
+        <field name="comment">DAFA Participants - Read</field> # Allows the users to read the participants related information and process and cant edit any.
         <field name="category_id" ref="category_dafa_handle_department_info"/>
         <field name="is_dafa" eval="True"/>
     </record>
 
     <record id="group_dafa_participants_write" model="res.groups">
         <field name="name">DAFA Participants (Write)</field>
-        <field name="comment">DAFA Participants - Write</field>
+        <field name="comment">DAFA Participants - Write</field> # Allows the users to manage(edit/add) participant related information and process
         <field name="category_id" ref="category_dafa_handle_department_info"/>
         <field name="is_dafa" eval="True"/>
         <field name="implied_ids" eval="[(4, ref('group_dafa_participants_read')), (4, ref('project.group_project_user')), (4, ref('sales_team.group_sale_salesman_all_leads'))]"/>
@@ -72,7 +72,7 @@
     <!-- Hantera Ekonomi -->
     <record id="group_dafa_admin_accounting_read" model="res.groups">
         <field name="name">DAFA Accounting (Read)</field>
-        <field name="comment">DAFA Accounting - Read</field>
+        <field name="comment">DAFA Accounting - Read</field>  # Allows the user to read the information related to the company's accounts such as order payments and invoices and cant edit any info.
         <field name="category_id" ref="category_dafa_handle_department_info"/>
         <field name="is_dafa" eval="True"/>
     </record>
