@@ -61,6 +61,7 @@
         <field name="comment">DAFA Participants - Gives access to read participant related information and processess.</field>
         <field name="category_id" ref="category_dafa_handle_department_info"/>
         <field name="is_dafa" eval="True"/>
+        <field name="implied_ids" eval="[(4, ref('outplacement.group_outplacement_user_read'))]"/>
     </record>
 
     <record id="group_dafa_participants_write" model="res.groups">
@@ -68,7 +69,7 @@
         <field name="comment">DAFA Participants - Gives access to read and change participant related information and processess.</field>
         <field name="category_id" ref="category_dafa_handle_department_info"/>
         <field name="is_dafa" eval="True"/>
-        <field name="implied_ids" eval="[(4, ref('group_dafa_participants_read')), (4, ref('project.group_project_user')), (4, ref('sales_team.group_sale_salesman_all_leads'))]"/>
+        <field name="implied_ids" eval="[(4, ref('outplacement.group_outplacement_user_write')), (4, ref('group_dafa_participants_read')), (4, ref('project.group_project_user')), (4, ref('sales_team.group_sale_salesman_all_leads'))]"/>
     </record>
 
 
@@ -79,6 +80,7 @@
         <field name="comment">DAFA Accounting - Gives access to read information related to the accounting of the company such as order-payments and invoices.</field>
         <field name="category_id" ref="category_dafa_handle_department_info"/>
         <field name="is_dafa" eval="True"/>
+        <field name="implied_ids" eval="[(4, ref('group_dafa_participants_read'))]"/>
     </record>
 
     <record id="group_dafa_admin_accounting_write" model="res.groups">
@@ -86,7 +88,7 @@
         <field name="comment">DAFA Accounting - Gives access to read and change information related to the accounting of the company such as order-payments and invoices.</field>
         <field name="category_id" ref="category_dafa_handle_department_info"/>
         <field name="is_dafa" eval="True"/>
-        <field name="implied_ids" eval="[(4, ref('group_dafa_admin_accounting_read')), (4, ref('account.group_account_invoice')), (4, ref('account.group_account_manager'))]"/>
+        <field name="implied_ids" eval="[(4, ref('group_dafa_participants_write')), (4, ref('group_dafa_admin_accounting_read')), (4, ref('account.group_account_invoice')), (4, ref('account.group_account_manager'))]"/>
     </record>
     
     <!-- DAFA Support -->
