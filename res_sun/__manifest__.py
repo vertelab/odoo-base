@@ -21,7 +21,7 @@
 
 {
     'name': 'Res SUN',
-    'version': '12.0.1.2',
+    'version': '12.0.0.1.3',
     'category': '',
     'description': """
 SUN
@@ -34,11 +34,9 @@ AFC-191, 209
     'website': 'http://www.vertel.se',
     'depends': ['contacts',],
     'data': [
-        #'views/res_partner_view.xml',
         'security/ir.model.access.csv', 
         'views/res_sun_view.xml',
         'data/res.sun.csv',
-        'data/res.partner.education_level.csv'
         ],
     'application': False,
     'installable': True,

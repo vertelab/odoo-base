@@ -1,10 +1,9 @@
-from odoo import models, fields
+from odoo import models, fields, api
 
 
 class ResPartnerEducation(models.Model):
     _name = "res.partner.education"
 
-    partner_ids = fields.Many2many(comodel_name="res.partner")
     sun_id = fields.Many2one(comodel_name='res.sun',
                                string='SUN Code')
     education_level_id = fields.Many2one(

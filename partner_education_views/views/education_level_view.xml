@@ -2,7 +2,7 @@
 <odoo>
     <record id="education_level_action" model="ir.actions.act_window">
         <field name="name">Education level</field>
-        <field name="res_model">res.partner.education_level</field>
+        <field name="res_model">res.partner.education.education_level</field>
         <field name="view_mode">tree,form</field>
     </record>
 
