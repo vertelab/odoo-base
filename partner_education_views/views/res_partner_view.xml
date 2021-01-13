@@ -9,7 +9,14 @@
                 <page name="education" string="Education">
                     <group>
                         <group>
-                            <field name="education_ids"/>
+                            <field name="education_ids" mode="tree" nolabel="1">
+                                <tree editable="bottom" string="Educations">
+                                    <field name="sun_id"/>
+                                    <field name="education_level_id"/>
+                                    <field name="foreign_education"/>
+                                    <field name="foreign_education_approved"/>
+                                </tree>
+                            </field>
                             <field name="cv_file_name" invisible="1"/>
                             <field name="cv" filename="cv_file_name"/>
                             <field name="references_file_name" invisible="1"/>
