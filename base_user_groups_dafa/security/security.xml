@@ -23,7 +23,8 @@
     <!-- Superadmin (Write) -->
     <record id="group_dafa_org_admin_write" model="res.groups">
         <field name="name">DAFA Org Admin (Write)</field>
-        <field name="comment">Allows user to read and write information related to the organization and all its departments.</field>
+        <field name="comment">Allows user to read and alter information related to 
+            the organization and all its departments.</field>
         <field name="category_id" ref="category_dafa_handle_org_info"/>
         <field name="is_dafa" eval="True"/>
         <field name="implied_ids" eval="[
@@ -38,20 +39,20 @@
     <!-- ############################################ -->
     <record id="category_dafa_handle_department_info" model="ir.module.category">
         <field name="name">Handle Department</field>
-        <field name="description">Category for handling information and tasks related to jobseekers.</field>
+        <field name="description">Category for handling information and tasks related to department.</field>
     </record>
 
     <!-- Manage Employees -->
     <record id="group_dafa_employees_read" model="res.groups">
         <field name="name">DAFA Admin (Read)</field>    
-        <field name="comment">Gives access to read employee related information and and tasks.</field>
+        <field name="comment">Gives access to read employee related information and and processes.</field>
         <field name="category_id" ref="category_dafa_handle_department_info"/>
         <field name="is_dafa" eval="True"/>
     </record>
 
     <record id="group_dafa_employees_write" model="res.groups">
         <field name="name">DAFA Admin (Write)</field>
-        <field name="comment">Gives access to read and write to employee related information and and tasks.</field>
+        <field name="comment">Gives access to read and write to employee related information and and processes.</field>
         <field name="category_id" ref="category_dafa_handle_department_info"/>
         <field name="is_dafa" eval="True"/>
         <field name="implied_ids" eval="[(4, ref('group_dafa_employees_read')), (4, ref('hr.group_hr_user'))]"/>
@@ -71,14 +72,17 @@
         <field name="comment">Gives access to read and write participant related information and processess.</field>
         <field name="category_id" ref="category_dafa_handle_department_info"/>
         <field name="is_dafa" eval="True"/>
-        <field name="implied_ids" eval="[(4, ref('outplacement.group_outplacement_user_write')), (4, ref('group_dafa_participants_read')), (4, ref('project.group_project_user')), (4, ref('sales_team.group_sale_salesman_all_leads'))]"/>
+        <field name="implied_ids" eval="[(4, ref('outplacement.group_outplacement_user_write')), 
+        (4, ref('group_dafa_participants_read')), (4, ref('project.group_project_user')), 
+        (4, ref('sales_team.group_sale_salesman_all_leads'))]"/>
     </record>
 
 
     <!-- Manage Accounting -->
     <record id="group_dafa_admin_accounting_read" model="res.groups">
         <field name="name">DAFA Accounting (Read)</field>
-        <field name="comment">Gives access to read information related to the accounting of the company such as order-payments and invoices.</field>
+        <field name="comment">Gives access to read information related to the accounting of the company 
+            such as order-payments and invoices.</field>
         <field name="category_id" ref="category_dafa_handle_department_info"/>
         <field name="is_dafa" eval="True"/>
         <field name="implied_ids" eval="[(4, ref('group_dafa_participants_read'))]"/>
@@ -86,10 +90,13 @@
 
     <record id="group_dafa_admin_accounting_write" model="res.groups">
         <field name="name">DAFA Accounting (Write)</field>
-        <field name="comment">Gives access to read and write information related to the accounting of the company such as order-payments and invoices.</field>
+        <field name="comment">Gives access to read and write information related to the accounting of 
+            the company such as order-payments and invoices.</field>
         <field name="category_id" ref="category_dafa_handle_department_info"/>
         <field name="is_dafa" eval="True"/>
-        <field name="implied_ids" eval="[(4, ref('group_dafa_participants_write')), (4, ref('group_dafa_admin_accounting_read')), (4, ref('account.group_account_invoice')), (4, ref('account.group_account_manager'))]"/>
+        <field name="implied_ids" eval="[(4, ref('group_dafa_participants_write')), 
+        (4, ref('group_dafa_admin_accounting_read')), (4, ref('account.group_account_invoice')), 
+        (4, ref('account.group_account_manager'))]"/>
     </record>
     
     <!-- DAFA Support -->
@@ -102,14 +109,20 @@
     <record id="1_line_support" model="res.groups">
         <field name="name">DAFA 1st Line</field>
         <field name="category_id" ref="module_category_af_support"/>
-        <field name="implied_ids" eval="[(4, ref('base_user_groups_dafa.group_dafa_employees_read')), (4, ref('base_user_groups_dafa.group_dafa_participants_read')), (4, ref('base_user_groups_dafa.group_dafa_admin_accounting_read')), (4, ref('base_user_groups_dafa.group_dafa_org_admin_read'))]"/>
+        <field name="implied_ids" eval="[(4, ref('base_user_groups_dafa.group_dafa_employees_read')), 
+        (4, ref('base_user_groups_dafa.group_dafa_participants_read')), 
+        (4, ref('base_user_groups_dafa.group_dafa_admin_accounting_read')), 
+        (4, ref('base_user_groups_dafa.group_dafa_org_admin_read'))]"/>
         <field name="comment">DAFA READ-roles</field>
     </record>
 
     <record id="2_line_support" model="res.groups">
         <field name="name">DAFA 2nd Line</field>
         <field name="category_id" ref="module_category_af_support"/>
-        <field name="implied_ids" eval="[(4, ref('1_line_support')), (4, ref('base_user_groups_dafa.group_dafa_participants_write')), (4, ref('base_user_groups_dafa.group_dafa_admin_accounting_write')), (4, ref('base_user_groups_dafa.group_dafa_org_admin_write'))]"/>
+        <field name="implied_ids" eval="[(4, ref('1_line_support')), 
+        (4, ref('base_user_groups_dafa.group_dafa_participants_write')), 
+        (4, ref('base_user_groups_dafa.group_dafa_admin_accounting_write')), 
+        (4, ref('base_user_groups_dafa.group_dafa_org_admin_write'))]"/>
         <field name="comment">DAFA Write-roles</field>
     </record>
 

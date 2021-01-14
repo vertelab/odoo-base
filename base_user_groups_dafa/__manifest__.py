@@ -9,7 +9,6 @@
     "website": "https://arbetsformedlingen.se/",
     "category": "Security",
     "depends": [
-        "outplacement",
         "hr",
         "sale",
         "project",
