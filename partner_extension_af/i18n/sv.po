@@ -1,0 +1,260 @@
+# Translation of Odoo Server.
+# This file contains the translation of the following modules:
+#	* partner_extension_af
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: Odoo Server 12.0-20200618\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2021-01-15 08:03+0000\n"
+"PO-Revision-Date: 2021-01-15 08:03+0000\n"
+"Last-Translator: <>\n"
+"Language-Team: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: \n"
+"Plural-Forms: \n"
+
+#. module: partner_extension_af
+#: model:ir.model.fields,field_description:partner_extension_af.field_res_partner__type
+#: model:ir.model.fields,field_description:partner_extension_af.field_res_users__type
+msgid "Address Type"
+msgstr "Adresstyp"
+
+#. module: partner_extension_af
+#: selection:res.partner,segment_jobseeker:0
+msgid "C1"
+msgstr ""
+
+#. module: partner_extension_af
+#: selection:res.partner,segment_jobseeker:0
+msgid "C2"
+msgstr ""
+
+#. module: partner_extension_af
+#: selection:res.partner,segment_jobseeker:0
+msgid "C3"
+msgstr ""
+
+#. module: partner_extension_af
+#: model:ir.model.fields,field_description:partner_extension_af.field_res_partner__cfar
+#: model:ir.model.fields,field_description:partner_extension_af.field_res_users__cfar
+msgid "CFAR"
+msgstr "CfarNr"
+
+#. module: partner_extension_af
+#: model:ir.model.fields,help:partner_extension_af.field_res_partner__cfar
+#: model:ir.model.fields,help:partner_extension_af.field_res_users__cfar
+msgid "CFAR number"
+msgstr "Cfar-nummer"
+
+#. module: partner_extension_af
+#: model:ir.model,name:partner_extension_af.model_res_partner
+#: selection:res.partner,type:0
+msgid "Contact"
+msgstr "Kontakt"
+
+#. module: partner_extension_af
+#: model:ir.model.fields,field_description:partner_extension_af.field_res_partner__customer_id
+#: model:ir.model.fields,field_description:partner_extension_af.field_res_users__customer_id
+#: model:ir.model.fields,help:partner_extension_af.field_res_partner__customer_id
+#: model:ir.model.fields,help:partner_extension_af.field_res_users__customer_id
+msgid "Customer number"
+msgstr "Kundnummmer"
+
+#. module: partner_extension_af
+#: model:ir.model.fields,field_description:partner_extension_af.field_res_partner__customer_since
+#: model:ir.model.fields,field_description:partner_extension_af.field_res_users__customer_since
+msgid "Customer since"
+msgstr "Aktuell sedan"
+
+#. module: partner_extension_af
+#: model:ir.model.fields,field_description:partner_extension_af.field_res_partner__deactualization_date
+#: model:ir.model.fields,field_description:partner_extension_af.field_res_users__deactualization_date
+msgid "Deactualization date"
+msgstr "Avaktualiseringsdatum"
+
+#. module: partner_extension_af
+#: model:ir.model.fields,field_description:partner_extension_af.field_res_partner__deactualization_reason
+#: model:ir.model.fields,field_description:partner_extension_af.field_res_users__deactualization_reason
+msgid "Deactualization reason"
+msgstr "Avaktualiseringsanledning"
+
+#. module: partner_extension_af
+#: model:ir.model.fields,field_description:partner_extension_af.field_res_partner__is_employer
+#: model:ir.model.fields,field_description:partner_extension_af.field_res_users__is_employer
+msgid "Employer"
+msgstr "Arbetsgivare"
+
+#. module: partner_extension_af
+#: model:ir.model.fields,field_description:partner_extension_af.field_res_partner__segment_employer
+#: model:ir.model.fields,field_description:partner_extension_af.field_res_users__segment_employer
+msgid "Employer segment"
+msgstr "Arbetsgivarsegment"
+
+#. module: partner_extension_af
+#: selection:res.partner,segment_employer:0
+msgid "Employment subsidy"
+msgstr "Anställningsstöd"
+
+#. module: partner_extension_af
+#: selection:res.partner,segment_employer:0
+msgid "Entry job"
+msgstr "Ingångsjobb"
+
+#. module: partner_extension_af
+#: selection:res.partner,type:0
+msgid "Foreign Address"
+msgstr ""
+
+#. module: partner_extension_af
+#: selection:res.partner,type:0
+msgid "Given address"
+msgstr ""
+
+#. module: partner_extension_af
+#: model:ir.model.fields,field_description:partner_extension_af.field_res_partner__is_government
+#: model:ir.model.fields,field_description:partner_extension_af.field_res_users__is_government
+msgid "Government"
+msgstr "Myndighet"
+
+#. module: partner_extension_af
+#: selection:res.partner,segment_employer:0
+msgid "Including 1"
+msgstr "Inkluderande nivå 1"
+
+#. module: partner_extension_af
+#: selection:res.partner,segment_employer:0
+msgid "Including 2"
+msgstr "Inkluderande nivå 2"
+
+#. module: partner_extension_af
+#: model:ir.model.fields,field_description:partner_extension_af.field_res_partner__is_independent_partner
+#: model:ir.model.fields,field_description:partner_extension_af.field_res_users__is_independent_partner
+msgid "Independent partner"
+msgstr "Fristående aktör"
+
+#. module: partner_extension_af
+#: selection:res.partner,type:0
+msgid "Invoice address"
+msgstr "Fakturaadress"
+
+#. module: partner_extension_af
+#: model:ir.model.fields,field_description:partner_extension_af.field_res_partner__is_jobseeker
+#: model:ir.model.fields,field_description:partner_extension_af.field_res_users__is_jobseeker
+msgid "Jobseeker"
+msgstr "Arbetssökande"
+
+#. module: partner_extension_af
+#: model:ir.model.fields,field_description:partner_extension_af.field_res_partner__segment_jobseeker
+#: model:ir.model.fields,field_description:partner_extension_af.field_res_users__segment_jobseeker
+msgid "Jobseeker segment"
+msgstr "Arbetssökandesegment"
+
+#. module: partner_extension_af
+#: selection:res.partner,registered_through:0
+msgid "Local office"
+msgstr "Lokalkontor"
+
+#. module: partner_extension_af
+#: selection:res.partner,type:0
+msgid "Mailing Address"
+msgstr ""
+
+#. module: partner_extension_af
+#: selection:res.partner,segment_employer:0
+msgid "National agreement"
+msgstr "Nationellt avtal"
+
+#. module: partner_extension_af
+#: selection:res.partner,type:0
+msgid "Other address"
+msgstr ""
+
+#. module: partner_extension_af
+#: selection:res.partner,registered_through:0
+msgid "PDM"
+msgstr ""
+
+#. module: partner_extension_af
+#: selection:res.partner,type:0
+msgid "Private Address"
+msgstr "Privatadress"
+
+#. module: partner_extension_af
+#: model:ir.model.fields,field_description:partner_extension_af.field_res_partner__registered_through
+#: model:ir.model.fields,field_description:partner_extension_af.field_res_users__registered_through
+msgid "Registered Through"
+msgstr "Inskriven på"
+
+#. module: partner_extension_af
+#: model:ir.model.fields,field_description:partner_extension_af.field_res_partner__sms_reminders
+#: model:ir.model.fields,field_description:partner_extension_af.field_res_users__sms_reminders
+msgid "SMS reminders"
+msgstr "SMS-påminnelser"
+
+#. module: partner_extension_af
+#: selection:res.partner,registered_through:0
+msgid "Self service"
+msgstr "Självservice"
+
+#. module: partner_extension_af
+#: model:ir.model.fields,field_description:partner_extension_af.field_res_partner__share_info_with_employers
+#: model:ir.model.fields,field_description:partner_extension_af.field_res_users__share_info_with_employers
+msgid "Share name and address with employers"
+msgstr "Namn och adress får lämnas till arbetsgivare"
+
+#. module: partner_extension_af
+#: selection:res.partner,type:0
+msgid "Shipping address"
+msgstr "Leveransadress"
+
+#. module: partner_extension_af
+#: model:ir.model.fields,help:partner_extension_af.field_res_partner__type
+#: model:ir.model.fields,help:partner_extension_af.field_res_users__type
+msgid "Used by Sales and Purchase Apps to select the relevant address depending on the context."
+msgstr ""
+
+#. module: partner_extension_af
+#: selection:res.partner,type:0
+msgid "Visitation Address"
+msgstr ""
+
+#. module: partner_extension_af
+#: model:ir.model.fields,field_description:partner_extension_af.field_res_partner__visitation_address_id
+#: model:ir.model.fields,field_description:partner_extension_af.field_res_users__visitation_address_id
+msgid "Visitation address"
+msgstr "Besöksadress"
+
+#. module: partner_extension_af
+#: model:ir.model.fields,field_description:partner_extension_af.field_res_partner__foreign_country_of_work
+#: model:ir.model.fields,field_description:partner_extension_af.field_res_users__foreign_country_of_work
+msgid "When working in foreign country"
+msgstr "Vid arbete utomlands"
+
+#. module: partner_extension_af
+#: model:ir.model.fields,field_description:partner_extension_af.field_res_partner__jobseeker_work
+#: model:ir.model.fields,field_description:partner_extension_af.field_res_users__jobseeker_work
+msgid "Work"
+msgstr "Arbete"
+
+#. module: partner_extension_af
+#: model:ir.model.fields,field_description:partner_extension_af.field_res_partner__work_phone
+#: model:ir.model.fields,field_description:partner_extension_af.field_res_users__work_phone
+msgid "Work phone"
+msgstr "Jobbtelefon"
+
+#. module: partner_extension_af
+#: model:ir.model.fields,help:partner_extension_af.field_res_partner__work_phone
+#: model:ir.model.fields,help:partner_extension_af.field_res_users__work_phone
+msgid "Work phone number"
+msgstr "Jobbtelefonnummer"
+
+#. module: partner_extension_af
+#: model:ir.model.fields,field_description:partner_extension_af.field_res_partner__given_address_id
+#: model:ir.model.fields,field_description:partner_extension_af.field_res_partner__given_address_street
+#: model:ir.model.fields,field_description:partner_extension_af.field_res_users__given_address_id
+#: model:ir.model.fields,field_description:partner_extension_af.field_res_users__given_address_street
+msgid "given address"
+msgstr "angiven adress"
+

@@ -21,7 +21,7 @@
 
 {
     'name': 'Arbetsförmedlingen Partner Extension',
-    'version': '12.0.0.1.0',
+    'version': '12.0.0.1.1',
     'category': '',
     'description': """Partner fields for Arbetsförmedlingen.""",
     'author': 'Vertel AB',
