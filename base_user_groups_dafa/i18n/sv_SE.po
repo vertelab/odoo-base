@@ -166,5 +166,5 @@ msgstr "Hantera Branch"
 #. module: base_user_groups_dafa
 #: model:ir.module.category,name:base_user_groups_dafa.category_dafa_handle_org_info
 msgid "Handle Organization"
-msgstr "HAntera Org."
+msgstr "Hantera Org."
 
