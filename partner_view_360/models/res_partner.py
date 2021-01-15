@@ -37,8 +37,8 @@ class ResPartner(models.Model):
     _inherit = "res.partner"
     _rec_name = "name_com_reg_num"
 
-    work_phone = fields.Char(string="Work phone", help="Work phone number")
-    age = fields.Char(string="Age", compute="calculate_age")
+    work_phone = fields.Char(string="Work phone", help="Work phone number") #is added in partner_extension_af
+    age = fields.Char(string="Age", compute="calculate_age") #is added in partner_extension_af
     company_registry = fields.Char(
         string="Organization number", help="organization number", index=True
     )
@@ -48,14 +48,14 @@ class ResPartner(models.Model):
     social_sec_nr_age = fields.Char(
         string="Social security number", compute="combine_social_sec_nr_age"
     )
-    cfar = fields.Char(string="CFAR", help="CFAR number")
+    cfar = fields.Char(string="CFAR", help="CFAR number") #is added in partner_extension_af
     customer_id = fields.Char(
         string="Customer number", help="Customer number", index=True
-    )
+    ) #is added in partner_extension_af
     eidentification = fields.Char(
         string="E-Identification",
         help="BankId or other e-identification done OK or other",
-    )
+    ) 
 
     type = fields.Selection(
         selection_add=[
@@ -64,24 +64,24 @@ class ResPartner(models.Model):
             ("visitation address", "Visitation Address"),
             ("mailing address", "Mailing Address"),
         ]
-    )
+    ) #is added in partner_extension_af
 
-    is_jobseeker = fields.Boolean(string="Jobseeker", index=True)
-    is_independent_partner = fields.Boolean(string="Independent partner")
-    is_government = fields.Boolean(string="Government")
-    is_employer = fields.Boolean(string="Employer", index=True)
+    is_jobseeker = fields.Boolean(string="Jobseeker", index=True) #is added in partner_extension_af
+    is_independent_partner = fields.Boolean(string="Independent partner") #is added in partner_extension_af
+    is_government = fields.Boolean(string="Government") #is added in partner_extension_af
+    is_employer = fields.Boolean(string="Employer", index=True) #is added in partner_extension_af
 
-    jobseeker_category_id = fields.Many2one(comodel_name="res.partner.skat")
+    jobseeker_category_id = fields.Many2one(comodel_name="res.partner.skat") #is added in partner_extension_af
     jobseeker_category = fields.Char(
         string="Jobseeker category", compute="combine_category_name_code"
-    )
-    customer_since = fields.Datetime(string="Customer since")
-    jobseeker_work = fields.Boolean(string="Work")
-    deactualization_date = fields.Datetime(string="Deactualization date")
+    ) #is added in partner_extension_af
+    customer_since = fields.Datetime(string="Customer since") #is added in partner_extension_af
+    jobseeker_work = fields.Boolean(string="Work") #is added in partner_extension_af
+    deactualization_date = fields.Datetime(string="Deactualization date") #is added in partner_extension_af
     deactualization_reason = fields.Char(
         string="Deactualization reason"
     )  # egen modell?
-    foreign_country_of_work = fields.Char(string="When working in foreign country")
+    foreign_country_of_work = fields.Char(string="When working in foreign country") #is added in partner_extension_af
     deactualization_message = fields.Text(
         string="Message to jobseeker regarding deactualization"
     )
@@ -93,28 +93,28 @@ class ResPartner(models.Model):
             ("local office", "Local office"),
         ],
         string="Registered Through",
-    )
-    match_area = fields.Boolean(string="Match Area")
+    ) #is added in partner_extension_af
+    match_area = fields.Boolean(string="Match Area") 
     share_info_with_employers = fields.Boolean(
         string="Share name and address with employers"
-    )
-    sms_reminders = fields.Boolean(string="SMS reminders")
-    visitation_address_id = fields.Many2one("res.partner", string="Visitation address")
+    ) #is added in partner_extension_af
+    sms_reminders = fields.Boolean(string="SMS reminders") #is added in partner_extension_af
+    visitation_address_id = fields.Many2one("res.partner", string="Visitation address") #is added in partner_extension_af
 
-    given_address_id = fields.Many2one("res.partner", string="given address")
+    given_address_id = fields.Many2one("res.partner", string="given address") # Add to a separate module
     given_address_street = fields.Char(
         string="given address", related="given_address_id.street"
-    )
-    given_address_zip = fields.Char(related="given_address_id.zip")
+    ) #is added in partner_extension_af
+    given_address_zip = fields.Char(related="given_address_id.zip") 
     given_address_city = fields.Char(related="given_address_id.city")
     employer_class = fields.Selection(
         selection=[("1", "1"), ("2", "2"), ("3", "3"), ("4", "4")]
-    )
+    ) # Add to a separate module
 
-    state_code = fields.Char(string="State code", related="state_id.code")
+    state_code = fields.Char(string="State code", related="state_id.code") # Moved to l10n_se
     state_name_code = fields.Char(
         string="Municipality", compute="combine_state_name_code"
-    )
+    )  # Moved to l10n_se
 
     temp_officer_id = fields.Many2many(
         comodel_name="res.users",
@@ -125,7 +125,7 @@ class ResPartner(models.Model):
     segment_jobseeker = fields.Selection(
         string="Jobseeker segment",
         selection=[("a", "A"), ("b", "B"), ("c1", "C1"), ("c2", "C2"), ("c3", "C3")],
-    )
+    ) #is added in partner_extension_af
     segment_employer = fields.Selection(
         string="Employer segment",
         selection=[
@@ -135,7 +135,7 @@ class ResPartner(models.Model):
             ("national agreement", "National agreement"),
             ("employment subsidy", "Employment subsidy"),
         ],
-    )
+    ) #is added in partner_extension_af
 
     name_com_reg_num = fields.Char(compute="_compute_name_com_reg_num", store=True)
 
