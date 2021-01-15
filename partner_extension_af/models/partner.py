@@ -72,7 +72,7 @@ class Partner(models.Model):
         string="Employer segment",
         selection=[
             ("including 1", "Including 1"),
-            ("including 2", " Including 2"),
+            ("including 2", "Including 2"),
             ("entry job", "Entry job"),
             ("national agreement", "National agreement"),
             ("employment subsidy", "Employment subsidy"),
