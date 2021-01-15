@@ -19,5 +19,3 @@ class ResPartner(models.Model):
     @api.one
     def _compute_has_drivers_license(self):
         self.har_drivers_license = len(self.drivers_license_ids) > 0
-
-
