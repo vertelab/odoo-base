@@ -64,67 +64,67 @@ msgstr "Dafa Linje 3"
 #. module: base_user_groups_dafa
 #: model:res.groups,name:base_user_groups_dafa.group_dafa_admin_accounting_read
 msgid "DAFA Accounting (Read)"
-msgstr "Bhr Ekonomi (Läs)"
+msgstr "DAFA Ekonomi (Läs)"
 
 #. module: base_user_groups_dafa
 #: model:res.groups,name:base_user_groups_dafa.group_dafa_admin_accounting_write
 msgid "DAFA Accounting (Write)"
-msgstr "Bhr Ekonomi (Skriv)"
+msgstr "DAFA Ekonomi (Skriv)"
 
 #. module: base_user_groups_dafa
 #: model:res.groups,name:base_user_groups_dafa.group_dafa_employees_read
 msgid "DAFA Admin (Read)"
-msgstr "Bhr Admin (Läs)"
+msgstr "DAFA Admin (Läs)"
 
 #. module: base_user_groups_dafa
 #: model:res.groups,name:base_user_groups_dafa.group_dafa_employees_write
 msgid "DAFA Admin (Write)"
-msgstr "Bhr Admin (Skriv)"
+msgstr "DAFA Admin (Skriv)"
 
 #. module: base_user_groups_dafa
 #: model:ir.model.fields,field_description:base_user_groups_dafa.field_res_groups__is_dafa
 msgid "DAFA Group"
-msgstr ""
+msgstr "DAFA Grupp"
 
 #. module: base_user_groups_dafa
 #: model:res.groups,name:base_user_groups_dafa.group_dafa_org_admin_read
 msgid "DAFA Org-Admin (Read)"
-msgstr "Bhr Org-Admin (Läs)"
+msgstr "DAFA Org-Admin (Läs)"
 
 #. module: base_user_groups_dafa
 #: model:res.groups,name:base_user_groups_dafa.group_dafa_org_admin_write
 msgid "DAFA Org-Admin (Write)"
-msgstr "Bhr Org-Admin (Skriv)"
+msgstr "DAFA Org-Admin (Skriv)"
 
 #. module: base_user_groups_dafa
 #: model:res.groups,name:base_user_groups_dafa.group_dafa_participants_read
 msgid "DAFA Participants (Read)"
-msgstr "Bhr Deltagare (Läs)"
+msgstr "DAFA Deltagare (Läs)"
 
 #. module: base_user_groups_dafa
 #: model:res.groups,name:base_user_groups_dafa.group_dafa_participants_write
 msgid "DAFA Participants (Write)"
-msgstr "Bhr Deltagare (Skriv)"
+msgstr "DAFA Deltagare (Skriv)"
 
 #. module: base_user_groups_dafa
 #: model:res.groups,comment:base_user_groups_dafa.1_line_support
 msgid "DAFA READ-roles"
-msgstr "Bhr LÄS-Roller"
+msgstr "DAFA LÄS-Roller"
 
 #. module: base_user_groups_dafa
 #: model:ir.module.category,name:base_user_groups_dafa.module_category_af_support
 msgid "DAFA Support"
-msgstr "Bhr Support"
+msgstr "DAFA Support"
 
 #. module: base_user_groups_dafa
 #: model:res.groups,comment:base_user_groups_dafa.2_line_support
 msgid "DAFA Write-roles"
-msgstr "Bhr SKRIV-Roller"
+msgstr "DAFA SKRIV-Roller"
 
 #. module: base_user_groups_dafa
 #: model:res.groups,comment:base_user_groups_dafa.3_line_support
 msgid "DAFA Write-roles and Odoo Admin"
-msgstr "Bhr SKRIV-Roller och Odoo Admin"
+msgstr "DAFA SKRIV-Roller och Odoo Admin"
 
 #. module: base_user_groups_dafa
 #: model:res.groups,comment:base_user_groups_dafa.group_dafa_admin_accounting_write
