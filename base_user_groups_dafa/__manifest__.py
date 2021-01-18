@@ -10,6 +10,7 @@
     "category": "Security",
     "depends": [
         "outplacement",
+        "web_dashboard_dafa",
         "hr",
         "sale",
         "project",
