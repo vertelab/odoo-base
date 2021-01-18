@@ -4,14 +4,7 @@ from odoo import models, fields, api
 class ResPartner(models.Model):
     _inherit = 'res.partner'
 
-    sun_ids = fields.Many2many(comodel_name='res.sun',
-                               string='SUN Code')
-    education_level = fields.Many2one(
-        comodel_name="res.partner.education_level",
-        string="Education level")
-    foreign_education = fields.Boolean(string="Foreign education")
-    foreign_education_approved = fields.Boolean(
-        string="Foreign education approved")
+    education_ids = fields.Many2many(string="Educations", comodel_name="res.partner.education")
     cv = fields.Binary('CV')
     cv_file_name = fields.Char()
     references = fields.Binary()

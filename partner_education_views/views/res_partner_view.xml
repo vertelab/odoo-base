@@ -9,15 +9,18 @@
                 <page name="education" string="Education">
                     <group>
                         <group>
-                            <field name="sun_ids" widget="many2many_tags"
-                                   options="{'no_create_edit': True}"/>
-                            <field name="education_level"/>
-                            <field name="foreign_education"/>
-                            <field name="foreign_education_approved"/>
+                            <field name="education_ids" mode="tree" nolabel="1">
+                                <tree editable="bottom" string="Educations">
+                                    <field name="sun_id"/>
+                                    <field name="education_level_id"/>
+                                    <field name="foreign_education"/>
+                                    <field name="foreign_education_approved"/>
+                                </tree>
+                            </field>
                             <field name="cv_file_name" invisible="1"/>
                             <field name="cv" filename="cv_file_name"/>
                             <field name="references_file_name" invisible="1"/>
-                            <field name="references" filename="cv_file_name"/>
+                            <field name="references" filename="references_file_name"/>
                         </group>
                         <group>
                             <field name="drivers_license_ids"

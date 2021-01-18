@@ -18,24 +18,19 @@
 #    along with this program.  If not, see <http://www.gnu.org/licenses/>.
 #
 ##############################################################################
-from odoo import models, fields, api, _
-import logging
-_logger = logging.getLogger(__name__)
 
-class ResPartner(models.Model):
-    _inherit = 'res.partner'
+{
+    'name': 'Arbetsförmedlingen Partner Extension',
+    'version': '12.0.0.1.1',
+    'category': '',
+    'description': """Partner fields for Arbetsförmedlingen.""",
+    'author': 'Vertel AB',
+    'website': 'http://www.vertel.se',
+    'depends': ['base'],
+    'data': [
 
-    sun_ids = fields.Many2many(comodel_name='res.sun', string='SUN Code')
-    
-    education_level = fields.Many2one(comodel_name="res.partner.education_level", string="Education level")
-
-    foreign_education = fields.Boolean(string="Foreign education")
-    foreign_education_approved = fields.Boolean(string="Foreign education approved")
-
-class ResPartnerEducationLevel(models.Model):
-    _name="res.partner.education_level"
-
-    partner_ids = fields.One2many(comodel_name="res.partner", inverse_name="education_level")
-
-    name = fields.Integer(string="Education level") #2
-    description = fields.Char(string="Description") #förgymnasial utbildning 9 (10) år
+    ],
+    'application': False,
+    'installable': True,
+}
+# vim:expandtab:smartindent:tabstop=4s:softtabstop=4:shiftwidth=4:
