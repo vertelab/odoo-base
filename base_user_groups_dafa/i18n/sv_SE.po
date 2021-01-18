@@ -1,0 +1,170 @@
+# Translation of Odoo Server.
+# This file contains the translation of the following modules:
+#	* base_user_groups_dafa
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: Odoo Server 12.0-20201012\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2021-01-15 15:42+0000\n"
+"PO-Revision-Date: 2021-01-15 15:42+0000\n"
+"Last-Translator: <>\n"
+"Language-Team: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: \n"
+"Plural-Forms: \n"
+
+#. module: base_user_groups_dafa
+#: model:ir.model,name:base_user_groups_dafa.model_res_groups
+msgid "Access Groups"
+msgstr "Rättighetsgrupper"
+
+#. module: base_user_groups_dafa
+#: model:res.groups,comment:base_user_groups_dafa.group_dafa_org_admin_write
+msgid "Allows user to read and alter information related to \n"
+"            the organization and all its departments."
+msgstr "Låter användaren läsa och ändra information relaterat till orgranisationen och dess olika brancher."
+
+#. module: base_user_groups_dafa
+#: model:res.groups,comment:base_user_groups_dafa.group_dafa_org_admin_read
+msgid "Allows user to read information related to the organization and all its departments."
+msgstr "Låter användaren enbart läsa information relaterat till orgranisationen och dess olika brancher."
+
+#. module: base_user_groups_dafa
+#: model:ir.module.category,description:base_user_groups_dafa.module_category_af_support
+msgid "Allows you to perform technical support."
+msgstr "Låter användaren utföra teknisk support."
+
+#. module: base_user_groups_dafa
+#: model:ir.module.category,description:base_user_groups_dafa.category_dafa_handle_org_info
+msgid "Category for handling employee rights on organisational level."
+msgstr "Kategori för grupper som hanterar anställdas rättigheter på organisationsnivå."
+
+#. module: base_user_groups_dafa
+#: model:ir.module.category,description:base_user_groups_dafa.category_dafa_handle_department_info
+msgid "Category for handling information and tasks related to department."
+msgstr "KAtergori för att hantera information relaterat till en eller flera brancher av organisationen."
+
+#. module: base_user_groups_dafa
+#: model:res.groups,name:base_user_groups_dafa.1_line_support
+msgid "DAFA 1st Line"
+msgstr "DAFA Linje 1"
+
+#. module: base_user_groups_dafa
+#: model:res.groups,name:base_user_groups_dafa.2_line_support
+msgid "DAFA 2nd Line"
+msgstr "Dafa Linje 2"
+
+#. module: base_user_groups_dafa
+#: model:res.groups,name:base_user_groups_dafa.3_line_support
+msgid "DAFA 3rd Line"
+msgstr "Dafa Linje 3"
+
+#. module: base_user_groups_dafa
+#: model:res.groups,name:base_user_groups_dafa.group_dafa_admin_accounting_read
+msgid "DAFA Accounting (Read)"
+msgstr "DAFA Ekonomi (Läs)"
+
+#. module: base_user_groups_dafa
+#: model:res.groups,name:base_user_groups_dafa.group_dafa_admin_accounting_write
+msgid "DAFA Accounting (Write)"
+msgstr "DAFA Ekonomi (Skriv)"
+
+#. module: base_user_groups_dafa
+#: model:res.groups,name:base_user_groups_dafa.group_dafa_employees_read
+msgid "DAFA Admin (Read)"
+msgstr "DAFA Admin (Läs)"
+
+#. module: base_user_groups_dafa
+#: model:res.groups,name:base_user_groups_dafa.group_dafa_employees_write
+msgid "DAFA Admin (Write)"
+msgstr "DAFA Admin (Skriv)"
+
+#. module: base_user_groups_dafa
+#: model:ir.model.fields,field_description:base_user_groups_dafa.field_res_groups__is_dafa
+msgid "DAFA Group"
+msgstr "DAFA Grupp"
+
+#. module: base_user_groups_dafa
+#: model:res.groups,name:base_user_groups_dafa.group_dafa_org_admin_read
+msgid "DAFA Org-Admin (Read)"
+msgstr "DAFA Org-Admin (Läs)"
+
+#. module: base_user_groups_dafa
+#: model:res.groups,name:base_user_groups_dafa.group_dafa_org_admin_write
+msgid "DAFA Org-Admin (Write)"
+msgstr "DAFA Org-Admin (Skriv)"
+
+#. module: base_user_groups_dafa
+#: model:res.groups,name:base_user_groups_dafa.group_dafa_participants_read
+msgid "DAFA Participants (Read)"
+msgstr "DAFA Deltagare (Läs)"
+
+#. module: base_user_groups_dafa
+#: model:res.groups,name:base_user_groups_dafa.group_dafa_participants_write
+msgid "DAFA Participants (Write)"
+msgstr "DAFA Deltagare (Skriv)"
+
+#. module: base_user_groups_dafa
+#: model:res.groups,comment:base_user_groups_dafa.1_line_support
+msgid "DAFA READ-roles"
+msgstr "DAFA LÄS-Roller"
+
+#. module: base_user_groups_dafa
+#: model:ir.module.category,name:base_user_groups_dafa.module_category_af_support
+msgid "DAFA Support"
+msgstr "DAFA Support"
+
+#. module: base_user_groups_dafa
+#: model:res.groups,comment:base_user_groups_dafa.2_line_support
+msgid "DAFA Write-roles"
+msgstr "DAFA SKRIV-Roller"
+
+#. module: base_user_groups_dafa
+#: model:res.groups,comment:base_user_groups_dafa.3_line_support
+msgid "DAFA Write-roles and Odoo Admin"
+msgstr "DAFA SKRIV-Roller och Odoo Admin"
+
+#. module: base_user_groups_dafa
+#: model:res.groups,comment:base_user_groups_dafa.group_dafa_admin_accounting_write
+msgid "Gives access to read and write information related to the accounting of \n"
+"            the company such as order-payments and invoices."
+msgstr "Ger behörighet att läsa och skriva/ändra information relaterat till företagets ekonomi."
+
+#. module: base_user_groups_dafa
+#: model:res.groups,comment:base_user_groups_dafa.group_dafa_participants_write
+msgid "Gives access to read and write participant related information and processess."
+msgstr ""
+
+#. module: base_user_groups_dafa
+#: model:res.groups,comment:base_user_groups_dafa.group_dafa_employees_write
+msgid "Gives access to read and write to employee related information and and processes."
+msgstr "Ger behörighet att läsa och skriva/ändra information relaterat till deltagare och deras processer."
+
+#. module: base_user_groups_dafa
+#: model:res.groups,comment:base_user_groups_dafa.group_dafa_employees_read
+msgid "Gives access to read employee related information and and processes."
+msgstr "Ger behörighet att läsa information relaterat till anställda."
+
+#. module: base_user_groups_dafa
+#: model:res.groups,comment:base_user_groups_dafa.group_dafa_admin_accounting_read
+msgid "Gives access to read information related to the accounting of the company \n"
+"            such as order-payments and invoices."
+msgstr "Ger behörighet att läsa information relaterat till företagets ekonomi."
+
+#. module: base_user_groups_dafa
+#: model:res.groups,comment:base_user_groups_dafa.group_dafa_participants_read
+msgid "Gives access to read participant related information and processess."
+msgstr "Ger behörighet att läsa information relaterat till deltagare och deras processer."
+
+#. module: base_user_groups_dafa
+#: model:ir.module.category,name:base_user_groups_dafa.category_dafa_handle_department_info
+msgid "Handle Department"
+msgstr "Hantera Branch"
+
+#. module: base_user_groups_dafa
+#: model:ir.module.category,name:base_user_groups_dafa.category_dafa_handle_org_info
+msgid "Handle Organization"
+msgstr "Hantera Org."
+
