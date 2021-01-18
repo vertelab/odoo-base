@@ -55,7 +55,7 @@
         <field name="comment">Gives access to read and write to employee related information and and processes.</field>
         <field name="category_id" ref="category_dafa_handle_department_info"/>
         <field name="is_dafa" eval="True"/>
-        <field name="implied_ids" eval="[(4, ref('group_dafa_employees_read')), (4, ref('hr.group_hr_user'))]"/>
+        <field name="implied_ids" eval="[(4, ref('group_dafa_employees_read')), (4, ref('hr.group_hr_user')), (4, ref('web_dashboard_dafa.group_my_dashboard_manager'))]"/>
     </record>
 
     <!-- Manage Participants -->
