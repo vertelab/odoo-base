@@ -43,6 +43,7 @@ v12.0.0.1.10 AFC-704 Changed target for "Close-button".\n
         'mail',
         'partner_firstname', 
         'contacts', 
+        'partner_ssn',
         'res_ssyk',
         'res_sni',
         'partner_fax',
