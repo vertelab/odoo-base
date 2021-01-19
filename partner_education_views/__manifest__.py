@@ -29,7 +29,7 @@
     'author': "N-development",
     'license': 'AGPL-3',
     'website': 'https://www.n-development.com',
-    'depends': ['contacts'],
+    'depends': ['contacts', 'res_sun', 'res_drivers_license'],
     'data': [
         'security/ir.model.access.csv',
         'data/res.drivers_license.csv',

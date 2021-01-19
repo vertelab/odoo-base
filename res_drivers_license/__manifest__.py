@@ -32,7 +32,6 @@ AFC-197
     'website': 'http://www.vertel.se',
     'depends': ['base', 'res_sun'],
     'data': [
-        #'views/res_partner_view.xml',
         'security/ir.model.access.csv', 
         'views/res_drivers_license_view.xml',
         "data/res.drivers_license.csv",
