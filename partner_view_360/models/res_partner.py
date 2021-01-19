@@ -38,16 +38,6 @@ class ResPartner(models.Model):
     _rec_name = "name_com_reg_num"
 
     work_phone = fields.Char(string="Work phone", help="Work phone number") #is added in partner_extension_af
-    age = fields.Char(string="Age", compute="calculate_age") #is added in partner_extension_af
-    company_registry = fields.Char(
-        string="Organization number", help="organization number", index=True
-    )
-    social_sec_nr = fields.Char(
-        string="Social security number", related="company_registry", index=True
-    )
-    social_sec_nr_age = fields.Char(
-        string="Social security number", compute="combine_social_sec_nr_age"
-    )
     cfar = fields.Char(string="CFAR", help="CFAR number") #is added in partner_extension_af
     customer_id = fields.Char(
         string="Customer number", help="Customer number", index=True
@@ -139,25 +129,6 @@ class ResPartner(models.Model):
 
     name_com_reg_num = fields.Char(compute="_compute_name_com_reg_num", store=True)
 
-    _sql_constraints = [
-        ('company_registry_unique', 
-        'UNIQUE(company_registry)',
-        'company_registry (social security number/organization number) field needs to be unique'
-        ), 
-        ('customer_id_unique', 
-        'UNIQUE(customer_id)',
-        'customer_id field needs to be unique'
-        )]
-
-    @api.one
-    def combine_social_sec_nr_age(self):  # How to do the popup???
-        if self.company_registry != False:
-            self.social_sec_nr_age = _("%s (%s years old)") % (
-                self.company_registry,
-                self.age,
-            )
-        else:
-            self.social_sec_nr_age = ""
 
     @api.one
     def combine_state_name_code(self):
@@ -169,133 +140,6 @@ class ResPartner(models.Model):
             self.jobseeker_category_id.name,
             self.jobseeker_category_id.code,
         )
-
-    @api.one
-    @api.constrains("company_registry")
-    def calculate_age(self):
-        wrong_input = False
-        today = date.today()
-        social_sec = self.company_registry
-        social_sec_stripped = ""
-        if self.is_jobseeker and social_sec != False:
-            social_sec_split = social_sec.split("-")
-            error_message = ""
-            if len(social_sec_split) > 1:
-                if len(social_sec_split[1]) != 4 or len(social_sec_split) > 2:
-                    wrong_input = True
-                    error_message = _(
-                        "Incorrectly formated social security number %s (company_registry field), incorrectly placed or too many hyphens"
-                        % social_sec
-                    )
-                    _logger.error(error_message)
-                social_sec_stripped = social_sec_split[0]
-                if len(social_sec_stripped) != 8:
-                    wrong_input = True
-                    error_message = _(
-                        "Social security number %s (company_registry field) lenght is incorrect, should be 12"
-                        % social_sec
-                    )
-                    _logger.error(error_message)
-            elif len(social_sec_split) == 1:
-                if len(social_sec_split[0]) == 10:
-                    wrong_input = True
-                    error_message = _(
-                        "Social security number %s (company_registry field) lenght is incorrect, should be 12"
-                        % social_sec
-                    )
-                    _logger.error(error_message)
-                    social_sec_stripped = social_sec_split[0][:6]
-                elif len(social_sec_split[0]) == 12:
-                    social_sec_stripped = social_sec_split[0][:8]
-                    self.company_registry = "%s-%s" % (
-                        social_sec_stripped,
-                        social_sec_split[0][8:12],
-                    )
-                else:
-                    wrong_input = True
-                    error_message = _(
-                        "Social security number %s (company_registry field) lenght is incorrect, should be 12"
-                        % social_sec
-                    )
-                    _logger.error(error_message)
-            date_of_birth = date(1980, 1, 1)
-            if len(social_sec_stripped) == 6:
-                yr = social_sec_stripped[:2]
-                year = int("20" + yr)
-                month = int(social_sec_stripped[2:4])
-                day = int(social_sec_stripped[4:6])
-                if day > 60:
-                    day = day - 60
-                try:
-                    date_of_birth = date(year, month, day)
-                except:
-                    wrong_input = True
-                    error_message = _(
-                        "Could not convert social security number %s (company_registry field) to date"
-                        % social_sec
-                    )
-                    _logger.error(error_message)
-                # if social security numbers with 10 numbers are reallowed,
-                # change this to something more reasonable in case children
-                # are allowed to register
-                if today.year - date_of_birth.year < 18:
-                    year = int("19" + yr)
-                    try:
-                        date_of_birth = date(year, month, day)
-                    except:
-                        wrong_input = True
-                        error_message = _(
-                            "Could not convert social security number %s (company_registry field) to date"
-                            % social_sec_stripped
-                        )
-                        _logger.error(error_message)
-            elif len(social_sec_stripped) == 8:
-                year = int(social_sec_stripped[:4])
-                month = int(social_sec_stripped[4:6])
-                day = int(social_sec_stripped[6:8])
-                if day > 60:
-                    day = day - 60
-                try:
-                    date_of_birth = date(year, month, day)
-                except:
-                    wrong_input = True
-                    error_message = _(
-                        "Could not convert social security number %s (company_registry field) to date"
-                        % social_sec_stripped
-                    )
-                    _logger.error(error_message)
-            else:
-                wrong_input = True
-                error_message = _(
-                    "Incorrectly formated social security number %s (company_registry field)"
-                    % social_sec
-                )
-                _logger.error(error_message)
-
-            if not wrong_input:
-                years = today.year - date_of_birth.year
-                if today.month < date_of_birth.month or (
-                    today.month == date_of_birth.month and today.day < date_of_birth.day
-                ):
-                    years -= 1
-                if years > 67:
-                    self.age = _("This person is too old, at %s years old") % years
-                    _logger.warn(
-                        "A person older than 67 should not be in the system, a person is %s years old"
-                        % years
-                    )
-                else:
-                    self.age = years
-
-            else:
-                self.social_sec_nr = ""
-                self.age = ""
-                raise ValidationError(
-                    _(
-                        "Please input a correctly formated social security number.\n %s"
-                        % error_message
-                    )
-                )
 
     def update_partner_images(self):
         for partner in self:
