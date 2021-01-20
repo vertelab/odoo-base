@@ -32,12 +32,8 @@
     'depends': ['contacts', 'res_sun', 'res_drivers_license'],
     'data': [
         'security/ir.model.access.csv',
-        'data/res.drivers_license.csv',
         'data/res.partner.education.education_level.csv',
-        'data/res.sun.csv',
-        'views/res_sun_view.xml',
         'views/education_level_view.xml',
-        'views/res_drivers_license_view.xml',
         'views/res_partner_view.xml',
     ],
     'installable': True,
