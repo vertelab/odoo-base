@@ -7,15 +7,15 @@
         <field name="arch" type="xml">
             <xpath expr="//page[@name='internal_notes']" position="after">
                 <page name="education" string="Education">
+                   <field name="education_ids" mode="tree" nolabel="1">
+                        <tree editable="top" string="Educations">
+                            <field name="sun_id"/>
+                            <field name="education_level_id"/>
+                            <field name="foreign_education"/>
+                            <field name="foreign_education_approved"/>
+                        </tree>
+                    </field>
                     <group>
-                        <field name="education_ids" mode="tree" nolabel="1">
-                                <tree editable="top" string="Educations">
-                                    <field name="sun_id"/>
-                                    <field name="education_level_id"/>
-                                    <field name="foreign_education"/>
-                                    <field name="foreign_education_approved"/>
-                                </tree>
-                        </field>
                         <group>
                             <field name="cv_file_name" invisible="1"/>
                             <field name="cv" filename="cv_file_name"/>
