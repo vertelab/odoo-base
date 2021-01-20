@@ -20,24 +20,4 @@
 #
 ################################################################################
 
-{
-    'name': 'Partner Education',
-    'version': '12.0.0.1.1',
-    'category': 'Mail',
-    'description': """Partner Education""",
-
-    'author': "N-development",
-    'license': 'AGPL-3',
-    'website': 'https://www.n-development.com',
-    'depends': ['contacts', 'res_sun', 'res_drivers_license'],
-    'data': [
-        'security/ir.model.access.csv',
-        'data/res.partner.education.education_level.csv',
-        'views/education_level_view.xml',
-        'views/res_partner_view.xml',
-    ],
-    'installable': True,
-    'images': [
-        'static/description/img.png'
-    ],
-}
+from . import models

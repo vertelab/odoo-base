@@ -21,10 +21,10 @@
 ################################################################################
 
 {
-    'name': 'Partner Education',
-    'version': '12.0.0.1.1',
+    'name': 'Partner Education DEPRECATED',
+    'version': '12.0.0.0.1',
     'category': 'Mail',
-    'description': """Partner Education""",
+    'description': """Partner Education Level""",
 
     'author': "N-development",
     'license': 'AGPL-3',
@@ -36,7 +36,7 @@
         'views/education_level_view.xml',
         'views/res_partner_view.xml',
     ],
-    'installable': True,
+    'installable': False,
     'images': [
         'static/description/img.png'
     ],
