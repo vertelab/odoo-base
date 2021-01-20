@@ -14,7 +14,7 @@
     <!-- Hantera Organisationsuppgifter (Läs) -->
     <record id="group_dafa_org_admin_read" model="res.groups">
         <field name="name">DAFA Org Admin (Read)</field>
-        <field name="comment">Allows user to read information related to the organization and all its departments.</field>
+        <field name="comment">The role inherits "Manage employees Read"and "Manage participants Read" and Allows user to read the information related to the organization and all its departments.</field>
         <field name="category_id" ref="category_dafa_handle_org_info"/>
         <field name="is_dafa" eval="True"/>
     </record>
@@ -23,7 +23,7 @@
     <!-- Superadmin (Write) -->
     <record id="group_dafa_org_admin_write" model="res.groups">
         <field name="name">DAFA Org Admin (Write)</field>
-        <field name="comment">Allows user to read and alter information related to 
+        <field name="comment">The role inherits "Manage employees Read/write"and "Manage participants Read" and Allows user to read and alter information related to 
             the organization and all its departments.</field>
         <field name="category_id" ref="category_dafa_handle_org_info"/>
         <field name="is_dafa" eval="True"/>
@@ -52,7 +52,7 @@
 
     <record id="group_dafa_employees_write" model="res.groups">
         <field name="name">DAFA Admin (Write)</field>
-        <field name="comment">Gives access to read and write to employee related information and and processes.</field>
+        <field name="comment">The role inherits "Manage employees Read" and Gives access to read and write to employee related information and and processes.</field>
         <field name="category_id" ref="category_dafa_handle_department_info"/>
         <field name="is_dafa" eval="True"/>
         <field name="implied_ids" eval="[(4, ref('group_dafa_employees_read')), (4, ref('hr.group_hr_user')), (4, ref('web_dashboard_dafa.group_my_dashboard_manager'))]"/>
@@ -69,7 +69,7 @@
 
     <record id="group_dafa_participants_write" model="res.groups">
         <field name="name">DAFA Participants (Write)</field>
-        <field name="comment">Gives access to read and write participant related information and processess.</field>
+        <field name="comment">The role Inherits "Manage Participant read" and gives access to read and write participant related information and processess.</field>
         <field name="category_id" ref="category_dafa_handle_department_info"/>
         <field name="is_dafa" eval="True"/>
         <field name="implied_ids" eval="[(4, ref('outplacement.group_outplacement_user_write')), 
@@ -81,7 +81,7 @@
     <!-- Manage Accounting -->
     <record id="group_dafa_admin_accounting_read" model="res.groups">
         <field name="name">DAFA Accounting (Read)</field>
-        <field name="comment">Gives access to read information related to the accounting of the company 
+        <field name="comment">The roll Inherits the groups "Manage Employee read" and "Manage Participant read" and gives access to read information related to the accounting of the company 
             such as order-payments and invoices.</field>
         <field name="category_id" ref="category_dafa_handle_department_info"/>
         <field name="is_dafa" eval="True"/>
@@ -90,7 +90,7 @@
 
     <record id="group_dafa_admin_accounting_write" model="res.groups">
         <field name="name">DAFA Accounting (Write)</field>
-        <field name="comment">Gives access to read and write information related to the accounting of 
+        <field name="comment">The role inherits "Manage employees Read"and "Manage participants Read" and Gives access to read and write information related to the accounting of 
             the company such as order-payments and invoices.</field>
         <field name="category_id" ref="category_dafa_handle_department_info"/>
         <field name="is_dafa" eval="True"/>
@@ -113,7 +113,7 @@
         (4, ref('base_user_groups_dafa.group_dafa_participants_read')), 
         (4, ref('base_user_groups_dafa.group_dafa_admin_accounting_read')), 
         (4, ref('base_user_groups_dafa.group_dafa_org_admin_read'))]"/>
-        <field name="comment">DAFA READ-roles</field>
+        <field name="comment">Inherits all DAFA READ-roles</field>
     </record>
 
     <record id="2_line_support" model="res.groups">
@@ -123,14 +123,14 @@
         (4, ref('base_user_groups_dafa.group_dafa_participants_write')), 
         (4, ref('base_user_groups_dafa.group_dafa_admin_accounting_write')), 
         (4, ref('base_user_groups_dafa.group_dafa_org_admin_write'))]"/>
-        <field name="comment">DAFA Write-roles</field>
+        <field name="comment">Inherits all DAFA Write-roles</field>
     </record>
 
     <record id="3_line_support" model="res.groups">
         <field name="name">DAFA 3rd Line</field>
         <field name="category_id" ref="module_category_af_support"/>
         <field name="implied_ids" eval="[(4, ref('2_line_support')), (4, ref('base.group_system'))]"/>
-        <field name="comment">DAFA Write-roles and Odoo Admin</field>
+        <field name="comment">Inherits all DAFA Write-roles and Odoo Admin role</field>
     </record>
 
 </odoo>
