@@ -1,8 +1,9 @@
-# -*- coding: utf-8 -*-
-##############################################################################
+# -*- coding: UTF-8 -*-
+
+################################################################################
 #
-#    Odoo, Open Source Management Solution, third party addon
-#    Copyright (C) 2004-2019 Vertel AB (<http://vertel.se>).
+#    OpenERP, Open Source Management Solution
+#    Copyright (C) 2019 N-Development (<https://n-development.com>).
 #
 #    This program is free software: you can redistribute it and/or modify
 #    it under the terms of the GNU Affero General Public License as
@@ -17,27 +18,26 @@
 #    You should have received a copy of the GNU Affero General Public License
 #    along with this program.  If not, see <http://www.gnu.org/licenses/>.
 #
-##############################################################################
+################################################################################
 
 {
     'name': 'Partner Education',
-    'version': '12.0.1.1',
-    'category': '',
-    'description': """
-Module to see Partner Education
-================================================================================================
-AFC-1149
-""",
-    'author': 'Vertel AB',
+    'version': '12.0.0.0.1',
+    'category': 'Mail',
+    'description': """Partner Education Level""",
+
+    'author': "N-development",
     'license': 'AGPL-3',
-    'website': 'http://www.vertel.se',
-    'depends': [
-        'base',
-        'partner_view_360',
-    ],
+    'website': 'https://www.n-development.com',
+    'depends': ['contacts', 'res_sun', 'res_drivers_license'],
     'data': [
-        'views/res_partner_education_view.xml',
-        ],
-    'application': False,
+        'security/ir.model.access.csv',
+        'data/res.partner.education.education_level.csv',
+        'views/education_level_view.xml',
+        'views/res_partner_view.xml',
+    ],
     'installable': True,
+    'images': [
+        'static/description/img.png'
+    ],
 }
