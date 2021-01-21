@@ -76,7 +76,7 @@ class ResPartner(models.Model):
 
     def update_tlr_data_action(self):
         granted = False
-        for group in ('base.group_system'):
+        for group in ('base.group_system', ):
             if self.env.user.has_group(group):
                 granted = True
                 break
