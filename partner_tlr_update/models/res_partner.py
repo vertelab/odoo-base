@@ -83,12 +83,12 @@ class ResPartner(models.Model):
         if not granted:
             raise AccessError(_("You are not allowed to sync data with TLR."))
         try:
-            self.update_tlr_data()
+            self._update_tlr_data()
         except Exception as e:
             _logger.error('TLR APi error: %s', e)
             raise UserError(_('Api error'))
 
-    def update_tlr_data(self):
+    def _update_tlr_data(self):
         self.ensure_one()
         legacy_no = self.env['ir.config_parameter'].sudo().get_param('dafa.legacy_no')
         if legacy_no:
