@@ -1,0 +1,5 @@
+<odoo>
+    <record id="base.action_partner_form" model="ir.actions.act_window">
+        <field name="domain">[('show_for_support','=',True)]</field>
+    </record>
+</odoo>
