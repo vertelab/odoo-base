@@ -7,14 +7,18 @@
             <field name="arch" type="xml">
                 <xpath expr="//page[@name='contacts_addresses']" position="after">
                     <page name="education" string="Education">
+                        <field name="education_ids" mode="tree" nolabel="1">
+                            <tree editable="top" string="Educations">
+                                <field name="sun_id"/>
+                                <field name="education_level_id"/>
+                                <field name="foreign_education"/>
+                                <field name="foreign_education_approved"/>
+                            </tree>
+                        </field>
                         <group>
-                            <field name="sun_ids" options="{'no_create_edit': True}" widget="many2many_tags" />
-                            <field name="education_level" />
-                            <!-- <field name="foreign_education" />
-                            <field name="foreign_education_approved" />
                             <field name="has_drivers_license" /> 
                             <field name="drivers_license_ids" options="{'no_create_edit': True}" widget="many2many_tags" />
-                            <field name="has_car" groups="base.group_no_one" /> -->
+                            <field name="has_car" groups="base.group_no_one" /> 
                         </group>
                     </page>
                 </xpath>

@@ -1,1 +1,1 @@
-from . import res_partner
+from . import res_drivers_license
