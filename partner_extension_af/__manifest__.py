@@ -26,7 +26,7 @@
     'description': """Partner fields for Arbetsförmedlingen.""",
     'author': 'Vertel AB',
     'website': 'http://www.vertel.se',
-    'depends': ['base'],
+    'depends': ['base', 'base_user_groups_dafa'],
     'data': [
         'views/res_partner_view.xml'
     ],
