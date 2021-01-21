@@ -24,14 +24,14 @@ import re
 import logging
 from lxml import etree
 from odoo import api, models, _
-from odoo.exceptions import UserError
+from odoo.exceptions import UserError, AccessError
 from odoo.addons.api_ipf_tlr_client.models.client_config import ClientConfig
 
 _logger = logging.getLogger(__name__)
 
 
 def get_api(self):
-    return self.env['ipf.tlr.client.config'].search([], limit=1)
+    return self.env['ipf.tlr.client.config'].sudo().search([], limit=1)
 
 
 if not hasattr(ClientConfig, 'get_api'):
@@ -75,18 +75,26 @@ class ResPartner(models.Model):
         return re.sub(r"<\?xml.*\?>", '', xml)
 
     def update_tlr_data_action(self):
+        granted = False
+        for group in ('base.group_system', ):
+            if self.env.user.has_group(group):
+                granted = True
+                break
+        if not granted:
+            raise AccessError(_("You are not allowed to sync data with TLR."))
         try:
-            self.update_tlr_data()
+            self._update_tlr_data()
         except Exception as e:
             _logger.error('TLR APi error: %s', e)
             raise UserError(_('Api error'))
 
-    def update_tlr_data(self):
+    def _update_tlr_data(self):
         self.ensure_one()
-        if self.legacy_no:
-            api_client = self.env['ipf.tlr.client.config'].get_api()
+        legacy_no = self.env['ir.config_parameter'].sudo().get_param('dafa.legacy_no')
+        if legacy_no:
+            api_client = self.env['ipf.tlr.client.config'].sudo().get_api()
             if api_client:
-                response = api_client.get_tjansteleverantor(self.legacy_no)
+                response = api_client.get_tjansteleverantor(legacy_no)
                 if response.status_code == 200:
                     self.parse_xml_tjansteleverantor_data(response.text)
                     _logger.info("PARSED XML")
