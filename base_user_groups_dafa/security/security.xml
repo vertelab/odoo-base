@@ -14,7 +14,8 @@
     <!-- Hantera Organisationsuppgifter (Läs) -->
     <record id="group_dafa_org_admin_read" model="res.groups">
         <field name="name">DAFA Org Admin (Read)</field>
-        <field name="comment"> Allows user to read the information related to the organization and all its departments.(The role inherits "Manage employees Read"and "Manage participants Read")</field>
+        <field name="comment"> Allows user to read the information related to
+            the organization and all its departments.(The role inherits "Manage employees Read"and "Manage participants Read")</field>
         <field name="category_id" ref="category_dafa_handle_org_info"/>
         <field name="is_dafa" eval="True"/>
     </record>
