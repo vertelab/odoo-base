@@ -24,7 +24,7 @@ import re
 import logging
 from lxml import etree
 from odoo import api, models, _
-from odoo.exceptions import UserError, Warning, AccessError
+from odoo.exceptions import UserError, AccessError
 from odoo.addons.api_ipf_tlr_client.models.client_config import ClientConfig
 
 _logger = logging.getLogger(__name__)
