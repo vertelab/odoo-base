@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="view_partner_form" model="ir.ui.view">
+        <field name="name">res.partner.form.inherit.af</field>
+        <field name="model">res.partner</field>
+        <field name="inherit_id" ref="base.view_partner_form" />
+        <field name="arch" type="xml">
+            <field name="user_id" position="after">
+                <field name="is_jobseeker" groups="base_user_groups_dafa.1_line_support"/>
+            </field>
+        </field>
+    </record>
+</odoo>
