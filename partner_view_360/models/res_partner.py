@@ -35,7 +35,7 @@ _logger = logging.getLogger(__name__)
 
 class ResPartner(models.Model):
     _inherit = "res.partner"
-    _rec_name = "name_com_reg_num"
+    _rec_name = "name_ssn"
 
     work_phone = fields.Char(string="Work phone", help="Work phone number") #is added in partner_extension_af
     cfar = fields.Char(string="CFAR", help="CFAR number") #is added in partner_extension_af
@@ -127,8 +127,14 @@ class ResPartner(models.Model):
         ],
     ) #is added in partner_extension_af
 
-    name_com_reg_num = fields.Char(compute="_compute_name_com_reg_num", store=True)
-
+    #Not sure if intended for jobseekers or 
+    name_ssn = fields.Char(compute="_compute_name_ssn", store=True)
+    
+    _sql_constraints = [
+        ('customer_id_unique', 
+        'UNIQUE(customer_id)',
+        'customer_id field needs to be unique'
+        )]
 
     @api.one
     def combine_state_name_code(self):
@@ -237,22 +243,22 @@ class ResPartner(models.Model):
             "target": "inline",
             "type": "ir.actions.act_window",
         }
-
-    def update_name_com_reg_number(self):
+    # changed in case they're intended for jobseekers
+    def update_name_ssn(self):
         for partner in self:
             name = partner.name
-            if partner.company_registry:
-                name += " " + partner.company_registry
-            partner.name_com_reg_num = name
+            if partner.social_sec_nr:
+                name += " " + partner.social_sec_nr
+            partner.name_ssn = name
             partner.name = partner.name
 
-    @api.depends("name", "company_registry")
-    def _compute_name_com_reg_num(self):
+    @api.depends("name", "social_sec_nr")
+    def _compute_name_ssn(self):
         for partner in self:
             name = partner.name
-            if partner.company_registry:
-                name += " " + partner.company_registry
-            partner.name_com_reg_num = name
+            if partner.social_sec_nr:
+                name += " " + partner.social_sec_nr
+            partner.name_ssn = name
 
     @api.multi
     def name_get(self):
