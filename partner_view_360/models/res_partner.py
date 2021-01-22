@@ -32,7 +32,7 @@ from odoo.tools import image_resize_image_big, image_colorize
 
 class ResPartner(models.Model):
     _inherit = "res.partner"  
-    _rec_name = "name_com_reg_num"
+    _rec_name = "name_ssn"
 
     work_phone = fields.Char(string='Work phone', help="Work phone number")
     cfar = fields.Char(string='CFAR', help="CFAR number")
@@ -76,8 +76,8 @@ class ResPartner(models.Model):
     segment_jobseeker = fields.Selection(string="Jobseeker segment", selection=[('a','A'), ('b','B'), ('c1','C1'), ('c2','C2'), ('c3','C3')]) 
     segment_employer = fields.Selection(string="Employer segment", selection=[('including 1','Including 1'), ('including 2',' Including 2'), ('entry job','Entry job'), ('national agreement','National agreement'), ('employment subsidy','Employment subsidy')])
 
-    name_com_reg_num = fields.Char(compute="_compute_name_com_reg_num", store=True)
-
+    name_ssn = fields.Char(compute="_compute_name_ssn", store=True)
+    
     communication_channel = fields.Selection([
         ('email', 'Email'),
         ('sms', 'SMS'),
@@ -103,3 +103,19 @@ class ResPartner(models.Model):
     @api.one
     def combine_category_name_code(self):
         self.jobseeker_category = "%s %s" % (self.jobseeker_category_id.name, self.jobseeker_category_id.code)
+
+    def update_name_ssn(self):
+        for partner in self:
+            name = partner.name
+            if partner.social_sec_nr:
+                name += " " + partner.social_sec_nr
+            partner.name_ssn = name
+            partner.name = partner.name
+
+    @api.depends("name", "social_sec_nr")
+    def _compute_name_ssn(self):
+        for partner in self:
+            name = partner.name
+            if partner.social_sec_nr:
+                name += " " + partner.social_sec_nr
+            partner.name_ssn = name
