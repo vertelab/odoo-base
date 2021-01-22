@@ -36,7 +36,7 @@ class Jobs(models.Model):
     partner_id = fields.Many2one(comodel_name="res.partner")
     
     ssyk_id = fields.Many2one('res.ssyk', string="Job title") 
-    ssyk_code = fields.Char(string="SSYK", related="name.code")
+    ssyk_code = fields.Char(string="SSYK", related="ssyk_id.code")
     education_level_id = fields.Many2one(comodel_name="res.partner.education.education_level", 
         string="Education level", related="education_id.education_level_id", readonly=True)
     education_id = fields.Many2one(string="Education", comodel_name="res.partner.education")
