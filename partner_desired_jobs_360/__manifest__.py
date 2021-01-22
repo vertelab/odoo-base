@@ -31,7 +31,7 @@ Module to see which jobs a jobseeking partner desires
     'author': 'Vertel AB',
     'license': 'AGPL-3',
     'website': 'http://www.vertel.se',
-    'depends': ['partner_view_360'],
+    'depends': ['partner_view_360', 'partner_desired_jobs'],
     'data': [
 	'views/res_partner_view.xml',
         ],
