@@ -127,7 +127,7 @@ class ResPartner(models.Model):
         ],
     ) #is added in partner_extension_af
 
-    #Not sure if intended for jobseekers or 
+    
     name_ssn = fields.Char(compute="_compute_name_ssn", store=True)
     
     _sql_constraints = [
@@ -243,7 +243,7 @@ class ResPartner(models.Model):
             "target": "inline",
             "type": "ir.actions.act_window",
         }
-    # changed in case they're intended for jobseekers
+
     def update_name_ssn(self):
         for partner in self:
             name = partner.name
