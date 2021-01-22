@@ -35,9 +35,12 @@ class Jobs(models.Model):
 
     partner_id = fields.Many2one(comodel_name="res.partner")
     
-    name = fields.Many2one('res.ssyk', string="Job title") 
+    ssyk_id = fields.Many2one('res.ssyk', string="Job title") 
     ssyk_code = fields.Char(string="SSYK", related="name.code")
-    education_level = fields.Many2one(comodel_name="res.partner.education_level", string="Education level")
+    education_level_id = fields.Many2one(comodel_name="res.partner.education.education_level", 
+        string="Education level", related="education_id.education_level_id", readonly=True)
+    education_id = fields.Many2one(string="Education", comodel_name="res.partner.education")
+
     experience_length = fields.Selection([(0, 'No Experience'),
                                           (1, 'Less than 1 year'),
                                           (2, '1 to 3 years'),
@@ -53,9 +56,9 @@ class Jobs(models.Model):
         else:
             self.experience = False
 
-    @api.onchange('education_level')
+    @api.onchange('education_id')
     def _tick_untick_education(self):
-        if self.education_level.name != 0:
+        if self.education_id:
             self.education = True
         else:
             self.education = False

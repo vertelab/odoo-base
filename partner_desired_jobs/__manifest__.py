@@ -33,9 +33,8 @@ AFC-1151 previous experiences
     'license': 'AGPL-3',
     'website': 'http://www.vertel.se',
     'depends': ['base', 
-    'hr_skill',
     'res_ssyk',
-    'res_sun',
+    'partner_education',
     ],
     'data': [
 			'views/res_partner_view.xml',
