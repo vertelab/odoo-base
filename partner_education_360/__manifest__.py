@@ -20,23 +20,23 @@
 ##############################################################################
 
 {
-    'name': 'Partner Education',
+    'name': 'Partner Education 360',
     'version': '12.0.1.1',
     'category': '',
     'description': """
-Module to see Partner Education
+Adds education to jobseeker view
 ================================================================================================
-AFC-1149
+
 """,
     'author': 'Vertel AB',
     'license': 'AGPL-3',
     'website': 'http://www.vertel.se',
     'depends': [
-        'base',
         'partner_view_360',
+        'partner_education'
     ],
     'data': [
-        'views/res_partner_education_view.xml',
+        'views/res_partner_view.xml',
         ],
     'application': False,
     'installable': True,

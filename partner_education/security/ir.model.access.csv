@@ -1,0 +1,5 @@
+id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
+access_education_level_manager,res.partner.education.education_level,model_res_partner_education_education_level,base.group_partner_manager,1,1,1,1
+access_education_level_user,res.partner.eduaction.education_level.user,model_res_partner_education_education_level,base.group_user,1,0,0,0
+access_education_manager,res.partner.education,model_res_partner_education,base.group_partner_manager,1,1,1,1
+access_education_user,res.partner.education.user,model_res_partner_education,base.group_user,1,0,0,0
