@@ -1,295 +1,171 @@
 <?xml version="1.0" encoding="utf-8"?>
 <odoo>
-  <record id="view_partner_form" model="ir.ui.view">
-    <field name="name">res.partner.form.inherit.view_360</field>
-    <field name="model">res.partner</field>
-    <field name="inherit_id" ref="base.view_partner_form" />
-    <field name="arch" type="xml">
-      <!-- TODO: 
-           
-           vid sökning heter administrative officer (user_id) fortfarande säljare, kanske ska ändra genom 
-           en translation fil eller på liknande sätt så att alla instanser av säljare blir till handläggare
-           alternativt byta ut fältet helt.
-           
-           borde ändra implementering, administrative officer bör vara eget fält, medan user_id är gömd, men används för annat.
-      -->
-      <xpath expr="//button[@name='toggle_active']" position="attributes">
-        <attribute name="invisible">1</attribute>
-      </xpath>
-      <field name="function" position="after">
-        <field name="work_phone" />
-      </field>
-      <xpath expr="//group[@name='sale']/field[@name='user_id']" position="attributes">
-        <attribute name="string">Administrative officer</attribute>
-      </xpath>
-      <field name="type" position="before">
-        <!-- behåll ifall det behövs i framtiden -->
-        <!-- <span>
-             <label for="org_or_social_sec_nr" string="Organization number" attrs="{'invisible':[('is_company', '=', False)]}"/>
-             <label for="org_or_social_sec_nr" string="Social security number" attrs="{'invisible':[('is_company', '=', True)]}"/>
-             </span> -->
-        <field name="company_registry" />
-        <field name="cfar" attrs="{'invisible':[('is_company', '=', False)]}" />
-      </field>
-      <field name="barcode" position="after">
-<!--
-        <field name="office_id" options="{'no_create_edit': True}"  />
--->
-        <field name="temp_officer_id" widget="many2many_tags" options="{'no_create_edit': True}" />
-        <field name="is_jobseeker" />
-        <field name="is_independent_partner" />
-        <field name="is_government" />
-        <field name="is_employer" />
-        <field name="type" />
-      </field>
-      <!-- endast för om is_customer är true-->
-      <field name="vat" position="after">
-        <field name="customer_id" attrs="{'invisible':[('customer', '=', False)]}" groups="base.group_no_one" />
-      </field>
-      <field name="vat" position="attributes">
-        <attribute name="invisible">1</attribute>
-      </field>
-      <field name="barcode" position="attributes">
-        <attribute name="invisible">1</attribute>
-      </field>
-      <xpath expr="//page[@name='internal_notes']" position="after">
-        <page string="Jobseeker info" attrs="{'invisible':[('customer', '=', False)]}">
-          <group>
-            <group>
-              <field name="jobseeker_category" />
-              <field name="customer_since" />
-              <field name="jobseeker_work" attrs="{'invisible':[('is_company', '=', True)]}" />
-            </group>
-            <group>
-              <field name="deactualization_date" string="Deactualization date" />
-              <field name="deactualization_reason" />
-              <field name="foreign_country_of_work" />
-              <field name="deactualization_message" />
-            </group>
-          </group>
-        </page>
-      </xpath>
-    </field>
-  </record>
-  <record id="view_partner_tree" model="ir.ui.view">
-    <field name="name">res.partner.view.tree.inherit.view_360</field>
-    <field name="model">res.partner</field>
-    <field name="inherit_id" ref="base.view_partner_tree" />
-    <field name="arch" type="xml">
-      <xpath expr="/tree" position="inside">
-        <field name="customer_id" groups="base.group_no_one" />
-      </xpath>
-    </field>
-  </record>
-  <record id="view_partner_select_employee360" model="ir.ui.view">
-    <field name="name">res.partner.view.select.inherit.view_360</field>
-    <field name="model">res.partner</field>
-    <field name="inherit_id" ref="base.view_res_partner_filter" />
-    <field name="arch" type="xml">
-      <xpath expr="//field[@name='user_id']" position="after">
-        <field name="social_sec_nr"/>
-        <field name="company_registry" />
-        <field name="cfar" />
-        <field name="customer_id" groups="base.group_no_one" />
-        <!-- filter_domain="[('customer','=',True), ('parent_id', '=', False)]" -->
-        <!-- kommenterad för att jag inte har någon customer, behöver testas -->
-        <filter string="Job seekers" name="is_jobseeker" domain="[('is_jobseeker','=',True)]" />
-        <filter string="Employers" name="is_employer" domain="[('is_employer','=',True)]" />
-        <filter string="Government body" name="is_government" domain="[('is_government','=',True)]" />
-        <filter string="Independent partners" name="is_independent_partner" domain="[('is_independent_partner','=',True)]" />
-      </xpath>
-    </field>
-  </record>
-  <record id="view_jobseeker_form" model="ir.ui.view">
-    <field name="name">res.partner.form.jobseeker</field>
-    <field name="model">res.partner</field>
-    <field name="priority">-100</field>
-    <field name="arch" type="xml">
-      <form string="Jobseeker">
-        <sheet>
-          <div style="margin-bottom:1em;">
-            <button name="close_view" type="object">Close</button>
-          </div>
-          <div class="oe_button_box" name="button_box">
-          </div>
-          <div class="oe_title">
-            <h1>
-              <field name="name" default_focus="1" placeholder="Name" attrs="{'required' : [('type', '=', 'contact')]}" />
-            </h1>
-            <!-- Visa avaktualiserad eller Lagrad bara om det är så -->
-            <group attrs="{'invisible':[ ('deactualization_date', '=', False ) ]}">
-              <field name="deactualization_date" widget="date"/>
-            </group>
-          </div>
-          <group>
-            <group string="Personal Information">
-              <field name="is_jobseeker" invisible="1" />
-              <field name="parent_id" attrs="{'invisible' : True}" />
-              <field name="type" attrs="{'invisible' : True}" />
-              <label for="social_sec_nr" string="Social security number" class="oe_edit_only" />
-              <field name="social_sec_nr" nolabel="1" class="oe_edit_only" />
-              <label for="social_sec_nr_age" string="Social security number" class="oe_read_only" />
-              <field name="social_sec_nr_age" class="oe_read_only" nolabel="1" />
-              <field name="customer_id" groups="base.group_no_one" />
-              <!-- folkbokföringsadress, alternativt göra en res partner typ-->
-              <label for="state_name_code" string="Municipality" class="oe_read_only" />
-              <field name="state_name_code" class="oe_read_only" placeholder="State" nolabel="1" />
-              <label for="state_id" string="Municipality" class="oe_edit_only" />
-              <field name="state_id" class="oe_edit_only" nolabel="1" />
-              <label for="street" string="Registered address" />
-              <div class="oe_read_only">
-                <div class="o_address_format">
-                  <span class="oe_read_only">
-                    <field name="street" placeholder="Street..." class="o_address_street" />
-                    <field name="street2" placeholder="Street 2..." class="o_address_street" />
-                    <span style="margin-right:1em;">
-                      <field name="zip" placeholder="ZIP" class="o_address_zip" />
-                    </span>
-                    <field name="city" placeholder="City" class="o_address_city" />
-                  </span>
-                </div>
-              </div>
-              <field name="country_id" placeholder="Country" class="o_address_country" attrs="{'invisible': True}" />
-              <field name="phone" />
-              <field name="mobile" />
-              <field name="email" />
-            </group>
-            <group string="Employment service information">
-              <field name="registered_through" />
-              <label for="jobseeker_category_id" string="Jobseeker category" class="oe_edit_only"/>
-              <field name="jobseeker_category_id" options="{'no_create_edit': True}" class="oe_edit_only" nolabel="1"/>
-              <field name="jobseeker_category" class="oe_read_only"/>
-              <field name="customer_since" />
-              <field name="office_id" options="{'no_create_edit': True}"  />
-              <field name="match_area" />
-              <field name="share_info_with_employers" />
-              <field name="sms_reminders" />
-              <field name="segment_jobseeker" groups="base.group_no_one" />
-              <field name="eidentification" />
-              <label for="user_id" string="Administrative officer" />
-              <field name="user_id" nolabel="1" />
-               <!-- Visa avaktualiserad eller Lagrad bara om det är så -->
-              <field name="deactualization_reason" attrs="{'invisible':[ ('deactualization_date', '=', False ) ]}"/>
-            </group>
-          </group>
-          <notebook>
-            <page string="Upcoming meetings" name="upcoming_meetings" autofocus="autofocus"/>
-            <page string="Previous meetings" name="previous_meetings"/>
-            <page name="contacts_addresses" string="Contacts &amp; Addresses" >
-              <field name="child_ids" mode="kanban" context="{'default_parent_id': active_id, 'default_street': street, 'default_street2': street2, 'default_city': city, 'default_state_id': state_id, 'default_zip': zip, 'default_country_id': country_id}">
-                <kanban>
-                  <field name="id" />
-                  <field name="color" />
-                  <field name="name" />
-                  <field name="title" />
-                  <field name="type" />
-                  <field name="email" />
-                  <field name="parent_id" />
-                  <field name="is_company" />
-                  <field name="function" />
-                  <field name="phone" />
-                  <field name="street" />
-                  <field name="street2" />
-                  <field name="zip" />
-                  <field name="city" />
-                  <field name="country_id" />
-                  <field name="mobile" />
-                  <field name="state_id" />
-                  <field name="image_small" />
-                  <!-- fields in form x2many view to diminish requests -->
-                  <field name="comment" />
-                  <field name="display_name" />
-                  <templates>
-                    <t t-name="kanban-box">
-                      <t t-set="color" t-value="kanban_color(record.color.raw_value)" />
-                      <div t-att-class="color + (record.title.raw_value == 1 ? ' oe_kanban_color_alert' : '') + ' oe_kanban_global_click'">
-                        <div class="o_kanban_image">
-                          <img alt="" t-if="record.image_small.raw_value" t-att-src="kanban_image('res.partner', 'image_small', record.id.raw_value)" />
-                          <t t-if="!record.image_small.raw_value">
-                            <img alt="Delivery" t-if="record.type.raw_value === 'delivery'" t-att-src="_s + &quot;/base/static/img/truck.png&quot;" />
-                            <img alt="Invoice" t-if="record.type.raw_value === 'invoice'" t-att-src="_s + &quot;/base/static/img/money.png&quot;" />
-                            <t t-if="record.type.raw_value !== 'invoice' &amp;&amp; record.type.raw_value !== 'delivery'">
-                              <img alt="Logo" t-if="record.is_company.raw_value === true" t-att-src="_s + &quot;/base/static/img/company_image.png&quot;" />
-                              <img alt="Avatar" t-if="record.is_company.raw_value === false" t-att-src="_s + &quot;/base/static/img/avatar.png&quot;" />
-                            </t>
-                          </t>
-                        </div>
-                        <div class="oe_kanban_details">
-                          <field name="name" />
-                          <div t-if="record.function.raw_value">
-                            <field name="function" />
-                          </div>
-                          <div t-if="record.email.raw_value">
-                            <field name="email" widget="email" />
-                          </div>
-                          <div t-if="record.type.raw_value != 'contact'">
-                            <div>
-                              <field name="zip" />
-                              <field name="city" />
-                            </div>
-                            <field t-if="record.state_id.raw_value" name="state_id" />
-                            <field name="country_id" />
-                          </div>
-                          <div t-if="record.phone.raw_value">
-                            Phone:
-                            <field name="phone" />
-                          </div>
-                          <div t-if="record.mobile.raw_value">
-                            Mobile:
-                            <field name="mobile" />
-                          </div>
-                        </div>
-                      </div>
-                    </t>
-                  </templates>
-                </kanban>
-                <form string="Contact / Address">
-                  <sheet>
-                    <!-- parent_id and type fields needed in attrs in base_address_city module which overwrites
-                         _fields_view_get() of partner. It would be better to put those fields there but the web client
-                         dosen't support when a field is displayed several times in the same view.-->
-                    <field name="type" required="1" widget="radio" options="{'horizontal': true}" />
-                    <field name="parent_id" invisible="1" />
-                    <hr />
+    <record id="view_partner_form" model="ir.ui.view">
+        <field name="name">res.partner.form.inherit.view_360</field>
+        <field name="model">res.partner</field>
+        <field name="inherit_id" ref="base.view_partner_form" />
+        <field name="arch" type="xml">
+            <!-- TODO: 
+                 
+                 vid sökning heter administrative officer (user_id) fortfarande säljare, kanske ska ändra genom 
+                 en translation fil eller på liknande sätt så att alla instanser av säljare blir till handläggare
+                 alternativt byta ut fältet helt.
+                 
+                 borde ändra implementering, administrative officer bör vara eget fält, medan user_id är gömd, men används för annat.
+            -->
+            <field name="function" position="after">
+                <field name="work_phone" />
+            </field>
+            <xpath expr="//group[@name='sale']/field[@name='user_id']" position="attributes">
+                <attribute name="string">Administrative officer</attribute>
+            </xpath>
+            <field name="type" position="before">
+                <!-- behåll ifall det behövs i framtiden -->
+                <!-- <span>
+                     <label for="org_or_social_sec_nr" string="Organization number" attrs="{'invisible':[('is_company', '=', False)]}"/>
+                     <label for="org_or_social_sec_nr" string="Social security number" attrs="{'invisible':[('is_company', '=', True)]}"/>
+                     </span> -->
+                <field name="company_registry" />
+                <field name="cfar" attrs="{'invisible':[('is_company', '=', False)]}" />
+            </field>
+            <field name="barcode" position="after">
+                <!-- what fields should we use? -->
+                <!-- <field name="office" options="{'no_create_edit': True}" domain="[('type', '=', 'af office')]" /> -->
+                <!-- <field name="my_office_code" /> -->
+                <!-- <field name="office_ids" widget="many2many_tags" options="{'no_create_edit': True}" domain="[('type', '=', 'af office')]" /> -->
+                <field name="temp_officer_id" widget="many2many_tags" options="{'no_create_edit': True}" />
+                <field name="is_jobseeker" />
+                <field name="is_independent_partner" />
+                <field name="is_government" />
+                <field name="is_employer" />
+                <field name="type" />
+            </field>
+            <!-- endast för om is_customer är true-->
+            <field name="vat" position="after">
+                <field name="customer_id" attrs="{'invisible':[('customer', '=', False)]}" />
+                <field name="office_id" attrs="{'invisible':[('type', '!=', 'af office')]}" />
+            </field>
+            <field name="vat" position="attributes">
+                <attribute name="invisible">1</attribute>
+            </field>
+            <field name="barcode" position="attributes">
+                <attribute name="invisible">1</attribute>
+            </field>
+            <xpath expr="//page[@name='internal_notes']" position="after">
+                <page string="Jobseeker info" attrs="{'invisible':[('customer', '=', False)]}">
                     <group>
-                      <group attrs="{'invisible': [('type','=', 'contact')]}">
-                        <label for="street" string="Address" />
-                        <div>
-                          <div class="o_address_format" name="div_address">
-                            <field name="street" placeholder="Street..." class="o_address_street" />
-                            <field name="street2" placeholder="Street 2..." class="o_address_street" />
-                            <span style="margin-right:1em;">
-                              <field name="zip" placeholder="ZIP" class="o_address_zip" />
-                            </span>
-                            <field name="city" placeholder="City" class="o_address_city" />
-                            <label for="state_name_code" string="Municipality" class="oe_read_only" />
-                            <field name="state_name_code" class="oe_read_only" placeholder="State" nolabel="1" />
-                            <label for="state_id" string="Municipality" class="oe_edit_only" />
-                            <field name="state_id" class="oe_edit_only" nolabel="1" />
-                            <field name="country_id" placeholder="Country" class="o_address_country" options="{&quot;no_open&quot;: True, &quot;no_create&quot;: True}" />
-                          </div>
-                        </div>
-                      </group>
-                      <group>
-                        <field name="name" string="Contact Name" attrs="{'required' : [('type', '=', 'contact')]}" />
-                        <field name="title" placeholder="e.g. Mr." attrs="{'invisible': [('type','!=', 'contact')]}" />
-                        <field name="function" placeholder="e.g. Sales Director" attrs="{'invisible': [('type','!=', 'contact')]}" />
-                        <field name="email" />
-                        <field name="phone" widget="phone" />
-                        <field name="mobile" widget="phone" />
-                        <field name="comment" placeholder="internal note..." />
-                      </group>
+                        <group>
+                            <field name="jobseeker_category" />
+                            <field name="customer_since" />
+                            <field name="jobseeker_work" attrs="{'invisible':[('is_company', '=', True)]}" />
+                        </group>
+                        <group>
+                            <field name="deactualization_date" />
+                            <field name="deactualization_reason" />
+                            <field name="foreign_country_of_work" />
+                            <field name="deactualization_message" />
+                        </group>
+                    </group>
+                </page>
+            </xpath>
+        </field>
+    </record>
+    <record id="view_partner_tree" model="ir.ui.view">
+        <field name="name">res.partner.view.tree.inherit.view_360</field>
+        <field name="model">res.partner</field>
+        <field name="inherit_id" ref="base.view_partner_tree" />
+        <field name="arch" type="xml">
+            <xpath expr="/tree" position="inside">
+                <field name="customer_id" />
+            </xpath>
+        </field>
+    </record>
+    <record id="view_partner_select_employee360" model="ir.ui.view">
+        <field name="name">res.partner.view.select.inherit.view_360</field>
+        <field name="model">res.partner</field>
+        <field name="inherit_id" ref="base.view_res_partner_filter" />
+        <field name="arch" type="xml">
+            <xpath expr="//field[@name='user_id']" position="after">
+                <field name="company_registry" />
+                <field name="social_sec_nr" />
+                <field name="cfar" />
+                <field name="customer_id" />
+                <!-- filter_domain="[('customer','=',True), ('parent_id', '=', False)]" -->
+                <!-- kommenterad för att jag inte har någon customer, behöver testas -->
+                <filter string="Job seekers" name="is_jobseeker" domain="[('is_jobseeker','=',True)]" />
+                <filter string="Employers" name="is_employer" domain="[('is_employer','=',True)]" />
+                <filter string="Government body" name="is_government" domain="[('is_government','=',True)]" />
+                <filter string="Independent partners" name="is_independent_partner" domain="[('is_independent_partner','=',True)]" />
+            </xpath>
+        </field>
+    </record>
+    <record id="view_jobseeker_form" model="ir.ui.view">
+        <field name="name">res.partner.form.jobseeker</field>
+        <field name="model">res.partner</field>
+        <field name="arch" type="xml">
+            <form string="Jobseeker">
+                <sheet>
+                    <div class="oe_button_box" name="button_box">
+                        <button name="toggle_active" type="object" class="oe_stat_button" icon="fa-archive">
+                            <field name="active" widget="boolean_button" options="{&quot;terminology&quot;: &quot;archive&quot;}" />
+                        </button>
+                    </div>
+                    <div class="oe_title">
+                        <h1>
+                            <field name="name" default_focus="1" placeholder="Name" attrs="{'required' : [('type', '=', 'contact')]}" />
+                        </h1>
+                    </div>
+                    <group>
+                        <group attrs="{'invisible': [('type','=', 'contact')]}">
+                            <field name="type" invisible="1"/>
+                            <label for="street" string="Address" />
+                            <div class="o_address_format" name="div_address">
+                                <field name="street" placeholder="Street..." class="o_address_street" />
+                                <field name="street2" placeholder="Street 2..." class="o_address_street" />
+                                <span style="margin-right:1em;">
+                                    <field name="zip" placeholder="ZIP" class="o_address_zip" />
+                                </span>
+                                <field name="city" placeholder="City" class="o_address_city" />
+                                <label for="state_name_code" string="Municipality" class="oe_read_only" />
+                                <field name="state_name_code" class="oe_read_only" placeholder="State" nolabel="1" />
+                                <label for="state_id" string="Municipality" class="oe_edit_only" />
+                                <field name="state_id" class="oe_edit_only" nolabel="1" />
+                                <field name="country_id" placeholder="Country" class="o_address_country" options="{&quot;no_open&quot;: True, &quot;no_create&quot;: True}" />
+                            </div>
+                        </group>
+                        <group>
+                            <field name="name" string="Contact Name" attrs="{'required' : [('type', '=', 'contact')]}" />
+                            <field name="title" placeholder="e.g. Mr." attrs="{'invisible': [('type','!=', 'contact')]}" />
+                            <field name="function" placeholder="e.g. Sales Director" attrs="{'invisible': [('type','!=', 'contact')]}" />
+                            <field name="email" />
+                            <field name="phone" widget="phone" />
+                            <field name="mobile" widget="phone" />
+                            <field name="comment" placeholder="internal note..." />
+                        </group>
+                    </group>
+                    <group string="Employment service information">
+                        <field name="registered_through" />
+                        <field name="jobseeker_category" />
+                        <field name="customer_since" />
+                        <!-- what fields should we use? -->
+                        <!-- <field name="office" options="{'no_create_edit': True}" domain="[('type', '=', 'af office')]" /> -->
+                        <!-- <field name="office_ids" widget="many2many_tags" options="{'no_create_edit': True}" domain="[('type', '=', 'af office')]" /> -->
+                        <field name="share_info_with_employers" />
+                        <field name="sms_reminders" />
+                        <field name="segment_jobseeker" />
+                        <label for="user_id" string="Administrative officer" />
+                        <field name="user_id" nolabel="1" />
+                        <field name="communication_channel"/>
                     </group>
                     <field name="image" invisible="True" />
-                  </sheet>
-                </form>
-              </field>
-            </page>
-          </notebook>
-        </sheet>
-      </form>
-    </field>
-  </record>
+                    <notebook>
+                        <page name="apply_for_jobs" string="Education" />
+                        <!-- Byt namn på sidans namn också, inte bara string -->
+                    </notebook>
+                </sheet>
+            </form>
+        </field>
+    </record>
   <record model="ir.ui.view" id="view_jobseeker_tree">
     <field name="name">res.partner.jobseeker.tree</field>
     <field name="model">res.partner</field>
@@ -298,7 +174,9 @@
         <field name="name" />
         <field name="city" />
         <field name="email" />
+<!--
         <field name="office_id" />
+-->
       </tree>
     </field>
   </record>
@@ -310,7 +188,9 @@
         <field name="name" />
         <field name="city" />
         <field name="email" />
+<!--
         <field name="office_id" />
+-->
         <templates>
           <t t-name="kanban-box">
             <div class="oe_kanban_global_click">
@@ -327,7 +207,9 @@
                       <field name="email" />
                     </li>
                     <li>
+<!--
                       <field name="office_id" />
+-->
                     </li>
                   </ul>
                 </div>
@@ -391,28 +273,13 @@
     <field name="act_window_id" ref="action_jobseekers" />
   </record>
 
-  <menuitem id="res_partner_jobseekers_menu" name="Jobseekers" action="" 
-    sequence="4" groups="af_security.af_jobseekers_editor"
-    web_icon="partner_view_360,static/description/icon.png" />
-  <menuitem id="res_partner_jobseekers_action_menu" name="Jobseekers" 
-    parent="res_partner_jobseekers_menu" action="action_jobseekers" 
-    sequence="10" groups="base.group_no_one" />
-  <menuitem id="res_partner_jobseekers_config_menu" 
-    parent="res_partner_jobseekers_menu" name="Configuration" 
-    sequence="100" groups="base.group_no_one" />
-  <menuitem id="menu_sni_config" 
-    parent="res_partner_jobseekers_config_menu" 
-    action="res_sni.action_sni_form" sequence="10" 
-    groups="base.group_no_one" />
-  <menuitem id="menu_ssyk_config" 
-    parent="res_partner_jobseekers_config_menu" 
-    action="res_ssyk.action_ssyk_form" sequence="20"  
-    groups="base.group_no_one" />
-  <menuitem id="menu_sun_config" 
-    parent="res_partner_jobseekers_config_menu" 
-    action="res_sun.action_sun_form" sequence="30"  
-    groups="base.group_no_one" />
-
+  <menuitem id="res_partner_jobseekers_menu" name="Jobseekers" action="" sequence="4" groups="af_security.af_jobseekers_editor" />
+  <menuitem id="res_partner_jobseekers_action_menu" name="Jobseekers" parent="res_partner_jobseekers_menu" action="action_jobseekers" sequence="10" groups="base.group_no_one" />
+  <menuitem id="res_partner_jobseekers_config_menu" parent="res_partner_jobseekers_menu" name="Configuration" sequence="100" groups="base.group_no_one" />
+  <menuitem id="menu_sni_config" parent="res_partner_jobseekers_config_menu" action="res_sni.action_sni_form" sequence="10"  groups="base.group_no_one" />
+  <menuitem id="menu_ssyk_config" parent="res_partner_jobseekers_config_menu" action="res_ssyk.action_ssyk_form" sequence="20"  groups="base.group_no_one" />
+  <menuitem id="menu_sun_config" parent="res_partner_jobseekers_config_menu" action="res_sun.action_sun_form" sequence="30"  groups="base.group_no_one" />
+  <menuitem id="menu_drivers_license_config" parent="res_partner_jobseekers_config_menu" action="res_drivers_license.action_drivers_license_form" sequence="4" groups="base.group_no_one" />
   <record id="view_partner_employer_form" model="ir.ui.view">
     <field name="name">res.partner.form.employer</field>
     <field name="model">res.partner</field>
@@ -465,7 +332,9 @@
               <field name="employer_class" />
               <label for="user_id" string="Administrative officer" />
               <field name="user_id" nolabel="1" />
+<!--
               <field name="office_id" options="{'no_create_edit': True}"  />
+-->
               <field name="segment_employer" groups="base.group_no_one" />
             </group>
           </group>
@@ -600,7 +469,9 @@
         <field name="name" />
         <field name="city" />
         <field name="email" />
+<!--
         <field name="office_id" />
+-->
         <templates>
           <t t-name="kanban-box">
             <div class="oe_kanban_global_click">
@@ -622,7 +493,9 @@
                       <field name="email" />
                     </li>
                     <li>
+<!--
                       <field name="office_id" />
+-->
                     </li>
                   </ul>
                 </div>
@@ -642,7 +515,9 @@
         <field name="company_registry" />
         <field name="city" />
         <field name="email" />
+<!--
         <field name="office_id" />
+-->
       </tree>
     </field>
   </record>
@@ -705,18 +580,10 @@
     <field name="view_id" ref="view_employer_tree" />
     <field name="act_window_id" ref="action_employers" />
   </record>
-  
-  <menuitem id="res_partner_employers_menu" name="Employers" 
-    action="action_employers" sequence="3"
-    web_icon="partner_view_360,static/description/icon.png" />
-  <menuitem id="res_partner_employers_config_menu" 
-    parent="res_partner_employers_menu" name="Configuration" sequence="0" 
-    groups="base.group_no_one" />
-  <menuitem id="menu_ssyk_config" parent="res_partner_employers_config_menu" 
-    action="res_ssyk.action_ssyk_form" sequence="2" />
-  <menuitem id="menu_sni_config" parent="res_partner_employers_config_menu" 
-    action="res_sni.action_sni_form" sequence="1" />
-
+  <menuitem id="res_partner_employers_menu" name="Employers" action="action_employers" sequence="3" />
+  <menuitem id="res_partner_employers_config_menu" parent="res_partner_employers_menu" name="Configuration" sequence="0" groups="base.group_no_one" />
+  <menuitem id="menu_ssyk_config" parent="res_partner_employers_config_menu" action="res_ssyk.action_ssyk_form" sequence="2" />
+  <menuitem id="menu_sni_config" parent="res_partner_employers_config_menu" action="res_sni.action_sni_form" sequence="1" />
   <record id="action_screenpopup" model="ir.actions.act_window">
     <field name="name">Jobseekers</field>
     <field name="res_model">res.partner</field>
