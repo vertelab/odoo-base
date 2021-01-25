@@ -30,7 +30,7 @@ Manages partners and related values
     'author': 'Vertel AB',
     'license': 'AGPL-3',
     'website': 'http://www.vertel.se',
-    'depends': ['activity_field', 'event', 'base'],
+    'depends': ['event', 'base'],
     'data': [
 			'views/event_event.xml'
         ],
