@@ -20,26 +20,23 @@
 ##############################################################################
 
 {
-    'name': 'Partner desired jobs',
-    'version': '12.0.1.5',
+    'name': 'Partner Education 360',
+    'version': '12.0.1.1',
     'category': '',
     'description': """
-Module to see which jobs a jobseeking partner desires
+Adds education to jobseeker view
 ================================================================================================
-AFC-168
-AFC-1151 previous experiences
+
 """,
     'author': 'Vertel AB',
     'license': 'AGPL-3',
     'website': 'http://www.vertel.se',
-    'depends': ['base', 
-    'res_ssyk',
-    'partner_education',
+    'depends': [
+        'partner_view_360',
+        'partner_education'
     ],
     'data': [
-			'views/res_partner_view.xml',
-            'views/desired_jobs_view.xml',
-            'security/ir.model.access.csv'
+        'views/res_partner_view.xml',
         ],
     'application': False,
     'installable': True,

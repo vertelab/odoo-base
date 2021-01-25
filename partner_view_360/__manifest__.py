@@ -39,12 +39,14 @@ AFC-102, 103, 140, 183, 192, 213, 210, 241, 259, 260, 346, 1138
         'res_sun',
         'res_drivers_license',
         'res_ssyk',
-        'res_sni'
+        'res_sni',
+        'partner_ssn',
+        'l10n_se',
+        'af_security'
     ],
     'data': [
         'views/res_partner_view.xml',
         'wizard/res_partner_search_wizard.xml',
-        "data/res.country.state.csv",
     ],
     'demo': [
         "data/jobseekers/res.partner.csv",

@@ -91,12 +91,6 @@ class ResPartner(models.Model):
         )]
 
     @api.one
-    def combine_social_sec_nr_age(self): #How to do the popup???
-        if self.company_registry != False:
-            self.social_sec_nr_age = _("%s (%s years old)") % (self.company_registry, self.age)
-        else:
-            self.social_sec_nr_age = ""
-    @api.one
     def combine_state_name_code(self):
         self.state_name_code = "%s %s" % (self.state_id.name, self.state_id.code)
 

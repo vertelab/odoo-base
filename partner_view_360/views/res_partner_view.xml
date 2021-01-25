@@ -87,6 +87,7 @@
         <field name="arch" type="xml">
             <xpath expr="//field[@name='user_id']" position="after">
                 <field name="company_registry" />
+                <field name="social_sec_nr" />
                 <field name="cfar" />
                 <field name="customer_id" />
                 <!-- filter_domain="[('customer','=',True), ('parent_id', '=', False)]" -->
@@ -95,29 +96,6 @@
                 <filter string="Employers" name="is_employer" domain="[('is_employer','=',True)]" />
                 <filter string="Government body" name="is_government" domain="[('is_government','=',True)]" />
                 <filter string="Independent partners" name="is_independent_partner" domain="[('is_independent_partner','=',True)]" />
-            </xpath>
-        </field>
-    </record>
-    <record id="view_partner_form_education" model="ir.ui.view">
-        <field name="name">res.partner.eduacation.form</field>
-        <field name="model">res.partner</field>
-        <field name="inherit_id" ref="base.view_partner_form" />
-        <field name="arch" type="xml">
-            <field name="category_id" position="after">
-                <field name="communication_channel"/>
-            </field>
-            <xpath expr="//page[@name='internal_notes']" position="after">
-                <page name="education" string="Education">
-                    <group>
-                        <field name="sun_ids" options="{'no_create_edit': True}" />
-                        <field name="education_level" />
-                        <field name="foreign_education" />
-                        <field name="foreign_education_approved" />
-                        <!-- <field name="has_drivers_license" /> -->
-                        <field name="drivers_license_ids" options="{'no_create_edit': True}" />
-                        <field name="has_car" />
-                    </group>
-                </page>
             </xpath>
         </field>
     </record>
@@ -139,6 +117,7 @@
                     </div>
                     <group>
                         <group attrs="{'invisible': [('type','=', 'contact')]}">
+                            <field name="type" invisible="1"/>
                             <label for="street" string="Address" />
                             <div class="o_address_format" name="div_address">
                                 <field name="street" placeholder="Street..." class="o_address_street" />
@@ -301,27 +280,6 @@
   <menuitem id="menu_ssyk_config" parent="res_partner_jobseekers_config_menu" action="res_ssyk.action_ssyk_form" sequence="20"  groups="base.group_no_one" />
   <menuitem id="menu_sun_config" parent="res_partner_jobseekers_config_menu" action="res_sun.action_sun_form" sequence="30"  groups="base.group_no_one" />
   <menuitem id="menu_drivers_license_config" parent="res_partner_jobseekers_config_menu" action="res_drivers_license.action_drivers_license_form" sequence="4" groups="base.group_no_one" />
-  <record id="view_partner_form_education1" model="ir.ui.view">
-    <field name="name">res.partner.eduacation.form1</field>
-    <field name="model">res.partner</field>
-    <field name="inherit_id" ref="view_jobseeker_form" />
-    <field name="arch" type="xml">
-      <xpath expr="//page[@name='apply_for_jobs']" position="inside">
-        <page name="education" string="Education">
-          <group>
-            <field name="sun_ids" options="{'no_create_edit': True}" widget="many2many_tags" />
-            <field name="education_level" />
-            <field name="foreign_education" />
-            <field name="foreign_education_approved" />
-            <!-- <field name="has_drivers_license" /> -->
-            <field name="drivers_license_ids" options="{'no_create_edit': True}" widget="many2many_tags" />
-            <!-- bortkommenterad för att vi inte vet om vi kan få en integration i tid (Fredrik) -->
-            <field name="has_car" groups="base.group_no_one" />
-          </group>
-        </page>
-      </xpath>
-    </field>
-  </record>
   <record id="view_partner_employer_form" model="ir.ui.view">
     <field name="name">res.partner.form.employer</field>
     <field name="model">res.partner</field>
