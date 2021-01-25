@@ -20,11 +20,14 @@
 ##############################################################################
 
 {
-    'name': 'Event Automatic Digital Dialogue partners',
-    'version': '0.1',
+    'name': 'Replaced - Event Automatic Digital Dialogue partners',
+    'version': '12.0.0.0.2',
     'category': '',
     'description': """
-Manages partners and related values
+Manages partners and related values\n
+Replace by:\n
+https://github.com/vertelab/odoo-af/tree/Dev-12.0-Fenix-Sprint-02/af_automatic_customer_dialogue/static/description\n
+
 ================================================================================================
 """,
     'author': 'Vertel AB',
