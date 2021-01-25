@@ -2,7 +2,7 @@
 ##############################################################################
 #
 #    Odoo, Open Source Management Solution, third party addon
-#    Copyright (C) 2004-2020 Vertel AB (<http://vertel.se>).
+#    Copyright (C) 2004-2019 Vertel AB (<http://vertel.se>).
 #
 #    This program is free software: you can redistribute it and/or modify
 #    it under the terms of the GNU Affero General Public License as
@@ -20,35 +20,24 @@
 ##############################################################################
 
 {
-    'name': 'Partner 360 view',
-    'version': '12.0.0.1.5',
+    'name': 'Partner Education 360',
+    'version': '12.0.1.1',
     'category': '',
     'description': """
-Module for employee 360 view
+Adds education to jobseeker view
 ================================================================================================
-This module alters, adds, removes and shuffles around fields in the partner view
-Also adds new menus and views for partners of type jobseeker and employer
-AFC-102, 103, 140, 183, 192, 213, 210, 241, 259, 260, 346, 1138
+
 """,
     'author': 'Vertel AB',
     'license': 'AGPL-3',
     'website': 'http://www.vertel.se',
     'depends': [
-        'base',
-        'contacts',
-        'res_sun',
-        'res_drivers_license',
-        'res_ssyk',
-        'res_sni'
+        'partner_view_360',
+        'partner_education'
     ],
     'data': [
         'views/res_partner_view.xml',
-        'wizard/res_partner_search_wizard.xml',
-    ],
-    'demo': [
-        "data/jobseekers/res.partner.csv",
-        "data/employers/res.partner.csv",
-    ],
+        ],
     'application': False,
     'installable': True,
 }
