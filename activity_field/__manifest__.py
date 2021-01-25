@@ -20,7 +20,7 @@
 ##############################################################################
 
 {
-    'name': 'Activity Tab DEPRECATED',
+    'name': 'Depreciated Activity Tab - replace with partner_activity',
     'version': '12.0.1.3',						# Format 12.0.1.0, för att vi använder Odoo 12
     'category': '',
     'description': """
@@ -39,5 +39,5 @@ AFC-130
      #       'security/ir.model.access.csv'
         ],
     'application': False,
-    'installable': True,
+    'installable': False,
 }
