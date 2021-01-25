@@ -87,6 +87,7 @@
         <field name="arch" type="xml">
             <xpath expr="//field[@name='user_id']" position="after">
                 <field name="company_registry" />
+                <field name="social_sec_nr" />
                 <field name="cfar" />
                 <field name="customer_id" />
                 <!-- filter_domain="[('customer','=',True), ('parent_id', '=', False)]" -->
