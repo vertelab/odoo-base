@@ -33,7 +33,7 @@
             <field name="model">res.interpreter.language</field>
             <field name="arch" type="xml">
                 <search string="Search Interpreter Language">
-                    <field name="name" filter_domain="[('name','ilike',self),('code','ilike',self)]" />
+                    <field name="name" filter_domain="['|', ('name','ilike',self),('code','ilike',self)]" />
                     <field name="code"/>
                     <separator />
                 </search>
