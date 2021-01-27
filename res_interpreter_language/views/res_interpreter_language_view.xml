@@ -7,12 +7,9 @@
             <field name="arch" type="xml">
                 <form string="Interpreter Language">
                     <sheet>
-                        <!--<h1>
-                            <field name="name" default_focus="1" placeholder="Name" />
-                        </h1> -->
                         <group>
-                            <field name="code" />
-                            <field name="name" />
+                            <field name="code"/>
+                            <field name="name"/>
                         </group>
                     </sheet>
                 </form>
@@ -23,8 +20,8 @@
             <field name="model">res.interpreter.language</field>
             <field name="arch" type="xml">
                 <tree string="Code">
-                    <field name="code" />
-                    <field name="name" />
+                    <field name="code"/>
+                    <field name="name"/>
                 </tree>
             </field>
         </record>
@@ -33,9 +30,9 @@
             <field name="model">res.interpreter.language</field>
             <field name="arch" type="xml">
                 <search string="Search Interpreter Language">
-                    <field name="name" filter_domain="['|', ('name','ilike',self),('code','ilike',self)]" />
+                    <field name="name" filter_domain="['|', ('name','ilike',self),('code','ilike',self)]"/>
                     <field name="code"/>
-                    <separator />
+                    <separator/>
                 </search>
             </field>
         </record>
@@ -46,9 +43,8 @@
             <field name="view_type">form</field>
             <field name="view_mode">tree,form</field>
             <field name="view_id" ref="view_interpreter_language_tree"/>
-            <field name="context">{}</field>
             <field name="search_view_id" ref="view_interpreter_language_filter"/>
         </record>
-        <menuitem id="menu_interpreter_language" parent="contacts.res_partner_menu_config" action="action_interpreter_language_form" sequence="50" />
+        <menuitem id="menu_interpreter_language" parent="contacts.res_partner_menu_config" action="action_interpreter_language_form" sequence="50"/>
     </data>
 </odoo>
