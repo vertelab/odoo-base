@@ -41,6 +41,13 @@ if not hasattr(ClientConfig, 'get_api'):
 class ResPartner(models.Model):
     _inherit = 'res.partner'
 
+    # TODO: 
+    # make it so that the xml search findalls every instance of something 
+    # rather than just the first
+    # make a function for adding addresses
+    # check for addresses and contact persons when parsing subsidiaries
+    # pass subsidiary id to address/contact person functions for as parent_id 
+
     def match_list(self):
         return {
             'organization': [
@@ -61,12 +68,15 @@ class ResPartner(models.Model):
             'subsidiary': [
                 ('ns64:utforandeVerksamhetId', 'legacy_no'),
                 ('ns64:namn', 'name'),
+                ('ns23:avtalId', 'category_id.name'),
+            ],
+            'address': [
+                ('ns23:adressId', 'legacy_no'),
                 ('ns23:adressrad', 'street'),
                 ('ns23:postnummer', 'zip'),
                 ('ns23:postort', 'city'),
                 ('ns23:lanskod', 'country_id.name'),
                 ('ns23:kommunkod', 'state_id.name'),
-                ('ns23:avtalId', 'category_id.name'),
             ]
         }
 
@@ -99,9 +109,9 @@ class ResPartner(models.Model):
                     self.parse_xml_tjansteleverantor_data(response.text)
                     _logger.info("PARSED XML")
                 #response = api_client.get_utforande_verksamhet_id()
-                if response.status_code == 200:
-                    self.parse_xml_organisationsnummer_data(response.text)
-                    _logger.info("PARSED XML 2")
+                # if response.status_code == 200:
+                #     self.parse_xml_organisationsnummer_data(response.text)
+                #     _logger.info("PARSED XML 2")
 
     def update_from_xml(self, xml, match_name):    
         match_fields = self.match_list()[match_name]
@@ -152,26 +162,34 @@ class ResPartner(models.Model):
         root = etree.XML(xml.encode())
         self.update_from_xml(root, 'organization')
         _logger.info("UPDATE FROM XML")
-        contact_persons = root.find(
-            ".//ns107:kontaktpersonLista", namespaces={'ns107': 'http://arbetsformedlingen.se/datatyp/tjansteleverantor/tjansteleverantor/v15'})
-        _logger.info("CONTACT PERSONS FOUND")
-        if contact_persons is not None:
+        contact_persons = root.findall(
+            ".//ns300:tjansteleverantor/ns107:kontaktpersonLista", 
+                namespaces={'ns300': "http://arbetsformedlingen.se/tjansteleverantor/response/hamtatjansteleverantorsvar/v15",
+                'ns107': 'http://arbetsformedlingen.se/datatyp/tjansteleverantor/tjansteleverantor/v15'})
+        if contact_persons:
             _logger.info("CONTACT PERSONS NOT NONE")
-            self.update_contact_person(contact_persons)
+            for elem in contact_persons:
+                self.update_contact_person(elem, self.id)
+        subsidiaries = root.findall(
+            ".//ns107:utforandeVerksamhetLista", namespaces={'ns107': 'http://arbetsformedlingen.se/datatyp/tjansteleverantor/tjansteleverantor/v15'})
+        if subsidiaries:
+            _logger.info("SUBSIDIARY NOT NONE")
+            for elem in subsidiaries:
+                self.update_subsidiary(elem)                 
 
-    @api.model
-    def parse_xml_organisationsnummer_data(self, xml):
-        #_logger.info("XML: %s" % xml)
-        root = etree.fromstring(self.clearing_xml(xml))
-        _logger.info("ROOT: %s" % root)
-        self.update_subsidiary(root)
+    # @api.model
+    # def parse_xml_organisationsnummer_data(self, xml):
+    #     #_logger.info("XML: %s" % xml)
+    #     root = etree.fromstring(self.clearing_xml(xml))
+    #     _logger.info("ROOT: %s" % root)
+    #     self.update_subsidiary(root)
 
     @api.multi
-    def update_contact_person(self, xml):
+    def update_contact_person(self, xml, parent_id):
         person_id = xml.find(".//ns25:kontaktpersonId", namespaces={'ns25':'http://arbetsformedlingen.se/datatyp/tjansteleverantor/kontaktperson/v17'})
         if person_id is not None:
             person_id = person_id.text
-            children = self.search([('parent_id', '=', self.id),
+            children = self.search([('parent_id', '=', parent_id),
                                     ('legacy_no', '=', person_id)], limit=1)
             if children:
                 _logger.info("found children contact persons")
@@ -182,6 +200,7 @@ class ResPartner(models.Model):
                     'name': 'From TLR',
                     'parent_id': self.id,
                 }])
+                _logger.info("what")
             partner.update_from_xml(xml, 'contact_persons')
 
     @api.multi
@@ -203,3 +222,36 @@ class ResPartner(models.Model):
                     'type': 'other',
                 }])
             partner.update_from_xml(xml, 'subsidiary')
+            addresses = xml.findall(
+                ".//ns64:adressLista", namespaces={'ns64': "http://arbetsformedlingen.se/datatyp/tjansteleverantor/utforandeverksamhet/v15"})
+            if addresses:
+                _logger.info("ADDRESSES NOT NONE")
+                for elem in addresses:
+                    self.update_sub_address(elem, partner.id)
+        
+
+    @api.multi
+    def update_sub_address(self, xml, parent_id):
+        address_id = xml.find(".//ns23:adressId",
+                                 namespaces={'ns23': "http://arbetsformedlingen.se/datatyp/tjansteleverantor/adress/v15"})
+        if address_id is not None:
+            address_id = address_id.text
+            children = self.search([('parent_id', '=', parent_id),
+                                    ('legacy_no', '=', address_id)], limit=1)
+            if children:
+                _logger.info("found children addresses")
+                partner = children
+            else:
+                _logger.info("creating address partner")
+                partner = self.create([{
+                    'parent_id': parent_id,
+                    'type': 'other',
+                }])
+            partner.update_from_xml(xml, 'address')
+            contact_persons = xml.find(
+                ".//ns23:kontaktperson", namespaces={'ns23': "http://arbetsformedlingen.se/datatyp/tjansteleverantor/adress/v15"})
+            if contact_persons is not None:
+                _logger.info("CONTACT PERSONS NOT NONE")
+                for elem in contact_persons:
+                    self.update_contact_person(elem, partner.id)
+            
