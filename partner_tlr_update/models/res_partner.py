@@ -41,13 +41,6 @@ if not hasattr(ClientConfig, 'get_api'):
 class ResPartner(models.Model):
     _inherit = 'res.partner'
 
-    # TODO: 
-    # make it so that the xml search findalls every instance of something 
-    # rather than just the first
-    # make a function for adding addresses
-    # check for addresses and contact persons when parsing subsidiaries
-    # pass subsidiary id to address/contact person functions for as parent_id 
-
     def match_list(self):
         return {
             'organization': [
@@ -108,10 +101,6 @@ class ResPartner(models.Model):
                 if response.status_code == 200:
                     self.parse_xml_tjansteleverantor_data(response.text)
                     _logger.info("PARSED XML")
-                #response = api_client.get_utforande_verksamhet_id()
-                # if response.status_code == 200:
-                #     self.parse_xml_organisationsnummer_data(response.text)
-                #     _logger.info("PARSED XML 2")
 
     def update_from_xml(self, xml, match_name):    
         match_fields = self.match_list()[match_name]
@@ -175,14 +164,7 @@ class ResPartner(models.Model):
         if subsidiaries:
             _logger.info("SUBSIDIARY NOT NONE")
             for elem in subsidiaries:
-                self.update_subsidiary(elem)                 
-
-    # @api.model
-    # def parse_xml_organisationsnummer_data(self, xml):
-    #     #_logger.info("XML: %s" % xml)
-    #     root = etree.fromstring(self.clearing_xml(xml))
-    #     _logger.info("ROOT: %s" % root)
-    #     self.update_subsidiary(root)
+                self.update_subsidiary(elem)
 
     @api.multi
     def update_contact_person(self, xml, parent_id):
