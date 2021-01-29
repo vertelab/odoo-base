@@ -4,7 +4,7 @@ from odoo import models, fields, api
 class ResPartner(models.Model):
     _inherit = 'res.partner'
 
-    education_ids = fields.Many2many(string="Educations", comodel_name="res.partner.education")
+    education_ids = fields.One2many(string="Educations", comodel_name="res.partner.education", inverse_name="partner_id")
     cv = fields.Binary('CV')
     cv_file_name = fields.Char()
     references = fields.Binary()
