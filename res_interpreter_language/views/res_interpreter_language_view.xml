@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <record id="view_interpreter_language_form" model="ir.ui.view">
+            <field name="name">res.interpreter_language.form</field>
+            <field name="model">res.interpreter.language</field>
+            <field name="arch" type="xml">
+                <form string="Interpreter Language">
+                    <sheet>
+                        <group>
+                            <field name="code"/>
+                            <field name="name"/>
+                        </group>
+                    </sheet>
+                </form>
+            </field>
+        </record>
+        <record id="view_interpreter_language_tree" model="ir.ui.view">
+            <field name="name">res.interpreter_language.tree</field>
+            <field name="model">res.interpreter.language</field>
+            <field name="arch" type="xml">
+                <tree string="Code">
+                    <field name="code"/>
+                    <field name="name"/>
+                </tree>
+            </field>
+        </record>
+        <record id="view_interpreter_language_filter" model="ir.ui.view">
+            <field name="name">res.interpreter_language.select</field>
+            <field name="model">res.interpreter.language</field>
+            <field name="arch" type="xml">
+                <search string="Search Interpreter Language">
+                    <field name="name" filter_domain="['|', ('name','ilike',self),('code','ilike',self)]"/>
+                    <field name="code"/>
+                    <separator/>
+                </search>
+            </field>
+        </record>
+        <record id="action_interpreter_language_form" model="ir.actions.act_window">
+            <field name="name">Interpreter Language</field>
+            <field name="type">ir.actions.act_window</field>
+            <field name="res_model">res.interpreter.language</field>
+            <field name="view_type">form</field>
+            <field name="view_mode">tree,form</field>
+            <field name="view_id" ref="view_interpreter_language_tree"/>
+            <field name="search_view_id" ref="view_interpreter_language_filter"/>
+        </record>
+        <menuitem id="menu_interpreter_language" parent="contacts.res_partner_menu_config" action="action_interpreter_language_form" sequence="50"/>
+    </data>
+</odoo>
