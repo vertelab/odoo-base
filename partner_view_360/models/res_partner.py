@@ -166,8 +166,9 @@ class ResPartner(models.Model):
     @api.one
     def combine_category_name_code(self):
         self.jobseeker_category = "%s %s" % (
-            self.jobseeker_category_id.name,
             self.jobseeker_category_id.code,
+            self.jobseeker_category_id.name,
+            #date set here
         )
 
     @api.one
