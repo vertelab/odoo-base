@@ -118,6 +118,8 @@ class ResPartner(models.Model):
 
     office_code_name = fields.Char(string="office", compute='_compute_office_code_name')
 
+    user_name_sign = fields.Char(string="Administrative officer", compute='_compute_user_name_sign')
+
     temp_officer_id = fields.Many2many(
         comodel_name="res.users",
         relation="res_partner_temp_officer_rel",
@@ -164,6 +166,10 @@ class ResPartner(models.Model):
     @api.one
     def combine_state_name_code(self):
         self.state_name_code = "%s %s" % (self.state_id.name, self.state_id.code)
+
+    @api.one
+    def _compute_user_name_sign(self):
+        self.user_name_sign = "%s %s" % (self.user_id.name, self.user_id.login)
 
     @api.one
     def _compute_office_code_name(self):
