@@ -54,21 +54,21 @@ class ResPartner(models.Model):
                 ('partner_id', '=', partner.id), ('note_date', '<=', fields.Date.today())],
                 limit=1, order='note_date desc')
             if daily_note_last_contact:
-                partner.last_contact = daily_note_last_contact.note_date.date()
+                partner.last_contact_date = daily_note_last_contact.note_date.date()
                 # check that we have a linked appointment
                 if daily_note_last_contact.appointment_id:
                     partner.last_contact_type = 'T' if daily_note_last_contact.appointment_id.channel == self.env.ref('calendar_channel.channel_pdm') else 'B'
-
+                partner.last_contact = " ".join((partner.last_contact_date, partner.last_contact_time, partner.last_contact_type))
             daily_note_next_contact = self.env['res.partner.notes'].search([
                 ('partner_id', '=', partner.id), ('note_date', '>', fields.Date.today())],
                 limit=1, order='note_date desc')
             if daily_note_next_contact:
-                partner.next_contact = daily_note_next_contact.note_date.date()
+                partner.next_contact_date = daily_note_next_contact.note_date.date()
                 partner.next_contact_time = daily_note_next_contact.note_date.strftime("%H:%M")
                 # check that we have a linked appointment
                 if daily_note_next_contact.appointment_id:
                     partner.next_contact_type = 'T' if daily_note_next_contact.appointment_id.channel == self.env.ref('calendar_channel.channel_pdm') else 'B'
-
+                partner.next_contact = " ".join((partner.next_contact_date, partner.next_contact_time, partner.next_contact_type))
     @api.multi
     def _create_next_last_msg(self):
         if self.is_jobseeker:
@@ -87,7 +87,7 @@ class ResPartner(models.Model):
 
     notes_ids = fields.One2many(comodel_name='res.partner.notes', 
                                  string='Daily notes', inverse_name="partner_id")
-    next_contact = fields.Date(string="Next contact", compute='_compute_note_fields',
+    next_contact_date = fields.Date(string="Next contact", compute='_compute_note_fields',
                                  store=True)
     next_contact_time = fields.Char(string='Next contact time', 
                                  compute='_compute_note_fields', store=True)
@@ -95,12 +95,14 @@ class ResPartner(models.Model):
                                 selection=[('T', 'Phone'), ('B', 'Visit'),
                                  ('E', 'E-mail'), ('P', 'Mail'), ('I', 'Internet')],
                                   compute='_compute_note_fields', store=True)
-    last_contact = fields.Date(string="Last contact", compute='_compute_note_fields',
+    next_contact = fields.Char(string="Next contact", compute='_compute_note_fields')
+    last_contact_date = fields.Date(string="Latest contact", compute='_compute_note_fields',
                                  store=True)
-    last_contact_type = fields.Selection(string='Last contact type',
+    last_contact_type = fields.Selection(string='Latest contact type',
                                  selection=[('T', 'Phone'), ('B', 'Visit'),
                                   ('E', 'E-mail'), ('P', 'Mail'), ('I', 'Internet')],
                                    compute='_compute_note_fields', store=True)
+    last_contact = fields.Char(string="Latest contact", compute='_compute_note_fields')
 
     def action_view_next_event(self):
         action = {

@@ -116,6 +116,10 @@ class ResPartner(models.Model):
         string="Municipality", compute="combine_state_name_code"
     )  # Moved to l10n_se
 
+    office_code_name = fields.Char(string="office", compute='_compute_office_code_name')
+
+    user_name_sign = fields.Char(string="Administrative officer", compute='_compute_user_name_sign')
+
     temp_officer_id = fields.Many2many(
         comodel_name="res.users",
         relation="res_partner_temp_officer_rel",
@@ -164,10 +168,19 @@ class ResPartner(models.Model):
         self.state_name_code = "%s %s" % (self.state_id.name, self.state_id.code)
 
     @api.one
+    def _compute_user_name_sign(self):
+        self.user_name_sign = "%s %s" % (self.user_id.name, self.user_id.login)
+
+    @api.one
+    def _compute_office_code_name(self):
+        self.office_code_name = "%s %s" % (self.office_id.office_code, self.office_id.name)
+
+    @api.one
     def combine_category_name_code(self):
         self.jobseeker_category = "%s %s" % (
-            self.jobseeker_category_id.name,
             self.jobseeker_category_id.code,
+            self.jobseeker_category_id.name,
+            #date set here
         )
 
     @api.one

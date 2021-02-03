@@ -193,5 +193,5 @@ msgstr "Nästa kontakt"
 #. module: partner_daily_notes
 #: model:ir.model.fields,field_description:partner_daily_notes.field_res_partner__last_contact
 #: model:ir.model.fields,field_description:partner_daily_notes.field_res_users__last_contact
-msgid "Last contact"
-msgstr "Sista kontakt"
+msgid "Latest contact"
+msgstr "Senaste kontakt"
