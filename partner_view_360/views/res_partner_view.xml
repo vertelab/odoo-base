@@ -729,13 +729,13 @@
     <field name="search_view_id" ref="view_jobseeker_filter" />
     <field name="domain" eval="[('is_jobseeker', '=', True)]" />
   </record>
-  <record model="ir.actions.server" id="action_update_name_com_reg_num">
+  <record model="ir.actions.server" id="action_update_name_ssn">
       <field name="name">Update Partner Breadcrumb</field>
       <field name="model_id" ref="base.model_res_partner"/>
       <field name="state">code</field>
       <field name="code">
           if records:
-              records.update_name_com_reg_number()
+              records.update_name_ssn()
       </field>
   </record>
 </odoo>

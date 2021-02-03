@@ -20,46 +20,26 @@
 ##############################################################################
 
 {
-    'name': 'Partner 360 view',
-    'version': '12.0.0.1.11',
+    'name': 'Partner Social Security Number',
+    'version': '12.0.0.1.0',
     'category': '',
     'description': """
-Module for employee 360 view
+Adds social security number to partners
 ================================================================================================
-This module alters, adds, removes and shuffles around fields in the partner view \n
-Also adds new menus and views for partners of type jobseeker and employer \n
-v12.0.0.1.4 AFC-102, 103, 140, 183, 192, 213, 210, 241, 259, 260, 346 \n
-v12.0.0.1.5 AFC-713 Small changes in language \n
-v12.0.0.1.6 AFC-713 Small changes in language \n
-v12.0.0.1.7 AFC-713 Small changes in language \n
-v12.0.0.1.9 AFC-816 Changed reload window to partern_360_view.\n
-v12.0.0.1.10 AFC-704 Changed target for "Close-button".\n
-\n
+
 """,
     'author': 'Vertel AB',
     'license': 'AGPL-3',
     'website': 'http://www.vertel.se',
     'depends': [
-        'mail',
-        'partner_firstname', 
-        'contacts', 
-        'partner_ssn',
-        'res_ssyk',
-        'res_sni',
-        'partner_fax',
-        'hr_office',
-        'af_security',
-        'res_sun',
-        'l10n_se'
+        'contacts',
     ],
     'data': [
-        'views/res_partner_template.xml',
         'views/res_partner_view.xml',
-        "data/res.country.state.csv",
-        "data/res.partner.skat.csv",
-        "security/ir.model.access.csv"
     ],
-    
+    'demo': [
+        
+    ],
     'application': False,
     'installable': True,
 }
