@@ -87,7 +87,7 @@ class ResPartner(models.Model):
 
     notes_ids = fields.One2many(comodel_name='res.partner.notes', 
                                  string='Daily notes', inverse_name="partner_id")
-    next_contact_date = fields.Date(string="Next contact", compute='_compute_note_fields',
+    next_contact_date = fields.Datetime(string="Next contact", compute='_compute_note_fields',
                                  store=True)
     next_contact_time = fields.Char(string='Next contact time', 
                                  compute='_compute_note_fields', store=True)
@@ -96,7 +96,7 @@ class ResPartner(models.Model):
                                  ('E', 'E-mail'), ('P', 'Mail'), ('I', 'Internet')],
                                   compute='_compute_note_fields', store=True)
     next_contact = fields.Char(string="Next contact", compute='_compute_note_fields')
-    last_contact_date = fields.Date(string="Latest contact", compute='_compute_note_fields',
+    last_contact_date = fields.Datetime(string="Latest contact", compute='_compute_note_fields',
                                  store=True)
     last_contact_type = fields.Selection(string='Latest contact type',
                                  selection=[('T', 'Phone'), ('B', 'Visit'),
