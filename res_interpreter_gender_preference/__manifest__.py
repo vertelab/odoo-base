@@ -22,12 +22,12 @@
 # Version format OdooMajor.OdooMinor.Major.Minor.Patch
 
 {
-    'name': 'Intepreter Languages',
+    'name': 'Intepreter Gender Preferences',
     'version': '12.0.0.0.1',
     'category': '',
     'description':
         """
-        Data repository for interpreter language codes.
+        Data repository for interpreter gender preference codes.
         """,
     'author': 'Vertel AB',
     'license': 'AGPL-3',
