@@ -194,14 +194,16 @@ class ResPartner(models.Model):
                 user = self.env['res.users'].create([{
                     'name': 'From TLR',
                     'parent_id': self.id,
+                    'login': 'FromTLR'
                 }])
+            user.partner_id.update_from_xml(xml, 'contact_persons')
             employee = self.env['hr.employee'].create({
-                'user_id': user.id
+                'name': user.name,
                 })
             user.write({
-                'employee_ids': [(6,0,[employee.id])]
+                'employee_ids': [(6,0,[employee.id])],
+                'login': "_".join((user.partner_id.email,user.partner_id.legacy_no))
                 })
-            user.update_from_xml(xml, 'contact_persons')
 
     @api.multi
     def update_subsidiary(self, xml):
@@ -213,14 +215,14 @@ class ResPartner(models.Model):
                                                 ('ka_nr', '=', subsidiary_id)], limit=1)
             if children:
                 _logger.info("found children subsidiaries")
-                partner = children
+                subsidiary = children
             else:
                 _logger.info("creating subsidiary partner")
                 subsidiary = self.env['performing.operation'].create([{
                     'name': 'From TLR',
                     'company_id': self.id,
                 }])
-            partner.update_from_xml(xml, 'subsidiary')
+            subsidiary.update_from_xml(xml, 'subsidiary', self.match_list())
             addresses = xml.findall(
                 ".//ns64:adressLista", namespaces={'ns64': "http://arbetsformedlingen.se/datatyp/tjansteleverantor/utforandeverksamhet/v15"})
             if addresses:
@@ -244,6 +246,7 @@ class ResPartner(models.Model):
                 _logger.info("creating address partner")
                 partner = self.create([{
                     'performing_operation_id': performing_operation_id, 
+                    'type': 'other'
                 }])
             partner.update_from_xml(xml, 'address')
             contact_persons = xml.find(
@@ -253,3 +256,49 @@ class ResPartner(models.Model):
                 for elem in contact_persons:
                     self.update_contact_person(elem, partner.id)
             
+class PerformingOperation(models.Model):
+    _inherit = 'performing.operation'
+
+    def update_from_xml(self, xml, match_name, match_list):    
+        match_fields = match_list[match_name]
+        _logger.info("match_fields %s" % match_fields)
+        data = {}
+        for field in match_fields:
+            country = False
+            _logger.info("field[0]: %s" % field[0])
+            elem = xml.find(".//%s" % field[0], namespaces={
+                'ns107': 'http://arbetsformedlingen.se/datatyp/tjansteleverantor/tjansteleverantor/v15',
+                'ns25':'http://arbetsformedlingen.se/datatyp/tjansteleverantor/kontaktperson/v17',
+                'ns64': 'http://arbetsformedlingen.se/datatyp/tjansteleverantor/utforandeverksamhet/v15',
+                'ns23':'http://arbetsformedlingen.se/datatyp/tjansteleverantor/adress/v15',
+                'ns26':'http://arbetsformedlingen.se/datatyp/gemensam/personnamn/v0',
+                'ns27':'http://arbetsformedlingen.se/datatyp/tjansteleverantor/teleadress/v4',
+                })
+            if elem is not None:
+                _logger.info("field[1] %s" % field[1])
+                _logger.info("elem text %s" % elem.text)
+                if field[1] == 'state_id.name' and country:
+                    _logger.info("field[1] == state_id.name and country")
+                    state = self.state_id.search([
+                        ('name', '=', elem.text),
+                        ('country_id', '=', country)], limit=1)
+                    if not state:
+                        state = state.create({'name': elem.text,
+                                              'country_id': country})
+                    data['state_id'] = state.id
+                elif '.' in field[1]:
+                    _logger.info("'.' in field[1]")
+                    field_model, field_name = field[1].split('.')
+                    if field_model in self and field_name in self[field_model]:
+                        value_id = self[field_model].search([
+                            (field_name, '=', elem.text)], limit=1)
+                        if value_id:
+                            data[field_model] = value_id.id
+                            if field[1] == 'country_id.name':
+                                country = value_id.id
+                elif field[1] in self:
+                    _logger.info("field[1] in self")
+                    data[field[1]] = elem.text
+        _logger.info("data %s" % data)
+        if data:
+            self.write(data)
