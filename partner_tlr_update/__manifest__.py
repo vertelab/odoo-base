@@ -35,7 +35,6 @@
         'partner_legacy_id',
         'partner_firstname',
         'hr_departments_partner',
-        'outplacement'
     ],
     'data': [
         'views/res_partner_views.xml',
