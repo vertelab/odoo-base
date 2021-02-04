@@ -1,1 +1,1 @@
-from . import res_interpreter_language  # noqa:F401
+from . import res_interpreter_gender_preference  # noqa:F401
