@@ -202,7 +202,9 @@ class ResPartner(models.Model):
                 })
             user.write({
                 'employee_ids': [(6,0,[employee.id])],
-                'login': "_".join((user.partner_id.email,user.partner_id.legacy_no))
+                'login': "_".join((
+                    user.partner_id.email if user.partner_id.email else "",
+                    user.partner_id.legacy_no))
                 })
 
     @api.multi
