@@ -76,7 +76,7 @@ class ResPartner(models.Model):
             'subsidiary': [
                 ('ns64:utforandeVerksamhetId', 'ka_nr'),
                 ('ns64:namn', 'name'),
-                ('ns23:avtalId', 'category_id.name'),
+                ('ns64:avtalId', 'category_id.name'),
             ],
             'address': [
                 ('ns23:adressId', 'legacy_no'),
@@ -201,7 +201,7 @@ class ResPartner(models.Model):
             user.partner_id.update_from_xml(xml, 'contact_persons')
             employee = self.env['hr.employee'].create({
                 'name': user.name,
-                'work_address': address_id,
+                'address_id': address_id,
                 })
             email = user.partner_id.email
             if not email:
