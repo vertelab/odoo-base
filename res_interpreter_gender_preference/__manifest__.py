@@ -32,7 +32,7 @@
     'author': 'Vertel AB',
     'license': 'AGPL-3',
     'website': 'http://www.vertel.se',
-    'depends': [],
+    'depends': ['contacts'],
     'data': [
         'security/ir.model.access.csv',
         'views/res_interpreter_gender_preference_view.xml',
