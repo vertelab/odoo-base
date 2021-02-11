@@ -37,9 +37,6 @@ def get_api(self):
 if not hasattr(ClientConfig, 'get_api'):
     ClientConfig.get_api = get_api
 
-#TODO:
-#kolla ns62:tjanstId efter 25 i avtal med avtalid från utförande verksamhet
-
 class ResPartner(models.Model):
     _inherit = 'res.partner'
     
