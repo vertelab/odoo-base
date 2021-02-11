@@ -37,7 +37,8 @@ def get_api(self):
 if not hasattr(ClientConfig, 'get_api'):
     ClientConfig.get_api = get_api
 
-
+#TODO:
+#fixa så att man kan ta emot flera telefonnummer per kontaktperson
 
 class ResPartner(models.Model):
     _inherit = 'res.partner'
@@ -72,9 +73,9 @@ class ResPartner(models.Model):
                 ('ns25:epost', 'email'),
             ],
             'subsidiary': [
-                ('ns64:utforandeVerksamhetId', 'legacy_no'),
+                ('ns64:utforandeVerksamhetId', 'ka_nr'),
                 ('ns64:namn', 'name'),
-                ('ns23:avtalId', 'category_id.name'),
+                ('ns64:avtalId', 'category_id.name'),
             ],
             'address': [
                 ('ns23:adressId', 'legacy_no'),
@@ -171,7 +172,7 @@ class ResPartner(models.Model):
         if contact_persons:
             _logger.info("CONTACT PERSONS NOT NONE")
             for elem in contact_persons:
-                self.update_contact_person(elem, self.id)
+                self.update_contact_person(elem, self.id, False)
         subsidiaries = root.findall(
             ".//ns107:utforandeVerksamhetLista", namespaces={'ns107': 'http://arbetsformedlingen.se/datatyp/tjansteleverantor/tjansteleverantor/v15'})
         if subsidiaries:
@@ -180,7 +181,7 @@ class ResPartner(models.Model):
                 self.update_subsidiary(elem)
 
     @api.multi
-    def update_contact_person(self, xml, parent_id):
+    def update_contact_person(self, xml, parent_id, address_id):
         person_id = xml.find(".//ns25:kontaktpersonId", namespaces={'ns25':'http://arbetsformedlingen.se/datatyp/tjansteleverantor/kontaktperson/v17'})
         if person_id is not None:
             person_id = person_id.text
@@ -199,11 +200,15 @@ class ResPartner(models.Model):
             user.partner_id.update_from_xml(xml, 'contact_persons')
             employee = self.env['hr.employee'].create({
                 'name': user.name,
+                'address_id': address_id,
                 })
+            email = user.partner_id.email
+            if not email:
+                email = ""
             user.write({
                 'employee_ids': [(6,0,[employee.id])],
                 'login': "_".join((
-                    user.partner_id.email if user.partner_id.email else "",
+                    email,
                     user.partner_id.legacy_no))
                 })
 
@@ -256,7 +261,7 @@ class ResPartner(models.Model):
             if contact_persons is not None:
                 _logger.info("CONTACT PERSONS NOT NONE")
                 for elem in contact_persons:
-                    self.update_contact_person(elem, partner.id)
+                    self.update_contact_person(elem, partner.id, partner.id)
             
 class PerformingOperation(models.Model):
     _inherit = 'performing.operation'
