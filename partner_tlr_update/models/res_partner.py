@@ -38,8 +38,7 @@ if not hasattr(ClientConfig, 'get_api'):
     ClientConfig.get_api = get_api
 
 #TODO:
-#fixa så att man kan ta emot flera telefonnummer per kontaktperson
-#fixa så att 
+#kolla ns62:tjanstId efter 25 i avtal med avtalid från utförande verksamhet
 
 class ResPartner(models.Model):
     _inherit = 'res.partner'
@@ -55,7 +54,6 @@ class ResPartner(models.Model):
         </subsidiary>
     </organization>
     """
-
     def match_list(self):
         return {
             'organization': [
@@ -166,23 +164,33 @@ class ResPartner(models.Model):
         root = etree.XML(xml.encode())
         self.update_from_xml(root, 'organization')
         _logger.info("UPDATE FROM XML")
-        contact_persons = root.findall(
-            ".//ns300:tjansteleverantor/ns107:kontaktpersonLista", 
-                namespaces={'ns300': "http://arbetsformedlingen.se/tjansteleverantor/response/hamtatjansteleverantorsvar/v15",
-                'ns107': 'http://arbetsformedlingen.se/datatyp/tjansteleverantor/tjansteleverantor/v15'})
-        if contact_persons:
-            _logger.info("CONTACT PERSONS NOT NONE")
-            for elem in contact_persons:
-                self.update_contact_person(elem, self.id, False)
         subsidiaries = root.findall(
             ".//ns107:utforandeVerksamhetLista", namespaces={'ns107': 'http://arbetsformedlingen.se/datatyp/tjansteleverantor/tjansteleverantor/v15'})
         if subsidiaries:
             _logger.info("SUBSIDIARY NOT NONE")
+            contract_nrs = self.get_contract_nrs(root)
             for elem in subsidiaries:
-                self.update_subsidiary(elem)
+                self.update_subsidiary(elem, contract_nrs)
 
     @api.multi
-    def update_contact_person(self, xml, parent_id, address_id):
+    def get_contract_nrs(self, xml, service_nr = 25):
+        contract_nrs = []
+        contracts = xml.findall(".//ns107:avtalLista", namespaces={'ns107': "http://arbetsformedlingen.se/datatyp/tjansteleverantor/tjansteleverantor/v15"})
+        if contracts:
+            _logger.info("contracts found")
+            for contract in contracts:
+                service_id = contract.find(".//ns62:tjanstId", namespaces={'ns62':'http://arbetsformedlingen.se/datatyp/tjansteleverantor/avtal/v15'})
+                if service_id and service_id == 25:
+                    _logger.info("contract %s with service_id 25 found")
+                    contract_nr = contract.find(".//ns62:avtalId", namespaces={'ns62':'http://arbetsformedlingen.se/datatyp/tjansteleverantor/avtal/v15'})
+                    if contract_nr:
+                        _logger.info("contract_nr %s" % contract_nr)
+                        contract_nrs.append(contract_nr)    
+        _logger.info("contract_nrs: %s" % contract_nrs)
+        return contract_nrs
+
+    @api.multi
+    def update_contact_person(self, xml, parent_id):
         person_id = xml.find(".//ns25:kontaktpersonId", namespaces={'ns25':'http://arbetsformedlingen.se/datatyp/tjansteleverantor/kontaktperson/v17'})
         if person_id is not None:
             person_id = person_id.text
@@ -201,7 +209,7 @@ class ResPartner(models.Model):
             user.partner_id.update_from_xml(xml, 'contact_persons')
             employee = self.env['hr.employee'].create({
                 'name': user.name,
-                'address_id': address_id,
+                'address_id': parent_id,
                 })
             email = user.partner_id.email
             if not email:
@@ -214,7 +222,12 @@ class ResPartner(models.Model):
                 })
 
     @api.multi
-    def update_subsidiary(self, xml):
+    def update_subsidiary(self, xml, contract_nrs):
+        contract_id = xml.find(".//ns64:avtalId",
+                                 namespaces={'ns64': 'http://arbetsformedlingen.se/datatyp/tjansteleverantor/utforandeverksamhet/v15'})
+        if not contract_id or not contract_id.text in contract_nrs:
+            _logger.info("subsidiary contract_id %s not found in list of contract ids" % contract_id.text)
+            return
         subsidiary_id = xml.find(".//ns64:utforandeVerksamhetId",
                                  namespaces={'ns64': 'http://arbetsformedlingen.se/datatyp/tjansteleverantor/utforandeverksamhet/v15'})
         if subsidiary_id is not None:
@@ -262,7 +275,7 @@ class ResPartner(models.Model):
             if contact_persons is not None:
                 _logger.info("CONTACT PERSONS NOT NONE")
                 for elem in contact_persons:
-                    self.update_contact_person(elem, partner.id, partner.id)
+                    self.update_contact_person(elem, partner.id)
             
 class PerformingOperation(models.Model):
     _inherit = 'performing.operation'
