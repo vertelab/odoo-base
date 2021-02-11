@@ -170,19 +170,21 @@ class ResPartner(models.Model):
                 self.update_subsidiary(elem, contract_nrs)
 
     @api.multi
-    def get_contract_nrs(self, xml, service_nr = 25):
+    def get_contract_nrs(self, xml, service_nr = 26):
         contract_nrs = []
         contracts = xml.findall(".//ns107:avtalLista", namespaces={'ns107': "http://arbetsformedlingen.se/datatyp/tjansteleverantor/tjansteleverantor/v15"})
         if contracts:
             _logger.info("contracts found")
             for contract in contracts:
                 service_id = contract.find(".//ns62:tjanstId", namespaces={'ns62':'http://arbetsformedlingen.se/datatyp/tjansteleverantor/avtal/v15'})
-                if service_id and service_id == 25:
-                    _logger.info("contract %s with service_id 25 found")
-                    contract_nr = contract.find(".//ns62:avtalId", namespaces={'ns62':'http://arbetsformedlingen.se/datatyp/tjansteleverantor/avtal/v15'})
-                    if contract_nr:
-                        _logger.info("contract_nr %s" % contract_nr)
-                        contract_nrs.append(contract_nr)    
+                if service_id is not None:
+                    _logger.info("service number %s found, service number wanted: %s" % (service_id.text,service_nr))
+                    if service_id.text == str(service_nr):
+                        _logger.info("service number %s found" % service_nr)
+                        contract_id = contract.find(".//ns62:avtalId", namespaces={'ns62':'http://arbetsformedlingen.se/datatyp/tjansteleverantor/avtal/v15'})
+                        if contract_id is not None:
+                            _logger.info("contract %s with service number %s found" % (contract_id.text, service_nr))
+                            contract_nrs.append(contract_id.text)    
         _logger.info("contract_nrs: %s" % contract_nrs)
         return contract_nrs
 
@@ -222,7 +224,7 @@ class ResPartner(models.Model):
     def update_subsidiary(self, xml, contract_nrs):
         contract_id = xml.find(".//ns64:avtalId",
                                  namespaces={'ns64': 'http://arbetsformedlingen.se/datatyp/tjansteleverantor/utforandeverksamhet/v15'})
-        if not contract_id or not contract_id.text in contract_nrs:
+        if contract_id is None or not contract_id.text in contract_nrs:
             _logger.info("subsidiary contract_id %s not found in list of contract ids" % contract_id.text)
             return
         subsidiary_id = xml.find(".//ns64:utforandeVerksamhetId",
