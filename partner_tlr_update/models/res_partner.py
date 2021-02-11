@@ -39,7 +39,6 @@ if not hasattr(ClientConfig, 'get_api'):
 
 #TODO:
 #fixa så att man kan ta emot flera telefonnummer per kontaktperson
-#fixa så att 
 
 class ResPartner(models.Model):
     _inherit = 'res.partner'
