@@ -226,9 +226,11 @@
                           </div>
                           <div t-if="record.type.raw_value != 'contact'">
                             <div>
+                              <field name="street"/>
                               <field name="zip" />
                               <field name="city" />
                             </div>
+                            Municipality:
                             <field t-if="record.state_id.raw_value" name="state_id" />
                             <field name="country_id" />
                           </div>
