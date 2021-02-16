@@ -54,7 +54,7 @@ class ResPartner(models.Model):
                 ('partner_id', '=', partner.id), ('note_date', '<=', fields.Date.today())],
                 limit=1, order='note_date desc')
             if daily_note_last_contact:
-                partner.last_contact_date = daily_note_last_contact.note_date.date()
+                partner.last_contact_date = daily_note_last_contact.note_date
                 # check that we have a linked appointment
                 if daily_note_last_contact.appointment_id:
                     partner.last_contact_type = 'T' if daily_note_last_contact.appointment_id.channel == self.env.ref('calendar_channel.channel_pdm') else 'B'
@@ -63,7 +63,7 @@ class ResPartner(models.Model):
                 ('partner_id', '=', partner.id), ('note_date', '>', fields.Date.today())],
                 limit=1, order='note_date desc')
             if daily_note_next_contact:
-                partner.next_contact_date = daily_note_next_contact.note_date.date()
+                partner.next_contact_date = daily_note_next_contact.note_date
                 partner.next_contact_time = daily_note_next_contact.note_date.strftime("%H:%M")
                 # check that we have a linked appointment
                 if daily_note_next_contact.appointment_id:
