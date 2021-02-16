@@ -113,7 +113,7 @@
         <field name="inherit_id" ref="partner_view_360.view_partner_employer_form" /> 
         <field name="arch" type="xml"> 
         <xpath expr="//page[@name='contacts_addresses']" position="after">
-                <page string="KPI">
+                <page string="KPI" attrs="{'invisible':[('is_company', '=', False)]}">
                     <group>
                       <field name="kpi_ids" mode="tree" nolabel="1">
                         <tree editable="bottom" string="KPI" default_order="fiscal_year desc"> 
