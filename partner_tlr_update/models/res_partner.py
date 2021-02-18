@@ -277,7 +277,7 @@ class ResPartner(models.Model):
                     'type': 'other'
                 }])
             partner.update_from_xml(xml, 'address')
-            contact_persons = xml.find(
+            contact_persons = xml.findall(
                 ".//ns23:kontaktperson",
                 namespaces={'ns23': "http://arbetsformedlingen.se/datatyp/tjansteleverantor/adress/v15"}) # noqa E501
             if contact_persons is not None:
