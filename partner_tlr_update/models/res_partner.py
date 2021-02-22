@@ -220,6 +220,12 @@ class ResPartner(models.Model):
             email = user.partner_id.email
             if not email:
                 email = ""
+            if self.env['res.users'].search_count([('login', '=', email)]):
+                partner = user.partner_id
+                user.unlink()
+                partner.unlink()
+                employee.unlink()
+                return
             user.write({
                 'employee_ids': [(6, 0, [employee.id])],
                 'login': "_".join((
