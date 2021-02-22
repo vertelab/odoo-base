@@ -27,6 +27,6 @@ class ResDriversLicense(models.Model):
     _name = 'res.drivers_license'
     _description = """Value store for drivers licence"""
 
-    partner_id = fields.Many2one(comodel_name="res.partner")
+    partner_id = fields.Many2many(comodel_name="res.partner")
     name = fields.Char(string='Class', required=True) #A,B etc.
     description = fields.Char(string='Description')
