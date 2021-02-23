@@ -199,13 +199,14 @@ class ResPartner(models.Model):
             namespaces={'ns25': 'http://arbetsformedlingen.se/datatyp/tjansteleverantor/kontaktperson/v17'}) # noqa E501
         if person_id is not None:
             person_id = person_id.text
-            children = self.env['res.users'].search([
-                ('legacy_no', '=', person_id)], limit=1)   
-            if children:
-                _logger.info("found children contact persons")
-                user = children
-                if children.parent_id.id != parent_id:
-                    _logger.info("found contact person with different parent_id, overwriting")
+            child = self.env['res.users'].search([
+                ('legacy_no', '=', person_id)], limit=1)
+            if child:
+                _logger.info("found child contact persons")
+                user = child
+                if child.parent_id.id != parent_id:
+                    _logger.info("found contact person with different"
+                                "parent_id, overwriting")
                     user.write({'parent_id': parent_id})
             else:
                 _logger.info("creating contact person partner")
@@ -215,24 +216,28 @@ class ResPartner(models.Model):
                     'login': 'FromTLR'
                 }])
             user.partner_id.update_from_xml(xml, 'contact_persons')
-            if not children:
+            if not child:
                 employee = self.env['hr.employee'].create({
                     'name': user.name,
                     'address_id': parent_id,
                     })
-                email = user.partner_id.email
-                login = email
-                if email:
-                    # in case there is already another user with the same email for some reason
-                    if self.env['res.users'].search([('login','=',user.partner_id.email)]):
+                login = user.partner_id.email
+                if login:
+                    # in case there is already another user
+                    # with the same email for some reason
+                    if self.env['res.users'].search([(
+                            'login', '=', login)]):
                         login = "_".join((
-                                        email, 
+                                        login,
                                         user.partner_id.legacy_no
                                         ))
                 else:
                     login = user.partner_id.legacy_no
-                if self.env['res.users'].search_count([('login', '=', login)]): # if the user somehow already exists
-                  _logger.warn("User with the same login found, not adding new user")
+                # if the user somehow already exists
+                if self.env['res.users'].search_count([(
+                        'login', '=', login)]):
+                    _logger.warn("User with the same login found, "
+                    "not adding new user")
                   partner = user.partner_id
                   user.unlink()
                   partner.unlink()
@@ -260,12 +265,12 @@ class ResPartner(models.Model):
                                 namespaces={'ns64': 'http://arbetsformedlingen.se/datatyp/tjansteleverantor/utforandeverksamhet/v15'}) # noqa E501
         if subsidiary_id is not None:
             subsidiary_id = subsidiary_id.text
-            children = self.env['performing.operation'].search([
+            child = self.env['performing.operation'].search([
                 ('company_id', '=', self.id),
                 ('ka_nr', '=', subsidiary_id)], limit=1)
-            if children:
-                _logger.info("found children subsidiaries")
-                subsidiary = children
+            if child:
+                _logger.info("found child subsidiaries")
+                subsidiary = child
             else:
                 _logger.info("creating subsidiary partner")
                 subsidiary = self.env['performing.operation'].create([{
@@ -287,11 +292,11 @@ class ResPartner(models.Model):
                             namespaces={'ns23': "http://arbetsformedlingen.se/datatyp/tjansteleverantor/adress/v15"}) # noqa E501
         if address_id is not None:
             address_id = address_id.text
-            children = self.search([('legacy_no', '=', address_id)], limit=1)
-            if children:
-                _logger.info("found children addresses")
-                partner = children
-                if children.performing_operation_id.id != performing_operation_id:
+            child = self.search([('legacy_no', '=', address_id)], limit=1)
+            if child:
+                _logger.info("found child addresses")
+                partner = child
+                if child.performing_operation_id.id != performing_operation_id:
                     _logger.info("found address with different performing_operation_id, updating")
                     partner.write({
                         'performing_operation_id': performing_operation_id
