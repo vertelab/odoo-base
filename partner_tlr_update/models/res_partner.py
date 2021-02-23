@@ -200,11 +200,13 @@ class ResPartner(models.Model):
         if person_id is not None:
             person_id = person_id.text
             children = self.env['res.users'].search([
-                ('parent_id', '=', parent_id),
-                ('legacy_no', '=', person_id)], limit=1)
+                ('legacy_no', '=', person_id)], limit=1)   
             if children:
                 _logger.info("found children contact persons")
                 user = children
+                if children.parent_id.id != parent_id:
+                    _logger.info("found contact person with different parent_id, overwriting")
+                    user.write({'parent_id': parent_id})
             else:
                 _logger.info("creating contact person partner")
                 user = self.env['res.users'].create([{
@@ -213,19 +215,32 @@ class ResPartner(models.Model):
                     'login': 'FromTLR'
                 }])
             user.partner_id.update_from_xml(xml, 'contact_persons')
-            employee = self.env['hr.employee'].create({
-                'name': user.name,
-                'address_id': parent_id,
+            if not children:
+                employee = self.env['hr.employee'].create({
+                    'name': user.name,
+                    'address_id': parent_id,
+                    })
+                email = user.partner_id.email
+                login = email
+                if email:
+                    # in case there is already another user with the same email for some reason
+                    if self.env['res.users'].search([('login','=',user.partner_id.email)]):
+                        login = "_".join((
+                                        email, 
+                                        user.partner_id.legacy_no
+                                        ))
+                else:
+                    login = user.partner_id.legacy_no
+                user.write({
+                    'employee_ids': [(6, 0, [employee.id])],
+                    'login': login
+                    })
+            elif not user.employee_ids: # in case there is no employee connected to the user
+                employee = self.env['hr.employee'].create({
+                    'name': user.name,
+                    'address_id': parent_id,
                 })
-            email = user.partner_id.email
-            if not email:
-                email = ""
-            user.write({
-                'employee_ids': [(6, 0, [employee.id])],
-                'login': "_".join((
-                    email,
-                    user.partner_id.legacy_no))
-                })
+                user.write({'employee_ids': [(6, 0, [employee.id])]})
 
     @api.multi
     def update_subsidiary(self, xml, contract_nrs):
@@ -265,11 +280,15 @@ class ResPartner(models.Model):
                             namespaces={'ns23': "http://arbetsformedlingen.se/datatyp/tjansteleverantor/adress/v15"}) # noqa E501
         if address_id is not None:
             address_id = address_id.text
-            children = self.search([('performing_operation_id', '=', performing_operation_id), # noqa E501
-                                    ('legacy_no', '=', address_id)], limit=1)
+            children = self.search([('legacy_no', '=', address_id)], limit=1)
             if children:
                 _logger.info("found children addresses")
                 partner = children
+                if children.performing_operation_id.id != performing_operation_id:
+                    _logger.info("found address with different performing_operation_id, updating")
+                    partner.write({
+                        'performing_operation_id': performing_operation_id
+                        })
             else:
                 _logger.info("creating address partner")
                 partner = self.create([{
