@@ -231,6 +231,13 @@ class ResPartner(models.Model):
                                         ))
                 else:
                     login = user.partner_id.legacy_no
+                if self.env['res.users'].search_count([('login', '=', login)]): # if the user somehow already exists
+                  _logger.warn("User with the same login found, not adding new user")
+                  partner = user.partner_id
+                  user.unlink()
+                  partner.unlink()
+                  employee.unlink()
+                  return
                 user.write({
                     'employee_ids': [(6, 0, [employee.id])],
                     'login': login
