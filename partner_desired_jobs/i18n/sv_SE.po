@@ -39,13 +39,13 @@ msgstr "Skapad den"
 #: model:ir.actions.act_window,name:partner_desired_jobs.partner_jobs_action
 #: model:ir.ui.menu,name:partner_desired_jobs.partner_jobs_menu_action
 msgid "Desired Jobs Action"
-msgstr "Önskade yrken utförande"
+msgstr "Sökta yrken utförande"
 
 #. module: partner_desired_jobs
 #: model_terms:ir.ui.view,arch_db:partner_desired_jobs.partner_jobs_view_tree
 #: model_terms:ir.ui.view,arch_db:partner_desired_jobs.view_partner_form
 msgid "Desired jobs"
-msgstr "Önskade yrken"
+msgstr "Sökta yrken"
 
 #. module: partner_desired_jobs
 #: model:ir.model.fields,field_description:partner_desired_jobs.field_res_partner_jobs__display_name
