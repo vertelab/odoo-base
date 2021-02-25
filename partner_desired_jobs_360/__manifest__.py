@@ -21,7 +21,7 @@
 
 {
     'name': 'Partner desired jobs 360',
-    'version': '12.0.1.1',
+    'version': '12.0.1.2',
     'category': '',
     'description': """
 Module to see which jobs a jobseeking partner desires
