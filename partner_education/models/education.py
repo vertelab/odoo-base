@@ -16,11 +16,12 @@ class ResPartnerEducation(models.Model):
 
     @api.multi
     def name_get(self):
-        res = super(ResPartnerEducation, self).name_get()
         data = []
         for education in self:
             sun_code = education.sun_id.name or ""
-            education_level = education.education_level_id.name or _("None")
-            display_value = "".join((sun_code, ', ', education_level))
+            education_level = _("None")
+            if education.education_level_id:
+                education_level = education.education_level_id.name
+            display_value = "".join((sun_code, ', ', str(education_level)))
             data.append((education.id, display_value))
         return data

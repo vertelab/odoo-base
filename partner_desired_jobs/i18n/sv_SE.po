@@ -138,3 +138,7 @@ msgstr ""
 msgid "res.partner.jobs"
 msgstr ""
 
+#. module: partner_desired_jobs
+#: model:ir.model.fields,field_description:partner_desired_jobs.field_res_partner_jobs__ssyk_id
+msgid "Job title"
+msgstr "Jobbtitel"

@@ -4,14 +4,15 @@
     <field name="model">res.partner</field> 
     <field name="inherit_id" ref="partner_view_360.view_jobseeker_form" />
     <field name="arch" type="xml"> 
-        <xpath expr="//page[@name='contacts_addresses']" position="after" attrs="{'invisible':[('is_jobseeker', '=', False)]}">
+        <xpath expr="//page[@name='apply_for_jobs']" position="after" attrs="{'invisible':[('is_jobseeker', '=', False)]}">
             <page string="Desired jobs">
                 <group>
                   <field name="job_ids" mode="tree" nolabel="1">
-                    <tree editable="bottom" string="Desired jobs" default_order="ssyk_code">
+                    <tree editable="bottom" string="Desired jobs" default_order="name">
+                        <field name="partner_id" invisible="1"/>
                         <field name="ssyk_code"/> 
                         <field name="ssyk_id"  options="{'no_create_edit': True}"/>
-                        <field name="education_id" />
+                        <field name="education_id" domain="[('partner_id','=',partner_id)]"/>
                         <field name="education_level_id"/>
                         <field name="education"/>
                         <field name="experience_length"/>

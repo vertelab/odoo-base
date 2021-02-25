@@ -10,11 +10,10 @@ class ResPartnerEducationLevel(models.Model):
 
     @api.multi
     def name_get(self):
-        res = super(ResPartnerEducationLevel, self).name_get()
         data = []
         for edu_lvl in self:
             description = edu_lvl.description or ""
-            name = edu_lvl.name or ""
-            display_value = "".join((description, ' (', name, ')'))
+            name = edu_lvl.name or "0"
+            display_value = "".join((description, ' (', str(name), ')'))
             data.append((edu_lvl.id, display_value))
         return data
