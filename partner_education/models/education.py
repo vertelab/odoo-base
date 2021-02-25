@@ -1,4 +1,4 @@
-from odoo import models, fields, api
+from odoo import models, fields, api, _
 
 
 class ResPartnerEducation(models.Model):
@@ -13,3 +13,14 @@ class ResPartnerEducation(models.Model):
     foreign_education = fields.Boolean(string="Foreign education")
     foreign_education_approved = fields.Boolean(
         string="Foreign education approved")
+
+    @api.multi
+    def name_get(self):
+        res = super(ResPartnerEducation, self).name_get()
+        data = []
+        for education in self:
+            sun_code = education.sun_id.name or ""
+            education_level = education.education_level_id.name or _("None")
+            display_value = "".join((sun_code, ', ', education_level))
+            data.append((education.id, display_value))
+        return data
