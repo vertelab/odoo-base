@@ -26,7 +26,7 @@
     'description': """
 Module to see which jobs a jobseeking partner desires
 ================================================================================================
-
+AFC-1753 fixed a domain
 """,
     'author': 'Vertel AB',
     'license': 'AGPL-3',

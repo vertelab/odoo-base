@@ -28,6 +28,7 @@ Module to see which jobs a jobseeking partner desires
 ================================================================================================
 AFC-168
 AFC-1151 previous experiences
+AFC-1753 fixed a domain
 """,
     'author': 'Vertel AB',
     'license': 'AGPL-3',

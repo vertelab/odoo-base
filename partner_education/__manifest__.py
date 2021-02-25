@@ -24,7 +24,10 @@
     'name': 'Partner Education',
     'version': '12.0.0.1.1',
     'category': 'Mail',
-    'description': """Partner Education""",
+    'description': """Partner Education
+    ===================================================================
+    AFC-1753 fixed display names on education and education levels
+    """,
 
     'author': "N-development",
     'license': 'AGPL-3',
