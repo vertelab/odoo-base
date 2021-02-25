@@ -238,16 +238,17 @@ class ResPartner(models.Model):
                         'login', '=', login)]):
                     _logger.warn("User with the same login found, "
                     "not adding new user")
-                  partner = user.partner_id
-                  user.unlink()
-                  partner.unlink()
-                  employee.unlink()
-                  return
+                    partner = user.partner_id
+                    user.unlink()
+                    partner.unlink()
+                    employee.unlink()
+                    return
                 user.write({
                     'employee_ids': [(6, 0, [employee.id])],
                     'login': login
                     })
-            elif not user.employee_ids: # in case there is no employee connected to the user
+            # in case there is no employee connected to the user
+            elif not user.employee_ids:
                 employee = self.env['hr.employee'].create({
                     'name': user.name,
                     'address_id': parent_id,
