@@ -1,4 +1,4 @@
-from odoo import models, fields
+from odoo import models, fields, api
 
 
 class ResPartnerEducationLevel(models.Model):
@@ -7,3 +7,14 @@ class ResPartnerEducationLevel(models.Model):
 
     name = fields.Integer(string="Education level")
     description = fields.Char(string="Description")
+
+    @api.multi
+    def name_get(self):
+        res = super(ResPartnerEducationLevel, self).name_get()
+        data = []
+        for edu_lvl in self:
+            description = edu_lvl.description or ""
+            name = edu_lvl.name or ""
+            display_value = "".join((description, ' (', name, ')'))
+            data.append((edu_lvl.id, display_value))
+        return data

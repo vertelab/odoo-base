@@ -22,9 +22,9 @@
 
 {
     'name': 'Partner Education',
-    'version': '12.0.0.0.1',
+    'version': '12.0.0.1.1',
     'category': 'Mail',
-    'description': """Partner Education Level""",
+    'description': """Partner Education""",
 
     'author': "N-development",
     'license': 'AGPL-3',
