@@ -21,20 +21,20 @@
 
 {
     'name': 'Partner desired jobs 360',
-    'version': '12.0.1.1',
+    'version': '12.0.1.2',
     'category': '',
     'description': """
 Module to see which jobs a jobseeking partner desires
 ================================================================================================
-
+AFC-1849 made some fields debug only
 """,
     'author': 'Vertel AB',
     'license': 'AGPL-3',
     'website': 'http://www.vertel.se',
     'depends': ['partner_view_360', 'partner_desired_jobs'],
     'data': [
-	'views/res_partner_view.xml',
-        ],
+        'views/res_partner_view.xml',
+    ],
     'application': False,
     'installable': True,
 }
