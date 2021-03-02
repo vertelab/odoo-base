@@ -27,14 +27,15 @@
 Module to see which jobs a jobseeking partner desires
 ================================================================================================
 AFC-1753 fixed a domain
+AFC-1849 made some fields debug only
 """,
     'author': 'Vertel AB',
     'license': 'AGPL-3',
     'website': 'http://www.vertel.se',
     'depends': ['partner_view_360', 'partner_desired_jobs'],
     'data': [
-	'views/res_partner_view.xml',
-        ],
+        'views/res_partner_view.xml',
+    ],
     'application': False,
     'installable': True,
 }
