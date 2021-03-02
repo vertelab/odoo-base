@@ -11,10 +11,10 @@
                     <tree editable="bottom" string="Desired jobs" default_order="ssyk_code">
                         <field name="ssyk_code"/> 
                         <field name="ssyk_id"  options="{'no_create_edit': True}"/>
-                        <field name="education_id" />
-                        <field name="education_level_id"/>
+                        <field name="education_id" groups="base.group_no_one"/>
+                        <field name="education_level_id" groups="base.group_no_one"/>
                         <field name="education"/>
-                        <field name="experience_length"/>
+                        <field name="experience_length" groups="base.group_no_one"/>
                         <field name="experience"/>
                     </tree>
                   </field>

@@ -21,25 +21,27 @@
 
 {
     'name': 'Partner desired jobs',
-    'version': '12.0.1.5',
+    'version': '12.0.1.6',
     'category': '',
     'description': """
 Module to see which jobs a jobseeking partner desires
 ================================================================================================
 AFC-168
 AFC-1151 previous experiences
+AFC-1849 made some fields debug only
 """,
     'author': 'Vertel AB',
     'license': 'AGPL-3',
     'website': 'http://www.vertel.se',
-    'depends': ['base', 
-    'res_ssyk',
-    'partner_education',
+    'depends': [
+        'base',
+        'res_ssyk',
+        'partner_education',
     ],
     'data': [
-			'views/res_partner_view.xml',
-            'views/desired_jobs_view.xml',
-            'security/ir.model.access.csv'
+        'views/res_partner_view.xml',
+        'views/desired_jobs_view.xml',
+        'security/ir.model.access.csv'
         ],
     'application': False,
     'installable': True,
