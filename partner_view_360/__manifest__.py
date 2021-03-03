@@ -21,7 +21,7 @@
 
 {
     'name': 'Partner 360 view',
-    'version': '12.0.0.1.11',
+    'version': '12.0.0.1.12',
     'category': '',
     'description': """
 Module for employee 360 view
@@ -34,6 +34,7 @@ v12.0.0.1.6 AFC-713 Small changes in language \n
 v12.0.0.1.7 AFC-713 Small changes in language \n
 v12.0.0.1.9 AFC-816 Changed reload window to partern_360_view.\n
 v12.0.0.1.10 AFC-704 Changed target for "Close-button".\n
+12.0.0.1.12 AFC-1890 fixed ssn field \n
 \n
 """,
     'author': 'Vertel AB',
@@ -41,8 +42,8 @@ v12.0.0.1.10 AFC-704 Changed target for "Close-button".\n
     'website': 'http://www.vertel.se',
     'depends': [
         'mail',
-        'partner_firstname', 
-        'contacts', 
+        'partner_firstname',
+        'contacts',
         'partner_ssn',
         'res_ssyk',
         'res_sni',
@@ -58,7 +59,6 @@ v12.0.0.1.10 AFC-704 Changed target for "Close-button".\n
         "data/res.partner.skat.csv",
         "security/ir.model.access.csv"
     ],
-    
     'application': False,
     'installable': True,
 }
