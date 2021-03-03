@@ -24,9 +24,10 @@
     'name': 'Partner Education',
     'version': '12.0.0.1.2',
     'category': 'Mail',
-    'description': """Partner Education
-    ===================================================================
-    AFC-1753 fixed display names on education and education levels
+    'description': """
+Partner Education
+===================================================================
+AFC-1753 fixed display names on education and education levels
     """,
 
     'author': "N-development",
