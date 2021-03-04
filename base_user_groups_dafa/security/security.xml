@@ -56,7 +56,11 @@
         <field name="comment">Gives access to read and write to employee related information and and processes.(The role inherits "Manage employees Read")</field>
         <field name="category_id" ref="category_dafa_handle_department_info"/>
         <field name="is_dafa" eval="True"/>
-        <field name="implied_ids" eval="[(4, ref('group_dafa_employees_read')), (4, ref('hr.group_hr_user')), (4, ref('web_dashboard_dafa.group_my_dashboard_manager'))]"/>
+        <field name="implied_ids" eval="[(6, 0, [
+        ref('group_dafa_employees_read'),
+        ref('hr.group_hr_user'),
+        ref('web_dashboard_dafa.group_my_dashboard_manager'),
+        ref('outplacement.group_outplacement_user_write')])]"/>
     </record>
 
     <!-- Manage Participants -->
@@ -65,7 +69,9 @@
         <field name="comment">Gives access to read participant related information and processess.</field>
         <field name="category_id" ref="category_dafa_handle_department_info"/>
         <field name="is_dafa" eval="True"/>
-        <field name="implied_ids" eval="[(4, ref('outplacement.group_outplacement_user_read'))]"/>
+        <field name="implied_ids" eval="[(6, 0, [
+            ref('outplacement.group_outplacement_user_read'),
+            ref('project.group_project_manager')])]"/>
     </record>
 
     <record id="group_dafa_participants_write" model="res.groups">
@@ -120,18 +126,31 @@
     <record id="2_line_support" model="res.groups">
         <field name="name">DAFA 2nd Line</field>
         <field name="category_id" ref="module_category_af_support"/>
-        <field name="implied_ids" eval="[(4, ref('1_line_support')), 
-        (4, ref('base_user_groups_dafa.group_dafa_participants_write')), 
-        (4, ref('base_user_groups_dafa.group_dafa_admin_accounting_write')), 
-        (4, ref('base_user_groups_dafa.group_dafa_org_admin_write'))]"/>
+        <field name="implied_ids" eval="[(6, 0, [
+    ref('1_line_support'), 
+    ref('base_user_groups_dafa.group_dafa_participants_write'), 
+    ref('base_user_groups_dafa.group_dafa_admin_accounting_write'), 
+    ref('base_user_groups_dafa.group_dafa_org_admin_write'),
+    ref('base.group_partner_manager')])]"/>
         <field name="comment">Inherits all DAFA Write-roles</field>
     </record>
 
     <record id="3_line_support" model="res.groups">
         <field name="name">DAFA 3rd Line</field>
         <field name="category_id" ref="module_category_af_support"/>
-        <field name="implied_ids" eval="[(4, ref('2_line_support')), (4, ref('base.group_system'))]"/>
+        <field name="implied_ids" eval="[(6, 0, [ref('2_line_support'), ref('base.group_system')])]"/>
         <field name="comment">Inherits all DAFA Write-roles and Odoo Admin role</field>
+    </record>
+
+    <record id="rule_dafa_partner_support" model="ir.rule">
+        <field name="name">res.partner - DAFA Support</field>
+        <field ref="base.model_res_partner" name="model_id"/>
+        <field name="groups" eval="[(6, 0, [ref('2_line_support')])]"/>
+        <field name="domain_force">[(1, '=', 1)]</field>
+        <field name="perm_read" eval="True"/>
+        <field name="perm_write" eval="True"/>
+        <field name="perm_create" eval="True"/>
+        <field name="perm_unlink" eval="True"/>
     </record>
 
 </odoo>
