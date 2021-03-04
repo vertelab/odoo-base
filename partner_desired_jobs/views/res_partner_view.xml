@@ -14,7 +14,7 @@
                           <field name="partner_id" invisible="1"/>
                           <field name="ssyk_code"/> 
                           <field name="ssyk_id"  options="{'no_create_edit': True}"/>
-                          <field name="education_id" domain="[('partner_id','=',partner_id)]"/>
+                          <field name="education_id" options="{'no_create_edit': True}" domain="[('partner_id','=',partner_id)]"/>
                           <field name="education_level_id"/>
                           <field name="education"/>
                           <field name="experience_length"/>
