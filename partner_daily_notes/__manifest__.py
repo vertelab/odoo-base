@@ -21,18 +21,20 @@
 
 {
     'name': 'Daily notes',
-    'version': '12.0.1.1.7',
+    'version': '12.0.1.2.0',
     'category': '',
     'description': """
 Daily notes
 ===============================================================================
 AFC-81\n
+AFC-1923\n
 This module allowes daily notes for a partner.\n
 - 12.0.1.1  Added mapping for Integration platform with the module base_map.\n
 - 12.0.1.4  Changed display Daily Notes types in "name in Tree-view".\n
 - 12.0.1.5 AFC-999 Removed duplicate translation line for Secret\n
 - 12.0.1.6 moved all generation of daily notes from calendar_af to this module\n
 - 12.0.1.7 Commented away the Smart-button on the contact-view-form\n
+- 12.0.1.2 Replaced the computed fields with normal fields because of changes in architecture\n
 """,
     'author': 'Vertel AB',
     'license': 'AGPL-3',
