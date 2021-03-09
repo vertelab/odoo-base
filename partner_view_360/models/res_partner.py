@@ -133,14 +133,19 @@ class ResPartner(models.Model):
         ],
     ) #is added in partner_extension_af
 
-    
     name_ssn = fields.Char(compute="_compute_name_ssn", store=True)
-    
+
     _sql_constraints = [
         ('customer_id_unique', 
         'UNIQUE(customer_id)',
         'customer_id field needs to be unique'
         )]
+
+    @api.constrains('zip')
+    @api.one
+    def _constrain_zip(self):
+        if self.zip and not self.zip.isdecimal():
+            raise ValidationError(_("Zip field must only contain numbers"))
 
     @api.one
     def _compute_zip_format(self):
