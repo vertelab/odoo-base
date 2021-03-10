@@ -145,7 +145,7 @@ class ResPartner(models.Model):
     @api.one
     def _constrain_zip(self):
         if self.zip and not self.zip.isdecimal():
-            raise ValidationError(_("Zip field must only contain numbers"))
+            raise ValidationError(_("Zip field must only contain numbers and no spaces"))
 
     @api.one
     def _compute_zip_format(self):
