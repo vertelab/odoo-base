@@ -106,6 +106,8 @@ class ResPartner(models.Model):
         string="Municipality", compute="combine_state_name_code"
     )  # Moved to l10n_se
 
+    zip_formated = fields.Char(string="Zip", compute="_compute_zip_format")
+
     office_code_name = fields.Char(string="office", compute='_compute_office_code_name')
 
     user_name_sign = fields.Char(string="Administrative officer", compute='_compute_user_name_sign')
@@ -131,14 +133,26 @@ class ResPartner(models.Model):
         ],
     ) #is added in partner_extension_af
 
-    
     name_ssn = fields.Char(compute="_compute_name_ssn", store=True)
-    
+
     _sql_constraints = [
         ('customer_id_unique', 
         'UNIQUE(customer_id)',
         'customer_id field needs to be unique'
         )]
+
+    @api.constrains('zip')
+    @api.one
+    def _constrain_zip(self):
+        if self.zip and not self.zip.isdecimal():
+            raise ValidationError(_("Zip field must only contain numbers and no spaces"))
+
+    @api.one
+    def _compute_zip_format(self):
+        if self.zip and len(self.zip) == 5:
+            self.zip_formated = "%s %s" % (self.zip[:3], self.zip[3:])
+        else:
+            self.zip_formated = self.zip
 
     @api.one
     def combine_state_name_code(self):

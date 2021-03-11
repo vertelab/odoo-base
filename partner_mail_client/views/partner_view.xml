@@ -1,0 +1,17 @@
+<odoo>
+    <data>
+        <record id="partner_mail_form_view" model="ir.ui.view">
+            <field name="name">res.partner.form</field>
+            <field name="model">res.partner</field>
+            <field name="inherit_id" ref="base.view_partner_form"/>
+            <field name="arch" type="xml">
+                <xpath expr="//notebook/page[1]" position="after">
+                    <field name="show_messages" invisible="1"/>
+                    <page name="mail_message" string="Messages" attrs="{'invisible': [('show_messages', '=', False)]}">
+                        <field name="mail_message_id"/>
+                    </page>
+                </xpath>
+            </field>
+        </record>
+    </data>
+</odoo>
