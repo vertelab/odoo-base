@@ -40,7 +40,6 @@ class ResCountryState(models.Model):
         :return: list of pairs ``(id, text_repr)`` for each records
         :rtype: list(tuple)
         """
-        # super(ResCountryState, self).name_get()
         result = []
         for state in self:
                 result.append((state.id, "%s %s" % (state.code, state.name)))
