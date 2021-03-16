@@ -59,6 +59,7 @@ msgstr "Utbildning"
 
 #. module: partner_desired_jobs
 #: model:ir.model.fields,field_description:partner_desired_jobs.field_res_partner_jobs__education_level
+#: model:ir.model.fields,field_description:partner_desired_jobs.field_res_partner_jobs__education_level_id
 msgid "Education level"
 msgstr "Utbildningsnivå"
 
