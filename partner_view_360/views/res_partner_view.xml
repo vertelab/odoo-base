@@ -228,7 +228,7 @@
                           <div t-if="record.type.raw_value != 'contact'">
                             <div>
                               <field name="street"/>
-                              <field name="zip" />
+                              <field name="zip_formated" />
                               <field name="city" />
                             </div>
                             Municipality:

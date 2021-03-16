@@ -310,7 +310,15 @@ class ResPartner(models.Model):
             raise Warning(_("You can't set yourself as responsible case worker"))
         else:
             super(ResPartner, self).write(vals)
-        
+
+    @api.model
+    def create(self, values):
+        zip = values.get('zip')
+        if zip:
+            if zip and not zip.isdecimal():
+                raise ValidationError(_("Zip field must only contain numbers and no spaces"))
+        return super(ResPartner, self).create(values)
+
 
 class ResPartnerSKAT(models.Model):
     _name = "res.partner.skat"
