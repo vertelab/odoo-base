@@ -44,22 +44,22 @@ msgstr "Kategori för grupper som hanterar anställdas rättigheter på organisa
 #. module: base_user_groups_dafa
 #: model:ir.module.category,description:base_user_groups_dafa.category_dafa_handle_department_info
 msgid "Category for handling information and tasks related to department."
-msgstr "KAtergori för att hantera information relaterat till en eller flera brancher av organisationen."
+msgstr "Katergori för att hantera information relaterat till en eller flera brancher av organisationen."
 
 #. module: base_user_groups_dafa
 #: model:res.groups,name:base_user_groups_dafa.1_line_support
 msgid "DAFA 1st Line"
-msgstr "DAFA Linje 1"
+msgstr "DAFA 1sta linjens support"
 
 #. module: base_user_groups_dafa
 #: model:res.groups,name:base_user_groups_dafa.2_line_support
 msgid "DAFA 2nd Line"
-msgstr "Dafa Linje 2"
+msgstr "Dafa 2ndra linjens support"
 
 #. module: base_user_groups_dafa
 #: model:res.groups,name:base_user_groups_dafa.3_line_support
 msgid "DAFA 3rd Line"
-msgstr "Dafa Linje 3"
+msgstr "Dafa 3de linjens support"
 
 #. module: base_user_groups_dafa
 #: model:res.groups,name:base_user_groups_dafa.group_dafa_admin_accounting_read
@@ -74,12 +74,12 @@ msgstr "DAFA Ekonomi (Skriv)"
 #. module: base_user_groups_dafa
 #: model:res.groups,name:base_user_groups_dafa.group_dafa_employees_read
 msgid "DAFA Admin (Read)"
-msgstr "DAFA Admin (Läs)"
+msgstr "DAFA Hantera Anställda (Läs)"
 
 #. module: base_user_groups_dafa
 #: model:res.groups,name:base_user_groups_dafa.group_dafa_employees_write
 msgid "DAFA Admin (Write)"
-msgstr "DAFA Admin (Skriv)"
+msgstr "DAFA Hantera Anställda (Skriv)"
 
 #. module: base_user_groups_dafa
 #: model:ir.model.fields,field_description:base_user_groups_dafa.field_res_groups__is_dafa
@@ -89,22 +89,22 @@ msgstr "DAFA Grupp"
 #. module: base_user_groups_dafa
 #: model:res.groups,name:base_user_groups_dafa.group_dafa_org_admin_read
 msgid "DAFA Org-Admin (Read)"
-msgstr "DAFA Org-Admin (Läs)"
+msgstr "DAFA Hantera Org (Läs)"
 
 #. module: base_user_groups_dafa
 #: model:res.groups,name:base_user_groups_dafa.group_dafa_org_admin_write
 msgid "DAFA Org-Admin (Write)"
-msgstr "DAFA Org-Admin (Skriv)"
+msgstr "DAFA Hantera Org (Skriv)"
 
 #. module: base_user_groups_dafa
 #: model:res.groups,name:base_user_groups_dafa.group_dafa_participants_read
 msgid "DAFA Participants (Read)"
-msgstr "DAFA Deltagare (Läs)"
+msgstr "DAFA Hantera Deltagare (Läs)"
 
 #. module: base_user_groups_dafa
 #: model:res.groups,name:base_user_groups_dafa.group_dafa_participants_write
 msgid "DAFA Participants (Write)"
-msgstr "DAFA Deltagare (Skriv)"
+msgstr "DAFA Hantera Deltagare (Skriv)"
 
 #. module: base_user_groups_dafa
 #: model:res.groups,comment:base_user_groups_dafa.1_line_support
@@ -161,10 +161,10 @@ msgstr "Ger behörighet att läsa information relaterat till deltagare och deras
 #. module: base_user_groups_dafa
 #: model:ir.module.category,name:base_user_groups_dafa.category_dafa_handle_department_info
 msgid "Handle Department"
-msgstr "Hantera Branch"
+msgstr "UtfV."
 
 #. module: base_user_groups_dafa
 #: model:ir.module.category,name:base_user_groups_dafa.category_dafa_handle_org_info
 msgid "Handle Organization"
-msgstr "Hantera Org."
+msgstr "Org."
 
