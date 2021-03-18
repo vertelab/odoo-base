@@ -21,7 +21,7 @@
 
 {
     'name': 'Partner 360 view',
-    'version': '12.0.0.1.13',
+    'version': '12.0.0.1.14',
     'category': '',
     'description': """
 Module for employee 360 view
@@ -36,6 +36,7 @@ v12.0.0.1.9 AFC-816 Changed reload window to partern_360_view.\n
 v12.0.0.1.10 AFC-704 Changed target for "Close-button".\n
 v12.0.0.1.12 AFC-1890 fixed ssn field \n
 v12.0.0.1.13 AFC-1910 changed order to state code and name. \n
+v12.0.0.1.14 AFC-1914 fixed behaviour of zip field  \n
 \n
 """,
     'author': 'Vertel AB',
