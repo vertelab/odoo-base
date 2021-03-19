@@ -139,6 +139,7 @@
               <div class="oe_read_only">
                 <div class="o_address_format">
                   <span class="oe_read_only">
+                    <field name="address_co" placeholder="c/o..." class="o_address_street" />
                     <field name="street" placeholder="Street..." class="o_address_street" />
                     <field name="street2" placeholder="Street 2..." class="o_address_street" />
                     <span style="margin-right:1em;">
@@ -191,6 +192,7 @@
                   <field name="is_company" />
                   <field name="function" />
                   <field name="phone" />
+                  <field name="address_co" />
                   <field name="street" />
                   <field name="street2" />
                   <field name="zip" />
@@ -227,7 +229,7 @@
                           </div>
                           <div t-if="record.type.raw_value != 'contact'">
                             <div>
-                              <field name="street"/>
+                              <field name="street"/><br/>
                               <field name="zip_formated" />
                               <field name="city" />
                             </div>
@@ -261,6 +263,7 @@
                         <label for="street" string="Address" />
                         <div>
                           <div class="o_address_format" name="div_address">
+                            <field name="address_co" placeholder="c/o..." class="o_address_street" />
                             <field name="street" placeholder="Street..." class="o_address_street" />
                             <field name="street2" placeholder="Street 2..." class="o_address_street" />
                             <span style="margin-right:1em;">
@@ -451,6 +454,7 @@
               <field name="state_id" class="oe_edit_only" nolabel="1" />
               <label for="street" string="Address" />
               <div class="o_address_format">
+                <field name="address_co" placeholder="c/o..." class="o_address_street" />
                 <field name="street" placeholder="Street..." class="o_address_street" />
                 <span style="margin-right:1em;">
                   <field name="zip" placeholder="ZIP" class="o_address_zip" />
@@ -489,6 +493,7 @@
                   <field name="is_company" />
                   <field name="function" />
                   <field name="phone" />
+                  <field name="address_co" />
                   <field name="street" />
                   <field name="street2" />
                   <field name="zip" />
@@ -528,7 +533,7 @@
                           </div>
                           <div t-if="record.type.raw_value != 'contact'">
                             <div>
-                              <field name="street" />
+                              <field name="street" /><br/>
                               <field name="zip" />
                               <field name="city" />
                             </div>
@@ -562,6 +567,7 @@
                         <label for="street" string="Address" />
                         <div>
                           <div class="o_address_format" name="div_address">
+                            <field name="address_co" placeholder="c/o..." class="o_address_street" />
                             <field name="street" placeholder="Street..." class="o_address_street" />
                             <field name="street2" placeholder="Street 2..." class="o_address_street" />
                             <span style="margin-right:1em;">
