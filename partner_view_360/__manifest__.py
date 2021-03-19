@@ -21,7 +21,7 @@
 
 {
     'name': 'Partner 360 view',
-    'version': '12.0.0.1.13',
+    'version': '12.0.0.1.14',
     'category': '',
     'description': """
 Module for employee 360 view
@@ -29,13 +29,14 @@ Module for employee 360 view
 This module alters, adds, removes and shuffles around fields in the partner view \n
 Also adds new menus and views for partners of type jobseeker and employer \n
 v12.0.0.1.4 AFC-102, 103, 140, 183, 192, 213, 210, 241, 259, 260, 346 \n
-v12.0.0.1.5 AFC-713: Small changes in language \n
-v12.0.0.1.6 AFC-713: Small changes in language \n
-v12.0.0.1.7 AFC-713: Small changes in language \n
-v12.0.0.1.9 AFC-816: Changed reload window to partern_360_view.\n
-v12.0.0.1.10 AFC-704: Changed target for "Close-button".\n
-v12.0.0.1.12 AFC-1890: fixed ssn field \n
-v12.0.0.1.13 AFC-1910: changed order to state code and name. \n
+v12.0.0.1.5 AFC-713 Small changes in language \n
+v12.0.0.1.6 AFC-713 Small changes in language \n
+v12.0.0.1.7 AFC-713 Small changes in language \n
+v12.0.0.1.9 AFC-816 Changed reload window to partern_360_view.\n
+v12.0.0.1.10 AFC-704 Changed target for "Close-button".\n
+v12.0.0.1.12 AFC-1890 fixed ssn field \n
+v12.0.0.1.13 AFC-1910 changed order to state code and name. \n
+v12.0.0.1.14 AFC-1914 fixed behaviour of zip field  \n
 v12.0.0.2.1 AFC-1937: Added support for c/o addresses. \n
 \n
 """,
