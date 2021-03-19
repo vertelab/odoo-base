@@ -18,28 +18,20 @@
 #    along with this program.  If not, see <http://www.gnu.org/licenses/>.
 #
 ##############################################################################
+from odoo import models, fields, api, _
 from odoo import http
 from odoo.http import request
+from zeep.client import CachingClient
 import werkzeug
 import hashlib
 
 import logging
-_logger = logging.getLogger(__name__)
 
-from odoo import models, fields, api, _
-from zeep.client import CachingClient
-from zeep.helpers import serialize_object
-from zeep import xsd
-
-
-import logging
 _logger = logging.getLogger(__name__)
 
 
 class WebsiteScreenpop(http.Controller):
-    
-    
-    
+
     @http.route(['/opencustomerview'], type='http', auth="public", website=True, csrf=False)
     def opencustomerview(self, **post):
         """
@@ -55,7 +47,7 @@ class WebsiteScreenpop(http.Controller):
         P92 första planeringssamtal
         Test-URL: http://afcrm-v12-afcrm-test.tocp.arbetsformedlingen.se/opencustomerview?personnummer=200002022382&signatur=admin&arendetyp=T99&kontaktid=1752211167&bankid=&token=43970fa88b3afdb0b021f34304f98c31973a145c&datatime=2020-09-11-09&reason=none
         """
-        _logger.warn('opencustomerview %s' % post)
+        _logger.debug('opencustomerview %s' % post)
         secret = request.env['ir.config_parameter'].sudo().get_param('partner_view_360.secret', 'hemligt')
         # ~ token = hashlib.sha1(secret + fields.DateTime.now().tostring[:13].replace(' ','-') + post.get('personnummer') ).hexdigest()
         if request.env.user.login != post.get('signatur'):
@@ -80,7 +72,14 @@ class WebsiteScreenpop(http.Controller):
             return werkzeug.utils.redirect(res_url)
         elif partner and len(partner) == 1:
             action = request.env.ref('partner_view_360.action_jobseekers')
-            partner.eidentification = post.get('bankid')
+
+            bankid_vals = {
+                'name': post.get('bankid'),
+                'user_id': request.env.user.id,
+                'partner_id': partner.id
+            }
+            request.env['res.partner.bankid'].create(bankid_vals)
+
             res_url = '%s/web#id=%s&action=%s&model=res.partner&view_type=form' % (
                                                                 request.env['ir.config_parameter'].sudo().get_param('web.base.url',''),
                                                                 partner.id if partner else 0,
