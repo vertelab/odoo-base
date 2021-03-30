@@ -21,7 +21,7 @@
 
 {
     'name': "Partner MQ/IPF-update dispatcher",
-    'version': '12.0.0.1.6',
+    'version': '12.0.0.2.0',
     'category': '',
     'description': """
 Listen for updates on th MQ-bus
@@ -32,7 +32,7 @@ Listen for updates on th MQ-bus
     'website': 'http://www.vertel.se',
     'depends': ['base', 'calendar_af', 'edi_af_aisf_rask'],
     'external_dependencies': {'python': ['stomp', 'xmltodict']},
-    'data': [ ],
+    'data': ['data/cron.xml'],
     'application': False,
     'installable': True,
 }
