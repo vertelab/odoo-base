@@ -21,7 +21,7 @@
 
 {
     'name': 'Daily notes',
-    'version': '12.0.1.2.0',
+    'version': '12.0.1.2.2',
     'category': '',
     'description': """
 Daily notes
@@ -35,6 +35,7 @@ This module allowes daily notes for a partner.\n
 - 12.0.1.6 moved all generation of daily notes from calendar_af to this module\n
 - 12.0.1.7 Commented away the Smart-button on the contact-view-form\n
 - 12.0.1.2 Replaced the computed fields with normal fields because of changes in architecture\n
+v12.0.1.2.2 AFC-1920: Added updates to next_contact fields when making new appointments. \n
 """,
     'author': 'Vertel AB',
     'license': 'AGPL-3',
