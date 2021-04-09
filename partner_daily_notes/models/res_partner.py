@@ -27,7 +27,7 @@ class ResPartnerNotes(models.Model):
     _description = 'Daily notes for a partner'
     _name = 'res.partner.notes'
 
-    name = fields.Char(string="Title") 
+    name = fields.Char(string="Title")
     partner_id = fields.Many2one(comodel_name="res.partner", string="Job seeker")
 
     administrative_officer = fields.Many2one('res.users',
@@ -38,7 +38,7 @@ class ResPartnerNotes(models.Model):
     is_confidential = fields.Boolean(string="Secret", help="Apply/Remove Secret")
     note_type = fields.Many2one(comodel_name="res.partner.note.type")
     note_number = fields.Char(string="AIS number")
-    
+
     appointment_id = fields.Many2one(comodel_name='calendar.appointment',
                                  string='Linked meeting')
     office_id = fields.Many2one('hr.department', string="Office")
@@ -47,7 +47,7 @@ class ResPartnerNotes(models.Model):
 class ResPartner(models.Model):
     _inherit = 'res.partner'
 
-    # not used since we removed the computed-fields. 
+    # not used since we removed the computed-fields.
     # keep it here until we know how we want to proceed
     # @api.depends('notes_ids')
     # def _compute_note_fields(self):
@@ -88,14 +88,14 @@ class ResPartner(models.Model):
                 message = self.env['edi.message'].create(vals)
                 message.pack()
 
-    notes_ids = fields.One2many(comodel_name='res.partner.notes', 
+    notes_ids = fields.One2many(comodel_name='res.partner.notes',
                                  string='Daily notes', inverse_name="partner_id")
     # Remove the computed part of this fields for now until we decide how to handle this
     # next_contact_date = fields.Datetime(string="Next contact", compute='_compute_note_fields',
     #                              store=True)
-    # next_contact_time = fields.Char(string='Next contact time', 
+    # next_contact_time = fields.Char(string='Next contact time',
     #                              compute='_compute_note_fields', store=True)
-    # next_contact_type = fields.Selection(string='Next contact type', 
+    # next_contact_type = fields.Selection(string='Next contact type',
     #                             selection=[('T', 'Phone'), ('B', 'Visit'),
     #                              ('E', 'E-mail'), ('P', 'Mail'), ('I', 'Internet')],
     #                               compute='_compute_note_fields', store=True)
@@ -108,16 +108,46 @@ class ResPartner(models.Model):
     #                                compute='_compute_note_fields', store=True)
     # last_contact = fields.Char(string="Latest contact", compute='_compute_note_fields')
     next_contact_date = fields.Datetime(string="Next contact")
-    next_contact_time = fields.Char(string='Next contact time')
-    next_contact_type = fields.Selection(string='Next contact type', 
-                                selection=[('T', 'Phone'), ('B', 'Visit'),
-                                 ('E', 'E-mail'), ('P', 'Mail'), ('I', 'Internet')])
-    next_contact = fields.Char(string="Next contact")
+    next_contact_time = fields.Char(string="Next contact time")
+    next_contact_type = fields.Selection(
+        string="Next contact type",
+        selection=[
+            ("T", "Phone"),
+            ("B", "Visit"),
+            ("E", "E-mail"),
+            ("P", "Mail"),
+            ("I", "Internet"),
+        ],
+    )
+    next_contact = fields.Char(string="Next contact", compute="_compute_next_contact")
     last_contact_date = fields.Datetime(string="Latest contact")
-    last_contact_type = fields.Selection(string='Latest contact type',
-                                 selection=[('T', 'Phone'), ('B', 'Visit'),
-                                  ('E', 'E-mail'), ('P', 'Mail'), ('I', 'Internet')])
-    last_contact = fields.Char(string="Latest contact")
+    last_contact_type = fields.Selection(
+        string="Latest contact type",
+        selection=[
+            ("T", "Phone"),
+            ("B", "Visit"),
+            ("E", "E-mail"),
+            ("P", "Mail"),
+            ("I", "Internet"),
+        ],
+    )
+    last_contact = fields.Char(string="Latest contact", compute="_compute_last_contact")
+
+    @api.one
+    def _compute_next_contact(self):
+        if self.next_contact_date:
+            res = f"{self.next_contact_date.date()} {self.next_contact_time if self.next_contact_time else ''} {self.next_contact_type}"
+        else:
+            res = _("No next contact")
+        self.next_contact = res
+
+    @api.one
+    def _compute_last_contact(self):
+        if self.last_contact_date:
+            res = f"{self.last_contact_date.date()} {self.last_contact_type}"
+        else:
+            res = _("No last contact")
+        self.last_contact = res
 
     def action_view_next_event(self):
         action = {
