@@ -40,7 +40,6 @@ class ResPartnerNotes(models.Model):
     is_confidential = fields.Boolean(string="Secret", help="Apply/Remove Secret")
     note_type = fields.Many2one(comodel_name="res.partner.note.type")
     note_number = fields.Char(string="AIS number")
-
     appointment_id = fields.Many2one(
         comodel_name="calendar.appointment", string="Linked meeting"
     )
@@ -88,6 +87,7 @@ class ResPartner(models.Model):
             ("I", "Internet"),
         ],
     )
+
     next_contact = fields.Char(string="Next contact", compute="_compute_next_contact")
     last_contact_date = fields.Datetime(string="Latest contact")
     last_contact_type = fields.Selection(
@@ -100,6 +100,7 @@ class ResPartner(models.Model):
             ("I", "Internet"),
         ],
     )
+
     last_contact = fields.Char(string="Latest contact", compute="_compute_last_contact")
 
     @api.one
