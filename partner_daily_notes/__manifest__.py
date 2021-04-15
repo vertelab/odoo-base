@@ -29,12 +29,13 @@ Daily notes
 AFC-81\n
 AFC-1923\n
 This module allowes daily notes for a partner.\n
-- 12.0.1.1  Added mapping for Integration platform with the module base_map.\n
-- 12.0.1.4  Changed display Daily Notes types in "name in Tree-view".\n
-- 12.0.1.5 AFC-999 Removed duplicate translation line for Secret\n
-- 12.0.1.6 moved all generation of daily notes from calendar_af to this module\n
-- 12.0.1.7 Commented away the Smart-button on the contact-view-form\n
-- 12.0.1.2 Replaced the computed fields with normal fields because of changes in architecture\n
+v12.0.1.1.0: Added mapping for Integration platform with the module base_map.\n
+v12.0.1.4.0: Changed display Daily Notes types in "name in Tree-view".\n
+v12.0.1.5.0 AFC-999: Removed duplicate translation line for Secret\n
+v12.0.1.6.0: moved all generation of daily notes from calendar_af to this module\n
+v12.0.1.7.0: Commented away the Smart-button on the contact-view-form\n
+v12.0.1.2.0: Replaced the computed fields with normal fields because of changes in architecture\n
+v12.0.1.2.1 AFC-1674: Replaced some normal fields with computed ones. \n
 v12.0.1.2.2 AFC-1920: Added updates to next_contact fields when making new appointments. \n
 """,
     'author': 'Vertel AB',
