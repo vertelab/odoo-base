@@ -168,7 +168,6 @@
               <field name="share_info_with_employers" />
               <field name="sms_reminders" />
               <field name="segment_jobseeker" groups="base.group_no_one" />
-              <field name="eidentification" />
               <label for="user_id" string="Administrative officer" class="oe_edit_only"/>
               <field name="user_id" nolabel="1" options="{'no_create_edit': True}" class="oe_edit_only"/>
               <field name="user_name_sign" class="oe_read_only"/>
