@@ -1,6 +1,6 @@
 {
     'name': 'Partner flip firstname',
-    'version': '12.0.0.1.1',
+    'version': '13.0.0.1.1',
     'category': '',
     'description': """
 Flips the position of the firstname and lastname fields
