@@ -3,7 +3,7 @@
     'version': '13.0.0.1.1',
     'category': '',
     'description': """
-Flips the position of the firstname and lastname fields
+Flips the position of the OCA module partner_firstname's firstname and lastname fields
 ===========================================================
 """,
     'author': 'Vertel AB',
