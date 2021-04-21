@@ -84,6 +84,14 @@ class ResPartner(models.Model):
         ],
         string="Registered Through",
     ) #is added in partner_extension_af
+    kromtype = fields.Selection(
+        selection=[
+            ("KROM", "KROM"),
+            ("KROM ESF", "KROM ESF"),
+            ("NEJ", "NEJ"),
+        ],
+        string="KROM",
+    )
     match_area = fields.Boolean(string="Match Area") 
     share_info_with_employers = fields.Boolean(
         string="Share name and address with employers"
