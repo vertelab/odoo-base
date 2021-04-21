@@ -391,10 +391,12 @@ class ResPartner(models.Model):
 
                 # Handle list of messages
                 for message in respartnerlsnr.get_list():
-                    _logger.debug("Asok MQ Listener - adding message to internal queue")
                     if message[0]["message-id"] not in processed_list:
                         try:
                             with lock:
+                                _logger.info(f"Asok MQ Listener RASK-SYNC - adding message to internal queue: "
+                                             f"message-id {message[0]['message-id']}, SID: {message[1].get(SID)}, "
+                                             f"PNR: {message[1].get(PNR)}")
                                 msg_list.append(message)
                             # append message to processed_list to keep
                             # track of what messages have been processed

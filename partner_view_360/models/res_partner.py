@@ -37,6 +37,13 @@ class ResPartner(models.Model):
     _inherit = "res.partner"
     _rec_name = "name_ssn"
 
+    @api.one
+    def _compute_eidentification(self):
+        bankid_token = self.env["res.partner.bankid"].search(
+            [("partner_id", "=", self.id), ("user_id", "=", self.env.user.id)], limit=1
+        )
+        self.eidentification = bankid_token.name if bankid_token else False
+
     work_phone = fields.Char(string="Work phone", help="Work phone number") #is added in partner_extension_af
     cfar = fields.Char(string="CFAR", help="CFAR number") #is added in partner_extension_af
     customer_id = fields.Char(
@@ -45,7 +52,8 @@ class ResPartner(models.Model):
     eidentification = fields.Char(
         string="E-Identification",
         help="BankId or other e-identification done OK or other",
-    ) 
+        compute="_compute_eidentification"
+    )
 
     type = fields.Selection(
         selection_add=[
@@ -92,7 +100,7 @@ class ResPartner(models.Model):
         ],
         string="KROM",
     )
-    match_area = fields.Boolean(string="Match Area") 
+    match_area = fields.Boolean(string="Match Area")
     share_info_with_employers = fields.Boolean(
         string="Share name and address with employers"
     ) #is added in partner_extension_af
@@ -103,7 +111,7 @@ class ResPartner(models.Model):
     given_address_street = fields.Char(
         string="given address", related="given_address_id.street"
     ) #is added in partner_extension_af
-    given_address_zip = fields.Char(related="given_address_id.zip") 
+    given_address_zip = fields.Char(related="given_address_id.zip")
     given_address_city = fields.Char(related="given_address_id.city")
     employer_class = fields.Selection(
         selection=[("1", "1"), ("2", "2"), ("3", "3"), ("4", "4")]
@@ -144,7 +152,7 @@ class ResPartner(models.Model):
     name_ssn = fields.Char(compute="_compute_name_ssn", store=True)
 
     _sql_constraints = [
-        ('customer_id_unique', 
+        ('customer_id_unique',
         'UNIQUE(customer_id)',
         'customer_id field needs to be unique'
         )]

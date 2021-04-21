@@ -2,7 +2,7 @@
 ##############################################################################
 #
 #    Odoo, Open Source Management Solution, third party addon
-#    Copyright (C) 2004-2020 Vertel AB (<http://vertel.se>).
+#    Copyright (C) 2004-2021 Vertel AB (<http://vertel.se>).
 #
 #    This program is free software: you can redistribute it and/or modify
 #    it under the terms of the GNU Affero General Public License as
@@ -19,20 +19,20 @@
 #
 ##############################################################################
 
-{
-    'name': "Partner MQ/IPF-update dispatcher",
-    'version': '12.0.0.2.0',
-    'category': '',
-    'description': """
-Listen for updates on th MQ-bus
+from odoo import models, fields, api, _
+import logging
 
-""",
-    'author': 'Vertel AB',
-    'license': 'AGPL-3',
-    'website': 'http://www.vertel.se',
-    'depends': ['base', 'calendar_af', 'edi_af_aisf_rask'],
-    'external_dependencies': {'python': ['stomp', 'xmltodict']},
-    'data': ['data/cron.xml'],
-    'application': False,
-    'installable': True,
-}
+_logger = logging.getLogger(__name__)
+
+
+class ResPartnerBankid(models.TransientModel):
+    _name = "res.partner.bankid"
+    _description = (
+        "Represents an approval from BankId for a specific res.partner and res.users"
+    )
+    _transient_max_hours = 0.5  # tag transient model for removal after 30 minutes.
+    _order = "create_date desc"  # make sure we always get the latest token first.
+
+    name = fields.Char(string="Result")
+    user_id = fields.Many2one(comodel_name="res.users", string="User")
+    partner_id = fields.Many2one(comodel_name="res.partner", string="Partner")
