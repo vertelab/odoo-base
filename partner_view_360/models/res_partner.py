@@ -83,7 +83,7 @@ class ResPartner(models.Model):
             ("local office", "Local office"),
         ],
         string="Registered Through",
-    ) #is added in partner_extension_af
+    )  # is added in partner_extension_af
     kromtype = fields.Selection(
         selection=[
             ("KROM", "KROM"),
