@@ -1,13 +1,13 @@
 # Copyright 2016-2018 Camptocamp SA
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl.html)
 
-import logging
 import json
-
+import logging
 import werkzeug
+from odoo.addons.web.controllers.main import ensure_db
+from odoo.modules.module import get_module_resource
 
 from odoo import http
-from odoo.addons.web.controllers.main import ensure_db
 
 
 class HealthCheckFilter(logging.Filter):
@@ -24,7 +24,6 @@ logging.getLogger('werkzeug').addFilter(
     HealthCheckFilter('GET /monitoring/status HTTP')
 )
 
-
 class Monitoring(http.Controller):
 
     @http.route('/monitoring/status', type='http', auth='none')
@@ -33,7 +32,9 @@ class Monitoring(http.Controller):
         # TODO: add 'sub-systems' status and infos:
         # queue job, cron, database, ...
         headers = {'Content-Type': 'application/json'}
-        info = {'status': 1.19}
+        text_file_path = get_module_resource('monitoring_status_af', 'static/description/', 'version.txt')
+        file_value = open(text_file_path, "r+")
+        info = {'status': file_value.read()}
         session = http.request.session
         # We set a custom expiration of 1 second for this request, as we do a
         # lot of health checks, we don't want those anonymous sessions to be

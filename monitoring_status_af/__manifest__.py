@@ -4,7 +4,7 @@
     'name': 'Monitoring: Status',
     'version': '12.0.1.0.1',
     'description': """
-        12.0.1.0.1 - AFC-1851 Changed Monitoring value from 1 to 1.19\n
+        12.0.1.0.1 - AFC-1851 Taken Monitoring value from version.txt instead of static.\n
     """,
     'author': "Camptocamp,Odoo Community Association (OCA)','Vertel AB'",
     'license': 'AGPL-3',
