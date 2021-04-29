@@ -20,6 +20,7 @@
 ##############################################################################
 
 from odoo import models, fields, api, _
+from datetime import datetime, timedelta
 import logging
 
 _logger = logging.getLogger(__name__)
@@ -75,8 +76,14 @@ class ResPartner(models.Model):
         string="Daily notes",
         inverse_name="partner_id",
     )
-    next_contact_date = fields.Datetime(string="Next contact")
-    next_contact_time = fields.Char(string="Next contact time")
+    next_contact_date = fields.Datetime(
+        string="Next contact",
+        help="Fields used by AIS-F data. Do not overwrite with other data.",
+    )
+    next_contact_time = fields.Char(
+        string="Next contact time",
+        help="Fields used by AIS-F data. Do not overwrite with other data.",
+    )
     next_contact_type = fields.Selection(
         string="Next contact type",
         selection=[
@@ -86,10 +93,12 @@ class ResPartner(models.Model):
             ("P", "Mail"),
             ("I", "Internet"),
         ],
+        help="Fields used by AIS-F data. Do not overwrite with other data.",
     )
-
-    next_contact = fields.Char(string="Next contact", compute="_compute_next_contact")
-    last_contact_date = fields.Datetime(string="Latest contact")
+    last_contact_date = fields.Datetime(
+        string="Latest contact",
+        help="Fields used by AIS-F data. Do not overwrite with other data.",
+    )
     last_contact_type = fields.Selection(
         string="Latest contact type",
         selection=[
@@ -99,22 +108,83 @@ class ResPartner(models.Model):
             ("P", "Mail"),
             ("I", "Internet"),
         ],
+        help="Fields used by AIS-F data. Do not overwrite with other data.",
     )
 
+    next_contact = fields.Char(string="Next contact", compute="_compute_next_contact")
     last_contact = fields.Char(string="Latest contact", compute="_compute_last_contact")
 
     @api.one
     def _compute_next_contact(self):
-        if self.next_contact_date:
-            res = f"{self.next_contact_date.date()} {self.next_contact_time if self.next_contact_time else ''} {self.next_contact_type}"
+        # get the first planned meeting for the jobseeker
+        appointment = self.env["calendar.appointment"].search(
+            [
+                ("partner_id", "=", self.id),
+                ("state", "=", "confirmed"),
+                ("start", ">=", datetime.now()),
+            ],
+            order="start",
+            limit=1,
+        )
+        if appointment and (
+            not self.next_contact_date
+            or (self.next_contact_date and appointment.start < self.next_contact_date)
+        ):
+            # use appointment date instead of AIS-F data.
+            tz_offset = self.env.user.tz_offset
+            if tz_offset:
+                next_contact_time = (
+                    appointment.start
+                    + timedelta(hours=int(tz_offset[1:3]), minutes=int(tz_offset[3:5]))
+                ).strftime("%H:%M")
+            else:
+                next_contact_time = appointment.start.strftime("%H:%M")
+            next_contact_date = appointment.start.date()
+            next_contact_type = (
+                "T"
+                if appointment.channel == self.env.ref("calendar_channel.channel_pdm")
+                else "B"
+            )
+        else:
+            # use AIS-F data
+            next_contact_time = self.next_contact_time
+            next_contact_date = self.next_contact_date.date()
+            next_contact_type = self.next_contact_type
+        if next_contact_date:
+            res = f"{next_contact_date} {next_contact_time if next_contact_time else ''} {next_contact_type}"
         else:
             res = _("No next contact")
         self.next_contact = res
 
     @api.one
     def _compute_last_contact(self):
-        if self.last_contact_date:
-            res = f"{self.last_contact_date.date()} {self.last_contact_type}"
+        # get the last historic meeting for the jobseeker
+        appointment = self.env["calendar.appointment"].search(
+            [
+                ("partner_id", "=", self.id),
+                ("state", "=", "done"),
+                ("start", "<", datetime.now()),
+            ],
+            order="start",
+            limit=1,
+        )
+        if appointment and (
+            not self.next_contact_date
+            or (self.last_contact_date and appointment.start > self.last_contact_date)
+        ):
+            # use appointment date instead of AIS-F data.
+            last_contact_date = appointment.start.date()
+            last_contact_type = (
+                "T"
+                if appointment.channel == self.env.ref("calendar_channel.channel_pdm")
+                else "B"
+            )
+        else:
+            # use AIS-F data
+            last_contact_date = self.last_contact_date.date()
+            last_contact_type = self.last_contact_type
+        if last_contact_date:
+            res = f"{last_contact_date} {last_contact_type}"
         else:
             res = _("No last contact")
         self.last_contact = res
