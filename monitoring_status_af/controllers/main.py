@@ -33,8 +33,8 @@ class Monitoring(http.Controller):
         # queue job, cron, database, ...
         headers = {'Content-Type': 'application/json'}
         text_file_path = get_module_resource('monitoring_status_af', 'static/description/', 'version.txt')
-        file_value = open(text_file_path, "r+")
-        info = {'status': file_value.read()}
+        file = open(text_file_path, "r+")
+        info = {'status': file.read()}
         session = http.request.session
         # We set a custom expiration of 1 second for this request, as we do a
         # lot of health checks, we don't want those anonymous sessions to be
