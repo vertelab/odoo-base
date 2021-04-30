@@ -162,12 +162,3 @@ class Partner(models.Model):
                     },
                 })
         return log
-
-    # @api.model
-    # def _af_pre_func_audit_log(self, method, args, kwargs):
-    #     """ Run before a function call.
-    #     :arg method: The method being called.
-    #     :arg args: The arguments to the method.
-    #     :arg kwargs: The keyword arguments to the method.
-    #     :returns: Some data needed for audit log generation in
-    #     _af_post_func_audit_log."""

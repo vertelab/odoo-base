@@ -78,7 +78,7 @@ class AFLogAudit(models.AbstractModel):
             }
         }
         if kwargs.get('error'):
-            if type(kwargs.get('error')) == AccessError:
+            if isinstance(kwargs.get('error'), AccessError):
                 audit_log['audit']['authorisationinfo'] = 0
             else:
                 audit_log['audit']['executioninfo'] = 0

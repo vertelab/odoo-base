@@ -15,8 +15,6 @@ class DBFormatter(logging.Formatter):
     def __init__(self, fmt=None, datefmt=None, style='%'):
         """ Override supplied formats to our desired formats. This feels
         cleaner than overriding the entire init_logger function."""
-        # asctime is needed to generate the variable in format
-        #fmt = '%(asctime)s|%(message)s %(perf_info)s'
         # JSON datetime format (ISO 8601) with UTC timezone.
         datefmt = '%Y-%m-%dT%H:%M:%S.%03dZ'
         return super(DBFormatter, self).__init__(fmt=fmt, datefmt=datefmt, style=style)

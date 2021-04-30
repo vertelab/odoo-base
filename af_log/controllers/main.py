@@ -5,10 +5,6 @@ import json
 from odoo import http
 from odoo.http import request
 from odoo.addons.web.controllers.main import DataSet as DataSetOrigin
-from odoo.addons.web.controllers.main import clean_action
-from odoo.models import check_method_name
-from odoo.api import call_kw, Environment
-from odoo.exceptions import AccessError
 
 # TODO: What to do about these controllers?
 #       I feel like they should be disabled altogether.
@@ -20,9 +16,9 @@ _logger = logging.getLogger(__name__)
 
 class DataSet(DataSetOrigin):
 
-    # TODO: Vad händer vid exception? Ska vi logga försök att göra något eller inte?
-
     def _is_af_audit_log_model(self, model):
+        """ Check if the model has audit logging.
+        """
         if hasattr(model, '_af_audit_log'):
             return model._af_audit_log
         return False
@@ -134,35 +130,3 @@ class DataSet(DataSetOrigin):
     #     res = super(DataSet, self).load(model, id, fields)
     #     _logger.warn(f"load res: {res}")
     #     return res
-
-    # Original methods for reference. DELETE BEFORE PUSH!
-    ### USING SEARCH_READ ###
-    # @http.route('/web/dataset/search_read', type='json', auth="user")
-    # def search_read(self, model, fields=False, offset=0, limit=False, domain=None, sort=None):
-    #     _logger.warn(f"search_read model: {model} fields: {fields} offset: {offset} limit: {limit} domain: {domain} sort: {sort}")
-    #     return self.do_search_read(model, fields, offset, limit, domain, sort)
-
-    ### USING _CALL_KW ###
-    #
-    # def call_common(self, model, method, args, domain_id=None, context_id=None):
-    #     return self._call_kw(model, method, args, {})
-    #
-
-    #
-    # # @http.route('/web/dataset/call', type='json', auth="user")
-    # def call(self, model, method, args, domain_id=None, context_id=None):
-    #     _logger.warn(f"call model: {model} method: {method} args: {args} domain_id: {domain_id} context_id: {context_id}")
-    #     return self._call_kw(model, method, args, {})
-    #
-    # # @http.route(['/web/dataset/call_kw', '/web/dataset/call_kw/<path:path>'], type='json', auth="user")
-    # def call_kw(self, model, method, args, kwargs, path=None):
-    #     _logger.warn(f"call_kw model: {model} method: {method} args: {args} kwargs: {kwargs} path: {path}")
-    #     return self._call_kw(model, method, args, kwargs)
-
-    # # @http.route('/web/dataset/call_button', type='json', auth="user")
-    # def call_button(self, model, method, args, domain_id=None, context_id=None):
-    #     _logger.warn(f"call_button model: {model} method: {method} args: {args} domain_id: {domain_id} context_id: {context_id}")
-    #     action = self._call_kw(model, method, args, {})
-    #     if isinstance(action, dict) and action.get('type') != '':
-    #         return clean_action(action)
-    #     return False
