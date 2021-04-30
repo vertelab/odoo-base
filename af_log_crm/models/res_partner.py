@@ -19,7 +19,8 @@ class Partner(models.Model):
                         Arbetssökande, Arbetsgivare.
             'obj_id':   Arbetsförmedlingen HR object id, e.g. a
                         person or org number.
-            'ïd_type':  The type of the id, e.g. Organisationsnummer or
+            'id_type':  The type of the id, e.g. Organisationsnummer or
+            'id_type':  The type of the id, e.g. Organisationsnummer or
                         Personnummer.
             'values':   {HR field name: HR field value},
             'defaults': Optional. dict with default values. Use to
