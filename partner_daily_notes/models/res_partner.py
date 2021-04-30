@@ -148,7 +148,9 @@ class ResPartner(models.Model):
         else:
             # use AIS-F data
             next_contact_time = self.next_contact_time
-            next_contact_date = self.next_contact_date.date()
+            next_contact_date = (
+                self.next_contact_date.date() if self.next_contact_date else False
+            )
             next_contact_type = self.next_contact_type
         if next_contact_date:
             res = f"{next_contact_date} {next_contact_time if next_contact_time else ''} {next_contact_type}"
@@ -181,7 +183,9 @@ class ResPartner(models.Model):
             )
         else:
             # use AIS-F data
-            last_contact_date = self.last_contact_date.date()
+            last_contact_date = (
+                self.last_contact_date.date() if self.last_contact_date else False
+            )
             last_contact_type = self.last_contact_type
         if last_contact_date:
             res = f"{last_contact_date} {last_contact_type}"
