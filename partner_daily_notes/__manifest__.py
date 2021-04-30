@@ -2,7 +2,7 @@
 ##############################################################################
 #
 #    Odoo, Open Source Management Solution, third party addon
-#    Copyright (C) 2004-2019 Vertel AB (<http://vertel.se>).
+#    Copyright (C) 2004-2021 Vertel AB (<http://vertel.se>).
 #
 #    This program is free software: you can redistribute it and/or modify
 #    it under the terms of the GNU Affero General Public License as
@@ -21,7 +21,7 @@
 
 {
     'name': 'Daily notes',
-    'version': '12.0.1.2.2',
+    'version': '12.0.1.3.0',
     'category': '',
     'description': """
 Daily notes
@@ -37,6 +37,7 @@ v12.0.1.7.0: Commented away the Smart-button on the contact-view-form\n
 v12.0.1.2.0: Replaced the computed fields with normal fields because of changes in architecture\n
 v12.0.1.2.1 AFC-1674: Replaced some normal fields with computed ones. \n
 v12.0.1.2.2 AFC-1920: Added updates to next_contact fields when making new appointments. \n
+v12.0.1.3.0 AFC-2155: Updated logic for how next_contact and last_contact are updated \n
 """,
     'author': 'Vertel AB',
     'license': 'AGPL-3',
