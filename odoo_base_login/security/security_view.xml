@@ -1,0 +1,28 @@
+<?xml version="1.0"?>
+<odoo>
+    <data>
+
+        <!-- Security category -->
+        <record model="ir.module.category" id="module_web_base_login_categ">
+            <field name="name">Login Reason</field>
+            <field name="description">Allows you to manage different role of login with reasons</field>
+            <field name="sequence">10</field>
+        </record>
+
+        <!-- Show Login Reason -->
+        <record id="show_login_reason" model="res.groups">
+            <field name="name">Show login-reason</field>
+            <field name="category_id" ref="module_web_base_login_categ"/>
+            <field name="comment">The user will have access to local employers.</field>
+        </record>
+
+        <!-- Security Auditor -->
+        <record id="security_auditor_login" model="res.groups">
+            <field name="name">Security Auditor</field>
+            <field name="category_id" ref="module_web_base_login_categ"/>
+            <field name="implied_ids" eval="[(4, ref('odoo_base_login.show_login_reason'))]"/>
+            <field name="comment">The user will have access to local employers.</field>
+        </record>
+
+    </data>
+</odoo>
