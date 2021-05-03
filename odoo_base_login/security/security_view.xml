@@ -13,7 +13,8 @@
         <record id="show_login_reason" model="res.groups">
             <field name="name">Show login-reason</field>
             <field name="category_id" ref="module_web_base_login_categ"/>
-            <field name="comment">The user will have access to local employers.</field>
+            <field name="comment">The Login Reason-group enables tracking of a login reason and sets a time limit on the
+                session</field>
         </record>
 
         <!-- Security Auditor -->
@@ -21,7 +22,7 @@
             <field name="name">Security Auditor</field>
             <field name="category_id" ref="module_web_base_login_categ"/>
             <field name="implied_ids" eval="[(4, ref('odoo_base_login.show_login_reason'))]"/>
-            <field name="comment">The user will have access to local employers.</field>
+            <field name="comment">Security Auditors can review and comment on login-records</field>
         </record>
 
     </data>

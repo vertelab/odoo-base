@@ -8,7 +8,7 @@
             <field name="name">base.login.reason.form.view</field>
             <field name="model">base.login.reason</field>
             <field name="arch" type="xml">
-                <form string="Base Login">
+                <form string="Base Login" create="false" delete="false">
                     <header>
                             <field name="state" widget="statusbar" statusbar_visible="draft,audit,done"/>
                         </header>
@@ -18,13 +18,13 @@
                                 <field name="user_id" readonly="1"/>
                                 <field name="email" readonly="1"/>
                                 <field name="login_reason" readonly="1"/>
-                                <field name="auditor_comment" />
+                                <field name="auditor_comment" groups="odoo_base_login.security_auditor_login"/>
 
                             </group>
                             <group>
                                 <field name="logged_in" readonly="1"/>
                                 <field name="logged_out" readonly="1"/>
-                                <field name="length"/>
+                                <field name="length" readonly="1"/>
                                 <field name="active_length"/>
                             </group>
                         </group>
@@ -38,7 +38,7 @@
             <field name="name">base.login.reason.tree.view</field>
             <field name="model">base.login.reason</field>
             <field name="arch" type="xml">
-                <tree string="Base Login">
+                <tree string="Base Login" create="false" delete="false">
                     <field name="user_id"/>
                     <field name="email"/>
                     <field name="logged_in"/>
@@ -80,15 +80,16 @@
         </record>
 
         <record id="action_base_login_tree" model="ir.actions.act_window">
-            <field name="name">Access log</field>
+            <field name="name">Login Access log</field>
             <field name="res_model">base.login.reason</field>
             <field name="view_type">form</field>
             <field name="view_mode">tree,form</field>
         </record>
 
         <!-- Menuitem for base login access -->
-        <menuitem id="access_log_main_menu" sequence="3" name="Access log"/>
-        <menuitem id="base_login_menu_access" parent="access_log_main_menu" name="Access log" action="action_base_login_tree"/>
+        <menuitem id="access_log_main_menu" parent="base.menu_administration" sequence="3" name="Login Access log"/>
+        <menuitem id="base_login_menu_access" parent="access_log_main_menu" name="Login Access log"
+                  action="action_base_login_tree"/>
 
     </data>
 </odoo>
