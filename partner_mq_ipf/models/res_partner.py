@@ -29,6 +29,7 @@ import sys
 import time
 import xmltodict
 import threading
+from uuid import uuid4
 
 _logger = logging.getLogger(__name__)
 
@@ -267,17 +268,22 @@ class ResPartner(models.Model):
                             social_security_number = msg.get(PNR)
                             former_social_security_number = msg.get(PREVPNR, None)
                             message_type = msg.get(MSGTYPE)
+
+                            self.env['af.process.log'].log_message(
+                                'MQ AIS-F SYNC', headers["message-id"], "RASK",
+                                message=str(message), objectid=customer_id, first=True)
                             # Send request to RASK
-                            env_new["res.partner"].rask_controller(
+                            success = env_new["res.partner"]._aisf_sync_jobseeker(
                                 customer_id,
-                                social_security_number,
-                                former_social_security_number,
-                                message_type,
+                                headers["message-id"]
                             )
                             # append message to ack_list to let main
                             # thread know that this can be ACK'd
-                            with lock:
-                                ack_list.append(message)
+                            if success:
+                                self.env['af.process.log'].log_message(
+                                    'MQ AIS-F SYNC', headers["message-id"], "PROCESS COMPLETED", objectid=customer_id)
+                                with lock:
+                                    ack_list.append(message)
                         message = False
                     except:
                         _logger.exception(
