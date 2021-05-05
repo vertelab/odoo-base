@@ -22,11 +22,15 @@
 import logging
 from datetime import datetime, timedelta
 from odoo import SUPERUSER_ID
-from odoo import fields, api
+from odoo import fields, api, http
 from odoo import models
 from odoo.exceptions import AccessDenied
 from odoo.http import request
-from ..controllers.main import clear_session_history
+# from ..controllers.main import clear_session_history
+from os.path import getmtime
+from time import time
+from os import utime
+from odoo.http import SessionExpiredException
 
 _logger = logging.getLogger(__name__)
 
@@ -39,6 +43,7 @@ class ResUsers(models.Model):
     session_length = fields.Integer("Session length")
     exp_date = fields.Datetime('Expiry Date')
     logged_in = fields.Boolean('Logged In')
+    ticket_ID = fields.Char("Ticket ID")
     last_update = fields.Datetime(string="Last Connection Updated")
 
     # Method call when user login, create history record here
@@ -68,20 +73,108 @@ class ResUsers(models.Model):
                                             'logged_in': True,
                                             'last_update': datetime.now()})
     #
-    def validate_sessions(self):
+    # def validate_sessions(self):
+    #     """
+    #         Function for validating user sessions
+    #     """
+    #     users = self.search([('exp_date', '!=', False)])
+    #     for user in users:
+    #         if user.exp_date < datetime.utcnow():
+    #             # clear session session file for the user
+    #             session_cleared = clear_session_history(user.sid)
+    #             if session_cleared:
+    #                 # clear user session
+    #                 user._clear_session()
+    #                 _logger.info("Cron _validate_session: "
+    #                              "cleared session user: %s" % (user.name))
+    #             else:
+    #                 _logger.info("Cron _validate_session: failed to "
+    #                              "clear session user: %s" % (user.name))
+
+    @api.model_cr_context
+    def _auth_timeout_get_ignored_urls(self):
+        """Pluggable method for calculating ignored urls
+        Defaults to stored config param
         """
-            Function for validating user sessions
+        params = self.env['ir.config_parameter']
+        return params._auth_timeout_get_parameter_ignored_urls()
+
+    @api.model_cr_context
+    def _auth_timeout_deadline_calculate(self, session_length):
+        """Pluggable method for calculating timeout deadline
+        Defaults to current time minus delay using delay stored as config
+        param.
         """
-        users = self.search([('exp_date', '!=', False)])
-        for user in users:
-            if user.exp_date < datetime.utcnow():
-                # clear session session file for the user
-                session_cleared = clear_session_history(user.sid)
-                if session_cleared:
-                    # clear user session
-                    user._clear_session()
-                    _logger.info("Cron _validate_session: "
-                                 "cleared session user: %s" % (user.name))
-                else:
-                    _logger.info("Cron _validate_session: failed to "
-                                 "clear session user: %s" % (user.name))
+        params = self.env['ir.config_parameter']
+        delay = session_length
+        if delay <= 0:
+            return False
+        return time() - delay
+
+    @api.model_cr_context
+    def _auth_timeout_session_terminate(self, session):
+        """Pluggable method for terminating a timed-out session
+
+        This is a late stage where a session timeout can be aborted.
+        Useful if you want to do some heavy checking, as it won't be
+        called unless the session inactivity deadline has been reached.
+
+        Return:
+            True: session terminated
+            False: session timeout cancelled
+        """
+        if session.db and session.uid:
+            session.logout(keep_db=True)
+        return True
+
+    @api.model_cr_context
+    def _auth_timeout_check(self, session_length):
+        """Perform session timeout validation and expire if needed."""
+
+        print ("Auth timeout check ::", session_length)
+
+        if not http.request:
+            return
+
+        session = http.request.session
+
+        # Calculate deadline
+        deadline = self._auth_timeout_deadline_calculate(session_length)
+
+        # Check if past deadline
+        expired = False
+        if deadline is not False:
+            path = http.root.session_store.get_session_filename(session.sid)
+            try:
+
+                expired = getmtime(path) < deadline
+            except OSError:
+                _logger.exception(
+                    'Exception reading session file modified time.',
+                )
+                # Force expire the session. Will be resolved with new session.
+                expired = True
+
+        # Try to terminate the session
+        terminated = False
+        if expired:
+            terminated = self._auth_timeout_session_terminate(session)
+
+        # If session terminated, all done
+        if terminated:
+            raise SessionExpiredException("Session expired")
+
+        # Else, conditionally update session modified and access times
+        ignored_urls = self._auth_timeout_get_ignored_urls()
+
+        if http.request.httprequest.path not in ignored_urls:
+            if 'path' not in locals():
+                path = http.root.session_store.get_session_filename(
+                    session.sid,
+                )
+            try:
+                utime(path, None)
+            except OSError:
+                _logger.exception(
+                    'Exception updating session file access/modified times.',
+                )

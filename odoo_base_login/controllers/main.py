@@ -42,21 +42,6 @@ from odoo.service import security
 from odoo.tools.translate import _
 from datetime import datetime
 
-
-def clear_session_history(u_sid, f_uid=False):
-    """ Clear all the user session histories for a particular user """
-    path = odoo.tools.config.session_dir
-    store = werkzeug.contrib.sessions.FilesystemSessionStore(
-        path, session_class=odoo.http.OpenERPSession, renew_missing=True)
-    session_fname = store.get_session_filename(u_sid)
-    try:
-        os.remove(session_fname)
-        return True
-    except OSError:
-        pass
-    return False
-
-
 def super_clear_all():
     """ Clear all the user session histories """
     path = odoo.tools.config.session_dir
@@ -79,8 +64,10 @@ class Home(main.Home):
         active_user_log = request.env['base.login.reason'].search([('user_id','=',request.session.uid),
                                                                    ('logged_out','=',False)], limit=1)
         if active_user_log:
-            active_user_log.login_reason= kw.get('login_reason')
-            active_user_log.length = kw.get('session_length')
+            active_user_log.login_reason = kw.get('login_reason')
+            active_user_log.length = int(kw.get('session_length'))
+            active_user_log.length = int(kw.get('session_length'))
+
         return result
 
 class Session(main.Session):
