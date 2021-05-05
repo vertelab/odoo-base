@@ -39,10 +39,31 @@ class AFLogAudit(models.AbstractModel):
     _af_audit_log = True
 
     @api.model
+    def _af_log_field_data(self, model_name, f, v):
+        model = self.env[model_name]
+        field = model._fields.get(f)
+        if not field:
+            _logger.warning(f"TECH2HR: No field named {f} in {model_name}")
+            return
+        field_data = {
+            'model': model_name,
+            'label': field._description_string(self.env),
+        }
+
+    @api.model
     def _af_log_human_readable_vals(self, values):
         # TODO: Implement the translation. How hard could it be?
         # Cache in TECH2HR. Keep it thread safe!
         # setdefault should be useful.
+        return values
+        # label = self._fields['registered_through']._description_string(self.env)
+        # self._fields['country_id'].convert_to_display_name(self.env.ref('base.se'), self)
+        for f, v in values.items():
+             field_data = TECH2HR.get(f'{self._name},{f}')
+             if not field_data:
+                 field = self._fields.get(f)
+                 if not field:
+                     _logger.warning(f"TECH2HR: No field named {f} in {self._name}")
         return values
 
     @api.model

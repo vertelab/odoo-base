@@ -3,9 +3,31 @@
 from odoo import models, api
 from odoo.addons.af_log.models.af_log import recursive_default
 
+
+class InvoiceLine(models.Model):
+    _inherit = 'account.invoice.line'
+
+    @api.multi
+    def write(self, values):
+        return super().write(values)
+
+
 class Partner(models.Model):
     _inherit = ['res.partner', 'af.log.audit']
     _name = 'res.partner'
+
+    @api.model
+    def _af_audit_log_setup(self):
+        return {
+            'jobseeker':{
+                'type': 'Arbetssökande',
+                'id_type': 'Personnummer',
+                'id': 'social_sec_nr',  # str or function
+                'required_fields': ['is_jobseeker', 'social_sec_nr'],
+                'filter': lambda model, values: values['is_jobseeker'],  # Filter function
+                'priority': 1,
+            }
+        }
 
     @api.model
     def _af_audit_log_details(self, operation, **kwargs):

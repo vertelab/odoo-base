@@ -64,5 +64,4 @@ class DBFormatter(logging.Formatter):
             }
         return json.dumps(log_data)
 
-
 netsvc.DBFormatter = DBFormatter

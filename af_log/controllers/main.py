@@ -93,6 +93,7 @@ class DataSet(DataSetOrigin):
         res = None
         try:
             res = super(DataSet, self)._call_kw(model, method, args, kwargs)
+            foo = 1
         except Exception as e:
             if audit:
                 audit_log(model_obj, method, args, kwargs, res, before, e)
