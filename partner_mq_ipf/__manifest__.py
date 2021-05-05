@@ -21,16 +21,16 @@
 
 {
     'name': "Partner MQ/IPF-update dispatcher",
-    'version': '12.0.0.2.0',
+    'version': '12.0.0.3.0',
     'category': '',
     'description': """
 Listen for updates on th MQ-bus
-
+v12.0.0.3.0 - Changed sync to af_aisf_jobseeker__sync.
 """,
     'author': 'Vertel AB',
     'license': 'AGPL-3',
     'website': 'http://www.vertel.se',
-    'depends': ['base', 'calendar_af', 'edi_af_aisf_rask'],
+    'depends': ['base', 'calendar_af', 'edi_af_aisf_rask', 'af_aisf_jobseeker_sync'],
     'external_dependencies': {'python': ['stomp', 'xmltodict']},
     'data': ['data/cron.xml'],
     'application': False,
