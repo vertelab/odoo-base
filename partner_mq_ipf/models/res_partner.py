@@ -238,7 +238,7 @@ class ResPartner(models.Model):
 
     def __get_host_port(self):
         str = self.env["ir.config_parameter"].get_param(
-            "partner_mq_ipf.mqhostport", "172.16.36.27:61613"
+            "partner_mq_ipf.mqhostport", "localhost:61613"
         )
         hosts = list()
         for vals in str.split(","):
@@ -256,7 +256,6 @@ class ResPartner(models.Model):
             # passing a bool in do_list to indicate if we should keep
             # running this loop. What is a better solution?
             while do_list[0]:
-                message = False
                 if msg_list:
                     try:
                         with lock:
@@ -265,13 +264,7 @@ class ResPartner(models.Model):
                             _logger.debug("Asok MQ Sender: sending request to RASK")
                             headers, msg = message
                             customer_id = msg.get(SID)
-                            social_security_number = msg.get(PNR)
-                            former_social_security_number = msg.get(PREVPNR, None)
-                            message_type = msg.get(MSGTYPE)
 
-                            self.env['af.process.log'].log_message(
-                                'MQ AIS-F SYNC', headers["message-id"], "RASK",
-                                message=str(message), objectid=customer_id, first=True)
                             # Send request to RASK
                             success = env_new["res.partner"]._aisf_sync_jobseeker(
                                 customer_id,
@@ -284,7 +277,6 @@ class ResPartner(models.Model):
                                     'MQ AIS-F SYNC', headers["message-id"], "PROCESS COMPLETED", objectid=customer_id)
                                 with lock:
                                     ack_list.append(message)
-                        message = False
                     except:
                         _logger.exception(
                             "Asok MQ Sender: error sending request to RASK!"
@@ -301,11 +293,12 @@ class ResPartner(models.Model):
         host_port = self.__get_host_port()
         target = self.env["ir.config_parameter"].get_param(
             "partner_mq_ipf.target_asok",
-            "/topic/Consumer.crm.VirtualTopic.arbetssokande.andring",
+            "/queue/Consumer.crm.VirtualTopic.arbetssokande.andring",
         )
-        usr = self.env["ir.config_parameter"].get_param("partner_mq_ipf.mquser", "crm")
+        usr = self.env["ir.config_parameter"].get_param(
+            "partner_mq_ipf.mquser", "admin")
         pwd = self.env["ir.config_parameter"].get_param(
-            "partner_mq_ipf.mqpwd", "topsecret"
+            "partner_mq_ipf.mqpwd", "admin"
         )
         stomp_log_level = self.env["ir.config_parameter"].get_param(
             "partner_mq_ipf.stomp_logger", "INFO"
@@ -353,9 +346,6 @@ class ResPartner(models.Model):
             while counter > 0:
                 # Let messages accumulate
                 time.sleep(5)
-                _logger.debug(
-                    "__msglist before unsubscribe: %s" % respartnerlsnr.get_list()
-                )
                 # check if we have ACKs to send out
                 with lock:
                     while len(ack_list) > 0:
@@ -378,7 +368,7 @@ class ResPartner(models.Model):
                             )
                             if not ack_message_current:
                                 # this message ghosted us????
-                                _logger.warn(
+                                _logger.warning(
                                     "Asok MQ Listener - COULD NOT FIND MESSAGE TO ACC: %s"
                                     % ack_message[0]["message-id"]
                                 )
@@ -400,9 +390,9 @@ class ResPartner(models.Model):
                     if message[0]["message-id"] not in processed_list:
                         try:
                             with lock:
-                                _logger.info(f"Asok MQ Listener RASK-SYNC - adding message to internal queue: "
-                                             f"message-id {message[0]['message-id']}, SID: {message[1].get(SID)}, "
-                                             f"PNR: {message[1].get(PNR)}")
+                                self.env['af.process.log'].log_message(
+                                    'MQ AIS-F SYNC', message[0]["message-id"], "RASK",
+                                    message=str(message), first=True)
                                 msg_list.append(message)
                             # append message to processed_list to keep
                             # track of what messages have been processed
@@ -413,7 +403,6 @@ class ResPartner(models.Model):
                             _logger.exception(
                                 "Asok MQ Listener: error adding message to internal queue"
                             )
-                message = False
                 self.env.cr.commit()
                 # Clear accumulated messages
                 respartnerlsnr.clear_list()
