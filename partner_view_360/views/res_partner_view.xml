@@ -126,9 +126,7 @@
               <field name="parent_id" attrs="{'invisible' : True}" />
               <field name="type" attrs="{'invisible' : True}" />
               <label for="social_sec_nr" string="Social security number" class="oe_edit_only" />
-              <field name="social_sec_nr" nolabel="1" class="oe_edit_only" />
-              <label for="social_sec_nr_age" string="Social security number" class="oe_read_only" />
-              <field name="social_sec_nr_age" class="oe_read_only" nolabel="1" />
+              <field name="social_sec_nr" class="oe_read_only" nolabel="1" />
               <field name="customer_id" groups="base.group_no_one" />
               <!-- folkbokföringsadress, alternativt göra en res partner typ-->
               <label for="state_name_code" string="Municipality" class="oe_read_only" />
