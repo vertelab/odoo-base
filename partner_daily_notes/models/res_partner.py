@@ -126,12 +126,12 @@ class ResPartner(models.Model):
             order="start",
             limit=1,
         )
+        tz_offset = self.env.user.tz_offset
         if appointment and (
             not self.next_contact_date
             or (self.next_contact_date and appointment.start < self.next_contact_date)
         ):
             # use appointment date instead of AIS-F data.
-            tz_offset = self.env.user.tz_offset
             if tz_offset:
                 next_contact_time = (
                     appointment.start
@@ -147,7 +147,13 @@ class ResPartner(models.Model):
             )
         else:
             # use AIS-F data
-            next_contact_time = self.next_contact_time
+            if tz_offset:
+                # there has to be a better way to do this.
+                hours = int(self.next_contact_time[0:2]) + int(tz_offset[0:3])
+                minutes = int(self.next_contact_time[3:5]) + int(tz_offset[0] + tz_offset[3:5])
+                next_contact_time = f"{hours:02d}:{minutes:02d}"
+            else:
+                next_contact_time = self.next_contact_time
             next_contact_date = (
                 self.next_contact_date.date() if self.next_contact_date else False
             )
