@@ -148,7 +148,7 @@ msgstr "Referenser"
 #: model:ir.model.fields,field_description:partner_education.field_res_partner__references_file_name
 #: model:ir.model.fields,field_description:partner_education.field_res_users__references_file_name
 msgid "References File Name"
-msgstr ""
+msgstr "Referenser, filnamn"
 
 #. module: partner_education
 #: model:ir.model.fields,field_description:partner_education.field_res_partner_education__sun_id
@@ -158,7 +158,7 @@ msgstr "SUN Kod"
 #. module: partner_education
 #: model:ir.model,name:partner_education.model_res_partner_education_education_level
 msgid "Value store for education level."
-msgstr ""
+msgstr "Värdeföråd för utbildningsnivå"
 
 #. module: partner_education
 #: model:ir.model,name:partner_education.model_res_partner_education
