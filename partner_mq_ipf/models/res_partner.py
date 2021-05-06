@@ -49,6 +49,7 @@ PREVPNR = "tidigarePersonnummer"
 SID = "sokandeId"
 MSGTYPE = "meddelandetyp"
 TIMESTAMP = "tidpunkt"
+AISF_ASOK_SYNC_PROCESS = "AIS-F ASOK SYNC"
 
 
 class AsokResPartnerListener(stomp.ConnectionListener):
@@ -248,7 +249,7 @@ class ResPartner(models.Model):
 
     @api.model
     def mq_asok_sender(self, msg_list, ack_list, do_list, lock):
-        """Method run in a seperate thread. Sends requests to RASK."""
+        """Method run in a seperate thread. Sends requests to AIS-F."""
         new_cr = registry(self.env.cr.dbname).cursor()
         uid, context = self.env.uid, self.env.context
         with api.Environment.manage():
@@ -261,12 +262,13 @@ class ResPartner(models.Model):
                         with lock:
                             message = msg_list.pop()
                         if message:
-                            _logger.debug("Asok MQ Sender: sending request to RASK")
+                            _logger.debug("Asok MQ Sender: sending request to AIS-F")
                             headers, msg = message
                             customer_id = msg.get(SID)
 
-                            # Send request to RASK
+                            # Send request to AIS-F
                             success = env_new["res.partner"]._aisf_sync_jobseeker(
+                                AISF_ASOK_SYNC_PROCESS,
                                 customer_id,
                                 headers["message-id"]
                             )
@@ -274,12 +276,12 @@ class ResPartner(models.Model):
                             # thread know that this can be ACK'd
                             if success:
                                 self.env['af.process.log'].log_message(
-                                    'MQ AIS-F SYNC', headers["message-id"], "PROCESS COMPLETED", objectid=customer_id)
+                                    AISF_ASOK_SYNC_PROCESS, headers["message-id"], "PROCESS COMPLETED", objectid=customer_id)
                                 with lock:
                                     ack_list.append(message)
                     except:
                         _logger.exception(
-                            "Asok MQ Sender: error sending request to RASK!"
+                            "Asok MQ Sender: error sending request to AIS-F!"
                         )
                 else:
                     # slow down so we don't loop all the time
@@ -311,7 +313,7 @@ class ResPartner(models.Model):
         mqconn = stomp.Connection10(host_port)
 
         if (
-            self.env["ir.config_parameter"].get_param("partner_mq_ipf.mqusessl", "1")
+            self.env["ir.config_parameter"].get_param("partner_mq_ipf.mqusessl", "0")
             == "1"
         ):
             mqconn.set_ssl(for_hosts=host_port, ssl_version=ssl.PROTOCOL_TLS)
@@ -391,7 +393,7 @@ class ResPartner(models.Model):
                         try:
                             with lock:
                                 self.env['af.process.log'].log_message(
-                                    'MQ AIS-F SYNC', message[0]["message-id"], "RASK",
+                                    AISF_ASOK_SYNC_PROCESS, message[0]["message-id"], "PROCESS INITIATED",
                                     message=str(message), first=True)
                                 msg_list.append(message)
                             # append message to processed_list to keep
