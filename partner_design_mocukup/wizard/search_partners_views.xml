@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+
+        <!--Form for Search Partners-->
+        <record id="search_partners_form_view" model="ir.ui.view">
+            <field name="name">search.partners.form.view</field>
+            <field name="model">search.partners</field>
+            <field name="arch" type="xml">
+                <form string="Search Partners">
+                    <div style="margin-left:25%;margin-top:10%;width:765px;">
+                        <field name="search_partner" placeholder="Search Here..." nolabel="1" required="1"/>
+                        <group>
+                            <field name="name"/>
+                            <field name="email"/>
+                            <field name="no_match" invisible="1"/>
+                        </group>
+                    </div>
+                    <div attrs="{'invisible': [('no_match', '=', False)]}" align="center">
+                        No match found!
+                    </div>
+                    <group style="margin-left:44%;margin-top:55px;">
+                        <button name="search_partners" type="object" string="Search"/>
+                    </group>
+                </form>
+            </field>
+        </record>
+
+        <!--Action-->
+        <record id="action_search_partners" model="ir.actions.act_window">
+            <field name="name">Search Partners</field>
+            <field name="res_model">search.partners</field>
+            <field name="view_type">form</field>
+            <field name="view_mode">form</field>
+            <field name="target">inline</field>
+        </record>
+
+
+        <menuitem id="search_partners_menu" parent="contacts.menu_contacts" name="Search Partners"
+                  action="action_search_partners" sequence="1"/>
+
+    </data>
+</odoo>
