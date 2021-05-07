@@ -104,75 +104,150 @@
     <field name="model">res.partner</field>
     <field name="priority">-100</field>
     <field name="arch" type="xml">
-      <form string="Jobseeker">
+      <form string="Jobseeker" class="af_res_partner_form_jobseeker">
         <sheet>
           <div style="margin-bottom:1em;">
             <button name="close_view" type="object">Close</button>
-          </div>
-          <div class="oe_button_box" name="button_box">
-          </div>
-          <div class="oe_title">
-            <h1>
-              <field name="name" default_focus="1" placeholder="Name" attrs="{'required' : [('type', '=', 'contact')]}" />
-            </h1>
+            <h1>Arbetssökande <field name="name" default_focus="1" placeholder="Name" attrs="{'required' : [('type', '=', 'contact')]}"/></h1>
             <!-- Visa avaktualiserad eller Lagrad bara om det är så -->
             <group attrs="{'invisible':[ ('deactualization_date', '=', False ) ]}">
               <field name="deactualization_date" widget="date"/>
-            </group>
-          </div>
-          <group>
-            <group string="Personal Information">
-              <field name="is_jobseeker" invisible="1" />
-              <field name="parent_id" attrs="{'invisible' : True}" />
-              <field name="type" attrs="{'invisible' : True}" />
-              <label for="social_sec_nr" string="Social security number" class="oe_edit_only" />
-              <field name="social_sec_nr" class="oe_read_only" nolabel="1" />
-              <field name="customer_id" groups="base.group_no_one" />
-              <!-- folkbokföringsadress, alternativt göra en res partner typ-->
-              <label for="state_name_code" string="Municipality" class="oe_read_only" />
-              <field name="state_name_code" class="oe_read_only" placeholder="State" nolabel="1" />
-              <label for="state_id" string="Municipality" class="oe_edit_only" />
-              <field name="state_id" class="oe_edit_only" nolabel="1" />
-              <label for="street" string="Registered address" />
-              <div class="oe_read_only">
-                <div class="o_address_format">
-                  <span class="oe_read_only">
-                    <field name="address_co" placeholder="c/o..." class="o_address_street" />
-                    <field name="street" placeholder="Street..." class="o_address_street" />
-                    <field name="street2" placeholder="Street 2..." class="o_address_street" />
-                    <span style="margin-right:1em;">
-                      <field name="zip" placeholder="ZIP" class="o_address_zip oe_edit_only" />
-                      <field name="zip_formated" placeholder="ZIP" class="o_address_zip oe_read_only" />
-                    </span>
-                    <field name="city" placeholder="City" class="o_address_city" />
-                  </span>
-                </div>
-              </div>
-              <field name="country_id" placeholder="Country" class="o_address_country" attrs="{'invisible': True}" />
-              <field name="phone" />
-              <field name="mobile" />
-              <field name="email" />
-            </group>
-            <group string="Employment service information">
-              <field name="registered_through" />
-              <label for="jobseeker_category_id" string="Jobseeker category" class="oe_edit_only"/>
-              <field name="jobseeker_category_id" options="{'no_create_edit': True}" class="oe_edit_only" nolabel="1"/>
-              <field name="jobseeker_category" class="oe_read_only"/>
-              <field name="customer_since" widget="date"/>
-              <label for="office_id" string="Jobseeker category" class="oe_edit_only"/>
-              <field name="office_id" options="{'no_create_edit': True}" class="oe_edit_only" nolabel="1"/>
-              <field name="office_code_name" class="oe_read_only"/>
-              <field name="match_area" />
-              <field name="share_info_with_employers" />
-              <field name="sms_reminders" />
-              <field name="segment_jobseeker" groups="base.group_no_one" />
-              <label for="user_id" string="Administrative officer" class="oe_edit_only"/>
-              <field name="user_id" nolabel="1" options="{'no_create_edit': True}" class="oe_edit_only"/>
-              <field name="user_name_sign" class="oe_read_only"/>
-               <!-- Visa avaktualiserad eller Lagrad bara om det är så -->
               <field name="deactualization_reason" attrs="{'invisible':[ ('deactualization_date', '=', False ) ]}"/>
             </group>
-          </group>
+          </div>
+          <div class="oe_button_box" name="button_box">
+          </div>
+
+
+
+          <div>
+            <div string="Personal Information" class="af_column_50 af_personal_information_group">
+              <field name="is_jobseeker" invisible="1" />
+              <field name="parent_id" invisible="1" />
+              <field name="type" invisible="1" />
+
+              <div class="af_field_group">
+                <label for="social_sec_nr" string="Social security number" class="oe_edit_only"/>
+                <field name="social_sec_nr" nolabel="1" class="oe_edit_only"/>
+              </div>
+
+              <div class="af_field_group">
+                <label for="social_sec_nr_age" string="Personummer:" class="oe_read_only"/>
+                <field name="social_sec_nr_age" class="oe_read_only" nolabel="1"/>
+              </div>
+
+              <div class="af_field_group">
+                <label for="phone" string="Telefonummer" class="oe_read_only"/>
+                <field name="phone"/>
+              </div>
+
+              <div class="af_field_group">
+                <label for="mobile" string="Mobilnummer" class="oe_read_only"/>
+                <field name="mobile"/>
+              </div>
+
+              <div class="af_field_group">
+                <label for="email" string="E-post" class="oe_read_only"/>
+                <field name="email"/>
+              </div>
+
+              <div class="af_field_group">
+                <!-- folkbokföringsadress, alternativt göra en res partner typ-->
+                <label for="state_name_code" string="Municipality" class="oe_read_only"/>
+                <field name="state_name_code" class="oe_read_only" placeholder="State"/>
+              </div>
+
+              <div class="af_field_group">
+                <label for="state_id" string="Municipality" class="oe_edit_only"/>
+                <field name="state_id" class="oe_edit_only"/>
+              </div>
+
+              <div class="af_field_group">
+                <label for="street" string="Registered address"/>
+                <div class="oe_read_only">
+                  <div class="o_address_format">
+                    <span class="oe_read_only">
+                      <field name="street" placeholder="Street..." class="o_address_street"/>
+                      <field name="street2" placeholder="Street 2..." class="o_address_street"/>
+                      <span style="margin-right:1em;">
+                        <field name="zip" placeholder="ZIP" class="o_address_zip oe_edit_only"/>
+                        <field name="zip_formated" placeholder="ZIP" class="o_address_zip oe_read_only"/>
+                      </span>
+                      <field name="city" placeholder="City" class="o_address_city"/>
+                    </span>
+                  </div>
+                </div>
+                <field name="country_id" placeholder="Country" class="o_address_country" attrs="{'invisible': True}"/>
+              </div>
+            </div>
+
+            <div string="Employment service information"  class="af_column_50 af_employment_service_information_group">
+
+              <div class="af_field_group">
+                <label for="registered_through" class="oe_read_only"/>
+                <field name="registered_through"/>
+              </div>
+
+              <div class="af_field_group">
+                <label for="jobseeker_category_id" string="Jobseeker category" class="oe_edit_only"/>
+                <field name="jobseeker_category_id" options="{'no_create_edit': True}" class="oe_edit_only"/>
+
+                <label for="jobseeker_category" class="oe_read_only"/>
+                <field name="jobseeker_category" class="oe_read_only"/>
+              </div>
+
+              <div class="af_field_group">
+                <label for="customer_since" class="oe_read_only"/>
+                <field name="customer_since" widget="date"/>
+              </div>
+
+              <div class="af_field_group">
+                <label for="office_id" class="oe_edit_only"/>
+                <field name="office_id" options="{'no_create_edit': True}" class="oe_edit_only" nolabel="1"/>
+
+                <label for="office_code_name" class="oe_read_only"/>
+                <field name="office_code_name" class="oe_read_only" string="Kontor" />
+              </div>
+
+              <div class="af_field_group">
+                <label for="user_id" string="Administrative officer" class="oe_edit_only"/>
+                <field name="user_id" nolabel="1" options="{'no_create_edit': True}" class="oe_edit_only"/>
+
+                <label for="user_name_sign" class="oe_read_only"/>
+                <field name="user_name_sign" class="oe_read_only"/>
+              </div>
+
+              <div class="af_field_group">
+                <label for="segment_jobseeker" class="oe_read_only" groups="base.group_no_one"/>
+                <field name="segment_jobseeker" groups="base.group_no_one"/>
+              </div>
+
+              <div class="af_field_group">
+                <label for="customer_id" string="Kundnummer:" class="oe_read_only" groups="base.group_no_one"/>
+                <field name="customer_id" groups="base.group_no_one"/>
+              </div>
+
+              <div class="af_field_group">
+                <label for="share_info_with_employers" class="oe_read_only"/>
+                <field name="share_info_with_employers"/>
+              </div>
+
+              <div class="af_field_group">
+                <label for="sms_reminders" class="oe_read_only"/>
+                <field name="sms_reminders"/>
+              </div>
+
+              <div class="af_field_group">
+                <label for="match_area" class="oe_read_only"/>
+                <field name="match_area"/>
+              </div>
+
+            </div>
+          </div>
+
+          <div class="af_arbetsokande_installningar">
+
+          </div>
           <notebook>
             <page string="Upcoming meetings" name="upcoming_meetings" autofocus="autofocus"/>
             <page string="Previous meetings" name="previous_meetings"/>
