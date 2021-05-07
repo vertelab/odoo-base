@@ -1,0 +1,4 @@
+id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
+account_base_login,base.login.reason,odoo_base_login.model_base_login_reason,odoo_base_login.security_auditor_login,1,1,1,1
+account_base_login,base.login.reason,odoo_base_login.model_base_login_reason,odoo_base_login.show_login_reason,1,0,0,0
+account_base_login,base.login.reason,odoo_base_login.model_base_login_reason,,1,1,1,1
