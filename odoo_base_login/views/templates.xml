@@ -13,7 +13,7 @@
                <label for="login-reason">Login reason</label>
                <input type="text" placeholder="Login-reason" name="login_reason" t-att-value="login_reason"
                       id="login_reason" required="required"
-                      t-attf-class="form-control #{'form-control-sm' if form_small else ''}"/>
+                      t-attf-class="form-control #{'form-control-sm' if form_small else ''}" minlength="10"/>
            </div>
            <div t-if="debug" class="form-group field-session-length">
                <label for="session_length">Session length</label>
