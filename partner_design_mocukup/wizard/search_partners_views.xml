@@ -35,9 +35,8 @@
             <field name="target">inline</field>
         </record>
 
-
-        <menuitem id="search_partners_menu" parent="contacts.menu_contacts" name="Search Partners"
-                  action="action_search_partners" sequence="1"/>
+        <menuitem id="menu_search_partner" action="action_search_partners"
+                  parent="menu_partner_mocukup" name="Search Partners" sequence="1"/>
 
     </data>
 </odoo>

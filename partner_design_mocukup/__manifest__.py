@@ -12,8 +12,8 @@
         'crm', 'project'
     ],
     'data': [
+        'views/res_partner_views.xml',
         'wizard/search_partners_views.xml',
-        'views/res_partner_views.xml'
     ],
     'application': False,
     'installable': True,

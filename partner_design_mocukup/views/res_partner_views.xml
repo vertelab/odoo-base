@@ -51,25 +51,29 @@
                     </group>
                     <group>
                         <group class="col-3">
-                            <field name="opportunity_ids">
-                                <tree decoration-bf="message_needaction==True"
-                                      decoration-muted="probability == 100"
-                                      decoration-danger="activity_date_deadline and (activity_date_deadline &lt; current_date)">
-                                    <field name="activity_date_deadline" invisible="1"/>
-                                    <field name="message_needaction" invisible="1"/>
-                                    <field name="probability" invisible="1"/>
-                                    <field name="name" string="Opportunity"/>
-                                </tree>
-                            </field>
-                            <field name="activity_ids">
-                                <tree string="Activities">
-                                    <field name="display_name"/>
-<!--                                    <field name="date_deadline"/>-->
-<!--                                    <field name="summary"/>-->
-                                </tree>
-                            </field>
+                            <div style="border: 1px solid black;">
+                                <span><b>Opportunities</b></span><br/>
+                                <field name="opportunity_ids">
+                                    <tree decoration-bf="message_needaction==True"
+                                          decoration-muted="probability == 100"
+                                          decoration-danger="activity_date_deadline and (activity_date_deadline &lt; current_date)">
+                                        <field name="activity_date_deadline" invisible="1"/>
+                                        <field name="message_needaction" invisible="1"/>
+                                        <field name="probability" invisible="1"/>
+                                        <field name="name" string="Opportunity"/>
+                                    </tree>
+                                </field>
+                            </div>
+                            <div style="border: 1px solid black;margin-top:10px">
+                                <span><b>Activities</b></span><br/>
+                                <field name="activity_ids">
+                                    <tree string="Activities">
+                                        <field name="display_name"/>
+                                    </tree>
+                                </field>
+                            </div>
                         </group>
-                        <group class="col-3">
+                        <group class="col-2" style="border: 1px solid black;margin-right:10px;max-width:22%">
                             <field name="type" attrs="{'invisible': [('parent_id','=', False)]}"
                                    groups="base.group_no_one"/>
                             <label for="street" string="Address"/>
@@ -97,7 +101,7 @@
                             <field name="vat" placeholder="e.g. BE0477472701"
                                    attrs="{'readonly': [('parent_id','!=',False)]}"/>
                         </group>
-                        <group class="col-3">
+                        <group class="col-3" style="border: 1px solid black;margin-right:40px">
                             <field name="function" placeholder="e.g. Sales Director"
                                    attrs="{'invisible': [('is_company','=', True)]}"/>
                             <field name="phone" widget="phone"/>
@@ -114,29 +118,35 @@
                                    placeholder="Tags..."/>
                         </group>
                         <group class="col-3">
-                            <field name="task_ids">
-                                <tree>
-                                    <field name="name"/>
-                                </tree>
-                            </field>
-                            <field name="child_ids"
-                                   context="{'default_parent_id': active_id, 'default_street': street,
+                            <div style="border: 1px solid black;">
+                                <span><b>Tasks</b></span><br/>
+                                <field name="task_ids">
+                                    <tree>
+                                        <field name="name"/>
+                                    </tree>
+                                </field>
+                            </div>
+                            <div style="border: 1px solid black;margin-top:10px">
+                                <span><b>Contact &amp; Addresses</b></span><br/>
+                                <field name="child_ids"
+                                       context="{'default_parent_id': active_id, 'default_street': street,
                                         'default_street2': street2, 'default_city': city, 'default_state_id': state_id,
                                         'default_zip': zip, 'default_country_id': country_id,
                                         'default_supplier': supplier, 'default_customer': customer,
                                         'default_lang': lang, 'default_user_id': user_id}">
-                                <tree>
-                                    <field name="name"/>
-                                </tree>
-                            </field>
+                                    <tree>
+                                        <field name="name"/>
+                                    </tree>
+                                </field>
+                            </div>
                         </group>
                     </group>
                 </form>
             </field>
         </record>
 
-        <record id="partner_view_from_search_partner_noramal" model="ir.ui.view">
-            <field name="name">partner.view.normal.from.search.partners.form.view</field>
+        <record id="partner_view_from_search_partner_original" model="ir.ui.view">
+            <field name="name">partner.view.original.from.search.partners.form.view</field>
             <field name="model">res.partner</field>
             <field name="arch" type="xml">
                 <form string="Contacts">
@@ -435,6 +445,41 @@
                 </form>
             </field>
         </record>
+
+        <record id="action_original_partner_view_action" model="ir.actions.act_window">
+            <field name="name">Contacts</field>
+            <field name="type">ir.actions.act_window</field>
+            <field name="res_model">res.partner</field>
+            <field name="view_type">form</field>
+            <field name="view_mode">kanban,tree,form</field>
+        </record>
+
+        <record id="action_original_partner_tree_view_action" model="ir.actions.act_window.view">
+            <field name="act_window_id" ref="action_original_partner_view_action"/>
+            <field name="sequence" eval="2"/>
+            <field name="view_mode">tree</field>
+            <field name="view_id" ref="base.view_partner_tree"/>
+        </record>
+
+        <record id="action_original_partner_form_view_action" model="ir.actions.act_window.view">
+            <field name="act_window_id" ref="action_original_partner_view_action"/>
+            <field name="sequence" eval="2"/>
+            <field name="view_mode">form</field>
+            <field name="view_id" ref="partner_design_mocukup.partner_view_from_search_partner_original"/>
+        </record>
+
+        <record id="action_original_partner_kanban_view_action" model="ir.actions.act_window.view">
+            <field name="act_window_id" ref="action_original_partner_view_action"/>
+            <field name="sequence" eval="1"/>
+            <field name="view_mode">kanban</field>
+            <field name="view_id" ref="base.res_partner_kanban_view"/>
+        </record>
+
+        <menuitem id="menu_partner_mocukup"
+                  parent="contacts.menu_contacts" name="Mocukup" sequence="60"/>
+
+        <menuitem id="menu_partner_original" action="action_original_partner_view_action"
+                  parent="menu_partner_mocukup" name="Original Contacts"/>
 
     </data>
 </odoo>
