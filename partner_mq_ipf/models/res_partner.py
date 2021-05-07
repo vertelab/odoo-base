@@ -29,7 +29,7 @@ import sys
 import time
 import xmltodict
 import threading
-from uuid import uuid4
+from odoo.addons.af_process_log.models.af_process_log import MaxTriesExceededError
 
 _logger = logging.getLogger(__name__)
 
@@ -391,16 +391,19 @@ class ResPartner(models.Model):
                 for message in respartnerlsnr.get_list():
                     if message[0]["message-id"] not in processed_list:
                         try:
+                            self.env['af.process.log'].log_message(
+                                AISF_ASOK_SYNC_PROCESS, message[0]["message-id"], "PROCESS INITIATED",
+                                message=str(message), first=True)
                             with lock:
-                                self.env['af.process.log'].log_message(
-                                    AISF_ASOK_SYNC_PROCESS, message[0]["message-id"], "PROCESS INITIATED",
-                                    message=str(message), first=True)
                                 msg_list.append(message)
                             # append message to processed_list to keep
                             # track of what messages have been processed
                             # this is needed since we will recieve already
                             # processed messages until they are ACK'd
                             processed_list.append(message[0]["message-id"])
+                        except MaxTriesExceededError:
+                            # TODO: Check if we should NACK instead.
+                            respartnerlsnr.ack_message(message)
                         except:
                             _logger.exception(
                                 "Asok MQ Listener: error adding message to internal queue"
