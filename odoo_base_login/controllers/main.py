@@ -55,19 +55,18 @@ def super_clear_all():
             pass
     return True
 
-
 class Home(main.Home):
 
     @http.route('/web/login', type='http', auth="none", sitemap=False)
     def web_login(self, redirect=None, **kw):
         result = super(Home, self).web_login(redirect=redirect, kw=kw)
-        active_user_log = request.env['base.login.reason'].search([('user_id','=',request.session.uid),
-                                                                   ('logged_out','=',False)], limit=1)
-        if active_user_log:
-            active_user_log.login_reason = kw.get('login_reason')
-            active_user_log.length = int(kw.get('session_length'))
-            active_user_log.length = int(kw.get('session_length'))
-
+        if kw.get('login_reason') and kw.get('session_length') and kw.get('ticket_ID'):
+            log = request.env['res.users.log'].create({})
+            session_ID = request.session.sid
+            request.env['base.login.reason'].create(
+                {'user_id': request.session.uid, 'logged_in': log.create_date, 'session_ID': session_ID,
+                 'login_reason': kw.get('login_reason'), 'state': 'audit',
+                 'ticket_ID': kw.get('ticket_ID'), 'length':kw.get('session_length')})
         return result
 
 class Session(main.Session):

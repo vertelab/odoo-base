@@ -47,13 +47,15 @@ class ResUsers(models.Model):
     last_update = fields.Datetime(string="Last Connection Updated")
 
     # Method call when user login, create history record here
-    @api.model
-    def _update_last_login(self):
-        log = self.env['res.users.log'].create({})
-        session_ID = request.session.sid
-        self.env['base.login.reason'].create(
-            {'user_id': self.id, 'logged_in': log.create_date, 'session_ID':session_ID,
-             'login_reason':self.login_reason, 'state':'audit'})
+    # @api.model
+    # def _update_last_login(self):
+    #     print ("Context: :::",self._context)
+    #     log = self.env['res.users.log'].create({})
+    #     session_ID = request.session.sid
+    #     if self.login_reason and self.ticket_ID:
+    #         self.env['base.login.reason'].create(
+    #             {'user_id': self.id, 'logged_in': log.create_date, 'session_ID':session_ID,
+    #              'login_reason':self.login_reason, 'state':'audit', 'ticket_ID':self.ticket_ID})
 
 
     def _clear_session(self):
@@ -130,9 +132,6 @@ class ResUsers(models.Model):
     @api.model_cr_context
     def _auth_timeout_check(self, session_length):
         """Perform session timeout validation and expire if needed."""
-
-        print ("Auth timeout check ::", session_length)
-
         if not http.request:
             return
 
