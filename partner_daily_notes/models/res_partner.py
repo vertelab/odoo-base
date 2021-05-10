@@ -130,7 +130,7 @@ class ResPartner(models.Model):
         tz_offset = self.env.user.tz_offset
         if appointment and (
             not self.next_contact_date
-            or (self.next_contact_date and appointment.start < self.next_contact_date)
+            or (self.next_contact_date and appointment.start.date() < self.next_contact_date)
         ):
             # use appointment date instead of AIS-F data.
             if tz_offset:
@@ -179,7 +179,7 @@ class ResPartner(models.Model):
         )
         if appointment and (
             not self.next_contact_date
-            or (self.last_contact_date and appointment.start > self.last_contact_date)
+            or (self.last_contact_date and appointment.start.date() > self.last_contact_date)
         ):
             # use appointment date instead of AIS-F data.
             last_contact_date = appointment.start.date()
