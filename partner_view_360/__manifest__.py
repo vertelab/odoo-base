@@ -21,7 +21,7 @@
 
 {
     'name': 'Partner 360 view',
-    'version': '12.0.0.2.3',
+    'version': '12.0.0.2.4',
     'category': '',
     'description': """
 Module for employee 360 view
@@ -40,6 +40,7 @@ v12.0.0.1.14 AFC-1914 fixed behaviour of zip field  \n
 v12.0.0.2.1 AFC-1937: Added support for c/o addresses. \n
 v12.0.0.2.2 AFC-1988: Better handling of bankid approvals. \n
 v12.0.0.2.3 AFC-2072: Removed field eidentification from views. \n
+v12.0.0.2.4 AFC-2097: Misc bugfixes. \n
 \n
 """,
     'author': 'Vertel AB',
