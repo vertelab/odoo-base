@@ -90,6 +90,7 @@ class DataSet(DataSetOrigin):
                 _logger.exception(
                     "Failed to generate before data for audit log! "
                     f"model: {model_obj._name} method: {method}")
+        res = None
         try:
             res = super(DataSet, self)._call_kw(model, method, args, kwargs)
         except Exception as e:
