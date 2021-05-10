@@ -58,8 +58,6 @@ class WebsiteScreenpop(http.Controller):
             return request.render('partner_view_360.403', {'error': 'ERROR: Token missmatch','our_token': token, 'ext_token': post.get('token'), 'partner': None, 'action': None, 'url': None, 'post': post,'secret': secret,'signatur':post.get('signatur')})
 
         pnr = post.get('personnummer', '')
-        if pnr and not '-' in pnr:
-            pnr = pnr[:8] + '-' + pnr[8:12]
         partner = request.env['res.partner'].search_pnr(pnr)  # not granted yet
 
         if not partner:
@@ -120,8 +118,6 @@ class WebsiteScreenpop(http.Controller):
         message = _('You have to initiate BankID-identification') 
         bankid = res = None       
         pnr = post.get('personnummer', '')
-        if pnr and not '-' in pnr:
-            pnr = pnr[:8] + '-' + pnr[8:12]
         partner = request.env['res.partner'].search_pnr(pnr)  # not granted yet
         if post.get('bankid_init'):
             message = _('Initiating BankID-identification, try to authenticate')
