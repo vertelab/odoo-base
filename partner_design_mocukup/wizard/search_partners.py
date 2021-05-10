@@ -47,7 +47,8 @@ class SearchPartners(models.TransientModel):
                         (form_view.id, 'form')
                     ],
                     'type': 'ir.actions.act_window',
-                    'domain': [('id', 'in', partners.ids)]
+                    'domain': [('id', 'in', partners.ids)],
+                    'target': 'current'
                 }
             elif len(partners) == 1:
                 self.no_match = False
@@ -61,9 +62,8 @@ class SearchPartners(models.TransientModel):
                     'views': [(form_view.id, 'form')],
                     'view_id': form_view.id,
                     'target': 'current',
-                    'res_id': partners.id
+                    'res_id': partners.id,
                 }
         else:
-            print ("fdjhfkjdshfjksdhf")
             self.no_match = True
 

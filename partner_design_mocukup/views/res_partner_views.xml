@@ -8,13 +8,19 @@
             <field name="arch" type="xml">
                 <form string="Contacts" style="width:100%">
                     <group class="col-12">
-                        <div class="oe_button_box" name="button_box">
-                            <button name="toggle_active" type="object"
-                                    class="oe_stat_button" icon="fa-archive">
-                                <field name="active" widget="boolean_button"
-                                       options='{"terminology": "archive"}'/>
-                            </button>
-                        </div>
+                        <group class="col-6">
+                            <div class="oe_button_box" name="button_box">
+                                <button name="toggle_active" type="object"
+                                        class="oe_stat_button" icon="fa-archive">
+                                    <field name="active" widget="boolean_button"
+                                           options='{"terminology": "archive"}'/>
+                                </button>
+                            </div>
+                        </group>
+                        <group class="col-6">
+                            <field name="search_partner_name"/>
+                            <button name="search_partner_by_name" class="btn btn-primary" type="object" string="Search"/>
+                        </group>
                     </group>
                     <group colspan="12" class="col-12">
                         <field name="customer" invisible="1"/>
@@ -52,7 +58,10 @@
                     <group>
                         <group class="col-3">
                             <div style="border: 1px solid black;">
-                                <span><b>Opportunities</b></span><br/>
+                                <span>
+                                    <b>Opportunities</b>
+                                </span>
+                                <br/>
                                 <field name="opportunity_ids">
                                     <tree decoration-bf="message_needaction==True"
                                           decoration-muted="probability == 100"
@@ -65,7 +74,10 @@
                                 </field>
                             </div>
                             <div style="border: 1px solid black;margin-top:10px">
-                                <span><b>Activities</b></span><br/>
+                                <span>
+                                    <b>Activities</b>
+                                </span>
+                                <br/>
                                 <field name="activity_ids">
                                     <tree string="Activities">
                                         <field name="display_name"/>
@@ -119,7 +131,10 @@
                         </group>
                         <group class="col-3">
                             <div style="border: 1px solid black;">
-                                <span><b>Tasks</b></span><br/>
+                                <span>
+                                    <b>Tasks</b>
+                                </span>
+                                <br/>
                                 <field name="task_ids">
                                     <tree>
                                         <field name="name"/>
@@ -127,7 +142,10 @@
                                 </field>
                             </div>
                             <div style="border: 1px solid black;margin-top:10px">
-                                <span><b>Contact &amp; Addresses</b></span><br/>
+                                <span>
+                                    <b>Contact &amp; Addresses</b>
+                                </span>
+                                <br/>
                                 <field name="child_ids"
                                        context="{'default_parent_id': active_id, 'default_street': street,
                                         'default_street2': street2, 'default_city': city, 'default_state_id': state_id,
