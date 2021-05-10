@@ -76,7 +76,7 @@ class ResPartner(models.Model):
         string="Daily notes",
         inverse_name="partner_id",
     )
-    next_contact_date = fields.Datetime(
+    next_contact_date = fields.Date(
         string="Next contact",
         help="Fields used by AIS-F data. Do not overwrite with other data.",
     )
@@ -95,7 +95,7 @@ class ResPartner(models.Model):
         ],
         help="Fields used by AIS-F data. Do not overwrite with other data.",
     )
-    last_contact_date = fields.Datetime(
+    last_contact_date = fields.Date(
         string="Latest contact",
         help="Fields used by AIS-F data. Do not overwrite with other data.",
     )
@@ -126,6 +126,7 @@ class ResPartner(models.Model):
             order="start",
             limit=1,
         )
+        next_contact_date = None
         tz_offset = self.env.user.tz_offset
         if appointment and (
             not self.next_contact_date
@@ -145,7 +146,7 @@ class ResPartner(models.Model):
                 if appointment.channel == self.env.ref("calendar_channel.channel_pdm")
                 else "B"
             )
-        else:
+        elif self.next_contact_date and self.next_contact_time:
             # use AIS-F data
             if tz_offset:
                 # there has to be a better way to do this.
@@ -155,7 +156,7 @@ class ResPartner(models.Model):
             else:
                 next_contact_time = self.next_contact_time
             next_contact_date = (
-                self.next_contact_date.date() if self.next_contact_date else False
+                self.next_contact_date if self.next_contact_date else False
             )
             next_contact_type = self.next_contact_type
         if next_contact_date:
@@ -190,7 +191,7 @@ class ResPartner(models.Model):
         else:
             # use AIS-F data
             last_contact_date = (
-                self.last_contact_date.date() if self.last_contact_date else False
+                self.last_contact_date if self.last_contact_date else False
             )
             last_contact_type = self.last_contact_type
         if last_contact_date:
