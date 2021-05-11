@@ -393,7 +393,7 @@
                 <strong class="o_kanban_record_title">
                   <field name="name" />
                 </strong>
-          sheet      <div class="o_kanban_tags_section">
+                <div class="o_kanban_tags_section">
                   <ul>
                     <li>
                       <field name="city" />
