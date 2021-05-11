@@ -1,0 +1,97 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<odoo>
+    <data>
+
+        <!-- Base login reason form view -->
+        <record id="base_login_reason_form_view" model="ir.ui.view">
+            <field name="name">base.login.reason.form.view</field>
+            <field name="model">base.login.reason</field>
+            <field name="arch" type="xml">
+                <form string="Base Login" create="false" delete="false">
+                    <header>
+                            <field name="state" widget="statusbar" statusbar_visible="draft,audit,done"/>
+                        </header>
+                    <sheet>
+                        <group>
+                            <group>
+                                <field name="user_id" readonly="1"/>
+                                <field name="email" readonly="1"/>
+                                <field name="login_reason" readonly="1"/>
+                                <field name="auditor_comment" string="For the Login-Reason Auditor:"/>
+                            </group>
+                            <group>
+                                <field name="ticket_ID" readonly="1"/>
+                                <field name="logged_in" readonly="1"/>
+                                <field name="logged_out" readonly="1"/>
+                                <field name="length" readonly="1"/>
+                                <field name="active_length"/>
+                            </group>
+                        </group>
+                    </sheet>
+                </form>
+            </field>
+        </record>
+
+        <!-- Base login reason tree view -->
+        <record id="base_login_reason_tree_view" model="ir.ui.view">
+            <field name="name">base.login.reason.tree.view</field>
+            <field name="model">base.login.reason</field>
+            <field name="arch" type="xml">
+                <tree string="Base Login" create="false" delete="false">
+                    <field name="ticket_ID"/>
+                    <field name="user_id"/>
+                    <field name="email"/>
+                    <field name="logged_in"/>
+                    <field name="logged_out"/>
+                    <field name="length"/>
+                    <field name="active_length" widget="float_time"/>
+                    <field name="login_reason"/>
+                    <field name="auditor_comment"/>
+                    <field name="state"/>
+                    <field name="session_ID" invisible="1"/>
+                </tree>
+            </field>
+        </record>
+
+        <!-- Base login reason search view -->
+        <record id="base_login_reason_search_view" model="ir.ui.view">
+            <field name="name">base.login.reason.search.view</field>
+            <field name="model">base.login.reason</field>
+            <field name="arch" type="xml">
+                <search string="Base Login">
+                    <field name="ticket_ID"/>
+                    <field name="user_id"/>
+                    <field name="email"/>
+                    <field name="login_reason"/>
+                    <field name="auditor_comment"/>
+                    <field name="logged_in"/>
+                    <field name="logged_out"/>
+                    <field name="length"/>
+                    <filter name="state_draft" domain="[('state','=','draft')]" string="New"/>
+                    <filter name="state_audit" domain="[('state','=','audit')]" string="Audit"/>
+                    <filter name="state_alert" domain="[('state','=','alert')]" string="Alert"/>
+                    <filter name="state_done" domain="[('state','=','done')]" string="Done"/>
+                   <group expand="0" string="Group By">
+                       <filter string="Users" name="login_users" context="{'group_by': 'user_id'}"/>
+                       <filter string="Tickets" name="tickets_by" context="{'group_by': 'ticket_ID'}"/>
+                       <filter string="Logged In" name="logged_in" context="{'group_by': 'logged_in'}"/>
+                       <filter string="Logged Out" name="login_out" context="{'group_by': 'logged_out'}"/>
+                   </group>
+                </search>
+            </field>
+        </record>
+
+        <record id="action_base_login_tree" model="ir.actions.act_window">
+            <field name="name">Login Access log</field>
+            <field name="res_model">base.login.reason</field>
+            <field name="view_type">form</field>
+            <field name="view_mode">tree,form</field>
+        </record>
+
+        <!-- Menuitem for base login access -->
+        <menuitem id="base_login_menu_access" name="Login Access log"
+                  action="action_base_login_tree" groups="odoo_base_login.show_login_reason"/>
+
+    </data>
+</odoo>
