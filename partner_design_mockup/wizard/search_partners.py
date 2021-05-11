@@ -13,6 +13,7 @@ class SearchPartners(models.TransientModel):
 
     def search_partners(self):
         self.ensure_one()
+        context = self._context
         partners = []
         if self.search_partner and self.name and not self.email:
             name_upper = self.search_partner.upper()
@@ -35,7 +36,10 @@ class SearchPartners(models.TransientModel):
                 self.no_match = False
                 kanban_view = self.env.ref('base.res_partner_kanban_view')
                 tree_view = self.env.ref('base.view_partner_tree')
-                form_view = self.env.ref('partner_design_mockup.partner_view_from_search_partner')
+                if 'from_advance_search_partner' in context:
+                    form_view = self.env.ref('partner_design_mockup.partner_view_from_advance_search_partner')
+                else:
+                    form_view = self.env.ref('partner_design_mockup.partner_view_from_search_partner')
                 return {
                     'name': _('Partners'),
                     'view_type': 'form',

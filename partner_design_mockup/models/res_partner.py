@@ -25,7 +25,7 @@ class ResPartner(models.Model):
         self.ensure_one()
         kanban_view = self.env.ref('base.res_partner_kanban_view')
         tree_view = self.env.ref('base.view_partner_tree')
-        form_view = self.env.ref('partner_design_mockup.partner_view_from_search_partner')
+        form_view = self.env.ref('partner_design_mockup.partner_view_from_advance_search_partner')
         return {
             'name': _('Contacts'),
             'view_type': 'form',

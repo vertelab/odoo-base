@@ -38,5 +38,18 @@
         <menuitem id="menu_search_partner" action="action_search_partners"
                   parent="menu_partner_mockup" name="Search Partners" sequence="1"/>
 
+        <!--Action-->
+        <record id="action_advance_search_partners" model="ir.actions.act_window">
+            <field name="name">Search Partners</field>
+            <field name="res_model">search.partners</field>
+            <field name="view_type">form</field>
+            <field name="view_mode">form</field>
+            <field name="target">inline</field>
+            <field name="context">{'from_advance_search_partner': True}</field>
+        </record>
+
+        <menuitem id="menu_advance_search_partner" action="action_advance_search_partners"
+                  parent="menu_partner_mockup" name="Advance Search Partners" sequence="2"/>
+
     </data>
 </odoo>

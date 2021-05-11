@@ -2,6 +2,168 @@
 <odoo>
     <data>
 
+        <record id="partner_view_from_advance_search_partner" model="ir.ui.view">
+            <field name="name">partner.view.from.advance.search.partners.form.view</field>
+            <field name="model">res.partner</field>
+            <field name="arch" type="xml">
+                <form string="Contacts" style="width:100%">
+                    <group class="col-12">
+                        <group class="col-6">
+                            <div class="oe_button_box" name="button_box">
+                                <button name="toggle_active" type="object"
+                                        class="oe_stat_button" icon="fa-archive">
+                                    <field name="active" widget="boolean_button"
+                                           options='{"terminology": "archive"}'/>
+                                </button>
+                            </div>
+                        </group>
+                        <group class="col-6">
+                            <button name="advance_search_partner" class="btn btn-primary" type="object"
+                                    string="Advance Search"/>
+                        </group>
+                    </group>
+                    <group colspan="12" class="col-12">
+                        <field name="customer" invisible="1"/>
+                        <field name="supplier" invisible="1"/>
+                        <field name="user_id" invisible="1"/>
+                        <div class="oe_title">
+                            <field name="image" widget='image' class="oe_avatar"
+                                   options='{"preview_image": "image_medium", "size": [90, 90]}'/>
+                            <field name="is_company" invisible="1"/>
+                            <field name="commercial_partner_id" invisible="1"/>
+                            <field name="company_type" widget="radio"
+                                   class="oe_edit_only"
+                                   options="{'horizontal': true}"/>
+                            <h1>
+                                <field name="name" default_focus="1" placeholder="Name"
+                                       attrs="{'required' : [('type', '=', 'contact')]}"/>
+                            </h1>
+                            <div class="o_row">
+                                <field name="parent_id"
+                                       widget="res_partner_many2one"
+                                       placeholder="Company"
+                                       domain="[('is_company', '=', True)]"
+                                       context="{'default_is_company': True, 'default_supplier': supplier, 'default_customer': customer, 'show_vat': True}"
+                                       attrs="{'invisible': ['|', '&amp;', ('is_company','=', True),('parent_id', '=', False),('company_name', '!=', False),('company_name', '!=', '')]}"/>
+                                <field name="company_name"
+                                       attrs="{'invisible': ['|', '|', ('company_name', '=', False), ('company_name', '=', ''), ('is_company', '=', True)]}"/>
+                                <button name="create_company" type="object" class="oe_edit_only btn-link"
+                                        attrs="{'invisible': ['|', '|', ('is_company','=', True), ('company_name', '=', ''), ('company_name', '=', False)]}">
+                                    <span class="fa fa-plus-square"/>
+                                    Create company
+                                </button>
+                            </div>
+                        </div>
+                    </group>
+                    <group>
+                        <group class="col-3">
+                            <div style="border: 1px solid black;">
+                                <span>
+                                    <b>Opportunities</b>
+                                </span>
+                                <br/>
+                                <field name="opportunity_ids">
+                                    <tree decoration-bf="message_needaction==True"
+                                          decoration-muted="probability == 100"
+                                          decoration-danger="activity_date_deadline and (activity_date_deadline &lt; current_date)">
+                                        <field name="activity_date_deadline" invisible="1"/>
+                                        <field name="message_needaction" invisible="1"/>
+                                        <field name="probability" invisible="1"/>
+                                        <field name="name" string="Opportunity"/>
+                                    </tree>
+                                </field>
+                            </div>
+                            <div style="border: 1px solid black;margin-top:10px">
+                                <span>
+                                    <b>Activities</b>
+                                </span>
+                                <br/>
+                                <field name="activity_ids">
+                                    <tree string="Activities">
+                                        <field name="display_name"/>
+                                    </tree>
+                                </field>
+                            </div>
+                        </group>
+                        <group class="col-2" style="border: 1px solid black;margin-right:10px;max-width:22%">
+                            <field name="type" attrs="{'invisible': [('parent_id','=', False)]}"
+                                   groups="base.group_no_one"/>
+                            <label for="street" string="Address"/>
+                            <div class="o_address_format">
+                                <div attrs="{'invisible': ['|', ('parent_id', '=', False), ('type', '!=', 'contact')]}"
+                                     class="oe_edit_only">
+                                    <b>Company Address:</b>
+                                </div>
+                                <field name="street" placeholder="Street..." class="o_address_street"
+                                       attrs="{'readonly': [('type', '=', 'contact'),('parent_id', '!=', False)]}"/>
+                                <field name="street2" placeholder="Street 2..." class="o_address_street"
+                                       attrs="{'readonly': [('type', '=', 'contact'),('parent_id', '!=', False)]}"/>
+                                <field name="city" placeholder="City" class="o_address_city"
+                                       attrs="{'readonly': [('type', '=', 'contact'),('parent_id', '!=', False)]}"/>
+                                <field name="state_id" class="o_address_state" placeholder="State"
+                                       options='{"no_open": True}'
+                                       attrs="{'readonly': [('type', '=', 'contact'),('parent_id', '!=', False)]}"
+                                       context="{'country_id': country_id, 'zip': zip}"/>
+                                <field name="zip" placeholder="ZIP" class="o_address_zip"
+                                       attrs="{'readonly': [('type', '=', 'contact'),('parent_id', '!=', False)]}"/>
+                                <field name="country_id" placeholder="Country" class="o_address_country"
+                                       options='{"no_open": True, "no_create": True}'
+                                       attrs="{'readonly': [('type', '=', 'contact'),('parent_id', '!=', False)]}"/>
+                            </div>
+                            <field name="vat" placeholder="e.g. BE0477472701"
+                                   attrs="{'readonly': [('parent_id','!=',False)]}"/>
+                        </group>
+                        <group class="col-3" style="border: 1px solid black;margin-right:40px">
+                            <field name="function" placeholder="e.g. Sales Director"
+                                   attrs="{'invisible': [('is_company','=', True)]}"/>
+                            <field name="phone" widget="phone"/>
+                            <field name="mobile" widget="phone"/>
+                            <field name="user_ids" invisible="1"/>
+                            <field name="email" widget="email" context="{'gravatar_image': True}"
+                                   attrs="{'required': [('user_ids','!=', [])]}"/>
+                            <field name="website" widget="url" placeholder="e.g. https://www.odoo.com"/>
+                            <field name="title" options='{"no_open": True}'
+                                   attrs="{'invisible': [('is_company', '=', True)]}"/>
+                            <field name="lang"/>
+                            <field name="category_id" widget="many2many_tags"
+                                   options="{'color_field': 'color', 'no_create_edit': True}"
+                                   placeholder="Tags..."/>
+                        </group>
+                        <group class="col-3">
+                            <div style="border: 1px solid black;">
+                                <span>
+                                    <b>Tasks</b>
+                                </span>
+                                <br/>
+                                <field name="task_ids">
+                                    <tree>
+                                        <field name="name"/>
+                                    </tree>
+                                </field>
+                            </div>
+                            <div style="border: 1px solid black;margin-top:10px">
+                                <span>
+                                    <b>Contact &amp; Addresses</b>
+                                </span>
+                                <br/>
+                                <field name="child_ids"
+                                       context="{'default_parent_id': active_id, 'default_street': street,
+                                        'default_street2': street2, 'default_city': city, 'default_state_id': state_id,
+                                        'default_zip': zip, 'default_country_id': country_id,
+                                        'default_supplier': supplier, 'default_customer': customer,
+                                        'default_lang': lang, 'default_user_id': user_id}">
+                                    <tree>
+                                        <field name="name"/>
+                                    </tree>
+                                </field>
+                            </div>
+                        </group>
+                    </group>
+                </form>
+            </field>
+        </record>
+
+
         <record id="partner_view_from_search_partner" model="ir.ui.view">
             <field name="name">partner.view.from.search.partners.form.view</field>
             <field name="model">res.partner</field>
@@ -20,8 +182,6 @@
                         <group class="col-6">
                             <field name="search_partner_name"/>
                             <button name="search_partner_by_name" class="btn btn-primary" type="object" string="Search"/>
-                            <button name="advance_search_partner" class="btn btn-primary" type="object"
-                                    string="Advance Search"/>
                         </group>
                     </group>
                     <group colspan="12" class="col-12">

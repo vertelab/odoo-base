@@ -1,6 +1,6 @@
 {
     'name': 'Partner Design Mockup',
-    'version': '12.0.0.3',
+    'version': '12.0.0.4',
     'category': '',
     'description': """
     Download 'One Click Form Edit' module from here : \n
@@ -8,6 +8,7 @@
     V12.0.0.1 AFC-2170 - This module adds two different ways of displaying Odoo content. A normal formview with tabs and a custom view with different boxes with content-views. \n
     V12.0.0.2 AFC-2170 - Added search box in second type of view to search partners. \n
     V12.0.0.3 AFC-2170 - Added Advance search button in second type of view to search partners. \n
+    V12.0.0.3 AFC-2170 - Added Advance search button in second type of view to search partners with separate menu. \n
 """,
     'author': 'Vertel AB',
     'license': 'AGPL-3',
