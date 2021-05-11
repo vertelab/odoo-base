@@ -36,7 +36,7 @@
         </record>
 
         <menuitem id="menu_search_partner" action="action_search_partners"
-                  parent="menu_partner_mockup" name="Search Partners" sequence="1"/>
+                  parent="menu_partner_mockup" name="Search-form to Form and Search-view" sequence="2"/>
 
         <!--Action-->
         <record id="action_advance_search_partners" model="ir.actions.act_window">
@@ -49,7 +49,7 @@
         </record>
 
         <menuitem id="menu_advance_search_partner" action="action_advance_search_partners"
-                  parent="menu_partner_mockup" name="Advance Search Partners" sequence="2"/>
+                  parent="menu_partner_mockup" name="Search-form to Formview with Search-button" sequence="1"/>
 
     </data>
 </odoo>

@@ -659,7 +659,7 @@
                   parent="contacts.menu_contacts" name="Mockup" sequence="60"/>
 
         <menuitem id="menu_partner_original" action="action_original_partner_view_action"
-                  parent="menu_partner_mockup" name="Original Contacts"/>
+                  parent="menu_partner_mockup" name="Standard View with tabs" sequence="3"/>
 
     </data>
 </odoo>
