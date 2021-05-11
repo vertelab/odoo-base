@@ -301,13 +301,11 @@
                           </div>
                           <div t-if="record.type.raw_value != 'contact'">
                             <div>
+                              <field name="address_co"/><br/>
                               <field name="street"/><br/>
                               <field name="zip_formated" />
                               <field name="city" />
                             </div>
-                            Municipality:
-                            <field t-if="record.state_id.raw_value" name="state_id" />
-                            <field name="country_id" />
                           </div>
                           <div t-if="record.phone.raw_value">
                             Phone:
@@ -346,19 +344,6 @@
                             <field name="country_id" placeholder="Country" class="o_address_country" options="{&quot;no_open&quot;: True, &quot;no_create&quot;: True}" />
                           </div>
                         </div>
-                        <label for="state_name_code" string="Municipality" class="oe_read_only" />
-                        <field name="state_name_code" class="oe_read_only" placeholder="State" nolabel="1" />
-                        <label for="state_id" string="Municipality" class="oe_edit_only" />
-                        <field name="state_id" class="oe_edit_only" nolabel="1" />
-                      </group>
-                      <group>
-                        <field name="name" string="Contact Name" attrs="{'required' : [('type', '=', 'contact')]}" />
-                        <field name="title" placeholder="e.g. Mr." attrs="{'invisible': [('type','!=', 'contact')]}" />
-                        <field name="function" placeholder="e.g. Sales Director" attrs="{'invisible': [('type','!=', 'contact')]}" />
-                        <field name="email" attrs="{'invisible': [('type','!=', 'contact')]}"/>
-                        <field name="phone" widget="phone" attrs="{'invisible': [('type','!=', 'contact')]}"/>
-                        <field name="mobile" widget="phone" attrs="{'invisible': [('type','!=', 'contact')]}"/>
-                        <field name="comment" placeholder="internal note..." />
                       </group>
                     </group>
                     <field name="image" invisible="True" />
@@ -605,12 +590,11 @@
                           </div>
                           <div t-if="record.type.raw_value != 'contact'">
                             <div>
+                              <field name="address_co" /><br/>
                               <field name="street" /><br/>
                               <field name="zip" />
                               <field name="city" />
                             </div>
-                            Municipality:
-                            <field t-if="record.state_id.raw_value" name="state_id" />
                             <field name="country_id" />
                           </div>
                           <div t-if="record.phone.raw_value">
@@ -646,22 +630,9 @@
                               <field name="zip" placeholder="ZIP" class="o_address_zip" />
                             </span>
                             <field name="city" placeholder="City" class="o_address_city" />
-                            <label for="state_name_code" string="Municipality" class="oe_read_only" />
-                            <field name="state_name_code" class="oe_read_only" placeholder="State" nolabel="1" />
-                            <label for="state_id" string="Municipality" class="oe_edit_only" />
-                            <field name="state_id" class="oe_edit_only" nolabel="1" />
                             <field name="country_id" placeholder="Country" class="o_address_country" options="{&quot;no_open&quot;: True, &quot;no_create&quot;: True}" />
                           </div>
                         </div>
-                      </group>
-                      <group>
-                        <field name="name" string="Contact Name" attrs="{'required' : [('type', '=', 'contact')]}" />
-                        <field name="title" placeholder="e.g. Mr." attrs="{'invisible': [('type','!=', 'contact')]}" />
-                        <field name="function" placeholder="e.g. Sales Director" attrs="{'invisible': [('type','!=', 'contact')]}" />
-                        <field name="email" />
-                        <field name="phone" widget="phone" />
-                        <field name="mobile" widget="phone" />
-                        <field name="comment" placeholder="internal note..." />
                       </group>
                     </group>
                     <field name="supplier" invisible="True" />
