@@ -126,12 +126,12 @@
             <field name="type" invisible="1" />
 
             <div class="af_field_group">
-              <label for="social_sec_nr" string="Personummer:" class="oe_read_only"/>
+              <label for="social_sec_nr" string="Personnummer:" class="oe_read_only"/>
               <field name="social_sec_nr" class="oe_read_only" nolabel="1"/>
             </div>
 
             <div class="af_field_group">
-              <label for="phone" string="Telefonummer" class="oe_read_only"/>
+              <label for="phone" string="Telefonnummer" class="oe_read_only"/>
               <field name="phone"/>
             </div>
 
