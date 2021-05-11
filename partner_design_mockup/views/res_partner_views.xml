@@ -1,0 +1,665 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+
+        <record id="partner_view_from_advance_search_partner" model="ir.ui.view">
+            <field name="name">partner.view.from.advance.search.partners.form.view</field>
+            <field name="model">res.partner</field>
+            <field name="arch" type="xml">
+                <form string="Contacts" style="width:100%">
+                    <group class="col-12">
+                        <group class="col-6">
+                            <div class="oe_button_box" name="button_box">
+                                <button name="toggle_active" type="object"
+                                        class="oe_stat_button" icon="fa-archive">
+                                    <field name="active" widget="boolean_button"
+                                           options='{"terminology": "archive"}'/>
+                                </button>
+                            </div>
+                        </group>
+                        <group class="col-6">
+                            <button name="advance_search_partner" class="btn btn-primary" type="object"
+                                    string="Advance Search"/>
+                        </group>
+                    </group>
+                    <group colspan="12" class="col-12">
+                        <field name="customer" invisible="1"/>
+                        <field name="supplier" invisible="1"/>
+                        <field name="user_id" invisible="1"/>
+                        <div class="oe_title">
+                            <field name="image" widget='image' class="oe_avatar"
+                                   options='{"preview_image": "image_medium", "size": [90, 90]}'/>
+                            <field name="is_company" invisible="1"/>
+                            <field name="commercial_partner_id" invisible="1"/>
+                            <field name="company_type" widget="radio"
+                                   class="oe_edit_only"
+                                   options="{'horizontal': true}"/>
+                            <h1>
+                                <field name="name" default_focus="1" placeholder="Name"
+                                       attrs="{'required' : [('type', '=', 'contact')]}"/>
+                            </h1>
+                            <div class="o_row">
+                                <field name="parent_id"
+                                       widget="res_partner_many2one"
+                                       placeholder="Company"
+                                       domain="[('is_company', '=', True)]"
+                                       context="{'default_is_company': True, 'default_supplier': supplier, 'default_customer': customer, 'show_vat': True}"
+                                       attrs="{'invisible': ['|', '&amp;', ('is_company','=', True),('parent_id', '=', False),('company_name', '!=', False),('company_name', '!=', '')]}"/>
+                                <field name="company_name"
+                                       attrs="{'invisible': ['|', '|', ('company_name', '=', False), ('company_name', '=', ''), ('is_company', '=', True)]}"/>
+                                <button name="create_company" type="object" class="oe_edit_only btn-link"
+                                        attrs="{'invisible': ['|', '|', ('is_company','=', True), ('company_name', '=', ''), ('company_name', '=', False)]}">
+                                    <span class="fa fa-plus-square"/>
+                                    Create company
+                                </button>
+                            </div>
+                        </div>
+                    </group>
+                    <group>
+                        <group class="col-3">
+                            <div style="border: 1px solid black;">
+                                <span>
+                                    <b>Opportunities</b>
+                                </span>
+                                <br/>
+                                <field name="opportunity_ids">
+                                    <tree decoration-bf="message_needaction==True"
+                                          decoration-muted="probability == 100"
+                                          decoration-danger="activity_date_deadline and (activity_date_deadline &lt; current_date)">
+                                        <field name="activity_date_deadline" invisible="1"/>
+                                        <field name="message_needaction" invisible="1"/>
+                                        <field name="probability" invisible="1"/>
+                                        <field name="name" string="Opportunity"/>
+                                    </tree>
+                                </field>
+                            </div>
+                            <div style="border: 1px solid black;margin-top:10px">
+                                <span>
+                                    <b>Activities</b>
+                                </span>
+                                <br/>
+                                <field name="activity_ids">
+                                    <tree string="Activities">
+                                        <field name="display_name"/>
+                                    </tree>
+                                </field>
+                            </div>
+                        </group>
+                        <group class="col-2" style="border: 1px solid black;margin-right:10px;max-width:22%">
+                            <field name="type" attrs="{'invisible': [('parent_id','=', False)]}"
+                                   groups="base.group_no_one"/>
+                            <label for="street" string="Address"/>
+                            <div class="o_address_format">
+                                <div attrs="{'invisible': ['|', ('parent_id', '=', False), ('type', '!=', 'contact')]}"
+                                     class="oe_edit_only">
+                                    <b>Company Address:</b>
+                                </div>
+                                <field name="street" placeholder="Street..." class="o_address_street"
+                                       attrs="{'readonly': [('type', '=', 'contact'),('parent_id', '!=', False)]}"/>
+                                <field name="street2" placeholder="Street 2..." class="o_address_street"
+                                       attrs="{'readonly': [('type', '=', 'contact'),('parent_id', '!=', False)]}"/>
+                                <field name="city" placeholder="City" class="o_address_city"
+                                       attrs="{'readonly': [('type', '=', 'contact'),('parent_id', '!=', False)]}"/>
+                                <field name="state_id" class="o_address_state" placeholder="State"
+                                       options='{"no_open": True}'
+                                       attrs="{'readonly': [('type', '=', 'contact'),('parent_id', '!=', False)]}"
+                                       context="{'country_id': country_id, 'zip': zip}"/>
+                                <field name="zip" placeholder="ZIP" class="o_address_zip"
+                                       attrs="{'readonly': [('type', '=', 'contact'),('parent_id', '!=', False)]}"/>
+                                <field name="country_id" placeholder="Country" class="o_address_country"
+                                       options='{"no_open": True, "no_create": True}'
+                                       attrs="{'readonly': [('type', '=', 'contact'),('parent_id', '!=', False)]}"/>
+                            </div>
+                            <field name="vat" placeholder="e.g. BE0477472701"
+                                   attrs="{'readonly': [('parent_id','!=',False)]}"/>
+                        </group>
+                        <group class="col-3" style="border: 1px solid black;margin-right:40px">
+                            <field name="function" placeholder="e.g. Sales Director"
+                                   attrs="{'invisible': [('is_company','=', True)]}"/>
+                            <field name="phone" widget="phone"/>
+                            <field name="mobile" widget="phone"/>
+                            <field name="user_ids" invisible="1"/>
+                            <field name="email" widget="email" context="{'gravatar_image': True}"
+                                   attrs="{'required': [('user_ids','!=', [])]}"/>
+                            <field name="website" widget="url" placeholder="e.g. https://www.odoo.com"/>
+                            <field name="title" options='{"no_open": True}'
+                                   attrs="{'invisible': [('is_company', '=', True)]}"/>
+                            <field name="lang"/>
+                            <field name="category_id" widget="many2many_tags"
+                                   options="{'color_field': 'color', 'no_create_edit': True}"
+                                   placeholder="Tags..."/>
+                        </group>
+                        <group class="col-3">
+                            <div style="border: 1px solid black;">
+                                <span>
+                                    <b>Tasks</b>
+                                </span>
+                                <br/>
+                                <field name="task_ids">
+                                    <tree>
+                                        <field name="name"/>
+                                    </tree>
+                                </field>
+                            </div>
+                            <div style="border: 1px solid black;margin-top:10px">
+                                <span>
+                                    <b>Contact &amp; Addresses</b>
+                                </span>
+                                <br/>
+                                <field name="child_ids"
+                                       context="{'default_parent_id': active_id, 'default_street': street,
+                                        'default_street2': street2, 'default_city': city, 'default_state_id': state_id,
+                                        'default_zip': zip, 'default_country_id': country_id,
+                                        'default_supplier': supplier, 'default_customer': customer,
+                                        'default_lang': lang, 'default_user_id': user_id}">
+                                    <tree>
+                                        <field name="name"/>
+                                    </tree>
+                                </field>
+                            </div>
+                        </group>
+                    </group>
+                </form>
+            </field>
+        </record>
+
+
+        <record id="partner_view_from_search_partner" model="ir.ui.view">
+            <field name="name">partner.view.from.search.partners.form.view</field>
+            <field name="model">res.partner</field>
+            <field name="arch" type="xml">
+                <form string="Contacts" style="width:100%">
+                    <group class="col-12">
+                        <group class="col-6">
+                            <div class="oe_button_box" name="button_box">
+                                <button name="toggle_active" type="object"
+                                        class="oe_stat_button" icon="fa-archive">
+                                    <field name="active" widget="boolean_button"
+                                           options='{"terminology": "archive"}'/>
+                                </button>
+                            </div>
+                        </group>
+                        <group class="col-6">
+                            <field name="search_partner_name"/>
+                            <button name="search_partner_by_name" class="btn btn-primary" type="object" string="Search"/>
+                        </group>
+                    </group>
+                    <group colspan="12" class="col-12">
+                        <field name="customer" invisible="1"/>
+                        <field name="supplier" invisible="1"/>
+                        <field name="user_id" invisible="1"/>
+                        <div class="oe_title">
+                            <field name="image" widget='image' class="oe_avatar"
+                                   options='{"preview_image": "image_medium", "size": [90, 90]}'/>
+                            <field name="is_company" invisible="1"/>
+                            <field name="commercial_partner_id" invisible="1"/>
+                            <field name="company_type" widget="radio"
+                                   class="oe_edit_only"
+                                   options="{'horizontal': true}"/>
+                            <h1>
+                                <field name="name" default_focus="1" placeholder="Name"
+                                       attrs="{'required' : [('type', '=', 'contact')]}"/>
+                            </h1>
+                            <div class="o_row">
+                                <field name="parent_id"
+                                       widget="res_partner_many2one"
+                                       placeholder="Company"
+                                       domain="[('is_company', '=', True)]"
+                                       context="{'default_is_company': True, 'default_supplier': supplier, 'default_customer': customer, 'show_vat': True}"
+                                       attrs="{'invisible': ['|', '&amp;', ('is_company','=', True),('parent_id', '=', False),('company_name', '!=', False),('company_name', '!=', '')]}"/>
+                                <field name="company_name"
+                                       attrs="{'invisible': ['|', '|', ('company_name', '=', False), ('company_name', '=', ''), ('is_company', '=', True)]}"/>
+                                <button name="create_company" type="object" class="oe_edit_only btn-link"
+                                        attrs="{'invisible': ['|', '|', ('is_company','=', True), ('company_name', '=', ''), ('company_name', '=', False)]}">
+                                    <span class="fa fa-plus-square"/>
+                                    Create company
+                                </button>
+                            </div>
+                        </div>
+                    </group>
+                    <group>
+                        <group class="col-3">
+                            <div style="border: 1px solid black;">
+                                <span>
+                                    <b>Opportunities</b>
+                                </span>
+                                <br/>
+                                <field name="opportunity_ids">
+                                    <tree decoration-bf="message_needaction==True"
+                                          decoration-muted="probability == 100"
+                                          decoration-danger="activity_date_deadline and (activity_date_deadline &lt; current_date)">
+                                        <field name="activity_date_deadline" invisible="1"/>
+                                        <field name="message_needaction" invisible="1"/>
+                                        <field name="probability" invisible="1"/>
+                                        <field name="name" string="Opportunity"/>
+                                    </tree>
+                                </field>
+                            </div>
+                            <div style="border: 1px solid black;margin-top:10px">
+                                <span>
+                                    <b>Activities</b>
+                                </span>
+                                <br/>
+                                <field name="activity_ids">
+                                    <tree string="Activities">
+                                        <field name="display_name"/>
+                                    </tree>
+                                </field>
+                            </div>
+                        </group>
+                        <group class="col-2" style="border: 1px solid black;margin-right:10px;max-width:22%">
+                            <field name="type" attrs="{'invisible': [('parent_id','=', False)]}"
+                                   groups="base.group_no_one"/>
+                            <label for="street" string="Address"/>
+                            <div class="o_address_format">
+                                <div attrs="{'invisible': ['|', ('parent_id', '=', False), ('type', '!=', 'contact')]}"
+                                     class="oe_edit_only">
+                                    <b>Company Address:</b>
+                                </div>
+                                <field name="street" placeholder="Street..." class="o_address_street"
+                                       attrs="{'readonly': [('type', '=', 'contact'),('parent_id', '!=', False)]}"/>
+                                <field name="street2" placeholder="Street 2..." class="o_address_street"
+                                       attrs="{'readonly': [('type', '=', 'contact'),('parent_id', '!=', False)]}"/>
+                                <field name="city" placeholder="City" class="o_address_city"
+                                       attrs="{'readonly': [('type', '=', 'contact'),('parent_id', '!=', False)]}"/>
+                                <field name="state_id" class="o_address_state" placeholder="State"
+                                       options='{"no_open": True}'
+                                       attrs="{'readonly': [('type', '=', 'contact'),('parent_id', '!=', False)]}"
+                                       context="{'country_id': country_id, 'zip': zip}"/>
+                                <field name="zip" placeholder="ZIP" class="o_address_zip"
+                                       attrs="{'readonly': [('type', '=', 'contact'),('parent_id', '!=', False)]}"/>
+                                <field name="country_id" placeholder="Country" class="o_address_country"
+                                       options='{"no_open": True, "no_create": True}'
+                                       attrs="{'readonly': [('type', '=', 'contact'),('parent_id', '!=', False)]}"/>
+                            </div>
+                            <field name="vat" placeholder="e.g. BE0477472701"
+                                   attrs="{'readonly': [('parent_id','!=',False)]}"/>
+                        </group>
+                        <group class="col-3" style="border: 1px solid black;margin-right:40px">
+                            <field name="function" placeholder="e.g. Sales Director"
+                                   attrs="{'invisible': [('is_company','=', True)]}"/>
+                            <field name="phone" widget="phone"/>
+                            <field name="mobile" widget="phone"/>
+                            <field name="user_ids" invisible="1"/>
+                            <field name="email" widget="email" context="{'gravatar_image': True}"
+                                   attrs="{'required': [('user_ids','!=', [])]}"/>
+                            <field name="website" widget="url" placeholder="e.g. https://www.odoo.com"/>
+                            <field name="title" options='{"no_open": True}'
+                                   attrs="{'invisible': [('is_company', '=', True)]}"/>
+                            <field name="lang"/>
+                            <field name="category_id" widget="many2many_tags"
+                                   options="{'color_field': 'color', 'no_create_edit': True}"
+                                   placeholder="Tags..."/>
+                        </group>
+                        <group class="col-3">
+                            <div style="border: 1px solid black;">
+                                <span>
+                                    <b>Tasks</b>
+                                </span>
+                                <br/>
+                                <field name="task_ids">
+                                    <tree>
+                                        <field name="name"/>
+                                    </tree>
+                                </field>
+                            </div>
+                            <div style="border: 1px solid black;margin-top:10px">
+                                <span>
+                                    <b>Contact &amp; Addresses</b>
+                                </span>
+                                <br/>
+                                <field name="child_ids"
+                                       context="{'default_parent_id': active_id, 'default_street': street,
+                                        'default_street2': street2, 'default_city': city, 'default_state_id': state_id,
+                                        'default_zip': zip, 'default_country_id': country_id,
+                                        'default_supplier': supplier, 'default_customer': customer,
+                                        'default_lang': lang, 'default_user_id': user_id}">
+                                    <tree>
+                                        <field name="name"/>
+                                    </tree>
+                                </field>
+                            </div>
+                        </group>
+                    </group>
+                </form>
+            </field>
+        </record>
+
+        <record id="partner_view_from_search_partner_original" model="ir.ui.view">
+            <field name="name">partner.view.original.from.search.partners.form.view</field>
+            <field name="model">res.partner</field>
+            <field name="arch" type="xml">
+                <form string="Contacts">
+                    <sheet>
+                        <div class="oe_button_box" name="button_box">
+                            <button name="toggle_active" type="object"
+                                    class="oe_stat_button" icon="fa-archive">
+                                <field name="active" widget="boolean_button"
+                                       options='{"terminology": "archive"}'/>
+                            </button>
+                        </div>
+                        <field name="image" widget='image' class="oe_avatar"
+                               options='{"preview_image": "image_medium", "size": [90, 90]}'/>
+                        <div class="oe_title">
+                            <field name="is_company" invisible="1"/>
+                            <field name="commercial_partner_id" invisible="1"/>
+                            <field name="company_type" widget="radio"
+                                   class="oe_edit_only"
+                                   options="{'horizontal': true}"/>
+                            <h1>
+                                <field name="name" default_focus="1" placeholder="Name"
+                                       attrs="{'required' : [('type', '=', 'contact')]}"/>
+                            </h1>
+                            <div class="o_row">
+                                <field name="parent_id"
+                                       widget="res_partner_many2one"
+                                       placeholder="Company"
+                                       domain="[('is_company', '=', True)]"
+                                       context="{'default_is_company': True, 'default_supplier': supplier, 'default_customer': customer, 'show_vat': True}"
+                                       attrs="{'invisible': ['|', '&amp;', ('is_company','=', True),('parent_id', '=', False),('company_name', '!=', False),('company_name', '!=', '')]}"/>
+                                <field name="company_name"
+                                       attrs="{'invisible': ['|', '|', ('company_name', '=', False), ('company_name', '=', ''), ('is_company', '=', True)]}"/>
+                                <button name="create_company" type="object" class="oe_edit_only btn-link"
+                                        attrs="{'invisible': ['|', '|', ('is_company','=', True), ('company_name', '=', ''), ('company_name', '=', False)]}">
+                                    <span class="fa fa-plus-square"/>
+                                    Create company
+                                </button>
+                            </div>
+                        </div>
+
+                        <group>
+                            <group>
+                                <field name="type" attrs="{'invisible': [('parent_id','=', False)]}"
+                                       groups="base.group_no_one"/>
+                                <label for="street" string="Address"/>
+                                <div class="o_address_format">
+                                    <div attrs="{'invisible': ['|', ('parent_id', '=', False), ('type', '!=', 'contact')]}"
+                                         class="oe_edit_only">
+                                        <b>Company Address:</b>
+                                    </div>
+                                    <field name="street" placeholder="Street..." class="o_address_street"
+                                           attrs="{'readonly': [('type', '=', 'contact'),('parent_id', '!=', False)]}"/>
+                                    <field name="street2" placeholder="Street 2..." class="o_address_street"
+                                           attrs="{'readonly': [('type', '=', 'contact'),('parent_id', '!=', False)]}"/>
+                                    <field name="city" placeholder="City" class="o_address_city"
+                                           attrs="{'readonly': [('type', '=', 'contact'),('parent_id', '!=', False)]}"/>
+                                    <field name="state_id" class="o_address_state" placeholder="State"
+                                           options='{"no_open": True}'
+                                           attrs="{'readonly': [('type', '=', 'contact'),('parent_id', '!=', False)]}"
+                                           context="{'country_id': country_id, 'zip': zip}"/>
+                                    <field name="zip" placeholder="ZIP" class="o_address_zip"
+                                           attrs="{'readonly': [('type', '=', 'contact'),('parent_id', '!=', False)]}"/>
+                                    <field name="country_id" placeholder="Country" class="o_address_country"
+                                           options='{"no_open": True, "no_create": True}'
+                                           attrs="{'readonly': [('type', '=', 'contact'),('parent_id', '!=', False)]}"/>
+                                </div>
+                                <field name="vat" placeholder="e.g. BE0477472701"
+                                       attrs="{'readonly': [('parent_id','!=',False)]}"/>
+                            </group>
+                            <group>
+                                <field name="customer" invisible="1"/>
+                                <field name="supplier" invisible="1"/>
+                                <field name="user_id" invisible="1"/>
+                                <field name="function" placeholder="e.g. Sales Director"
+                                       attrs="{'invisible': [('is_company','=', True)]}"/>
+                                <field name="phone" widget="phone"/>
+                                <field name="mobile" widget="phone"/>
+                                <field name="user_ids" invisible="1"/>
+                                <field name="email" widget="email" context="{'gravatar_image': True}"
+                                       attrs="{'required': [('user_ids','!=', [])]}"/>
+                                <field name="website" widget="url" placeholder="e.g. https://www.odoo.com"/>
+                                <field name="title" options='{"no_open": True}'
+                                       attrs="{'invisible': [('is_company', '=', True)]}"/>
+                                <field name="lang"/>
+                                <field name="category_id" widget="many2many_tags"
+                                       options="{'color_field': 'color', 'no_create_edit': True}"
+                                       placeholder="Tags..."/>
+                            </group>
+                        </group>
+
+                        <notebook colspan="4">
+                            <page string="Opportunities">
+                                <field name="opportunity_ids">
+                                    <tree decoration-bf="message_needaction==True"
+                                          decoration-muted="probability == 100"
+                                          decoration-danger="activity_date_deadline and (activity_date_deadline &lt; current_date)">
+                                        <field name="activity_date_deadline" invisible="1"/>
+                                        <field name="message_needaction" invisible="1"/>
+                                        <field name="probability" invisible="1"/>
+                                        <field name="create_date"/>
+                                        <field name="name" string="Opportunity"/>
+                                        <field name="partner_id" string="Customer"/>
+                                        <field name="country_id"/>
+                                        <field name="activity_date_deadline"/>
+                                        <field name="activity_summary"/>
+                                        <field name="stage_id"/>
+                                        <field name="planned_revenue" sum="Expected Revenues"/>
+                                        <field name="probability" avg="Avg. of Probability"/>
+                                        <field name="team_id"/>
+                                        <field name="user_id"/>
+                                    </tree>
+                                </field>
+                            </page>
+                            <page string="Tasks">
+                                <field name="task_ids">
+                                    <tree decoration-bf="message_needaction==True"
+                                          decoration-danger="date_deadline and (date_deadline&lt;current_date)"
+                                          string="Tasks">
+                                        <field name="message_needaction" invisible="1"/>
+                                        <field name="sequence" invisible="not context.get('seq_visible', False)"/>
+                                        <field name="name"/>
+                                        <field name="project_id" invisible="context.get('user_invisible', False)"/>
+                                        <field name="user_id" invisible="context.get('user_invisible', False)"/>
+                                        <field name="date_deadline" invisible="context.get('deadline_visible',True)"/>
+                                        <field name="stage_id" invisible="context.get('set_visible',False)"/>
+                                    </tree>
+
+                                </field>
+                            </page>
+                            <page string="Contacts &amp; Addresses">
+                                <field name="child_ids" mode="kanban"
+                                       context="{'default_parent_id': active_id, 'default_street': street,
+                                        'default_street2': street2, 'default_city': city, 'default_state_id': state_id,
+                                        'default_zip': zip, 'default_country_id': country_id,
+                                        'default_supplier': supplier, 'default_customer': customer,
+                                        'default_lang': lang, 'default_user_id': user_id}">
+                                    <kanban>
+                                        <field name="id"/>
+                                        <field name="color"/>
+                                        <field name="name"/>
+                                        <field name="title"/>
+                                        <field name="type"/>
+                                        <field name="email"/>
+                                        <field name="parent_id"/>
+                                        <field name="is_company"/>
+                                        <field name="function"/>
+                                        <field name="phone"/>
+                                        <field name="street"/>
+                                        <field name="street2"/>
+                                        <field name="zip"/>
+                                        <field name="city"/>
+                                        <field name="country_id"/>
+                                        <field name="mobile"/>
+                                        <field name="state_id"/>
+                                        <field name="image_small"/>
+                                        <field name="lang"/>
+                                        <!-- fields in form x2many view to diminish requests -->
+                                        <field name="comment"/>
+                                        <field name="customer"/>
+                                        <field name="display_name"/>
+                                        <field name="supplier"/>
+                                        <templates>
+                                            <t t-name="kanban-box">
+                                                <t t-set="color" t-value="kanban_color(record.color.raw_value)"/>
+                                                <div t-att-class="color + (record.title.raw_value == 1 ? ' oe_kanban_color_alert' : '') + ' oe_kanban_global_click'">
+                                                    <div class="o_kanban_image">
+                                                        <img alt="" t-if="record.image_small.raw_value"
+                                                             t-att-src="kanban_image('res.partner', 'image_small', record.id.raw_value)"/>
+                                                        <t t-if="!record.image_small.raw_value">
+                                                            <img alt="Delivery"
+                                                                 t-if="record.type.raw_value === 'delivery'"
+                                                                 t-att-src='_s + "/base/static/img/truck.png"'/>
+                                                            <img alt="Invoice"
+                                                                 t-if="record.type.raw_value === 'invoice'"
+                                                                 t-att-src='_s + "/base/static/img/money.png"'/>
+                                                            <t t-if="record.type.raw_value !== 'invoice' &amp;&amp; record.type.raw_value !== 'delivery'">
+                                                                <img alt="Logo"
+                                                                     t-if="record.is_company.raw_value === true"
+                                                                     t-att-src='_s + "/base/static/img/company_image.png"'/>
+                                                                <img alt="Avatar"
+                                                                     t-if="record.is_company.raw_value === false"
+                                                                     t-att-src='_s + "/base/static/img/avatar.png"'/>
+                                                            </t>
+                                                        </t>
+                                                    </div>
+                                                    <div class="oe_kanban_details">
+                                                        <field name="name"/>
+                                                        <div t-if="record.function.raw_value">
+                                                            <field name="function"/>
+                                                        </div>
+                                                        <div t-if="record.email.raw_value">
+                                                            <field name="email" widget="email"/>
+                                                        </div>
+                                                        <div t-if="record.type.raw_value != 'contact'">
+                                                            <div>
+                                                                <field name="zip"/>
+                                                                <field name="city"/>
+                                                            </div>
+                                                            <field t-if="record.state_id.raw_value" name="state_id"/>
+                                                            <field name="country_id"/>
+                                                        </div>
+                                                        <div t-if="record.phone.raw_value">Phone:
+                                                            <field name="phone" widget="phone"/>
+                                                        </div>
+                                                        <div t-if="record.mobile.raw_value">Mobile:
+                                                            <field name="mobile" widget="phone"/>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </t>
+                                        </templates>
+                                    </kanban>
+                                    <form string="Contact / Address">
+                                        <sheet>
+                                            <!-- parent_id and type fields needed in attrs in base_address_city module which overwrites
+                                            _fields_view_get() of partner. It would be better to put those fields there but the web client
+                                            dosen't support when a field is displayed several times in the same view.-->
+                                            <field name="type" required="1" widget="radio"
+                                                   options="{'horizontal': true}"/>
+                                            <field name="parent_id" invisible="1"/>
+                                            <hr/>
+                                            <group>
+                                                <group attrs="{'invisible': [('type','=', 'contact')]}">
+                                                    <label for="street" string="Address"/>
+                                                    <div>
+                                                        <div class="o_address_format" name="div_address">
+                                                            <field name="street" placeholder="Street..."
+                                                                   class="o_address_street"/>
+                                                            <field name="street2" placeholder="Street 2..."
+                                                                   class="o_address_street"/>
+                                                            <field name="city" placeholder="City"
+                                                                   class="o_address_city"/>
+                                                            <field name="state_id" class="o_address_state"
+                                                                   placeholder="State" options='{"no_open": True}'
+                                                                   context="{'country_id': country_id, 'zip': zip}"/>
+                                                            <field name="zip" placeholder="ZIP" class="o_address_zip"/>
+                                                            <field name="country_id" placeholder="Country"
+                                                                   class="o_address_country"
+                                                                   options='{"no_open": True, "no_create": True}'/>
+                                                        </div>
+                                                    </div>
+                                                </group>
+                                                <group>
+                                                    <field name="name" string="Contact Name"
+                                                           attrs="{'required' : [('type', '=', 'contact')]}"/>
+                                                    <field name="title" placeholder="e.g. Mr."
+                                                           attrs="{'invisible': [('type','!=', 'contact')]}"/>
+                                                    <field name="function" placeholder="e.g. Sales Director"
+                                                           attrs="{'invisible': [('type','!=', 'contact')]}"/>
+                                                    <field name="email"/>
+                                                    <field name="phone" widget="phone"/>
+                                                    <field name="mobile" widget="phone"/>
+                                                    <field name="comment" placeholder="internal note..."/>
+                                                </group>
+                                            </group>
+                                            <field name="supplier" invisible="True"/>
+                                            <field name="customer" invisible="True"/>
+                                            <field name="lang" invisible="True"/>
+                                            <field name="image" invisible="True"/>
+                                            <field name="user_id" invisible="True"/>
+                                        </sheet>
+                                    </form>
+                                </field>
+                            </page>
+                            <page string="Calendar Events">
+                                <field name="meeting_ids">
+                                    <tree string="Meetings" decoration-bf="message_needaction==True">
+                                        <field name="name" string="Subject"/>
+                                        <field name="allday" invisible="True"/>
+                                        <field name="start" string="Start Date"/>
+                                        <field name="stop" string="End Date"/>
+                                        <field name="partner_ids"/>
+                                        <field name="location"/>
+                                        <field name="state" invisible="True"/>
+                                        <field name="duration" widget="float_time"/>
+                                        <field name="message_needaction" invisible="1"/>
+                                    </tree>
+                                </field>
+                            </page>
+                            <page string="Activities">
+                                <field name="activity_ids">
+                                    <tree string="Activities">
+                                        <field name="display_name"/>
+                                        <field name="date_deadline"/>
+                                        <field name="summary"/>
+                                    </tree>
+                                </field>
+                            </page>
+                        </notebook>
+                    </sheet>
+                    <div class="oe_chatter">
+                        <field name="message_follower_ids" widget="mail_followers"/>
+                        <field name="activity_ids" widget="mail_activity"/>
+                        <field name="message_ids" widget="mail_thread" options="{'post_refresh': 'recipients'}"/>
+                    </div>
+                </form>
+            </field>
+        </record>
+
+        <record id="action_original_partner_view_action" model="ir.actions.act_window">
+            <field name="name">Contacts</field>
+            <field name="type">ir.actions.act_window</field>
+            <field name="res_model">res.partner</field>
+            <field name="view_type">form</field>
+            <field name="view_mode">kanban,tree,form</field>
+        </record>
+
+        <record id="action_original_partner_tree_view_action" model="ir.actions.act_window.view">
+            <field name="act_window_id" ref="action_original_partner_view_action"/>
+            <field name="sequence" eval="2"/>
+            <field name="view_mode">tree</field>
+            <field name="view_id" ref="base.view_partner_tree"/>
+        </record>
+
+        <record id="action_original_partner_form_view_action" model="ir.actions.act_window.view">
+            <field name="act_window_id" ref="action_original_partner_view_action"/>
+            <field name="sequence" eval="2"/>
+            <field name="view_mode">form</field>
+            <field name="view_id" ref="partner_design_mockup.partner_view_from_search_partner_original"/>
+        </record>
+
+        <record id="action_original_partner_kanban_view_action" model="ir.actions.act_window.view">
+            <field name="act_window_id" ref="action_original_partner_view_action"/>
+            <field name="sequence" eval="1"/>
+            <field name="view_mode">kanban</field>
+            <field name="view_id" ref="base.res_partner_kanban_view"/>
+        </record>
+
+        <menuitem id="menu_partner_mockup"
+                  parent="contacts.menu_contacts" name="Mockup" sequence="60"/>
+
+        <menuitem id="menu_partner_original" action="action_original_partner_view_action"
+                  parent="menu_partner_mockup" name="Standard View with tabs" sequence="3"/>
+
+    </data>
+</odoo>
