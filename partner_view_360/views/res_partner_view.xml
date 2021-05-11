@@ -794,7 +794,9 @@
   
   <menuitem id="res_partner_employers_menu" name="Employers" 
     action="action_employers" sequence="3"
-    web_icon="partner_view_360,static/description/icon.png" />
+    web_icon="partner_view_360,static/description/icon.png"
+    groups="base.group_system"
+  />
   <menuitem id="res_partner_employers_config_menu" 
     parent="res_partner_employers_menu" name="Configuration" sequence="0" 
     groups="base.group_no_one" />
