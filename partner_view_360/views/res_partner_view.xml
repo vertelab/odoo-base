@@ -99,275 +99,269 @@
       </xpath>
     </field>
   </record>
+
   <record id="view_jobseeker_form" model="ir.ui.view">
     <field name="name">res.partner.form.jobseeker</field>
     <field name="model">res.partner</field>
     <field name="priority">-100</field>
     <field name="arch" type="xml">
       <form string="Jobseeker" class="af_res_partner_form_jobseeker">
-        <sheet>
-          <div style="margin-bottom:1em;">
-            <button name="close_view" type="object">Close</button>
-            <h1>Arbetssökande <field name="name" default_focus="1" placeholder="Name" attrs="{'required' : [('type', '=', 'contact')]}"/></h1>
-            <!-- Visa avaktualiserad eller Lagrad bara om det är så -->
-            <group attrs="{'invisible':[ ('deactualization_date', '=', False ) ]}">
-              <field name="deactualization_date" widget="date"/>
-              <field name="deactualization_reason" attrs="{'invisible':[ ('deactualization_date', '=', False ) ]}"/>
-            </group>
-          </div>
-          <div class="oe_button_box" name="button_box">
-          </div>
 
+        <div style="margin-bottom:1em;">
+          <button name="close_view" type="object">Close</button>
+          <h1>Arbetssökande <field name="name" default_focus="1" placeholder="Name" attrs="{'required' : [('type', '=', 'contact')]}"/></h1>
+          <!-- Visa avaktualiserad eller Lagrad bara om det är så -->
+          <group attrs="{'invisible':[ ('deactualization_date', '=', False ) ]}">
+            <field name="deactualization_date" widget="date"/>
+            <field name="deactualization_reason" attrs="{'invisible':[ ('deactualization_date', '=', False ) ]}"/>
+          </group>
+        </div>
+        <div class="oe_button_box" name="button_box">
+        </div>
 
+        <div>
+          <div string="Personal Information" class="af_column_50 af_personal_information_group">
+            <field name="is_jobseeker" invisible="1" />
+            <field name="parent_id" invisible="1" />
+            <field name="type" invisible="1" />
 
-          <div>
-            <div string="Personal Information" class="af_column_50 af_personal_information_group">
-              <field name="is_jobseeker" invisible="1" />
-              <field name="parent_id" invisible="1" />
-              <field name="type" invisible="1" />
+            <div class="af_field_group">
+              <label for="social_sec_nr" string="Personummer:" class="oe_read_only"/>
+              <field name="social_sec_nr" class="oe_read_only" nolabel="1"/>
+            </div>
 
-              <div class="af_field_group">
-                <label for="social_sec_nr" string="Social security number" class="oe_edit_only"/>
-                <field name="social_sec_nr" nolabel="1" class="oe_edit_only"/>
-              </div>
+            <div class="af_field_group">
+              <label for="phone" string="Telefonummer" class="oe_read_only"/>
+              <field name="phone"/>
+            </div>
 
-              <div class="af_field_group">
-                <label for="social_sec_nr_age" string="Personummer:" class="oe_read_only"/>
-                <field name="social_sec_nr_age" class="oe_read_only" nolabel="1"/>
-              </div>
+            <div class="af_field_group">
+              <label for="mobile" string="Mobilnummer" class="oe_read_only"/>
+              <field name="mobile"/>
+            </div>
 
-              <div class="af_field_group">
-                <label for="phone" string="Telefonummer" class="oe_read_only"/>
-                <field name="phone"/>
-              </div>
+            <div class="af_field_group">
+              <label for="email" string="E-post" class="oe_read_only"/>
+              <field name="email"/>
+            </div>
 
-              <div class="af_field_group">
-                <label for="mobile" string="Mobilnummer" class="oe_read_only"/>
-                <field name="mobile"/>
-              </div>
+            <div class="af_field_group">
+              <!-- folkbokföringsadress, alternativt göra en res partner typ-->
+              <label for="state_name_code" string="Municipality" class="oe_read_only"/>
+              <field name="state_name_code" class="oe_read_only" placeholder="State"/>
+            </div>
 
-              <div class="af_field_group">
-                <label for="email" string="E-post" class="oe_read_only"/>
-                <field name="email"/>
-              </div>
+            <div class="af_field_group">
+              <label for="state_id" string="Municipality" class="oe_edit_only"/>
+              <field name="state_id" class="oe_edit_only"/>
+            </div>
 
-              <div class="af_field_group">
-                <!-- folkbokföringsadress, alternativt göra en res partner typ-->
-                <label for="state_name_code" string="Municipality" class="oe_read_only"/>
-                <field name="state_name_code" class="oe_read_only" placeholder="State"/>
-              </div>
-
-              <div class="af_field_group">
-                <label for="state_id" string="Municipality" class="oe_edit_only"/>
-                <field name="state_id" class="oe_edit_only"/>
-              </div>
-
-              <div class="af_field_group">
-                <label for="street" string="Registered address"/>
-                <div class="oe_read_only">
-                  <div class="o_address_format">
-                    <span class="oe_read_only">
-                      <field name="street" placeholder="Street..." class="o_address_street"/>
-                      <field name="street2" placeholder="Street 2..." class="o_address_street"/>
-                      <span style="margin-right:1em;">
-                        <field name="zip" placeholder="ZIP" class="o_address_zip oe_edit_only"/>
-                        <field name="zip_formated" placeholder="ZIP" class="o_address_zip oe_read_only"/>
-                      </span>
-                      <field name="city" placeholder="City" class="o_address_city"/>
+            <div class="af_field_group">
+              <label for="street" string="Registered address"/>
+              <div class="oe_read_only">
+                <div class="o_address_format">
+                  <span class="oe_read_only">
+                    <field name="street" placeholder="Street..." class="o_address_street"/>
+                    <field name="street2" placeholder="Street 2..." class="o_address_street"/>
+                    <span style="margin-right:1em;">
+                      <field name="zip" placeholder="ZIP" class="o_address_zip oe_edit_only"/>
+                      <field name="zip_formated" placeholder="ZIP" class="o_address_zip oe_read_only"/>
                     </span>
-                  </div>
+                    <field name="city" placeholder="City" class="o_address_city"/>
+                  </span>
                 </div>
-                <field name="country_id" placeholder="Country" class="o_address_country" attrs="{'invisible': True}"/>
               </div>
-            </div>
-
-            <div string="Employment service information"  class="af_column_50 af_employment_service_information_group">
-
-              <div class="af_field_group">
-                <label for="registered_through" class="oe_read_only"/>
-                <field name="registered_through"/>
-              </div>
-
-              <div class="af_field_group">
-                <label for="jobseeker_category_id" string="Jobseeker category" class="oe_edit_only"/>
-                <field name="jobseeker_category_id" options="{'no_create_edit': True}" class="oe_edit_only"/>
-
-                <label for="jobseeker_category" class="oe_read_only"/>
-                <field name="jobseeker_category" class="oe_read_only"/>
-              </div>
-
-              <div class="af_field_group">
-                <label for="customer_since" class="oe_read_only"/>
-                <field name="customer_since" widget="date"/>
-              </div>
-
-              <div class="af_field_group">
-                <label for="office_id" class="oe_edit_only"/>
-                <field name="office_id" options="{'no_create_edit': True}" class="oe_edit_only" nolabel="1"/>
-
-                <label for="office_code_name" class="oe_read_only"/>
-                <field name="office_code_name" class="oe_read_only" string="Kontor" />
-              </div>
-
-              <div class="af_field_group">
-                <label for="user_id" string="Administrative officer" class="oe_edit_only"/>
-                <field name="user_id" nolabel="1" options="{'no_create_edit': True}" class="oe_edit_only"/>
-
-                <label for="user_name_sign" class="oe_read_only"/>
-                <field name="user_name_sign" class="oe_read_only"/>
-              </div>
-
-              <div class="af_field_group">
-                <label for="segment_jobseeker" class="oe_read_only" groups="base.group_no_one"/>
-                <field name="segment_jobseeker" groups="base.group_no_one"/>
-              </div>
-
-              <div class="af_field_group">
-                <label for="customer_id" string="Kundnummer:" class="oe_read_only" groups="base.group_no_one"/>
-                <field name="customer_id" groups="base.group_no_one"/>
-              </div>
-
-              <div class="af_field_group">
-                <label for="share_info_with_employers" class="oe_read_only"/>
-                <field name="share_info_with_employers"/>
-              </div>
-
-              <div class="af_field_group">
-                <label for="sms_reminders" class="oe_read_only"/>
-                <field name="sms_reminders"/>
-              </div>
-
-              <div class="af_field_group">
-                <label for="match_area" class="oe_read_only"/>
-                <field name="match_area"/>
-              </div>
-
+              <field name="country_id" placeholder="Country" class="o_address_country" attrs="{'invisible': True}"/>
             </div>
           </div>
 
-          <div class="af_arbetsokande_installningar">
+          <div string="Employment service information"  class="af_column_50 af_employment_service_information_group">
+
+            <div class="af_field_group">
+              <label for="registered_through" class="oe_read_only"/>
+              <field name="registered_through"/>
+            </div>
+
+            <div class="af_field_group">
+              <label for="jobseeker_category_id" string="Jobseeker category" class="oe_edit_only"/>
+              <field name="jobseeker_category_id" options="{'no_create_edit': True}" class="oe_edit_only"/>
+
+              <label for="jobseeker_category" class="oe_read_only"/>
+              <field name="jobseeker_category" class="oe_read_only"/>
+            </div>
+
+            <div class="af_field_group">
+              <label for="customer_since" class="oe_read_only"/>
+              <field name="customer_since" widget="date"/>
+            </div>
+
+            <div class="af_field_group">
+              <label for="office_id" class="oe_edit_only"/>
+              <field name="office_id" options="{'no_create_edit': True}" class="oe_edit_only" nolabel="1"/>
+
+              <label for="office_code_name" class="oe_read_only"/>
+              <field name="office_code_name" class="oe_read_only" string="Kontor" />
+            </div>
+
+            <div class="af_field_group">
+              <label for="user_id" string="Administrative officer" class="oe_edit_only"/>
+              <field name="user_id" nolabel="1" options="{'no_create_edit': True}" class="oe_edit_only"/>
+
+              <label for="user_name_sign" class="oe_read_only"/>
+              <field name="user_name_sign" class="oe_read_only"/>
+            </div>
+
+            <div class="af_field_group">
+              <label for="segment_jobseeker" class="oe_read_only" groups="base.group_no_one"/>
+              <field name="segment_jobseeker" groups="base.group_no_one"/>
+            </div>
+
+            <div class="af_field_group">
+              <label for="customer_id" string="Kundnummer:" class="oe_read_only" groups="base.group_no_one"/>
+              <field name="customer_id" groups="base.group_no_one"/>
+            </div>
+
+            <div class="af_field_group">
+              <label for="share_info_with_employers" class="oe_read_only"/>
+              <field name="share_info_with_employers"/>
+            </div>
+
+            <div class="af_field_group">
+              <label for="sms_reminders" class="oe_read_only"/>
+              <field name="sms_reminders"/>
+            </div>
+
+            <div class="af_field_group">
+              <label for="match_area" class="oe_read_only"/>
+              <field name="match_area"/>
+            </div>
 
           </div>
-          <notebook>
-            <page string="Upcoming meetings" name="upcoming_meetings" autofocus="autofocus"/>
-            <page string="Previous meetings" name="previous_meetings"/>
-            <page name="contacts_addresses" string="Contacts &amp; Addresses" >
-              <field name="child_ids" mode="kanban" context="{'default_parent_id': active_id, 'default_street': street, 'default_street2': street2, 'default_city': city, 'default_state_id': state_id, 'default_zip': zip, 'default_country_id': country_id}">
-                <kanban>
-                  <field name="id" />
-                  <field name="color" />
-                  <field name="name" />
-                  <field name="title" />
-                  <field name="type" />
-                  <field name="email" />
-                  <field name="parent_id" />
-                  <field name="is_company" />
-                  <field name="function" />
-                  <field name="phone" />
-                  <field name="address_co" />
-                  <field name="street" />
-                  <field name="street2" />
-                  <field name="zip" />
-                  <field name="city" />
-                  <field name="country_id" />
-                  <field name="mobile" />
-                  <field name="state_id" />
-                  <field name="image_small" />
-                  <!-- fields in form x2many view to diminish requests -->
-                  <field name="comment" />
-                  <field name="display_name" />
-                  <templates>
-                    <t t-name="kanban-box">
-                      <t t-set="color" t-value="kanban_color(record.color.raw_value)" />
-                      <div t-att-class="color + (record.title.raw_value == 1 ? ' oe_kanban_color_alert' : '') + ' oe_kanban_global_click'">
-                        <div class="o_kanban_image">
-                          <img alt="" t-if="record.image_small.raw_value" t-att-src="kanban_image('res.partner', 'image_small', record.id.raw_value)" />
-                          <t t-if="!record.image_small.raw_value">
-                            <img alt="Delivery" t-if="record.type.raw_value === 'delivery'" t-att-src="_s + &quot;/base/static/img/truck.png&quot;" />
-                            <img alt="Invoice" t-if="record.type.raw_value === 'invoice'" t-att-src="_s + &quot;/base/static/img/money.png&quot;" />
-                            <t t-if="record.type.raw_value !== 'invoice' &amp;&amp; record.type.raw_value !== 'delivery'">
-                              <img alt="Logo" t-if="record.is_company.raw_value === true" t-att-src="_s + &quot;/base/static/img/company_image.png&quot;" />
-                              <img alt="Avatar" t-if="record.is_company.raw_value === false" t-att-src="_s + &quot;/base/static/img/avatar.png&quot;" />
-                            </t>
+        </div>
+
+        <div class="af_arbetsokande_installningar">
+
+        </div>
+        <notebook>
+          <page string="Upcoming meetings" name="upcoming_meetings" autofocus="autofocus"/>
+          <page string="Previous meetings" name="previous_meetings"/>
+          <page name="contacts_addresses" string="Contacts &amp; Addresses" >
+            <field name="child_ids" mode="kanban" context="{'default_parent_id': active_id, 'default_street': street, 'default_street2': street2, 'default_city': city, 'default_state_id': state_id, 'default_zip': zip, 'default_country_id': country_id}">
+              <kanban>
+                <field name="id" />
+                <field name="color" />
+                <field name="name" />
+                <field name="title" />
+                <field name="type" />
+                <field name="email" />
+                <field name="parent_id" />
+                <field name="is_company" />
+                <field name="function" />
+                <field name="phone" />
+                <field name="address_co" />
+                <field name="street" />
+                <field name="street2" />
+                <field name="zip" />
+                <field name="city" />
+                <field name="country_id" />
+                <field name="mobile" />
+                <field name="state_id" />
+                <field name="image_small" />
+                <!-- fields in form x2many view to diminish requests -->
+                <field name="comment" />
+                <field name="display_name" />
+                <templates>
+                  <t t-name="kanban-box">
+                    <t t-set="color" t-value="kanban_color(record.color.raw_value)" />
+                    <div t-att-class="color + (record.title.raw_value == 1 ? ' oe_kanban_color_alert' : '') + ' oe_kanban_global_click'">
+                      <div class="o_kanban_image">
+                        <img alt="" t-if="record.image_small.raw_value" t-att-src="kanban_image('res.partner', 'image_small', record.id.raw_value)" />
+                        <t t-if="!record.image_small.raw_value">
+                          <img alt="Delivery" t-if="record.type.raw_value === 'delivery'" t-att-src="_s + &quot;/base/static/img/truck.png&quot;" />
+                          <img alt="Invoice" t-if="record.type.raw_value === 'invoice'" t-att-src="_s + &quot;/base/static/img/money.png&quot;" />
+                          <t t-if="record.type.raw_value !== 'invoice' &amp;&amp; record.type.raw_value !== 'delivery'">
+                            <img alt="Logo" t-if="record.is_company.raw_value === true" t-att-src="_s + &quot;/base/static/img/company_image.png&quot;" />
+                            <img alt="Avatar" t-if="record.is_company.raw_value === false" t-att-src="_s + &quot;/base/static/img/avatar.png&quot;" />
                           </t>
+                        </t>
+                      </div>
+                      <div class="oe_kanban_details">
+                        <field name="name" />
+                        <div t-if="record.function.raw_value">
+                          <field name="function" />
                         </div>
-                        <div class="oe_kanban_details">
-                          <field name="name" />
-                          <div t-if="record.function.raw_value">
-                            <field name="function" />
+                        <div t-if="record.email.raw_value">
+                          <field name="email" widget="email" />
+                        </div>
+                        <div t-if="record.type.raw_value != 'contact'">
+                          <div>
+                            <field name="street"/><br/>
+                            <field name="zip_formated" />
+                            <field name="city" />
                           </div>
-                          <div t-if="record.email.raw_value">
-                            <field name="email" widget="email" />
-                          </div>
-                          <div t-if="record.type.raw_value != 'contact'">
-                            <div>
-                              <field name="street"/><br/>
-                              <field name="zip_formated" />
-                              <field name="city" />
-                            </div>
-                            Municipality:
-                            <field t-if="record.state_id.raw_value" name="state_id" />
-                            <field name="country_id" />
-                          </div>
-                          <div t-if="record.phone.raw_value">
-                            Phone:
-                            <field name="phone" />
-                          </div>
-                          <div t-if="record.mobile.raw_value">
-                            Mobile:
-                            <field name="mobile" />
-                          </div>
+                          Municipality:
+                          <field t-if="record.state_id.raw_value" name="state_id" />
+                          <field name="country_id" />
+                        </div>
+                        <div t-if="record.phone.raw_value">
+                          Phone:
+                          <field name="phone" />
+                        </div>
+                        <div t-if="record.mobile.raw_value">
+                          Mobile:
+                          <field name="mobile" />
                         </div>
                       </div>
-                    </t>
-                  </templates>
-                </kanban>
-                <form string="Contact / Address">
-                  <sheet>
-                    <!-- parent_id and type fields needed in attrs in base_address_city module which overwrites
-                         _fields_view_get() of partner. It would be better to put those fields there but the web client
-                         dosen't support when a field is displayed several times in the same view.-->
-                    <field name="type" required="1" widget="radio" options="{'horizontal': true}" />
-                    <field name="parent_id" invisible="1" />
-                    <hr />
-                    <group>
-                      <group attrs="{'invisible': [('type','=', 'contact')]}">
-                        <label for="street" string="Address" />
-                        <div>
-                          <div class="o_address_format" name="div_address">
-                            <field name="address_co" placeholder="c/o..." class="o_address_street" />
-                            <field name="street" placeholder="Street..." class="o_address_street" />
-                            <field name="street2" placeholder="Street 2..." class="o_address_street" />
-                            <span style="margin-right:1em;">
-                              <field name="zip" placeholder="ZIP" class="o_address_zip oe_edit_only" />
-                              <field name="zip_formated" placeholder="ZIP" class="o_address_zip oe_read_only" />
-                            </span>
-                            <field name="city" placeholder="City" class="o_address_city" />
-                            <field name="country_id" placeholder="Country" class="o_address_country" options="{&quot;no_open&quot;: True, &quot;no_create&quot;: True}" />
-                          </div>
+                    </div>
+                  </t>
+                </templates>
+              </kanban>
+              <form string="Contact / Address">
+                <sheet>
+                  <!-- parent_id and type fields needed in attrs in base_address_city module which overwrites
+                       _fields_view_get() of partner. It would be better to put those fields there but the web client
+                       dosen't support when a field is displayed several times in the same view.-->
+                  <field name="type" required="1" widget="radio" options="{'horizontal': true}" />
+                  <field name="parent_id" invisible="1" />
+                  <hr />
+                  <group>
+                    <group attrs="{'invisible': [('type','=', 'contact')]}">
+                      <label for="street" string="Address" />
+                      <div>
+                        <div class="o_address_format" name="div_address">
+                          <field name="address_co" placeholder="c/o..." class="o_address_street" />
+                          <field name="street" placeholder="Street..." class="o_address_street" />
+                          <field name="street2" placeholder="Street 2..." class="o_address_street" />
+                          <span style="margin-right:1em;">
+                            <field name="zip" placeholder="ZIP" class="o_address_zip oe_edit_only" />
+                            <field name="zip_formated" placeholder="ZIP" class="o_address_zip oe_read_only" />
+                          </span>
+                          <field name="city" placeholder="City" class="o_address_city" />
+                          <field name="country_id" placeholder="Country" class="o_address_country" options="{&quot;no_open&quot;: True, &quot;no_create&quot;: True}" />
                         </div>
-                        <label for="state_name_code" string="Municipality" class="oe_read_only" />
-                        <field name="state_name_code" class="oe_read_only" placeholder="State" nolabel="1" />
-                        <label for="state_id" string="Municipality" class="oe_edit_only" />
-                        <field name="state_id" class="oe_edit_only" nolabel="1" />
-                      </group>
-                      <group>
-                        <field name="name" string="Contact Name" attrs="{'required' : [('type', '=', 'contact')]}" />
-                        <field name="title" placeholder="e.g. Mr." attrs="{'invisible': [('type','!=', 'contact')]}" />
-                        <field name="function" placeholder="e.g. Sales Director" attrs="{'invisible': [('type','!=', 'contact')]}" />
-                        <field name="email" attrs="{'invisible': [('type','!=', 'contact')]}"/>
-                        <field name="phone" widget="phone" attrs="{'invisible': [('type','!=', 'contact')]}"/>
-                        <field name="mobile" widget="phone" attrs="{'invisible': [('type','!=', 'contact')]}"/>
-                        <field name="comment" placeholder="internal note..." />
-                      </group>
+                      </div>
+                      <label for="state_name_code" string="Municipality" class="oe_read_only" />
+                      <field name="state_name_code" class="oe_read_only" placeholder="State" nolabel="1" />
+                      <label for="state_id" string="Municipality" class="oe_edit_only" />
+                      <field name="state_id" class="oe_edit_only" nolabel="1" />
                     </group>
-                    <field name="image" invisible="True" />
-                  </sheet>
-                </form>
-              </field>
-            </page>
-          </notebook>
-        </sheet>
+                    <group>
+                      <field name="name" string="Contact Name" attrs="{'required' : [('type', '=', 'contact')]}" />
+                      <field name="title" placeholder="e.g. Mr." attrs="{'invisible': [('type','!=', 'contact')]}" />
+                      <field name="function" placeholder="e.g. Sales Director" attrs="{'invisible': [('type','!=', 'contact')]}" />
+                      <field name="email" attrs="{'invisible': [('type','!=', 'contact')]}"/>
+                      <field name="phone" widget="phone" attrs="{'invisible': [('type','!=', 'contact')]}"/>
+                      <field name="mobile" widget="phone" attrs="{'invisible': [('type','!=', 'contact')]}"/>
+                      <field name="comment" placeholder="internal note..." />
+                    </group>
+                  </group>
+                  <field name="image" invisible="True" />
+                </sheet>
+              </form>
+            </field>
+          </page>
+        </notebook>
+
       </form>
     </field>
   </record>
@@ -399,7 +393,7 @@
                 <strong class="o_kanban_record_title">
                   <field name="name" />
                 </strong>
-                <div class="o_kanban_tags_section">
+          sheet      <div class="o_kanban_tags_section">
                   <ul>
                     <li>
                       <field name="city" />
