@@ -18,14 +18,13 @@
                                 <field name="user_id" readonly="1"/>
                                 <field name="email" readonly="1"/>
                                 <field name="login_reason" readonly="1"/>
-                                <field name="auditor_comment" groups="odoo_base_login.security_auditor_login"/>
-
+                                <field name="auditor_comment" string="For the Login-Reason Auditor:"/>
                             </group>
                             <group>
                                 <field name="ticket_ID" readonly="1"/>
                                 <field name="logged_in" readonly="1"/>
                                 <field name="logged_out" readonly="1"/>
-                                <field name="length" />
+                                <field name="length" readonly="1"/>
                                 <field name="active_length"/>
                             </group>
                         </group>
@@ -91,9 +90,8 @@
         </record>
 
         <!-- Menuitem for base login access -->
-        <menuitem id="access_log_main_menu" parent="base.menu_administration" sequence="3" name="Login Access log"/>
-        <menuitem id="base_login_menu_access" parent="access_log_main_menu" name="Login Access log"
-                  action="action_base_login_tree"/>
+        <menuitem id="base_login_menu_access" name="Login Access log"
+                  action="action_base_login_tree" groups="odoo_base_login.show_login_reason"/>
 
     </data>
 </odoo>

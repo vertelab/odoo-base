@@ -73,7 +73,7 @@ class Session(main.Session):
 
     @http.route('/web/session/logout', type='http', auth="none")
     def logout(self, redirect='/web'):
-        audit_log = request.env['base.login.reason'].search(
+        audit_log = request.env['base.login.reason'].sudo().search(
             [('user_id', '=', request.session.uid),('logged_out','=',False)], limit=1)
         if audit_log:
             audit_log.logged_out = datetime.now()
