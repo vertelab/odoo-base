@@ -5,14 +5,6 @@
     <field name="model">res.partner</field>
     <field name="inherit_id" ref="base.view_partner_form" />
     <field name="arch" type="xml">
-      <!-- TODO: 
-           
-           vid sökning heter administrative officer (user_id) fortfarande säljare, kanske ska ändra genom 
-           en translation fil eller på liknande sätt så att alla instanser av säljare blir till handläggare
-           alternativt byta ut fältet helt.
-           
-           borde ändra implementering, administrative officer bör vara eget fält, medan user_id är gömd, men används för annat.
-      -->
       <xpath expr="//button[@name='toggle_active']" position="attributes">
         <attribute name="invisible">1</attribute>
       </xpath>
@@ -23,18 +15,10 @@
         <attribute name="string">Administrative officer</attribute>
       </xpath>
       <field name="type" position="before">
-        <!-- behåll ifall det behövs i framtiden -->
-        <!-- <span>
-             <label for="org_or_social_sec_nr" string="Organization number" attrs="{'invisible':[('is_company', '=', False)]}"/>
-             <label for="org_or_social_sec_nr" string="Social security number" attrs="{'invisible':[('is_company', '=', True)]}"/>
-             </span> -->
         <field name="company_registry" />
         <field name="cfar" attrs="{'invisible':[('is_company', '=', False)]}" />
       </field>
       <field name="barcode" position="after">
-<!--
-        <field name="office_id" options="{'no_create_edit': True}"  />
--->
         <field name="temp_officer_id" widget="many2many_tags" options="{'no_create_edit': True}" />
         <field name="is_jobseeker" />
         <field name="is_independent_partner" />
@@ -71,6 +55,7 @@
       </xpath>
     </field>
   </record>
+
   <record id="view_partner_tree" model="ir.ui.view">
     <field name="name">res.partner.view.tree.inherit.view_360</field>
     <field name="model">res.partner</field>
@@ -81,6 +66,7 @@
       </xpath>
     </field>
   </record>
+
   <record id="view_partner_select_employee360" model="ir.ui.view">
     <field name="name">res.partner.view.select.inherit.view_360</field>
     <field name="model">res.partner</field>
@@ -295,21 +281,12 @@
                         </div>
                         <div t-if="record.type.raw_value != 'contact'">
                           <div>
+                            <field name="address_co"/><br/>
                             <field name="street"/><br/>
                             <field name="zip_formated" />
                             <field name="city" />
                           </div>
-                          Municipality:
-                          <field t-if="record.state_id.raw_value" name="state_id" />
                           <field name="country_id" />
-                        </div>
-                        <div t-if="record.phone.raw_value">
-                          Phone:
-                          <field name="phone" />
-                        </div>
-                        <div t-if="record.mobile.raw_value">
-                          Mobile:
-                          <field name="mobile" />
                         </div>
                       </div>
                     </div>
@@ -340,19 +317,6 @@
                           <field name="country_id" placeholder="Country" class="o_address_country" options="{&quot;no_open&quot;: True, &quot;no_create&quot;: True}" />
                         </div>
                       </div>
-                      <label for="state_name_code" string="Municipality" class="oe_read_only" />
-                      <field name="state_name_code" class="oe_read_only" placeholder="State" nolabel="1" />
-                      <label for="state_id" string="Municipality" class="oe_edit_only" />
-                      <field name="state_id" class="oe_edit_only" nolabel="1" />
-                    </group>
-                    <group>
-                      <field name="name" string="Contact Name" attrs="{'required' : [('type', '=', 'contact')]}" />
-                      <field name="title" placeholder="e.g. Mr." attrs="{'invisible': [('type','!=', 'contact')]}" />
-                      <field name="function" placeholder="e.g. Sales Director" attrs="{'invisible': [('type','!=', 'contact')]}" />
-                      <field name="email" attrs="{'invisible': [('type','!=', 'contact')]}"/>
-                      <field name="phone" widget="phone" attrs="{'invisible': [('type','!=', 'contact')]}"/>
-                      <field name="mobile" widget="phone" attrs="{'invisible': [('type','!=', 'contact')]}"/>
-                      <field name="comment" placeholder="internal note..." />
                     </group>
                   </group>
                   <field name="image" invisible="True" />
@@ -361,10 +325,10 @@
             </field>
           </page>
         </notebook>
-
       </form>
     </field>
   </record>
+
   <record model="ir.ui.view" id="view_jobseeker_tree">
     <field name="name">res.partner.jobseeker.tree</field>
     <field name="model">res.partner</field>
@@ -377,6 +341,7 @@
       </tree>
     </field>
   </record>
+
   <record model="ir.ui.view" id="view_jobseeker_kanban">
     <field name="name">res.partner.jobseeker.kanban</field>
     <field name="model">res.partner</field>
@@ -413,6 +378,7 @@
       </kanban>
     </field>
   </record>
+
   <record id="view_jobseeker_filter" model="ir.ui.view">
     <field name="name">res.partner.select</field>
     <field name="model">res.partner</field>
@@ -441,6 +407,7 @@
       </search>
     </field>
   </record>
+
   <record id="action_jobseekers" model="ir.actions.act_window">
     <field name="name">Jobseekers</field>
     <field name="res_model">res.partner</field>
@@ -453,12 +420,14 @@
     <field name="domain" eval="[('is_jobseeker', '=', True)]" />
     <field name="context" eval="{'default_is_jobseeker': True}" />
   </record>
+
   <record id="action_jobseeker_form_view" model="ir.actions.act_window.view">
     <field eval="2" name="sequence" />
     <field name="view_mode">form</field>
     <field name="view_id" ref="view_jobseeker_form" />
     <field name="act_window_id" ref="action_jobseekers" />
   </record>
+
   <record id="action_jobseeker_kanban_view" model="ir.actions.act_window.view">
     <field eval="0" name="sequence" />
     <field name="view_mode">kanban</field>
@@ -599,12 +568,11 @@
                           </div>
                           <div t-if="record.type.raw_value != 'contact'">
                             <div>
+                              <field name="address_co" /><br/>
                               <field name="street" /><br/>
                               <field name="zip" />
                               <field name="city" />
                             </div>
-                            Municipality:
-                            <field t-if="record.state_id.raw_value" name="state_id" />
                             <field name="country_id" />
                           </div>
                           <div t-if="record.phone.raw_value">
@@ -640,22 +608,9 @@
                               <field name="zip" placeholder="ZIP" class="o_address_zip" />
                             </span>
                             <field name="city" placeholder="City" class="o_address_city" />
-                            <label for="state_name_code" string="Municipality" class="oe_read_only" />
-                            <field name="state_name_code" class="oe_read_only" placeholder="State" nolabel="1" />
-                            <label for="state_id" string="Municipality" class="oe_edit_only" />
-                            <field name="state_id" class="oe_edit_only" nolabel="1" />
                             <field name="country_id" placeholder="Country" class="o_address_country" options="{&quot;no_open&quot;: True, &quot;no_create&quot;: True}" />
                           </div>
                         </div>
-                      </group>
-                      <group>
-                        <field name="name" string="Contact Name" attrs="{'required' : [('type', '=', 'contact')]}" />
-                        <field name="title" placeholder="e.g. Mr." attrs="{'invisible': [('type','!=', 'contact')]}" />
-                        <field name="function" placeholder="e.g. Sales Director" attrs="{'invisible': [('type','!=', 'contact')]}" />
-                        <field name="email" />
-                        <field name="phone" widget="phone" />
-                        <field name="mobile" widget="phone" />
-                        <field name="comment" placeholder="internal note..." />
                       </group>
                     </group>
                     <field name="supplier" invisible="True" />
@@ -672,6 +627,7 @@
       </form>
     </field>
   </record>
+
   <record model="ir.ui.view" id="view_employer_kanban">
     <field name="name">res.partner.employer.kanban</field>
     <field name="model">res.partner</field>
@@ -713,6 +669,7 @@
       </kanban>
     </field>
   </record>
+
   <record model="ir.ui.view" id="view_employer_tree">
     <field name="name">res.partner.employer.tree</field>
     <field name="model">res.partner</field>
@@ -726,6 +683,7 @@
       </tree>
     </field>
   </record>
+
   <record id="view_employer_filter" model="ir.ui.view">
     <field name="name">res.partner.select</field>
     <field name="model">res.partner</field>
@@ -756,6 +714,7 @@
       </search>
     </field>
   </record>
+
   <record id="action_employers" model="ir.actions.act_window">
     <field name="name">Employers</field>
     <field name="res_model">res.partner</field>
@@ -767,18 +726,21 @@
     </field>
     <field name="domain" eval="[('is_employer', '=', True)]" />
   </record>
+
   <record id="action_employer_form_view" model="ir.actions.act_window.view">
     <field eval="2" name="sequence" />
     <field name="view_mode">form</field>
     <field name="view_id" ref="view_partner_employer_form" />
     <field name="act_window_id" ref="action_employers" />
   </record>
+
   <record id="action_employer_kanban_view" model="ir.actions.act_window.view">
     <field eval="0" name="sequence" />
     <field name="view_mode">kanban</field>
     <field name="view_id" ref="view_employer_kanban" />
     <field name="act_window_id" ref="action_employers" />
   </record>
+
   <record id="action_employer_tree_view" model="ir.actions.act_window.view">
     <field eval="1" name="sequence" />
     <field name="view_mode">tree</field>
@@ -791,11 +753,14 @@
     web_icon="partner_view_360,static/description/icon.png"
     groups="base.group_system"
   />
+
   <menuitem id="res_partner_employers_config_menu" 
     parent="res_partner_employers_menu" name="Configuration" sequence="0" 
     groups="base.group_no_one" />
-  <menuitem id="menu_ssyk_config" parent="res_partner_employers_config_menu" 
+
+  <menuitem id="menu_ssyk_config" parent="res_partner_employers_config_menu"
     action="res_ssyk.action_ssyk_form" sequence="2" />
+
   <menuitem id="menu_sni_config" parent="res_partner_employers_config_menu" 
     action="res_sni.action_sni_form" sequence="1" />
 
@@ -807,6 +772,7 @@
     <field name="search_view_id" ref="view_jobseeker_filter" />
     <field name="domain" eval="[('is_jobseeker', '=', True)]" />
   </record>
+
   <record model="ir.actions.server" id="action_update_name_ssn">
       <field name="name">Update Partner Breadcrumb</field>
       <field name="model_id" ref="base.model_res_partner"/>

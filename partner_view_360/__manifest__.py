@@ -21,7 +21,7 @@
 
 {
     'name': 'Partner 360 view',
-    'version': '12.0.0.2.5',
+    'version': '12.0.0.2.6',
     'category': '',
     'description': """
 Module for employee 360 view
@@ -41,7 +41,8 @@ v12.0.0.2.1 AFC-1937: Added support for c/o addresses. \n
 v12.0.0.2.2 AFC-1988: Better handling of bankid approvals. \n
 v12.0.0.2.3 AFC-2072: Removed field eidentification from views. \n
 v12.0.0.2.4 AFC-2097: Misc bugfixes. \n
-v12.0.0.2.5 AFC-2168: Changed menu groups.
+v12.0.0.2.5 AFC-2168: Changed menu groups. \n
+v12.0.0.2.6 AFC-2161: Removed state from some address views. \n
 \n
 """,
     'author': 'Vertel AB',
