@@ -198,8 +198,8 @@
             </div>
 
             <div class="af_field_group">
-              <label for="segment_jobseeker" class="oe_read_only" groups="base.group_no_one"/>
-              <field name="segment_jobseeker" groups="base.group_no_one"/>
+              <label for="segment_jobseeker" />
+              <field name="segment_jobseeker" />
             </div>
 
             <div class="af_field_group">

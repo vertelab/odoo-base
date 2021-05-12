@@ -21,7 +21,7 @@
 
 {
     'name': 'Partner 360 view',
-    'version': '12.0.0.2.7',
+    'version': '12.0.0.2.8',
     'category': '',
     'description': """
 Module for employee 360 view
@@ -44,6 +44,7 @@ v12.0.0.2.4 AFC-2097: Misc bugfixes. \n
 v12.0.0.2.5 AFC-2168: Changed menu groups. \n
 v12.0.0.2.6 AFC-2161: Removed state from some address views. \n
 v12.0.0.2.7 AFC-2161: Removed thumbnail image for addresses. \n
+v12.0.0.2.8 AFC-2229: made segment_jobseeker visible for users \n
 \n
 """,
     'author': 'Vertel AB',
