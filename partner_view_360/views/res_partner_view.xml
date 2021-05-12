@@ -165,6 +165,7 @@
               <field name="office_id" options="{'no_create_edit': True}" class="oe_edit_only" nolabel="1"/>
               <field name="office_code_name" class="oe_read_only"/>
               <field name="kromtype" />
+              <field name="match_area" />
               <field name="share_info_with_employers" />
               <field name="sms_reminders" />
               <field name="segment_jobseeker" groups="base.group_no_one" />

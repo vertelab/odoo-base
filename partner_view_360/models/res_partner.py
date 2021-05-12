@@ -100,7 +100,7 @@ class ResPartner(models.Model):
         ],
         string="Rusta och matcha-område",
     )
-    # match_area = fields.Boolean(string="Match Area")
+    match_area = fields.Boolean(string="Match Area")
     share_info_with_employers = fields.Boolean(
         string="Share name and address with employers"
     ) #is added in partner_extension_af
