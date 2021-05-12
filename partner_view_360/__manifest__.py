@@ -21,7 +21,7 @@
 
 {
     'name': 'Partner 360 view',
-    'version': '12.0.0.2.6',
+    'version': '12.0.0.2.7',
     'category': '',
     'description': """
 Module for employee 360 view
@@ -43,6 +43,7 @@ v12.0.0.2.3 AFC-2072: Removed field eidentification from views. \n
 v12.0.0.2.4 AFC-2097: Misc bugfixes. \n
 v12.0.0.2.5 AFC-2168: Changed menu groups. \n
 v12.0.0.2.6 AFC-2161: Removed state from some address views. \n
+v12.0.0.2.7 AFC-2161: Removed thumbnail image for addresses. \n
 \n
 """,
     'author': 'Vertel AB',
