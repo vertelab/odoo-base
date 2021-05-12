@@ -310,6 +310,7 @@ class ResPartner(models.Model):
 
                                 # Send request to AIS-F
                                 success = env_new["res.partner"]._aisf_sync_jobseeker(
+                                    None,
                                     AISF_ASOK_SYNC_PROCESS,
                                     customer_id,
                                     headers["message-id"]
