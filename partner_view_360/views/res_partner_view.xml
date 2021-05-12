@@ -112,8 +112,13 @@
             <field name="type" invisible="1" />
 
             <div class="af_field_group">
-              <label for="social_sec_nr" string="Personnummer:" class="oe_read_only"/>
-              <field name="social_sec_nr" class="oe_read_only" nolabel="1"/>
+              <label for="social_sec_nr" string="Social security number" class="oe_edit_only"/>
+              <field name="social_sec_nr" nolabel="1" class="oe_edit_only"/>
+            </div>
+
+            <div class="af_field_group">
+              <label for="social_sec_nr_age" string="Personummer:" class="oe_read_only"/>
+              <field name="social_sec_nr_age" class="oe_read_only" nolabel="1"/>
             </div>
 
             <div class="af_field_group">
@@ -198,8 +203,8 @@
             </div>
 
             <div class="af_field_group">
-              <label for="segment_jobseeker" class="oe_read_only" groups="base.group_no_one"/>
-              <field name="segment_jobseeker" groups="base.group_no_one"/>
+              <label for="segment_jobseeker" />
+              <field name="segment_jobseeker" />
             </div>
 
             <div class="af_field_group">
@@ -260,17 +265,6 @@
                   <t t-name="kanban-box">
                     <t t-set="color" t-value="kanban_color(record.color.raw_value)" />
                     <div t-att-class="color + (record.title.raw_value == 1 ? ' oe_kanban_color_alert' : '') + ' oe_kanban_global_click'">
-                      <div class="o_kanban_image">
-                        <img alt="" t-if="record.image_small.raw_value" t-att-src="kanban_image('res.partner', 'image_small', record.id.raw_value)" />
-                        <t t-if="!record.image_small.raw_value">
-                          <img alt="Delivery" t-if="record.type.raw_value === 'delivery'" t-att-src="_s + &quot;/base/static/img/truck.png&quot;" />
-                          <img alt="Invoice" t-if="record.type.raw_value === 'invoice'" t-att-src="_s + &quot;/base/static/img/money.png&quot;" />
-                          <t t-if="record.type.raw_value !== 'invoice' &amp;&amp; record.type.raw_value !== 'delivery'">
-                            <img alt="Logo" t-if="record.is_company.raw_value === true" t-att-src="_s + &quot;/base/static/img/company_image.png&quot;" />
-                            <img alt="Avatar" t-if="record.is_company.raw_value === false" t-att-src="_s + &quot;/base/static/img/avatar.png&quot;" />
-                          </t>
-                        </t>
-                      </div>
                       <div class="oe_kanban_details">
                         <field name="name" />
                         <div t-if="record.function.raw_value">
@@ -547,17 +541,6 @@
                     <t t-name="kanban-box">
                       <t t-set="color" t-value="kanban_color(record.color.raw_value)" />
                       <div t-att-class="color + (record.title.raw_value == 1 ? ' oe_kanban_color_alert' : '') + ' oe_kanban_global_click'">
-                        <div class="o_kanban_image">
-                          <img alt="" t-if="record.image_small.raw_value" t-att-src="kanban_image('res.partner', 'image_small', record.id.raw_value)" />
-                          <t t-if="!record.image_small.raw_value">
-                            <img alt="Delivery" t-if="record.type.raw_value === 'delivery'" t-att-src="_s + &quot;/base/static/img/truck.png&quot;" />
-                            <img alt="Invoice" t-if="record.type.raw_value === 'invoice'" t-att-src="_s + &quot;/base/static/img/money.png&quot;" />
-                            <t t-if="record.type.raw_value !== 'invoice' &amp;&amp; record.type.raw_value !== 'delivery'">
-                              <img alt="Logo" t-if="record.is_company.raw_value === true" t-att-src="_s + &quot;/base/static/img/company_image.png&quot;" />
-                              <img alt="Avatar" t-if="record.is_company.raw_value === false" t-att-src="_s + &quot;/base/static/img/avatar.png&quot;" />
-                            </t>
-                          </t>
-                        </div>
                         <div class="oe_kanban_details">
                           <field name="name" />
                           <div t-if="record.function.raw_value">

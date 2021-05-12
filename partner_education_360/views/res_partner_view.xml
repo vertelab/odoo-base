@@ -11,14 +11,14 @@
                             <tree editable="top" string="Educations">
                                 <field name="sun_id"/>
                                 <field name="education_level_id"/>
-                                <field name="foreign_education"/>
-                                <field name="foreign_education_approved"/>
+                                <field name="foreign_education" invisible="1"/>
+                                <field name="foreign_education_approved" invisible="1"/>
                             </tree>
                         </field>
-                        <group>
-                            <field name="has_drivers_license" /> 
-                            <field name="drivers_license_ids" options="{'no_create_edit': True}" widget="many2many_tags" />
-                            <field name="has_car" groups="base.group_no_one" /> 
+                        <group invisible="1">
+                            <field name="has_drivers_license" invisible="1" />
+                            <field name="drivers_license_ids" options="{'no_create_edit': True}" widget="many2many_tags" invisible="1" />
+                            <field name="has_car" groups="base.group_no_one" invisible="1" />
                         </group>
                     </page>
                 </xpath>
