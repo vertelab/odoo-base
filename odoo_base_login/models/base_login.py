@@ -35,13 +35,16 @@ class BaseLogin(models.Model):
     login_reason = fields.Text("Login Reason")
     logged_in = fields.Datetime("Logged in")
     logged_out = fields.Datetime("Logged out")
+    color = fields.Integer('Kanban Color Index')
     length = fields.Integer("Length")
     ticket_ID = fields.Char("Ticket ID")
     auditor_comment = fields.Text("Auditor comment")
     active_length = fields.Float("Active Length (Minutes)", compute="_count_active_time")
     session_ID = fields.Char("Session ID")
-    state = fields.Selection([('draft','New'), ('audit','Audit'), ('alert','Alert'),('done','Done')], string="Status",
+    state = fields.Selection([('logged_in','Logged In'), ('logged_out','Logged Out')], string="Status",
                              default="draft")
+    status = fields.Selection([('draft','Sample'), ('audit','Audit'), ('failed','Failed'),('pass','Pass')],
+                              string="Audit Status")
 
     def _count_active_time(self):
         for login_base in self:

@@ -20,13 +20,14 @@
 ##############################################################################
 
 import logging
+import werkzeug
 from datetime import datetime, timedelta
 from odoo import SUPERUSER_ID
 from odoo import fields, api, http
 from odoo import models
 from odoo.exceptions import AccessDenied
 from odoo.http import request
-# from ..controllers.main import clear_session_history
+from ..controllers.main import clear_session_history
 from os.path import getmtime
 from time import time
 from os import utime
@@ -46,18 +47,6 @@ class ResUsers(models.Model):
     ticket_ID = fields.Char("Ticket ID")
     last_update = fields.Datetime(string="Last Connection Updated")
 
-    # Method call when user login, create history record here
-    # @api.model
-    # def _update_last_login(self):
-    #     print ("Context: :::",self._context)
-    #     log = self.env['res.users.log'].create({})
-    #     session_ID = request.session.sid
-    #     if self.login_reason and self.ticket_ID:
-    #         self.env['base.login.reason'].create(
-    #             {'user_id': self.id, 'logged_in': log.create_date, 'session_ID':session_ID,
-    #              'login_reason':self.login_reason, 'state':'audit', 'ticket_ID':self.ticket_ID})
-
-
     def _clear_session(self):
         """
             Function for clearing the session details for user
@@ -65,33 +54,39 @@ class ResUsers(models.Model):
         self.write({'sid': False, 'exp_date': False, 'logged_in': False,
                     'last_update': datetime.now()})
     #
-    def _save_session(self):
+    def _save_session(self, minutes=15):
         """
             Function for saving session details to corresponding user
         """
-        exp_date = datetime.utcnow() + timedelta(minutes=45)
+
+        print ("Called....")
+        exp_date = datetime.utcnow() + timedelta(minutes=minutes)
         sid = request.httprequest.session.sid
-        self.with_user(SUPERUSER_ID).write({'sid': sid, 'exp_date': exp_date,
+        self.sudo().write({'sid': sid, 'exp_date': exp_date,
                                             'logged_in': True,
                                             'last_update': datetime.now()})
     #
-    # def validate_sessions(self):
-    #     """
-    #         Function for validating user sessions
-    #     """
-    #     users = self.search([('exp_date', '!=', False)])
-    #     for user in users:
-    #         if user.exp_date < datetime.utcnow():
-    #             # clear session session file for the user
-    #             session_cleared = clear_session_history(user.sid)
-    #             if session_cleared:
-    #                 # clear user session
-    #                 user._clear_session()
-    #                 _logger.info("Cron _validate_session: "
-    #                              "cleared session user: %s" % (user.name))
-    #             else:
-    #                 _logger.info("Cron _validate_session: failed to "
-    #                              "clear session user: %s" % (user.name))
+    def validate_sessions(self):
+        """
+            Function for validating user sessions
+        """
+        users = self.search([('exp_date', '!=', False)])
+        for user in users:
+            print ("USER :::",user)
+            if user.exp_date < datetime.utcnow():
+                print ("Inside IF.....")
+                user._clear_session()
+                return werkzeug.utils.redirect('/web/session/logout')
+                # clear session session file for the user
+                # session_cleared = clear_session_history(user.sid)
+                # if session_cleared:
+                #     # clear user session
+                #     user._clear_session()
+                #     _logger.info("Cron _validate_session: "
+                #                  "cleared session user: %s" % (user.name))
+                # else:
+                #     _logger.info("Cron _validate_session: failed to "
+                #                  "clear session user: %s" % (user.name))
 
     @api.model_cr_context
     def _auth_timeout_get_ignored_urls(self):
