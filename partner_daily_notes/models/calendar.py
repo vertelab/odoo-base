@@ -168,14 +168,5 @@ class CalendarAppointmentSuggestion(models.Model):
         partner = self.appointment_id.sudo().partner_id
         partner.notes_ids = [(0, 0, vals)]
 
-        # update next_contact information.
-        partner.next_contact_date = self.appointment_id.start.date().isoformat()
-        partner.next_contact_time = self.appointment_id.start.time().strftime("%H:%M")
-        partner.next_contact_type = (
-            "T"
-            if self.appointment_id.channel
-            == self.env.ref("calendar_channel.channel_pdm")
-            else "B"
-        )
         # create edi message
         partner._create_next_last_msg()

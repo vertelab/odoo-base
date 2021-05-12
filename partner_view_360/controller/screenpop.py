@@ -58,10 +58,8 @@ class WebsiteScreenpop(http.Controller):
             return request.render('partner_view_360.403', {'error': 'ERROR: Token missmatch','our_token': token, 'ext_token': post.get('token'), 'partner': None, 'action': None, 'url': None, 'post': post,'secret': secret,'signatur':post.get('signatur')})
 
         pnr = post.get('personnummer', '')
-        if pnr and not '-' in pnr:
-            pnr = pnr[:8] + '-' + pnr[8:12]
-        partner = request.env['res.partner'].sudo().search([('company_registry','=',pnr)]) # not granted yet
-        
+        partner = request.env['res.partner'].search_pnr(pnr)  # not granted yet
+
         if not partner:
             action_bankid = request.env.ref('hr_360_view.search_jobseeker_wizard')
             request.session['ssn_not_found'] = True
@@ -78,7 +76,7 @@ class WebsiteScreenpop(http.Controller):
                 'user_id': request.env.user.id,
                 'partner_id': partner.id
             }
-            request.env['res.partner.bankid'].create(bankid_vals)
+            request.env['res.partner.bankid'].sudo().create(bankid_vals)
 
             res_url = '%s/web#id=%s&action=%s&model=res.partner&view_type=form' % (
                                                                 request.env['ir.config_parameter'].sudo().get_param('web.base.url',''),
@@ -120,9 +118,7 @@ class WebsiteScreenpop(http.Controller):
         message = _('You have to initiate BankID-identification') 
         bankid = res = None       
         pnr = post.get('personnummer', '')
-        if pnr and not '-' in pnr:
-            pnr = pnr[:8] + '-' + pnr[8:12]
-        partner = request.env['res.partner'].sudo().search([('company_registry','=',pnr)]) # not granted yet
+        partner = request.env['res.partner'].search_pnr(pnr)  # not granted yet
         if post.get('bankid_init'):
             message = _('Initiating BankID-identification, try to authenticate')
             bankid = CachingClient(request.env['ir.config_parameter'].sudo().get_param('partner_view_360.bankid_wsdl', 'http://bhipws.arbetsformedlingen.se/Integrationspunkt/ws/mobiltbankidinterntjanst?wsdl'))  # create a Client instance

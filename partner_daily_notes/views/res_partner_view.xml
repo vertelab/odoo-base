@@ -14,10 +14,17 @@
                         string="Daily notes"/>
                 </xpath>
               -->
-                <field name="jobseeker_category" position="after">
-                    <field name="next_contact"/>
-                    <field name="last_contact"/>
-                </field>
+                <xpath expr="//field[@name='jobseeker_category']/.." position="after">
+                    <div class="af_field_group">
+                        <label for="next_contact"/>
+                        <field name="next_contact"/>
+                    </div>
+                    <div class="af_field_group">
+                        <label for="last_contact"/>
+                        <field name="last_contact"/>
+                    </div>
+
+                </xpath>
             </field>
 
         </record>

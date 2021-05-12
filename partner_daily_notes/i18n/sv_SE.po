@@ -195,3 +195,9 @@ msgstr "Nästa kontakt"
 #: model:ir.model.fields,field_description:partner_daily_notes.field_res_users__last_contact
 msgid "Latest contact"
 msgstr "Senaste kontakt"
+
+#. module: partner_daily_notes
+#: code:addons/partner_daily_notes/models/res_partner.py:165
+#, python-format
+msgid "No next contact"
+msgstr "Ingen nästa kontakt"
