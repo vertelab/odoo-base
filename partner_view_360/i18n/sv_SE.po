@@ -119,7 +119,7 @@ msgstr "Stäng"
 #: model_terms:ir.ui.view,arch_db:partner_view_360.view_employer_filter
 #: model_terms:ir.ui.view,arch_db:partner_view_360.view_jobseeker_filter
 msgid "Companies"
-msgstr "Bolag"
+msgstr "Företag"
 
 #. module: partner_view_360
 #: model_terms:ir.ui.view,arch_db:partner_view_360.view_employer_filter
@@ -520,7 +520,7 @@ msgstr ""
 #. module: partner_view_360
 #: model:ir.model.fields,field_description:partner_view_360.field_res_partner_skat__partner_id
 msgid "Partner"
-msgstr "Samarbetspartner"
+msgstr ""
 
 #. module: partner_view_360
 #: model_terms:ir.ui.view,arch_db:partner_view_360.view_jobseeker_form
@@ -596,7 +596,7 @@ msgstr "Sök arbetssökande "
 #: model_terms:ir.ui.view,arch_db:partner_view_360.view_employer_filter
 #: model_terms:ir.ui.view,arch_db:partner_view_360.view_jobseeker_filter
 msgid "Search Partner"
-msgstr "Sök efter kontakter"
+msgstr "Sök efter partner"
 
 #. module: partner_view_360
 #: selection:res.partner,registered_through:0
