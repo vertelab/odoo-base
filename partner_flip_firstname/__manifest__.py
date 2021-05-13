@@ -14,6 +14,7 @@ Flips the position of the OCA module partner_firstname's firstname and lastname 
     ],
     'data': [
 			'views/res_partner_view.xml',
+			'views/res_users_view.xml',
         ],
     'application': False,
     'installable': True,
