@@ -122,17 +122,17 @@
             </div>
 
             <div class="af_field_group">
-              <label for="phone" string="Telefonnummer" class="oe_read_only"/>
+              <label for="phone" string="Telefonnummer"/>
               <field name="phone"/>
             </div>
 
             <div class="af_field_group">
-              <label for="mobile" string="Mobilnummer" class="oe_read_only"/>
+              <label for="mobile" string="Mobilnummer"/>
               <field name="mobile"/>
             </div>
 
             <div class="af_field_group">
-              <label for="email" string="E-post" class="oe_read_only"/>
+              <label for="email" string="E-post"/>
               <field name="email"/>
             </div>
 
@@ -147,9 +147,9 @@
               <field name="state_id" class="oe_edit_only"/>
             </div>
 
-            <div class="af_field_group">
+            <div class="af_field_group oe_read_only">
               <label for="street" string="Registered address"/>
-              <div class="oe_read_only">
+              <div>
                 <div class="o_address_format">
                   <span class="oe_read_only">
                     <field name="street" placeholder="Street..." class="o_address_street"/>
@@ -168,8 +168,8 @@
 
           <div string="Employment service information"  class="af_column_50 af_employment_service_information_group">
 
-            <div class="af_field_group">
-              <label for="registered_through" class="oe_read_only"/>
+            <div class="af_field_group oe_read_only">
+              <label for="registered_through"/>
               <field name="registered_through"/>
             </div>
 
@@ -181,23 +181,49 @@
               <field name="jobseeker_category" class="oe_read_only"/>
             </div>
 
-            <div class="af_field_group">
-              <label for="customer_since" class="oe_read_only"/>
+            <div class="af_field_group oe_read_only">
+              <label for="customer_since"/>
               <field name="customer_since" widget="date"/>
             </div>
 
             <div class="af_field_group">
-              <label for="office_id" class="oe_edit_only"/>
-              <field name="office_id" options="{'no_create_edit': True}" class="oe_edit_only" nolabel="1"/>
-              <field name="office_code_name" class="oe_read_only"/>
-              <field name="kromtype" />
-              <field name="match_area" />
-              <field name="share_info_with_employers" />
-              <field name="sms_reminders" />
-              <field name="segment_jobseeker" groups="base.group_no_one" />
-              <field name="eidentification" />
-              <label for="office_code_name" class="oe_read_only"/>
-              <field name="office_code_name" class="oe_read_only" string="Kontor" />
+              <label for="office_id" string="Kontor"/>
+              <div>
+                <field name="office_id" options="{'no_create_edit': True}" class="oe_edit_only" nolabel="1"/>
+                <field name="office_code_name" class="oe_read_only"/>
+              </div>
+            </div>
+            <div class="af_field_group">
+              <label for="kromtype"/>
+              <field name="kromtype"/>
+            </div>
+
+            <div class="af_field_group">
+              <label for="match_area"/>
+              <field name="match_area"/>
+            </div>
+            <div class="af_field_group">
+              <label for="share_info_with_employers"/>
+              <field name="share_info_with_employers"/>
+            </div>
+
+            <div class="af_field_group">
+              <label for="sms_reminders"/>
+              <field name="sms_reminders"/>
+            </div>
+
+            <div class="af_field_group" groups="base.group_no_one">
+              <label for="segment_jobseeker"/>
+              <field name="segment_jobseeker" groups="base.group_no_one"/>
+            </div>
+
+            <div class="af_field_group">
+              <label for="eidentification"/>
+              <field name="eidentification"/>
+            </div>
+            <div class="af_field_group oe_read_only">
+              <label for="office_code_name"/>
+              <field name="office_code_name" string="Kontor"/>
             </div>
 
             <div class="af_field_group">
@@ -213,23 +239,23 @@
               <field name="segment_jobseeker" />
             </div>
 
-            <div class="af_field_group">
-              <label for="customer_id" string="Kundnummer:" class="oe_read_only" groups="base.group_no_one"/>
+            <div class="af_field_group oe_read_only" groups="base.group_no_one">
+              <label for="customer_id" string="Kundnummer:"/>
               <field name="customer_id" groups="base.group_no_one"/>
             </div>
 
-            <div class="af_field_group">
-              <label for="share_info_with_employers" class="oe_read_only"/>
+            <div class="af_field_group oe_read_only">
+              <label for="share_info_with_employers"/>
               <field name="share_info_with_employers"/>
             </div>
 
-            <div class="af_field_group">
-              <label for="sms_reminders" class="oe_read_only"/>
+            <div class="af_field_group oe_read_only">
+              <label for="sms_reminders"/>
               <field name="sms_reminders"/>
             </div>
 
-            <div class="af_field_group">
-              <label for="match_area" class="oe_read_only"/>
+            <div class="af_field_group oe_read_only">
+              <label for="match_area"/>
               <field name="match_area"/>
             </div>
 
