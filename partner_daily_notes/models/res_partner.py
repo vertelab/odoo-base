@@ -55,21 +55,24 @@ class ResPartner(models.Model):
 
     @api.multi
     def _create_next_last_msg(self):
-        if self.is_jobseeker:
-            route = self.env.ref(
-                "edi_af_aisf_trask.asok_contact_route", raise_if_not_found=False
-            )
-            if route:
-                vals = {
-                    "name": "set contact msg",
-                    "edi_type": self.env.ref("edi_af_aisf_trask.asok_contact").id,
-                    "model": self._name,
-                    "res_id": self.id,
-                    "route_id": route.id,
-                    "route_type": "edi_af_aisf_trask_contact",
-                }
-                message = self.env["edi.message"].create(vals)
-                message.pack()
+        try:
+            if self.is_jobseeker:
+                route = self.env.ref(
+                    "edi_af_aisf_trask.asok_contact_route", raise_if_not_found=False
+                )
+                if route:
+                    vals = {
+                        "name": "set contact msg",
+                        "edi_type": self.env.ref("edi_af_aisf_trask.asok_contact").id,
+                        "model": self._name,
+                        "res_id": self.id,
+                        "route_id": route.id,
+                        "route_type": "edi_af_aisf_trask_contact",
+                    }
+                    message = self.env["edi.message"].create(vals)
+                    message.pack()
+        except:
+            _logger.exception("Something went wrong in IPF meeting sync.")
 
     notes_ids = fields.One2many(
         comodel_name="res.partner.notes",
