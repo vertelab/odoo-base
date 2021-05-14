@@ -117,7 +117,7 @@
             </div>
 
             <div class="af_field_group">
-              <label for="social_sec_nr_age" string="Personummer:" class="oe_read_only"/>
+              <label for="social_sec_nr_age" string="Personnummer:" class="oe_read_only"/>
               <field name="social_sec_nr_age" class="oe_read_only" nolabel="1"/>
             </div>
 
