@@ -186,13 +186,16 @@
               <field name="customer_since" widget="date"/>
             </div>
 
-            <div class="af_field_group">
+            <div class="af_field_group oe_edit_only">
               <label for="office_id" string="Kontor"/>
-              <div>
-                <field name="office_id" options="{'no_create_edit': True}" class="oe_edit_only" nolabel="1"/>
-                <field name="office_code_name" class="oe_read_only"/>
-              </div>
+              <field name="office_id" options="{'no_create_edit': True}" nolabel="1"/>
+              <field name="office_code_name" class="oe_read_only"/>
             </div>
+            <div class="af_field_group oe_read_only">
+              <label for="office_code_name" string="Kontor"/>
+              <field name="office_code_name" />
+            </div>
+
             <div class="af_field_group">
               <label for="kromtype"/>
               <field name="kromtype"/>
@@ -221,10 +224,6 @@
               <label for="eidentification"/>
               <field name="eidentification"/>
             </div>
-            <div class="af_field_group oe_read_only">
-              <label for="office_code_name"/>
-              <field name="office_code_name" string="Kontor"/>
-            </div>
 
             <div class="af_field_group">
               <label for="user_id" string="Administrative officer" class="oe_edit_only"/>
@@ -242,21 +241,6 @@
             <div class="af_field_group oe_read_only" groups="base.group_no_one">
               <label for="customer_id" string="Kundnummer:"/>
               <field name="customer_id" groups="base.group_no_one"/>
-            </div>
-
-            <div class="af_field_group oe_read_only">
-              <label for="share_info_with_employers"/>
-              <field name="share_info_with_employers"/>
-            </div>
-
-            <div class="af_field_group oe_read_only">
-              <label for="sms_reminders"/>
-              <field name="sms_reminders"/>
-            </div>
-
-            <div class="af_field_group oe_read_only">
-              <label for="match_area"/>
-              <field name="match_area"/>
             </div>
 
           </div>
