@@ -154,4 +154,8 @@
         <field name="perm_unlink" eval="True"/>
     </record>
 
+     <record id="interpreter_accountant" model="res.groups">
+        <field name="name">Interpreter Accountant</field>
+    </record>
+
 </odoo>
