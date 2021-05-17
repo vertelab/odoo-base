@@ -197,11 +197,6 @@
             </div>
 
             <div class="af_field_group">
-              <label for="kromtype"/>
-              <field name="kromtype"/>
-            </div>
-
-            <div class="af_field_group">
               <label for="match_area"/>
               <field name="match_area"/>
             </div>
