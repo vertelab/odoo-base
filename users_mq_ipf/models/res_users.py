@@ -174,64 +174,72 @@ class ResUsers(models.Model):
                             # not sure how specific the search has to be to find the right object
                             user_id = self.env['res.users'].search([('login', '=', signature)])
                             office_id = self.env['hr.department'].search([('office_code', '=', office_code)])
+                            if not user_id:
+                                user_id = self.env['res.users'].create({
+                                    'login': signature,
+                                    'name': signature,
+                                    'employee_ids': [(0, 0, {
+                                        'name': signature
+                                    })]
+                                })
+                                log.log_message(AISF_OFFICER_SYNC_PROCESS, eventid,
+                                                OFFICER_SYNC, objectid=signature,
+                                                message=f"Failed to find res.user"
+                                                        f" with login {signature}, "
+                                                        f"creating new user",
+                                                status=False)
+                                _logger.info(f"Failed to find res.user with login {signature},"
+                                             f" creating new user")
 
-                            if user_id:
-                                if msg_type == "delete":
-                                    # find office and remove it from office_ids
-                                    log.log_message(AISF_OFFICER_SYNC_PROCESS, eventid,
-                                                    OFFICER_SYNC, objectid=signature,
-                                                    message=f"Deleting office with office_code {office_code}"
-                                                            f" from user with login {signature}")
-                                    _logger.debug(f"Deleting office with office_code {office_code}"
-                                                  f" from user with login {signature}")
-                                    if office_id:
-                                        for employee in user_id.employee_ids:
-                                            employee.write({
-                                                'office_ids': [(3, office_id.id, 0)]
-                                            })
-                                    else:
-                                        log.log_message(AISF_OFFICER_SYNC_PROCESS, eventid,
-                                                        OFFICER_SYNC, objectid=signature,
-                                                        error_message=f"Failed to find hr.department"
-                                                                      f" with office_code {office_code}",
-                                                        status=False)
-                                        _logger.error(f"Failed to find hr.department"
-                                                      f" with office_code {office_code}")
-                                elif msg_type == "create":
-                                    # find office and add it to office_ids
-                                    log.log_message(AISF_OFFICER_SYNC_PROCESS, eventid,
-                                                    OFFICER_SYNC, objectid=signature,
-                                                    message=f"Adding office with office_code {office_code}"
-                                                            f" to user with login {signature}")
-                                    _logger.debug(f"Adding office with office_code {office_code}"
-                                                  f" to user with login {signature}")
-                                    if office_id:
-                                        for employee in user_id.employee_ids:
-                                            employee.write({
-                                                'office_ids': [(4, office_id.id, 0)]
-                                            })
-                                    else:
-                                        log.log_message(AISF_OFFICER_SYNC_PROCESS, eventid,
-                                                        OFFICER_SYNC, objectid=signature,
-                                                        error_message=f"Failed to find hr.department "
-                                                                      f"with office_code {office_code}",
-                                                        status=False)
-                                        _logger.error(f"Failed to find hr.department"
-                                                      f" with office_code {office_code}")
+                            if msg_type == "delete":
+                                # find office and remove it from office_ids
+                                log.log_message(AISF_OFFICER_SYNC_PROCESS, eventid,
+                                                OFFICER_SYNC, objectid=signature,
+                                                message=f"Deleting office with office_code {office_code}"
+                                                        f" from user with login {signature}")
+                                _logger.debug(f"Deleting office with office_code {office_code}"
+                                              f" from user with login {signature}")
+                                if office_id:
+                                    for employee in user_id.employee_ids:
+                                        employee.write({
+                                            'office_ids': [(3, office_id.id, 0)]
+                                        })
                                 else:
                                     log.log_message(AISF_OFFICER_SYNC_PROCESS, eventid,
                                                     OFFICER_SYNC, objectid=signature,
-                                                    message=f"Message of type {msg_type} not supported,"
-                                                            f" ignoring",
+                                                    error_message=f"Failed to find hr.department"
+                                                                  f" with office_code {office_code}",
                                                     status=False)
-                                    _logger.info(f"Message of type {msg_type} not supported, ignoring")
+                                    _logger.error(f"Failed to find hr.department"
+                                                  f" with office_code {office_code}")
+                            elif msg_type == "create":
+                                # find office and add it to office_ids
+                                log.log_message(AISF_OFFICER_SYNC_PROCESS, eventid,
+                                                OFFICER_SYNC, objectid=signature,
+                                                message=f"Adding office with office_code {office_code}"
+                                                        f" to user with login {signature}")
+                                _logger.debug(f"Adding office with office_code {office_code}"
+                                              f" to user with login {signature}")
+                                if office_id:
+                                    for employee in user_id.employee_ids:
+                                        employee.write({
+                                            'office_ids': [(4, office_id.id, 0)]
+                                        })
+                                else:
+                                    log.log_message(AISF_OFFICER_SYNC_PROCESS, eventid,
+                                                    OFFICER_SYNC, objectid=signature,
+                                                    error_message=f"Failed to find hr.department "
+                                                                  f"with office_code {office_code}",
+                                                    status=False)
+                                    _logger.error(f"Failed to find hr.department"
+                                                  f" with office_code {office_code}")
                             else:
                                 log.log_message(AISF_OFFICER_SYNC_PROCESS, eventid,
                                                 OFFICER_SYNC, objectid=signature,
-                                                error_message=f"Failed to find res.user"
-                                                              f" with login {signature}",
+                                                message=f"Message of type {msg_type} not supported,"
+                                                        f" ignoring",
                                                 status=False)
-                                _logger.error(f"Failed to find res.user with login {signature}")
+                                _logger.info(f"Message of type {msg_type} not supported, ignoring")
 
                             # append message to ack_list to let main
                             # thread know that this can be ACK'd
