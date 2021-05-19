@@ -44,7 +44,7 @@ class BaseLogin(models.Model):
     state = fields.Selection([('logged_in','Logged In'), ('logged_out','Logged Out')], string="Status",
                              default="draft")
     status = fields.Selection([('draft','Sample'), ('audit','Audit'), ('failed','Failed'),('pass','Pass')],
-                              string="Audit Status")
+                              string="Audit Status", default='draft')
 
     def _count_active_time(self):
         for login_base in self:

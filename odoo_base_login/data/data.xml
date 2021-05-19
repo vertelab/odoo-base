@@ -2,22 +2,18 @@
 <odoo>
     <data>
 
-        <record id="inactive_session_time_out_ignored_url" model="ir.config_parameter">
-            <field name="key">inactive_session_time_out_ignored_url</field>
-            <field name="value">/calendar/notify,/longpolling/poll</field>
-        </record>
 
-<!--        <record model="ir.cron" id="check_user_sessions">-->
-<!--            <field name="name">Access Log: check User Sessions</field>-->
-<!--            <field name="model_id" ref="model_res_users"/>-->
-<!--            <field name="state">code</field>-->
-<!--            <field name="code">model.validate_sessions()</field>-->
-<!--            <field name="interval_number">1</field>-->
-<!--            <field name="interval_type">minutes</field>-->
-<!--            <field name="numbercall">-1</field>-->
-<!--            <field name="doall" eval="False"/>-->
-<!--            <field name="active" eval="True"/>-->
-<!--        </record>-->
+        <record model="ir.cron" id="check_user_sessions">
+            <field name="name">Access Log: check User Sessions</field>
+            <field name="model_id" ref="model_res_users"/>
+            <field name="state">code</field>
+            <field name="code">model.validate_sessions()</field>
+            <field name="interval_number">1</field>
+            <field name="interval_type">minutes</field>
+            <field name="numbercall">-1</field>
+            <field name="doall" eval="False"/>
+            <field name="active" eval="True"/>
+        </record>
 
 
     </data>

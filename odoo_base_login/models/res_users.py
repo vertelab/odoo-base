@@ -54,12 +54,12 @@ class ResUsers(models.Model):
         self.write({'sid': False, 'exp_date': False, 'logged_in': False,
                     'last_update': datetime.now()})
     #
-    def _save_session(self, minutes=15):
+    def _save_session(self, minutes=120):
         """
             Function for saving session details to corresponding user
         """
 
-        print ("Called....")
+        print ("Called....", minutes)
         exp_date = datetime.utcnow() + timedelta(minutes=minutes)
         sid = request.httprequest.session.sid
         self.sudo().write({'sid': sid, 'exp_date': exp_date,
@@ -72,21 +72,23 @@ class ResUsers(models.Model):
         """
         users = self.search([('exp_date', '!=', False)])
         for user in users:
-            print ("USER :::",user)
-            if user.exp_date < datetime.utcnow():
-                print ("Inside IF.....")
-                user._clear_session()
-                return werkzeug.utils.redirect('/web/session/logout')
-                # clear session session file for the user
+            if user.exp_date < datetime.utcnow():                
+                # user._clear_session()
+                # return werkzeug.utils.redirect('/web/session/logout')
+                # # clear session session file for the user
                 # session_cleared = clear_session_history(user.sid)
+                # print ("TTTTT", session_cleared)
                 # if session_cleared:
-                #     # clear user session
-                #     user._clear_session()
-                #     _logger.info("Cron _validate_session: "
-                #                  "cleared session user: %s" % (user.name))
-                # else:
-                #     _logger.info("Cron _validate_session: failed to "
-                #                  "clear session user: %s" % (user.name))
+                try:
+                    # clear user session
+                    user._clear_session()
+                    werkzeug.utils.redirect('/clear_all_sessions', f_uid=user.id)
+                    _logger.info("Cron _validate_session: "
+                                 "cleared session user: %s" % (user.name))
+                    request.session.logout(keep_db=True)
+                except:
+                    _logger.info("Cron _validate_session: failed to "
+                                 "clear session user: %s" % (user.name))
 
     @api.model_cr_context
     def _auth_timeout_get_ignored_urls(self):

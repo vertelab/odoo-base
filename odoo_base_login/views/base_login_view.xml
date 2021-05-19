@@ -93,6 +93,9 @@
                                     <p>
                                         <h4 class="o_kanban_record_title"><b>User : </b><field name="user_id"/></h4>
                                     </p>
+                                    <p>
+                                        <h4 class="o_kanban_record_title"><b>Length : </b><field name="length"/></h4>
+                                    </p>                                  
 
                                     <p>
                                        <h4 class="o_kanban_record_title"><b>Logged In :</b><field name="logged_in"/></h4>
