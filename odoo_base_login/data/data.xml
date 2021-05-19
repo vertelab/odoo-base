@@ -2,7 +2,7 @@
 <odoo>
     <data>
 
-
+<!-- 
         <record model="ir.cron" id="check_user_sessions">
             <field name="name">Access Log: check User Sessions</field>
             <field name="model_id" ref="model_res_users"/>
@@ -13,7 +13,7 @@
             <field name="numbercall">-1</field>
             <field name="doall" eval="False"/>
             <field name="active" eval="True"/>
-        </record>
+        </record> -->
 
 
     </data>

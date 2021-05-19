@@ -18,7 +18,6 @@
 #    along with this program.  If not, see <http://www.gnu.org/licenses/>.
 #
 ##############################################################################
-
 from odoo import models
 from odoo.http import request
 
@@ -34,7 +33,7 @@ class IrHttp(models.AbstractModel):
             logging_track = request.env['base.login.reason'].search([('user_id','=',request.env.user.id),
                                                      ('state','=','audit'),
                                                      ('logged_out','=',False)], limit=1)
-
-            timeout = logging_track.length *60
+            timeout = logging_track.length * 60
+            request.env['res.users'].validate_sessions_check_user(request.env.user)
             request.env.user._auth_timeout_check(timeout)
         return res
