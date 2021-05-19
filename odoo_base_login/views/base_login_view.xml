@@ -18,8 +18,10 @@
                                 <field name="user_id" readonly="1"/>
                                 <field name="email" readonly="1"/>
                                 <field name="login_reason" readonly="1"/>
+                                <!-- Start edit mode for Auditors only -->
                                 <field name="status"/>
                                 <field name="auditor_comment" string="For the Login-Reason Auditor:"/>
+                                <!-- Ends edit mode for Auditors only -->
                             </group>
                             <group>
                                 <field name="ticket_ID" readonly="1"/>
@@ -88,7 +90,7 @@
                                 </div>
                                 <div class="o_event_right">
                                      <p>
-                                        <h4 class="o_kanban_record_title"><b>Ticket# :</b><field name="ticket_ID"/></h4>
+                                        <h4 class="o_kanban_record_title"><b>Ticket# : </b><field name="ticket_ID"/></h4>
                                     </p>
                                     <p>
                                         <h4 class="o_kanban_record_title"><b>User : </b><field name="user_id"/></h4>
@@ -98,13 +100,13 @@
                                     </p>                                  
 
                                     <p>
-                                       <h4 class="o_kanban_record_title"><b>Logged In :</b><field name="logged_in"/></h4>
+                                       <h4 class="o_kanban_record_title"><b>Logged In : </b><field name="logged_in"/></h4>
                                     </p>
                                     <p>
-                                       <h4 class="o_kanban_record_title"><b>Logged out :</b><field name="logged_out"/></h4>
+                                       <h4 class="o_kanban_record_title"><b>Logged out : </b><field name="logged_out"/></h4>
                                     </p>
                                     <p>
-                                       <h4 class="o_kanban_record_title"><b>Reason :</b><field name="login_reason"/></h4>
+                                       <h4 class="o_kanban_record_title"><b>Reason : </b><field name="login_reason"/></h4>
                                     </p>
 
                                 </div>
