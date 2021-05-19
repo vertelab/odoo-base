@@ -19,7 +19,6 @@
 #
 ##############################################################################
 
-
 import os
 import werkzeug
 import werkzeug.contrib.sessions
@@ -87,7 +86,7 @@ class Session(main.Session):
 
     @http.route('/web/session/logout', type='http', auth="none")
     def logout(self, redirect='/web'):
-        print ("This function is called....")
+        
         audit_log = request.env['base.login.reason'].sudo().search(
             [('user_id', '=', request.session.uid),('logged_out','=',False)], limit=1)
         if audit_log:
@@ -104,7 +103,7 @@ class Session(main.Session):
     @http.route('/clear_all_sessions', type='http', auth="none")
     def logout_all(self, redirect='/web', f_uid=False):
         """ Log out from all the sessions of the current user """
-        print ("Yes, this is called now...")
+        
         if f_uid:
             user = request.env['res.users'].with_user(1).browse(int(f_uid))
             if user:
