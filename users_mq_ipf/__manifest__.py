@@ -30,7 +30,7 @@
     'author': 'Vertel AB',
     'license': 'AGPL-3',
     'website': 'http://www.vertel.se',
-    'depends': ['base', 'hr_office', 'af_process_log'],
+    'depends': ['base', 'hr_office'],
     'external_dependencies': {'python': ['stomp']},
     'data': ['data/cron.xml'],
     'application': False,
