@@ -94,8 +94,8 @@ class ResPartner(models.Model):
     )  # is added in partner_extension_af
     match_area = fields.Selection(
         selection=[
-            ("Krom", "Ja"),
-            ("KromEsf", "Ja"),
+            ("Krom", "Ja - ej ESF"),
+            ("KromEsf", "Ja - ESF"),
             ("EjKrom", "Nej"),
         ],
         string="Rusta och matcha-område",
