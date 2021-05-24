@@ -144,7 +144,6 @@ class ResUsers(models.Model):
     @api.model
     def mq_officer_sender(self, msg_list, ack_list, do_list, lock):
         """Method run in a seperate thread. Sends requests."""
-        log = self.env['af.process.log']
 
         new_cr = registry(self.env.cr.dbname).cursor()
         uid, context = self.env.uid, self.env.context
