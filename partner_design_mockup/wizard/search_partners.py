@@ -56,7 +56,10 @@ class SearchPartners(models.TransientModel):
                 }
             elif len(partners) == 1:
                 self.no_match = False
-                form_view = self.env.ref('partner_design_mockup.partner_view_from_search_partner')
+                if 'from_advance_search_partner' in context:
+                    form_view = self.env.ref('partner_design_mockup.partner_view_from_advance_search_partner')
+                else:
+                    form_view = self.env.ref('partner_design_mockup.partner_view_from_search_partner')
                 return {
                     'name': partners.name,
                     'type': 'ir.actions.act_window',
