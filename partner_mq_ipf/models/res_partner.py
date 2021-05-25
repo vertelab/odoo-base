@@ -2,7 +2,7 @@
 ##############################################################################
 #
 #    Odoo, Open Source Management Solution, third party addon
-#    Copyright (C) 2004-2020 Vertel AB (<http://vertel.se>).
+#    Copyright (C) 2004-2021 Vertel AB (<http://vertel.se>).
 #
 #    This program is free software: you can redistribute it and/or modify
 #    it under the terms of the GNU Affero General Public License as
@@ -20,15 +20,16 @@
 ##############################################################################
 
 from odoo import models, fields, api, _, registry
+from odoo.addons.af_process_log.models.af_process_log import MaxTriesExceededError
 
 import json
 import logging
 import stomp
 import ssl
-import sys
-import time
 import xmltodict
-import threading
+from queue import Queue, Empty
+from time import time
+
 
 _logger = logging.getLogger(__name__)
 
@@ -48,6 +49,7 @@ PREVPNR = "tidigarePersonnummer"
 SID = "sokandeId"
 MSGTYPE = "meddelandetyp"
 TIMESTAMP = "tidpunkt"
+AISF_ASOK_SYNC_PROCESS = "AIS-F ASOK SYNC"
 
 
 class AsokResPartnerListener(stomp.ConnectionListener):
@@ -57,7 +59,7 @@ class AsokResPartnerListener(stomp.ConnectionListener):
         self.__pwd = pwd
         self.__target = target
         self.__clientid = clientid
-        self.__msglist = list()
+        self.__msgqueue = Queue()
 
     def __parse_message(self, message):
         xmldict = None
@@ -77,8 +79,6 @@ class AsokResPartnerListener(stomp.ConnectionListener):
                 raise ValueError("Illegal XMLFormat")
         except:
             # log parse error
-            # ex = sys.exc_info()
-            # print("Oops! %s occurred: %s" % (ex[0], ex[1]))
             _logger.warning("Illegal XML format: '%s'" % message)
             return None
 
@@ -88,14 +88,15 @@ class AsokResPartnerListener(stomp.ConnectionListener):
         data = self.__parse_message(message)
         _logger.debug("_handle_message: %s" % data)
         if data:
-            # Add message to list
-            self.__msglist.append((headers, data))
+            # Add message to queue
+            self.__msgqueue.put((headers, data))
 
-    def get_list(self):
-        return self.__msglist
-
-    def clear_list(self):
-        self.__msglist = list()
+    def next_message(self, block=False, timeout=5):
+        """Fetch the next message in the queue."""
+        try:
+            return self.__msgqueue.get(block=block, timeout=timeout)
+        except Empty:
+            return
 
     def on_error(self, headers, body):
         """
@@ -237,7 +238,7 @@ class ResPartner(models.Model):
 
     def __get_host_port(self):
         str = self.env["ir.config_parameter"].get_param(
-            "partner_mq_ipf.mqhostport", "172.16.36.27:61613"
+            "partner_mq_ipf.mqhostport", "localhost:61613"
         )
         hosts = list()
         for vals in str.split(","):
@@ -246,60 +247,17 @@ class ResPartner(models.Model):
         return hosts
 
     @api.model
-    def mq_asok_sender(self, msg_list, ack_list, do_list, lock):
-        """Method run in a seperate thread. Sends requests to RASK."""
-        new_cr = registry(self.env.cr.dbname).cursor()
-        uid, context = self.env.uid, self.env.context
-        with api.Environment.manage():
-            env_new = api.Environment(new_cr, uid, context)
-            # passing a bool in do_list to indicate if we should keep
-            # running this loop. What is a better solution?
-            while do_list[0]:
-                message = False
-                if msg_list:
-                    try:
-                        with lock:
-                            message = msg_list.pop()
-                        if message:
-                            _logger.debug("Asok MQ Sender: sending request to RASK")
-                            headers, msg = message
-                            customer_id = msg.get(SID)
-                            social_security_number = msg.get(PNR)
-                            former_social_security_number = msg.get(PREVPNR, None)
-                            message_type = msg.get(MSGTYPE)
-                            # Send request to RASK
-                            env_new["res.partner"].rask_controller(
-                                customer_id,
-                                social_security_number,
-                                former_social_security_number,
-                                message_type,
-                            )
-                            # append message to ack_list to let main
-                            # thread know that this can be ACK'd
-                            with lock:
-                                ack_list.append(message)
-                        message = False
-                    except:
-                        _logger.exception(
-                            "Asok MQ Sender: error sending request to RASK!"
-                        )
-                else:
-                    # slow down so we don't loop all the time
-                    time.sleep(1)
-        # close our new cursor
-        env_new.cr.close()
-
-    @api.model
     def mq_asok_listener(self, minutes_to_live=10):
         _logger.info("Asok MQ Listener started.")
         host_port = self.__get_host_port()
         target = self.env["ir.config_parameter"].get_param(
             "partner_mq_ipf.target_asok",
-            "/topic/Consumer.crm.VirtualTopic.arbetssokande.andring",
+            "/queue/Consumer.crm.VirtualTopic.arbetssokande.andring",
         )
-        usr = self.env["ir.config_parameter"].get_param("partner_mq_ipf.mquser", "crm")
+        usr = self.env["ir.config_parameter"].get_param(
+            "partner_mq_ipf.mquser", "admin")
         pwd = self.env["ir.config_parameter"].get_param(
-            "partner_mq_ipf.mqpwd", "topsecret"
+            "partner_mq_ipf.mqpwd", "admin"
         )
         stomp_log_level = self.env["ir.config_parameter"].get_param(
             "partner_mq_ipf.stomp_logger", "INFO"
@@ -312,7 +270,7 @@ class ResPartner(models.Model):
         mqconn = stomp.Connection10(host_port)
 
         if (
-            self.env["ir.config_parameter"].get_param("partner_mq_ipf.mqusessl", "1")
+            self.env["ir.config_parameter"].get_param("partner_mq_ipf.mqusessl", "0")
             == "1"
         ):
             mqconn.set_ssl(for_hosts=host_port, ssl_version=ssl.PROTOCOL_TLS)
@@ -325,109 +283,62 @@ class ResPartner(models.Model):
 
         try:
             connect_and_subscribe(mqconn, usr, pwd, target)
+            limit = time() + minutes_to_live * 60
 
-            counter = 12 * minutes_to_live  # Number of 5 sek slices to wait
-            # define common lists to be used between threads
-            msg_list = []
-            ack_list = []
-            # passing a bool in do_list to indicate if we should keep
-            # running mq_asok_sender. What is a better solution?
-            do_list = [True]
-            # define a lock so we can lock msg_list while updating it
-            # in each thread.
-            lock = threading.Lock()
-            # create a new thread running mq_asok_sender function
-            sender_thread = threading.Thread(
-                target=self.mq_asok_sender, args=(msg_list, ack_list, do_list, lock)
-            )
-            sender_thread.start()
-
-            processed_list = []
             # run loop
-            while counter > 0:
-                # Let messages accumulate
-                time.sleep(5)
-                _logger.debug(
-                    "__msglist before unsubscribe: %s" % respartnerlsnr.get_list()
-                )
-                # check if we have ACKs to send out
-                with lock:
-                    while len(ack_list) > 0:
-                        try:
-                            # read ack_list and send ACK to MQ queue
-                            ack_message = ack_list.pop()
-                            # use a generator to find the matching 
-                            # message from current list not sure if this 
-                            # is actually needed but I've implemented it
-                            # to stop problems with us ACKing messages 
-                            # that disapear...
-                            ack_message_current = next(
-                                (
-                                    msg
-                                    for msg in respartnerlsnr.get_list()
-                                    if msg[0]["message-id"]
-                                    == ack_message[0]["message-id"]
-                                ),
-                                False,
-                            )
-                            if not ack_message_current:
-                                # this message ghosted us????
-                                _logger.warn(
-                                    "Asok MQ Listener - COULD NOT FIND MESSAGE TO ACC: %s"
-                                    % ack_message[0]["message-id"]
-                                )
-                            else:
-                                _logger.debug(
-                                    "Asok MQ Listener - ACK: %s"
-                                    % ack_message_current[0]["message-id"]
-                                )
-                                respartnerlsnr.ack_message(ack_message_current)
-                            ack_message_current = False
-                            ack_message = False
-                        except:
-                            _logger.exception("Asok MQ Listener: error ACK")
-                # Stop listening
-                mqconn.unsubscribe(target)
+            while time() < limit:
+                message = respartnerlsnr.next_message()
+                if message:
+                    env_new = None
+                    try:
+                        self.env['af.process.log'].log_message(
+                            AISF_ASOK_SYNC_PROCESS, message[0]["message-id"], "PROCESS INITIATED",
+                            message=str(message), first=True)
+                        new_cr = registry(self.env.cr.dbname).cursor()
+                        uid, context = self.env.uid, self.env.context
+                        with api.Environment.manage():
+                            env_new = api.Environment(new_cr, uid, context)
+                            if message:
+                                _logger.debug("Asok MQ Sender: sending request to AIS-F")
+                                headers, msg = message
+                                customer_id = msg.get(SID)
+                                social_sec_nr = msg.get(PNR, False)
 
-                # Handle list of messages
-                for message in respartnerlsnr.get_list():
-                    if message[0]["message-id"] not in processed_list:
-                        try:
-                            with lock:
-                                _logger.info(f"Asok MQ Listener RASK-SYNC - adding message to internal queue: "
-                                             f"message-id {message[0]['message-id']}, SID: {message[1].get(SID)}, "
-                                             f"PNR: {message[1].get(PNR)}")
-                                msg_list.append(message)
-                            # append message to processed_list to keep
-                            # track of what messages have been processed
-                            # this is needed since we will recieve already
-                            # processed messages until they are ACK'd
-                            processed_list.append(message[0]["message-id"])
-                        except:
-                            _logger.exception(
-                                "Asok MQ Listener: error adding message to internal queue"
-                            )
-                message = False
-                self.env.cr.commit()
-                # Clear accumulated messages
-                respartnerlsnr.clear_list()
+                                # Send request to AIS-F
+                                success = env_new["res.partner"]._aisf_sync_jobseeker(
+                                    None,
+                                    AISF_ASOK_SYNC_PROCESS,
+                                    customer_id,
+                                    social_sec_nr,
+                                    headers["message-id"]
+                                )
+                                if success:
+                                    self.env['af.process.log'].log_message(
+                                        AISF_ASOK_SYNC_PROCESS, headers["message-id"], "PROCESS COMPLETED", objectid=customer_id)
+                                    respartnerlsnr.ack_message(message)
+                    except MaxTriesExceededError:
+                        # TODO: Check if we should NACK instead.
+                        respartnerlsnr.ack_message(message)
+                    except Exception:
+                        _logger.exception(
+                            "Asok MQ Sender: error sending request to AIS-F!"
+                        )
+                    finally:
+                        # close our new cursor
+                        if env_new:
+                            env_new.cr.close()
                 # Check if stop has been called
+                self.env.cr.commit()
                 cronstop = self.env["ir.config_parameter"].get_param(
-                    "partner_mq_ipf.cronstop", "0"
-                )
-                if cronstop == "0":
-                    counter -= 1
-                    if counter > 0:
-                        # Only subscribe if we haven't reached the end yet
-                        subscribe(mqconn, target)
-                else:
-                    counter = 0
+                    "partner_mq_ipf.cronstop", "0")
+                if cronstop != "0":
+                    break
+            # Stop listening
+            mqconn.unsubscribe(target)
         except:
             _logger.exception("Something went wrong in MQ")
         finally:
             # send signal to stop other thread
-            do_list[0] = False
-            time.sleep(1)
             if mqconn.is_connected():
                 mqconn.disconnect()
 

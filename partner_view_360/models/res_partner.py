@@ -336,7 +336,7 @@ class ResPartner(models.Model):
 
     @api.model
     def search_pnr(self, pnr):
-        domain = []
+        domain = [('is_jobseeker', '=', True)]
         if len(pnr) == 13 and pnr[8] == "-":
             domain.append(("social_sec_nr", "=", pnr))
         elif len(pnr) == 12:
