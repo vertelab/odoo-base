@@ -24,7 +24,7 @@
     'version': '12.0.0.3.0',
     'category': '',
     'description': """
-Listen for updates on th MQ-bus
+Listen for updates on the MQ-bus
 v12.0.0.3.0 - Changed sync to af_aisf_jobseeker__sync.
 """,
     'author': 'Vertel AB',
