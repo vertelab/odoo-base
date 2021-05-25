@@ -2,7 +2,7 @@
 ##############################################################################
 #
 #    Odoo, Open Source Management Solution, third party addon
-#    Copyright (C) 2004-2020 Vertel AB (<http://vertel.se>).
+#    Copyright (C) 2004-2021 Vertel AB (<http://vertel.se>).
 #
 #    This program is free software: you can redistribute it and/or modify
 #    it under the terms of the GNU Affero General Public License as
@@ -26,10 +26,7 @@ import json
 import logging
 import stomp
 import ssl
-import sys
-from time import time
 import xmltodict
-import threading
 from queue import Queue, Empty
 from time import time
 
@@ -82,8 +79,6 @@ class AsokResPartnerListener(stomp.ConnectionListener):
                 raise ValueError("Illegal XMLFormat")
         except:
             # log parse error
-            # ex = sys.exc_info()
-            # print("Oops! %s occurred: %s" % (ex[0], ex[1]))
             _logger.warning("Illegal XML format: '%s'" % message)
             return None
 
@@ -307,12 +302,14 @@ class ResPartner(models.Model):
                                 _logger.debug("Asok MQ Sender: sending request to AIS-F")
                                 headers, msg = message
                                 customer_id = msg.get(SID)
+                                social_sec_nr = msg.get(PNR, False)
 
                                 # Send request to AIS-F
                                 success = env_new["res.partner"]._aisf_sync_jobseeker(
                                     None,
                                     AISF_ASOK_SYNC_PROCESS,
                                     customer_id,
+                                    social_sec_nr,
                                     headers["message-id"]
                                 )
                                 if success:
