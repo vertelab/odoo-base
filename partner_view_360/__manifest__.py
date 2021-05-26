@@ -21,7 +21,7 @@
 
 {
     'name': 'Partner 360 view',
-    'version': '12.0.0.2.6',
+    'version': '12.0.0.3.0',
     'category': '',
     'description': """
 Module for employee 360 view
@@ -43,7 +43,10 @@ v12.0.0.2.3 AFC-2072: Removed field eidentification from views. \n
 v12.0.0.2.4 AFC-2097: Misc bugfixes. \n
 v12.0.0.2.5 AFC-2168: Changed menu groups. \n
 v12.0.0.2.6 AFC-2161: Removed state from some address views. \n
-\n
+v12.0.0.2.7 AFC-2161: Removed thumbnail image for addresses. \n
+v12.0.0.2.8 AFC-2229: made segment_jobseeker visible for users \n
+v12.0.0.2.9 AFC-2239: Fixed jobseeker view.\n
+v12.0.0.3.0 AFC-1950: Replaced kromtype with match_area.\n
 """,
     'author': 'Vertel AB',
     'license': 'AGPL-3',

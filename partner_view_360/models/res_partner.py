@@ -91,8 +91,15 @@ class ResPartner(models.Model):
             ("local office", "Local office"),
         ],
         string="Registered Through",
-    ) #is added in partner_extension_af
-    match_area = fields.Boolean(string="Match Area")
+    )  # is added in partner_extension_af
+    match_area = fields.Selection(
+        selection=[
+            ("Krom", "Ja - ej ESF"),
+            ("KromEsf", "Ja - ESF"),
+            ("EjKrom", "Nej"),
+        ],
+        string="Rusta och matcha-område",
+    )
     share_info_with_employers = fields.Boolean(
         string="Share name and address with employers"
     ) #is added in partner_extension_af
@@ -329,7 +336,7 @@ class ResPartner(models.Model):
 
     @api.model
     def search_pnr(self, pnr):
-        domain = []
+        domain = [('is_jobseeker', '=', True)]
         if len(pnr) == 13 and pnr[8] == "-":
             domain.append(("social_sec_nr", "=", pnr))
         elif len(pnr) == 12:

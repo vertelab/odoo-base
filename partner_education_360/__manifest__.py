@@ -2,7 +2,7 @@
 ##############################################################################
 #
 #    Odoo, Open Source Management Solution, third party addon
-#    Copyright (C) 2004-2019 Vertel AB (<http://vertel.se>).
+#    Copyright (C) 2004-2021 Vertel AB (<http://vertel.se>).
 #
 #    This program is free software: you can redistribute it and/or modify
 #    it under the terms of the GNU Affero General Public License as
@@ -21,12 +21,13 @@
 
 {
     'name': 'Partner Education 360',
-    'version': '12.0.1.1',
+    'version': '12.0.0.2.0',
     'category': '',
     'description': """
 Adds education to jobseeker view
 ================================================================================================
-
+v12.0.0.1.1 Versions before good version handling\n
+v12.0.0.2.0 AFC-2229: Hid drivers license and foreign educations\n
 """,
     'author': 'Vertel AB',
     'license': 'AGPL-3',
@@ -37,7 +38,7 @@ Adds education to jobseeker view
     ],
     'data': [
         'views/res_partner_view.xml',
-        ],
+    ],
     'application': False,
     'installable': True,
 }

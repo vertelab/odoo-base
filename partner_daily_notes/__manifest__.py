@@ -21,7 +21,7 @@
 
 {
     'name': 'Daily notes',
-    'version': '12.0.1.4.0',
+    'version': '12.0.1.4.1',
     'category': '',
     'description': """
 Daily notes
@@ -40,6 +40,7 @@ v12.0.1.2.2 AFC-1920: Added updates to next_contact fields when making new appoi
 v12.0.1.3.0 AFC-2155: Updated logic for how next_contact and last_contact are updated \n
 12.0.1.4.0 AFC-2213: Fixed bug in next_contact calculation. Changed type of next_contact_date
 and last_contact_date from Datetime to Date. \n
+v12.0.1.4.1 AFC-2228: Made IPF meeting sync more robust.
 """,
     'author': 'Vertel AB',
     'license': 'AGPL-3',

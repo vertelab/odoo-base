@@ -112,22 +112,27 @@
             <field name="type" invisible="1" />
 
             <div class="af_field_group">
-              <label for="social_sec_nr" string="Personnummer:" class="oe_read_only"/>
-              <field name="social_sec_nr" class="oe_read_only" nolabel="1"/>
+              <label for="social_sec_nr" string="Social security number" class="oe_edit_only"/>
+              <field name="social_sec_nr" nolabel="1" class="oe_edit_only"/>
             </div>
 
             <div class="af_field_group">
-              <label for="phone" string="Telefonnummer" class="oe_read_only"/>
+              <label for="social_sec_nr_age" string="Personnummer:" class="oe_read_only"/>
+              <field name="social_sec_nr_age" class="oe_read_only" nolabel="1"/>
+            </div>
+
+            <div class="af_field_group">
+              <label for="phone" string="Telefonnummer"/>
               <field name="phone"/>
             </div>
 
             <div class="af_field_group">
-              <label for="mobile" string="Mobilnummer" class="oe_read_only"/>
+              <label for="mobile" string="Mobilnummer"/>
               <field name="mobile"/>
             </div>
 
             <div class="af_field_group">
-              <label for="email" string="E-post" class="oe_read_only"/>
+              <label for="email" string="E-post"/>
               <field name="email"/>
             </div>
 
@@ -142,9 +147,9 @@
               <field name="state_id" class="oe_edit_only"/>
             </div>
 
-            <div class="af_field_group">
+            <div class="af_field_group oe_read_only">
               <label for="street" string="Registered address"/>
-              <div class="oe_read_only">
+              <div>
                 <div class="o_address_format">
                   <span class="oe_read_only">
                     <field name="street" placeholder="Street..." class="o_address_street"/>
@@ -163,8 +168,8 @@
 
           <div string="Employment service information"  class="af_column_50 af_employment_service_information_group">
 
-            <div class="af_field_group">
-              <label for="registered_through" class="oe_read_only"/>
+            <div class="af_field_group oe_read_only">
+              <label for="registered_through"/>
               <field name="registered_through"/>
             </div>
 
@@ -176,17 +181,43 @@
               <field name="jobseeker_category" class="oe_read_only"/>
             </div>
 
-            <div class="af_field_group">
-              <label for="customer_since" class="oe_read_only"/>
+            <div class="af_field_group oe_read_only">
+              <label for="customer_since"/>
               <field name="customer_since" widget="date"/>
             </div>
 
-            <div class="af_field_group">
-              <label for="office_id" class="oe_edit_only"/>
-              <field name="office_id" options="{'no_create_edit': True}" class="oe_edit_only" nolabel="1"/>
+            <div class="af_field_group oe_edit_only">
+              <label for="office_id" string="Kontor"/>
+              <field name="office_id" options="{'no_create_edit': True}" nolabel="1"/>
+              <field name="office_code_name" class="oe_read_only"/>
+            </div>
+            <div class="af_field_group oe_read_only">
+              <label for="office_code_name" string="Kontor"/>
+              <field name="office_code_name" />
+            </div>
 
-              <label for="office_code_name" class="oe_read_only"/>
-              <field name="office_code_name" class="oe_read_only" string="Kontor" />
+            <div class="af_field_group">
+              <label for="match_area"/>
+              <field name="match_area"/>
+            </div>
+            <div class="af_field_group">
+              <label for="share_info_with_employers"/>
+              <field name="share_info_with_employers"/>
+            </div>
+
+            <div class="af_field_group">
+              <label for="sms_reminders"/>
+              <field name="sms_reminders"/>
+            </div>
+
+            <div class="af_field_group" groups="base.group_no_one">
+              <label for="segment_jobseeker"/>
+              <field name="segment_jobseeker" groups="base.group_no_one"/>
+            </div>
+
+            <div class="af_field_group">
+              <label for="eidentification"/>
+              <field name="eidentification"/>
             </div>
 
             <div class="af_field_group">
@@ -198,28 +229,13 @@
             </div>
 
             <div class="af_field_group">
-              <label for="segment_jobseeker" class="oe_read_only" groups="base.group_no_one"/>
-              <field name="segment_jobseeker" groups="base.group_no_one"/>
+              <label for="segment_jobseeker" />
+              <field name="segment_jobseeker" />
             </div>
 
-            <div class="af_field_group">
-              <label for="customer_id" string="Kundnummer:" class="oe_read_only" groups="base.group_no_one"/>
+            <div class="af_field_group oe_read_only" groups="base.group_no_one">
+              <label for="customer_id" string="Kundnummer:"/>
               <field name="customer_id" groups="base.group_no_one"/>
-            </div>
-
-            <div class="af_field_group">
-              <label for="share_info_with_employers" class="oe_read_only"/>
-              <field name="share_info_with_employers"/>
-            </div>
-
-            <div class="af_field_group">
-              <label for="sms_reminders" class="oe_read_only"/>
-              <field name="sms_reminders"/>
-            </div>
-
-            <div class="af_field_group">
-              <label for="match_area" class="oe_read_only"/>
-              <field name="match_area"/>
             </div>
 
           </div>
@@ -260,17 +276,6 @@
                   <t t-name="kanban-box">
                     <t t-set="color" t-value="kanban_color(record.color.raw_value)" />
                     <div t-att-class="color + (record.title.raw_value == 1 ? ' oe_kanban_color_alert' : '') + ' oe_kanban_global_click'">
-                      <div class="o_kanban_image">
-                        <img alt="" t-if="record.image_small.raw_value" t-att-src="kanban_image('res.partner', 'image_small', record.id.raw_value)" />
-                        <t t-if="!record.image_small.raw_value">
-                          <img alt="Delivery" t-if="record.type.raw_value === 'delivery'" t-att-src="_s + &quot;/base/static/img/truck.png&quot;" />
-                          <img alt="Invoice" t-if="record.type.raw_value === 'invoice'" t-att-src="_s + &quot;/base/static/img/money.png&quot;" />
-                          <t t-if="record.type.raw_value !== 'invoice' &amp;&amp; record.type.raw_value !== 'delivery'">
-                            <img alt="Logo" t-if="record.is_company.raw_value === true" t-att-src="_s + &quot;/base/static/img/company_image.png&quot;" />
-                            <img alt="Avatar" t-if="record.is_company.raw_value === false" t-att-src="_s + &quot;/base/static/img/avatar.png&quot;" />
-                          </t>
-                        </t>
-                      </div>
                       <div class="oe_kanban_details">
                         <field name="name" />
                         <div t-if="record.function.raw_value">
@@ -547,17 +552,6 @@
                     <t t-name="kanban-box">
                       <t t-set="color" t-value="kanban_color(record.color.raw_value)" />
                       <div t-att-class="color + (record.title.raw_value == 1 ? ' oe_kanban_color_alert' : '') + ' oe_kanban_global_click'">
-                        <div class="o_kanban_image">
-                          <img alt="" t-if="record.image_small.raw_value" t-att-src="kanban_image('res.partner', 'image_small', record.id.raw_value)" />
-                          <t t-if="!record.image_small.raw_value">
-                            <img alt="Delivery" t-if="record.type.raw_value === 'delivery'" t-att-src="_s + &quot;/base/static/img/truck.png&quot;" />
-                            <img alt="Invoice" t-if="record.type.raw_value === 'invoice'" t-att-src="_s + &quot;/base/static/img/money.png&quot;" />
-                            <t t-if="record.type.raw_value !== 'invoice' &amp;&amp; record.type.raw_value !== 'delivery'">
-                              <img alt="Logo" t-if="record.is_company.raw_value === true" t-att-src="_s + &quot;/base/static/img/company_image.png&quot;" />
-                              <img alt="Avatar" t-if="record.is_company.raw_value === false" t-att-src="_s + &quot;/base/static/img/avatar.png&quot;" />
-                            </t>
-                          </t>
-                        </div>
                         <div class="oe_kanban_details">
                           <field name="name" />
                           <div t-if="record.function.raw_value">
