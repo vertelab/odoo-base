@@ -186,8 +186,8 @@ class ResUsers(models.Model):
             limit = time() + minutes_to_live * 60
 
             while time() < limit:
+                message = officerlsnr.next_message()
                 if message:
-                    message = officerlsnr.next_message()
                     env_new = None
                     try:
                         self.env['af.process.log'].log_message(
