@@ -20,6 +20,8 @@
 ##############################################################################
 
 from odoo import models, fields, api, _, registry
+from odoo.addons.af_process_log.models.af_process_log import MaxTriesExceededError
+
 
 import json
 import logging
@@ -45,8 +47,8 @@ CODE = "kontorskod"
 SECTION = "sektion"
 TYPE = "notifieringstyp"
 ACCESS = "behorighet"
-AISF_OFFICER_SYNC_PROCESS = "AIS-F OFFICER SYNC"
-OFFICER_SYNC = "OFFICER SYNC"
+AISF_OFFICER_OFFICE_SYNC_PROCESS = "AIS-F OFFICER-OFFICE SYNC"
+OFFICER_OFFICE_SYNC = "OFFICER-OFFICE SYNC"
 
 class OfficerListener(stomp.ConnectionListener):
     def __init__(self, mqconn, user, pwd, target, clientid=4):
@@ -189,7 +191,7 @@ class ResUsers(models.Model):
                     env_new = None
                     try:
                         self.env['af.process.log'].log_message(
-                            AISF_OFFICER_SYNC_PROCESS, message[0]["message-id"], "PROCESS INITIATED",
+                            AISF_OFFICER_OFFICE_SYNC_PROCESS, message[0]["message-id"], "PROCESS INITIATED",
                             message=str(message), first=True)
                         new_cr = registry(self.env.cr.dbname).cursor()
                         uid, context = self.env.uid, self.env.context
@@ -203,12 +205,13 @@ class ResUsers(models.Model):
                             msg_type = msg.get(TYPE)
                             access = msg.get(ACCESS)
                             eventid = headers["message-id"]
+                            objectid = f"{signature}-{office_code}"
                             _logger.debug(f"Got message with  {signature}, "
                                           f"office code {office_code}, "
                                           f"type {msg_type}, "
                                           f"access {access}")
                             # not sure how specific the search has to be to find the right object
-                            log.log_message(AISF_OFFICER_SYNC_PROCESS, eventid, "SYNC STARTED", objectid=signature)
+                            log.log_message(AISF_OFFICER_OFFICE_SYNC_PROCESS, eventid, "SYNC STARTED", objectid=objectid)
                             user_id = env_new['res.users'].search([('login', '=', signature)])
                             office_id = env_new['hr.department'].search([('office_code', '=', office_code)])
                             if not user_id:
@@ -219,8 +222,8 @@ class ResUsers(models.Model):
                                         'name': signature
                                     })]
                                 })
-                                log.log_message(AISF_OFFICER_SYNC_PROCESS, eventid,
-                                                OFFICER_SYNC, objectid=signature,
+                                log.log_message(AISF_OFFICER_OFFICE_SYNC_PROCESS, eventid,
+                                                OFFICER_OFFICE_SYNC, objectid=objectid,
                                                 info_3=f"Failed to find res.user"
                                                         f" with login {signature}, "
                                                         f"creating new user")
@@ -235,8 +238,8 @@ class ResUsers(models.Model):
                                     employee.write({
                                         'office_ids': [(4, office_id.id, 0)]
                                     })
-                                log.log_message(AISF_OFFICER_SYNC_PROCESS, eventid,
-                                                OFFICER_SYNC, objectid=signature,
+                                log.log_message(AISF_OFFICER_OFFICE_SYNC_PROCESS, eventid,
+                                                OFFICER_OFFICE_SYNC, objectid=objectid,
                                                 info_2=f"Failed to find hr.department "
                                                        f"with office_code {office_code}, "
                                                        f"creating new")
@@ -247,8 +250,8 @@ class ResUsers(models.Model):
                                 # find office and remove it from office_ids
                                 _logger.debug(f"Deleting office with office_code {office_code}"
                                               f" from user with login {signature}")
-                                log.log_message(AISF_OFFICER_SYNC_PROCESS, eventid,
-                                                OFFICER_SYNC, objectid=signature,
+                                log.log_message(AISF_OFFICER_OFFICE_SYNC_PROCESS, eventid,
+                                                OFFICER_OFFICE_SYNC, objectid=objectid,
                                                 message=f"Deleting office with office_code {office_code}"
                                                         f" from user with login {signature}")
                                 for employee in user_id.employee_ids:
@@ -257,8 +260,8 @@ class ResUsers(models.Model):
                                     })
                             elif msg_type == "create":
                                 # find office and add it to office_ids
-                                log.log_message(AISF_OFFICER_SYNC_PROCESS, eventid,
-                                                OFFICER_SYNC, objectid=signature,
+                                log.log_message(AISF_OFFICER_OFFICE_SYNC_PROCESS, eventid,
+                                                OFFICER_OFFICE_SYNC, objectid=objectid,
                                                 message=f"Adding office with office_code {office_code}"
                                                         f" to user with login {signature}")
                                 _logger.debug(f"Adding office with office_code {office_code}"
@@ -268,16 +271,23 @@ class ResUsers(models.Model):
                                         'office_ids': [(4, office_id.id, 0)]
                                     })
                             else:
-                                log.log_message(AISF_OFFICER_SYNC_PROCESS, eventid,
-                                                OFFICER_SYNC, objectid=signature,
+                                log.log_message(AISF_OFFICER_OFFICE_SYNC_PROCESS, eventid,
+                                                OFFICER_OFFICE_SYNC, objectid=objectid,
                                                 message=f"Message of type {msg_type} not supported,"
                                                         f" ignoring",
                                                 status=False)
                                 _logger.info(f"Message of type {msg_type} not supported, ignoring")
-                    except Exception:
+                    except MaxTriesExceededError:
+                        # TODO: Check if we should NACK instead.
+                        officerlsnr.ack_message(message)
+                    except Exception as e:
                         _logger.exception(
-                            "Officer MQ Sender: error "
+                            f"Officer MQ Sender: error {e}"
                         )
+                        log.log_message(AISF_OFFICER_OFFICE_SYNC_PROCESS, eventid,
+                                        OFFICER_OFFICE_SYNC, objectid=objectid,
+                                        error_message=f"Officer MQ Sender: error {e}",
+                                        status=False)
                     finally:
                         # close our new cursor
                         if env_new:
