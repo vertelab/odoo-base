@@ -149,6 +149,7 @@ class ResPartner(models.Model):
     ) #is added in partner_extension_af
 
     name_ssn = fields.Char(compute="_compute_name_ssn", store=True)
+    is_spu = fields.Boolean(string='SPU', default=False)
 
     _sql_constraints = [
         ('customer_id_unique',
