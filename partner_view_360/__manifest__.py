@@ -21,7 +21,7 @@
 
 {
     'name': 'Partner 360 view',
-    'version': '12.0.0.3.0',
+    'version': '12.0.0.3.1',
     'category': '',
     'description': """
 Module for employee 360 view
