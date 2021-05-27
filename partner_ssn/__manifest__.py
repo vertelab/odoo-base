@@ -21,10 +21,11 @@
 
 {
     'name': 'Partner Social Security Number',
-    'version': '12.0.0.1.0',
+    'version': '12.0.0.1.1',
     'category': '',
     'description': """
 Adds social security number to partners
+v12.0.0.1.1 AFC-2255 Changed the text when a person is older than 67 years old \n
 ================================================================================================
 
 """,

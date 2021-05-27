@@ -127,7 +127,7 @@ class ResPartner(models.Model):
                 ):
                     years -= 1
                 if years > 67:
-                    self.age = _("This person is too old, at %s years old") % years
+                    self.age = _(" %s years old") % years
                     _logger.warn(
                         "A person older than 67 should not be in the system, a person is %s years old"
                         % years

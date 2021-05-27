@@ -85,8 +85,8 @@ msgstr "Personnummret %s är felaktigt formaterat"
 #. module: partner_ssn
 #: code:addons/partner_ssn/models/res_partner.py:130
 #, python-format
-msgid "This person is too old, at %s years old"
-msgstr "Personen är för gammal, %s år."
+msgid "%s years old"
+msgstr "%s år."
 
 #. module: partner_ssn
 #: sql_constraint:res.partner:0
