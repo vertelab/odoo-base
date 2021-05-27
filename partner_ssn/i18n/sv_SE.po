@@ -82,11 +82,11 @@ msgstr "Personnummret %s är formaterat som YYMMDDNNNN, det är inte tillåtet."
 msgid "Social security number %s is not correctly formated."
 msgstr "Personnummret %s är felaktigt formaterat"
 
-#. module: partner_ssn
-#: code:addons/partner_ssn/models/res_partner.py:130
-#, python-format
-msgid "%s years old"
-msgstr "%s år."
+
+
+
+
+
 
 #. module: partner_ssn
 #: sql_constraint:res.partner:0
