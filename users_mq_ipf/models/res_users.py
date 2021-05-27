@@ -26,7 +26,6 @@ import logging
 import stomp
 import ssl
 from queue import Queue, Empty
-import time
 from time import time
 
 _logger = logging.getLogger(__name__)
@@ -179,7 +178,6 @@ class ResUsers(models.Model):
         mqconn.set_listener("", officerlsnr)
         # passing a bool in do_list to indicate if we should keep
         # running mq_officer_sender. What is a better solution?
-        do_list = [True]
         try:
             connect_and_subscribe(mqconn, usr, pwd, target)
 
@@ -223,10 +221,9 @@ class ResUsers(models.Model):
                                 })
                                 log.log_message(AISF_OFFICER_SYNC_PROCESS, eventid,
                                                 OFFICER_SYNC, objectid=signature,
-                                                message=f"Failed to find res.user"
+                                                info_3=f"Failed to find res.user"
                                                         f" with login {signature}, "
-                                                        f"creating new user",
-                                                status=False)
+                                                        f"creating new user")
                                 _logger.info(f"Failed to find res.user with login {signature},"
                                              f" creating new user")
 
@@ -265,6 +262,11 @@ class ResUsers(models.Model):
                                             'office_ids': [(4, office_id.id, 0)]
                                         })
                                 else:
+                                    env_new['hr.department'].create({
+                                        'name': office_code,
+                                        'office_code': office_code
+                                    })
+
                                     log.log_message(AISF_OFFICER_SYNC_PROCESS, eventid,
                                                     OFFICER_SYNC, objectid=signature,
                                                     error_message=f"Failed to find hr.department "
@@ -290,7 +292,7 @@ class ResUsers(models.Model):
                 # Check if stop has been called
                 self.env.cr.commit()
                 cronstop = self.env["ir.config_parameter"].get_param(
-                    "partner_mq_ipf.cronstop", "0")
+                    "users_mq_ipf.cronstop", "0")
                 if cronstop != "0":
                     break
             # Stop listening
