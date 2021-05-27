@@ -82,12 +82,6 @@ msgstr "Personnummret %s är formaterat som YYMMDDNNNN, det är inte tillåtet."
 msgid "Social security number %s is not correctly formated."
 msgstr "Personnummret %s är felaktigt formaterat"
 
-
-
-
-
-
-
 #. module: partner_ssn
 #: sql_constraint:res.partner:0
 msgid "social security number field needs to be unique"
