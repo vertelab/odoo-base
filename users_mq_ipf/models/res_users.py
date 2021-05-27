@@ -226,7 +226,23 @@ class ResUsers(models.Model):
                                                         f"creating new user")
                                 _logger.info(f"Failed to find res.user with login {signature},"
                                              f" creating new user")
-
+                            if not office_id:
+                                office_id = env_new['hr.department'].create({
+                                    'name': office_code,
+                                    'office_code': office_code
+                                })
+                                for employee in user_id.employee_ids:
+                                    employee.write({
+                                        'office_ids': [(4, office_id.id, 0)]
+                                    })
+                                log.log_message(AISF_OFFICER_SYNC_PROCESS, eventid,
+                                                OFFICER_SYNC, objectid=signature,
+                                                info_2=f"Failed to find hr.department "
+                                                       f"with office_code {office_code}, "
+                                                       f"creating new")
+                                _logger.error(f"Failed to find hr.department"
+                                              f" with office_code {office_code},"
+                                              f" creating new")
                             if msg_type == "delete":
                                 # find office and remove it from office_ids
                                 _logger.debug(f"Deleting office with office_code {office_code}"
@@ -235,19 +251,10 @@ class ResUsers(models.Model):
                                                 OFFICER_SYNC, objectid=signature,
                                                 message=f"Deleting office with office_code {office_code}"
                                                         f" from user with login {signature}")
-                                if office_id:
-                                    for employee in user_id.employee_ids:
-                                        employee.write({
-                                            'office_ids': [(3, office_id.id, 0)]
-                                        })
-                                else:
-                                    log.log_message(AISF_OFFICER_SYNC_PROCESS, eventid,
-                                                    OFFICER_SYNC, objectid=signature,
-                                                    error_message=f"Failed to find hr.department"
-                                                                  f" with office_code {office_code}",
-                                                    status=False)
-                                    _logger.error(f"Failed to find hr.department"
-                                                  f" with office_code {office_code}")
+                                for employee in user_id.employee_ids:
+                                    employee.write({
+                                        'office_ids': [(3, office_id.id, 0)]
+                                    })
                             elif msg_type == "create":
                                 # find office and add it to office_ids
                                 log.log_message(AISF_OFFICER_SYNC_PROCESS, eventid,
@@ -256,24 +263,10 @@ class ResUsers(models.Model):
                                                         f" to user with login {signature}")
                                 _logger.debug(f"Adding office with office_code {office_code}"
                                               f" to user with login {signature}")
-                                if office_id:
-                                    for employee in user_id.employee_ids:
-                                        employee.write({
-                                            'office_ids': [(4, office_id.id, 0)]
-                                        })
-                                else:
-                                    env_new['hr.department'].create({
-                                        'name': office_code,
-                                        'office_code': office_code
+                                for employee in user_id.employee_ids:
+                                    employee.write({
+                                        'office_ids': [(4, office_id.id, 0)]
                                     })
-
-                                    log.log_message(AISF_OFFICER_SYNC_PROCESS, eventid,
-                                                    OFFICER_SYNC, objectid=signature,
-                                                    error_message=f"Failed to find hr.department "
-                                                                  f"with office_code {office_code}",
-                                                    status=False)
-                                    _logger.error(f"Failed to find hr.department"
-                                                  f" with office_code {office_code}")
                             else:
                                 log.log_message(AISF_OFFICER_SYNC_PROCESS, eventid,
                                                 OFFICER_SYNC, objectid=signature,
