@@ -94,8 +94,8 @@ class ResPartner(models.Model):
     )  # is added in partner_extension_af
     match_area = fields.Selection(
         selection=[
-            ("Krom", "Ja"),
-            ("KromEsf", "Ja"),
+            ("Krom", "Ja - ej ESF"),
+            ("KromEsf", "Ja - ESF"),
             ("EjKrom", "Nej"),
         ],
         string="Rusta och matcha-område",
@@ -336,7 +336,7 @@ class ResPartner(models.Model):
 
     @api.model
     def search_pnr(self, pnr):
-        domain = []
+        domain = [('is_jobseeker', '=', True)]
         if len(pnr) == 13 and pnr[8] == "-":
             domain.append(("social_sec_nr", "=", pnr))
         elif len(pnr) == 12:
