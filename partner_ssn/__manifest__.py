@@ -21,11 +21,12 @@
 
 {
     'name': 'Partner Social Security Number',
-    'version': '12.0.0.1.1',
+    'version': '12.0.0.1.2',
     'category': '',
     'description': """
 Adds social security number to partners
 v12.0.0.1.1 AFC-2255 Changed the text when a person is older than 67 years old \n
+v12.0.0.1.2 AFC-2186 Added Gender inside Contacts based on SSN's last number. \n
 ================================================================================================
 
 """,
