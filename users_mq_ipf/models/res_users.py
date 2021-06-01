@@ -224,10 +224,8 @@ class ResUsers(models.Model):
                                 })
                                 log.log_message(AISF_OFFICER_OFFICE_SYNC_PROCESS, eventid,
                                                 OFFICER_OFFICE_SYNC, objectid=objectid,
-                                                info_3=f"Failed to find res.user"
-                                                        f" with login {signature}, "
-                                                        f"creating new user")
-                                _logger.info(f"Failed to find res.user with login {signature},"
+                                                info_3="Created officer")
+                                _logger.debug(f"Failed to find res.user with login {signature},"
                                              f" creating new user")
                             if not office_id:
                                 office_id = env_new['hr.department'].create({
@@ -240,10 +238,8 @@ class ResUsers(models.Model):
                                     })
                                 log.log_message(AISF_OFFICER_OFFICE_SYNC_PROCESS, eventid,
                                                 OFFICER_OFFICE_SYNC, objectid=objectid,
-                                                info_2=f"Failed to find hr.department "
-                                                       f"with office_code {office_code}, "
-                                                       f"creating new")
-                                _logger.error(f"Failed to find hr.department"
+                                                info_2="Created office")
+                                _logger.debug(f"Failed to find hr.department"
                                               f" with office_code {office_code},"
                                               f" creating new")
                             if msg_type == "delete":
@@ -252,8 +248,8 @@ class ResUsers(models.Model):
                                               f" from user with login {signature}")
                                 log.log_message(AISF_OFFICER_OFFICE_SYNC_PROCESS, eventid,
                                                 OFFICER_OFFICE_SYNC, objectid=objectid,
-                                                message=f"Deleting office with office_code {office_code}"
-                                                        f" from user with login {signature}")
+                                                message=f"Deleting office {office_code}"
+                                                        f" from user {signature}")
                                 for employee in user_id.employee_ids:
                                     employee.write({
                                         'office_ids': [(3, office_id.id, 0)]
@@ -262,8 +258,8 @@ class ResUsers(models.Model):
                                 # find office and add it to office_ids
                                 log.log_message(AISF_OFFICER_OFFICE_SYNC_PROCESS, eventid,
                                                 OFFICER_OFFICE_SYNC, objectid=objectid,
-                                                message=f"Adding office with office_code {office_code}"
-                                                        f" to user with login {signature}")
+                                                message=f"Adding office {office_code}"
+                                                        f" to user {signature}")
                                 _logger.debug(f"Adding office with office_code {office_code}"
                                               f" to user with login {signature}")
                                 for employee in user_id.employee_ids:
@@ -276,7 +272,7 @@ class ResUsers(models.Model):
                                                 message=f"Message of type {msg_type} not supported,"
                                                         f" ignoring",
                                                 status=False)
-                                _logger.info(f"Message of type {msg_type} not supported, ignoring")
+                                _logger.debug(f"Message of type {msg_type} not supported, ignoring")
                             officerlsnr.ack_message(message)
                     except MaxTriesExceededError:
                         # TODO: Check if we should NACK instead.
