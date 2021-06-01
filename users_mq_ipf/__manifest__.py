@@ -21,16 +21,16 @@
 
 {
     'name': "Users MQ/IPF-update dispatcher",
-    'version': '12.0.0.1.0',
+    'version': '12.0.0.1.1',
     'category': '',
     'description': """
 
-
+v12.0.0.1.1 - added logging with af_process_log, refactored code
 """,
     'author': 'Vertel AB',
     'license': 'AGPL-3',
     'website': 'http://www.vertel.se',
-    'depends': ['base', 'hr_office'],
+    'depends': ['base', 'hr_office', 'af_process_log'],
     'external_dependencies': {'python': ['stomp']},
     'data': ['data/cron.xml'],
     'application': False,
