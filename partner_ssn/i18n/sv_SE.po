@@ -83,12 +83,6 @@ msgid "Social security number %s is not correctly formated."
 msgstr "Personnummret %s är felaktigt formaterat"
 
 #. module: partner_ssn
-#: code:addons/partner_ssn/models/res_partner.py:130
-#, python-format
-msgid "This person is too old, at %s years old"
-msgstr "Personen är för gammal, %s år."
-
-#. module: partner_ssn
 #: sql_constraint:res.partner:0
 msgid "social security number field needs to be unique"
 msgstr "Personnummret måste vara unikt."

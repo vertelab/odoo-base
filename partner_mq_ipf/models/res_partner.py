@@ -326,6 +326,7 @@ class ResPartner(models.Model):
                     finally:
                         # close our new cursor
                         if env_new:
+                            env_new.cr.commit()
                             env_new.cr.close()
                 # Check if stop has been called
                 self.env.cr.commit()
