@@ -168,8 +168,8 @@ class ResUsers(models.Model):
         mqconn = stomp.Connection10(host_port)
 
         if (
-            self.env["ir.config_parameter"].get_param("users_mq_ipf.mqusessl", "1")
-            == "1"
+                self.env["ir.config_parameter"].get_param("users_mq_ipf.mqusessl", "1")
+                == "1"
         ):
             mqconn.set_ssl(for_hosts=host_port, ssl_version=ssl.PROTOCOL_TLS)
             _logger.debug("Officer MQ Listener - Using TLS")
@@ -225,10 +225,12 @@ class ResUsers(models.Model):
                                 log.log_message(AISF_OFFICER_OFFICE_SYNC_PROCESS, eventid,
                                                 OFFICER_OFFICE_SYNC, objectid=objectid,
                                                 info_3=f"Failed to find res.user"
-                                                        f" with login {signature}, "
-                                                        f"creating new user")
+                                                       f" with login {signature}, "
+                                                       f"creating new user")
                                 _logger.info(f"Failed to find res.user with login {signature},"
                                              f" creating new user")
+                                # Make call to X-500 to read info about new user
+                                user_id._update_user_x500()
                             if not office_id:
                                 office_id = env_new['hr.department'].create({
                                     'name': office_code,
@@ -307,3 +309,20 @@ class ResUsers(models.Model):
             # send signal to stop other thread
             if mqconn.is_connected():
                 mqconn.disconnect()
+
+    @api.one
+    def _update_user_x500(self):
+        """ Asks X500 for information about the supplied user
+        and updates the user object. """
+        route = self.env.ref("edi_af_officer.get_officer_route")
+        vals = {
+            'name': 'Get officer msg',
+            'edi_type': self.env.ref('edi_af_officer.get_officer').id,
+            'model': self._name,
+            'res_id': self.id,
+            'route_id': route.id,
+            'route_type': 'edi_af_officer',
+        }
+        message = self.env['edi.message'].sudo().create(vals)
+        message.pack()
+        route.run()
