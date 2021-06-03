@@ -42,6 +42,7 @@ def connect_and_subscribe(mqconn, user, pwd, target, clientid=4):
     mqconn.connect(user, pwd, wait=True)
     subscribe(mqconn, target, clientid=clientid)
 
+
 SIGN = "signatur"
 CODE = "kontorskod"
 SECTION = "sektion"
@@ -49,6 +50,7 @@ TYPE = "notifieringstyp"
 ACCESS = "behorighet"
 AISF_OFFICER_OFFICE_SYNC_PROCESS = "AIS-F OFFICER-OFFICE SYNC"
 OFFICER_OFFICE_SYNC = "OFFICER-OFFICE SYNC"
+
 
 class OfficerListener(stomp.ConnectionListener):
     def __init__(self, mqconn, user, pwd, target, clientid=4):
@@ -163,7 +165,7 @@ class ResUsers(models.Model):
         stomp_logger = logging.getLogger("stomp.py")
         stomp_logger.setLevel(getattr(logging, stomp_log_level))
 
-        log = self.env['af.process.log']
+        log = self.env["af.process.log"]
 
         mqconn = stomp.Connection10(host_port)
 
@@ -190,9 +192,13 @@ class ResUsers(models.Model):
                 if message:
                     env_new = None
                     try:
-                        self.env['af.process.log'].log_message(
-                            AISF_OFFICER_OFFICE_SYNC_PROCESS, message[0]["message-id"], "PROCESS INITIATED",
-                            message=str(message), first=True)
+                        self.env["af.process.log"].log_message(
+                            AISF_OFFICER_OFFICE_SYNC_PROCESS,
+                            message[0]["message-id"],
+                            "PROCESS INITIATED",
+                            message=str(message),
+                            first=True,
+                        )
                         new_cr = registry(self.env.cr.dbname).cursor()
                         uid, context = self.env.uid, self.env.context
                         with api.Environment.manage():
@@ -206,85 +212,133 @@ class ResUsers(models.Model):
                             access = msg.get(ACCESS)
                             eventid = headers["message-id"]
                             objectid = f"{signature}-{office_code}"
-                            _logger.debug(f"Got message with  {signature}, "
-                                          f"office code {office_code}, "
-                                          f"type {msg_type}, "
-                                          f"access {access}")
+                            _logger.debug(
+                                f"Got message with  {signature}, "
+                                f"office code {office_code}, "
+                                f"type {msg_type}, "
+                                f"access {access}"
+                            )
                             # not sure how specific the search has to be to find the right object
-                            log.log_message(AISF_OFFICER_OFFICE_SYNC_PROCESS, eventid, "SYNC STARTED", objectid=objectid)
-                            user_id = env_new['res.users'].search([('login', '=', signature)])
-                            office_id = env_new['hr.department'].search([('office_code', '=', office_code)])
+                            log.log_message(
+                                AISF_OFFICER_OFFICE_SYNC_PROCESS,
+                                eventid,
+                                "SYNC STARTED",
+                                objectid=objectid,
+                            )
+                            user_id = env_new["res.users"].search(
+                                [("login", "=", signature)]
+                            )
+                            office_id = env_new["hr.department"].search(
+                                [("office_code", "=", office_code)]
+                            )
                             if not user_id:
-                                user_id = env_new['res.users'].create({
-                                    'login': signature,
-                                    'name': signature,
-                                    'employee_ids': [(0, 0, {
-                                        'name': signature
-                                    })]
-                                })
-                                log.log_message(AISF_OFFICER_OFFICE_SYNC_PROCESS, eventid,
-                                                OFFICER_OFFICE_SYNC, objectid=objectid,
-                                                info_3="Created officer")
-                                _logger.debug(f"Failed to find res.user with login {signature},"
-                                             f" creating new user")
+                                user_id = env_new["res.users"].create(
+                                    {
+                                        "login": signature,
+                                        "name": signature,
+                                        "employee_ids": [(0, 0, {"name": signature})],
+                                    }
+                                )
+                                log.log_message(
+                                    AISF_OFFICER_OFFICE_SYNC_PROCESS,
+                                    eventid,
+                                    OFFICER_OFFICE_SYNC,
+                                    objectid=objectid,
+                                    info_3=f"Failed to find res.user"
+                                    f" with login {signature}, "
+                                    f"creating new user",
+                                )
+                                _logger.info(
+                                    f"Failed to find res.user with login {signature},"
+                                    f" creating new user"
+                                )
+                                # Make call to X-500 to read info about new user
+                                user_id._update_user_x500()
                             if not office_id:
-                                office_id = env_new['hr.department'].create({
-                                    'name': office_code,
-                                    'office_code': office_code
-                                })
+                                office_id = env_new["hr.department"].create(
+                                    {"name": office_code, "office_code": office_code}
+                                )
                                 for employee in user_id.employee_ids:
-                                    employee.write({
-                                        'office_ids': [(4, office_id.id, 0)]
-                                    })
-                                log.log_message(AISF_OFFICER_OFFICE_SYNC_PROCESS, eventid,
-                                                OFFICER_OFFICE_SYNC, objectid=objectid,
-                                                info_2="Created office")
-                                _logger.debug(f"Failed to find hr.department"
-                                              f" with office_code {office_code},"
-                                              f" creating new")
+                                    employee.write(
+                                        {"office_ids": [(4, office_id.id, 0)]}
+                                    )
+                                log.log_message(
+                                    AISF_OFFICER_OFFICE_SYNC_PROCESS,
+                                    eventid,
+                                    OFFICER_OFFICE_SYNC,
+                                    objectid=objectid,
+                                    info_2=f"Failed to find hr.department "
+                                    f"with office_code {office_code}, "
+                                    f"creating new",
+                                )
+                                _logger.error(
+                                    f"Failed to find hr.department"
+                                    f" with office_code {office_code},"
+                                    f" creating new"
+                                )
                             if msg_type == "delete":
                                 # find office and remove it from office_ids
-                                _logger.debug(f"Deleting office with office_code {office_code}"
-                                              f" from user with login {signature}")
-                                log.log_message(AISF_OFFICER_OFFICE_SYNC_PROCESS, eventid,
-                                                OFFICER_OFFICE_SYNC, objectid=objectid,
-                                                message=f"Deleting office {office_code}"
-                                                        f" from user {signature}")
+                                _logger.debug(
+                                    f"Deleting office with office_code {office_code}"
+                                    f" from user with login {signature}"
+                                )
+                                log.log_message(
+                                    AISF_OFFICER_OFFICE_SYNC_PROCESS,
+                                    eventid,
+                                    OFFICER_OFFICE_SYNC,
+                                    objectid=objectid,
+                                    message=f"Deleting office with office_code {office_code}"
+                                    f" from user with login {signature}",
+                                )
                                 for employee in user_id.employee_ids:
-                                    employee.write({
-                                        'office_ids': [(3, office_id.id, 0)]
-                                    })
+                                    employee.write(
+                                        {"office_ids": [(3, office_id.id, 0)]}
+                                    )
                             elif msg_type == "create":
                                 # find office and add it to office_ids
-                                log.log_message(AISF_OFFICER_OFFICE_SYNC_PROCESS, eventid,
-                                                OFFICER_OFFICE_SYNC, objectid=objectid,
-                                                message=f"Adding office {office_code}"
-                                                        f" to user {signature}")
-                                _logger.debug(f"Adding office with office_code {office_code}"
-                                              f" to user with login {signature}")
+                                log.log_message(
+                                    AISF_OFFICER_OFFICE_SYNC_PROCESS,
+                                    eventid,
+                                    OFFICER_OFFICE_SYNC,
+                                    objectid=objectid,
+                                    message=f"Adding office with office_code {office_code}"
+                                    f" to user with login {signature}",
+                                )
+                                _logger.debug(
+                                    f"Adding office with office_code {office_code}"
+                                    f" to user with login {signature}"
+                                )
                                 for employee in user_id.employee_ids:
-                                    employee.write({
-                                        'office_ids': [(4, office_id.id, 0)]
-                                    })
+                                    employee.write(
+                                        {"office_ids": [(4, office_id.id, 0)]}
+                                    )
                             else:
-                                log.log_message(AISF_OFFICER_OFFICE_SYNC_PROCESS, eventid,
-                                                OFFICER_OFFICE_SYNC, objectid=objectid,
-                                                message=f"Message of type {msg_type} not supported,"
-                                                        f" ignoring",
-                                                status=False)
-                                _logger.debug(f"Message of type {msg_type} not supported, ignoring")
+                                log.log_message(
+                                    AISF_OFFICER_OFFICE_SYNC_PROCESS,
+                                    eventid,
+                                    OFFICER_OFFICE_SYNC,
+                                    objectid=objectid,
+                                    message=f"Message of type {msg_type} not supported,"
+                                    f" ignoring",
+                                    status=False,
+                                )
+                                _logger.info(
+                                    f"Message of type {msg_type} not supported, ignoring"
+                                )
                             officerlsnr.ack_message(message)
                     except MaxTriesExceededError:
                         # TODO: Check if we should NACK instead.
                         officerlsnr.ack_message(message)
                     except Exception as e:
-                        _logger.exception(
-                            f"Officer MQ Sender: error {e}"
+                        _logger.exception(f"Officer MQ Sender: error {e}")
+                        log.log_message(
+                            AISF_OFFICER_OFFICE_SYNC_PROCESS,
+                            eventid,
+                            OFFICER_OFFICE_SYNC,
+                            objectid=objectid,
+                            error_message=f"Officer MQ Sender: error {e}",
+                            status=False,
                         )
-                        log.log_message(AISF_OFFICER_OFFICE_SYNC_PROCESS, eventid,
-                                        OFFICER_OFFICE_SYNC, objectid=objectid,
-                                        error_message=f"Officer MQ Sender: error {e}",
-                                        status=False)
                     finally:
                         # close our new cursor
                         if env_new:
@@ -293,7 +347,8 @@ class ResUsers(models.Model):
                 # Check if stop has been called
                 self.env.cr.commit()
                 cronstop = self.env["ir.config_parameter"].get_param(
-                    "users_mq_ipf.cronstop", "0")
+                    "users_mq_ipf.cronstop", "0"
+                )
                 if cronstop != "0":
                     break
             # Stop listening
@@ -304,3 +359,20 @@ class ResUsers(models.Model):
             # send signal to stop other thread
             if mqconn.is_connected():
                 mqconn.disconnect()
+
+    @api.one
+    def _update_user_x500(self):
+        """Asks X500 for information about the supplied user
+        and updates the user object."""
+        route = self.env.ref("edi_af_officer.get_officer_route")
+        vals = {
+            "name": "Get officer msg",
+            "edi_type": self.env.ref("edi_af_officer.get_officer").id,
+            "model": self._name,
+            "res_id": self.id,
+            "route_id": route.id,
+            "route_type": "edi_af_officer",
+        }
+        message = self.env["edi.message"].sudo().create(vals)
+        message.pack()
+        route.run()
