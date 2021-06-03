@@ -21,7 +21,7 @@
 
 {
     'name': 'Partner 360 view',
-    'version': '12.0.0.3.2',
+    'version': '12.0.0.3.3',
     'category': '',
     'description': """
 Module for employee 360 view
@@ -49,6 +49,7 @@ v12.0.0.2.9 AFC-2239: Fixed jobseeker view.\n
 v12.0.0.3.0 AFC-1950: Replaced kromtype with match_area.\n
 v12.0.0.3.1 AFC-2372: Hide fields e-legitimation and arbetsökandesegment.\n
 v12.0.0.3.2 AFC-2245: Added new field is_spu to mark problematic records.\n
+v12.0.0.3.3 AFC-2305: Added css class to h1 tag\n
 """,
     'author': 'Vertel AB',
     'license': 'AGPL-3',

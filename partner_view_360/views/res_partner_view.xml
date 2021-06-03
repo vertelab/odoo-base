@@ -95,7 +95,7 @@
 
         <div style="margin-bottom:1em;">
           <button name="close_view" type="object">Close</button>
-          <h1>Arbetssökande <field name="name" default_focus="1" placeholder="Name" attrs="{'required' : [('type', '=', 'contact')]}"/></h1>
+          <h1 class="oe_left">Arbetssökande <field name="name" default_focus="1" placeholder="Name" attrs="{'required' : [('type', '=', 'contact')]}"/></h1>
           <!-- Visa avaktualiserad eller Lagrad bara om det är så -->
           <group attrs="{'invisible':[ ('deactualization_date', '=', False ) ]}">
             <field name="deactualization_date" widget="date"/>
