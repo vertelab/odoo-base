@@ -53,27 +53,6 @@ class ResPartnerNotes(models.Model):
 class ResPartner(models.Model):
     _inherit = "res.partner"
 
-    @api.multi
-    def _create_next_last_msg(self):
-        try:
-            if self.is_jobseeker:
-                route = self.env.ref(
-                    "edi_af_aisf_trask.asok_contact_route", raise_if_not_found=False
-                )
-                if route:
-                    vals = {
-                        "name": "set contact msg",
-                        "edi_type": self.env.ref("edi_af_aisf_trask.asok_contact").id,
-                        "model": self._name,
-                        "res_id": self.id,
-                        "route_id": route.id,
-                        "route_type": "edi_af_aisf_trask_contact",
-                    }
-                    message = self.env["edi.message"].create(vals)
-                    message.pack()
-        except:
-            _logger.exception("Something went wrong in IPF meeting sync.")
-
     notes_ids = fields.One2many(
         comodel_name="res.partner.notes",
         string="Daily notes",
@@ -114,8 +93,37 @@ class ResPartner(models.Model):
         help="Fields used by AIS-F data. Do not overwrite with other data.",
     )
 
+    # these fields are used to present the information in views.
     next_contact = fields.Char(string="Next contact", compute="_compute_next_contact")
     last_contact = fields.Char(string="Latest contact", compute="_compute_last_contact")
+    # these fields are used to keep track of our internal next / last contact dates
+    # and decide weather we need to sync our data to AIS-F or not.
+    next_contact_app = fields.Datetime(
+        string="Next contact (appointment)", compute="_compute_next_contact"
+    )
+    last_contact_app = fields.Datetime(
+        string="Latest contact (appointment)", compute="_compute_last_contact"
+    )
+    last_contact_type_app = fields.Selection(
+        string="Latest contact type",
+        selection=[
+            ("T", "Phone"),
+            ("B", "Visit"),
+            ("E", "E-mail"),
+            ("P", "Mail"),
+            ("I", "Internet"),
+        ],
+    )
+    next_contact_type_app = fields.Selection(
+        string="Next contact type",
+        selection=[
+            ("T", "Phone"),
+            ("B", "Visit"),
+            ("E", "E-mail"),
+            ("P", "Mail"),
+            ("I", "Internet"),
+        ],
+    )
 
     @api.one
     def _compute_next_contact(self):
@@ -130,10 +138,17 @@ class ResPartner(models.Model):
             limit=1,
         )
         next_contact_date = None
+        next_contact_time = None
+        next_contact_type = None
+        res = _("No next contact")
+        res_datetime = False
         tz_offset = self.env.user.tz_offset
         if appointment and (
             not self.next_contact_date
-            or (self.next_contact_date and appointment.start.date() < self.next_contact_date)
+            or (
+                self.next_contact_date
+                and appointment.start.date() < self.next_contact_date
+            )
         ):
             # use appointment date instead of AIS-F data.
             if tz_offset:
@@ -149,12 +164,15 @@ class ResPartner(models.Model):
                 if appointment.channel == self.env.ref("calendar_channel.channel_pdm")
                 else "B"
             )
+            res_datetime = appointment.start
         elif self.next_contact_date and self.next_contact_time:
             # use AIS-F data
             if tz_offset:
                 # there has to be a better way to do this.
                 hours = int(self.next_contact_time[0:2]) + int(tz_offset[0:3])
-                minutes = int(self.next_contact_time[3:5]) + int(tz_offset[0] + tz_offset[3:5])
+                minutes = int(self.next_contact_time[3:5]) + int(
+                    tz_offset[0] + tz_offset[3:5]
+                )
                 next_contact_time = f"{hours:02d}:{minutes:02d}"
             else:
                 next_contact_time = self.next_contact_time
@@ -162,11 +180,14 @@ class ResPartner(models.Model):
                 self.next_contact_date if self.next_contact_date else False
             )
             next_contact_type = self.next_contact_type
+            res_datetime = datetime.combine(
+                next_contact_date, datetime.strptime(next_contact_time, "%H:%M").time()
+            )
         if next_contact_date:
             res = f"{next_contact_date} {next_contact_time if next_contact_time else ''} {next_contact_type}"
-        else:
-            res = _("No next contact")
         self.next_contact = res
+        self.next_contact_app = res_datetime
+        self.next_contact_type_app = next_contact_type
 
     @api.one
     def _compute_last_contact(self):
@@ -180,9 +201,13 @@ class ResPartner(models.Model):
             order="start",
             limit=1,
         )
+        res_datetime = False
         if appointment and (
             not self.next_contact_date
-            or (self.last_contact_date and appointment.start.date() > self.last_contact_date)
+            or (
+                self.last_contact_date
+                and appointment.start.date() > self.last_contact_date
+            )
         ):
             # use appointment date instead of AIS-F data.
             last_contact_date = appointment.start.date()
@@ -191,17 +216,43 @@ class ResPartner(models.Model):
                 if appointment.channel == self.env.ref("calendar_channel.channel_pdm")
                 else "B"
             )
+            res_datetime = appointment.start
         else:
             # use AIS-F data
             last_contact_date = (
                 self.last_contact_date if self.last_contact_date else False
             )
             last_contact_type = self.last_contact_type
+            res_datetime = datetime.combine(last_contact_date, datetime.min.time())
         if last_contact_date:
             res = f"{last_contact_date} {last_contact_type}"
         else:
             res = _("No last contact")
         self.last_contact = res
+        self.last_contact_app = res_datetime
+        self.last_contact_type_app = last_contact_type
+
+    @api.multi
+    def _create_next_last_msg(self):
+        try:
+            if self.is_jobseeker:
+                route = self.env.ref(
+                    "edi_af_aisf_trask.asok_contact_route", raise_if_not_found=False
+                )
+                if route:
+                    vals = {
+                        "name": "set contact msg",
+                        "edi_type": self.env.ref("edi_af_aisf_trask.asok_contact").id,
+                        "model": self._name,
+                        "res_id": self.id,
+                        "route_id": route.id,
+                        "route_type": "edi_af_aisf_trask_contact",
+                    }
+                    message = self.env["edi.message"].create(vals)
+                    message.pack()
+                    route.run()
+        except:
+            _logger.exception("Something went wrong in IPF meeting sync.")
 
     def action_view_next_event(self):
         action = {

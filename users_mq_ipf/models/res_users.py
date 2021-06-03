@@ -325,6 +325,7 @@ class ResUsers(models.Model):
                                 _logger.info(
                                     f"Message of type {msg_type} not supported, ignoring"
                                 )
+                            officerlsnr.ack_message(message)
                     except MaxTriesExceededError:
                         # TODO: Check if we should NACK instead.
                         officerlsnr.ack_message(message)
