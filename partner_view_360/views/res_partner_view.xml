@@ -95,7 +95,7 @@
 
         <div style="margin-bottom:1em;">
           <button name="close_view" type="object">Close</button>
-          <h1>Arbetssökande <field name="name" default_focus="1" placeholder="Name" attrs="{'required' : [('type', '=', 'contact')]}"/></h1>
+          <h1 class="oe_left">Arbetssökande <field name="name" default_focus="1" placeholder="Name" attrs="{'required' : [('type', '=', 'contact')]}"/></h1>
           <!-- Visa avaktualiserad eller Lagrad bara om det är så -->
           <group attrs="{'invisible':[ ('deactualization_date', '=', False ) ]}">
             <field name="deactualization_date" widget="date"/>
@@ -206,14 +206,14 @@
               <field name="sms_reminders"/>
             </div>
 
-            <div class="af_field_group" groups="base.group_no_one">
-              <label for="segment_jobseeker"/>
-              <field name="segment_jobseeker" groups="base.group_no_one"/>
+            <div class="af_field_group" groups="base.group_no_one" invisible="1">
+              <label for="segment_jobseeker" invisible="1"/>
+              <field name="segment_jobseeker" groups="base.group_no_one" invisible="1"/>
             </div>
 
-            <div class="af_field_group">
-              <label for="eidentification"/>
-              <field name="eidentification"/>
+            <div class="af_field_group" invisible="1">
+              <label for="eidentification" invisible="1"/>
+              <field name="eidentification" invisible="1"/>
             </div>
 
             <div class="af_field_group">
@@ -224,9 +224,9 @@
               <field name="user_name_sign" class="oe_read_only"/>
             </div>
 
-            <div class="af_field_group">
-              <label for="segment_jobseeker" />
-              <field name="segment_jobseeker" />
+            <div class="af_field_group" attrs="{'invisible': True}">
+              <label for="segment_jobseeker" invisible="1"/>
+              <field name="segment_jobseeker" invisible="1"/>
             </div>
 
             <div class="af_field_group oe_read_only" groups="base.group_no_one">

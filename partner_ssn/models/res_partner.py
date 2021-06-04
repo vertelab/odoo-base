@@ -12,6 +12,7 @@ class ResPartner(models.Model):
     _inherit = "res.partner"
 
     age = fields.Char(string="Age", compute="calculate_age")
+    gender = fields.Selection([('male', 'Male'),('female', 'Female')], string="Gender", compute="calculate_gender")
     social_sec_nr = fields.Char(string="Social security number") 
     social_sec_nr_age = fields.Char(string="Social security number", compute="combine_social_sec_nr_age") 
 
@@ -30,6 +31,16 @@ class ResPartner(models.Model):
         'UNIQUE(social_sec_nr)',
         'social security number field needs to be unique'
         )]
+
+
+    def calculate_gender(self):
+        for partner in self:
+            if partner.social_sec_nr:
+                last_digit = int(partner.social_sec_nr[-1])
+                if last_digit % 2 == 0:
+                    partner.gender = 'female'
+                else:
+                    partner.gender = 'male'
 
     @api.one
     @api.constrains("social_sec_nr")
@@ -127,7 +138,7 @@ class ResPartner(models.Model):
                 ):
                     years -= 1
                 if years > 67:
-                    self.age = _("This person is too old, at %s years old") % years
+                    self.age = "%s" % years
                     _logger.warn(
                         "A person older than 67 should not be in the system, a person is %s years old"
                         % years
