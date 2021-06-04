@@ -53,6 +53,12 @@ class Jobs(models.Model):
                                           ])
     education = fields.Boolean(string="Education")
     experience = fields.Boolean(string="Experience")
+    demand_date = fields.Date("Demand Date", related='ssyk_id.demand_date', store=True)
+    demand_value = fields.Float("Demand Value", related='ssyk_id.demand_value', store=True)
+    previous_value = fields.Float("Previous Value", related='ssyk_id.previous_value', store=True)
+    change_value = fields.Float("Change Value", related='ssyk_id.change_value', store=True)
+    change = fields.Float("Change(%)", related='ssyk_id.change', store=True)
+    previous_date = fields.Date("Previous Date", related='ssyk_id.previous_date', store=True)
 
     @api.onchange('experience_length')
     def _tick_untick_experience(self):

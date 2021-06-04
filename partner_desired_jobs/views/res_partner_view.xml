@@ -19,6 +19,12 @@
                           <field name="education"/>
                           <field name="experience_length" groups="base.group_no_one"/>
                           <field name="experience"/>
+                          <field name="demand_date"/>
+                          <field name="demand_value"/>
+                          <field name="previous_value"/>
+                          <field name="change_value"/>
+                          <field name="change"/>
+                          <field name="previous_date"/>
                         </tree>
                       </field>
                     </group>

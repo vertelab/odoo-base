@@ -1,8 +1,8 @@
 # -*- coding: utf-8 -*-
 ##############################################################################
 #
-#    Odoo, Open Source Management Solution, third party addon
-#    Copyright (C) 2004-2019 Vertel AB (<http://vertel.se>).
+#    OpenERP, Open Source Management Solution, third party addon
+#    Copyright (C) 2004-2017 Vertel AB (<http://vertel.se>).
 #
 #    This program is free software: you can redistribute it and/or modify
 #    it under the terms of the GNU Affero General Public License as
@@ -20,31 +20,17 @@
 ##############################################################################
 
 {
-    'name': 'Partner desired jobs',
-    'version': '12.0.1.7',
-    'category': '',
-    'description': """
-Module to see which jobs a jobseeking partner desires
-================================================================================================
-AFC-168
-AFC-1151 previous experiences
-AFC-1753 fixed a domain
-AFC-1849 made some fields debug only
-V12.0.1.7 AFC-2421 Added Occupation demand's fields in Desired job tab.
-""",
+    'name': 'Res Occupation Demand',
+    'version': '12.0.0.1',
+    'category': 'Base',
+    'summary': "This module allow to configure Occupation demand in SSYK(res.ssyk).",
     'author': 'Vertel AB',
-    'license': 'AGPL-3',
     'website': 'http://www.vertel.se',
-    'depends': [
-        'base',
-        'res_occupation_demand',
-        'partner_education',
-    ],
+    'depends': ['res_ssyk'],
     'data': [
-        'views/res_partner_view.xml',
-        'views/desired_jobs_view.xml',
-        'security/ir.model.access.csv'
+        'views/res_ssyk_views.xml'
         ],
     'application': False,
     'installable': True,
 }
+# vim:expandtab:smartindent:tabstop=4s:softtabstop=4:shiftwidth=4:

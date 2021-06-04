@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <record id="inherit_view_ssyk_form_for_occ_demand" model="ir.ui.view">
+            <field name="name">res.ssyk.inherit.form.for.occupation.demand</field>
+            <field name="model">res.ssyk</field>
+            <field name="inherit_id" ref="res_ssyk.view_ssyk_form"/>
+            <field name="arch" type="xml">
+                <xpath expr="//group" position="after">
+                    <group string="Occupation Demand">
+                        <field name="demand_date"/>
+                        <field name="demand_value"/>
+                        <field name="previous_value"/>
+                        <field name="change_value"/>
+                        <field name="change"/>
+                        <field name="previous_date"/>
+                    </group>
+                </xpath>
+            </field>
+        </record>
+    </data>
+</odoo>
