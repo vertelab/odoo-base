@@ -195,11 +195,7 @@
               <label for="office_code_name" string="Kontor"/>
               <field name="office_code_name" />
             </div>
-
-            <div class="af_field_group">
-              <label for="match_area"/>
-              <field name="match_area"/>
-            </div>
+            
             <div class="af_field_group">
               <label for="share_info_with_employers"/>
               <field name="share_info_with_employers"/>
