@@ -8,10 +8,10 @@
             <field name="name">base.login.reason.form.view</field>
             <field name="model">base.login.reason</field>
             <field name="arch" type="xml">
-                <form string="Base Login" create="false" delete="false">
+                <form string="Base Login" create="false">
                     <header>
                             <field name="state" widget="statusbar" statusbar_visible="draft,audit,done"/>
-                        </header>
+                    </header>
                     <sheet>
                         <group>
                             <group>
@@ -24,7 +24,7 @@
                                 <field name="ticket_ID" readonly="1"/>
                                 <field name="logged_in" readonly="1"/>
                                 <field name="logged_out" readonly="1"/>
-                                <field name="length" readonly="1"/>
+                                <!--<field name="length" readonly="1"/>-->
                                 <field name="active_length"/>
                             </group>
                         </group>
@@ -38,13 +38,13 @@
             <field name="name">base.login.reason.tree.view</field>
             <field name="model">base.login.reason</field>
             <field name="arch" type="xml">
-                <tree string="Base Login" create="false" delete="false">
+                <tree string="Base Login" create="false">
                     <field name="ticket_ID"/>
                     <field name="user_id"/>
                     <field name="email"/>
                     <field name="logged_in"/>
                     <field name="logged_out"/>
-                    <field name="length"/>
+                    <!--<field name="length"/>-->
                     <field name="active_length" widget="float_time"/>
                     <field name="login_reason"/>
                     <field name="auditor_comment"/>
@@ -67,7 +67,7 @@
                     <field name="auditor_comment"/>
                     <field name="logged_in"/>
                     <field name="logged_out"/>
-                    <field name="length"/>
+                    <!--<field name="length"/>-->
                     <filter name="state_draft" domain="[('state','=','draft')]" string="New"/>
                     <filter name="state_audit" domain="[('state','=','audit')]" string="Audit"/>
                     <filter name="state_alert" domain="[('state','=','alert')]" string="Alert"/>

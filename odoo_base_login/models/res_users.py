@@ -46,18 +46,6 @@ class ResUsers(models.Model):
     ticket_ID = fields.Char("Ticket ID")
     last_update = fields.Datetime(string="Last Connection Updated")
 
-    # Method call when user login, create history record here
-    # @api.model
-    # def _update_last_login(self):
-    #     print ("Context: :::",self._context)
-    #     log = self.env['res.users.log'].create({})
-    #     session_ID = request.session.sid
-    #     if self.login_reason and self.ticket_ID:
-    #         self.env['base.login.reason'].create(
-    #             {'user_id': self.id, 'logged_in': log.create_date, 'session_ID':session_ID,
-    #              'login_reason':self.login_reason, 'state':'audit', 'ticket_ID':self.ticket_ID})
-
-
     def _clear_session(self):
         """
             Function for clearing the session details for user
@@ -74,24 +62,6 @@ class ResUsers(models.Model):
         self.with_user(SUPERUSER_ID).write({'sid': sid, 'exp_date': exp_date,
                                             'logged_in': True,
                                             'last_update': datetime.now()})
-    #
-    # def validate_sessions(self):
-    #     """
-    #         Function for validating user sessions
-    #     """
-    #     users = self.search([('exp_date', '!=', False)])
-    #     for user in users:
-    #         if user.exp_date < datetime.utcnow():
-    #             # clear session session file for the user
-    #             session_cleared = clear_session_history(user.sid)
-    #             if session_cleared:
-    #                 # clear user session
-    #                 user._clear_session()
-    #                 _logger.info("Cron _validate_session: "
-    #                              "cleared session user: %s" % (user.name))
-    #             else:
-    #                 _logger.info("Cron _validate_session: failed to "
-    #                              "clear session user: %s" % (user.name))
 
     @api.model_cr_context
     def _auth_timeout_get_ignored_urls(self):
@@ -107,8 +77,7 @@ class ResUsers(models.Model):
         Defaults to current time minus delay using delay stored as config
         param.
         """
-        params = self.env['ir.config_parameter']
-        delay = session_length
+        delay = self.env['ir.config_parameter']._auth_timeout_get_parameter_delay()
         if delay <= 0:
             return False
         return time() - delay
@@ -130,15 +99,15 @@ class ResUsers(models.Model):
         return True
 
     @api.model_cr_context
-    def _auth_timeout_check(self, session_length):
+    def _auth_timeout_check(self):
         """Perform session timeout validation and expire if needed."""
         if not http.request:
             return
 
         session = http.request.session
-
+        delay = self.env['ir.config_parameter']._auth_timeout_get_parameter_delay()
         # Calculate deadline
-        deadline = self._auth_timeout_deadline_calculate(session_length)
+        deadline = self._auth_timeout_deadline_calculate(delay)
 
         # Check if past deadline
         expired = False

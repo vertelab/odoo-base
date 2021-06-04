@@ -35,7 +35,7 @@ class BaseLogin(models.Model):
     login_reason = fields.Text("Login Reason")
     logged_in = fields.Datetime("Logged in")
     logged_out = fields.Datetime("Logged out")
-    length = fields.Integer("Length")
+    # length = fields.Integer("Length")
     ticket_ID = fields.Char("Ticket ID")
     auditor_comment = fields.Text("Auditor comment")
     active_length = fields.Float("Active Length (Minutes)", compute="_count_active_time")

@@ -29,12 +29,13 @@ class IrHttp(models.AbstractModel):
 
     @classmethod
     def _authenticate(cls, auth_method='user'):
+
         res = super(IrHttp, cls)._authenticate(auth_method=auth_method)
         if request and request.env and request.env.user:
             logging_track = request.env['base.login.reason'].search([('user_id','=',request.env.user.id),
                                                      ('state','=','audit'),
                                                      ('logged_out','=',False)], limit=1)
 
-            timeout = logging_track.length *60
-            request.env.user._auth_timeout_check(timeout)
+            # timeout = logging_track.length * 60
+            request.env.user._auth_timeout_check()
         return res
