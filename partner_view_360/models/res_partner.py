@@ -327,6 +327,18 @@ class ResPartner(models.Model):
                 raise ValidationError(_("Zip field must only contain numbers and no spaces"))
         return super(ResPartner, self).create(values)
 
+    @api.model
+    def search_pnr(self, pnr):
+        domain = []
+        if len(pnr) == 13 and pnr[8] == "-":
+            domain.append(("social_sec_nr", "=", pnr))
+        elif len(pnr) == 12:
+            domain.append(
+                ("social_sec_nr", "=", "%s-%s" % (pnr[:8], pnr[8:12])))
+        else:
+            raise ValidationError(_("Incorrectly formated social security number: %s") % pnr)
+        # unless we raised an error, return the result of the search
+        return self.env['res.partner'].sudo().search(domain, limit=1)
 
 class ResPartnerSKAT(models.Model):
     _name = "res.partner.skat"

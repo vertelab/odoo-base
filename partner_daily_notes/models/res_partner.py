@@ -76,7 +76,7 @@ class ResPartner(models.Model):
         string="Daily notes",
         inverse_name="partner_id",
     )
-    next_contact_date = fields.Datetime(
+    next_contact_date = fields.Date(
         string="Next contact",
         help="Fields used by AIS-F data. Do not overwrite with other data.",
     )
@@ -95,7 +95,7 @@ class ResPartner(models.Model):
         ],
         help="Fields used by AIS-F data. Do not overwrite with other data.",
     )
-    last_contact_date = fields.Datetime(
+    last_contact_date = fields.Date(
         string="Latest contact",
         help="Fields used by AIS-F data. Do not overwrite with other data.",
     )
@@ -126,12 +126,13 @@ class ResPartner(models.Model):
             order="start",
             limit=1,
         )
+        next_contact_date = None
+        tz_offset = self.env.user.tz_offset
         if appointment and (
             not self.next_contact_date
-            or (self.next_contact_date and appointment.start < self.next_contact_date)
+            or (self.next_contact_date and appointment.start.date() < self.next_contact_date)
         ):
             # use appointment date instead of AIS-F data.
-            tz_offset = self.env.user.tz_offset
             if tz_offset:
                 next_contact_time = (
                     appointment.start
@@ -145,11 +146,17 @@ class ResPartner(models.Model):
                 if appointment.channel == self.env.ref("calendar_channel.channel_pdm")
                 else "B"
             )
-        else:
+        elif self.next_contact_date and self.next_contact_time:
             # use AIS-F data
-            next_contact_time = self.next_contact_time
+            if tz_offset:
+                # there has to be a better way to do this.
+                hours = int(self.next_contact_time[0:2]) + int(tz_offset[0:3])
+                minutes = int(self.next_contact_time[3:5]) + int(tz_offset[0] + tz_offset[3:5])
+                next_contact_time = f"{hours:02d}:{minutes:02d}"
+            else:
+                next_contact_time = self.next_contact_time
             next_contact_date = (
-                self.next_contact_date.date() if self.next_contact_date else False
+                self.next_contact_date if self.next_contact_date else False
             )
             next_contact_type = self.next_contact_type
         if next_contact_date:
@@ -172,7 +179,7 @@ class ResPartner(models.Model):
         )
         if appointment and (
             not self.next_contact_date
-            or (self.last_contact_date and appointment.start > self.last_contact_date)
+            or (self.last_contact_date and appointment.start.date() > self.last_contact_date)
         ):
             # use appointment date instead of AIS-F data.
             last_contact_date = appointment.start.date()
@@ -184,7 +191,7 @@ class ResPartner(models.Model):
         else:
             # use AIS-F data
             last_contact_date = (
-                self.last_contact_date.date() if self.last_contact_date else False
+                self.last_contact_date if self.last_contact_date else False
             )
             last_contact_type = self.last_contact_type
         if last_contact_date:
