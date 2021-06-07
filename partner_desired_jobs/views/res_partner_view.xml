@@ -1,30 +1,38 @@
 <?xml version="1.0" encoding="utf-8"?>
 <odoo>
-    
-  <record id="view_partner_form" model="ir.ui.view">
+
+    <record id="view_partner_form" model="ir.ui.view">
         <field name="name">res.partner.view.form.inherit.jobs</field>
-        <field name="model">res.partner</field> 
-        <field name="inherit_id" ref="base.view_partner_form" />
-        <field name="arch" type="xml"> 
-            <xpath expr="//page[@name='internal_notes']" position="after" attrs="{'invisible':[('is_jobseeker', '=', False)]}">
+        <field name="model">res.partner</field>
+        <field name="inherit_id" ref="base.view_partner_form"/>
+        <field name="arch" type="xml">
+            <xpath expr="//page[@name='internal_notes']" position="after"
+                   attrs="{'invisible':[('is_jobseeker', '=', False)]}">
                 <page string="Desired jobs">
                     <group>
-                      <field name="job_ids" mode="tree" nolabel="1">
-                        <tree editable="bottom" string="Desired jobs" default_order="ssyk_code">
-                          <field name="partner_id" invisible="1"/>
-                          <field name="ssyk_code"/> 
-                          <field name="ssyk_id"  options="{'no_create_edit': True}"/>
-                          <field name="education_id" options="{'no_create_edit': True}" domain="[('partner_id','=',partner_id)]" groups="base.group_no_one"/>
-                          <field name="education_level_id" groups="base.group_no_one"/>
-                          <field name="education"/>
-                          <field name="experience_length" groups="base.group_no_one"/>
-                          <field name="experience"/>
-                        </tree>
-                      </field>
+                        <field name="job_ids" mode="tree" nolabel="1">
+                            <tree editable="bottom" string="Desired jobs" default_order="ssyk_code">
+                                <field name="partner_id" invisible="1"/>
+                                <field name="ssyk_code"/>
+                                <field name="ssyk_id" options="{'no_create_edit': True}"/>
+                                <field name="education_id" options="{'no_create_edit': True}"
+                                       domain="[('partner_id','=',partner_id)]" groups="base.group_no_one"/>
+                                <field name="education_level_id" groups="base.group_no_one"/>
+                                <field name="education"/>
+                                <field name="experience_length" groups="base.group_no_one"/>
+                                <field name="experience"/>
+                                <field name="demand_date"/>
+                                <field name="demand_value"/>
+                                <field name="previous_value"/>
+                                <field name="change_value"/>
+                                <field name="change"/>
+                                <field name="previous_date"/>
+                            </tree>
+                        </field>
                     </group>
                 </page>
             </xpath>
         </field>
-  </record>
+    </record>
 
 </odoo>
