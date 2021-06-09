@@ -21,11 +21,12 @@
 
 {
     'name': "Partner MQ/IPF-update dispatcher",
-    'version': '12.0.0.3.0',
+    'version': '12.0.0.3.1',
     'category': '',
     'description': """
 Listen for updates on the MQ-bus
 v12.0.0.3.0 - Changed sync to af_aisf_jobseeker__sync.
+v12.0.0.3.1 AFC-2467: Implemented queue limit.
 """,
     'author': 'Vertel AB',
     'license': 'AGPL-3',
