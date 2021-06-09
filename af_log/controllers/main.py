@@ -14,7 +14,19 @@ import logging
 _logger = logging.getLogger(__name__)
 
 
-class DataSet(DataSetOrigin):
+class AfLogMixin(object):
+    """ Mixin for audit logged controllers.
+    """
+
+    def _get_audit_user(self):
+        """Return the actual user that logged in. Will return original
+        user if currently logged in as Odoo Bot."""
+        user = request.env.user
+        if request.session.get('login') and request.session['login'] != user.login:
+            # User is OdooBot. Find original user from session.
+            user = user.search([('login', '=', request.session['login'])])
+            user = user or request.env.user
+        return user.sudo()
 
     def _is_af_audit_log_model(self, model):
         """ Check if the model has audit logging.
@@ -22,6 +34,46 @@ class DataSet(DataSetOrigin):
         if hasattr(model, '_af_audit_log'):
             return model._af_audit_log
         return False
+
+    def _af_log_pre_method_call(self, model, method, args, kwargs):
+        user = self._get_audit_user()
+        model_obj = request.env[model].sudo()
+        audit = self._is_af_audit_log_model(model_obj)
+        before = admin_before = None
+        if audit:
+            before = model_obj._af_audit_log_pre_method(
+                user, method, args, kwargs)
+        if user.has_group('base.group_system'):
+            admin_before = user._af_audit_log_pre_admin_action(model_obj, method, args, kwargs)
+        return user, model_obj, audit, before, admin_before
+
+    def _af_log_post_method_call(self, user, model_obj, audit, method, args, kwargs,
+                                 before, admin_before, res, error):
+        if audit:
+            try:
+                model_obj._af_audit_log_post_method(
+                    user, method, args, kwargs,
+                    res, before, error)
+            except:
+                _logger.exception(
+                    f"Failed to generate audit log! model: {model_obj._name},"
+                    f"method: {method}")
+        # Audit log admin actions
+        if user.has_group('base.group_system'):
+            try:
+                user._af_audit_log_post_admin_action(
+                    model_obj, method, args, kwargs, res, admin_before, error)
+            except:
+                _logger.exception(
+                    f"Failed to generate admin audit log! model: {model_obj._name},"
+                    f"method: {method}")
+        if audit:
+            model_obj._af_audit_log_cleanup(
+                user, method, args, kwargs,
+                res, before)
+
+
+class DataSet(DataSetOrigin, AfLogMixin):
 
     def do_search_read(self, model, fields=False, offset=0, limit=False, domain=None
                        , sort=None):
@@ -42,28 +94,22 @@ class DataSet(DataSetOrigin):
         """
         # Called by
         # search_read   /web/dataset/search_read
-        def audit_log(model, res, domain, error=None):
-            try:
-                model_obj = request.env[model]
-                if self._is_af_audit_log_model(model_obj):
-                    if len(res) == 1:
-                        # Endast ett sökresultat ska tolkas som en READ
-                        model_obj._af_cruds_audit_log("READ", ids=[r['id'] for r in res], result=res, error=error)
-                    else:
-                        # Flera/inget sökresultat ska tolkas som en SEARCH
-                        model_obj._af_cruds_audit_log("SEARCH", result=res,
-                                                      search_terms=domain,
-                                                      error=error)
-            except:
-                _logger.exception(f"""Failed to generate audit log! model: {model}, method: do_search_read""")
+        args = [domain, fields]
+        kwargs = {'limit': limit, 'domain': domain, 'sort': sort}
+        user, model_obj, audit, before, admin_before = self._af_log_pre_method_call(
+            model, 'search_read', args, kwargs)
+        error = None
         try:
-            res = super(DataSet, self).do_search_read(model, fields=fields,
-                                                  offset=offset, limit=limit,
-                                                  domain=domain, sort=sort)
+            res = super(DataSet, self).do_search_read(
+                model, fields=fields, offset=offset, limit=limit,
+                domain=domain, sort=sort)
         except Exception as e:
-            audit_log(model, res, domain, e)
-            raise
-        audit_log(model, res, domain)
+            error = e
+        self._af_log_post_method_call(user, model_obj, audit, 'search_read', args,
+                                      kwargs, before, admin_before,
+                                      res.get('records', {}), error)
+        if error:
+            raise error from None
         return res
 
     def _call_kw(self, model, method, args, kwargs):
@@ -72,34 +118,20 @@ class DataSet(DataSetOrigin):
         # call          /web/dataset/call
         # call_kw       /web/dataset/call_kw
         # call_button   /web/dataset/call_button
-        def audit_log(model_obj, method, args, kwargs, res, before, error=None):
-            try:
-                model_obj._af_post_func_audit_log(method, args, kwargs, res, before)
-            except:
-                _logger.exception(
-                    f"Failed to generate audit log! model: {model_obj._name},"
-                    f"method: {method}")
-        model_obj = request.env[model]
-        audit = self._is_af_audit_log_model(model_obj)
-        if audit:
-            try:
-                before = model_obj._af_pre_func_audit_log(method, args, kwargs)
-            except:
-                # Stop further audit execution
-                audit = False
-                _logger.exception(
-                    "Failed to generate before data for audit log! "
-                    f"model: {model_obj._name} method: {method}")
-        res = None
+        user, model_obj, audit, before, admin_before = self._af_log_pre_method_call(
+            model, method, args, kwargs)
+        # Run the called method
+        res = error = None
         try:
             res = super(DataSet, self)._call_kw(model, method, args, kwargs)
-            foo = 1
         except Exception as e:
-            if audit:
-                audit_log(model_obj, method, args, kwargs, res, before, e)
-            raise
-        if audit:
-            audit_log(model_obj, method, args, kwargs, res, before)
+            # Save error for re-raise
+            error = e
+        self._af_log_post_method_call(user, model_obj, audit, method, args,
+                                      kwargs, before, admin_before, res, error)
+        # Re-raise caught error
+        if error:
+            raise error from None
         return res
 
     # TODO: Behöver vi övervaka denna? Det är en UPDATE, men väldigt
@@ -119,16 +151,46 @@ class DataSet(DataSetOrigin):
                            starting the resequencing from an arbitrary number,
                            defaults to ``0``
         """
-        # This is an UPDATE. Can it be run wth any field as input? What
-        # would it do for a char or many2many?
+        # This is an UPDATE. It is limited to integer fields.
         res = super(DataSet, self).resequence(model, ids, field, offset=offset)
         return res
 
-    # TODO: När används denna? Hittar inget i koden. Kan vi stänga av den?
-    # fields används inte. Det ser trasigt ut.
-    # @http.route('/web/dataset/load', type='json', auth="user")
-    # def load(self, model, id, fields):
-    #     _logger.warn(f"load model: {model} fields: {fields} id: {id}")
-    #     res = super(DataSet, self).load(model, id, fields)
-    #     _logger.warn(f"load res: {res}")
-    #     return res
+
+    @http.route('/web/dataset/load', type='json', auth="user")
+    def load(self, model, id, fields):
+        user = self._get_audit_user()
+        model_obj = request.env[model].sudo()
+        audit = self._is_af_audit_log_model(model_obj)
+        if audit:
+            # fields is never used, so no need to pass it on here.
+            args = [[id]]
+            kwargs = {}
+            try:
+                before = model_obj._af_audit_log_pre_method(
+                    user, 'read', args, kwargs)
+            except:
+                before = None
+                _logger.exception(
+                    "Failed to generate before data for audit log! "
+                    f"model: {model_obj._name} method: search_read")
+        error = None
+        try:
+            res = super(DataSet, self).load(model, id, fields)
+        except Exception as e:
+            error = e
+        if audit:
+            try:
+                model_obj._af_audit_log_post_method(
+                    user, 'read', args, kwargs,
+                    [res.get('value', {})], before, error)
+            except:
+                _logger.exception(
+                    f"Failed to generate audit log! model: {model_obj._name},"
+                    f"method: search_read")
+        if error:
+            raise error from None
+        elif audit:
+            model_obj._af_audit_log_cleanup(
+                user, 'read', args, kwargs,
+                [res.get('value', {})], before)
+        return res

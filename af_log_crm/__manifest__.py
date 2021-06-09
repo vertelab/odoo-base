@@ -9,7 +9,7 @@
     'author': 'Vertel AB',
     'website': 'https://vertel.se',
     'license': 'Other proprietary',
-    'depends': ['af_log', 'partner_ssn', 'partner_view_360', 'account'],
+    'depends': ['af_log', 'partner_ssn', 'partner_view_360'],
     'data': [],
     'demo': [],
     'installable': True,
