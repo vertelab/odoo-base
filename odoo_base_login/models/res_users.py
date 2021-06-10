@@ -20,13 +20,14 @@
 ##############################################################################
 
 import logging
+import werkzeug
 from datetime import datetime, timedelta
 from odoo import SUPERUSER_ID
 from odoo import fields, api, http
 from odoo import models
 from odoo.exceptions import AccessDenied
 from odoo.http import request
-# from ..controllers.main import clear_session_history
+from ..controllers.main import clear_session_history
 from os.path import getmtime
 from time import time
 from os import utime
@@ -53,13 +54,14 @@ class ResUsers(models.Model):
         self.write({'sid': False, 'exp_date': False, 'logged_in': False,
                     'last_update': datetime.now()})
     #
-    def _save_session(self):
+    def _save_session(self, minutes=120):
         """
             Function for saving session details to corresponding user
         """
-        exp_date = datetime.utcnow() + timedelta(minutes=45)
+
+        exp_date = datetime.utcnow() + timedelta(minutes=minutes)
         sid = request.httprequest.session.sid
-        self.with_user(SUPERUSER_ID).write({'sid': sid, 'exp_date': exp_date,
+        self.sudo().write({'sid': sid, 'exp_date': exp_date,
                                             'logged_in': True,
                                             'last_update': datetime.now()})
 

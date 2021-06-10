@@ -22,7 +22,7 @@
 {
     'name': 'Login with reason',
     'summary':'Audit login users of certain group with logged in reason',
-    'version': '0.1',
+    'version': '12.0.0.2.1',
     'category': 'Tools',
     'description': """
 Base Login with reason
