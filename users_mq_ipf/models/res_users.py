@@ -253,7 +253,7 @@ class ResUsers(models.Model):
                                     f" creating new user"
                                 )
                                 # Make call to X-500 to read info about new user
-                                user_id._update_user_x500()
+                                env_new['res.users'].af_person_get(signature)
                             if not office_id:
                                 office_id = env_new["hr.department"].create(
                                     {"name": office_code, "office_code": office_code}
@@ -262,6 +262,7 @@ class ResUsers(models.Model):
                                     employee.write(
                                         {"office_ids": [(4, office_id.id, 0)]}
                                     )
+                                env_new['hr.department'].ash_kom_office_get(office_code)
                                 log.log_message(
                                     AISF_OFFICER_OFFICE_SYNC_PROCESS,
                                     eventid,
@@ -359,20 +360,3 @@ class ResUsers(models.Model):
             # send signal to stop other thread
             if mqconn.is_connected():
                 mqconn.disconnect()
-
-    @api.one
-    def _update_user_x500(self):
-        """Asks X500 for information about the supplied user
-        and updates the user object."""
-        route = self.env.ref("edi_af_officer.get_officer_route")
-        vals = {
-            "name": "Get officer msg",
-            "edi_type": self.env.ref("edi_af_officer.get_officer").id,
-            "model": self._name,
-            "res_id": self.id,
-            "route_id": route.id,
-            "route_type": "edi_af_officer",
-        }
-        message = self.env["edi.message"].sudo().create(vals)
-        message.pack()
-        route.run()
