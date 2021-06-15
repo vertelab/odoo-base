@@ -25,10 +25,6 @@
     'name': 'Intepreter Gender Preferences',
     'version': '12.0.0.0.1',
     'category': '',
-    'description':
-        """
-        Data repository for interpreter gender preference codes.
-        """,
     'author': 'Vertel AB',
     'license': 'AGPL-3',
     'website': 'http://www.vertel.se',

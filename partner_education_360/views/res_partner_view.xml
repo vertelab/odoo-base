@@ -3,7 +3,7 @@
         <record id="view_partner_form_education1" model="ir.ui.view">
             <field name="name">res.partner.education.form1</field>
             <field name="model">res.partner</field>
-            <field name="inherit_id" ref="partner_view_360.view_jobseeker_form" />
+            <field name="inherit_id" ref="partner_view_360.view_jobseeker_form"/>
             <field name="arch" type="xml">
                 <xpath expr="//page[@name='apply_for_jobs']" position="after">
                     <page name="education" string="Education">
@@ -16,9 +16,10 @@
                             </tree>
                         </field>
                         <group>
-                            <field name="has_drivers_license" /> 
-                            <field name="drivers_license_ids" options="{'no_create_edit': True}" widget="many2many_tags" />
-                            <field name="has_car" groups="base.group_no_one" /> 
+                            <field name="has_drivers_license"/>
+                            <field name="drivers_license_ids" options="{'no_create_edit': True}"
+                                   widget="many2many_tags"/>
+                            <field name="has_car" groups="base.group_no_one"/>
                         </group>
                     </page>
                 </xpath>

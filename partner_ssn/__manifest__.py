@@ -23,11 +23,6 @@
     'name': 'Partner Social Security Number',
     'version': '12.0.0.1.0',
     'category': '',
-    'description': """
-Adds social security number to partners
-================================================================================================
-
-""",
     'author': 'Vertel AB',
     'license': 'AGPL-3',
     'website': 'http://www.vertel.se',
@@ -38,7 +33,7 @@ Adds social security number to partners
         'views/res_partner_view.xml',
     ],
     'demo': [
-        
+
     ],
     'application': False,
     'installable': True,

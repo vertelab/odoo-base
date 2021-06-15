@@ -18,15 +18,14 @@
 #    along with this program.  If not, see <http://www.gnu.org/licenses/>.
 #
 ##############################################################################
-from odoo import models, fields, api
 from datetime import datetime
 
+from odoo import models, fields, api
+
+
 class BaseLogin(models.Model):
-
     _name = 'base.login.reason'
-
     _rec_name = 'user_id'
-
     _description = "Base Login"
 
     user_id = fields.Many2one("res.users", "User")
@@ -41,14 +40,13 @@ class BaseLogin(models.Model):
     auditor_comment = fields.Text("Auditor comment")
     active_length = fields.Float("Active Length (Minutes)", compute="_count_active_time")
     session_ID = fields.Char("Session ID")
-    state = fields.Selection([('logged_in','Logged In'), ('logged_out','Logged Out')], string="Status",
+    state = fields.Selection([('logged_in', 'Logged In'), ('logged_out', 'Logged Out')], string="Status",
                              default="draft")
-    status = fields.Selection([('draft','Sample'), ('audit','Audit'), ('failed','Failed'),('pass','Pass')],
+    status = fields.Selection([('draft', 'Sample'), ('audit', 'Audit'), ('failed', 'Failed'), ('pass', 'Pass')],
                               string="Audit Status", default='draft')
 
     def _count_active_time(self):
         for login_base in self:
             if login_base.logged_in and login_base.logged_out:
                 diff = login_base.logged_out - login_base.logged_in
-                login_base.active_length = (diff.total_seconds())/60
-
+                login_base.active_length = (diff.total_seconds()) / 60

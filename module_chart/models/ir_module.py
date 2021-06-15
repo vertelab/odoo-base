@@ -33,7 +33,3 @@ class Module(models.Model):
         unique_nodes = list({node['id']: node for node in nodes}.values())
         unique_edges = list({'%s-%s' % (edge['from'], edge['to']): edge for edge in edges}.values())
         return {'nodes': unique_nodes, 'edges': unique_edges}
-
-
-
-

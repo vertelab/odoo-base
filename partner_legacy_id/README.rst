@@ -1,6 +1,8 @@
 .. image:: https://img.shields.io/badge/licence-AGPL--3-blue.svg
     :alt: License: AGPL-3
 
+The module is maintained here: https://github.com/vertelab/odoo-base/tree/Dev-12.0-Fenix-Sprint-02/partner_legacy_id
+
 Employee Identification Numbers from Previous System
 ====================================================
 

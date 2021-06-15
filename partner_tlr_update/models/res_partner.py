@@ -20,12 +20,13 @@
 #
 ###############################################################################
 
-import re
 import logging
+import re
 from lxml import etree
-from odoo import api, models, _
-from odoo.exceptions import UserError, AccessError
 from odoo.addons.api_ipf_tlr_client.models.client_config import ClientConfig
+from odoo.exceptions import UserError, AccessError
+
+from odoo import api, models, _
 
 _logger = logging.getLogger(__name__)
 
@@ -52,6 +53,7 @@ class ResPartner(models.Model):
         </subsidiary>
     </organization>
     """
+
     def match_list(self):
         return {
             'organization': [
@@ -90,7 +92,7 @@ class ResPartner(models.Model):
 
     def update_tlr_data_action(self):
         granted = False
-        for group in ('base.group_system', ):
+        for group in ('base.group_system',):
             if self.env.user.has_group(group):
                 granted = True
                 break
@@ -104,7 +106,7 @@ class ResPartner(models.Model):
 
     def _update_tlr_data(self):
         self.ensure_one()
-        legacy_no = self.env['ir.config_parameter'].sudo().get_param('dafa.legacy_no') # noqa E501
+        legacy_no = self.env['ir.config_parameter'].sudo().get_param('dafa.legacy_no')  # noqa E501
         if legacy_no:
             api_client = self.env['ipf.tlr.client.config'].sudo().get_api()
             if api_client:
@@ -121,13 +123,13 @@ class ResPartner(models.Model):
             country = False
             _logger.info("field[0]: %s" % field[0])
             elem = xml.find(".//%s" % field[0], namespaces={
-                'ns107': 'http://arbetsformedlingen.se/datatyp/tjansteleverantor/tjansteleverantor/v15', # noqa E501
-                'ns25': 'http://arbetsformedlingen.se/datatyp/tjansteleverantor/kontaktperson/v17', # noqa E501
-                'ns64': 'http://arbetsformedlingen.se/datatyp/tjansteleverantor/utforandeverksamhet/v15', # noqa E501
-                'ns23': 'http://arbetsformedlingen.se/datatyp/tjansteleverantor/adress/v15', # noqa E501
-                'ns26': 'http://arbetsformedlingen.se/datatyp/gemensam/personnamn/v0', # noqa E501
-                'ns27': 'http://arbetsformedlingen.se/datatyp/tjansteleverantor/teleadress/v4', # noqa E501
-                })
+                'ns107': 'http://arbetsformedlingen.se/datatyp/tjansteleverantor/tjansteleverantor/v15',  # noqa E501
+                'ns25': 'http://arbetsformedlingen.se/datatyp/tjansteleverantor/kontaktperson/v17',  # noqa E501
+                'ns64': 'http://arbetsformedlingen.se/datatyp/tjansteleverantor/utforandeverksamhet/v15',  # noqa E501
+                'ns23': 'http://arbetsformedlingen.se/datatyp/tjansteleverantor/adress/v15',  # noqa E501
+                'ns26': 'http://arbetsformedlingen.se/datatyp/gemensam/personnamn/v0',  # noqa E501
+                'ns27': 'http://arbetsformedlingen.se/datatyp/tjansteleverantor/teleadress/v4',  # noqa E501
+            })
             if elem is not None:
                 _logger.info("field[1] %s" % field[1])
                 _logger.info("elem text %s" % elem.text)
@@ -164,7 +166,8 @@ class ResPartner(models.Model):
         _logger.info("UPDATE FROM XML")
         subsidiaries = root.findall(
             ".//ns107:utforandeVerksamhetLista",
-            namespaces={'ns107': 'http://arbetsformedlingen.se/datatyp/tjansteleverantor/tjansteleverantor/v15'}) # noqa E501
+            namespaces={
+                'ns107': 'http://arbetsformedlingen.se/datatyp/tjansteleverantor/tjansteleverantor/v15'})  # noqa E501
         if subsidiaries:
             _logger.info("SUBSIDIARY NOT NONE")
             contract_nrs = self.get_contract_nrs(root)
@@ -175,16 +178,19 @@ class ResPartner(models.Model):
     def get_contract_nrs(self, xml, service_nr=26):
         contract_nrs = []
         contracts = xml.findall(".//ns107:avtalLista",
-            namespaces={'ns107': "http://arbetsformedlingen.se/datatyp/tjansteleverantor/tjansteleverantor/v15"}) # noqa E501
+                                namespaces={
+                                    'ns107': "http://arbetsformedlingen.se/datatyp/tjansteleverantor/tjansteleverantor/v15"})  # noqa E501
         if contracts:
             _logger.info("contracts found")
             for contract in contracts:
                 service_id = contract.find(".//ns62:tjanstId",
-                    namespaces={'ns62':'http://arbetsformedlingen.se/datatyp/tjansteleverantor/avtal/v15'}) # noqa E501
-                if service_id is not None and service_id.text == str(service_nr): # noqa E501
+                                           namespaces={
+                                               'ns62': 'http://arbetsformedlingen.se/datatyp/tjansteleverantor/avtal/v15'})  # noqa E501
+                if service_id is not None and service_id.text == str(service_nr):  # noqa E501
                     _logger.info("service number %s found" % service_nr)
                     contract_id = contract.find(".//ns62:avtalId",
-                        namespaces={'ns62': 'http://arbetsformedlingen.se/datatyp/tjansteleverantor/avtal/v15'}) # noqa E501
+                                                namespaces={
+                                                    'ns62': 'http://arbetsformedlingen.se/datatyp/tjansteleverantor/avtal/v15'})  # noqa E501
                     if contract_id is not None:
                         _logger.info("contract %s "
                                      "with service number %s found"
@@ -196,7 +202,8 @@ class ResPartner(models.Model):
     @api.multi
     def update_contact_person(self, xml, parent_id):
         person_id = xml.find(".//ns25:kontaktpersonId",
-            namespaces={'ns25': 'http://arbetsformedlingen.se/datatyp/tjansteleverantor/kontaktperson/v17'}) # noqa E501
+                             namespaces={
+                                 'ns25': 'http://arbetsformedlingen.se/datatyp/tjansteleverantor/kontaktperson/v17'})  # noqa E501
         if person_id is not None:
             person_id = person_id.text
             child = self.env['res.users'].search([
@@ -206,7 +213,7 @@ class ResPartner(models.Model):
                 user = child
                 if child.parent_id.id != parent_id:
                     _logger.info("found contact person with different"
-                                "parent_id, overwriting")
+                                 "parent_id, overwriting")
                     user.write({'parent_id': parent_id})
             else:
                 _logger.info("creating contact person partner")
@@ -220,7 +227,7 @@ class ResPartner(models.Model):
                 employee = self.env['hr.employee'].create({
                     'name': user.name,
                     'address_id': parent_id,
-                    })
+                })
                 login = user.partner_id.email
                 if login:
                     # in case there is already another user
@@ -228,16 +235,16 @@ class ResPartner(models.Model):
                     if self.env['res.users'].search([(
                             'login', '=', login)]):
                         login = "_".join((
-                                        login,
-                                        user.partner_id.legacy_no
-                                        ))
+                            login,
+                            user.partner_id.legacy_no
+                        ))
                 else:
                     login = user.partner_id.legacy_no
                 # if the user somehow already exists
                 if self.env['res.users'].search_count([(
                         'login', '=', login)]):
                     _logger.warn("User with the same login found, "
-                    "not adding new user")
+                                 "not adding new user")
                     partner = user.partner_id
                     user.unlink()
                     partner.unlink()
@@ -246,7 +253,7 @@ class ResPartner(models.Model):
                 user.write({
                     'employee_ids': [(6, 0, [employee.id])],
                     'login': login
-                    })
+                })
             # in case there is no employee connected to the user
             elif not user.employee_ids:
                 employee = self.env['hr.employee'].create({
@@ -258,12 +265,14 @@ class ResPartner(models.Model):
     @api.multi
     def update_subsidiary(self, xml, contract_nrs):
         contract_id = xml.find(".//ns64:avtalId",
-                                namespaces={'ns64': 'http://arbetsformedlingen.se/datatyp/tjansteleverantor/utforandeverksamhet/v15'}) # noqa E501
+                               namespaces={
+                                   'ns64': 'http://arbetsformedlingen.se/datatyp/tjansteleverantor/utforandeverksamhet/v15'})  # noqa E501
         if contract_id is None or not (contract_id.text in contract_nrs):
-            _logger.info("subsidiary contract_id %s not found in list of contract ids" % contract_id.text) # noqa E501
+            _logger.info("subsidiary contract_id %s not found in list of contract ids" % contract_id.text)  # noqa E501
             return
         subsidiary_id = xml.find(".//ns64:utforandeVerksamhetId",
-                                namespaces={'ns64': 'http://arbetsformedlingen.se/datatyp/tjansteleverantor/utforandeverksamhet/v15'}) # noqa E501
+                                 namespaces={
+                                     'ns64': 'http://arbetsformedlingen.se/datatyp/tjansteleverantor/utforandeverksamhet/v15'})  # noqa E501
         if subsidiary_id is not None:
             subsidiary_id = subsidiary_id.text
             child = self.env['performing.operation'].search([
@@ -281,7 +290,8 @@ class ResPartner(models.Model):
             subsidiary.update_from_xml(xml, 'subsidiary', self.match_list())
             addresses = xml.findall(
                 ".//ns64:adressLista",
-                namespaces={'ns64': "http://arbetsformedlingen.se/datatyp/tjansteleverantor/utforandeverksamhet/v15"}) # noqa E501
+                namespaces={
+                    'ns64': "http://arbetsformedlingen.se/datatyp/tjansteleverantor/utforandeverksamhet/v15"})  # noqa E501
             if addresses:
                 _logger.info("ADDRESSES NOT NONE")
                 for elem in addresses:
@@ -290,7 +300,8 @@ class ResPartner(models.Model):
     @api.multi
     def update_sub_address(self, xml, performing_operation_id):
         address_id = xml.find(".//ns23:adressId",
-                            namespaces={'ns23': "http://arbetsformedlingen.se/datatyp/tjansteleverantor/adress/v15"}) # noqa E501
+                              namespaces={
+                                  'ns23': "http://arbetsformedlingen.se/datatyp/tjansteleverantor/adress/v15"})  # noqa E501
         if address_id is not None:
             address_id = address_id.text
             child = self.search([('legacy_no', '=', address_id)], limit=1)
@@ -301,7 +312,7 @@ class ResPartner(models.Model):
                     _logger.info("found address with different performing_operation_id, updating")
                     partner.write({
                         'performing_operation_id': performing_operation_id
-                        })
+                    })
             else:
                 _logger.info("creating address partner")
                 partner = self.create([{
@@ -311,7 +322,7 @@ class ResPartner(models.Model):
             partner.update_from_xml(xml, 'address')
             contact_persons = xml.findall(
                 ".//ns23:kontaktperson",
-                namespaces={'ns23': "http://arbetsformedlingen.se/datatyp/tjansteleverantor/adress/v15"}) # noqa E501
+                namespaces={'ns23': "http://arbetsformedlingen.se/datatyp/tjansteleverantor/adress/v15"})  # noqa E501
             if contact_persons is not None:
                 _logger.info("CONTACT PERSONS NOT NONE")
                 for elem in contact_persons:
@@ -329,13 +340,13 @@ class PerformingOperation(models.Model):
             country = False
             _logger.info("field[0]: %s" % field[0])
             elem = xml.find(".//%s" % field[0], namespaces={
-                'ns107': 'http://arbetsformedlingen.se/datatyp/tjansteleverantor/tjansteleverantor/v15', # noqa E501
-                'ns25': 'http://arbetsformedlingen.se/datatyp/tjansteleverantor/kontaktperson/v17', # noqa E501
-                'ns64': 'http://arbetsformedlingen.se/datatyp/tjansteleverantor/utforandeverksamhet/v15', # noqa E501
-                'ns23': 'http://arbetsformedlingen.se/datatyp/tjansteleverantor/adress/v15', # noqa E501
-                'ns26': 'http://arbetsformedlingen.se/datatyp/gemensam/personnamn/v0', # noqa E501
-                'ns27': 'http://arbetsformedlingen.se/datatyp/tjansteleverantor/teleadress/v4', # noqa E501
-                })
+                'ns107': 'http://arbetsformedlingen.se/datatyp/tjansteleverantor/tjansteleverantor/v15',  # noqa E501
+                'ns25': 'http://arbetsformedlingen.se/datatyp/tjansteleverantor/kontaktperson/v17',  # noqa E501
+                'ns64': 'http://arbetsformedlingen.se/datatyp/tjansteleverantor/utforandeverksamhet/v15',  # noqa E501
+                'ns23': 'http://arbetsformedlingen.se/datatyp/tjansteleverantor/adress/v15',  # noqa E501
+                'ns26': 'http://arbetsformedlingen.se/datatyp/gemensam/personnamn/v0',  # noqa E501
+                'ns27': 'http://arbetsformedlingen.se/datatyp/tjansteleverantor/teleadress/v4',  # noqa E501
+            })
             if elem is not None:
                 _logger.info("field[1] %s" % field[1])
                 _logger.info("elem text %s" % elem.text)

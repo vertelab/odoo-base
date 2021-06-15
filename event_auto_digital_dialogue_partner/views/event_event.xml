@@ -9,11 +9,11 @@
         </field>
     </record> -->
 
-    <record id="view_res_partner_form_events" model="ir.ui.view"> 
+    <record id="view_res_partner_form_events" model="ir.ui.view">
         <field name="name">view.res.partner.form.events</field>
-        <field name="model">res.partner</field> 
-        <field name="inherit_id" ref="base.view_partner_form" /> 
-        <field name="arch" type="xml"> 
+        <field name="model">res.partner</field>
+        <field name="inherit_id" ref="base.view_partner_form"/>
+        <field name="arch" type="xml">
             <field name="category_id" position="before">
                 <field name="events" widget="many2many_tags"/>
                 asdljsadljsa

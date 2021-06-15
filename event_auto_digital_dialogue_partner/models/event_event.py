@@ -19,13 +19,15 @@
 #
 ##############################################################################
 
-from odoo import models, fields, api, _
 import logging
+
+from odoo import models, fields, api, _
+
 _logger = logging.getLogger(__name__)
 
+
 class EventEvent(models.Model):
-    _inherit = "event.event" 
-    
+    _inherit = "event.event"
 
     registration_date = fields.Datetime(string="Registration date")
     recipients = fields.Many2many('res.partner', string="Recipients")
@@ -35,14 +37,15 @@ class EventEvent(models.Model):
         self.recipients_count = len(self.recipients)
 
     recipients_count = fields.Integer(compute='compute_recipients_count')
-    
+
+
 #    for recipient in recipients:
 #        for activity in recipient.activites_ids:
 #            if activity.meeting_type.name == "registration":
 #                registration_date = activity.start_date
 
-    
-    #registration_date = fields.Char(string="Registration date", help="Date that the job-seeker was entered into the system") #temporärt, ska tas från arbetssökande kundkortet
+
+# registration_date = fields.Char(string="Registration date", help="Date that the job-seeker was entered into the system") #temporärt, ska tas från arbetssökande kundkortet
 
 
 class ResPartner(models.Model):

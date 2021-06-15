@@ -4,7 +4,7 @@
     <!-- Manage Users, Employees, Contacts Organization wide -->
     <!-- Hantera Användare och Org-uppgifter (Organisationsnivå) -->
     <!-- ##################################### -->
-    
+
     <record id="category_dafa_handle_org_info" model="ir.module.category">
         <field name="name">Handle Organization</field>
         <field name="description">Category for handling employee rights on organisational level.</field>
@@ -14,8 +14,10 @@
     <!-- Hantera Organisationsuppgifter (Läs) -->
     <record id="group_dafa_org_admin_read" model="res.groups">
         <field name="name">DAFA Org Admin (Read)</field>
-        <field name="comment"> Allows user to read the information related to
-            the organization and all its departments.(The role inherits "Manage employees Read"and "Manage participants Read")</field>
+        <field name="comment">Allows user to read the information related to
+            the organization and all its departments.(The role inherits "Manage employees Read"and "Manage participants
+            Read")
+        </field>
         <field name="category_id" ref="category_dafa_handle_org_info"/>
         <field name="is_dafa" eval="True"/>
     </record>
@@ -24,8 +26,10 @@
     <!-- Superadmin (Write) -->
     <record id="group_dafa_org_admin_write" model="res.groups">
         <field name="name">DAFA Org Admin (Write)</field>
-        <field name="comment"> Allows user to read and alter information related to 
-            the organization and all its departments.(The role inherits "Manage employees Read/write"and "Manage participants Read")</field>
+        <field name="comment">Allows user to read and alter information related to
+            the organization and all its departments.(The role inherits "Manage employees Read/write"and "Manage
+            participants Read")
+        </field>
         <field name="category_id" ref="category_dafa_handle_org_info"/>
         <field name="is_dafa" eval="True"/>
         <field name="implied_ids" eval="[(6, 0, [
@@ -46,7 +50,7 @@
 
     <!-- Manage Employees -->
     <record id="group_dafa_employees_read" model="res.groups">
-        <field name="name">DAFA Admin (Read)</field>    
+        <field name="name">DAFA Admin (Read)</field>
         <field name="comment">Gives access to read employee related information and and processes.</field>
         <field name="category_id" ref="category_dafa_handle_department_info"/>
         <field name="is_dafa" eval="True"/>
@@ -54,7 +58,9 @@
 
     <record id="group_dafa_employees_write" model="res.groups">
         <field name="name">DAFA Admin (Write)</field>
-        <field name="comment">Gives access to read and write to employee related information and and processes.(The role inherits "Manage employees Read")</field>
+        <field name="comment">Gives access to read and write to employee related information and and processes.(The role
+            inherits "Manage employees Read")
+        </field>
         <field name="category_id" ref="category_dafa_handle_department_info"/>
         <field name="is_dafa" eval="True"/>
         <field name="implied_ids" eval="[(6, 0, [
@@ -77,7 +83,9 @@
 
     <record id="group_dafa_participants_write" model="res.groups">
         <field name="name">DAFA Participants (Write)</field>
-        <field name="comment">Gives access to read and write participant related information and processess.(The role Inherits "Manage Participant read")</field>
+        <field name="comment">Gives access to read and write participant related information and processess.(The role
+            Inherits "Manage Participant read")
+        </field>
         <field name="category_id" ref="category_dafa_handle_department_info"/>
         <field name="is_dafa" eval="True"/>
         <field name="implied_ids" eval="[(4, ref('outplacement.group_outplacement_user_write')), 
@@ -89,8 +97,10 @@
     <!-- Manage Accounting -->
     <record id="group_dafa_admin_accounting_read" model="res.groups">
         <field name="name">DAFA Accounting (Read)</field>
-        <field name="comment"> Gives access to read information related to the accounting of the company 
-            such as order-payments and invoices.(The roll Inherits the groups "Manage Employee read" and "Manage Participant read")</field>
+        <field name="comment">Gives access to read information related to the accounting of the company
+            such as order-payments and invoices.(The roll Inherits the groups "Manage Employee read" and "Manage
+            Participant read")
+        </field>
         <field name="category_id" ref="category_dafa_handle_department_info"/>
         <field name="is_dafa" eval="True"/>
         <field name="implied_ids" eval="[(4, ref('group_dafa_participants_read'))]"/>
@@ -98,15 +108,17 @@
 
     <record id="group_dafa_admin_accounting_write" model="res.groups">
         <field name="name">DAFA Accounting (Write)</field>
-        <field name="comment"> Gives access to read and write information related to the accounting of 
-            the company such as order-payments and invoices.(The role inherits "Manage employees Read/write" "Manage participants Read")</field>
+        <field name="comment">Gives access to read and write information related to the accounting of
+            the company such as order-payments and invoices.(The role inherits "Manage employees Read/write" "Manage
+            participants Read")
+        </field>
         <field name="category_id" ref="category_dafa_handle_department_info"/>
         <field name="is_dafa" eval="True"/>
         <field name="implied_ids" eval="[(4, ref('group_dafa_participants_write')), 
         (4, ref('group_dafa_admin_accounting_read')), (4, ref('account.group_account_invoice')), 
         (4, ref('account.group_account_manager'))]"/>
     </record>
-    
+
     <!-- DAFA Support -->
     <record model="ir.module.category" id="module_category_af_support">
         <field name="name">DAFA Support</field>
@@ -154,7 +166,7 @@
         <field name="perm_unlink" eval="True"/>
     </record>
 
-     <record id="interpreter_accountant" model="res.groups">
+    <record id="interpreter_accountant" model="res.groups">
         <field name="name">Interpreter Accountant</field>
     </record>
 

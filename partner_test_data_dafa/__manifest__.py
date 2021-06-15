@@ -6,13 +6,8 @@
     "author": "Vertel AB",
     "license": "AGPL-3",
     "website": "https://vertel.se/",
-    "description": """
-        This module adds testdata to be used in the KVL and STOM-projects. 
-        The source of the data is here: https://confluence.ams.se/pages/viewpage.action?pageId=76597519
-    """,
     "category": "Tools",
     "depends": [
-        "base",
         "contacts",
     ],
     "external_dependencies": [],

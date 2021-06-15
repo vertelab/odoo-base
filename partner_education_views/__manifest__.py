@@ -24,8 +24,6 @@
     'name': 'Partner Education DEPRECATED',
     'version': '12.0.0.0.1',
     'category': 'Mail',
-    'description': """Partner Education Level""",
-
     'author': "N-development",
     'license': 'AGPL-3',
     'website': 'https://www.n-development.com',

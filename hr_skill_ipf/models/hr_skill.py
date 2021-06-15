@@ -18,9 +18,12 @@
 #    along with this program.  If not, see <http://www.gnu.org/licenses/>.
 #
 ##############################################################################
-from odoo import models, fields, api, _
 import logging
+
+from odoo import models, fields, api, _
+
 _logger = logging.getLogger(__name__)
+
 
 class HrSkill(models.Model):
     _inherit = "hr.skill"

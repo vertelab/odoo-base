@@ -19,15 +19,18 @@
 #
 ##############################################################################
 
-from odoo import models, fields, api, _
 import logging
+
+from odoo import models, fields, api, _
+
 _logger = logging.getLogger(__name__)
 
+
 class AccountAnalyticLine(models.Model):
-   _inherit = "account.analytic.line" 
-   #_name = ""
-   # code = fields.Char(string="Code", help="Code") #borde sitta ihop med project_task
-   
-   # We use a many2one relation to our new model project.task.code. Each account.analytic.line can only have 1 code. 
-   # project.task.code stores data about the code. 
-   code_id = fields.Many2one(comodel_name="project.task.code", string="Code", help="Code") 
+    _inherit = "account.analytic.line"
+    # _name = ""
+    # code = fields.Char(string="Code", help="Code") #borde sitta ihop med project_task
+
+    # We use a many2one relation to our new model project.task.code. Each account.analytic.line can only have 1 code.
+    # project.task.code stores data about the code.
+    code_id = fields.Many2one(comodel_name="project.task.code", string="Code", help="Code")

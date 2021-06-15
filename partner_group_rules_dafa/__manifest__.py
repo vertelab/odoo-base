@@ -23,11 +23,6 @@
     'name': 'Partner group rules DAFA',
     'version': '12.0.0.1.0',
     'category': '',
-    'description': """
-Adds rules for fields that should or shouldn't be showed depending on user groups
-================================================================================================
-
-""",
     'author': 'Vertel AB',
     'license': 'AGPL-3',
     'website': 'http://www.vertel.se',
@@ -39,7 +34,7 @@ Adds rules for fields that should or shouldn't be showed depending on user group
         'views/res_partner_view.xml',
     ],
     'demo': [
-        
+
     ],
     'application': False,
     'installable': True,

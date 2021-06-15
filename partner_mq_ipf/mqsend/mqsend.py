@@ -1,9 +1,10 @@
 #!/usr/bin/env python3
 
-import stomp
-import sys, getopt
-import time
+import getopt
 import os.path
+import stomp
+import sys
+import time
 
 USAGE = sys.argv[0] + " -q queue | -t topic -f filetosend | message [message ...] "
 
@@ -53,10 +54,10 @@ def readfile(filename):
 dest, filename, args = parse()
 
 print(dest, args)
-#l = SampleListener()
+# l = SampleListener()
 conn = stomp.Connection()
-#conn.set_listener("SampleLister", l)
-#conn.start()
+# conn.set_listener("SampleLister", l)
+# conn.start()
 conn.connect()
 filedata = ""
 if filename:

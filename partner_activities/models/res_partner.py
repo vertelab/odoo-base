@@ -19,41 +19,47 @@
 #
 ##############################################################################
 
-from odoo import models, fields, api, _
 import logging
+
+from odoo import models, fields, api, _
+
 _logger = logging.getLogger(__name__)
 
+
 class ResPartner(models.Model):
-    _inherit = "res.partner" 
-    
+    _inherit = "res.partner"
+
     partner_activity_ids = fields.One2many(comodel_name="res.partner.activity", inverse_name="partner_id")
-    
 
     @api.one
     def compute_activities_count(self):
-            for partner in self:
-                partner.activities_count = len(partner.activity_ids)
+        for partner in self:
+            partner.activities_count = len(partner.activity_ids)
+
     activities_count = fields.Integer(compute='compute_activities_count')
 
     @api.multi
     def open_partner_activities(self):
-        return{
+        return {
             'name': _('Activities'),
-            'domain':[('partner_id', '=', self.ids)],
+            'domain': [('partner_id', '=', self.ids)],
             'view_type': 'form',
             'res_model': 'res.partner.activity',
-            'view_id':  False,
-            'view_mode': 'tree,kanban,form', #calendar: insufficient fields for calendar view
+            'view_id': False,
+            'view_mode': 'tree,kanban,form',  # calendar: insufficient fields for calendar view
             'type': 'ir.actions.act_window',
         }
 
-#TODO: Change name
+
+# TODO: Change name
 class ResPartnerActivity(models.Model):
-    _name="res.partner.activity"
-    
+    _name = "res.partner.activity"
+    _description = "RES Partner Activity"
+
     partner_id = fields.Many2one(comodel_name="res.partner")
     name = fields.Char(string="Activity Description", help="")
-    meeting_type = fields.Many2one(comodel_name="res.partner.activity.type") #gör till lista, gör att auto_digital_dialogue tar inskrivningsdatum från en meeting type = "inskrivning"
+    meeting_type = fields.Many2one(
+        comodel_name="res.partner.activity.type")  # gör till lista, gör att auto_digital_dialogue tar inskrivningsdatum från en meeting type = "inskrivning"
     meeting_type_parent = fields.Many2one(comodel_name='res.partner.activity.type', related="meeting_type.parent_id")
     start_date = fields.Datetime(string="Start date", help="", required=True)
     done_before_date = fields.Datetime(string="Done before date")
@@ -63,13 +69,13 @@ class ResPartnerActivity(models.Model):
     mandatory = fields.Boolean(string="Mandatory")
     done = fields.Boolean(string="Done")
 
+
 class ResPartnerActivityType(models.Model):
-    _name="res.partner.activity.type"
+    _name = "res.partner.activity.type"
+    _description = "RES Partner Activity Type"
 
     activity_id = fields.One2many(comodel_name="res.partner.activity", inverse_name="meeting_type")
     name = fields.Char(string="Meeting type", help="")
     description = fields.Char(string="Description", help="")
     parent_id = fields.Many2one(comodel_name='res.partner.activity.type', string='Parent')
-    #more fields?
-
-
+    # more fields?

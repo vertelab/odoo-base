@@ -22,7 +22,6 @@
     'name': 'Mail Tracking x2many',
     'version': '12.0.1.0.0',
     'category': 'Technical Settings',
-    'description': """Enables the track_visibility feature on many2many and one2many fields.""",
     'author': 'Vertel AB',
     'license': 'AGPL-3',
     'website': 'http://www.vertel.se',

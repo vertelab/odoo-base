@@ -18,16 +18,19 @@
 #    along with this program.  If not, see <http://www.gnu.org/licenses/>.
 #
 ##############################################################################
-from odoo import models, fields, api, _
 import logging
+
+from odoo import models, fields, api, _
+
 _logger = logging.getLogger(__name__)
 
-class ResSun(models.Model): 
+
+class ResSun(models.Model):
     _name = 'res.sun'
     _description = '''Value store for Sun codes.'''
 
     partner_ids = fields.Many2many(comodel_name="res.partner")
-    
+
     name = fields.Char(string='Name', required=True)
     code = fields.Char(string='Official Code',
                        help="Official code, group, sub-group or detail group.")

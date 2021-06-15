@@ -23,14 +23,6 @@
     'name': 'Depreciated - Partner Daily Notes Activity',
     'version': '12.0.1.2',
     'category': '',
-    'description': """
-Partner Daily Notes Activity
-===============================================================================
-AFC-649 
-This module shows daily notes activities for a partner.
-- 12.0.1.1  Added a Smart button on the contact-card that displays "Number of records for that user in the Daily Notes".
-- 12.0.1.2  Changed view for the expath to link in to.
-""",
     'author': 'Vertel AB',
     'license': 'AGPL-3',
     'website': 'http://www.vertel.se',
@@ -43,7 +35,7 @@ This module shows daily notes activities for a partner.
     'data': [
         # 'views/res_partner_view.xml'
 
-        ],
+    ],
     'application': False,
     'installable': False,
 }
