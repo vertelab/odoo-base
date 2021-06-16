@@ -172,7 +172,10 @@ class ResPartner(models.Model):
 
     @api.one
     def combine_state_name_code(self):
-        self.state_name_code = "%s %s" % (self.state_id.code, self.state_id.name)
+        if self.state_id:
+            self.state_name_code = f"{self.state_id.code} {self.state_id.name}"
+        else:
+            self.state_name_code = ""
 
     @api.one
     def _compute_user_name_sign(self):
