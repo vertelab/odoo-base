@@ -22,9 +22,6 @@
 from odoo import models, fields, api, _
 from datetime import datetime, timedelta
 import logging
-import pytz
-
-
 
 _logger = logging.getLogger(__name__)
 
@@ -146,21 +143,19 @@ class ResPartner(models.Model):
         res = _("No next contact")
         res_datetime = False
         tz_offset = self.env.user.tz_offset
-        timezone = pytz.timezone('Europe/Stockholm')
         if appointment and (
-            not self.next_contact_date
-            or (
-                self.next_contact_date
-                and appointment.start.date() < self.next_contact_date
-            )
+                not self.next_contact_date
+                or (
+                        self.next_contact_date
+                        and appointment.start.date() < self.next_contact_date
+                )
         ):
             # use appointment date instead of AIS-F data.
             if tz_offset:
                 next_contact_time = (
-                    appointment.start
-                    + timedelta(hours=int(tz_offset[1:3]), minutes=int(tz_offset[3:5]))
+                        appointment.start
+                        + timedelta(hours=int(tz_offset[1:3]), minutes=int(tz_offset[3:5]))
                 ).strftime("%H:%M")
-
             else:
                 next_contact_time = appointment.start.strftime("%H:%M")
             next_contact_date = appointment.start.date()
@@ -187,7 +182,7 @@ class ResPartner(models.Model):
             next_contact_type = self.next_contact_type
             res_datetime = datetime.combine(
                 next_contact_date, datetime.strptime(next_contact_time, "%H:%M").time()
-            ).astimezone(timezone)
+            )
         if next_contact_date:
             res = f"{next_contact_date} {next_contact_time if next_contact_time else ''} {next_contact_type}"
         self.next_contact = res
@@ -208,11 +203,11 @@ class ResPartner(models.Model):
         )
         res_datetime = False
         if appointment and (
-            not self.next_contact_date
-            or (
-                self.last_contact_date
-                and appointment.start.date() > self.last_contact_date
-            )
+                not self.next_contact_date
+                or (
+                        self.last_contact_date
+                        and appointment.start.date() > self.last_contact_date
+                )
         ):
             # use appointment date instead of AIS-F data.
             last_contact_date = appointment.start.date()
