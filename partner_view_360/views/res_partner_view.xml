@@ -282,6 +282,9 @@
                         </div>
                         <div t-if="record.type.raw_value != 'contact'">
                           <div>
+                            <span attrs="{'invisible': [('address_co','=', False)]}">
+                              C/O:
+                            </span>
                             <field name="address_co"/><br/>
                             <field name="street"/><br/>
                             <field name="zip_formated" />
