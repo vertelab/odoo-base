@@ -21,7 +21,7 @@
 
 {
     'name': 'Daily notes',
-    'version': '12.0.1.4.2',
+    'version': '12.0.1.4.3',
     'category': '',
     'description': """
 Daily notes
@@ -42,6 +42,7 @@ v12.0.1.3.0 AFC-2155: Updated logic for how next_contact and last_contact are up
 and last_contact_date from Datetime to Date. \n
 v12.0.1.4.1 AFC-2228: Made IPF meeting sync more robust. \n
 v12.0.1.4.2 AFC-2137: Fixed behaviour of this code. \n
+v12.0.1.4.3 AFC-2426: Fixed next appointment +2 hrs problem. \n
 """,
     'author': 'Vertel AB',
     'license': 'AGPL-3',
