@@ -23,11 +23,6 @@
     'name': 'Partner Education 360',
     'version': '12.0.1.1',
     'category': '',
-    'description': """
-Adds education to jobseeker view
-================================================================================================
-
-""",
     'author': 'Vertel AB',
     'license': 'AGPL-3',
     'website': 'http://www.vertel.se',

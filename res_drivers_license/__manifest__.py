@@ -23,20 +23,14 @@
     'name': 'Drivers License',
     'version': '12.0.1.1',
     'category': '',
-    'description': """
-Drivers License
-==============================================
-AFC-197
-""",
     'author': 'Vertel AB',
     'website': 'http://www.vertel.se',
-    'depends': ['base', 'res_sun'],
+    'depends': ['res_sun'],
     'data': [
-        'security/ir.model.access.csv', 
+        'security/ir.model.access.csv',
         'views/res_drivers_license_view.xml',
         "data/res.drivers_license.csv",
-        
-        ],
+    ],
     'application': False,
     'installable': True,
 }

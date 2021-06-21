@@ -23,20 +23,15 @@
     'name': 'Partner AF Signature',
     'version': '12.0.0.1.0',
     'category': '',
-    'description': """
-Adds Arbetsförmedlingen Signatur
-================================
-
-""",
     'author': 'Vertel AB',
     'license': 'AGPL-3',
     'website': 'http://www.vertel.se',
-    'depends': [ ],
+    'depends': [],
     'data': [
         'views/res_partner_view.xml',
     ],
     'demo': [
-        
+
     ],
     'application': False,
     'installable': True,

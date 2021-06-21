@@ -18,15 +18,17 @@
 #    along with this program.  If not, see <http://www.gnu.org/licenses/>.
 #
 ##############################################################################
-from odoo import models, fields, api, _
 import logging
+
+from odoo import models, fields, api, _
+
 _logger = logging.getLogger(__name__)
 
 
-class ResDriversLicense(models.Model): 
+class ResDriversLicense(models.Model):
     _name = 'res.drivers_license'
     _description = """Value store for drivers licence"""
 
     partner_id = fields.Many2many(comodel_name="res.partner")
-    name = fields.Char(string='Class', required=True) #A,B etc.
+    name = fields.Char(string='Class', required=True)  # A,B etc.
     description = fields.Char(string='Description')

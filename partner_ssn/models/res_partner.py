@@ -1,9 +1,9 @@
-from odoo import models, fields, api, _
-from datetime import date
 import logging
-from odoo.exceptions import ValidationError
 import re
+from datetime import date
+from odoo.exceptions import ValidationError
 
+from odoo import models, fields, api, _
 
 _logger = logging.getLogger(__name__)
 
@@ -12,11 +12,11 @@ class ResPartner(models.Model):
     _inherit = "res.partner"
 
     age = fields.Char(string="Age", compute="calculate_age")
-    social_sec_nr = fields.Char(string="Social security number") 
-    social_sec_nr_age = fields.Char(string="Social security number", compute="combine_social_sec_nr_age") 
+    social_sec_nr = fields.Char(string="Social security number")
+    social_sec_nr_age = fields.Char(string="Social security number", compute="combine_social_sec_nr_age")
 
     @api.one
-    def combine_social_sec_nr_age(self):  
+    def combine_social_sec_nr_age(self):
         if self.social_sec_nr != False:
             self.social_sec_nr_age = _("%s (%s years old)") % (
                 self.social_sec_nr,
@@ -26,10 +26,10 @@ class ResPartner(models.Model):
             self.social_sec_nr_age = ""
 
     _sql_constraints = [
-        ('social_sec_nr_unique', 
-        'UNIQUE(social_sec_nr)',
-        'social security number field needs to be unique'
-        )]
+        ('social_sec_nr_unique',
+         'UNIQUE(social_sec_nr)',
+         'social security number field needs to be unique'
+         )]
 
     @api.one
     @api.constrains("social_sec_nr")
@@ -116,14 +116,14 @@ class ResPartner(models.Model):
             else:
                 wrong_input = True
                 error_message = _(
-                    "Incorrectly formated social security number %s" 
+                    "Incorrectly formated social security number %s"
                 ) % social_sec
                 _logger.error(error_message)
 
             if not wrong_input:
                 years = today.year - date_of_birth.year
                 if today.month < date_of_birth.month or (
-                    today.month == date_of_birth.month and today.day < date_of_birth.day
+                        today.month == date_of_birth.month and today.day < date_of_birth.day
                 ):
                     years -= 1
                 if years > 67:

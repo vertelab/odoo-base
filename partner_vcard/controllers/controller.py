@@ -19,25 +19,25 @@
 #
 ##############################################################################
 
-from odoo import http
-from odoo.http import request
+import logging
 import werkzeug
 from odoo.exceptions import except_orm, Warning, RedirectWarning
+from odoo.http import request
 
-import logging
+from odoo import http
+
 _logger = logging.getLogger(__name__)
-
 
 
 class parter_vcard(http.Controller):
 
+    @http.route(['/vcard/<string:partner_name>', '/partner/vc/<int:partner_id>'], type='http', auth="public",
+                website=True, )
+    def vcard_partner_view(self, partner_name=None, partner_id=None, **post):
+        name = partner_name.replace(':.-_', '    ')
+        partner = request.env['res.partner'].search([('name', 'ilike', name)])
+        return request.render("partner_vcard.partner_vcard_view", {'partner': partner})
 
-    @http.route(['/vcard/<string:partner_name>','/partner/vc/<int:partner_id>'], type='http', auth="public", website=True, )
-    def vcard_partner_view(self, partner_name=None,partner_id=None, **post):
-        name = partner_name.replace(':.-_','    ')
-        partner = request.env['res.partner'].search([('name','ilike',name)])  
-        return request.render("partner_vcard.partner_vcard_view", {'partner':partner})
-    
     @http.route([
         '/partner/<int:partner_id>/vcard.vcl',
     ], type='http', auth="public", website=False, )
@@ -54,5 +54,4 @@ TITLE;CHARSET=UTF-8:VP Business Development
 ORG;CHARSET=UTF-8:iZwop® 
 URL;CHARSET=UTF-8:https://my.izwop.com/izwop-com/melvin-helgesson
 REV:2019-09-13T09:26:53.011Z
-END:VCARD""".format(name=partner.name,given_name=partner.name.split(' ')[0],family_name=partner.name.split(' ')[-1])
-
+END:VCARD""".format(name=partner.name, given_name=partner.name.split(' ')[0], family_name=partner.name.split(' ')[-1])

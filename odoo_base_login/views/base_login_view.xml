@@ -62,7 +62,7 @@
             <field name="model">base.login.reason</field>
             <field name="arch" type="xml">
                 <kanban class="o_customer_event_kanban_view">
-                   <field name="ticket_ID"/>
+                    <field name="ticket_ID"/>
                     <field name="user_id"/>
                     <field name="email"/>
                     <field name="color"/>
@@ -78,7 +78,8 @@
                             <div t-attf-class="oe_kanban_color_#{kanban_getcolor(record.color.raw_value)} oe_kanban_card oe_kanban_global_click">
                                 <div class="o_dropdown_kanban dropdown">
 
-                                    <a class="dropdown-toggle o-no-caret btn" role="button" data-toggle="dropdown" href="#" aria-label="Dropdown menu" title="Dropdown menu">
+                                    <a class="dropdown-toggle o-no-caret btn" role="button" data-toggle="dropdown"
+                                       href="#" aria-label="Dropdown menu" title="Dropdown menu">
                                         <span class="fa fa-ellipsis-v"/>
                                     </a>
                                     <div class="dropdown-menu" role="menu">
@@ -89,24 +90,42 @@
                                     </div>
                                 </div>
                                 <div class="o_event_right">
-                                     <p>
-                                        <h4 class="o_kanban_record_title"><b>Ticket# : </b><field name="ticket_ID"/></h4>
+                                    <p>
+                                        <h4 class="o_kanban_record_title">
+                                            <b>Ticket# :</b>
+                                            <field name="ticket_ID"/>
+                                        </h4>
                                     </p>
                                     <p>
-                                        <h4 class="o_kanban_record_title"><b>User : </b><field name="user_id"/></h4>
+                                        <h4 class="o_kanban_record_title">
+                                            <b>User :</b>
+                                            <field name="user_id"/>
+                                        </h4>
                                     </p>
                                     <p>
-                                        <h4 class="o_kanban_record_title"><b>Length : </b><field name="length"/></h4>
-                                    </p>                                  
+                                        <h4 class="o_kanban_record_title">
+                                            <b>Length :</b>
+                                            <field name="length"/>
+                                        </h4>
+                                    </p>
 
                                     <p>
-                                       <h4 class="o_kanban_record_title"><b>Logged In : </b><field name="logged_in"/></h4>
+                                        <h4 class="o_kanban_record_title">
+                                            <b>Logged In :</b>
+                                            <field name="logged_in"/>
+                                        </h4>
                                     </p>
                                     <p>
-                                       <h4 class="o_kanban_record_title"><b>Logged out : </b><field name="logged_out"/></h4>
+                                        <h4 class="o_kanban_record_title">
+                                            <b>Logged out :</b>
+                                            <field name="logged_out"/>
+                                        </h4>
                                     </p>
                                     <p>
-                                       <h4 class="o_kanban_record_title"><b>Reason : </b><field name="login_reason"/></h4>
+                                        <h4 class="o_kanban_record_title">
+                                            <b>Reason :</b>
+                                            <field name="login_reason"/>
+                                        </h4>
                                     </p>
 
                                 </div>
@@ -136,14 +155,14 @@
                     <filter name="state_audit" domain="[('state','=','audit')]" string="Audit"/>
                     <filter name="state_alert" domain="[('state','=','alert')]" string="Alert"/>
                     <filter name="state_done" domain="[('state','=','done')]" string="Done"/>
-                   <group expand="0" string="Group By">
-                       <filter string="Status" name="group_by_status" context="{'group_by': 'state'}"/>
-                       <filter string="Audit Status" name="group_by_audit" context="{'group_by': 'status'}"/>
-                       <filter string="Users" name="login_users" context="{'group_by': 'user_id'}"/>
-                       <filter string="Tickets" name="tickets_by" context="{'group_by': 'ticket_ID'}"/>
-                       <filter string="Logged In" name="logged_in" context="{'group_by': 'logged_in'}"/>
-                       <filter string="Logged Out" name="login_out" context="{'group_by': 'logged_out'}"/>
-                   </group>
+                    <group expand="0" string="Group By">
+                        <filter string="Status" name="group_by_status" context="{'group_by': 'state'}"/>
+                        <filter string="Audit Status" name="group_by_audit" context="{'group_by': 'status'}"/>
+                        <filter string="Users" name="login_users" context="{'group_by': 'user_id'}"/>
+                        <filter string="Tickets" name="tickets_by" context="{'group_by': 'ticket_ID'}"/>
+                        <filter string="Logged In" name="logged_in" context="{'group_by': 'logged_in'}"/>
+                        <filter string="Logged Out" name="login_out" context="{'group_by': 'logged_out'}"/>
+                    </group>
                 </search>
             </field>
         </record>

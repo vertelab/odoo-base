@@ -24,6 +24,7 @@ logging.getLogger('werkzeug').addFilter(
     HealthCheckFilter('GET /monitoring/status HTTP')
 )
 
+
 class Monitoring(http.Controller):
 
     @http.route('/monitoring/status', type='http', auth='none')

@@ -7,39 +7,39 @@
             <field name="arch" type="xml">
                 <tree editable="bottom" string="Notes" default_order="note_date">
                     <field name="partner_id"/>
-                    <field name="name" />    
+                    <field name="name"/>
                     <field name="note"/>
                     <field name="note_date" widget="date"/>
                     <field name="is_confidential"/>
                     <field name="note_type" options="{'no_create_edit': True}"/>
                     <field name="note_number" groups="base.group_no_one"/>
-                    <field name="office_id" options="{'no_create_edit': True}" />
+                    <field name="office_id" options="{'no_create_edit': True}"/>
                 </tree>
             </field>
         </record>
 
-         <record id="partner_notes_view_tree_button" model="ir.ui.view">
+        <record id="partner_notes_view_tree_button" model="ir.ui.view">
             <field name="name">Note Button</field>
             <field name="model">res.partner.notes</field>
             <field name="arch" type="xml">
                 <tree editable="bottom" string="Notes" default_order="note_date">
-                    <field name="name"/>    
+                    <field name="name"/>
                     <field name="note"/>
                     <field name="note_date" widget="date"/>
                     <field name="is_confidential"/>
                     <field name="note_type" options="{'no_create_edit': True}"/>
                     <field name="note_number" groups="base.group_no_one"/>
-                    <field name="office_id" options="{'no_create_edit': True}" />
+                    <field name="office_id" options="{'no_create_edit': True}"/>
                 </tree>
             </field>
         </record>
 
-          <record id="partner_note_type_view_tree" model="ir.ui.view">
+        <record id="partner_note_type_view_tree" model="ir.ui.view">
             <field name="name">Note Type</field>
             <field name="model">res.partner.note.type</field>
             <field name="arch" type="xml">
                 <tree editable="bottom" string="Note types">
-                    <field name="name" />    
+                    <field name="name"/>
                     <field name="description"/>
                 </tree>
             </field>
@@ -51,10 +51,10 @@
             <field name="res_model">res.partner.notes</field>
             <field name="view_type">form</field>
             <field name="view_mode">tree,form</field>
-            <field name="view_id" ref="partner_daily_notes.partner_notes_view_tree" />
+            <field name="view_id" ref="partner_daily_notes.partner_notes_view_tree"/>
             <field name="context">{}</field>
             <!-- <field name="search_view_id" ref="res_view_partner_notes_filter" /> -->
-        </record> 
+        </record>
 
         <record id="partner_note_type_action_view_tree" model="ir.actions.act_window">
             <field name="name">Note Types</field>
@@ -62,18 +62,28 @@
             <field name="res_model">res.partner.note.type</field>
             <field name="view_type">form</field>
             <field name="view_mode">tree,form</field>
-            <field name="view_id" ref="partner_daily_notes.partner_note_type_view_tree" />
+            <field name="view_id" ref="partner_daily_notes.partner_note_type_view_tree"/>
             <field name="context">{}</field>
             <!-- <field name="search_view_id" ref="res_view_partner_notes_filter" /> -->
-        </record> 
+        </record>
 
-        <menuitem id="partner_note_type_menu_action" name="Note types" parent="contacts.res_partner_menu_config" action="partner_note_type_action_view_tree" sequence="50" />
-        <menuitem id="partner_notes_menu_action" name="Daily notes" parent="contacts.menu_contacts" action="partner_notes_action_view_tree" sequence="50" />
-   
-        <menuitem id="partner_note_type_menu_action_jobseeker" name="Note types" parent="partner_view_360.res_partner_jobseekers_config_menu" action="partner_note_type_action_view_tree" sequence="50" />
-        <menuitem id="partner_notes_menu_action_jobseeker" name="Daily notes" parent="partner_view_360.res_partner_jobseekers_menu" action="partner_notes_action_view_tree" sequence="20" groups="base.group_no_one" />
-        
-        <menuitem id="partner_note_type_menu_action_employer" name="Note types" parent="partner_view_360.res_partner_employers_config_menu" action="partner_note_type_action_view_tree" sequence="50" />
-        <menuitem id="partner_notes_menu_action_employer" name="Daily notes" parent="partner_view_360.res_partner_employers_menu" action="partner_notes_action_view_tree" sequence="50" />
+        <menuitem id="partner_note_type_menu_action" name="Note types" parent="contacts.res_partner_menu_config"
+                  action="partner_note_type_action_view_tree" sequence="50"/>
+        <menuitem id="partner_notes_menu_action" name="Daily notes" parent="contacts.menu_contacts"
+                  action="partner_notes_action_view_tree" sequence="50"/>
+
+        <menuitem id="partner_note_type_menu_action_jobseeker" name="Note types"
+                  parent="partner_view_360.res_partner_jobseekers_config_menu"
+                  action="partner_note_type_action_view_tree" sequence="50"/>
+        <menuitem id="partner_notes_menu_action_jobseeker" name="Daily notes"
+                  parent="partner_view_360.res_partner_jobseekers_menu" action="partner_notes_action_view_tree"
+                  sequence="20" groups="base.group_no_one"/>
+
+        <menuitem id="partner_note_type_menu_action_employer" name="Note types"
+                  parent="partner_view_360.res_partner_employers_config_menu"
+                  action="partner_note_type_action_view_tree" sequence="50"/>
+        <menuitem id="partner_notes_menu_action_employer" name="Daily notes"
+                  parent="partner_view_360.res_partner_employers_menu" action="partner_notes_action_view_tree"
+                  sequence="50"/>
     </data>
 </odoo>

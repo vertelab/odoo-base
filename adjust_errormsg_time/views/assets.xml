@@ -2,12 +2,12 @@
 
 <odoo>
     <data>
-		<template id="assets_backend" name="Adjust Error Message" inherit_id="web.assets_backend">
-			<xpath expr=".">
-				<script type="text/javascript" src="/adjust_errormsg_time/static/src/js/basic_controller.js"/>
-				<script type="text/javascript" src="/adjust_errormsg_time/static/src/js/attach_document.js"/>
-			</xpath>
-		</template>
+        <template id="assets_backend" name="Adjust Error Message" inherit_id="web.assets_backend">
+            <xpath expr=".">
+                <script type="text/javascript" src="/adjust_errormsg_time/static/src/js/basic_controller.js"/>
+                <script type="text/javascript" src="/adjust_errormsg_time/static/src/js/attach_document.js"/>
+            </xpath>
+        </template>
 
     </data>
 </odoo>

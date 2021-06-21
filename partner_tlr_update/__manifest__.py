@@ -24,9 +24,6 @@
     'name': 'Partner TLR Update',
     'version': '12.0.0.0.1',
     'category': 'Tools',
-    'description': """This module links the TLR-API to the Odoo-logic and 
-    adds res-partner-data for the company and its contac-persons.""",
-
     'author': "N-development",
     'license': 'AGPL-3',
     'website': 'https://www.n-development.com',

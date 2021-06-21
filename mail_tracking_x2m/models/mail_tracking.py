@@ -1,5 +1,6 @@
 from odoo import models
 
+
 class MailTracking(models.Model):
     _inherit = 'mail.tracking.value'
 

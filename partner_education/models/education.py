@@ -3,6 +3,7 @@ from odoo import models, fields, api, _
 
 class ResPartnerEducation(models.Model):
     _name = "res.partner.education"
+    _description = "RES Partner Education"
 
     partner_id = fields.Many2one(comodel_name="res.partner")
     sun_id = fields.Many2one(comodel_name='res.sun',

@@ -21,22 +21,15 @@
 
 {
     'name': 'Replace Event Automatic Digital Dialogue',
-    'version': '12.0.0.0.2',       
+    'version': '12.0.0.0.2',
     'category': '',
-    'description': """
-Module that changes event view to an automatic digital dialogue view
-================================================================================================
-This module alters, adds and removes fields in the event view \n
-Replace by:\n
-https://github.com/vertelab/odoo-af/tree/Dev-12.0-Fenix-Sprint-02/af_automatic_customer_dialogue/static/description
-""",
     'author': 'Vertel AB',
     'license': 'AGPL-3',
     'website': 'http://www.vertel.se',
     'depends': ['website_event', 'event'],
     'data': [
-			'views/event_event.xml'
-        ],
+        'views/event_event.xml'
+    ],
     'application': False,
     'installable': True,
 }

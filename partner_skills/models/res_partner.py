@@ -19,13 +19,15 @@
 #
 ##############################################################################
 
-from odoo import models, fields, api, _
 import logging
+
+from odoo import models, fields, api, _
+
 _logger = logging.getLogger(__name__)
 
 
 class ResPartner(models.Model):
-    _inherit = "res.partner" #odoo inheritance från res.partner
+    _inherit = "res.partner"  # odoo inheritance från res.partner
 
     skills = fields.Many2many('hr.skill', string="Skill")
     skill_id = fields.Char(string="Skill", related="skills.complete_name")
@@ -57,20 +59,20 @@ class HrEmployee(models.Model):
 
 class OtherExperiences(models.Model):
     _name = 'hr.other.experiences'
-    description = "Experiences"
+    _description = "Experiences"
 
     name = fields.Char(string="Experience")
 
 
 class Strengths(models.Model):
     _name = 'hr.strengths'
-    description = "Strengths"
+    _description = "Strengths"
 
     name = fields.Char(string="Strengths")
 
 
 class Interests(models.Model):
     _name = 'hr.interests'
-    description = "Interests"
+    _description = "Interests"
 
     name = fields.Char(string="Interests")

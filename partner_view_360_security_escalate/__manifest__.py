@@ -23,9 +23,6 @@
     'name': 'Partner 360 view security escalate',
     'version': '12.0.0.1.9',
     'category': '',
-    'description': """
-Module for employee 360 view with enhanced security escalation
-""",
     'author': 'Vertel AB',
     'license': 'AGPL-3',
     'website': 'http://www.vertel.se',

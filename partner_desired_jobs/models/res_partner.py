@@ -19,8 +19,10 @@
 #
 ##############################################################################
 
-from odoo import models, fields, api
 import logging
+
+from odoo import models, fields, api
+
 _logger = logging.getLogger(__name__)
 
 
@@ -33,6 +35,7 @@ class ResPartner(models.Model):
 
 class Jobs(models.Model):
     _name = 'res.partner.jobs'
+    _description = "RES Partner Jobs"
 
     partner_id = fields.Many2one(comodel_name="res.partner")
 

@@ -12,7 +12,7 @@ class ResPartner(models.Model):
     references = fields.Binary()
     references_file_name = fields.Char()
     has_drivers_license = fields.Boolean(string="Has drivers license",
-                                         compute='_compute_has_drivers_license') # noqa 501
+                                         compute='_compute_has_drivers_license')  # noqa 501
     drivers_license_ids = fields.Many2many(comodel_name='res.drivers_license',
                                            string='Drivers license class')
     has_car = fields.Boolean(string="Has access to car")

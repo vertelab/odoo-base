@@ -19,33 +19,36 @@
 #
 ##############################################################################
 
-from odoo import models, fields, api, _
-
 import json
 import logging
-import stomp
 import ssl
+import stomp
 import sys
 import time
 import xmltodict
 
+from odoo import models, fields, api, _
+
 _logger = logging.getLogger(__name__)
+
 
 def connect_and_subscribe(mqconn, user, pwd, target, clientid=4):
     mqconn.connect(user, pwd, wait=True)
     mqconn.subscribe(destination=target, clientid=4, ack="client")
 
-PREN="prenumerera-arbetssokande"
-PNR="personnummer"
-PREVPNR="tidigarePersonnummer"
-SID="sokandeId"
-MSGTYPE="meddelandetyp"
-TIMESTAMP="tidpunkt"
+
+PREN = "prenumerera-arbetssokande"
+PNR = "personnummer"
+PREVPNR = "tidigarePersonnummer"
+SID = "sokandeId"
+MSGTYPE = "meddelandetyp"
+TIMESTAMP = "tidpunkt"
+
 
 class AsokResPartnerListener(stomp.ConnectionListener):
     __env = None
     __conn = None
-    __user = None 
+    __user = None
     __pwd = None
     __target = None
     __msglist = list()
@@ -66,12 +69,12 @@ class AsokResPartnerListener(stomp.ConnectionListener):
             # Validate xml dict
 
             if (
-                not isinstance(xmldict, dict)
-                or not PREN in xmldict.keys()
-                or not isinstance(xmldict[PREN], dict)
-                or not PNR in xmldict[PREN].keys()
-                or not SID in xmldict[PREN].keys()
-                or not MSGTYPE in xmldict[PREN].keys()
+                    not isinstance(xmldict, dict)
+                    or not PREN in xmldict.keys()
+                    or not isinstance(xmldict[PREN], dict)
+                    or not PNR in xmldict[PREN].keys()
+                    or not SID in xmldict[PREN].keys()
+                    or not MSGTYPE in xmldict[PREN].keys()
             ):
                 xmldict = None
                 raise ValueError("Illegal XMLFormat")
@@ -105,13 +108,13 @@ class AsokResPartnerListener(stomp.ConnectionListener):
         :param body: the frame's payload - usually a detailed error description.
         """
         _logger.error("Asok MQ Listener error: %s - %s" % (headers, body))
- 
+
     def on_message(self, headers, msg):
         _logger.debug("Asok MQ Listener on_message: {0} - {1}".format(headers, msg))
         self._handle_message(msg)
         # tell MQ we handled the message
         self.__conn.ack(headers["message-id"])
-    
+
     def on_disconnected(self):
         _logger.warning('Asok MQ Listener disconnected from MQ - Tring to reconnect')
         connect_and_subscribe(self.__conn, self.__user, self.__pwd, self.__target, self.__clientid)
@@ -140,10 +143,11 @@ class AsokResPartnerListener(stomp.ConnectionListener):
         """
         _logger.debug("Asok MQ Listener on_connected: %s - %s" % (headers, body))
 
+
 class STOMResPartnerListener(stomp.ConnectionListener):
     __env = None
     __conn = None
-    __user = None 
+    __user = None
     __pwd = None
     __target = None
     __clientid = None
@@ -191,13 +195,13 @@ class STOMResPartnerListener(stomp.ConnectionListener):
         :param body: the frame's payload - usually a detailed error description.
         """
         _logger.error("STOM MQ Listener error: %s - %s" % (headers, body))
- 
+
     def on_message(self, headers, msg):
         _logger.debug("STOM MQ Listener on_message: {0} - {1}".format(headers, msg))
         self._handle_message(msg)
         # tell MQ we handled the message
         self.__conn.ack(headers["message-id"])
-    
+
     def on_disconnected(self):
         _logger.warning('STOM MQ Listener disconnected from MQ - Tring to reconnect')
         connect_and_subscribe(self.__conn, self.__user, self.__pwd, self.__target, self.__clientid)
@@ -226,8 +230,9 @@ class STOMResPartnerListener(stomp.ConnectionListener):
         """
         _logger.debug("STOM MQ Listener on_connected: %s - %s" % (headers, body))
 
+
 class ResPartner(models.Model):
-    _inherit = "res.partner"  
+    _inherit = "res.partner"
 
     def __get_host_port(self):
         str = self.env['ir.config_parameter'].get_param('partner_mq_ipf.mqhostport', '172.16.36.27:61613')
@@ -238,25 +243,25 @@ class ResPartner(models.Model):
         return hosts
 
     @api.model
-    def mq_asok_listener(self, minutes_to_live = 10): 
+    def mq_asok_listener(self, minutes_to_live=10):
         _logger.info("Asok MQ Listener started.")
         host_port = self.__get_host_port()
-        target = self.env['ir.config_parameter'].get_param('partner_mq_ipf.target_asok', '/topic/Consumer.crm.VirtualTopic.arbetssokande.andring')
+        target = self.env['ir.config_parameter'].get_param('partner_mq_ipf.target_asok',
+                                                           '/topic/Consumer.crm.VirtualTopic.arbetssokande.andring')
         usr = self.env['ir.config_parameter'].get_param('partner_mq_ipf.mquser', 'crm')
         pwd = self.env['ir.config_parameter'].get_param('partner_mq_ipf.mqpwd', 'topsecret')
 
         mqconn = stomp.Connection10(host_port)
-        
+
         if self.env['ir.config_parameter'].get_param('partner_mq_ipf.mqusessl', '1') == '1':
             mqconn.set_ssl(for_hosts=host_port, ssl_version=ssl.PROTOCOL_TLS)
             _logger.debug("Asok MQ Listener - Using TLS")
         else:
             _logger.debug("Asok MQ Listener - Not using TLS")
 
-        
         respartnerlsnr = AsokResPartnerListener(self.env, mqconn, usr, pwd, target, 4)
         mqconn.set_listener('', respartnerlsnr)
-        
+
         try:
             connect_and_subscribe(
                 mqconn,
@@ -265,19 +270,20 @@ class ResPartner(models.Model):
                 target
             )
 
-            counter = 12 * minutes_to_live # Number of 5 sek slices to wait
+            counter = 12 * minutes_to_live  # Number of 5 sek slices to wait
             while counter > 0:
-                time.sleep(5) # wait for a bit
+                time.sleep(5)  # wait for a bit
                 mqconn.unsubscribe(target)
                 # handle list of messages
                 for msg in respartnerlsnr.get_list():
                     customer_id = msg.get(SID)
                     social_security_number = msg.get(PNR)
                     former_social_security_number = msg.get(PREVPNR, None)
-                    message_type = msg.get(MSGTYPE) 
+                    message_type = msg.get(MSGTYPE)
                     _logger.info("Asok MQ Listener - calling rask_controller")
                     _logger.debug("Asok MQ Listener - rask_controller: %s" % msg)
-                    self.env['res.partner'].rask_controller(customer_id, social_security_number, former_social_security_number, message_type)
+                    self.env['res.partner'].rask_controller(customer_id, social_security_number,
+                                                            former_social_security_number, message_type)
 
                 self.env.cr.commit()
                 respartnerlsnr.clear_list()
@@ -295,26 +301,26 @@ class ResPartner(models.Model):
             if mqconn.is_connected():
                 mqconn.disconnect()
 
-    def mq_stom_listener(self, minutes_to_live = 10): 
+    def mq_stom_listener(self, minutes_to_live=10):
         _logger.info("STOM MQ Listener started.")
         host_port = self.__get_host_port()
-        target = self.env['ir.config_parameter'].get_param('partner_mq_ipf.target_STOM', '/topic/Consumer.crm.VirtualTopic.arbetssokande.andring')
+        target = self.env['ir.config_parameter'].get_param('partner_mq_ipf.target_STOM',
+                                                           '/topic/Consumer.crm.VirtualTopic.arbetssokande.andring')
         usr = self.env['ir.config_parameter'].get_param('partner_mq_ipf.mquser', 'crm')
         pwd = self.env['ir.config_parameter'].get_param('partner_mq_ipf.mqpwd', 'topsecret')
 
         _logger.debug("STOM MQ Listener patameters - %s %s - %s %s" % ([host_port], target, usr, pwd))
 
         mqconn = stomp.Connection10(host_port)
-        
+
         if self.env['ir.config_parameter'].get_param('partner_mq_ipf.mqusessl', '1') == '1':
             mqconn.set_ssl(for_hosts=host_port, ssl_version=ssl.PROTOCOL_TLS)
             _logger.debug("STOM MQ Listener - Using TLS")
         else:
             _logger.debug("STOM MQ Listener - Not using TLS")
 
-        respartnerlsnr = STOMResPartnerListener(self.env, mqconn,usr,pwd,target,4)
+        respartnerlsnr = STOMResPartnerListener(self.env, mqconn, usr, pwd, target, 4)
         mqconn.set_listener('', respartnerlsnr)
-        
 
         try:
             connect_and_subscribe(
@@ -323,9 +329,9 @@ class ResPartner(models.Model):
                 pwd,
                 target
             )
-            counter = 12 * minutes_to_live # Number of 5 sek slices to wait
+            counter = 12 * minutes_to_live  # Number of 5 sek slices to wait
             while counter > 0:
-                time.sleep(5) # wait for a bit
+                time.sleep(5)  # wait for a bit
                 mqconn.unsubscribe(target)
 
                 # handle list of messages
@@ -345,8 +351,7 @@ class ResPartner(models.Model):
                     counter = 0
 
         finally:
-            
+
             time.sleep(1)
             if mqconn.is_connected():
                 mqconn.disconnect()
-

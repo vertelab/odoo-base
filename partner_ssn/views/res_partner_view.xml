@@ -6,11 +6,10 @@
         <field name="inherit_id" ref="base.view_partner_form"/>
         <field name="arch" type="xml">
             <field name="category_id" position="before">
-                <field name="social_sec_nr" />
+                <field name="social_sec_nr"/>
             </field>
         </field>
     </record>
-
 
 
 </odoo>

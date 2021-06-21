@@ -23,17 +23,10 @@
     'name': 'Base mapping',
     'version': '12.0.1.1',
     'category': '',
-    'description': """
-Base mapping
-============
-This modules allows for quick mapping of odoo fields to fields in other systems.
-Also supports import / export of field data.
-- 12.0.1.1  Added mapping for Integration platform with the module base_map.
-""",
     'author': 'Vertel AB',
     'license': 'AGPL-3',
     'website': 'http://www.vertel.se',
-    'depends': ['base',],
+    'depends': [],
     'data': [
 			'views/ir_model.xml',
 			'security/ir.model.access.csv',

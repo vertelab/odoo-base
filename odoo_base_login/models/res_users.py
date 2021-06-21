@@ -22,21 +22,22 @@
 import logging
 import werkzeug
 from datetime import datetime, timedelta
+from odoo.exceptions import AccessDenied
+from odoo.http import SessionExpiredException
+from odoo.http import request
+from os import utime
+from os.path import getmtime
+from time import time
+
 from odoo import SUPERUSER_ID
 from odoo import fields, api, http
 from odoo import models
-from odoo.exceptions import AccessDenied
-from odoo.http import request
 from ..controllers.main import clear_session_history
-from os.path import getmtime
-from time import time
-from os import utime
-from odoo.http import SessionExpiredException
 
 _logger = logging.getLogger(__name__)
 
-class ResUsers(models.Model):
 
+class ResUsers(models.Model):
     _inherit = 'res.users'
 
     sid = fields.Char('Session ID')
@@ -53,6 +54,7 @@ class ResUsers(models.Model):
         """
         self.write({'sid': False, 'exp_date': False, 'logged_in': False,
                     'last_update': datetime.now()})
+
     #
     def _save_session(self, minutes=120):
         """
@@ -62,8 +64,8 @@ class ResUsers(models.Model):
         exp_date = datetime.utcnow() + timedelta(minutes=minutes)
         sid = request.httprequest.session.sid
         self.sudo().write({'sid': sid, 'exp_date': exp_date,
-                                            'logged_in': True,
-                                            'last_update': datetime.now()})
+                           'logged_in': True,
+                           'last_update': datetime.now()})
 
     @api.model_cr_context
     def _auth_timeout_get_ignored_urls(self):
