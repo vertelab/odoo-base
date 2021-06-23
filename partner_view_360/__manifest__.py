@@ -39,6 +39,7 @@
     'data': [
         'views/res_partner_view.xml',
         'wizard/res_partner_search_wizard.xml',
+        'security/ir.model.access.csv'
     ],
     'demo': [
         "data/jobseekers/res.partner.csv",

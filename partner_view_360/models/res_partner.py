@@ -106,10 +106,11 @@ class ResPartner(models.Model):
     def combine_state_name_code(self):
         self.state_name_code = "%s %s" % (self.state_id.name, self.state_id.code)
 
-    @api.one
+    @api.multi
     def combine_category_name_code(self):
-        if self.jobseeker_category_id:
-            self.jobseeker_category = "%s %s" % (self.jobseeker_category_id.name, self.jobseeker_category_id.code)
+        for rec in self:
+            if rec.jobseeker_category_id:
+                rec.jobseeker_category = "%s %s" % (rec.jobseeker_category_id.name, rec.jobseeker_category_id.code)
 
     def update_name_ssn(self):
         for partner in self:
@@ -126,3 +127,10 @@ class ResPartner(models.Model):
             if partner.social_sec_nr:
                 name += " " + partner.social_sec_nr
             partner.name_ssn = name
+
+class ResPartnerSKAT(models.Model):
+    _name = "res.partner.skat"
+    _description = "Res Partner SKAT"
+
+    code = fields.Char(string="code")
+    name = fields.Char(string="name")
