@@ -185,13 +185,14 @@ class ResPartner(models.Model):
     def _compute_office_code_name(self):
         self.office_code_name = "%s %s" % (self.office_id.office_code, self.office_id.name)
 
-    @api.one
+    @api.multi
     def combine_category_name_code(self):
-        self.jobseeker_category = "%s %s" % (
-            self.jobseeker_category_id.code,
-            self.jobseeker_category_id.name,
-            #date set here
-        )
+        for rec in self:
+            if rec.jobseeker_category_id:
+                rec.jobseeker_category = "%s %s" % (
+                    rec.jobseeker_category_id.code,
+                    rec.jobseeker_category_id.name,
+                )
 
     def update_partner_images(self):
         for partner in self:
@@ -353,9 +354,7 @@ class ResPartner(models.Model):
 
 class ResPartnerSKAT(models.Model):
     _name = "res.partner.skat"
+    _description = "Res Partner Skat"
 
-    partner_id = fields.One2many(
-        comodel_name="res.partner", inverse_name="jobseeker_category"
-    )
     code = fields.Char(string="code")
     name = fields.Char(string="name")
