@@ -150,6 +150,10 @@
             <div class="af_field_group oe_read_only">
               <label for="street" string="Registered address"/>
               <div>
+                <field name="has_address_co" attrs="{'invisible': True}"/>
+                <div attrs="{'invisible': [('has_address_co','=', False)]}">C/O
+                  <field name="address_co" class="o_address_street" attrs="{'invisible': [('address_co', '=', False)]}"/>
+                </div>
                 <div class="o_address_format">
                   <span class="oe_read_only">
                     <field name="street" placeholder="Street..." class="o_address_street"/>
