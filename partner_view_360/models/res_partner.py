@@ -356,5 +356,8 @@ class ResPartnerSKAT(models.Model):
     _name = "res.partner.skat"
     _description = "Res Partner Skat"
 
+    partner_id = fields.One2many(
+        comodel_name="res.partner", inverse_name="jobseeker_category_id"
+    )
     code = fields.Char(string="code")
     name = fields.Char(string="name")
