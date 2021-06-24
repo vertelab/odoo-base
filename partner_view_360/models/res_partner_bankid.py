@@ -2,7 +2,7 @@
 ##############################################################################
 #
 #    Odoo, Open Source Management Solution, third party addon
-#    Copyright (C) 2004-2020 Vertel AB (<http://vertel.se>).
+#    Copyright (C) 2004-2021 Vertel AB (<http://vertel.se>).
 #
 #    This program is free software: you can redistribute it and/or modify
 #    it under the terms of the GNU Affero General Public License as
@@ -21,21 +21,18 @@
 
 from odoo import models, fields, api, _
 import logging
+
 _logger = logging.getLogger(__name__)
 
 
-class CalendarTaskType(models.Model):
-    _inherit = "calendar.task.type" 
+class ResPartnerBankid(models.TransientModel):
+    _name = "res.partner.bankid"
+    _description = (
+        "Represents an approval from BankId for a specific res.partner and res.users"
+    )
+    _transient_max_hours = 0.5  # tag transient model for removal after 30 minutes.
+    _order = "create_date desc"  # make sure we always get the latest token first.
 
-    code = fields.Char(string='Code', size=8, trim=True, )
-    name = fields.Char(string='Name', size=25, trim=True, )
-    right_type = fields.Selection(string='Right Type', selection=[('','N/A'),('STARK','Stark'),('MYCKET_STARK','Mycket Stark')] )
-    reason_code = fields.Char(string='Reason Code', size=3, trim=True, )
-    reason = fields.Char(string='Reason', size=25, trim=True, )
-    interval = fields.Selection(selection=[('1','1 day'),('7','1 week'),('14','2 weeks'),('30','30 days'),('60','60 days'),('100','100 days'),('365','a Year')],string='Interval',default='1')
-    client_responsible = fields.Boolean(string='Client Responsible', help="Change current user to be responsible for this client, and get permanent rights that goes with it")
-    
-    @api.one
-    def default_name(self):
-        self.display_name = "[%s] %s" % (self.code, self.name)
-        
+    name = fields.Char(string="Result")
+    user_id = fields.Many2one(comodel_name="res.users", string="User")
+    partner_id = fields.Many2one(comodel_name="res.partner", string="Partner")
