@@ -153,7 +153,7 @@ class ResPartner(models.Model):
 
     name_ssn = fields.Char(compute="_compute_name_ssn", store=True)
     is_spu = fields.Boolean(string='SPU', default=False)
-
+    has_address_co = fields.Boolean(compute="_check_address_co")
     _sql_constraints = [
         ('customer_id_unique',
         'UNIQUE(customer_id)',
@@ -192,6 +192,14 @@ class ResPartner(models.Model):
             self.jobseeker_category_id.name,
             #date set here
         )
+
+    @api.one
+    def _check_address_co(self):
+        if self.address_co:
+            self.has_address_co = True
+        else:
+            self.has_address_co = False
+
 
     def update_partner_images(self):
         for partner in self:

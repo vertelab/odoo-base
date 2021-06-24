@@ -21,7 +21,7 @@
 
 {
     'name': 'Partner 360 view',
-    'version': '12.0.0.3.6',
+    'version': '12.0.0.3.7',
     'category': '',
     'description': """
 Module for employee 360 view
@@ -53,6 +53,7 @@ v12.0.0.3.3 AFC-2305: Added css class to h1 tag\n
 v12.0.0.3.4 AFC-1950: Removed KROM Rusta och matcha.\n
 v12.0.0.3.5 AFC-2266: Updated format of person number for searching.\n
 v12.0.0.3.6 AFC-2263: Changed boolean to selection field.\n
+v12.0.0.3.7 AFC-2356: Added field has_address_co for displaying C/O prefix.\n
 """,
     'author': 'Vertel AB',
     'license': 'AGPL-3',
