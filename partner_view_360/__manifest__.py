@@ -21,7 +21,7 @@
 
 {
     'name': 'Partner 360 view',
-    'version': '12.0.0.3.4',
+    'version': '12.0.0.3.5',
     'category': '',
     'description': """
 Module for employee 360 view
@@ -51,6 +51,7 @@ v12.0.0.3.1 AFC-2372: Hide fields e-legitimation and arbetsökandesegment.\n
 v12.0.0.3.2 AFC-2245: Added new field is_spu to mark problematic records.\n
 v12.0.0.3.3 AFC-2305: Added css class to h1 tag\n
 v12.0.0.3.4 AFC-1950: Removed KROM Rusta och matcha.\n
+v12.0.0.3.5 AFC-2263: Changed boolean to selection field.\n
 """,
     'author': 'Vertel AB',
     'license': 'AGPL-3',

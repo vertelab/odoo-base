@@ -92,10 +92,20 @@ class ResPartner(models.Model):
         ],
         string="Registered Through",
     )  # is added in partner_extension_af
-    share_info_with_employers = fields.Boolean(
-        string="Share name and address with employers"
-    ) #is added in partner_extension_af
-    sms_reminders = fields.Boolean(string="SMS reminders") #is added in partner_extension_af
+    share_info_with_employers = fields.Selection(
+        selection=[
+            ("True", "Ja"),
+            ("False", "Nej"),
+        ],
+        string="Share name and address with employers",
+    )
+    sms_reminders = fields.Selection(
+        selection=[
+            ("True", "Ja"),
+            ("False", "Nej"),
+        ],
+        string="SMS reminders",
+    )
     visitation_address_id = fields.Many2one("res.partner", string="Visitation address") #is added in partner_extension_af
 
     given_address_id = fields.Many2one("res.partner", string="given address") # Add to a separate module
