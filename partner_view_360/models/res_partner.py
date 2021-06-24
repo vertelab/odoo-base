@@ -23,7 +23,8 @@ from odoo import models, fields, api, _
 import logging
 import threading
 import base64
-from datetime import date
+from datetime import datetime, date
+
 
 from odoo.exceptions import ValidationError
 from odoo.tools import image_resize_image_big, image_colorize
@@ -339,12 +340,26 @@ class ResPartner(models.Model):
 
     @api.model
     def search_pnr(self, pnr):
+        now_year = str(datetime.now().year)
+        last_century = str(int(now_year) - 100)[0:2]
         domain = [('is_jobseeker', '=', True)]
         if len(pnr) == 13 and pnr[8] == "-":
             domain.append(("social_sec_nr", "=", pnr))
-        elif len(pnr) == 12:
+        elif len(pnr) == 12 and "-" not in pnr:
             domain.append(
                 ("social_sec_nr", "=", "%s-%s" % (pnr[:8], pnr[8:12])))
+        elif len(pnr) == 11 and pnr[6] == "-":
+            if pnr[0:2] < now_year[2:4]:
+                domain.append(("social_sec_nr", "=", now_year[0:2] + pnr))
+            else:
+                domain.append(("social_sec_nr", "=", last_century + pnr))
+        elif len(pnr) == 10 and "-" not in pnr:
+            if pnr[0:2] < now_year[2:4]:
+                domain.append(
+                    ("social_sec_nr", "=", "%s-%s" % (now_year[0:2] + pnr[:6], pnr[6:10])))
+            else:
+                domain.append(
+                    ("social_sec_nr", "=", "%s-%s" % (last_century + pnr[:6], pnr[6:10])))
         else:
             raise ValidationError(_("Incorrectly formated social security number: %s") % pnr)
         # unless we raised an error, return the result of the search
