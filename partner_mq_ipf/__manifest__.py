@@ -31,7 +31,7 @@ v12.0.0.3.1 AFC-2467: Implemented queue limit.
     'author': 'Vertel AB',
     'license': 'AGPL-3',
     'website': 'http://www.vertel.se',
-    'depends': ['base', 'calendar_af', 'edi_af_aisf_rask', 'af_aisf_jobseeker_sync'],
+    'depends': ['base', 'calendar_af', 'af_aisf_jobseeker_sync'],
     'external_dependencies': {'python': ['stomp', 'xmltodict']},
     'data': ['data/cron.xml'],
     'application': False,

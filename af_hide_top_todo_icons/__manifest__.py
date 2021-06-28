@@ -20,8 +20,8 @@
 ##############################################################################
 
 {
-    'name': 'Hide Todo icon from top',
-    'version': '12.0.0.1',
+    'name': 'Depreciated Activity Tab - replace with partner_activity',
+    'version': '12.0.1.3',						# Format 12.0.1.0, för att vi använder Odoo 12
     'category': '',
     'summary': 'Hide Top Conversions and Activities icons.',
     'description': """
@@ -38,5 +38,5 @@
         'static/src/xml/systray.xml',
     ],
     'application': False,
-    'installable': True,
+    'installable': False,
 }
