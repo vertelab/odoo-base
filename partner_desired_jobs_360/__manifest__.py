@@ -21,13 +21,14 @@
 
 {
     'name': 'Partner desired jobs 360',
-    'version': '12.0.1.2',
+    'version': '12.0.1.3',
     'category': '',
     'description': """
 Module to see which jobs a jobseeking partner desires
 ================================================================================================
 AFC-1753 fixed a domain
-AFC-1849 made some fields debug only
+AFC-1849 made some fields debug only\n
+V12.0.1.3 AFC-2421 Added Occupation demand's fields in Desired job tab.
 """,
     'author': 'Vertel AB',
     'license': 'AGPL-3',
