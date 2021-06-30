@@ -223,7 +223,8 @@ class ResPartner(models.Model):
                 self.last_contact_date if self.last_contact_date else False
             )
             last_contact_type = self.last_contact_type
-            res_datetime = datetime.combine(last_contact_date, datetime.min.time())
+            if last_contact_date:
+                res_datetime = datetime.combine(last_contact_date, datetime.min.time())
         if last_contact_date:
             res = f"{last_contact_date} {last_contact_type}"
         else:
