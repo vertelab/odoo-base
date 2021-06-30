@@ -122,9 +122,9 @@ class Users(models.Model):
             # Check if first arg looks to be an id, or a list of ids
             if args and isinstance(args[0], list) and \
                     all([isinstance(i, int) for i in args[0]]):
-                audit_log['audit'].update['objectid'] = ', '.join([str(i) for i in args[0]])
+                audit_log['audit']['objectid'] = ', '.join([str(i) for i in args[0]])
             elif args and isinstance(args[0], int):
-                audit_log['audit'].update['objectid'] = str(args[0])
+                audit_log['audit']['objectid'] = str(args[0])
             if error:
                 if isinstance(error, AccessError):
                     audit_log['audit']['authorisationinfo'] = 0
