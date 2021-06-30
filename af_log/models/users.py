@@ -37,8 +37,8 @@ class Users(models.Model):
         """ Generate a user record for the log."""
         return {
             'name': self.login  # Personnummer or signature
-            # 'initiatinguser': Personnummer or signature. Supplied by the user.
-            #                   Another user initiated this event.
+            # 'initiatinguser': # Personnummer or signature. Supplied by the user.
+            #                   # Another user initiated this event.
         }
 
     @api.multi
@@ -53,15 +53,33 @@ class Users(models.Model):
         if method == 'write':
             # Save values before write
             ids = args[0]
+            if type(ids) == int:
+                domain = [('id', '=', ids)]
+            else:
+                domain = [('id', 'in', ids)]
             values = args[1]
             fields = [key for key in values]
-            return {
-                'values': model.search_read([('id', 'in', ids)], fields)
-            }
+            try:
+                return {
+                    'values': model.search_read(domain, fields)
+                }
+            except:
+                # Should generate an error further down the line.
+                # Probably no need to log here.
+                return
         elif method == 'unlink':
             # Save values before unlink
             ids = args[0]
-            return model.search_read([('id', 'in', ids)])
+            if type(ids) == int:
+                domain = [('id', '=', ids)]
+            else:
+                domain = [('id', 'in', ids)]
+            try:
+                return model.search_read(domain)
+            except:
+                # Should generate an error further down the line.
+                # Probably no need to log here.
+                return
 
     @api.multi
     def _af_audit_log_post_admin_action(self, model, method, args, kwargs, res, before=None, error=None):
@@ -83,6 +101,8 @@ class Users(models.Model):
         elif method == 'unlink':
             self._af_audit_log_admin_cruds(model, "DELETE", ids=args[0], values=before)
         elif method == 'search_read':
+            pass
+        elif method == 'search':
             pass
         else:
             # Generic method call
@@ -199,7 +219,7 @@ class Users(models.Model):
             # values: create values
             # result: create result ( so... recordset or id?)
             # Fetch create values
-            values = kwargs.get('values', {})
+            values = kwargs.get('values', [])
             # Could be single or multi create. Handle everything as multi.
             if type(values) != list:
                 values = [values]
@@ -208,7 +228,7 @@ class Users(models.Model):
             if records:
                 if type(records) != list:
                     records = [records]
-                records = self.search_read([('id', 'in', records)])  # , setup['required_fields'])
+                records = model.search_read([('id', 'in', records)])  # , setup['required_fields'])
             else:
                 # Create empty dummy records
                 records = [{} for x in range(len(values))]
@@ -223,7 +243,7 @@ class Users(models.Model):
                     'obj_type': f"{model._description} ({model._name})",
                     'obj_id': obj_id,
                     'id_type': id_type,
-                    'values': self._af_audit_log_admin_human_readable_vals(values, model=model),
+                    'values': self._af_audit_log_admin_human_readable_vals(value, model=model),
                 })
         elif operation == 'READ':
             # ids: record ids
@@ -239,7 +259,7 @@ class Users(models.Model):
                     obj_id = f"{record['id']}"
                     id_type = "databas-id"
                 # Translate to human readable
-                record_hr = self._af_audit_log_human_readable_vals(record, model=model)
+                record_hr = self._af_audit_log_admin_human_readable_vals(record, model=model)
                 # Remove extra fields from log record
                 for field in data.get('extra_fields', []):
                     record_hr.pop(field)
@@ -272,8 +292,8 @@ class Users(models.Model):
                 else:
                     obj_id = f"{vals_pre['id']}"
                     id_type = "databas-id"
-                vals_hr = self._af_audit_log_human_readable_vals(values)
-                vals_pre = self._af_audit_log_human_readable_vals(vals_pre)
+                vals_hr = self._af_audit_log_admin_human_readable_vals(values, model=model)
+                vals_pre = self._af_audit_log_admin_human_readable_vals(vals_pre, model=model)
                 for key, val in vals_hr.items():
                     vals_hr[key] = (
                         vals_hr[key][0],
@@ -321,8 +341,7 @@ class Users(models.Model):
             log.append(search_log)
         elif operation == 'DELETE':
             # ids: record ids
-            # values: read from before unlink (_af_audit_log_pre_method)
-            setup = self._af_audit_log_get_setup()
+            # values: read from before unlink (_af_audit_log_pre_method)ä
             values = kwargs.get('values', {})
             for record in values:
                 if 'name' in record:

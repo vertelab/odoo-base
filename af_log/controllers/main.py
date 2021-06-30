@@ -2,13 +2,14 @@
 
 import json
 
-from odoo import http
+from odoo import http, _
 from odoo.http import request
 from odoo.addons.web.controllers.main import DataSet as DataSetOrigin
-
-# TODO: What to do about these controllers?
-#       I feel like they should be disabled altogether.
-# from odoo.addons.web.controllers.main import Export, CSVExport, ExcelExport
+from odoo.models import Model
+from odoo.exceptions import UserError
+from odoo.addons.web.controllers.main import CSVExport as CSVExportOrigin,\
+    ExcelExport as ExcelExportOrigin, serialize_exception
+import operator
 
 import logging
 _logger = logging.getLogger(__name__)
@@ -18,7 +19,7 @@ class AfLogMixin(object):
     """ Mixin for audit logged controllers.
     """
 
-    def _get_audit_user(self):
+    def _get_audit_user(self) -> Model:
         """Return the actual user that logged in. Will return original
         user if currently logged in as Odoo Bot."""
         user = request.env.user
@@ -28,27 +29,39 @@ class AfLogMixin(object):
             user = user or request.env.user
         return user.sudo()
 
-    def _is_af_audit_log_model(self, model):
+    def _is_af_audit_log_model(self, model: Model) -> bool:
         """ Check if the model has audit logging.
         """
         if hasattr(model, '_af_audit_log'):
             return model._af_audit_log
         return False
 
-    def _af_log_pre_method_call(self, model, method, args, kwargs):
-        user = self._get_audit_user()
-        model_obj = request.env[model].sudo()
-        audit = self._is_af_audit_log_model(model_obj)
-        before = admin_before = None
-        if audit:
-            before = model_obj._af_audit_log_pre_method(
-                user, method, args, kwargs)
-        if user.has_group('base.group_system'):
-            admin_before = user._af_audit_log_pre_admin_action(model_obj, method, args, kwargs)
+    def _af_log_pre_method_call(self, model: str, method: str, args: list,
+                                kwargs: dict) -> tuple:
+        """ Run before a method call.
+        :returns: (the user object, the model object, whether this is an
+                  audit model, pre-method data, pre-method data for
+                  admin logging)
+        """
+        user = model_obj = audit = before = admin_before = None
+        try:
+            user = self._get_audit_user()
+            model_obj = request.env[model].sudo()
+            audit = self._is_af_audit_log_model(model_obj)
+            before = admin_before = None
+            if audit:
+                before = model_obj._af_audit_log_pre_method(
+                    user, method, args, kwargs)
+            if user.has_group('base.group_system'):
+                admin_before = user._af_audit_log_pre_admin_action(model_obj, method, args, kwargs)
+
+        except:
+            _logger.exception("AUDIT LOG FAILURE! Failed to generate data for audit log.")
         return user, model_obj, audit, before, admin_before
 
-    def _af_log_post_method_call(self, user, model_obj, audit, method, args, kwargs,
-                                 before, admin_before, res, error):
+    def _af_log_post_method_call(self, user: Model, model_obj: Model, audit: bool,
+                                 method: str, args: list, kwargs: dict, before,
+                                 admin_before, res, error: Exception):
         if audit:
             try:
                 model_obj._af_audit_log_post_method(
@@ -56,8 +69,8 @@ class AfLogMixin(object):
                     res, before, error)
             except:
                 _logger.exception(
-                    f"Failed to generate audit log! model: {model_obj._name},"
-                    f"method: {method}")
+                    f"AUDIT LOG FAILURE! Failed to generate audit log. model: {model_obj._name},"
+                    f" method: {method}")
         # Audit log admin actions
         if user.has_group('base.group_system'):
             try:
@@ -65,12 +78,17 @@ class AfLogMixin(object):
                     model_obj, method, args, kwargs, res, admin_before, error)
             except:
                 _logger.exception(
-                    f"Failed to generate admin audit log! model: {model_obj._name},"
-                    f"method: {method}")
+                    f"AUDIT LOG FAILURE! Failed to generate admin audit log. model: {model_obj._name},"
+                    f" method: {method}")
         if audit:
-            model_obj._af_audit_log_cleanup(
-                user, method, args, kwargs,
-                res, before)
+            try:
+                model_obj._af_audit_log_cleanup(
+                    user, method, args, kwargs,
+                    res, before)
+            except:
+                _logger.exception(
+                    f"AUDIT LOG FAILURE! Failed to clean up after admin log. model: {model_obj._name},"
+                    f" method: {method}")
 
 
 class DataSet(DataSetOrigin, AfLogMixin):
@@ -98,7 +116,7 @@ class DataSet(DataSetOrigin, AfLogMixin):
         kwargs = {'limit': limit, 'domain': domain, 'sort': sort}
         user, model_obj, audit, before, admin_before = self._af_log_pre_method_call(
             model, 'search_read', args, kwargs)
-        error = None
+        res = error = None
         try:
             res = super(DataSet, self).do_search_read(
                 model, fields=fields, offset=offset, limit=limit,
@@ -155,7 +173,6 @@ class DataSet(DataSetOrigin, AfLogMixin):
         res = super(DataSet, self).resequence(model, ids, field, offset=offset)
         return res
 
-
     @http.route('/web/dataset/load', type='json', auth="user")
     def load(self, model, id, fields):
         user = self._get_audit_user()
@@ -193,4 +210,80 @@ class DataSet(DataSetOrigin, AfLogMixin):
             model_obj._af_audit_log_cleanup(
                 user, 'read', args, kwargs,
                 [res.get('value', {})], before)
+        return res
+
+
+class CSVExport(CSVExportOrigin, AfLogMixin):
+
+    @http.route('/web/export/csv', type='http', auth="user")
+    @serialize_exception
+    def index(self, data, token):
+        params = json.loads(data)
+        model, fields, ids, domain, import_compat = \
+            operator.itemgetter('model', 'fields', 'ids', 'domain', 'import_compat')(params)
+        fields = [f['name'] for f in fields]
+        try:
+            if not ids:
+                ids = [r['id'] for r in request.env[model].search_read(
+                    domain, ['id'], offset=0, limit=False, order=False)]
+        except:
+            # Super should throw the same error. Handle it there.
+            pass
+
+        args = [ids, fields]
+        kwargs = {}
+        user, model_obj, audit, before, admin_before = self._af_log_pre_method_call(
+            model, 'read', args, kwargs)
+        res = error = None
+        read_data = None
+        try:
+            # TODO: Remove this read. Move this functionality to
+            #  the method base (in the super call).
+            read_data = model_obj.search_read([('id', 'in', ids)], fields)
+            res = super(CSVExport, self).index(data, token)
+        except Exception as e:
+            error = e
+        self._af_log_post_method_call(user, model_obj, audit, 'read', args,
+                                      kwargs, before, admin_before,
+                                      read_data, error)
+        if error:
+            raise error from None
+        return res
+
+
+class ExcelExport(ExcelExportOrigin, AfLogMixin):
+
+    @http.route('/web/export/xls', type='http', auth="user")
+    @serialize_exception
+    def index(self, data, token):
+        params = json.loads(data)
+        model, fields, ids, domain, import_compat = \
+            operator.itemgetter('model', 'fields', 'ids', 'domain', 'import_compat')(params)
+        fields = [f['name'] for f in fields]
+        try:
+            if not ids:
+                ids = [r['id'] for r in request.env[model].search_read(
+                    domain, ['id'], offset=0, limit=False, order=False)]
+        except:
+            # Super should throw the same error. Handle it there.
+            pass
+
+        args = [ids, fields]
+        kwargs = {}
+        user, model_obj, audit, before, admin_before = self._af_log_pre_method_call(
+            model, 'read', args, kwargs)
+        res = error = None
+        read_data = None
+        try:
+            # TODO: Remove this read. Move this functionality to
+            #  the method base (in the super call).
+            read_data = model_obj.search_read([('id', 'in', ids)], fields)
+            res = super(ExcelExport, self).index(data, token)
+        except Exception as e:
+            error = e
+        self._af_log_post_method_call(user, model_obj, audit, 'read', args,
+                                      kwargs, before, admin_before,
+                                      read_data, error)
+        if error:
+            raise error from None
         return res

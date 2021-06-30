@@ -211,7 +211,7 @@ class AFLogAudit(models.AbstractModel):
             # result: create result ( so... recordset or id?)
             setup = self._af_audit_log_get_setup()
             # Fetch create values
-            values = kwargs.get('values', {})
+            values = kwargs.get('values', [])
             # Could be single or multi create. Handle everything as multi.
             if type(values) != list:
                 values = [values]
@@ -233,7 +233,7 @@ class AFLogAudit(models.AbstractModel):
                             'obj_type': audit_data['type'],
                             'obj_id': obj_id,
                             'id_type': audit_data['id_type'],
-                            'values': self._af_audit_log_human_readable_vals(values),
+                            'values': self._af_audit_log_human_readable_vals(value),
                         })
         elif operation == 'READ':
             # ids: record ids
@@ -376,6 +376,10 @@ class AFLogAudit(models.AbstractModel):
         elif method == 'write':
             # Save values before write
             ids = args[0]
+            if type(ids) == int:
+                domain = [('id', '=', ids)]
+            else:
+                domain = [('id', 'in', ids)]
             values = args[1]
             fields = [key for key in values]
             setup = self._af_audit_log_get_setup()
@@ -385,13 +389,17 @@ class AFLogAudit(models.AbstractModel):
                 if field not in fields and field not in extra_fields:
                     extra_fields.append(field)
             return {
-                'values': self.sudo().search_read([('id', 'in', ids)], fields + extra_fields),
+                'values': self.sudo().search_read(domain, fields + extra_fields),
                 'extra_fields': extra_fields
             }
         elif method == 'unlink':
             # Save values before unlink
             ids = args[0]
-            return self.sudo().search_read([('id', 'in', ids)])
+            if type(ids) == int:
+                domain = [('id', '=', ids)]
+            else:
+                domain = [('id', 'in', ids)]
+            return self.sudo().search_read(domain)
 
     @api.model
     def _af_audit_log_post_method(self, user, method, args, kwargs, res, before=None, error=None):
@@ -423,6 +431,11 @@ class AFLogAudit(models.AbstractModel):
             else:
                 # Flera/inget sökresultat ska tolkas som en SEARCH
                 self._af_audit_log_cruds(user, "SEARCH", result=res, search_terms=domain)
+        elif method == 'search':
+            # TODO: Implement search. It is not used as far as I can
+            #  see, but users with sufficent technical knowhow could
+            #  potentially abuse it.
+            pass
 
     @api.model
     def _af_audit_log_cleanup(self, user, method, args, kwargs, res, before):
