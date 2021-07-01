@@ -28,6 +28,7 @@
 v12.0.0.1.1 - added logging with af_process_log, refactored code
 v12.0.0.2.0 - AFC-2408: added call to x500 when creating new users.
 v12.0.0.3.0 - AFC-2409: added call to ASH KOM when creating offices and improved x500 call.
+v12.0.0.3.1 - AFC-2543: removed some logging.
 """,
     'author': 'Vertel AB',
     'license': 'AGPL-3',

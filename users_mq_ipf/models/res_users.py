@@ -38,7 +38,6 @@ def subscribe(mqconn, target, clientid=4):
 
 
 def connect_and_subscribe(mqconn, user, pwd, target, clientid=4):
-    _logger.info(f"user: {user} pwd: {pwd}")
     mqconn.connect(user, pwd, wait=True)
     subscribe(mqconn, target, clientid=clientid)
 
@@ -103,8 +102,8 @@ class OfficerListener(stomp.ConnectionListener):
 
     def on_disconnected(self):
         # Probably happened because we asked to disconnect
-        _logger.warning(
-            "Officer MQ Listener disconnected from MQ - NOT Trying to reconnect"
+        _logger.debug(
+            "Officer MQ Listener disconnected from MQ"
         )
 
     def on_connecting(self, host_and_port):
