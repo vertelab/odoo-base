@@ -1,0 +1,37 @@
+# Translation of Odoo Server.
+# This file contains the translation of the following modules:
+#	* partner_af_signature
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: Odoo Server 12.0\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2021-07-02 08:49+0000\n"
+"PO-Revision-Date: 2021-07-02 08:49+0000\n"
+"Last-Translator: <>\n"
+"Language-Team: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: \n"
+"Plural-Forms: \n"
+
+#. module: partner_af_signature
+#: model:ir.model.fields,field_description:partner_af_signature.field_res_partner__af_signature
+msgid "AF Signature"
+msgstr "Signatur"
+
+#. module: partner_af_signature
+#: model:ir.model.fields,field_description:partner_af_signature.field_res_users__af_signature
+msgid "AF signature"
+msgstr "Signatur"
+
+#. module: partner_af_signature
+#: model:ir.model,name:partner_af_signature.model_res_partner
+msgid "Contact"
+msgstr "Kontakt"
+
+#. module: partner_af_signature
+#: model_terms:ir.ui.view,arch_db:partner_af_signature.view_partner_form
+msgid "Signature"
+msgstr "Signatur"
+

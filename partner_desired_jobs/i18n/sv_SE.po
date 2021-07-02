@@ -54,8 +54,8 @@ msgstr "Visningsnamn"
 
 #. module: partner_desired_jobs
 #: model:ir.model.fields,field_description:partner_desired_jobs.field_res_partner_jobs__education
-msgid "Education"
-msgstr "Utbildning"
+msgid "Is Education?"
+msgstr "Är Utbildning?"
 
 #. module: partner_desired_jobs
 #: model:ir.model.fields,field_description:partner_desired_jobs.field_res_partner_jobs__education_level

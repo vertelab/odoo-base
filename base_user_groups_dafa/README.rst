@@ -8,9 +8,9 @@ The module is maintained here: https://github.com/vertelab/odoo-base/tree/Dev-12
 
 Different version submitted
 ===========================
-1. V12.0.1.0.2 - AFC-1590 Added Supportgroups for 1st and 2nd line. Fixed version numbers\n
-2. V12.0.1.0.3 - AFC-1747 Update in translation.\n
-3. V12.0.1.0.4 - AFC-2117 Added New group for translation accountants.\n
+1. V12.0.1.0.2 - AFC-1590 Added Supportgroups for 1st and 2nd line. Fixed version numbers
+2. V12.0.1.0.3 - AFC-1747 Update in translation.
+3. V12.0.1.0.4 - AFC-2117 Added New group for translation accountants.
 
 
 Maintainers

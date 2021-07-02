@@ -54,7 +54,7 @@ class Jobs(models.Model):
                                           (2, '1 to 3 years'),
                                           (3, 'More than 3 years')
                                           ])
-    education = fields.Boolean(string="Education")
+    education = fields.Boolean(string="Is Education?")
     experience = fields.Boolean(string="Experience")
 
     @api.onchange('experience_length')
