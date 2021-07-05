@@ -68,7 +68,7 @@
                     <field name="color"/>
                     <field name="logged_in"/>
                     <field name="logged_out"/>
-                    <!--<field name="length"/>-->
+                    <field name="length"/>
                     <field name="active_length" widget="float_time"/>
                     <field name="login_reason"/>
                     <field name="auditor_comment"/>
@@ -95,9 +95,9 @@
                                     <p>
                                         <h4 class="o_kanban_record_title"><b>User : </b><field name="user_id"/></h4>
                                     </p>
-                                    <!--<p>
+                                    <p>
                                         <h4 class="o_kanban_record_title"><b>Length : </b><field name="length"/></h4>
-                                    </p>-->
+                                    </p>                                  
 
                                     <p>
                                        <h4 class="o_kanban_record_title"><b>Logged In : </b><field name="logged_in"/></h4>
