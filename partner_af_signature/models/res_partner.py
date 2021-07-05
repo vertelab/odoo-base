@@ -11,4 +11,4 @@ _logger = logging.getLogger(__name__)
 class ResPartner(models.Model):
     _inherit = "res.partner"
 
-    af_signature = fields.Char(string="Signature")
+    af_signature = fields.Char(string="AF Signature")

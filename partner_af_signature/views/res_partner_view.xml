@@ -6,7 +6,7 @@
         <field name="inherit_id" ref="base.view_partner_form"/>
         <field name="arch" type="xml">
             <field name="category_id" position="before">
-                <field name="af_signature"/>
+                <field name="af_signature" string="Signature"/>
             </field>
         </field>
     </record>

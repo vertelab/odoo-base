@@ -12,7 +12,7 @@ class ResPartner(models.Model):
     _inherit = "res.partner"
 
     age = fields.Char(string="Age", compute="calculate_age")
-    social_sec_nr = fields.Char(string="Social security number")
+    social_sec_nr = fields.Char(string="Social security number main")
     social_sec_nr_age = fields.Char(string="Social security number", compute="combine_social_sec_nr_age")
 
     @api.one
