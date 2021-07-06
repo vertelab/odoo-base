@@ -9,7 +9,7 @@ The module is maintained here: https://github.com/vertelab/odoo-base/tree/Dev-12
 Different version submitted
 ===========================
 
-
+1. V12.0.0.0.2 - AFC-2560 Fixed better error message for IPF Configuration.
 
 Maintainers
 ~~~~~~~~~~~

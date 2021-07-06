@@ -110,10 +110,18 @@ class ResPartner(models.Model):
         if legacy_no:
             api_client = self.env['ipf.tlr.client.config'].sudo().get_api()
             if api_client:
-                response = api_client.get_tjansteleverantor(legacy_no)
-                if response.status_code == 200:
-                    self.parse_xml_tjansteleverantor_data(response.text)
-                    _logger.info("PARSED XML")
+                try:
+                    response = api_client.get_tjansteleverantor(legacy_no)
+                    if response.status_code == 200:
+                        self.parse_xml_tjansteleverantor_data(response.text)
+                        _logger.info("PARSED XML")
+                    else:
+                        _logger.error("Something went wrong with updating TLR Data for Partner %s." % self.name)
+                        error_msg = str(response.status_code) + " - " + response.reason
+                        _logger.error("Getting %s Response" % error_msg)
+                except Exception as e:
+                    _logger.error("Something went wrong with updating TLR Data for Partner %s" % self.name)
+                    _logger.error(str(e))
 
     def update_from_xml(self, xml, match_name):
         match_fields = self.match_list()[match_name]
