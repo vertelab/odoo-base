@@ -116,11 +116,11 @@ class ResPartner(models.Model):
                         self.parse_xml_tjansteleverantor_data(response.text)
                         _logger.info("PARSED XML")
                     else:
-                        _logger.error("Something went wrong with updating TLR Data for Partner.")
+                        _logger.error("Something went wrong with updating TLR Data for Partner %s." % self.name)
                         error_msg = str(response.status_code) + " - " + response.reason
                         _logger.error("Getting %s Response" % error_msg)
                 except Exception as e:
-                    _logger.error("Something went wrong with updating TLR Data for Partner")
+                    _logger.error("Something went wrong with updating TLR Data for Partner %s" % self.name)
                     _logger.error(str(e))
 
     def update_from_xml(self, xml, match_name):
