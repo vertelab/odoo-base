@@ -14,7 +14,8 @@
             <field name="name">Show login-reason</field>
             <field name="category_id" ref="module_web_base_login_categ"/>
             <field name="comment">The Login Reason-group enables tracking of a login reason and sets a time limit on the
-                session</field>
+                session
+            </field>
         </record>
 
         <!-- Security Auditor -->

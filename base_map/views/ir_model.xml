@@ -1,49 +1,51 @@
 <?xml version="1.0" encoding="utf-8"?>
 <odoo>
-    
-  <record id="view_model_form_map" model="ir.ui.view">
-    <field name="name">ir.model.form.map</field>
-    <field name="model">ir.model</field>
-    <field name="inherit_id" ref="base.view_model_form" />
-    <field name="arch" type="xml">
-      <xpath expr="//form//form/notebook" position="inside">
-        <page name='map' string="Mapping">
-            <group>
-                <button string="Start mapping" type="object" name="create_mapped_field" class="oe_highlight" attrs="{'invisible': [('map_id', '!=', '')]}" />
-                <field name="map_id" invisible="1" />
-                <field name="map_system" readonly="0" />
-                <field name="map_table" readonly="0" />
-                <field name="map_field" readonly="0" />
-                <field name="map_type" readonly="0" />
-                <field name="map_odoo_master" readonly="0" />
-                <field name="map_comment" readonly="0" />
-            </group>
-        </page>
-      </xpath>
-    </field>
-  </record>
+
+    <record id="view_model_form_map" model="ir.ui.view">
+        <field name="name">ir.model.form.map</field>
+        <field name="model">ir.model</field>
+        <field name="inherit_id" ref="base.view_model_form"/>
+        <field name="arch" type="xml">
+            <xpath expr="//form//form/notebook" position="inside">
+                <page name='map' string="Mapping">
+                    <group>
+                        <button string="Start mapping" type="object" name="create_mapped_field" class="oe_highlight"
+                                attrs="{'invisible': [('map_id', '!=', '')]}"/>
+                        <field name="map_id" invisible="1"/>
+                        <field name="map_system" readonly="0"/>
+                        <field name="map_table" readonly="0"/>
+                        <field name="map_field" readonly="0"/>
+                        <field name="map_type" readonly="0"/>
+                        <field name="map_odoo_master" readonly="0"/>
+                        <field name="map_comment" readonly="0"/>
+                    </group>
+                </page>
+            </xpath>
+        </field>
+    </record>
 
 
-  <record id="view_model_fields_form_map" model="ir.ui.view">
-    <field name="name">ir.model.fields.form.map</field>
-    <field name="model">ir.model.fields</field>
-    <field name="inherit_id" ref="base.view_model_fields_form" />
-    <field name="arch" type="xml">
-      <xpath expr="//notebook" position="inside">
-        <page name='map' string="Mapping">
-            <group>
-                <button string="Start mapping" type="object" name="create_mapped_field" class="oe_highlight" attrs="{'invisible': [('map_id', '!=', '')]}" />
-                <field name="map_id" invisible="1" />
-                <field name="map_system" readonly="0" />
-                <field name="map_table" readonly="0" />
-                <field name="map_field" readonly="0" />
-                <field name="map_type" readonly="0" />
-                <field name="map_odoo_master" readonly="0" />
-                <field name="map_comment" readonly="0" />
-            </group>
-        </page>
-      </xpath>
-    </field>
-  </record>
+    <record id="view_model_fields_form_map" model="ir.ui.view">
+        <field name="name">ir.model.fields.form.map</field>
+        <field name="model">ir.model.fields</field>
+        <field name="inherit_id" ref="base.view_model_fields_form"/>
+        <field name="arch" type="xml">
+            <xpath expr="//notebook" position="inside">
+                <page name='map' string="Mapping">
+                    <group>
+                        <button string="Start mapping" type="object" name="create_mapped_field" class="oe_highlight"
+                                attrs="{'invisible': [('map_id', '!=', '')]}"/>
+                        <field name="map_id" invisible="1"/>
+                        <field name="map_system" readonly="0"/>
+                        <field name="map_table" readonly="0"/>
+                        <field name="map_field" readonly="0"/>
+                        <field name="map_type" readonly="0"/>
+                        <field name="map_odoo_master" readonly="0"/>
+                        <field name="map_comment" readonly="0"/>
+                    </group>
+                </page>
+            </xpath>
+        </field>
+    </record>
 
 </odoo>

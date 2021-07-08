@@ -5,15 +5,17 @@ import os.path
 import signal
 import sys
 import time
-from parsecmdline import parse
 from asoklistener import AsokListener
+from parsecmdline import parse
 
 lstnr = None
+
 
 def exit_gracefully(signal, frame):
     signals = {signal.SIGINT: "SIGINT", signal.SIGTERM: "SIGTERM", signal.SIGHUP: "SIGHUP"}
     print("\nReceived {} signal. Cleaning up resources.".format(signals[signal]))
     lstnr.stop()
+
 
 # main program
 def main():
@@ -63,4 +65,3 @@ def main():
 
 if __name__ == "__main__":
     main()
-

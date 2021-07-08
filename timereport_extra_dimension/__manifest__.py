@@ -23,20 +23,15 @@
     'name': 'Time report extra dimension',
     'version': '0.1',
     'category': '',
-    'description': """
-Module for adding another dimension to the time reporting
-================================================================================================
-
-""",
     'author': 'Vertel AB',
     'license': 'AGPL-3',
     'website': 'http://www.vertel.se',
-    'depends': ['base', 'hr_timesheet', 'project'],
+    'depends': ['hr_timesheet', 'project'],
     'data': [
-			'views/hr_timesheet.xml',
-            'views/project_task.xml',
-            'security/ir.model.access.csv',
-        ],
+        'views/hr_timesheet.xml',
+        'views/project_task.xml',
+        'security/ir.model.access.csv',
+    ],
     'application': False,
     'installable': True,
 }

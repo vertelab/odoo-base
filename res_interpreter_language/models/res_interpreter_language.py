@@ -7,5 +7,7 @@ _logger = logging.getLogger(__name__)
 
 class ResInterpreterLanguage(models.Model):
     _name = "res.interpreter.language"
+    _description = "RES Interpreter Language"
+
     code = fields.Char()
     name = fields.Char()

@@ -23,16 +23,6 @@
     'name': 'Daily notes',
     'version': '12.0.1.6',
     'category': '',
-    'description': """
-Daily notes
-===============================================================================
-AFC-81
-This module allowes daily notes for a partner.
-- 12.0.1.1  Added mapping for Integration platform with the module base_map.
-- 12.0.1.4  Changed display Daily Notes types in "name in Tree-view".
-- 12.0.1.5 AFC-999 Removed duplicate translation line for Secret
-- 12.0.1.6 moved all generation of daily notes from calendar_af to this module
-""",
     'author': 'Vertel AB',
     'license': 'AGPL-3',
     'website': 'http://www.vertel.se',
@@ -42,14 +32,14 @@ This module allowes daily notes for a partner.
         'calendar_af'
     ],
     'data': [
-            'security/ir.model.access.csv',
-            'views/res_partner_notes_view.xml',
-            'views/res_partner_view.xml',
-            "data/res.partner.note.type.csv",
+        'security/ir.model.access.csv',
+        'views/res_partner_notes_view.xml',
+        'views/res_partner_view.xml',
+        "data/res.partner.note.type.csv",
 
     ],
     'demo': [
-            "data/res.partner.notes.csv",
+        "data/res.partner.notes.csv",
     ],
     'application': False,
     'installable': True,

@@ -23,16 +23,12 @@
     'name': "Partner MQ/IPF-update dispatcher",
     'version': '12.0.0.1.6',
     'category': '',
-    'description': """
-Listen for updates on th MQ-bus
-
-""",
     'author': 'Vertel AB',
     'license': 'AGPL-3',
     'website': 'http://www.vertel.se',
-    'depends': ['base', 'calendar_af', 'edi_af_aisf_rask'],
+    'depends': ['calendar_af', 'edi_af_aisf_rask'],
     'external_dependencies': {'python': ['stomp', 'xmltodict']},
-    'data': [ ],
+    'data': [],
     'application': False,
     'installable': True,
 }

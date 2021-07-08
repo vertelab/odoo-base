@@ -3,9 +3,6 @@
 {
     'name': 'Monitoring: Status Af',
     'version': '12.0.1.0.1',
-    'description': """
-        12.0.1.0.1 - AFC-1851 Taken Monitoring value from version.txt instead of static.\n
-    """,
     'author': "Camptocamp,Odoo Community Association (OCA)','Vertel AB'",
     'license': 'AGPL-3',
     'category': 'category',

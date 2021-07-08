@@ -23,13 +23,6 @@
     'name': 'Partner Daily Notes EDI',
     'version': '12.0.1.2',
     'category': '',
-    'description': """
-Partner Daily Notes EDI
-===============================================================================
-AFC-1067
-
-When a note is created add an EDI-message to the queue (edi_af_as_notes)
-""",
     'author': 'Vertel AB',
     'license': 'AGPL-3',
     'website': 'http://www.vertel.se',

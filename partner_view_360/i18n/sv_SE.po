@@ -639,12 +639,16 @@ msgid "Shipping address"
 msgstr "Leveransadress"
 
 #. module: partner_view_360
-#: model:ir.model.fields,field_description:partner_view_360.field_res_partner__social_sec_nr
 #: model:ir.model.fields,field_description:partner_view_360.field_res_partner__social_sec_nr_age
 #: model:ir.model.fields,field_description:partner_view_360.field_res_users__social_sec_nr
 #: model:ir.model.fields,field_description:partner_view_360.field_res_users__social_sec_nr_age
 #: model_terms:ir.ui.view,arch_db:partner_view_360.view_jobseeker_form
 msgid "Social security number"
+msgstr "Personnummer"
+
+#. module: partner_view_360
+#: model:ir.model.fields,field_description:partner_view_360.field_res_partner__social_sec_nr
+msgid "Social security number main"
 msgstr "Personnummer"
 
 #. module: partner_view_360

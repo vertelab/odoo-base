@@ -19,6 +19,7 @@
 #
 ##############################################################################
 
+import odoo.modules.registry
 import os
 import werkzeug
 import werkzeug.contrib.sessions
@@ -28,17 +29,18 @@ import werkzeug.local
 import werkzeug.routing
 import werkzeug.wrappers
 import werkzeug.wsgi
+from datetime import datetime
 from odoo.addons.web.controllers import main
-import odoo
-import odoo.modules.registry
-from odoo import SUPERUSER_ID
-from odoo import http
 from odoo.exceptions import AccessError
 from odoo.http import Response
 from odoo.http import request
 from odoo.service import security
 from odoo.tools.translate import _
-from datetime import datetime
+
+import odoo
+from odoo import SUPERUSER_ID
+from odoo import http
+
 
 def clear_session_history(u_sid, f_uid=False):
     """ Clear all the user session histories for a particular user """
@@ -53,6 +55,7 @@ def clear_session_history(u_sid, f_uid=False):
         pass
     return False
 
+
 def super_clear_all():
     """ Clear all the user session histories """
     path = odoo.tools.config.session_dir
@@ -65,6 +68,7 @@ def super_clear_all():
         except OSError:
             pass
     return True
+
 
 class Home(main.Home):
 
@@ -98,15 +102,17 @@ class Home(main.Home):
 
         user = request.env['res.users'].browse(request.session.uid)
         user._save_session(30)
+
         return result
+
 
 class Session(main.Session):
 
     @http.route('/web/session/logout', type='http', auth="none")
     def logout(self, redirect='/web'):
-        
+
         audit_log = request.env['base.login.reason'].sudo().search(
-            [('user_id', '=', request.session.uid),('logged_out','=',False)], limit=1)
+            [('user_id', '=', request.session.uid), ('logged_out', '=', False)], limit=1)
         if audit_log:
             audit_log.logged_out = datetime.now()
             audit_log.state = 'logged_out'
@@ -120,7 +126,7 @@ class Session(main.Session):
     @http.route('/clear_all_sessions', type='http', auth="none")
     def logout_all(self, redirect='/web', f_uid=False):
         """ Log out from all the sessions of the current user """
-        
+
         if f_uid:
             user = request.env['res.users'].with_user(1).browse(int(f_uid))
             if user:

@@ -20,14 +20,15 @@
 ##############################################################################
 from odoo import models, fields, api, _
 
+
 class Partner(models.Model):
     _inherit = "res.partner"
 
     # TODO: Copy these fields as well. Fix the calculate_age constrain.
     # A constrain should only throw a valueError, not perform a compute.
-    #age = fields.Char(string="Age", compute="calculate_age")
-    #jobseeker_category_id = fields.Many2one(comodel_name="res.partner.skat")
-    #jobseeker_category = fields.Char(
+    # age = fields.Char(string="Age", compute="calculate_age")
+    # jobseeker_category_id = fields.Many2one(comodel_name="res.partner.skat")
+    # jobseeker_category = fields.Char(
     #    string="Jobseeker category", compute="combine_category_name_code")
     work_phone = fields.Char(string="Work phone", help="Work phone number")
     cfar = fields.Char(string="CFAR", help="CFAR number")
@@ -67,7 +68,7 @@ class Partner(models.Model):
         string="given address", related="given_address_id.street")
     segment_jobseeker = fields.Selection(
         string="Jobseeker segment",
-        selection=[("a", "A"), ("b", "B"), ("c1", "C1"), ("c2", "C2"), ("c3", "C3")],)
+        selection=[("a", "A"), ("b", "B"), ("c1", "C1"), ("c2", "C2"), ("c3", "C3")], )
     segment_employer = fields.Selection(
         string="Employer segment",
         selection=[

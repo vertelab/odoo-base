@@ -1,19 +1,19 @@
 <?xml version="1.0" encoding="utf-8"?>
 <odoo>
-  <template id="partner_vcard_view" name="Partner vCard">
-    <t t-call="portal.portal_layout">
-      <t t-set="breadcrumbs_searchbar" t-value="True" />
-      <t t-call="portal.portal_searchbar">
-        <t t-set="title">My vCard</t>
-      </t>
-      <span t-field="partner.name" />
-      <span t-field="partner.phone" />
-      <span t-field="partner.mobile" />
-      <span t-field="partner.email" />
-      <div>
-             <button id="vcard" on-click=""/>
-        <a t-att-href="'/partner/%s/vcard.vcl' % partner.id">vCard</a>
-      </div>
-    </t>
-  </template>
+    <template id="partner_vcard_view" name="Partner vCard">
+        <t t-call="portal.portal_layout">
+            <t t-set="breadcrumbs_searchbar" t-value="True"/>
+            <t t-call="portal.portal_searchbar">
+                <t t-set="title">My vCard</t>
+            </t>
+            <span t-field="partner.name"/>
+            <span t-field="partner.phone"/>
+            <span t-field="partner.mobile"/>
+            <span t-field="partner.email"/>
+            <div>
+                <button id="vcard" on-click=""/>
+                <a t-att-href="'/partner/%s/vcard.vcl' % partner.id">vCard</a>
+            </div>
+        </t>
+    </template>
 </odoo>

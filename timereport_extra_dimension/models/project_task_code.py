@@ -19,13 +19,15 @@
 #
 ##############################################################################
 
-from odoo import models, fields, api, _
 import logging
+
+from odoo import models, fields, api, _
+
 _logger = logging.getLogger(__name__)
 
+
 class ProjectTaskCode(models.Model):
-   _name = "project.task.code"
-   _description = "Code...?"
-   
-   name = fields.Char(string="Code", help="Code") #kalla för name för att värdet ska visas upp vid dropdown
-  
+    _name = "project.task.code"
+    _description = "Code...?"
+
+    name = fields.Char(string="Code", help="Code")  # kalla för name för att värdet ska visas upp vid dropdown

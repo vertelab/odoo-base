@@ -23,21 +23,14 @@
     'name': 'Res SUN',
     'version': '12.0.0.1.3',
     'category': '',
-    'description': """
-SUN
-==============================================
-AFC-191, 209
-
-
-""",
     'author': 'Vertel AB',
     'website': 'http://www.vertel.se',
-    'depends': ['contacts',],
+    'depends': ['contacts', ],
     'data': [
-        'security/ir.model.access.csv', 
+        'security/ir.model.access.csv',
         'views/res_sun_view.xml',
         'data/res.sun.csv',
-        ],
+    ],
     'application': False,
     'installable': True,
 }

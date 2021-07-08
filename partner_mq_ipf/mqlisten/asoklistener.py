@@ -1,9 +1,9 @@
+import ssl
 import stomp
 import sys
 import time
-import ssl
-from odoointf import odoointf
 from message import parse_message
+from odoointf import odoointf
 
 
 class AsokListener(stomp.ConnectionListener):
@@ -25,7 +25,7 @@ class AsokListener(stomp.ConnectionListener):
         self.__user = user
         self.__pwd = pwd
         self.__ssl = ssl
-        print("%s:%s - %s" % ( host, port, target))
+        print("%s:%s - %s" % (host, port, target))
 
     def print(self, message):
         print(message)
@@ -53,27 +53,26 @@ class AsokListener(stomp.ConnectionListener):
         else:
             self.print("Anruf fehlt!")
 
-
     def handle_json_message(self, message):
         import json
 
-#         message = """[
-#     {
-#         "pnr": "121212-1212",
-#         "stom_track": 0,
-#         "stom_description": "Låg risk för behov av stöd och matchning."
-#     },
-#     {
-#         "pnr": "121212-1212",
-#         "stom_track": 1,
-#         "stom_description": "Grundläggande stöd och matchning med eller utan språkstöd."
-#     },
-#     {
-#         "pnr": "121212-1212",
-#         "stom_track": 2,
-#         "stom_description": "Förstärkt stöd och matchning med eller utan spåkstöd."
-#     }
-# ]"""
+        #         message = """[
+        #     {
+        #         "pnr": "121212-1212",
+        #         "stom_track": 0,
+        #         "stom_description": "Låg risk för behov av stöd och matchning."
+        #     },
+        #     {
+        #         "pnr": "121212-1212",
+        #         "stom_track": 1,
+        #         "stom_description": "Grundläggande stöd och matchning med eller utan språkstöd."
+        #     },
+        #     {
+        #         "pnr": "121212-1212",
+        #         "stom_track": 2,
+        #         "stom_description": "Förstärkt stöd och matchning med eller utan spåkstöd."
+        #     }
+        # ]"""
         try:
             # Assume JSON
             stom_list = json.loads(message)
@@ -89,9 +88,7 @@ class AsokListener(stomp.ConnectionListener):
             self.print(the_ones)
         else:
             self.print("Anruf fehlt!")
-        
-        
-    
+
     def on_connecting(self, host_and_port):
         """
         Called by the STOMP connection once a TCP/IP connection to the
@@ -121,7 +118,7 @@ class AsokListener(stomp.ConnectionListener):
         self.handle_json_message(msg)
         self.print("HAndle message done")
         self.__conn.ack(headers["message-id"])
-    
+
     def on_error(self, headers, body):
         """
         Called by the STOMP connection when an ERROR frame is received.
@@ -142,7 +139,7 @@ class AsokListener(stomp.ConnectionListener):
             self.print("Using SSL")
 
         self.__conn.set_listener("AsokListener", self)
-        #self.__conn.start()
+        # self.__conn.start()
         self.__conn.connect(self.__user, self.__pwd, wait=True)
         self.__conn.subscribe(self.__target, id=4, ack="client")
         try:

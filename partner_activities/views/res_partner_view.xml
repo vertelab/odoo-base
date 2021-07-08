@@ -1,37 +1,37 @@
 <?xml version="1.0" encoding="utf-8"?>
 <odoo>
-    <record id="view_partner_form" model="ir.ui.view"> 
-        <field name="name">res.partner.view.form.inherit.activity</field> 
-        <field name="model">res.partner</field> 
-        <field name="inherit_id" ref="base.view_partner_form" /> 
-        <field name="arch" type="xml"> 
+    <record id="view_partner_form" model="ir.ui.view">
+        <field name="name">res.partner.view.form.inherit.activity</field>
+        <field name="model">res.partner</field>
+        <field name="inherit_id" ref="base.view_partner_form"/>
+        <field name="arch" type="xml">
             <xpath expr="//page[@name='internal_notes']" position="after">
                 <page string="Activity">
                     <group>
-                      <field name="partner_activity_ids" mode="tree" nolabel="1">
-                        <tree editable="bottom" string="Timesheet Activities" default_order="start_date">
-                           <!-- <field name="name" />     -->
-                            <field name="meeting_type"/>
-                            <field name="meeting_type_parent"/>
-                            <field name="start_date" widget="date"/>
-                            <field name="done_before_date" widget="date"/>    
-                            <field name="duration" widget="timesheet_uom" groups="base.group_no_one"/> 
-                            <field name="notes"/> 
-                            <field name="office_id"/>  
-                            <field name="mandatory" />    
-                           <field name="done" />    
-                        </tree>
-                      </field>   
+                        <field name="partner_activity_ids" mode="tree" nolabel="1">
+                            <tree editable="bottom" string="Timesheet Activities" default_order="start_date">
+                                <!-- <field name="name" />     -->
+                                <field name="meeting_type"/>
+                                <field name="meeting_type_parent"/>
+                                <field name="start_date" widget="date"/>
+                                <field name="done_before_date" widget="date"/>
+                                <field name="duration" widget="timesheet_uom" groups="base.group_no_one"/>
+                                <field name="notes"/>
+                                <field name="office_id"/>
+                                <field name="mandatory"/>
+                                <field name="done"/>
+                            </tree>
+                        </field>
                     </group>
                 </page>
             </xpath>
             <div name="button_box" position="inside">
                 <button name="open_partner_activities" type="object" class="oe_stat_button" icon="fa-calendar">
-                <field name="activities_count" string="Activities" widget="statinfo"/> 
+                    <field name="activities_count" string="Activities" widget="statinfo"/>
                 </button>
             </div>
         </field>
-     </record>
+    </record>
 
     <record id="action_partner_activity" model="ir.actions.act_window">
         <field name="name">Activity Action</field>
@@ -39,43 +39,43 @@
         <field name="res_model">res.partner.activity</field>
         <field name="view_type">form</field>
         <field name="view_mode">tree,pivot,graph,calendar</field>
-    </record> 
+    </record>
 
-    <record id="view_partner_activity_tree" model="ir.ui.view"> 
-        <field name="name">res.partner.activity.view.tree</field> 
-        <field name="model">res.partner.activity</field> 
-        <field name="arch" type="xml">           
+    <record id="view_partner_activity_tree" model="ir.ui.view">
+        <field name="name">res.partner.activity.view.tree</field>
+        <field name="model">res.partner.activity</field>
+        <field name="arch" type="xml">
             <tree editable="bottom" string="Timesheet Activities" default_order="start_date">
                 <field name="partner_id" groups="base.group_no_one"/>
-                <field name="name" />    
+                <field name="name"/>
                 <field name="meeting_type"/>
                 <field name="meeting_type_parent"/>
                 <field name="start_date" widget="date"/>
-                <field name="done_before_date" widget="date"/>    
-                <field name="duration" widget="timesheet_uom" groups="base.group_no_one"/> 
-                <field name="notes"/> 
-                <field name="office_id"/>  
-                <field name="mandatory" />    
-                <field name="done" />  
+                <field name="done_before_date" widget="date"/>
+                <field name="duration" widget="timesheet_uom" groups="base.group_no_one"/>
+                <field name="notes"/>
+                <field name="office_id"/>
+                <field name="mandatory"/>
+                <field name="done"/>
             </tree>
         </field>
     </record>
 
-     <record id="view_partner_activity_pivot" model="ir.ui.view"> 
-        <field name="name">res.partner.activity.view.pivot</field> 
-        <field name="model">res.partner.activity</field> 
-        <field name="arch" type="xml">           
+    <record id="view_partner_activity_pivot" model="ir.ui.view">
+        <field name="name">res.partner.activity.view.pivot</field>
+        <field name="model">res.partner.activity</field>
+        <field name="arch" type="xml">
             <pivot string="Activities">
-                <field name="start_date" type="col" interval="day" />
+                <field name="start_date" type="col" interval="day"/>
                 <field name="partner_id" type="row"/>
             </pivot>
         </field>
     </record>
 
-     <record id="view_partner_activity_graph" model="ir.ui.view"> 
-        <field name="name">res.partner.activity.view.graph</field> 
-        <field name="model">res.partner.activity</field> 
-        <field name="arch" type="xml">           
+    <record id="view_partner_activity_graph" model="ir.ui.view">
+        <field name="name">res.partner.activity.view.graph</field>
+        <field name="model">res.partner.activity</field>
+        <field name="arch" type="xml">
             <graph string="Activities">
                 <field name="partner_id"/>
                 <field name="office_id"/>
@@ -83,45 +83,47 @@
         </field>
     </record>
 
-     <record id="view_partner_activity_calendar" model="ir.ui.view"> 
-        <field name="name">res.partner.activity.view.calendar</field> 
-        <field name="model">res.partner.activity</field> 
-        <field name="arch" type="xml">           
-            <calendar string="Appointments" date_start="start_date"  date_delay="duration"> <!-- date_stop="stop" = start+duration?  -->
+    <record id="view_partner_activity_calendar" model="ir.ui.view">
+        <field name="name">res.partner.activity.view.calendar</field>
+        <field name="model">res.partner.activity</field>
+        <field name="arch" type="xml">
+            <calendar string="Appointments" date_start="start_date"
+                      date_delay="duration"> <!-- date_stop="stop" = start+duration?  -->
                 <field name="name"/>
             </calendar>
         </field>
-    </record> 
+    </record>
 
-     <record id="action_view_partner_activity_tree" model="ir.actions.act_window.view">
+    <record id="action_view_partner_activity_tree" model="ir.actions.act_window.view">
         <field name="act_window_id" ref="action_partner_activity"/>
         <field name="sequence" eval="1"/>
         <field name="view_mode">tree</field>
         <field name="view_id" ref="view_partner_activity_tree"/>
-    </record>    
+    </record>
 
-      <record id="action_view_partner_activity_pivot" model="ir.actions.act_window.view">
+    <record id="action_view_partner_activity_pivot" model="ir.actions.act_window.view">
         <field name="act_window_id" ref="action_partner_activity"/>
         <field name="sequence" eval="2"/>
         <field name="view_mode">pivot</field>
         <field name="view_id" ref="view_partner_activity_pivot"/>
-    </record>    
+    </record>
 
-      <record id="action_view_partner_activity_graph" model="ir.actions.act_window.view">
+    <record id="action_view_partner_activity_graph" model="ir.actions.act_window.view">
         <field name="act_window_id" ref="action_partner_activity"/>
         <field name="sequence" eval="3"/>
         <field name="view_mode">graph</field>
         <field name="view_id" ref="view_partner_activity_graph"/>
-    </record> 
+    </record>
 
-      <record id="action_view_partner_activity_calendar" model="ir.actions.act_window.view">
+    <record id="action_view_partner_activity_calendar" model="ir.actions.act_window.view">
         <field name="act_window_id" ref="action_partner_activity"/>
         <field name="sequence" eval="4"/>
         <field name="view_mode">calendar</field>
         <field name="view_id" ref="view_partner_activity_calendar"/>
-    </record>    
-    
-    <menuitem id="partner_activity_menu" name="Activities" parent="contacts.menu_contacts" action="action_partner_activity"/> 
+    </record>
+
+    <menuitem id="partner_activity_menu" name="Activities" parent="contacts.menu_contacts"
+              action="action_partner_activity"/>
 
     <record id="action_partner_activity_type" model="ir.actions.act_window">
         <field name="name">Activity Type Action</field>
@@ -129,40 +131,40 @@
         <field name="res_model">res.partner.activity.type</field>
         <field name="view_type">form</field>
         <field name="view_mode">tree,form</field>
-    </record> 
+    </record>
 
-    <record id="view_partner_activity_type_tree" model="ir.ui.view"> 
-        <field name="name">res.partner.activity.type.tree</field> 
-        <field name="model">res.partner.activity.type</field> 
-        <field name="arch" type="xml">           
+    <record id="view_partner_activity_type_tree" model="ir.ui.view">
+        <field name="name">res.partner.activity.type.tree</field>
+        <field name="model">res.partner.activity.type</field>
+        <field name="arch" type="xml">
             <tree editable="bottom" string="Activity types" default_order="activity_id">
-                <field name="parent_id"/>   
-                <field name="name" />   
+                <field name="parent_id"/>
+                <field name="name"/>
                 <field name="description"/>
                 <!-- <field name="activity_id" widget="many2many_tags" readonly="True"/>  -->
             </tree>
         </field>
     </record>
 
-    <record id="view_partner_activity_type_form" model="ir.ui.view"> 
-        <field name="name">res.partner.activity.type.form</field> 
-        <field name="model">res.partner.activity.type</field> 
-        <field name="arch" type="xml">           
+    <record id="view_partner_activity_type_form" model="ir.ui.view">
+        <field name="name">res.partner.activity.type.form</field>
+        <field name="model">res.partner.activity.type</field>
+        <field name="arch" type="xml">
             <form>
                 <sheet>
-                    <div class="oe_title">  
+                    <div class="oe_title">
                         <h1>
-                            <field name="name" />
+                            <field name="name"/>
                         </h1>
                     </div>
                     <group>
                         <group>
                             <field name="description"/>
-                            <field name="parent_id"/>   
+                            <field name="parent_id"/>
                         </group>
                     </group>
                 </sheet>
-            </form>          
+            </form>
         </field>
     </record>
 
@@ -171,16 +173,17 @@
         <field name="sequence" eval="1"/>
         <field name="view_mode">tree</field>
         <field name="view_id" ref="view_partner_activity_type_tree"/>
-    </record>  
+    </record>
 
     <record id="action_view_partner_activity_type_form" model="ir.actions.act_window.view">
         <field name="act_window_id" ref="action_partner_activity_type"/>
         <field name="sequence" eval="2"/>
         <field name="view_mode">form</field>
         <field name="view_id" ref="view_partner_activity_type_form"/>
-    </record>  
+    </record>
 
-    <menuitem id="partner_activity_type_menu" name="Activity types" parent="contacts.res_partner_menu_config" action="action_partner_activity_type"/> 
+    <menuitem id="partner_activity_type_menu" name="Activity types" parent="contacts.res_partner_menu_config"
+              action="action_partner_activity_type"/>
 
     <!-- 
         
@@ -201,43 +204,43 @@
     -->
 
 
-
-    <record id="view_partner_form1" model="ir.ui.view"> 
-        <field name="name">res.partner.view.form.inherit.activity1</field> 
-        <field name="model">res.partner</field> 
-        <field name="inherit_id" ref="partner_view_360.view_jobseeker_form" /> 
-        <field name="arch" type="xml"> 
+    <record id="view_partner_form1" model="ir.ui.view">
+        <field name="name">res.partner.view.form.inherit.activity1</field>
+        <field name="model">res.partner</field>
+        <field name="inherit_id" ref="partner_view_360.view_jobseeker_form"/>
+        <field name="arch" type="xml">
             <xpath expr="//page[@name='apply_for_jobs']" position="after">
                 <page string="Activity">
                     <group>
-                      <field name="partner_activity_ids" mode="tree" nolabel="1">
-                        <tree editable="bottom" string="Timesheet Activities" default_order="start_date">
-                           <!-- <field name="name" />     -->
-                            <field name="meeting_type"/>
-                            <field name="meeting_type_parent"/>
-                            <field name="start_date" widget="date"/>
-                            <field name="done_before_date" widget="date"/>    
-                            <field name="duration" widget="timesheet_uom" groups="base.group_no_one"/> 
-                            <field name="notes"/> 
-                            <field name="office_id"/>  
-                            <field name="mandatory" />    
-                           <field name="done" />    
-                        </tree>
-                      </field>   
+                        <field name="partner_activity_ids" mode="tree" nolabel="1">
+                            <tree editable="bottom" string="Timesheet Activities" default_order="start_date">
+                                <!-- <field name="name" />     -->
+                                <field name="meeting_type"/>
+                                <field name="meeting_type_parent"/>
+                                <field name="start_date" widget="date"/>
+                                <field name="done_before_date" widget="date"/>
+                                <field name="duration" widget="timesheet_uom" groups="base.group_no_one"/>
+                                <field name="notes"/>
+                                <field name="office_id"/>
+                                <field name="mandatory"/>
+                                <field name="done"/>
+                            </tree>
+                        </field>
                     </group>
                 </page>
             </xpath>
             <div name="button_box" position="inside">
                 <button name="open_partner_activities" type="object" class="oe_stat_button" icon="fa-calendar">
-                <field name="activities_count" string="Activities" widget="statinfo"/> 
+                    <field name="activities_count" string="Activities" widget="statinfo"/>
                 </button>
             </div>
         </field>
-     </record>
+    </record>
 
-    <menuitem id="partner_activity_menu" name="Activities" parent="partner_view_360.res_partner_jobseekers_menu" action="action_partner_activity"/> 
-    <menuitem id="partner_activity_type_menu" name="Activity types" parent="partner_view_360.res_partner_jobseekers_config_menu" action="action_partner_activity_type"/> 
-
+    <menuitem id="partner_activity_menu" name="Activities" parent="partner_view_360.res_partner_jobseekers_menu"
+              action="action_partner_activity"/>
+    <menuitem id="partner_activity_type_menu" name="Activity types"
+              parent="partner_view_360.res_partner_jobseekers_config_menu" action="action_partner_activity_type"/>
 
 
 </odoo>

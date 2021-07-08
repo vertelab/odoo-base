@@ -7,10 +7,10 @@
             <field name="arch" type="xml">
                 <xpath expr="//sheet/div[hasclass('oe_button_box')]" position="inside">
                     <button name="action_view_next_event"
-                        type="object"
-                        class="oe_stat_button"
-                        icon="fa-calendar-plus-o"
-                        string="Daily notes"/>
+                            type="object"
+                            class="oe_stat_button"
+                            icon="fa-calendar-plus-o"
+                            string="Daily notes"/>
                 </xpath>
                 <field name="jobseeker_category" position="after">
                     <field name="next_contact"/>

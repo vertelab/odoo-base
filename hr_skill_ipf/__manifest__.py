@@ -23,18 +23,12 @@
     'name': 'Skill IPF',
     'version': '12.0.1.1',
     'category': '',
-    'description': """
-Add ipf number field to hr_skill
-==============================================
-AFC-193
-
-""",
     'author': 'Vertel AB',
     'website': 'http://www.vertel.se',
-    'depends': ['base','hr_skill','hr',],
+    'depends': ['hr_skill', 'hr', ],
     'data': [
-        'views/hr_skill_view.xml', 
-        ],
+        'views/hr_skill_view.xml',
+    ],
     'application': False,
     'installable': True,
 }

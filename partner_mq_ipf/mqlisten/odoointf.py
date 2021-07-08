@@ -30,4 +30,3 @@ class odoointf(object):
     def xyz(self, key):
         print("xyz: ", key)
         return False
-

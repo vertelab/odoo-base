@@ -1,0 +1,68 @@
+<html>
+
+<h2>Advanced Kanban</h2>
+
+The module is maintained here:
+<a href="https://github.com/vertelab/odoo-base/tree/Dev-12.0-Fenix-Sprint-02/kanban_advanced">
+    https://github.com/vertelab/odoo-base/tree/Dev-12.0-Fenix-Sprint-02/kanban_advanced<br/></a>
+<br/>
+Can redirect kanban cards to other actions. This is done by adding data-attributes to the kanban card (div with
+the oe_kanban_global_click class).<br/><br/>
+
+<b>Example:</b><br/><br/>
+
+This is built on the Contacts kanban (base.res_partner_kanban_view). It will open up all a partners sale orders
+when the card is clicked.<br/><br/>
+
+Need to give 'data-kanban-adv-action-id="sale.act_res_partner_2_sale_order"' attribute in div tag where
+class="oe_kanban_global_click o_kanban_record_has_image_fill o_res_partner_kanban"<br/><br/>
+<!--<div class="oe_kanban_global_click o_kanban_record_has_image_fill o_res_partner_kanban"-->
+<!--        data-kanban-adv-action-id="sale.act_res_partner_2_sale_order"/>-->
+
+<b>Available data-attributes:</b><br/><br/>
+
+These are the data attributes that can currently be used. All domain and context attributes will be evaluated with the
+record object, just like the kanban card itself (seee the example).<br/><br/>
+
+* kanban-adv-action-id: The id of the action to perform (XML or database)<br/>
+* kanban-adv-action-func: NOT WORKING YET. A name of a python function that returns the action<br/>
+* kanban-adv-model: ACTION-ID METHOD ONLY. Overrides the model of the resulting action. Probably not useful and
+should be removed?<br/>
+* kanban-adv-domain: ACTION-ID METHOD ONLY. Overrides the domain of the resulting action.<br/>
+* kanban-adv-context: ACTION-ID METHOD ONLY. Overrides the domain of the resulting action.<br/>
+* kanban-adv-action-context: ACTION-ID METHOD ONLY. Supplied when loading the action from action-id.<br/>
+Contains the active_id, active_ids, and active_model info. Not sure if this actually serves a purpose?<br/>
+* kanban-adv-additional-context: Supplied when executing the action. Contains the active_id, active_ids, and
+active_model info.<br/>
+* kanban-adv-target: Overrides the target of the resulting action.<br/><br/>
+
+<b>Python method example:</b><br/><br/>
+
+NOT WORKING YET! Same example as up top, but done in python.
+In the xml:<br/>
+
+Need to give 'data-kanban-adv-action-func="kanban_open_sale_orders"' attribute in div tag where
+class="oe_kanban_global_click o_kanban_record_has_image_fill o_res_partner_kanban"<br/><br/>
+<!--<div class="oe_kanban_global_click o_kanban_record_has_image_fill o_res_partner_kanban"-->
+<!--data-kanban-adv-action-func="kanban_open_sale_orders"/>-->
+
+And in python:<br/>
+
+class Partner(models.Model):<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;_inherit = 'res.partner'<br/><br/>
+
+&nbsp;&nbsp;&nbsp;&nbsp;@api.multi<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;def kanban_open_sale_orders(self):<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;self.ensure_one()<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;action = self.env['ir.actions.act_window'].for_xml_id('sale',
+'act_res_partner_2_sale_order')<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;additional_context = {<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;'active_id': self.id,<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;'active_ids': self._ids,<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;'active_model': 'res.partner'<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;}<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;return {<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;'action': action,<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;'additional_context': additional_context,<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;}<br/>
+</html>

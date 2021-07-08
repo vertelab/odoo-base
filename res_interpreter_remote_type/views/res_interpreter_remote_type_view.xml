@@ -30,7 +30,7 @@
             <field name="model">res.interpreter.remote_type</field>
             <field name="arch" type="xml">
                 <search string="Search Interpreter Remote Type">
-                    <field name="name" 
+                    <field name="name"
                            filter_domain="['|', ('name','ilike',self),('code','ilike',self)]"/>
                     <field name="code"/>
                     <separator/>
@@ -46,7 +46,7 @@
             <field name="view_id" ref="view_interpreter_remote_type_tree"/>
             <field name="search_view_id" ref="view_interpreter_remote_type_filter"/>
         </record>
-        <menuitem id="menu_interpreter_remote_type" 
+        <menuitem id="menu_interpreter_remote_type"
                   parent="contacts.res_partner_menu_config"
                   action="action_interpreter_remote_type_form"
                   sequence="50"/>

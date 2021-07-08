@@ -18,16 +18,20 @@
 #    along with this program.  If not, see <http://www.gnu.org/licenses/>.
 #
 ##############################################################################
-from odoo import models, fields, api, _
 import logging
+
+from odoo import models, fields, api, _
+
 _logger = logging.getLogger(__name__)
 
-class Sni(models.Model): 
+
+class Sni(models.Model):
     _name = 'res.sni'
+    _description = "RES SNI"
 
     partner_ids = fields.Many2many(comodel_name="res.partner")
-    
+
     name = fields.Char(string='Name', required=True)
-    code = fields.Char(string='Official Code',help="Official code, group, sub-group or detail group.")
+    code = fields.Char(string='Official Code', help="Official code, group, sub-group or detail group.")
     description = fields.Char(string='Description')
     parent_id = fields.Many2one(comodel_name='res.sni', string='Parent')

@@ -23,12 +23,6 @@
     'name': 'Partner skills',
     'version': '12.0.1.2',
     'category': '',
-    'description': """
-Adds skills to the partner view
-================================================================================================
-- Gets skills from hr_skill - AFC-106
-- This module adds a tab with skills to the contact-card based on AFC-1119
-""",
     'author': 'Vertel AB',
     'license': 'AGPL-3',
     'website': 'http://www.vertel.se',

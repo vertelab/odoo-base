@@ -6,7 +6,7 @@
             <field name="inherit_id" ref="base.module_tree"/>
             <field name="arch" type="xml">
                 <xpath expr="//tree/field[@name='author']" position="after">
-                    <field name="dependencies_id" widget="many2many_tags" />
+                    <field name="dependencies_id" widget="many2many_tags"/>
                 </xpath>
             </field>
         </record>

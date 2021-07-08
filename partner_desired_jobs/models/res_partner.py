@@ -19,8 +19,10 @@
 #
 ##############################################################################
 
-from odoo import models, fields, api
 import logging
+
+from odoo import models, fields, api
+
 _logger = logging.getLogger(__name__)
 
 
@@ -33,6 +35,7 @@ class ResPartner(models.Model):
 
 class Jobs(models.Model):
     _name = 'res.partner.jobs'
+    _description = "RES Partner Jobs"
 
     partner_id = fields.Many2one(comodel_name="res.partner")
 
@@ -51,7 +54,7 @@ class Jobs(models.Model):
                                           (2, '1 to 3 years'),
                                           (3, 'More than 3 years')
                                           ])
-    education = fields.Boolean(string="Education")
+    education = fields.Boolean(string="Is Education?")
     experience = fields.Boolean(string="Experience")
 
     @api.onchange('experience_length')
