@@ -9,7 +9,8 @@ The module is maintained here: https://github.com/vertelab/odoo-base/tree/Dev-12
 Different version submitted
 ===========================
 
-1. v12.0.0.1.0 - Added Jobeeker ccategory inside res.partner
+1. v12.0.0.1.0 - Added Jobeeker category inside res.partner
+2. v12.0.0.1.1 - Added Jobeeker category inside res.partner form view.
 
 Maintainers
 ~~~~~~~~~~~
