@@ -61,14 +61,14 @@
             <field name="name">base.login.reason.kanban.view</field>
             <field name="model">base.login.reason</field>
             <field name="arch" type="xml">
-                <kanban class="o_customer_event_kanban_view">
+                <kanban class="o_customer_event_kanban_view" create="false">
                    <field name="ticket_ID"/>
                     <field name="user_id"/>
                     <field name="email"/>
                     <field name="color"/>
                     <field name="logged_in"/>
                     <field name="logged_out"/>
-                    <field name="length"/>
+                    <!--<field name="length"/>-->
                     <field name="active_length" widget="float_time"/>
                     <field name="login_reason"/>
                     <field name="auditor_comment"/>
@@ -95,10 +95,6 @@
                                     <p>
                                         <h4 class="o_kanban_record_title"><b>User : </b><field name="user_id"/></h4>
                                     </p>
-                                    <p>
-                                        <h4 class="o_kanban_record_title"><b>Length : </b><field name="length"/></h4>
-                                    </p>                                  
-
                                     <p>
                                        <h4 class="o_kanban_record_title"><b>Logged In : </b><field name="logged_in"/></h4>
                                     </p>
