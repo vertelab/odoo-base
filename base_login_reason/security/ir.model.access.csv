@@ -1,0 +1,5 @@
+id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
+account_base_login,base.login.reason.user,base_login_reason.model_base_login_reason,base_login_reason.show_login_reason,1,0,1,0
+account_base_auditor,base.login.reason.auditor,base_login_reason.model_base_login_reason,base_login_reason.security_auditor_login,1,1,1,0
+access_base_login,access.login,base_login_reason.model_base_login_reason,,1,0,0,0
+

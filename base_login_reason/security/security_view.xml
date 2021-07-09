@@ -1,0 +1,55 @@
+<?xml version="1.0"?>
+<odoo>
+    <data>
+
+        <!-- Security category -->
+        <record model="ir.module.category" id="module_web_base_login_categ">
+            <field name="name">Login Reason</field>
+            <field name="description">Allows you to manage different role of login with reasons</field>
+            <field name="sequence">10</field>
+        </record>
+
+        <!-- Show Login Reason -->
+        <record id="show_login_reason" model="res.groups">
+            <field name="name">Show login-reason</field>
+            <field name="category_id" ref="module_web_base_login_categ"/>
+            <field name="comment">The Login Reason-group enables tracking of a login reason and sets a time limit on the
+                session</field>
+        </record>
+
+        <!-- Security Auditor -->
+        <record id="security_auditor_login" model="res.groups">
+            <field name="name">Security Auditor</field>
+            <field name="category_id" ref="module_web_base_login_categ"/>
+            <field name="implied_ids" eval="[(4, ref('base_login_reason.show_login_reason'))]"/>
+            <field name="comment">Security Auditors can review and comment on login-records</field>
+        </record>
+
+
+        <!-- Record Rules -->
+        <!-- Access own log -->
+        <record id="access_own_login_log" model="ir.rule">
+            <field name="name">access.own.log</field>
+            <field name="model_id" ref="base_login_reason.model_base_login_reason"/>
+            <field name="domain_force">[('user_id', '=', user.id)]</field>
+            <field name="groups" eval="[(4, ref('base_login_reason.show_login_reason'))]"/>
+            <field name="perm_create" eval="1"/>
+            <field name="perm_write" eval="0"/>
+            <field name="perm_unlink" eval="0"/>
+            <field name="perm_read" eval="1"/>
+        </record>
+
+        <!-- Access All logs -->
+        <record id="access_all_login_log" model="ir.rule">
+            <field name="name">access.all.login.log</field>
+            <field name="model_id" ref="base_login_reason.model_base_login_reason"/>
+            <field name="domain_force">[(1, '=', 1)]</field>
+            <field name="groups" eval="[(4, ref('base_login_reason.security_auditor_login'))]"/>
+            <field name="perm_create" eval="1"/>
+            <field name="perm_write" eval="1"/>
+            <field name="perm_unlink" eval="0"/>
+            <field name="perm_read" eval="1"/>
+        </record>
+
+    </data>
+</odoo>
