@@ -87,13 +87,13 @@ class Home(main.Home):
                     raise werkzeug.exceptions.BadRequest(
                         _("You've missed data for login reason and ticket #, Please must enter it if you are login with debug mode"))
                 if len(kw.get('login_reason')) == 0:
-                    raise werkzeug.exceptions.BadRequest(_("You've missed data for login reason, Please must enter it if you are login with debug mode"))
+                    raise werkzeug.exceptions.BadRequest(_("You've missed data for login reason. Click 'Back' and Please enter a reason for logging in to the system"))
                 if len(kw.get('ticket_ID')) == 0:
                     raise werkzeug.exceptions.BadRequest(
-                        _("You've missed data for Ticket #, Please must enter it if you are login with debug mode"))
+                        _("You've missed data for Ticket #, Click 'Back' and  enter a reference to the ticket you are working with."))
                 if len(kw.get('login_reason')) < 10:
                     raise werkzeug.exceptions.BadRequest(
-                        _("login reason must be minimum 10 charactor "))
+                        _("The 'Login reason' needs to be minimum 10 characters. Click 'Back' and write a longer reason."))
             result = super(Home, self).web_login(redirect=redirect, kw=kw)
             if kw.get('login_reason') and kw.get('ticket_ID'):
                 log = request.env['res.users.log'].create({})
