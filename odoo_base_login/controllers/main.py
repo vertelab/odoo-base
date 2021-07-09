@@ -74,36 +74,40 @@ class Home(main.Home):
 
     @http.route('/web/wrong_input',type='http', auth="none", sitemap=False )
     def wrong_input(self, redirect=None, **kw):
-
         return request.render('odoo_base_login.wrong_input_400', {})
-
 
     @http.route('/web/login', type='http', auth="none", sitemap=False)
     def web_login(self, redirect=None, **kw):
-
-        if 'debug' in kw.keys() and 'login_reason' in kw.keys() and 'ticket_ID' in kw.keys():
-            if len(kw.get('login_reason')) == 0 and len(kw.get('ticket_ID')) == 0:
-                raise werkzeug.exceptions.BadRequest(
-                    _("You've missed data for login reason and ticket #, Please must enter it if you are login with debug mode"))
-            if len(kw.get('login_reason')) == 0:
-                raise werkzeug.exceptions.BadRequest(_("You've missed data for login reason, Please must enter it if you are login with debug mode"))
-
-            if len(kw.get('ticket_ID')) == 0:
-                raise werkzeug.exceptions.BadRequest(
-                    _("You've missed data for Ticket #, Please must enter it if you are login with debug mode"))
-        result = super(Home, self).web_login(redirect=redirect, kw=kw)
-        if kw.get('login_reason') and kw.get('ticket_ID'):
-            log = request.env['res.users.log'].create({})
-            session_ID = request.session.sid
-            request.env['base.login.reason'].create(
-                {'user_id': request.session.uid, 'logged_in': log.create_date, 'session_ID': session_ID,
-                 'login_reason': kw.get('login_reason'), 'state': 'logged_in',
-                 'ticket_ID': kw.get('ticket_ID')})
-
         user = request.env['res.users'].browse(request.session.uid)
-        user._save_session(30)
-
-        return result
+        active_user = request.env['res.users'].sudo().search([('login','=',kw.get('login'))])
+        if active_user.has_group('odoo_base_login.show_login_reason') or \
+                active_user.has_group('odoo_base_login.security_auditor_login'):
+            if 'debug' in kw.keys() and 'login_reason' in kw.keys() and 'ticket_ID' in kw.keys():
+                if len(kw.get('login_reason')) == 0 and len(kw.get('ticket_ID')) == 0:
+                    raise werkzeug.exceptions.BadRequest(
+                        _("You've missed data for login reason and ticket #, Please must enter it if you are login with debug mode"))
+                if len(kw.get('login_reason')) == 0:
+                    raise werkzeug.exceptions.BadRequest(_("You've missed data for login reason, Please must enter it if you are login with debug mode"))
+                if len(kw.get('ticket_ID')) == 0:
+                    raise werkzeug.exceptions.BadRequest(
+                        _("You've missed data for Ticket #, Please must enter it if you are login with debug mode"))
+                if len(kw.get('login_reason')) < 10:
+                    raise werkzeug.exceptions.BadRequest(
+                        _("login reason must be minimum 10 charactor "))
+            result = super(Home, self).web_login(redirect=redirect, kw=kw)
+            if kw.get('login_reason') and kw.get('ticket_ID'):
+                log = request.env['res.users.log'].create({})
+                session_ID = request.session.sid
+                request.env['base.login.reason'].create(
+                    {'user_id': request.session.uid, 'logged_in': log.create_date, 'session_ID': session_ID,
+                     'login_reason': kw.get('login_reason'), 'state': 'logged_in',
+                     'ticket_ID': kw.get('ticket_ID')})
+            user._save_session(30)
+            return result
+        else:
+            result = super(Home, self).web_login(redirect=redirect, kw=kw)
+            user._save_session(30)
+            return result
 
 
 class Session(main.Session):

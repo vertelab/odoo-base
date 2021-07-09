@@ -155,7 +155,8 @@
 
         <!-- Menuitem for base login access -->
         <menuitem id="base_login_menu_access" name="Login Access log"
-                  action="action_base_login_tree" groups="odoo_base_login.show_login_reason"/>
+                  action="action_base_login_tree" groups="odoo_base_login.show_login_reason"
+                  parent="base.menu_administration" sequence="100"/>
 
     </data>
 </odoo>
