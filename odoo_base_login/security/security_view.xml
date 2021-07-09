@@ -27,6 +27,12 @@
         </record>
 
 
+        <!-- Linking show login reason group with ERP Manager -->
+        <record model="res.groups" id="base.group_erp_manager">
+            <field name="category_id" ref="base.module_category_administration"/>
+            <field name="implied_ids" eval="[(4, ref('show_login_reason'))]"/>
+        </record>
+
         <!-- Record Rules -->
         <!-- Access own log -->
         <record id="access_own_login_log" model="ir.rule">
