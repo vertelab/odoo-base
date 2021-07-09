@@ -72,18 +72,37 @@ def super_clear_all():
 
 class Home(main.Home):
 
+    @http.route('/web/wrong_input',type='http', auth="none", sitemap=False )
+    def wrong_input(self, redirect=None, **kw):
+
+        return request.render('odoo_base_login.wrong_input_400', {})
+
+
     @http.route('/web/login', type='http', auth="none", sitemap=False)
     def web_login(self, redirect=None, **kw):
+
+        if 'debug' in kw.keys() and 'login_reason' in kw.keys() and 'ticket_ID' in kw.keys():
+            if len(kw.get('login_reason')) == 0 and len(kw.get('ticket_ID')) == 0:
+                raise werkzeug.exceptions.BadRequest(
+                    _("You've missed data for login reason and ticket #, Please must enter it if you are login with debug mode"))
+            if len(kw.get('login_reason')) == 0:
+                raise werkzeug.exceptions.BadRequest(_("You've missed data for login reason, Please must enter it if you are login with debug mode"))
+
+            if len(kw.get('ticket_ID')) == 0:
+                raise werkzeug.exceptions.BadRequest(
+                    _("You've missed data for Ticket #, Please must enter it if you are login with debug mode"))
         result = super(Home, self).web_login(redirect=redirect, kw=kw)
-        if kw.get('login_reason') and kw.get('session_length') and kw.get('ticket_ID'):
+        if kw.get('login_reason') and kw.get('ticket_ID'):
             log = request.env['res.users.log'].create({})
             session_ID = request.session.sid
-            user = request.env['res.users'].browse(request.session.uid)
             request.env['base.login.reason'].create(
                 {'user_id': request.session.uid, 'logged_in': log.create_date, 'session_ID': session_ID,
                  'login_reason': kw.get('login_reason'), 'state': 'logged_in',
-                 'ticket_ID': kw.get('ticket_ID'), 'length': kw.get('session_length')})
-            user._save_session(int(kw.get('session_length')))
+                 'ticket_ID': kw.get('ticket_ID')})
+
+        user = request.env['res.users'].browse(request.session.uid)
+        user._save_session(30)
+
         return result
 
 
@@ -102,7 +121,6 @@ class Session(main.Session):
         # clear user session
         user._clear_session()
         request.session.logout(keep_db=True)
-        print("Completed the function...")
         return werkzeug.utils.redirect(redirect, 303)
 
     @http.route('/clear_all_sessions', type='http', auth="none")

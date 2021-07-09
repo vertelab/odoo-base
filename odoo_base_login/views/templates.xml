@@ -23,4 +23,19 @@
         </xpath>
 
     </template>
+
+
+    <template id="wrong_input_400">
+        <t t-call="web.login_layout">
+            <div id="wrap">
+                <div class="container">
+                    <h1 class="mt32">400: Invalid Input</h1>
+                    <p class="alert alert-danger" t-if="error" role="alert">
+                    Please Make sure you have entered Ticket # and Login reason on debug mode.
+                    </p>
+                </div>
+            </div>
+        </t>
+    </template>
+
 </odoo>
