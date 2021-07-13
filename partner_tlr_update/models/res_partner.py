@@ -112,16 +112,17 @@ class ResPartner(models.Model):
             if api_client:
                 try:
                     response = api_client.get_tjansteleverantor(legacy_no)
-                    if response.status_code == 200:
+                    if response and response.status_code != 200:
+                        error_msg = str(response.status_code) + " - " + response.reason
+                        _logger.error(
+                            "Something went wrong with updating TLR Data for Partner %s. Getting %s Response" % (
+                                self.name, error_msg))
+                    else:
                         self.parse_xml_tjansteleverantor_data(response.text)
                         _logger.info("PARSED XML")
-                    else:
-                        _logger.error("Something went wrong with updating TLR Data for Partner %s." % self.name)
-                        error_msg = str(response.status_code) + " - " + response.reason
-                        _logger.error("Getting %s Response" % error_msg)
                 except Exception as e:
-                    _logger.error("Something went wrong with updating TLR Data for Partner %s" % self.name)
-                    _logger.error(str(e))
+                    _logger.error(
+                        "Something went wrong with updating TLR Data for Partner %s. %s" % (self.name, str(e)))
 
     def update_from_xml(self, xml, match_name):
         match_fields = self.match_list()[match_name]
