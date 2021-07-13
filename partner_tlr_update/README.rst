@@ -10,6 +10,7 @@ Different version submitted
 ===========================
 
 1. V12.0.0.0.2 - AFC-2560 Fixed better error message for IPF Configuration.
+1. V12.0.0.0.3 - AFC-2560 Added error message in one line and Improved code to fix error when success response.
 
 Maintainers
 ~~~~~~~~~~~

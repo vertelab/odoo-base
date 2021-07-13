@@ -22,7 +22,7 @@
 
 {
     'name': 'Partner TLR Update',
-    'version': '12.0.0.0.2',
+    'version': '12.0.0.0.3',
     'category': 'Tools',
     'author': "N-development",
     'license': 'AGPL-3',
