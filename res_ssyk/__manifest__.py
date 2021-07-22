@@ -21,7 +21,7 @@
 
 {
     'name': 'Res SSYK',
-    'version': '12.0.0.4',
+    'version': '12.0.0.5',
     'category': '',
     'author': 'Vertel AB',
     'website': 'http://www.vertel.se',

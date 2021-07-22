@@ -13,6 +13,7 @@ Different version submitted
 
 AFC-157
 
+v12.0.0.0.5 - AFC-2588 Fixed the name and description fields
 
 Maintainers
 ~~~~~~~~~~~
