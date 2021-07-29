@@ -22,6 +22,8 @@
 from odoo import models, fields, api, _
 import logging
 from odoo import SUPERUSER_ID
+from datetime import datetime
+import pytz
 
 _logger = logging.getLogger(__name__)
 
@@ -33,6 +35,8 @@ class CalendarAppointment(models.Model):
         super(CalendarAppointment, self).generate_cancel_daily_note(
             cancel_reason, appointment
         )
+        tz = pytz.timezone("Europe/Stockholm")
+        current_time = datetime.now(tz=tz)
         # create daily note
         user = self.env.context.get("uid")
         user = user and self.env["res.users"].browse(user) or self.env.user
@@ -51,7 +55,7 @@ class CalendarAppointment(models.Model):
                 "Cancelled %s: %s, %s %s. Reason: %s"
                 % (
                     self.type_id.name,
-                    self.start,
+                    current_time,
                     self.office_id.office_code,
                     self.user_id.login,
                     cancel_reason.name,
@@ -59,7 +63,7 @@ class CalendarAppointment(models.Model):
             ),
             "note_type": self.env.ref("partner_daily_notes.note_type_as_02").id,
             "office_id": user.office_ids._ids[0] if user.office_ids else False,
-            "note_date": self.start,
+            "note_date": current_time,
             "appointment_id": self.id,
         }
         appointment.partner_id.sudo().notes_ids = [(0, 0, vals)]
@@ -68,6 +72,8 @@ class CalendarAppointment(models.Model):
 
     def generate_move_daily_note(self, occasions, reason):
         # create daily note
+        tz = pytz.timezone("Europe/Stockholm")
+        current_time = datetime.now(tz=tz)
         user = self.env.context.get("uid")
         user = user and self.env["res.users"].browse(user) or self.env.user
         vals = {
@@ -85,7 +91,7 @@ class CalendarAppointment(models.Model):
                 "Meeting moved %s: %s, %s %s. Reason: %s"
                 % (
                     self.type_id.name,
-                    self.start,
+                    current_time,
                     self.office_id.office_code,
                     self.user_id.login,
                     reason.name,
@@ -102,6 +108,8 @@ class CalendarAppointment(models.Model):
     @api.model
     def create(self, values):
         res = super(CalendarAppointment, self).create(values)
+        tz = pytz.timezone("Europe/Stockholm")
+        current_time = datetime.now(tz=tz)
         user = self.env.context.get("uid")
         user = user and self.env["res.users"].browse(user) or self.env.user
         if res.sudo().partner_id and res.state == "confirmed":
@@ -116,14 +124,14 @@ class CalendarAppointment(models.Model):
                     "Booked %s: %s, %s %s."
                     % (
                         self.type_id.name,
-                        self.start,
+                        current_time,
                         self.office_id.office_code,
                         self.user_id.login,
                     )
                 ),
                 "note_type": self.env.ref("partner_daily_notes.note_type_as_02").id,
                 "office_id": user.office_ids._ids[0] if user.office_ids else False,
-                "note_date": self.start,
+                "note_date": current_time,
                 "appointment_id": self.id,
             }
             res.sudo().partner_id.notes_ids = [(0, 0, vals)]
