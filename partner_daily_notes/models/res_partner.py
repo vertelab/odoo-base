@@ -24,9 +24,14 @@ from datetime import datetime, timedelta
 import logging
 import pytz
 
-
-
 _logger = logging.getLogger(__name__)
+
+
+def datetime_se2utc(dt):
+    tz_se = pytz.timezone('Europe/Stockholm')
+    tz_utc = pytz.timezone('UTC')
+    dt = tz_se.localize(dt)
+    return tz_utc.normalize(dt, is_dst=False).replace(tzinfo=None)
 
 
 class ResPartnerNotes(models.Model):
@@ -146,21 +151,19 @@ class ResPartner(models.Model):
         res = _("No next contact")
         res_datetime = False
         tz_offset = self.env.user.tz_offset
-        timezone = pytz.timezone('Europe/Stockholm')
         if appointment and (
-            not self.next_contact_date
-            or (
-                self.next_contact_date
-                and appointment.start.date() < self.next_contact_date
-            )
+                not datetime_se2utc(self.next_contact_date)
+                or (
+                        datetime_se2utc(self.next_contact_date)
+                        and appointment.start.date() < datetime_se2utc(self.next_contact_date)
+                )
         ):
             # use appointment date instead of AIS-F data.
             if tz_offset:
                 next_contact_time = (
-                    appointment.start
-                    + timedelta(hours=int(tz_offset[1:3]), minutes=int(tz_offset[3:5]))
+                        appointment.start
+                        + timedelta(hours=int(tz_offset[1:3]), minutes=int(tz_offset[3:5]))
                 ).strftime("%H:%M")
-
             else:
                 next_contact_time = appointment.start.strftime("%H:%M")
             next_contact_date = appointment.start.date()
@@ -170,7 +173,7 @@ class ResPartner(models.Model):
                 else "B"
             )
             res_datetime = appointment.start
-        elif self.next_contact_date and self.next_contact_time:
+        elif datetime_se2utc(self.next_contact_date) and self.next_contact_time:
             # use AIS-F data
             if tz_offset:
                 # there has to be a better way to do this.
@@ -182,12 +185,12 @@ class ResPartner(models.Model):
             else:
                 next_contact_time = self.next_contact_time
             next_contact_date = (
-                self.next_contact_date if self.next_contact_date else False
+                datetime_se2utc(self.next_contact_date) if datetime_se2utc(self.next_contact_date) else False
             )
             next_contact_type = self.next_contact_type
             res_datetime = datetime.combine(
                 next_contact_date, datetime.strptime(next_contact_time, "%H:%M").time()
-            ).astimezone(timezone)
+            )
         if next_contact_date:
             res = f"{next_contact_date} {next_contact_time if next_contact_time else ''} {next_contact_type}"
         self.next_contact = res
@@ -208,11 +211,11 @@ class ResPartner(models.Model):
         )
         res_datetime = False
         if appointment and (
-            not self.next_contact_date
-            or (
-                self.last_contact_date
-                and appointment.start.date() > self.last_contact_date
-            )
+                not datetime_se2utc(self.next_contact_date)
+                or (
+                        self.last_contact_date
+                        and appointment.start.date() > self.last_contact_date
+                )
         ):
             # use appointment date instead of AIS-F data.
             last_contact_date = appointment.start.date()
