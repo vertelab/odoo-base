@@ -150,6 +150,10 @@
             <div class="af_field_group oe_read_only">
               <label for="street" string="Registered address"/>
               <div>
+                <field name="has_address_co" attrs="{'invisible': True}"/>
+                <div attrs="{'invisible': [('has_address_co','=', False)]}">C/O
+                  <field name="address_co" class="o_address_street" attrs="{'invisible': [('address_co', '=', False)]}"/>
+                </div>
                 <div class="o_address_format">
                   <span class="oe_read_only">
                     <field name="street" placeholder="Street..." class="o_address_street"/>
@@ -195,7 +199,7 @@
               <label for="office_code_name" string="Kontor"/>
               <field name="office_code_name" />
             </div>
-            
+
             <div class="af_field_group">
               <label for="share_info_with_employers"/>
               <field name="share_info_with_employers"/>
@@ -282,6 +286,9 @@
                         </div>
                         <div t-if="record.type.raw_value != 'contact'">
                           <div>
+                            <span attrs="{'invisible': [('address_co','=', False)]}">
+                              C/O:
+                            </span>
                             <field name="address_co"/><br/>
                             <field name="street"/><br/>
                             <field name="zip_formated" />
@@ -436,27 +443,27 @@
     <field name="act_window_id" ref="action_jobseekers" />
   </record>
 
-  <menuitem id="res_partner_jobseekers_menu" name="Jobseekers" action="" 
-    sequence="4" groups="af_security.af_jobseekers_editor"
-    web_icon="partner_view_360,static/description/icon.png" />
-  <menuitem id="res_partner_jobseekers_action_menu" name="Jobseekers" 
-    parent="res_partner_jobseekers_menu" action="action_jobseekers" 
-    sequence="10" groups="base.group_no_one" />
-  <menuitem id="res_partner_jobseekers_config_menu" 
-    parent="res_partner_jobseekers_menu" name="Configuration" 
-    sequence="100" groups="base.group_no_one" />
-  <menuitem id="menu_sni_config" 
-    parent="res_partner_jobseekers_config_menu" 
-    action="res_sni.action_sni_form" sequence="10" 
-    groups="base.group_no_one" />
-  <menuitem id="menu_ssyk_config" 
-    parent="res_partner_jobseekers_config_menu" 
-    action="res_ssyk.action_ssyk_form" sequence="20"  
-    groups="base.group_no_one" />
-  <menuitem id="menu_sun_config" 
-    parent="res_partner_jobseekers_config_menu" 
-    action="res_sun.action_sun_form" sequence="30"  
-    groups="base.group_no_one" />
+  <menuitem id="res_partner_jobseekers_menu" name="Jobseekers" action=""
+            sequence="4" groups="af_security.af_jobseekers_editor"
+            web_icon="partner_view_360,static/description/icon.png" />
+  <menuitem id="res_partner_jobseekers_action_menu" name="Jobseekers"
+            parent="res_partner_jobseekers_menu" action="action_jobseekers"
+            sequence="10" groups="base.group_no_one" />
+  <menuitem id="res_partner_jobseekers_config_menu"
+            parent="res_partner_jobseekers_menu" name="Configuration"
+            sequence="100" groups="base.group_no_one" />
+  <menuitem id="menu_sni_config"
+            parent="res_partner_jobseekers_config_menu"
+            action="res_sni.action_sni_form" sequence="10"
+            groups="base.group_no_one" />
+  <menuitem id="menu_ssyk_config"
+            parent="res_partner_jobseekers_config_menu"
+            action="res_ssyk.action_ssyk_form" sequence="20"
+            groups="base.group_no_one" />
+  <menuitem id="menu_sun_config"
+            parent="res_partner_jobseekers_config_menu"
+            action="res_sun.action_sun_form" sequence="30"
+            groups="base.group_no_one" />
 
   <record id="view_partner_employer_form" model="ir.ui.view">
     <field name="name">res.partner.form.employer</field>
@@ -737,22 +744,22 @@
     <field name="view_id" ref="view_employer_tree" />
     <field name="act_window_id" ref="action_employers" />
   </record>
-  
-  <menuitem id="res_partner_employers_menu" name="Employers" 
-    action="action_employers" sequence="3"
-    web_icon="partner_view_360,static/description/icon.png"
-    groups="base.group_system"
+
+  <menuitem id="res_partner_employers_menu" name="Employers"
+            action="action_employers" sequence="3"
+            web_icon="partner_view_360,static/description/icon.png"
+            groups="base.group_system"
   />
 
-  <menuitem id="res_partner_employers_config_menu" 
-    parent="res_partner_employers_menu" name="Configuration" sequence="0" 
-    groups="base.group_no_one" />
+  <menuitem id="res_partner_employers_config_menu"
+            parent="res_partner_employers_menu" name="Configuration" sequence="0"
+            groups="base.group_no_one" />
 
   <menuitem id="menu_ssyk_config" parent="res_partner_employers_config_menu"
-    action="res_ssyk.action_ssyk_form" sequence="2" />
+            action="res_ssyk.action_ssyk_form" sequence="2" />
 
-  <menuitem id="menu_sni_config" parent="res_partner_employers_config_menu" 
-    action="res_sni.action_sni_form" sequence="1" />
+  <menuitem id="menu_sni_config" parent="res_partner_employers_config_menu"
+            action="res_sni.action_sni_form" sequence="1" />
 
   <record id="action_screenpopup" model="ir.actions.act_window">
     <field name="name">Jobseekers</field>
@@ -764,12 +771,12 @@
   </record>
 
   <record model="ir.actions.server" id="action_update_name_ssn">
-      <field name="name">Update Partner Breadcrumb</field>
-      <field name="model_id" ref="base.model_res_partner"/>
-      <field name="state">code</field>
-      <field name="code">
-          if records:
-              records.update_name_ssn()
-      </field>
+    <field name="name">Update Partner Breadcrumb</field>
+    <field name="model_id" ref="base.model_res_partner"/>
+    <field name="state">code</field>
+    <field name="code">
+      if records:
+      records.update_name_ssn()
+    </field>
   </record>
 </odoo>

@@ -23,7 +23,8 @@ from odoo import models, fields, api, _
 import logging
 import threading
 import base64
-from datetime import date
+from datetime import datetime, date
+
 
 from odoo.exceptions import ValidationError
 from odoo.tools import image_resize_image_big, image_colorize
@@ -92,18 +93,20 @@ class ResPartner(models.Model):
         ],
         string="Registered Through",
     )  # is added in partner_extension_af
-    match_area = fields.Selection(
+    share_info_with_employers = fields.Selection(
         selection=[
-            ("Krom", "Ja - ej ESF"),
-            ("KromEsf", "Ja - ESF"),
-            ("EjKrom", "Nej"),
+            ("True", "Ja"),
+            ("False", "Nej"),
         ],
-        string="Rusta och matcha-område",
+        string="Share name and address with employers",
     )
-    share_info_with_employers = fields.Boolean(
-        string="Share name and address with employers"
-    ) #is added in partner_extension_af
-    sms_reminders = fields.Boolean(string="SMS reminders") #is added in partner_extension_af
+    sms_reminders = fields.Selection(
+        selection=[
+            ("True", "Ja"),
+            ("False", "Nej"),
+        ],
+        string="SMS reminders",
+    )
     visitation_address_id = fields.Many2one("res.partner", string="Visitation address") #is added in partner_extension_af
 
     given_address_id = fields.Many2one("res.partner", string="given address") # Add to a separate module
@@ -150,7 +153,7 @@ class ResPartner(models.Model):
 
     name_ssn = fields.Char(compute="_compute_name_ssn", store=True)
     is_spu = fields.Boolean(string='SPU', default=False)
-
+    has_address_co = fields.Boolean(compute="_check_address_co")
     _sql_constraints = [
         ('customer_id_unique',
         'UNIQUE(customer_id)',
@@ -172,7 +175,10 @@ class ResPartner(models.Model):
 
     @api.one
     def combine_state_name_code(self):
-        self.state_name_code = "%s %s" % (self.state_id.code, self.state_id.name)
+        if self.state_id:
+            self.state_name_code = f"{self.state_id.code} {self.state_id.name}"
+        else:
+            self.state_name_code = ""
 
     @api.one
     def _compute_user_name_sign(self):
@@ -182,13 +188,22 @@ class ResPartner(models.Model):
     def _compute_office_code_name(self):
         self.office_code_name = "%s %s" % (self.office_id.office_code, self.office_id.name)
 
-    @api.one
+    @api.multi
     def combine_category_name_code(self):
-        self.jobseeker_category = "%s %s" % (
-            self.jobseeker_category_id.code,
-            self.jobseeker_category_id.name,
-            #date set here
-        )
+        for rec in self:
+            if rec.jobseeker_category_id:
+                rec.jobseeker_category = "%s %s" % (
+                    rec.jobseeker_category_id.code,
+                    rec.jobseeker_category_id.name,
+                )
+
+    @api.one
+    def _check_address_co(self):
+        if self.address_co:
+            self.has_address_co = True
+        else:
+            self.has_address_co = False
+
 
     def update_partner_images(self):
         for partner in self:
@@ -337,12 +352,26 @@ class ResPartner(models.Model):
 
     @api.model
     def search_pnr(self, pnr):
+        now_year = str(datetime.now().year)
+        last_century = str(int(now_year) - 100)[0:2]
         domain = [('is_jobseeker', '=', True)]
         if len(pnr) == 13 and pnr[8] == "-":
             domain.append(("social_sec_nr", "=", pnr))
-        elif len(pnr) == 12:
+        elif len(pnr) == 12 and "-" not in pnr:
             domain.append(
                 ("social_sec_nr", "=", "%s-%s" % (pnr[:8], pnr[8:12])))
+        elif len(pnr) == 11 and pnr[6] == "-":
+            if pnr[0:2] < now_year[2:4]:
+                domain.append(("social_sec_nr", "=", now_year[0:2] + pnr))
+            else:
+                domain.append(("social_sec_nr", "=", last_century + pnr))
+        elif len(pnr) == 10 and "-" not in pnr:
+            if pnr[0:2] < now_year[2:4]:
+                domain.append(
+                    ("social_sec_nr", "=", "%s-%s" % (now_year[0:2] + pnr[:6], pnr[6:10])))
+            else:
+                domain.append(
+                    ("social_sec_nr", "=", "%s-%s" % (last_century + pnr[:6], pnr[6:10])))
         else:
             raise ValidationError(_("Incorrectly formated social security number: %s") % pnr)
         # unless we raised an error, return the result of the search
@@ -350,9 +379,10 @@ class ResPartner(models.Model):
 
 class ResPartnerSKAT(models.Model):
     _name = "res.partner.skat"
+    _description = "Res Partner Skat"
 
     partner_id = fields.One2many(
-        comodel_name="res.partner", inverse_name="jobseeker_category"
+        comodel_name="res.partner", inverse_name="jobseeker_category_id"
     )
     code = fields.Char(string="code")
     name = fields.Char(string="name")

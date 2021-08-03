@@ -27,7 +27,7 @@ import logging
 import stomp
 import ssl
 import xmltodict
-from queue import Queue, Empty
+from queue import Queue, Empty, Full
 from time import time
 
 
@@ -53,13 +53,13 @@ AISF_ASOK_SYNC_PROCESS = "AIS-F ASOK SYNC"
 
 
 class AsokResPartnerListener(stomp.ConnectionListener):
-    def __init__(self, mqconn, user, pwd, target, clientid=4):
+    def __init__(self, mqconn, user, pwd, target, clientid=4, queue_limit=None):
         self.__conn = mqconn
         self.__user = user
         self.__pwd = pwd
         self.__target = target
         self.__clientid = clientid
-        self.__msgqueue = Queue()
+        self.__msgqueue = Queue(queue_limit)
 
     def __parse_message(self, message):
         xmldict = None
@@ -89,9 +89,14 @@ class AsokResPartnerListener(stomp.ConnectionListener):
         _logger.debug("_handle_message: %s" % data)
         if data:
             # Add message to queue
-            self.__msgqueue.put((headers, data))
+            try:
+                self.__msgqueue.put((headers, data), block=False)
+            except Full:
+                # Queue is full. Don't wait, just keep going. Message
+                # will be back next cron run.
+                pass
 
-    def next_message(self, block=False, timeout=5):
+    def next_message(self, block=True, timeout=1):
         """Fetch the next message in the queue."""
         try:
             return self.__msgqueue.get(block=block, timeout=timeout)
@@ -262,6 +267,12 @@ class ResPartner(models.Model):
         stomp_log_level = self.env["ir.config_parameter"].get_param(
             "partner_mq_ipf.stomp_logger", "INFO"
         )
+        try:
+            queue_limit = int(self.env["ir.config_parameter"].get_param(
+                "partner_mq_ipf.queue_limit", "200"))
+        except:
+            _logger.exception("Couldn't read partner_mq_ipf.queue_limit as an integer.")
+            queue_limit = 200
 
         # decide the stomper log level depending on param
         stomp_logger = logging.getLogger("stomp.py")
@@ -278,7 +289,7 @@ class ResPartner(models.Model):
         else:
             _logger.debug("Asok MQ Listener - Not using TLS")
 
-        respartnerlsnr = AsokResPartnerListener(mqconn, usr, pwd, target, 4)
+        respartnerlsnr = AsokResPartnerListener(mqconn, usr, pwd, target, 4, queue_limit=queue_limit)
         mqconn.set_listener("", respartnerlsnr)
 
         try:
