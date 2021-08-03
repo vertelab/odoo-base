@@ -28,7 +28,7 @@ Daily notes
 ===============================================================================
 AFC-81\n
 AFC-1923\n
-This module allowes daily notes for a partner.\n
+This module allows daily notes for a partner.\n
 v12.0.1.1.0: Added mapping for Integration platform with the module base_map.\n
 v12.0.1.4.0: Changed display Daily Notes types in "name in Tree-view".\n
 v12.0.1.5.0 AFC-999: Removed duplicate translation line for Secret\n
