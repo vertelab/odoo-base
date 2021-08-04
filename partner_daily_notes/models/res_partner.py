@@ -22,8 +22,23 @@
 from odoo import models, fields, api, _
 from datetime import datetime, timedelta
 import logging
+import pytz
 
 _logger = logging.getLogger(__name__)
+
+
+def datetime_se2utc(dt):
+    tz_se = pytz.timezone('Europe/Stockholm')
+    tz_utc = pytz.timezone('UTC')
+    dt = tz_se.localize(dt)
+    return tz_utc.normalize(dt).replace(tzinfo=None)
+
+
+def datetime_utc2se(dt):
+    tz_se = pytz.timezone('Europe/Stockholm')
+    tz_utc = pytz.timezone('UTC')
+    dt = tz_utc.localize(dt)
+    return tz_se.normalize(dt).replace(tzinfo=None)
 
 
 class ResPartnerNotes(models.Model):
@@ -142,7 +157,6 @@ class ResPartner(models.Model):
         next_contact_type = None
         res = _("No next contact")
         res_datetime = False
-        tz_offset = self.env.user.tz_offset
         if appointment and (
                 not self.next_contact_date
                 or (
@@ -151,13 +165,9 @@ class ResPartner(models.Model):
                 )
         ):
             # use appointment date instead of AIS-F data.
-            if tz_offset:
-                next_contact_time = (
-                        appointment.start
-                        + timedelta(hours=int(tz_offset[1:3]), minutes=int(tz_offset[3:5]))
-                ).strftime("%H:%M")
-            else:
-                next_contact_time = appointment.start.strftime("%H:%M")
+
+            next_contact_time = \
+                datetime_utc2se(appointment.start).strftime("%H:%M")
             next_contact_date = appointment.start.date()
             next_contact_type = (
                 "T"
@@ -167,22 +177,13 @@ class ResPartner(models.Model):
             res_datetime = appointment.start
         elif self.next_contact_date and self.next_contact_time:
             # use AIS-F data
-            if tz_offset:
-                # there has to be a better way to do this.
-                hours = int(self.next_contact_time[0:2]) + int(tz_offset[0:3])
-                minutes = int(self.next_contact_time[3:5]) + int(
-                    tz_offset[0] + tz_offset[3:5]
-                )
-                next_contact_time = f"{hours:02d}:{minutes:02d}"
-            else:
-                next_contact_time = self.next_contact_time
-            next_contact_date = (
-                self.next_contact_date if self.next_contact_date else False
-            )
+            next_contact_time = self.next_contact_time
+            next_contact_date = self.next_contact_date
             next_contact_type = self.next_contact_type
-            res_datetime = datetime.combine(
-                next_contact_date, datetime.strptime(next_contact_time, "%H:%M").time()
-            )
+            res_datetime = datetime_se2utc(datetime.combine(
+                next_contact_date,
+                datetime.strptime(next_contact_time, "%H:%M").time()
+            ))
         if next_contact_date:
             res = f"{next_contact_date} {next_contact_time if next_contact_time else ''} {next_contact_type}"
         self.next_contact = res
@@ -203,7 +204,7 @@ class ResPartner(models.Model):
         )
         res_datetime = False
         if appointment and (
-                not self.next_contact_date
+                not datetime_se2utc(self.next_contact_date)
                 or (
                         self.last_contact_date
                         and appointment.start.date() > self.last_contact_date
