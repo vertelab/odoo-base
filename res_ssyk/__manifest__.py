@@ -21,16 +21,15 @@
 
 {
     'name': 'Res SSYK',
-    'version': '12.0.0.4',
+    'version': '12.0.0.0.5',
     'category': '',
     'description': """
 SSYK
 ==============================================
 https://www.scb.se/dokumentation/klassifikationer-och-standarder/standard-for-svensk-yrkesklassificering-ssyk/
 
-AFC-157
-
-Updated header in /data/res_ssyk.csv
+v12.0.0.0.4 - AFC-157 Updated header in /data/res_ssyk.csv
+v12.0.0.0.5 - AFC-2588 Fixed the name and description fields
 
 """,
     'author': 'Vertel AB',
