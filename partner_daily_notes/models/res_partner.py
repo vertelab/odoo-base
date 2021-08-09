@@ -169,11 +169,7 @@ class ResPartner(models.Model):
             next_contact_time = \
                 datetime_utc2se(appointment.start).strftime("%H:%M")
             next_contact_date = appointment.start.date()
-            next_contact_type = (
-                "T"
-                if appointment.channel == self.env.ref("calendar_channel.channel_pdm")
-                else "B"
-            )
+            next_contact_type = dict(self._fields['next_contact_type'].selection).get(self.next_contact_type)
             res_datetime = appointment.start
         elif self.next_contact_date and self.next_contact_time:
             # use AIS-F data
