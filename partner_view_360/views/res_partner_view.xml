@@ -113,7 +113,9 @@
 
             <div class="af_field_group">
               <label for="social_sec_nr" string="Social security number" class="oe_edit_only"/>
-              <span name="social_sec_nr" nolabel="1" class="oe_edit_only"/>
+              <div>
+                <field name="social_sec_nr" nolabel="1" class="oe_edit_only"/>
+              </div>
             </div>
 
             <div class="af_field_group">
