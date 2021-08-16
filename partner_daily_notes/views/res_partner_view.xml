@@ -17,11 +17,15 @@
                 <xpath expr="//field[@name='jobseeker_category']/.." position="after">
                     <div class="af_field_group">
                         <label for="next_contact"/>
-                        <field name="next_contact"/>
+                        <div>
+                            <field name="next_contact"/>
+                        </div>
                     </div>
                     <div class="af_field_group">
                         <label for="last_contact"/>
-                        <field name="last_contact"/>
+                        <div>
+                            <field name="last_contact"/>
+                        </div>
                     </div>
 
                 </xpath>
