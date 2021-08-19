@@ -204,7 +204,7 @@ class ResPartner(models.Model):
         )
         res_datetime = False
         if appointment and (
-                not datetime_se2utc(self.next_contact_date)
+                not self.next_contact_date
                 or (
                         self.last_contact_date
                         and appointment.start.date() > self.last_contact_date
