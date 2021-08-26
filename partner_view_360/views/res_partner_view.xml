@@ -543,7 +543,7 @@
               </div>
               <field name="street2" placeholder="Street 2..." class="o_address_street" attrs="{'invisible': True}" />
               <field name="country_id" placeholder="Country" class="o_address_country" attrs="{'invisible': True}" />
-              <field name="phone" />
+<!--              <field name="phone" />-->
               <field name="mobile" />
               <field name="email" />
               <field name="website" />
