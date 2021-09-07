@@ -183,7 +183,7 @@ class ResPartner(models.Model):
             res_datetime = datetime_se2utc(datetime.combine(
                 next_contact_date,
                 datetime.strptime(next_contact_time, "%H:%M").time()
-            ))
+            )) if next_contact_date else False
         if next_contact_date:
             res = f"{next_contact_date} {next_contact_time if next_contact_time else ''} {next_contact_type}"
         self.next_contact = res
@@ -224,7 +224,7 @@ class ResPartner(models.Model):
                 self.last_contact_date if self.last_contact_date else False
             )
             last_contact_type = self.last_contact_type
-            res_datetime = datetime.combine(last_contact_date, datetime.min.time())
+            res_datetime = datetime.combine(last_contact_date, datetime.min.time()) if last_contact_date else False
         if last_contact_date:
             res = f"{last_contact_date} {last_contact_type}"
         else:
