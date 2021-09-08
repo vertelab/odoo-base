@@ -138,7 +138,7 @@ class ResPartner(models.Model):
 
     segment_jobseeker = fields.Selection(
         string="Jobseeker segment",
-        selection=[("a", "A"), ("b", "B"), ("c1", "C1"), ("c2", "C2"), ("c3", "C3")],
+        selection=[("a", "A"), ("b", "B"), ("c", "C")],
     ) #is added in partner_extension_af
     segment_employer = fields.Selection(
         string="Employer segment",
@@ -376,6 +376,18 @@ class ResPartner(models.Model):
             raise ValidationError(_("Incorrectly formated social security number: %s") % pnr)
         # unless we raised an error, return the result of the search
         return self.env['res.partner'].sudo().search(domain, limit=1)
+
+    @api.model
+    def segment_jobseeker_field_update_values(self):
+        records = self.search([
+            '|','|',
+            ('segment_jobseeker','=','c1'),
+            ('segment_jobseeker','=','c2'),
+            ('segment_jobseeker','=','c3'),
+        ])
+        for record in records:
+            record.segment_jobseeker = 'c'
+
 
 class ResPartnerSKAT(models.Model):
     _name = "res.partner.skat"
