@@ -19,6 +19,8 @@
 #
 ##############################################################################
 
+from datetime import datetime
+import pytz
 from odoo import models, fields, api, _
 import logging
 from odoo import SUPERUSER_ID
@@ -33,6 +35,8 @@ class CalendarAppointment(models.Model):
         super(CalendarAppointment, self).generate_cancel_daily_note(
             cancel_reason, appointment
         )
+        tz = pytz.timezone("Europe/Stockholm")
+        current_time = datetime.now(tz=tz)
         # create daily note
         user = self.env.context.get("uid")
         user = user and self.env["res.users"].browse(user) or self.env.user
@@ -45,56 +49,58 @@ class CalendarAppointment(models.Model):
             "note": _(
                 "Cancelled %s: %s. Reason: %s"
                 % (self.type_id.name, self.start, cancel_reason.name)
-            )
-            if self.channel_name == "PDM"
-            else _(
+            ),
+            "note_type": self.env.ref("partner_daily_notes.note_type_as_02").id,
+            "office_id": user.office_ids._ids[0] if user.office_ids else False,
+            "note_date": current_time,
+            "appointment_id": self.id,
+        }
+        if self.channel_name != "PDM":
+            vals["note"] = _(
                 "Cancelled %s: %s, %s %s. Reason: %s"
                 % (
                     self.type_id.name,
-                    self.start,
+                    current_time,
                     self.office_id.office_code,
                     self.user_id.login,
                     cancel_reason.name,
                 )
-            ),
-            "note_type": self.env.ref("partner_daily_notes.note_type_as_02").id,
-            "office_id": user.office_ids._ids[0] if user.office_ids else False,
-            "note_date": self.start,
-            "appointment_id": self.id,
-        }
+            )
         appointment.partner_id.sudo().notes_ids = [(0, 0, vals)]
         # create edi message
         self.sudo().partner_id._create_next_last_msg()
 
     def generate_move_daily_note(self, occasions, reason):
         # create daily note
+        tz = pytz.timezone("Europe/Stockholm")
+        current_time = datetime.now(tz=tz)
         user = self.env.context.get("uid")
         user = user and self.env["res.users"].browse(user) or self.env.user
         vals = {
             "name": _(
                 "Meeting moved %s. Reason: %s" % (self.type_id.name, reason.name)
             ),
-            "partner_id": self.partner_id.id,
-            "administrative_officer": user if user.id != SUPERUSER_ID else False,
-            "note": _(
+            "note":  _(
                 "Meeting moved %s: %s. Reason: %s"
                 % (self.type_id.name, self.start, reason.name)
-            )
-            if self.channel_name == "PDM"
-            else _(
-                "Meeting moved %s: %s, %s %s. Reason: %s"
-                % (
-                    self.type_id.name,
-                    self.start,
-                    self.office_id.office_code,
-                    self.user_id.login,
-                    reason.name,
-                )
             ),
+            "partner_id": self.partner_id.id,
+            "administrative_officer": user if user.id != SUPERUSER_ID else False,
             "note_type": self.env.ref("partner_daily_notes.note_type_as_02").id,
             "office_id": user.office_ids._ids[0] if user.office_ids else False,
             "appointment_id": self.id,
         }
+        if self.channel_name != "PDM":
+            vals["note"] = _(
+                "Meeting moved %s: %s, %s %s. Reason: %s"
+                % (
+                    self.type_id.name,
+                    current_time,
+                    self.office_id.office_code,
+                    self.user_id.login,
+                    reason.name,
+                )
+            )
         self.partner_id.sudo().notes_ids = [(0, 0, vals)]
         # create edi message
         self.sudo().partner_id._create_next_last_msg()
@@ -102,6 +108,8 @@ class CalendarAppointment(models.Model):
     @api.model
     def create(self, values):
         res = super(CalendarAppointment, self).create(values)
+        tz = pytz.timezone("Europe/Stockholm")
+        current_time = datetime.now(tz=tz)
         user = self.env.context.get("uid")
         user = user and self.env["res.users"].browse(user) or self.env.user
         if res.sudo().partner_id and res.state == "confirmed":
@@ -110,22 +118,22 @@ class CalendarAppointment(models.Model):
                 "name": _("Booked %s" % self.type_id.name),
                 "partner_id": self.partner_id.id,
                 "administrative_officer": user if user.id != SUPERUSER_ID else False,
-                "note": _("Booked %s: %s." % (self.type_id.name, self.start))
-                if self.channel_name == "PDM"
-                else _(
+                "note": _("Booked %s: %s." % (self.type_id.name, self.start)),
+                "note_type": self.env.ref("partner_daily_notes.note_type_as_02").id,
+                "office_id": user.office_ids._ids[0] if user.office_ids else False,
+                "note_date": current_time,
+                "appointment_id": self.id,
+            }
+            if self.channel_name != "PDM":
+                vals["note"] = _(
                     "Booked %s: %s, %s %s."
                     % (
                         self.type_id.name,
-                        self.start,
+                        current_time,
                         self.office_id.office_code,
                         self.user_id.login,
                     )
-                ),
-                "note_type": self.env.ref("partner_daily_notes.note_type_as_02").id,
-                "office_id": user.office_ids._ids[0] if user.office_ids else False,
-                "note_date": self.start,
-                "appointment_id": self.id,
-            }
+                )
             res.sudo().partner_id.notes_ids = [(0, 0, vals)]
             # create edi message
             res.sudo().partner_id._create_next_last_msg()
@@ -149,9 +157,14 @@ class CalendarAppointmentSuggestion(models.Model):
             "note": _(
                 "Booked %s: %s."
                 % (self.appointment_id.type_id.name, self.appointment_id.start)
-            )
-            if self.appointment_id.channel_name == "PDM"
-            else _(
+            ),
+            "note_type": self.env.ref("partner_daily_notes.note_type_as_02").id,
+            "office_id": user.office_ids._ids[0] if user.office_ids else False,
+            "note_date": self.appointment_id.start,
+            "appointment_id": self.appointment_id.id,
+        }
+        if self.appointment_id.channel_name != "PDM":
+            vals["note"] = _(
                 "Booked %s: %s, %s %s."
                 % (
                     self.appointment_id.type_id.name,
@@ -159,12 +172,7 @@ class CalendarAppointmentSuggestion(models.Model):
                     self.appointment_id.office_id.office_code,
                     self.appointment_id.user_id.login,
                 )
-            ),
-            "note_type": self.env.ref("partner_daily_notes.note_type_as_02").id,
-            "office_id": user.office_ids._ids[0] if user.office_ids else False,
-            "note_date": self.appointment_id.start,
-            "appointment_id": self.appointment_id.id,
-        }
+            )
         partner = self.appointment_id.sudo().partner_id
         partner.notes_ids = [(0, 0, vals)]
 
