@@ -113,38 +113,52 @@
 
             <div class="af_field_group">
               <label for="social_sec_nr" string="Social security number" class="oe_edit_only"/>
-              <field name="social_sec_nr" nolabel="1" class="oe_edit_only"/>
+              <div>
+                <field name="social_sec_nr" nolabel="1" class="oe_edit_only"/>
+              </div>
             </div>
 
             <div class="af_field_group">
-              <label for="social_sec_nr_age" string="Personnummer:" class="oe_read_only"/>
-              <field name="social_sec_nr_age" class="oe_read_only" nolabel="1"/>
+              <label for="social_sec_nr_age" string="Personnummer" class="oe_read_only"/>
+              <div>
+                <field name="social_sec_nr_age" class="oe_read_only" nolabel="1"/>
+              </div>
             </div>
 
             <div class="af_field_group">
               <label for="phone" string="Telefonnummer"/>
-              <field name="phone"/>
+              <div>
+                <field name="phone"/>
+              </div>
             </div>
 
             <div class="af_field_group">
               <label for="mobile" string="Mobilnummer"/>
-              <field name="mobile"/>
+              <div>
+                <field name="mobile"/>
+              </div>
             </div>
 
             <div class="af_field_group">
               <label for="email" string="E-post"/>
-              <field name="email"/>
+              <div>
+                <field name="email"/>
+              </div>
             </div>
 
             <div class="af_field_group">
               <!-- folkbokföringsadress, alternativt göra en res partner typ-->
               <label for="state_name_code" string="Municipality" class="oe_read_only"/>
-              <field name="state_name_code" class="oe_read_only" placeholder="State"/>
+              <div>
+                <field name="state_name_code" class="oe_read_only" placeholder="State"/>
+              </div>
             </div>
 
             <div class="af_field_group">
               <label for="state_id" string="Municipality" class="oe_edit_only"/>
-              <field name="state_id" class="oe_edit_only"/>
+              <div>
+                <field name="state_id" class="oe_edit_only"/>
+              </div>
             </div>
 
             <div class="af_field_group oe_read_only">
@@ -174,45 +188,64 @@
 
             <div class="af_field_group oe_read_only">
               <label for="registered_through"/>
-              <field name="registered_through"/>
+              <div>
+                <field name="registered_through"/>
+              </div>
             </div>
 
             <div class="af_field_group">
               <label for="jobseeker_category_id" string="Jobseeker category" class="oe_edit_only"/>
-              <field name="jobseeker_category_id" options="{'no_create_edit': True}" class="oe_edit_only"/>
-
+              <div>
+                <field name="jobseeker_category_id" options="{'no_create_edit': True}" class="oe_edit_only"/>
+              </div>
               <label for="jobseeker_category" class="oe_read_only"/>
-              <field name="jobseeker_category" class="oe_read_only"/>
+              <div>
+                <field name="jobseeker_category" class="oe_read_only"/>
+              </div>
             </div>
 
             <div class="af_field_group oe_read_only">
               <label for="customer_since"/>
-              <field name="customer_since" widget="date"/>
+              <div>
+                <field name="customer_since" widget="date"/>
+              </div>
             </div>
 
             <div class="af_field_group oe_edit_only">
               <label for="office_id" string="Kontor"/>
-              <field name="office_id" options="{'no_create_edit': True}" nolabel="1"/>
-              <field name="office_code_name" class="oe_read_only"/>
+              <div>
+                <field name="office_id" options="{'no_create_edit': True}" nolabel="1"/>
+              </div>
+              <div>
+                <field name="office_code_name" class="oe_read_only"/>
+              </div>
             </div>
             <div class="af_field_group oe_read_only">
               <label for="office_code_name" string="Kontor"/>
-              <field name="office_code_name" />
+              <div>
+                <field name="office_code_name" />
+              </div>
             </div>
 
             <div class="af_field_group">
               <label for="share_info_with_employers"/>
-              <field name="share_info_with_employers"/>
+              <div>
+                <field name="share_info_with_employers"/>
+              </div>
             </div>
 
             <div class="af_field_group">
               <label for="sms_reminders"/>
-              <field name="sms_reminders"/>
+              <div>
+                <field name="sms_reminders"/>
+              </div>
             </div>
 
             <div class="af_field_group" groups="base.group_no_one" invisible="1">
               <label for="segment_jobseeker" invisible="1"/>
-              <field name="segment_jobseeker" groups="base.group_no_one" invisible="1"/>
+              <div>
+                <field name="segment_jobseeker" groups="base.group_no_one" invisible="1"/>
+              </div>
             </div>
 
             <div class="af_field_group" invisible="1">
@@ -225,7 +258,9 @@
               <field name="user_id" nolabel="1" options="{'no_create_edit': True}" class="oe_edit_only"/>
 
               <label for="user_name_sign" class="oe_read_only"/>
-              <field name="user_name_sign" class="oe_read_only"/>
+              <div>
+                <field name="user_name_sign" class="oe_read_only"/>
+              </div>
             </div>
 
             <div class="af_field_group" attrs="{'invisible': True}">
@@ -235,7 +270,9 @@
 
             <div class="af_field_group oe_read_only" groups="base.group_no_one">
               <label for="customer_id" string="Kundnummer:"/>
-              <field name="customer_id" groups="base.group_no_one"/>
+              <div>
+                <field name="customer_id" groups="base.group_no_one"/>
+              </div>
             </div>
 
           </div>

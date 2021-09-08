@@ -182,7 +182,7 @@ class ResPartner(models.Model):
 
     @api.one
     def _compute_user_name_sign(self):
-        self.user_name_sign = "%s %s" % (self.user_id.name, self.user_id.login)
+        self.user_name_sign = "%s (%s)" % (self.user_id.name, self.user_id.login)
 
     @api.one
     def _compute_office_code_name(self):

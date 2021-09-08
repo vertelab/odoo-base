@@ -316,17 +316,43 @@ class ResPartner(models.Model):
                                 social_sec_nr = msg.get(PNR, False)
 
                                 # Send request to AIS-F
-                                success = env_new["res.partner"]._aisf_sync_jobseeker(
-                                    None,
-                                    AISF_ASOK_SYNC_PROCESS,
-                                    customer_id,
-                                    social_sec_nr,
-                                    headers["message-id"]
-                                )
-                                if success:
-                                    self.env['af.process.log'].log_message(
-                                        AISF_ASOK_SYNC_PROCESS, headers["message-id"], "PROCESS COMPLETED", objectid=customer_id)
-                                    respartnerlsnr.ack_message(message)
+                                if self.is_mask_merit:
+                                    success = env_new["res.partner"]._aisf_sync_jobseeker_merit(
+                                        None,
+                                        AISF_ASOK_SYNC_PROCESS,
+                                        customer_id,
+                                        social_sec_nr,
+                                        headers["message-id"]
+                                    )
+                                    if success:
+                                        self.env['af.process.log'].log_message(
+                                            AISF_ASOK_SYNC_PROCESS, headers["message-id"], "PROCESS COMPLETED", objectid=customer_id)
+                                        respartnerlsnr.ack_message(message)
+                                elif self.is_mask_matching:
+                                    success = env_new["res.partner"]._aisf_sync_jobseeker_matching(
+                                        None,
+                                        AISF_ASOK_SYNC_PROCESS,
+                                        customer_id,
+                                        social_sec_nr,
+                                        headers["message-id"]
+                                    )
+                                    if success:
+                                        self.env['af.process.log'].log_message(
+                                            AISF_ASOK_SYNC_PROCESS, headers["message-id"], "PROCESS COMPLETED", objectid=customer_id)
+                                        respartnerlsnr.ack_message(message)
+                                else:
+                                    success = env_new["res.partner"]._aisf_sync_jobseeker(
+                                        None,
+                                        AISF_ASOK_SYNC_PROCESS,
+                                        customer_id,
+                                        social_sec_nr,
+                                        headers["message-id"]
+                                    )
+                                    if success:
+                                        self.env['af.process.log'].log_message(
+                                            AISF_ASOK_SYNC_PROCESS, headers["message-id"], "PROCESS COMPLETED", objectid=customer_id)
+                                        respartnerlsnr.ack_message(message)
+
                     except MaxTriesExceededError:
                         # TODO: Check if we should NACK instead.
                         respartnerlsnr.ack_message(message)
