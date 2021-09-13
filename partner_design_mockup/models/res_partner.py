@@ -6,6 +6,28 @@ class ResPartner(models.Model):
     _inherit = 'res.partner'
 
     search_partner_name = fields.Char("Search for name")
+    links = fields.Html("Links", compute='_compute_links')
+
+    @api.multi
+    def _compute_links(self):
+        links = self.env["partner.links"].search(
+            [
+                "|",
+                ("group_ids", "=", False),
+                ("group_ids", "in", self.env.user.groups_id.ids),
+            ]
+        )
+        if links:
+            for partner in self:
+                if partner.social_sec_nr:
+                    data = links.get_links(partner)
+                    html_data = "<table>"
+                    for link in data:
+                        html_data += "<tr><td><img height='25px' width='25px' src='%(icon)s'/>  " \
+                                     "<a href='%(url)s' target='_blank'> %(name)s </a></td></tr>" % \
+                                     {'icon': link.get('icon'), 'url': link.get('url'), 'name': link.get('name')}
+                    html_data += "</table>"
+                    partner.links = html_data
 
     @api.model
     def search(self, args, offset=0, limit=None, order=None, count=False):
