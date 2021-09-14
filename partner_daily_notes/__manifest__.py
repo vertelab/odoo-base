@@ -44,6 +44,7 @@ v12.0.1.4.1 AFC-2228: Made IPF meeting sync more robust. \n
 v12.0.1.4.2 AFC-2137: Fixed behaviour of this code. \n
 v12.0.1.4.3 AFC-2426: Fixed next appointment +2 hrs problem. \n
 v12.0.1.4.4 AFC-2489: Placed field under label for better reading. \n
+v12.0.1.4.5 AFC-2324: Changed next_contact_type and next_contact_type_app to Char \n
 """,
     'author': 'Vertel AB',
     'license': 'AGPL-3',
