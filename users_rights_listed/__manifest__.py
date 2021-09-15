@@ -24,7 +24,8 @@
     'category': '',
     'summary': 'Adds a UserGroup view to the res_users tree-view',
     'description': """
-        Adds a UserGroup view to the res_users tree-view
+        Adds a UserGroup view to the res_users tree-view \n
+        This module is maintained from: https://github.com/vertelab/odoo-base/edit/14.0/users_rights_listed/ \n
 """,
     'author': "Vertel AB",
     'license': "AGPL-3",
