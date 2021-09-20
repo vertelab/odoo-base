@@ -9,7 +9,7 @@
                 <xpath expr="//group[@name='description_group']" position="replace" />
                 <xpath expr="//field[@name='index_content']/parent::group" position="replace" />
                 <xpath expr="//sheet/group" position="after">
-                    <notebook groups="base.group_no_one">
+                    <notebook>
                         <page name="description" string="Description">
                             <field name="description" nolabel="1"/>
                         </page>
