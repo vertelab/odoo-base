@@ -1,0 +1,27 @@
+<templates>
+    <t t-extend="ControlPanel">
+        <t t-jquery="ol.breadcrumb" t-operation="attributes">
+            <attribute name="style">width:20%</attribute>
+        </t>
+        <t t-jquery="ol.breadcrumb" t-operation="after">
+            <div class="search_place_view">
+                <select id="search_place" name="search_place" class="search_place_input">
+                    <option value="at_contact">vid kontakt</option>
+                    <option value="based_on_authority_needs">Utifran Myndighetens behov</option>
+                </select>
+            </div>
+            <div class="search_option_view">
+                <select id="search_option" name="search_option" class="search_option_input">
+                    <option value="id_hanlding">ID-handling</option>
+                    <option value="e_identification">E-legitimation</option>
+                    <option value="card">LMA-kort/Uppehilistillstandskort</option>
+                    <option value="perivouly_identified">Kand (tidigare identifierad)</option>
+                    <option value="identified_by_certifier">Identifierad genom intygsgivare</option>
+                </select>
+            </div>
+            <div class="search_button">
+                <button name="search_contact" class="btn btn-primary contact_search" string="Search">Search</button>
+            </div>
+        </t>
+    </t>
+</templates>

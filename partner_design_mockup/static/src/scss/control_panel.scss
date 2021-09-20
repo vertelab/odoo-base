@@ -1,0 +1,35 @@
+.o_control_panel > .o_cp_searchview {
+    width: 35%;
+    min-height: 30px;
+}
+
+.o_control_panel {
+    .search_place_view {
+        width: 15%;
+
+        .search_place_input {
+            min-height: 30px;
+        }
+    }
+    &.o_breadcrumb_full {
+        .search_place_view {
+            display: none !important;
+        }
+    }
+}
+
+.o_control_panel {
+    .search_option_view {
+        width: 15%;
+
+        .search_option_input {
+            min-height: 30px;
+        }
+    }
+    &.o_breadcrumb_full {
+        .search_option_view {
+            display: none !important;
+        }
+    }
+}
+

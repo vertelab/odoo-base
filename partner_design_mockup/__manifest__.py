@@ -1,6 +1,6 @@
 {
     'name': 'Partner Design Mockup',
-    'version': '12.0.0.5',
+    'version': '12.0.0.6',
     'category': '',
     'description': """
     Download 'One Click Form Edit' module from here : \n
@@ -10,6 +10,7 @@
     V12.0.0.3 AFC-2170 - Added Advance search button in second type of view to search partners. \n
     V12.0.0.3 AFC-2170 - Added Advance search button in second type of view to search partners with separate menu. \n
     V12.0.0.5 AFC-2674 - Added Contact links section inside mocukup form views.\n
+    V12.0.0.6 AFC-2674 - Added dropdown and search button at top.\n
 """,
     'author': 'Vertel AB',
     'license': 'AGPL-3',
@@ -19,8 +20,10 @@
     ],
     'data': [
         'views/res_partner_views.xml',
+        'views/assets.xml',
         'wizard/search_partners_views.xml',
     ],
+    'qweb': ['static/src/xml/partner_search.xml'],
     'application': False,
     'installable': True,
 }

@@ -1,0 +1,12 @@
+<odoo>
+    <data>
+        <template id="partner_search_assets_backend" inherit_id="web.assets_backend"
+                  name="Backend Assets (used in backend interface)">
+            <xpath expr="." position="inside">
+                <link rel="stylesheet" type="text/scss"
+                      href="/partner_design_mockup/static/src/scss/control_panel.scss"/>
+            </xpath>
+        </template>
+
+    </data>
+</odoo>
