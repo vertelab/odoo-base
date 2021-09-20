@@ -81,15 +81,8 @@ class ResPartner(models.Model):
         string="Next contact time",
         help="Fields used by AIS-F data. Do not overwrite with other data.",
     )
-    next_contact_type = fields.Selection(
+    next_contact_type = fields.Char(
         string="Next contact type",
-        selection=[
-            ("T", "Phone"),
-            ("B", "Visit"),
-            ("E", "E-mail"),
-            ("P", "Mail"),
-            ("I", "Internet"),
-        ],
         help="Fields used by AIS-F data. Do not overwrite with other data.",
     )
     last_contact_date = fields.Date(
@@ -129,15 +122,8 @@ class ResPartner(models.Model):
             ("I", "Internet"),
         ],
     )
-    next_contact_type_app = fields.Selection(
+    next_contact_type_app = fields.Char(
         string="Next contact type",
-        selection=[
-            ("T", "Phone"),
-            ("B", "Visit"),
-            ("E", "E-mail"),
-            ("P", "Mail"),
-            ("I", "Internet"),
-        ],
     )
 
     @api.one

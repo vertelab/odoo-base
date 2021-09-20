@@ -21,7 +21,7 @@
 
 {
     'name': 'Daily notes',
-    'version': '12.0.1.4.6',
+    'version': '12.0.1.4.7',
     'category': '',
     'description': """
 Daily notes
@@ -46,6 +46,7 @@ v12.0.1.4.3 AFC-2426: Fixed next appointment +2 hrs problem. \n
 v12.0.1.4.4 AFC-2489: Placed field under label for better reading. \n
 v12.0.1.4.5 stopped crashing on partners with no next or last contact date \n
 v12.0.1.4.6 AFC-2297: Appointment notes now reflect (timezone correct) creation time \n
+v12.0.1.4.7 AFC-2324: Changed selection to char for next_contact_type and next_contact_type_app \n
 
 """,
     'author': 'Vertel AB',
