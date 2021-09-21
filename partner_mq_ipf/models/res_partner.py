@@ -22,6 +22,7 @@
 from odoo import models, fields, api, _, registry
 from odoo.addons.af_process_log.models.af_process_log import MaxTriesExceededError
 
+from datetime import datetime
 import json
 import logging
 import stomp
@@ -315,32 +316,41 @@ class ResPartner(models.Model):
                                 customer_id = msg.get(SID)
                                 social_sec_nr = msg.get(PNR, False)
 
-                                # Send request to AIS-F
-                                if self.is_mask_merit:
-                                    success = env_new["res.partner"]._aisf_sync_jobseeker_merit(
-                                        None,
-                                        AISF_ASOK_SYNC_PROCESS,
-                                        customer_id,
-                                        social_sec_nr,
-                                        headers["message-id"]
-                                    )
-                                    if success:
-                                        self.env['af.process.log'].log_message(
-                                            AISF_ASOK_SYNC_PROCESS, headers["message-id"], "PROCESS COMPLETED", objectid=customer_id)
-                                        respartnerlsnr.ack_message(message)
-                                elif self.is_mask_matching:
-                                    success = env_new["res.partner"]._aisf_sync_jobseeker_matching(
-                                        None,
-                                        AISF_ASOK_SYNC_PROCESS,
-                                        customer_id,
-                                        social_sec_nr,
-                                        headers["message-id"]
-                                    )
-                                    if success:
-                                        self.env['af.process.log'].log_message(
-                                            AISF_ASOK_SYNC_PROCESS, headers["message-id"], "PROCESS COMPLETED", objectid=customer_id)
-                                        respartnerlsnr.ack_message(message)
-                                else:
+                                timestamp = datetime.fromtimestamp(int(headers["timestamp"]))
+                                already_synced = self.env['af.process.log'].search_count([
+                                    ("create_date", ">", timestamp),
+                                    ("step", "=", "PROCESS COMPLETED"),
+                                    ("objectid", "=", customer_id)
+                                ])
+                                if not already_synced:
+                                    # Send request to AIS-F
+
+                                    # commented code below requires field that doesn't exist
+                                    # if self.is_mask_merit:
+                                    #     success = env_new["res.partner"]._aisf_sync_jobseeker_merit(
+                                    #         None,
+                                    #         AISF_ASOK_SYNC_PROCESS,
+                                    #         customer_id,
+                                    #         social_sec_nr,
+                                    #         headers["message-id"]
+                                    #     )
+                                    #     if success:
+                                    #         self.env['af.process.log'].log_message(
+                                    #             AISF_ASOK_SYNC_PROCESS, headers["message-id"], "PROCESS COMPLETED", objectid=customer_id)
+                                    #         respartnerlsnr.ack_message(message)
+                                    # elif self.is_mask_matching:
+                                    #     success = env_new["res.partner"]._aisf_sync_jobseeker_matching(
+                                    #         None,
+                                    #         AISF_ASOK_SYNC_PROCESS,
+                                    #         customer_id,
+                                    #         social_sec_nr,
+                                    #         headers["message-id"]
+                                    #     )
+                                    #     if success:
+                                    #         self.env['af.process.log'].log_message(
+                                    #             AISF_ASOK_SYNC_PROCESS, headers["message-id"], "PROCESS COMPLETED", objectid=customer_id)
+                                    #         respartnerlsnr.ack_message(message)
+                                    #else:
                                     success = env_new["res.partner"]._aisf_sync_jobseeker(
                                         None,
                                         AISF_ASOK_SYNC_PROCESS,
@@ -352,6 +362,13 @@ class ResPartner(models.Model):
                                         self.env['af.process.log'].log_message(
                                             AISF_ASOK_SYNC_PROCESS, headers["message-id"], "PROCESS COMPLETED", objectid=customer_id)
                                         respartnerlsnr.ack_message(message)
+                                else:
+                                    self.env['af.process.log'].log_message(
+                                        AISF_ASOK_SYNC_PROCESS, headers["message-id"], "PROCESS ABORTED",
+                                        objectid=customer_id,
+                                        status=False,
+                                        info_2="Jobseeker already synced")
+                                    respartnerlsnr.ack_message(message)
 
                     except MaxTriesExceededError:
                         # TODO: Check if we should NACK instead.
