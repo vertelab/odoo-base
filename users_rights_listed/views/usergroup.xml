@@ -8,7 +8,7 @@
             <field name="inherit_id" ref="base.view_users_tree"/>
             <field name="arch" type="xml">
                 <field name="lang" position="after">
-                    <field name="groups_id" widget="many2many_tags"/>
+                    <field name="groups_id" widget="many2many_tags" groups="base.group_no_one"/>
                 </field>
             </field>
         </record>

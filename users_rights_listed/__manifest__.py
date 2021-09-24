@@ -1,7 +1,7 @@
-################################################################################
+##############################################################################
 #
-#    OpenERP, Open Source Management Solution
-#    Copyright (C) 2019 N-Development (<https://n-development.com>).
+#    OpenERP, Open Source Management Solution, third party addon
+#    Copyright (C) 2004-2021 Vertel AB (<http://vertel.se>).
 #
 #    This program is free software: you can redistribute it and/or modify
 #    it under the terms of the GNU Affero General Public License as
@@ -16,15 +16,15 @@
 #    You should have received a copy of the GNU Affero General Public License
 #    along with this program.  If not, see <http://www.gnu.org/licenses/>.
 #
-################################################################################
+##############################################################################
 
 {
     'name': 'Users Rights Listed',
     'version': '14.0.0.0.1',
     'category': '',
-    'summary': 'Adds a UserGroup view to the res_users tree-view',
+    'summary': 'Adds a UserGroup field to the res_users tree-view in debug-mode.',
     'description': """
-        Adds a UserGroup view to the res_users tree-view \n
+        Adds a UserGroup field to the res_users tree-view in debug-mode.\n
         This module is maintained from: https://github.com/vertelab/odoo-base/edit/14.0/users_rights_listed/ \n
 """,
     'author': "Vertel AB",
