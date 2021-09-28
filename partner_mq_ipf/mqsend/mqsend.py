@@ -62,7 +62,7 @@ filedata = ""
 if filename:
     filedata = readfile(filename)
     print("filedata: ", filedata)
-    conn.send(body=filedata, destination=dest)
+    conn.send(body=filedata, destination=dest, headers={"message-id": "test", "timestamp": "1632233012"})
 
 else:
     print("Args: ", args)
