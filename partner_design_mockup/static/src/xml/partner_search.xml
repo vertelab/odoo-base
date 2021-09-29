@@ -7,7 +7,7 @@
             <div class="search_place_view">
                 <select id="search_place" name="search_place" class="search_place_input">
                     <option value="at_contact">vid kontakt</option>
-                    <option value="based_on_authority_needs">Utifran Myndighetens behov</option>
+                    <option value="based_on_authority_needs">Utifrån Myndighetens behov</option>
                 </select>
             </div>
             <div class="search_option_view">
