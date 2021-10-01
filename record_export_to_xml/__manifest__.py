@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 {
     'name': 'Export Records to XML',
-    'version': '14.0.0.1',
+    'version': '14.0.0.1.0',
     'category': 'Extra Tools',
     'summary': 'Export Records to XML',
     'description': """Export Records to XML""",
