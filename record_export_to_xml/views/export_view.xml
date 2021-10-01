@@ -1,0 +1,35 @@
+<odoo>
+    <data>
+        <record id="record_export_xml" model="ir.ui.view">
+            <field name="name">Record</field>
+            <field name="model">xml.export</field>
+            <field name="arch" type="xml">
+                <form>
+                    <footer>
+                        <button name='download_xml_export' string='Export' type='object' class="btn-primary"/>
+                        <button string="Cancel" class="oe_highlight" special="cancel"/>
+                    </footer>
+                </form>
+
+            </field>
+        </record>
+
+        <record id="view_attachment_simplified_form" model="ir.ui.view">
+            <field name="name">ir.attachment.simplified.form</field>
+            <field name="model">ir.attachment</field>
+            <field name="priority" eval="25" />
+            <field name="arch" type="xml">
+                <form string="Attachments">
+                    <sheet>
+                        <h1>
+                            <field name="name" invisible="1"/>
+                        </h1>
+                        <group name="main">
+                            <field name="datas" filename="name" string="Generated File" readonly="1" />
+                        </group>
+                    </sheet>
+                </form>
+            </field>
+        </record>
+    </data>
+</odoo>
