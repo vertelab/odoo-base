@@ -1,9 +1,7 @@
 from odoo import models, fields, api, _
-from datetime import date,datetime
 import base64
-from io import BytesIO
 import xml.etree.cElementTree as ET
-from fnmatch import fnmatch, fnmatchcase
+from fnmatch import fnmatch
 
 
 class XMLExport(models.TransientModel):
@@ -48,13 +46,13 @@ class XMLExport(models.TransientModel):
                             ET.SubElement(record, 'field', name=field.name, ref="%s" % values)
 
                     elif field.ttype in ['many2many']:
-                        m2mvalues = []
+                        mtomvalues = []
                         for val in model_records[field.name]:
                             key, values = 0, '' if not val.get_external_id() else val.get_external_id().items()
                             if len(values) > 0:
-                                m2mvalues.append("(4, ref('%s'))" % list(values)[0][1])
-                        if len(m2mvalues) > 0:
-                            ET.SubElement(record, 'field', name=field.name, eval="[%s]" % (','.join(m2mvalues)))
+                                mtomvalues.append("(4, ref('%s'))" % list(values)[0][1])
+                        if len(mtomvalues) > 0:
+                            ET.SubElement(record, 'field', name=field.name, eval="[%s]" % (','.join(mtomvalues)))
 
         xmlstr = ET.tostring(xml)
 
