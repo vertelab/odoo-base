@@ -1,0 +1,74 @@
+<odoo>
+    <data>
+        <record id="action_event_xml_export" model="ir.actions.act_window">
+            <field name="name">Event XML Export</field>
+            <field name="res_model">xml.export</field>
+            <field name="view_mode">form</field>
+            <field name="view_id" ref="record_export_to_xml.record_export_xml"/>
+            <field name="target">new</field>
+            <field name="binding_model_id" ref="event.model_event_event" />
+            <field name="binding_view_types">list,form</field>
+        </record>
+
+        <record id="action_partner_xml_export" model="ir.actions.act_window">
+            <field name="name">Partner XML Export</field>
+            <field name="res_model">xml.export</field>
+            <field name="view_mode">form</field>
+            <field name="view_id" ref="record_export_to_xml.record_export_xml"/>
+            <field name="target">new</field>
+            <field name="binding_model_id" ref="base.model_res_partner" />
+            <field name="binding_view_types">list,form</field>
+        </record>
+
+        <record id="action_users_xml_export" model="ir.actions.act_window">
+            <field name="name">Users XML Export</field>
+            <field name="res_model">xml.export</field>
+            <field name="view_mode">form</field>
+            <field name="view_id" ref="record_export_to_xml.record_export_xml"/>
+            <field name="target">new</field>
+            <field name="binding_model_id" ref="base.model_res_users" />
+            <field name="binding_view_types">list,form</field>
+        </record>
+
+        <record id="action_employee_xml_export" model="ir.actions.act_window">
+            <field name="name">Employees XML Export</field>
+            <field name="res_model">xml.export</field>
+            <field name="view_mode">form</field>
+            <field name="view_id" ref="record_export_to_xml.record_export_xml"/>
+            <field name="target">new</field>
+            <field name="binding_model_id" ref="hr.model_hr_employee" />
+            <field name="binding_view_types">list,form</field>
+        </record>
+
+        <record id="action_project_xml_export" model="ir.actions.act_window">
+            <field name="name">Project XML Export</field>
+            <field name="res_model">xml.export</field>
+            <field name="view_mode">form</field>
+            <field name="view_id" ref="record_export_to_xml.record_export_xml"/>
+            <field name="target">new</field>
+            <field name="binding_model_id" ref="project.model_project_project" />
+            <field name="binding_view_types">list,form</field>
+        </record>
+
+        <record id="action_project_task_xml_export" model="ir.actions.act_window">
+            <field name="name">Task XML Export</field>
+            <field name="res_model">xml.export</field>
+            <field name="view_mode">form</field>
+            <field name="view_id" ref="record_export_to_xml.record_export_xml"/>
+            <field name="target">new</field>
+            <field name="binding_model_id" ref="project.model_project_task" />
+            <field name="binding_view_types">list,form</field>
+        </record>
+
+        <record id="action_sale_order_xml_export" model="ir.actions.act_window">
+            <field name="name">Sale Order XML Export</field>
+            <field name="res_model">xml.export</field>
+            <field name="view_mode">form</field>
+            <field name="view_id" ref="record_export_to_xml.record_export_xml"/>
+            <field name="target">new</field>
+            <field name="binding_model_id" ref="sale.model_sale_order" />
+            <field name="binding_view_types">list,form</field>
+        </record>
+    </data>
+
+</odoo>
