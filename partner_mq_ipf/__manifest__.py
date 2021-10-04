@@ -30,7 +30,6 @@ v12.0.0.3.1 AFC-2467: Implemented queue limit.
 v12.0.0.3.2 AFC-2556: Added different requests to communicate with mq.
 v12.0.0.3.3 AFC-2663: Now skips already synced jobseekers.
 v12.0.0.3.4 AFC-2663: fixed timestamp format error.
-
 """,
     'author': 'Vertel AB',
     'license': 'AGPL-3',
