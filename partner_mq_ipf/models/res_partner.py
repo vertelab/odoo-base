@@ -315,8 +315,9 @@ class ResPartner(models.Model):
                                 headers, msg = message
                                 customer_id = msg.get(SID)
                                 social_sec_nr = msg.get(PNR, False)
-
-                                timestamp = datetime.fromtimestamp(int(headers["timestamp"]))
+                                # Timestamp from IPF is in milliseconds divide by 1000 to get POSIX Epoch timestamp
+                                timestamp = int(headers["timestamp"])/1000
+                                timestamp = datetime.fromtimestamp(timestamp)
                                 already_synced = self.env['af.process.log'].search_count([
                                     ("create_date", ">", timestamp),
                                     ("step", "=", "PROCESS COMPLETED"),
