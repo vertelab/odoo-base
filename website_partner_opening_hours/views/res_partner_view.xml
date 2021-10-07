@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <record id="view_opening_hours" model="ir.ui.view">
+            <field name="name">opening.hours.form</field>
+            <field name="model">opening.hours</field>
+            <field name="arch" type="xml">
+                <tree editable="bottom">
+                    <field name="dayofweek"/>
+                    <field name="open_time" widget="float_time"/>
+                    <field name="close_time" widget="float_time"/>
+                    <field name="break_start" widget="float_time"/>
+                    <field name="break_stop" widget="float_time"/>
+                    <field name="close"/>
+                </tree>
+            </field>
+        </record>
+        <record id="view_partner_form" model="ir.ui.view">
+            <field name="name">res.partner.form.inherited.website_partner_opening_hours</field>
+            <field name="model">res.partner</field>
+            <field name="inherit_id" ref="base.view_partner_form"/>
+            <field name="arch" type="xml">
+                <notebook position="inside">
+                    <page string="Opening Time" attrs="{'invisible': [('is_company', '=', False)]}">
+                        <field name="opening_hours_ids">
+                            <tree editable="bottom">
+                                <field name="dayofweek"/>
+                                <field name="open_time" widget="float_time"/>
+                                <field name="close_time" widget="float_time"/>
+                                <field name="break_start" widget="float_time"/>
+                                <field name="break_stop" widget="float_time"/>
+                                <field name="close"/>
+                            </tree>
+                        </field>
+                        <label for="opening_hours_exceptions"/>
+                        <field name="opening_hours_exceptions"/>
+                    </page>
+                </notebook>
+            </field>
+        </record>
+    </data>
+</odoo>
