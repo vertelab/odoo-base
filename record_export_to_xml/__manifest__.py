@@ -1,12 +1,18 @@
 # -*- coding: utf-8 -*-
 {
     'name': 'Export Records to XML',
-    'version': '14.0.0.1.0',
+    'version': '14.0.0.1.1',
     'category': 'Extra Tools',
     'summary': 'Export Records to XML',
     'description': """
-        Export Records to XML
-        14.0.0.1.1 - Added Documentations
+        Export Records to XML - Models you can import include: \n
+            - users
+            - contacts
+            - sale orders
+            - events
+            - hr employee
+            - project/tasks
+        \n 14.0.0.1.1 - Added Documentations
     """,
     'author': 'Vertelab',
     'website': "https://www.vertel.se",
