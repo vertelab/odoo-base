@@ -1,0 +1,108 @@
+# Translation of Odoo Server.
+# This file contains the translation of the following modules:
+# 	* partner_gender
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: Odoo Server 14.0-20210312\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2021-10-13 08:10+0000\n"
+"PO-Revision-Date: 2021-10-13 10:12+0200\n"
+"Language-Team: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"X-Generator: Poedit 2.3\n"
+"Last-Translator: \n"
+"Language: sv\n"
+
+#. module: partner_gender
+#: model:ir.model.fields.selection,name:partner_gender.selection__res_partner__gender__other
+msgid "Annat"
+msgstr "Annat"
+
+#. module: partner_gender
+#: model:ir.model,name:partner_gender.model_res_partner
+msgid "Contact"
+msgstr "Kontakt"
+
+#. module: partner_gender
+#: code:addons/partner_gender/models/res_partner.py:0
+#: model_terms:ir.ui.view,arch_db:partner_gender.portal_my_details
+#, python-format
+msgid "Decline to answer"
+msgstr "Vill ej svara"
+
+#. module: partner_gender
+#: model:ir.model.fields,field_description:partner_gender.field_res_partner__display_name
+msgid "Display Name"
+msgstr "Visningsnamn"
+
+#. module: partner_gender
+#: code:addons/partner_gender/models/res_partner.py:0
+#: model_terms:ir.ui.view,arch_db:partner_gender.portal_my_details
+#, python-format
+msgid "Female"
+msgstr "Kvinna"
+
+#. module: partner_gender
+#: model:ir.model.fields,field_description:partner_gender.field_res_partner__gender
+#: model_terms:ir.ui.view,arch_db:partner_gender.portal_my_details
+msgid "Gender"
+msgstr "Kön"
+
+#. module: partner_gender
+#: model:ir.model.fields,field_description:partner_gender.field_res_partner__gender_txt
+#: model:ir.model.fields,field_description:partner_gender.field_res_users__gender_txt
+msgid "Gender Txt"
+msgstr ""
+
+#. module: partner_gender
+#: model:ir.model.fields,field_description:partner_gender.field_res_partner__id
+msgid "ID"
+msgstr "ID"
+
+#. module: partner_gender
+#: model:ir.model.fields.selection,name:partner_gender.selection__res_partner__gender__female
+msgid "Kvinna"
+msgstr "Kvinna"
+
+#. module: partner_gender
+#: model:ir.model.fields,field_description:partner_gender.field_res_partner____last_update
+msgid "Last Modified on"
+msgstr "Senast ändrad"
+
+#. module: partner_gender
+#: code:addons/partner_gender/models/res_partner.py:0
+#: model_terms:ir.ui.view,arch_db:partner_gender.portal_my_details
+#, python-format
+msgid "Male"
+msgstr "Man"
+
+#. module: partner_gender
+#: model:ir.model.fields.selection,name:partner_gender.selection__res_partner__gender__male
+msgid "Man"
+msgstr "Man"
+
+#. module: partner_gender
+#: code:addons/partner_gender/models/res_partner.py:0
+#: model_terms:ir.ui.view,arch_db:partner_gender.portal_my_details
+#, python-format
+msgid "Other"
+msgstr "Annat"
+
+#. module: partner_gender
+#: model_terms:ir.ui.view,arch_db:partner_gender.personal_information
+msgid "Personal Information"
+msgstr "Personlig information"
+
+#. module: partner_gender
+#: model_terms:ir.ui.view,arch_db:partner_gender.personal_information
+msgid "Specify"
+msgstr "Specificera"
+
+#. module: partner_gender
+#: model:ir.model.fields.selection,name:partner_gender.selection__res_partner__gender__decline
+msgid "Vill ej svara"
+msgstr "Vill ej svara"

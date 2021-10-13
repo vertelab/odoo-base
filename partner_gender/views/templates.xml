@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <template id="portal_my_details" inherit_id="portal.portal_my_details">
+        <xpath expr="//div[contains(@t-attf-class,&quot;'name'&quot;)]" position="after">
+            <div t-attf-class="form-group #{error.get('name') and 'o_has_error' or ''} col-xl-6">
+                <label class="col-form-label">Gender</label>
+                <select class="form-control" name="gender">
+                    <option t-attf-value="male">Male</option>
+                    <option t-attf-value="female">Female</option>
+                    <option t-attf-value="other">Other</option>
+                    <option t-attf-value="decline">Decline to answer</option>
+                </select>
+            </div>
+        </xpath>
+    </template>
+</odoo>
