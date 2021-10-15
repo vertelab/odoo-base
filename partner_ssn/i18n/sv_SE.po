@@ -1,0 +1,89 @@
+# Translation of Odoo Server.
+# This file contains the translation of the following modules:
+#	* partner_ssn
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: Odoo Server 12.0-20210127\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2021-05-12 09:06+0000\n"
+"PO-Revision-Date: 2021-05-12 09:06+0000\n"
+"Last-Translator: Daniel Eriksson <daniel.eriksson@vertel.se>\n"
+"Language-Team: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: \n"
+"Plural-Forms: \n"
+
+#. module: partner_ssn
+#: code:addons/partner_ssn/models/res_partner.py:21
+#, python-format
+msgid "%s (%s years old)"
+msgstr "%s (%s år)"
+
+#. module: partner_ssn
+#: model:ir.model.fields,field_description:partner_ssn.field_res_partner__age
+#: model:ir.model.fields,field_description:partner_ssn.field_res_users__age
+msgid "Age"
+msgstr "Ålder"
+
+#. module: partner_ssn
+#: model:ir.model,name:partner_ssn.model_res_partner
+msgid "Contact"
+msgstr "Kontakt"
+
+#. module: partner_ssn
+#: code:addons/partner_ssn/models/res_partner.py:85
+#: code:addons/partner_ssn/models/res_partner.py:98
+#: code:addons/partner_ssn/models/res_partner.py:112
+#, python-format
+msgid "Could not convert social security number %s to date"
+msgstr "Kan inte konvertera personnummret %s till ett datum"
+
+#. module: partner_ssn
+#: code:addons/partner_ssn/models/res_partner.py:118
+#, python-format
+msgid "Incorrectly formated social security number %s"
+msgstr "Felformaterat personnummer %s"
+
+#. module: partner_ssn
+#: code:addons/partner_ssn/models/res_partner.py:142
+#, python-format
+msgid "Please input a correctly formated social security number.\n"
+" the correct format is YYYYMMDDNNNN or YYYYMMDD-NNNN.\n"
+" %s"
+msgstr "Vänligen ange ett personnummer i rätt format.\n"
+" Rätt format är YYYYMMDDNNNN eller YYYYMMDD-NNNN.\n"
+" Angivet personnummer: %s"
+
+#. module: partner_ssn
+#: model:ir.model.fields,field_description:partner_ssn.field_res_partner__social_sec_nr
+#: model:ir.model.fields,field_description:partner_ssn.field_res_partner__social_sec_nr_age
+#: model:ir.model.fields,field_description:partner_ssn.field_res_users__social_sec_nr
+#: model:ir.model.fields,field_description:partner_ssn.field_res_users__social_sec_nr_age
+msgid "Social security number"
+msgstr "Personnummer"
+
+#. module: partner_ssn
+#: code:addons/partner_ssn/models/res_partner.py:54
+#, python-format
+msgid "Social security number %s is formated as YYMMDD-NNNN, this format is not accepted"
+msgstr "Personnummret %s är formaterat som YYMMDD-NNNN, det är inte tillåtet."
+
+#. module: partner_ssn
+#: code:addons/partner_ssn/models/res_partner.py:64
+#, python-format
+msgid "Social security number %s is formated as YYMMDDNNNN, this format is not accepted"
+msgstr "Personnummret %s är formaterat som YYMMDDNNNN, det är inte tillåtet."
+
+#. module: partner_ssn
+#: code:addons/partner_ssn/models/res_partner.py:69
+#, python-format
+msgid "Social security number %s is not correctly formated."
+msgstr "Personnummret %s är felaktigt formaterat"
+
+#. module: partner_ssn
+#: sql_constraint:res.partner:0
+msgid "social security number field needs to be unique"
+msgstr "Personnummret måste vara unikt."
+
