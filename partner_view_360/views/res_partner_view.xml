@@ -108,8 +108,7 @@
         <div class="oe_button_box" name="button_box">
         </div>
 
-        <div>
-          <div string="Personal Information" class="af_column_50 af_personal_information_group">
+        <div class="af-three-column af_base_information_group">
             <field name="is_jobseeker" invisible="1" />
             <field name="parent_id" invisible="1" />
             <field name="type" invisible="1" />
@@ -149,21 +148,6 @@
               </div>
             </div>
 
-            <div class="af_field_group">
-              <!-- folkbokföringsadress, alternativt göra en res partner typ-->
-              <label for="state_name_code" string="Municipality" class="oe_read_only"/>
-              <div>
-                <field name="state_name_code" class="oe_read_only" placeholder="State"/>
-              </div>
-            </div>
-
-            <div class="af_field_group">
-              <label for="state_id" string="Municipality" class="oe_edit_only"/>
-              <div>
-                <field name="state_id" class="oe_edit_only"/>
-              </div>
-            </div>
-
             <div class="af_field_group oe_read_only">
               <label for="street" string="Registered address"/>
               <div>
@@ -185,10 +169,20 @@
               </div>
               <field name="country_id" placeholder="Country" class="o_address_country" attrs="{'invisible': True}"/>
             </div>
-          </div>
+            <div class="af_field_group">
+              <!-- folkbokföringsadress, alternativt göra en res partner typ-->
+              <label for="state_name_code" string="Municipality" class="oe_read_only"/>
+              <div>
+                <field name="state_name_code" class="oe_read_only" placeholder="State"/>
+              </div>
+            </div>
 
-          <div string="Employment service information"  class="af_column_50 af_employment_service_information_group">
-
+            <div class="af_field_group">
+              <label for="state_id" string="Municipality" class="oe_edit_only"/>
+              <div>
+                <field name="state_id" class="oe_edit_only"/>
+              </div>
+            </div>
             <div class="af_field_group oe_read_only">
               <label for="registered_through"/>
               <div>
@@ -237,13 +231,6 @@
               </div>
             </div>
 
-            <div class="af_field_group">
-              <label for="sms_reminders"/>
-              <div>
-                <field name="sms_reminders"/>
-              </div>
-            </div>
-
             <div class="af_field_group" groups="base.group_no_one" invisible="1">
               <label for="segment_jobseeker" invisible="1"/>
               <div>
@@ -277,8 +264,12 @@
                 <field name="customer_id" groups="base.group_no_one"/>
               </div>
             </div>
-
-          </div>
+            <div class="af_field_group">
+              <label for="sms_reminders"/>
+              <div>
+                <field name="sms_reminders"/>
+              </div>
+            </div>
         </div>
 
         <div class="af_arbetsokande_installningar">

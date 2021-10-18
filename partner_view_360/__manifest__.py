@@ -21,7 +21,7 @@
 
 {
     'name': 'Partner 360 view',
-    'version': '12.0.0.3.10',
+    'version': '12.0.0.3.11',
     'category': '',
     'description': """
 Module for employee 360 view
@@ -57,6 +57,7 @@ v12.0.0.3.7 AFC-2356: Added field has_address_co for displaying C/O prefix.\n
 v12.0.0.3.8 AFC-2256: Signature in brackets.\n
 v12.0.0.3.9 AFC-2489: Placed field under label for better reading.\n
 v12.0.0.3.10 AFC-2712: Changed segment_jobseeker field \n
+v12.0.0.3.11 AFC-2714: Split the text into a customer image for better readability \n
 """,
     'author': 'Vertel AB',
     'license': 'AGPL-3',
