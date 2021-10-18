@@ -109,7 +109,6 @@
         </div>
 
         <div class="af-three-column af_base_information_group">
-<!--          <div string="Personal Information" class="af_personal_information_group">-->
             <field name="is_jobseeker" invisible="1" />
             <field name="parent_id" invisible="1" />
             <field name="type" invisible="1" />
@@ -149,8 +148,6 @@
               </div>
             </div>
 
-
-
             <div class="af_field_group oe_read_only">
               <label for="street" string="Registered address"/>
               <div>
@@ -172,9 +169,6 @@
               </div>
               <field name="country_id" placeholder="Country" class="o_address_country" attrs="{'invisible': True}"/>
             </div>
-<!--          </div>-->
-
-<!--          <div string="Employment service information"  class="af_employment_service_information_group">-->
             <div class="af_field_group">
               <!-- folkbokföringsadress, alternativt göra en res partner typ-->
               <label for="state_name_code" string="Municipality" class="oe_read_only"/>
@@ -276,8 +270,6 @@
                 <field name="sms_reminders"/>
               </div>
             </div>
-
-<!--          </div>-->
         </div>
 
         <div class="af_arbetsokande_installningar">
