@@ -1,7 +1,8 @@
+# -*- coding: utf-8 -*-
 ##############################################################################
 #
-#    OpenERP, Open Source Management Solution, third party addon
-#    Copyright (C) 2004-2021 Vertel AB (<http://vertel.se>).
+#    Odoo SA, Open Source Management Solution, third party addon
+#    Copyright (C) 2021- Vertel AB (<http://vertel.se>).
 #
 #    This program is free software: you can redistribute it and/or modify
 #    it under the terms of the GNU Affero General Public License as
@@ -14,22 +15,27 @@
 #    GNU Affero General Public License for more details.
 #
 #    You should have received a copy of the GNU Affero General Public License
-#    along with this program.  If not, see <http://www.gnu.org/licenses/>.
+#    along with this program. If not, see <http://www.gnu.org/licenses/>.
 #
 ##############################################################################
 
 {
     'name': 'Users Rights Listed',
-    'version': '14.0.0.0.1',
-    'category': '',
     'summary': 'Adds a UserGroup field to the res_users tree-view in debug-mode.',
+    'author': 'Vertel AB',
+    'contributor': '',
+    'maintainer': 'Vertel AB',
+    'repository': 'https://github.com/vertelab/odoo-event.git',
+    'category': 'Tools',
+    'version': '14.0.0.0.1',
+    # Version ledger: 14.0 = Odoo version. 1 = Major. Non regressionable code. 2 = Minor. New features that are regressionable. 3 = Bug fixes
+    'license': 'AGPL-3',
+    'website': 'https://vertel.se/',
+    
     'description': """
         Adds a UserGroup field to the res_users tree-view in debug-mode.\n
         This module is maintained from: https://github.com/vertelab/odoo-base/edit/14.0/users_rights_listed/ \n
 """,
-    'author': "Vertel AB",
-    'license': "AGPL-3",
-    'website': 'https://www.vertel.se',
     'depends': [],
     'data': [
         "views/usergroup.xml"
