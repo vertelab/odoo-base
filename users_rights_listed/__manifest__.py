@@ -31,7 +31,6 @@
     # Version ledger: 14.0 = Odoo version. 1 = Major. Non regressionable code. 2 = Minor. New features that are regressionable. 3 = Bug fixes
     'license': 'AGPL-3',
     'website': 'https://vertel.se/',
-    
     'description': """
         Adds a UserGroup field to the res_users tree-view in debug-mode.\n
         This module is maintained from: https://github.com/vertelab/odoo-base/edit/14.0/users_rights_listed/ \n
