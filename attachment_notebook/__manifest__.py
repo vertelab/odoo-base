@@ -1,8 +1,8 @@
 # -*- coding: utf-8 -*-
 ##############################################################################
 #
-#    Odoo, Open Source Management Solution, third party addon
-#    Copyright (C) 2004-2017 Vertel AB (<https://vertel.se>).
+#    Odoo SA, Open Source Management Solution, third party addon
+#    Copyright (C) 2021- Vertel AB (<https://vertel.se>).
 #
 #    This program is free software: you can redistribute it and/or modify
 #    it under the terms of the GNU Affero General Public License as
@@ -15,23 +15,29 @@
 #    GNU Affero General Public License for more details.
 #
 #    You should have received a copy of the GNU Affero General Public License
-#    along with this program.  If not, see <http://www.gnu.org/licenses/>.
+#    along with this program. If not, see <http://www.gnu.org/licenses/>.
 #
 ##############################################################################
 
 {
     'name': 'Attachment Notebook',
+    'summary': '...',
+    'author': 'Vertel AB',
+    'contributor': '',
+    'maintainer': 'Vertel AB',
+    'repository': 'https://github.com/vertelab/odoo-base.git',
+    'category': 'Administration',
+    'version': '14.0.1',
+    # Version ledger: 14.0 = Odoo version. 1 = Major. Non regressionable code. 2 = Minor. New features that are regressionable. 3 = Bug fixes
+    'website': 'https://vertel.se/',
     'description': """
 Attachment Notebook
 ===================
 
 Adds a notebook for other modules to populate with more functionality
 """,
-    'version': '14.0.1',
-    'category': 'Administration',
     'license': 'AGPL-3',
     'website': 'https://www.vertel.se',
-    'author': 'Vertel AB',
     'depends': [],
     'data': [
         # 'views/document_templates.xml',
