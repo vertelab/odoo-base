@@ -2,23 +2,26 @@
 odoo-event/event_partner_calendar
 ==================
 
-New events are shown in the calendar.
+Export Records to XML
 ============
 
-Newly created events creates corresponding entries in the calendar.
-Features:
+| Export Records to XML - Models you can import include:
+| - users
+| - contacts
+| - sale orders
+| - events
+| - hr employee
+| - project/tasks
 
-* The start/end-time of the calendar entry is updated when the start/end time of the event changes.
-* Attendees of the event are added to the calendar event when they are added/removed to/from the event.
-* The calendar entry is removed when the event is removed.
+| 14.0.0.1.1 - Added Documentations
 | 
-| This module is maintained from: https://github.com/vertelab/odoo-event/tree/14.0/event_partner_calendar/
+| This module is maintained from: https://github.com/vertelab/odoo-event/tree/14.0/base/
 
 
 Installation
 ============
 
-This module depends on ``event``, ``calendar`` .
+This module depends on ``base``, ``event``, ``hr``, ``sale``, ``project``.
 
 This module is maintained from: https://github.com/vertelab/odoo-event/
 
