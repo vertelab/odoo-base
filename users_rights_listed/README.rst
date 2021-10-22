@@ -5,18 +5,15 @@ odoo-base/user_rights_listed
 User Rights Listed
 ============
 
-| Adds a UserGroup field to the res_users tree-view in debug-mode.\n
-| This module is maintained from: https://github.com/vertelab/odoo-base/edit/14.0/users_rights_listed/ \n
+| Adds a UserGroup field to the res_users tree-view in debug-mode.
 | 
-| This module is maintained from: https://github.com/vertelab/odoo-base/
 
 
 Installation
 ============
 
-This module depends on ``base``, ``event``, ``hr``, ``sale``, ``project``.
 
-This module is maintained from: https://github.com/vertelab/odoo-event/
+This module is maintained from: https://github.com/vertelab/odoo-base/
 
 Configuration
 =============
