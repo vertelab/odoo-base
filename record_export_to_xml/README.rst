@@ -1,5 +1,5 @@
 ==================
-odoo-event/event_partner_calendar
+odoo-base/record_export_to_xml
 ==================
 
 Export Records to XML
