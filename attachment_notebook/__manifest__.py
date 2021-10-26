@@ -20,8 +20,8 @@
 ##############################################################################
 
 {
-    'name': 'Attachment Notebook',
-    'summary': '...',
+    'name': 'Base: Attachment Notebook',
+    'summary': '',
     'author': 'Vertel AB',
     'contributor': '',
     'maintainer': 'Vertel AB',
@@ -29,15 +29,14 @@
     'category': 'Administration',
     'version': '14.0.1',
     # Version ledger: 14.0 = Odoo version. 1 = Major. Non regressionable code. 2 = Minor. New features that are regressionable. 3 = Bug fixes
-    'website': 'https://vertel.se/',
+    'license': 'AGPL-3',
+    'website': 'https://vertel.se/apps/base',
     'description': """
 Attachment Notebook
 ===================
 
 Adds a notebook for other modules to populate with more functionality
 """,
-    'license': 'AGPL-3',
-    'website': 'https://www.vertel.se',
     'depends': [],
     'data': [
         # 'views/document_templates.xml',

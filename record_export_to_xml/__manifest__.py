@@ -15,12 +15,12 @@
 #    GNU Affero General Public License for more details.
 #
 #    You should have received a copy of the GNU Affero General Public License
-#    along with this program.  If not, see <http://www.gnu.org/licenses/>.
+#    along with this program. If not, see <http://www.gnu.org/licenses/>.
 #
 ##############################################################################
 
 {
-    'name': 'Export Records to XML',
+    'name': 'Base: Export Records to XML',
     'summary': 'Export Records to XML',
     'author': 'Vertel AB',
     'contributor': '',
@@ -30,7 +30,7 @@
     'version': '14.0.0.1.1',
     # Version ledger: 14.0 = Odoo version. 1 = Major. Non regressionable code. 2 = Minor. New features that are regressionable. 3 = Bug fixes
     'license': 'AGPL-3',
-    'website': 'https://vertel.se/',
+    'website': 'https://vertel.se/apps/base',
     'description': """
         Export Records to XML - Models you can import include: \n
             - users

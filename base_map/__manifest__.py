@@ -1,7 +1,8 @@
+# -*- coding: utf-8 -*-
 ##############################################################################
 #
-#    Odoo, Open Source Management Solution, third party addon
-#    Copyright (C) 2004-2019 Vertel AB (<http://vertel.se>).
+#    Odoo SA, Open Source Management Solution, third party addon
+#    Copyright (C) 2021- Vertel AB (<https://vertel.se>).
 #
 #    This program is free software: you can redistribute it and/or modify
 #    it under the terms of the GNU Affero General Public License as
@@ -14,23 +15,28 @@
 #    GNU Affero General Public License for more details.
 #
 #    You should have received a copy of the GNU Affero General Public License
-#    along with this program.  If not, see <http://www.gnu.org/licenses/>.
+#    along with this program. If not, see <http://www.gnu.org/licenses/>.
 #
 ##############################################################################
 
 {
-    "name": "Base mapping",
-    "version": "13.0.1.0.0",
-    "category": "",
-    "summary": """
+    'name': 'Base mapping',
+    'summary': 'Allows for quick mapping of odoo fields to fields in other systems.',
+    'author': 'Vertel AB',
+    'contributor': '',
+    'maintainer': 'Vertel AB',
+    'repository': 'https://github.com/vertelab/odoo-base',
+    'category': '',
+    'version': '13.0.1.0.0',
+    # Version ledger: 14.0 = Odoo version. 1 = Major. Non regressionable code. 2 = Minor. New features that are regressionable. 3 = Bug fixes
+    'license': 'AGPL-3',
+    'website': 'https://vertel.se/apps/base',
+    "description": """
 Base mapping
 ============
 This modules allows for quick mapping of odoo fields to fields in other systems.
 Also supports import / export of field data.
 """,
-    "author": "Vertel AB",
-    "license": "AGPL-3",
-    "website": "http://www.vertel.se",
     "depends": ["base"],
     "data": [
         "views/ir_model.xml",

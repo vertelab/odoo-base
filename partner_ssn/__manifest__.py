@@ -20,8 +20,8 @@
 ##############################################################################
 
 {
-    'name': 'Partner Social Security Number',
-    'summary': '...',
+    'name': 'Base: Partner Social Security Number',
+    'summary': 'Adds social security number to partners.',
     'author': 'Vertel AB',
     'contributor': '',
     'maintainer': 'Vertel AB',
@@ -30,7 +30,7 @@
     'version': '14.0.0.1.0',
     # Version ledger: 14.0 = Odoo version. 1 = Major. Non regressionable code. 2 = Minor. New features that are regressionable. 3 = Bug fixes
     'license': 'AGPL-3',
-    'website': 'https://vertel.se/',
+    'website': 'https://vertel.se/apps/base',
     
     'description': """
 Adds social security number to partners
