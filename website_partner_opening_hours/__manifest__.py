@@ -31,7 +31,7 @@
     'license': 'AGPL-3',
     'website': 'https://vertel.se/apps/base',
     'description': """
-Add opening hours for a partner
+Add opening hours for a partner.
 ===============================
 """,
     'depends': ['base'],

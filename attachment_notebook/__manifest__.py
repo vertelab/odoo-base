@@ -21,7 +21,7 @@
 
 {
     'name': 'Base: Attachment Notebook',
-    'summary': '',
+    'summary': 'Adds a notebook for other modules to populate with more functionality.',
     'author': 'Vertel AB',
     'contributor': '',
     'maintainer': 'Vertel AB',
@@ -35,7 +35,7 @@
 Attachment Notebook
 ===================
 
-Adds a notebook for other modules to populate with more functionality
+Adds a notebook for other modules to populate with more functionality.
 """,
     'depends': [],
     'data': [

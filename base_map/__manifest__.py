@@ -20,7 +20,7 @@
 ##############################################################################
 
 {
-    'name': 'Base mapping',
+    'name': 'Base: Mapping',
     'summary': 'Allows for quick mapping of odoo fields to fields in other systems.',
     'author': 'Vertel AB',
     'contributor': '',

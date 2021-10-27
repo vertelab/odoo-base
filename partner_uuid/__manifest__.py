@@ -21,7 +21,7 @@
 
 {
     'name': 'Base: Partner UUID',
-    'summary': 'Adds a partner_uuid field to partners',
+    'summary': 'Adds a partner_uuid field to partners.',
     'author': 'Vertel AB',
     'contributor': '',
     'maintainer': 'Vertel AB',
@@ -32,7 +32,7 @@
     'license': 'AGPL-3',
     'website': 'https://vertel.se/apps/base',
     'description': """
-        Adds a partner_uuid field to partners
+        Adds a partner_uuid field to partners.
 """,
     'depends': [
         'contacts',

@@ -33,8 +33,8 @@
     'website': 'https://vertel.se/apps/base',
     'description': """
         Features:\n
-        * Adds a "Personal information" tab on res_partners with a gender field\n
-        * Adds an select box for gender on personal details form in the user portal\n
+        * Adds a "Personal information" tab on res_partners with a gender field.\n
+        * Adds an select box for gender on personal details form in the user portal.\n
         This module is maintained from: https://github.com/vertelab/odoo-base/\n
     """,
     'depends': ['base'],
