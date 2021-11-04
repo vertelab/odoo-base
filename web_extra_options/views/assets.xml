@@ -4,5 +4,8 @@
         <xpath expr="//script[@src='/web/static/src/js/fields/field_utils.js']" position="after">
             <script type="text/javascript" src="/web_extra_options/static/src/js/fields/field_utils.js"/>
         </xpath>
+        <xpath expr="//script[@src='/web/static/src/js/fields/basic_fields.js']" position="after">
+            <script type="text/javascript" src="/web_extra_options/static/src/js/fields/basic_fields.js"/>
+        </xpath>
     </template>
 </odoo>

@@ -21,7 +21,7 @@
 
 {
     'name': 'Web Extra Options',
-    'version': '12.0.0.1',
+    'version': '12.0.0.1.0',
     'category': '',
     'description': """Adds extra features to web.
 
@@ -101,6 +101,8 @@ Time Zone                       z or zz                   EST CST ... MST PST
                                 ZZ                        -0700 -0600 ... +0600 +0700
 Unix Timestamp                  X                         1360013296
 Unix Millisecond Timestamp      x                         1360013296123
+
+Adds possiblilty to search with sudo rights in search_count.
 """,
     'author': 'Vertel AB',
     'license': 'AGPL-3',
