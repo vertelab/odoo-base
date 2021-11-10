@@ -2,7 +2,7 @@ odoo.define('web_extra_options.basic_fields', function (require) {
 "use strict";
 
 let Domain = require('web.Domain');
-let basic_fields = require('web.basic_fields');
+let BasicModel = require('web.BasicModel');
 
 /**
  * The "Domain" field allows the user to construct a technical-prefix domain
@@ -11,7 +11,7 @@ let basic_fields = require('web.basic_fields');
  * domain directly (or to build advanced domains the tree-like interface does
  * not allow to).
  */
-basic_fields.FieldDomain.include({
+BasicModel.include({
     /**
      * Fetches the number of records associated to the domain the value of the
      * given field represents.
@@ -52,11 +52,17 @@ basic_fields.FieldDomain.include({
         var def = $.Deferred();
         var evalContext = this._getEvalContext(record);
         // Check for custom search_count method.
-        let method = fieldInfo.options.method || 'search_count';
+        let method = fieldInfo.options.method || "search_count";
+        let model = domainModel;
+        let args = [Domain.prototype.stringToArray(domainValue, evalContext)];
+        if (method !== "search_count"){
+             model = record.model;
+             args = args + [domainModel]
+        }
         this._rpc({
-            model: domainModel,
+            model: model,
             method: method,
-            args: [Domain.prototype.stringToArray(domainValue, evalContext)],
+            args: args,
             context: context
         })
             .then(_.identity, function (error, e) {
