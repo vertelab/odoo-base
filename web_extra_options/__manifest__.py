@@ -19,22 +19,23 @@
 #
 ##############################################################################
 
+# noinspection PyStatementEffect
 {
     'name': 'Web Extra Options',
-    'version': '12.0.0.1.0',
+    'version': '12.0.1.0.0',
     'category': '',
     'description': """Adds extra features to web.
 
 === Date and Datetime formating ===
-Adds formating options to date and datetime widgets through the datepicker option.
+Adds formatting options to date and datetime widgets through the datepicker option.
 
-Specify a format through the format option. Remember that this destroys language based formating.
+Specify a format through the format option. Remember that this destroys language based formatting.
 Example: options="{'datepicker': {'format': 'YYYY-MM-DD HH:mm'}}"
 
 You can also hide specific parts of the datetime (only seconds so far). NOT IMPLEMENTED FOR EDIT MODE!
 Example: options="{'datepicker': {'hide': {'seconds': True}}}"
 
-Date formating string is from moment.js, not python.
+Date formatting string is from moment.js, not python.
                                 Token                     Output
 Month                           M                         1 2 ... 11 12
                                 Mo                        1st 2nd ... 11th 12th
@@ -102,7 +103,11 @@ Time Zone                       z or zz                   EST CST ... MST PST
 Unix Timestamp                  X                         1360013296
 Unix Millisecond Timestamp      x                         1360013296123
 
-Adds possiblilty to search with sudo rights in search_count.
+
+=== SUDO rights for Search_Count ===
+Extends search_count with the ability to search with Sudo rights if user belongs to the right groups.
+Extend the model that is to use it with a customised search function, an example can be found in mass_mailing_count.
+In the view extend search_count widget with option={method:customized_function}.
 """,
     'author': 'Vertel AB',
     'license': 'AGPL-3',
