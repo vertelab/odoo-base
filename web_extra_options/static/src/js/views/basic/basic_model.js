@@ -57,7 +57,7 @@ BasicModel.include({
         let args = [Domain.prototype.stringToArray(domainValue, evalContext)];
         if (method !== "search_count"){
              model = record.model;
-             args = args + [domainModel]
+             args.push(domainModel)
         }
         this._rpc({
             model: model,

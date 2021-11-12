@@ -22,10 +22,11 @@
 # noinspection PyStatementEffect
 {
     'name': 'Web Extra Options',
-    'version': '12.0.1.0.0',
+    'version': '12.0.1.0.1',
     'category': '',
     'description': """Adds extra features to web.
-
+1. 12.0.1.0.0 - First deploy of Search Count
+2. 12.0.1.0.1 - Securityfix of Search Count
 === Date and Datetime formating ===
 Adds formatting options to date and datetime widgets through the datepicker option.
 
@@ -102,7 +103,6 @@ Time Zone                       z or zz                   EST CST ... MST PST
                                 ZZ                        -0700 -0600 ... +0600 +0700
 Unix Timestamp                  X                         1360013296
 Unix Millisecond Timestamp      x                         1360013296123
-
 
 === SUDO rights for Search_Count ===
 Extends search_count with the ability to search with Sudo rights if user belongs to the right groups.
