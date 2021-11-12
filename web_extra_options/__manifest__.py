@@ -25,7 +25,8 @@
     'version': '12.0.1.0.1',
     'category': '',
     'description': """Adds extra features to web.
-
+1. 12.0.1.0.0 - First deploy of Search Count
+2. 12.0.1.0.1 - Securityfix of Search Count
 === Date and Datetime formating ===
 Adds formatting options to date and datetime widgets through the datepicker option.
 
