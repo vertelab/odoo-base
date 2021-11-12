@@ -22,7 +22,7 @@
 # noinspection PyStatementEffect
 {
     'name': 'Web Extra Options',
-    'version': '12.0.1.0.0',
+    'version': '12.0.1.0.1',
     'category': '',
     'description': """Adds extra features to web.
 
