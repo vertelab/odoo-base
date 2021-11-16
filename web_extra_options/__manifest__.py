@@ -22,11 +22,12 @@
 # noinspection PyStatementEffect
 {
     'name': 'Web Extra Options',
-    'version': '12.0.1.0.1',
+    'version': '12.0.1.0.2',
     'category': '',
     'description': """Adds extra features to web.
 1. 12.0.1.0.0 - First deploy of Search Count
 2. 12.0.1.0.1 - Securityfix of Search Count
+3. 12.0.1.0.2 - Bugfixes - Better error handling
 === Date and Datetime formating ===
 Adds formatting options to date and datetime widgets through the datepicker option.
 
