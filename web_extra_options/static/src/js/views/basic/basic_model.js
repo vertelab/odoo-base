@@ -51,30 +51,31 @@ BasicModel.include({
 
         var def = $.Deferred();
         var evalContext = this._getEvalContext(record);
+        let args = [Domain.prototype.stringToArray(domainValue, evalContext)];
         // Check for custom search_count method.
         let method = fieldInfo.options.method || "search_count";
         let model = domainModel;
-        let args = [Domain.prototype.stringToArray(domainValue, evalContext)];
         if (method !== "search_count"){
              model = record.model;
              args.push(domainModel)
         }
-        this._rpc({
+        let promise = this._rpc({
             model: model,
             method: method,
             args: args,
             context: context
-        })
-            .then(_.identity, function (error, e) {
+        });
+        if (method == "search_count"){
+            promise.then(_.identity, function (error, e) {
                 e.preventDefault(); // prevent traceback (the search_count might be intended to break)
                 return false;
-            })
-            .always(function (nbRecords) {
-                def.resolve({
-                    model: domainModel,
-                    nbRecords: nbRecords,
-                });
+            })}
+        promise.always(function (nbRecords) {
+            def.resolve({
+                model: domainModel,
+                nbRecords: nbRecords,
             });
+        });
 
         return def;
     }
