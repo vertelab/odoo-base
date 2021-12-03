@@ -1,0 +1,7 @@
+<odoo>
+    <template id="assets_backend" inherit_id="web.assets_backend">
+        <xpath expr="//link[last()]" position="after">
+            <link rel="stylesheet" type="text/scss" href="/partner_flip_zip_city/static/src/scss/form_view.scss"/>
+        </xpath>
+    </template>
+</odoo>

@@ -13,6 +13,7 @@
     ],
     'data': [
         'views/res_partner_view.xml',
+        'views/assets.xml',
     ],
     'application': False,
     'installable': True,
