@@ -31,7 +31,7 @@
     "description": """
         Partner Counterpart
     """,
-    "depends": ["base", "contacts", "sales_team"],
+    "depends": ["base", "contacts", "sales_team", "account"],
     "data": [
         "security/ir.model.access.csv",
         'views/partner_counterpart_view.xml',
