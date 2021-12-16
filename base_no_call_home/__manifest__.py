@@ -35,7 +35,6 @@
     'depends': ["mail", 'web'],
     'init_xml': [],
     'data': [
-        "data/base_view.xml",
         "data/mail_data.xml",
     ],
     'demo_xml': [],
