@@ -28,18 +28,30 @@ from odoo.tools.config import config
 
 config['publisher_warranty_url'] = ''
 _logger = logging.getLogger(__name__)
-_logger.info("CALLED!")
+
+
+### TODO: Remove this, this is only here to keep a record of all POST requests
+import requests
+
+good_post = requests.post
+def my_post(*args, **kwargs):
+    _logger.info("ANY POST:\n args: %s\n kwargs: %s", str(args), str(kwargs))
+    return good_post(*args, **kwargs)
+
+requests.post = my_post
+### TODO: Remove this
+
 
 class PublisherWarrantyContract(AbstractModel):
     _inherit = "publisher_warranty.contract"
 
     def __init__(self, *args, **kwargs):
-        _logger.info("Created instance")
+        _logger.info("base_no_call_home: Created instance")
         super(PublisherWarrantyContract, self).__init__(*args, **kwargs)
 
     @api.model
     def _get_message(self):
-        _logger.info("_get_message")
+        _logger.info("base_no_call_home: _get_message")
         if version_info and isinstance(version_info, (list,tuple)) and 'e' == version_info[-1]:
             ret = super(PublisherWarrantyContract, self)._get_message()
             return ret
@@ -47,22 +59,22 @@ class PublisherWarrantyContract(AbstractModel):
 
     @api.model
     def _get_sys_logs(self):
-        _logger.info("_get_sys_logs")
+        _logger.info("base_no_call_home: _get_sys_logs")
         if version_info and isinstance(version_info, (list,tuple)) and 'e' == version_info[-1]:
             ret = super(PublisherWarrantyContract, self)._get_sys_logs()
             return ret
         return
 
     def update_notification(self, cron_mode=True):
-        _logger.info("update_notification")
+        _logger.info("base_no_call_home: update_notification")
         if version_info and isinstance(version_info, (list, tuple)) and 'e' == version_info[-1]:
             return super(PublisherWarrantyContract, self).update_notification(cron_mode=cron_mode)
-        _logger.info("NO More phoning Home Stuff")
+        _logger.info("base_no_call_home: No more phoning Home Stuff")
         return True
 
     @api.model
     def set_notification_update(self, cron_id):
-        _logger.info("set_notification_update")
+        _logger.info("base_no_call_home: set_notification_update")
         if version_info and isinstance(version_info, (list,tuple)) and 'e' == version_info[-1]:
             self.env['ir.cron'].browse(cron_id).write({'active': True})
         else:
