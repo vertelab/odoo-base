@@ -11,8 +11,7 @@ _logger = logging.getLogger(__name__)
 class ResPartner(models.Model):
     _inherit = "res.partner"
 
-    age = fields.Char(string="Age", compute="calculate_age")
-    gender = fields.Selection([('male', 'Male'), ('female', 'Female')], string="Gender", compute="calculate_gender")
+    age = fields.Char(string="Age",) # compute="calculate_age" removed computed
     social_sec_nr = fields.Char(string="Social security number")
     social_sec_nr_age = fields.Char(string="Social security number", compute="combine_social_sec_nr_age")
 
@@ -33,14 +32,6 @@ class ResPartner(models.Model):
         'social security number field needs to be unique'
         )]
 
-    def calculate_gender(self):
-        for partner in self:
-            if partner.social_sec_nr:
-                last_digit = int(partner.social_sec_nr[-1])
-                if last_digit % 2 == 0:
-                    partner.gender = 'female'
-                else:
-                    partner.gender = 'male'
 
     @api.depends('social_sec_nr')
     @api.constrains("social_sec_nr")
