@@ -12,4 +12,3 @@ class ResPartner(models.Model):
     _inherit = "res.partner"
 
     partner_uuid = fields.Char(string="UUID")
-    partner_ssn = fields.Char(string="SSN")

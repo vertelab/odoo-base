@@ -7,7 +7,6 @@
             <field name="arch" type="xml">
                 <field name="vat" position="after">
                     <field name="partner_uuid" />
-                    <field name="partner_ssn" />
                 </field>
             </field>
         </record>
