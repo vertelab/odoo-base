@@ -12,7 +12,7 @@ class ResPartner(models.Model):
     def calculate_gender(self):
         for partner in self:
             if partner.social_sec_nr:
-                last_digit = int(partner.social_sec_nr[-1])
+                last_digit = int(partner.social_sec_nr[-2])
                 if last_digit % 2 == 0:
                     partner.gender = 'female'
                 else:
