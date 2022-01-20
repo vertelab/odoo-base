@@ -1,0 +1,44 @@
+# Translation of Odoo Server.
+# This file contains the translation of the following modules:
+# 	* partner_company_registry
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: Odoo Server 14.0-20211230\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2022-01-20 07:38+0000\n"
+"PO-Revision-Date: 2022-01-20 08:39+0100\n"
+"Last-Translator: Han Wong <han.wong@vertel.se>\n"
+"Language-Team: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"Language: sv_SE\n"
+"X-Generator: Poedit 3.0\n"
+
+#. module: partner_company_registry
+#: model:ir.model.fields,field_description:partner_company_registry.field_res_partner__company_registry
+#: model:ir.model.fields,field_description:partner_company_registry.field_res_users__company_registry
+msgid "Company Registry"
+msgstr "Organisationsnummer"
+
+#. module: partner_company_registry
+#: model:ir.model,name:partner_company_registry.model_res_partner
+msgid "Contact"
+msgstr "Kontakt"
+
+#. module: partner_company_registry
+#: model:ir.model.fields,field_description:partner_company_registry.field_res_partner__display_name
+msgid "Display Name"
+msgstr "Visningsnamn"
+
+#. module: partner_company_registry
+#: model:ir.model.fields,field_description:partner_company_registry.field_res_partner__id
+msgid "ID"
+msgstr ""
+
+#. module: partner_company_registry
+#: model:ir.model.fields,field_description:partner_company_registry.field_res_partner____last_update
+msgid "Last Modified on"
+msgstr "Senast ändrad den"
