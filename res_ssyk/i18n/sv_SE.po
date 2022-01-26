@@ -1,0 +1,134 @@
+# Translation of Odoo Server.
+# This file contains the translation of the following modules:
+# 	* res_ssyk
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: Odoo Server 14.0-20220121\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2022-01-26 13:39+0000\n"
+"PO-Revision-Date: 2022-01-26 14:41+0100\n"
+"Last-Translator: \n"
+"Language-Team: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: \n"
+"Language: sv\n"
+"X-Generator: Poedit 3.0\n"
+
+#. module: res_ssyk
+#: model_terms:ir.ui.view,arch_db:res_ssyk.view_ssyk_tree
+msgid "Code"
+msgstr "Kod"
+
+#. module: res_ssyk
+#: model:ir.model,name:res_ssyk.model_res_partner
+msgid "Contact"
+msgstr "Kontakt"
+
+#. module: res_ssyk
+#: model:ir.model.fields,field_description:res_ssyk.field_res_ssyk__create_uid
+msgid "Created by"
+msgstr "Skapad av"
+
+#. module: res_ssyk
+#: model:ir.model.fields,field_description:res_ssyk.field_res_ssyk__create_date
+msgid "Created on"
+msgstr "Skapad den"
+
+#. module: res_ssyk
+#: model:ir.model.fields,field_description:res_ssyk.field_res_ssyk__description
+msgid "Description"
+msgstr "Beskrivning"
+
+#. module: res_ssyk
+#: model:ir.model.fields,field_description:res_ssyk.field_res_partner__display_name
+#: model:ir.model.fields,field_description:res_ssyk.field_res_ssyk__display_name
+msgid "Display Name"
+msgstr "Visningsnamn"
+
+#. module: res_ssyk
+#: model:ir.model.fields,field_description:res_ssyk.field_res_partner__id
+#: model:ir.model.fields,field_description:res_ssyk.field_res_ssyk__id
+msgid "ID"
+msgstr "ID"
+
+#. module: res_ssyk
+#: model:ir.model.fields,field_description:res_ssyk.field_res_partner____last_update
+#: model:ir.model.fields,field_description:res_ssyk.field_res_ssyk____last_update
+msgid "Last Modified on"
+msgstr "Senast redigerad"
+
+#. module: res_ssyk
+#: model:ir.model.fields,field_description:res_ssyk.field_res_ssyk__write_uid
+msgid "Last Updated by"
+msgstr "Senast uppdaterad av"
+
+#. module: res_ssyk
+#: model:ir.model.fields,field_description:res_ssyk.field_res_ssyk__write_date
+msgid "Last Updated on"
+msgstr "Senast uppdaterad den"
+
+#. module: res_ssyk
+#: model:ir.model.fields,field_description:res_ssyk.field_res_ssyk__name
+#: model_terms:ir.ui.view,arch_db:res_ssyk.view_ssyk_form
+msgid "Name"
+msgstr "Namn"
+
+#. module: res_ssyk
+#: model:ir.model.fields,field_description:res_ssyk.field_res_ssyk__code
+msgid "Official Code"
+msgstr "Officiell kod"
+
+#. module: res_ssyk
+#: model:ir.model.fields,help:res_ssyk.field_res_ssyk__code
+msgid "Official code, group, sub-group or detail group."
+msgstr "Officiell kod, grupp, undergrupp eller detaljgrupp."
+
+#. module: res_ssyk
+#: model:ir.model.fields,field_description:res_ssyk.field_res_ssyk__parent_id
+msgid "Parent"
+msgstr "Förälder"
+
+#. module: res_ssyk
+#: model:ir.model.fields,field_description:res_ssyk.field_res_ssyk__partner_ids
+msgid "Partner"
+msgstr "Partner"
+
+#. module: res_ssyk
+#: model:ir.model.fields,field_description:res_ssyk.field_property_designation__ssyk_id
+#: model:ir.model.fields,field_description:res_ssyk.field_property_stakeholder__ssyk_id
+#: model:ir.model.fields,field_description:res_ssyk.field_res_partner__ssyk_id
+#: model:ir.model.fields,field_description:res_ssyk.field_res_users__ssyk_id
+msgid "Primary SSYK"
+msgstr "Primär SSYK"
+
+#. module: res_ssyk
+#: model:ir.model.fields,field_description:res_ssyk.field_property_designation__ssyk_ids
+#: model:ir.model.fields,field_description:res_ssyk.field_property_stakeholder__ssyk_ids
+#: model:ir.model.fields,field_description:res_ssyk.field_res_partner__ssyk_ids
+#: model:ir.model.fields,field_description:res_ssyk.field_res_users__ssyk_ids
+msgid "SSYK"
+msgstr "SSYK"
+
+#. module: res_ssyk
+#: model:ir.actions.act_window,name:res_ssyk.action_ssyk_form
+#: model:ir.ui.menu,name:res_ssyk.menu_ssyk_form
+msgid "SSYK-koder"
+msgstr "SSYK-koder"
+
+#. module: res_ssyk
+#: model_terms:ir.ui.view,arch_db:res_ssyk.view_ssyk_filter
+msgid "Search ssyk"
+msgstr "Sök SSYK"
+
+#. module: res_ssyk
+#: model:ir.model,name:res_ssyk.model_res_ssyk
+msgid "res.ssyk"
+msgstr "SSYK"
+
+#. module: res_ssyk
+#: model_terms:ir.ui.view,arch_db:res_ssyk.view_ssyk_form
+msgid "ssyk"
+msgstr "SSYK"
