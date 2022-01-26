@@ -7,6 +7,7 @@
         <field name="arch" type="xml">
             <field name="vat" position="after">
                 <field name="ssyk_ids" widget="many2many_tags" options="{'no_create_edit': True}"/>
+                <field name="ssyk_id" options="{'no_create_edit': True}"/>
             </field>
         </field>
     </record>

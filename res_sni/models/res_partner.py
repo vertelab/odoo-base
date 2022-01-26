@@ -27,3 +27,4 @@ class Partner(models.Model):
     _inherit = 'res.partner'
 
     sni_ids = fields.Many2many(comodel_name='res.sni', string='SNI')
+    sni_id = fields.Many2one('res.sni', string="Primary SNI")

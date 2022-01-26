@@ -5,7 +5,8 @@
             <field name="model">res.partner</field>
             <field name="arch" type="xml">
                 <pivot string="Contacts" disable_linking="True" sample="1">
-                    <field name="name" type="row"/>
+                    <field name="sni_id" type="row"/>
+                    <field name="ssyk_id" type="row" invisible="1"/>
                 </pivot>
             </field>
         </record>
