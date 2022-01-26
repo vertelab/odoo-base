@@ -4,9 +4,9 @@
             <field name="name">res.partner.pivot.view</field>
             <field name="model">res.partner</field>
             <field name="arch" type="xml">
-                <pivot string="Contacts" disable_linking="True" sample="1">
+                <pivot string="Contacts" sample="1">
                     <field name="sni_id" type="row"/>
-                    <field name="ssyk_id" type="row" invisible="1"/>
+                    <field name="ssyk_id" type="row" />
                 </pivot>
             </field>
         </record>
