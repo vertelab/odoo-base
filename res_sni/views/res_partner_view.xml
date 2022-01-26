@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="view_partner_form" model="ir.ui.view">
+        <field name="name">res.partner.form.inherit.sni</field>
+        <field name="model">res.partner</field>
+        <field name="inherit_id" ref="base.view_partner_form" />
+        <field name="arch" type="xml">
+            <field name="vat" position="after">
+                <field name="sni_ids" widget="many2many_tags" options="{'no_create_edit': True}"/>
+                <field name="sni_id" options="{'no_create_edit': True}"/>
+            </field>
+        </field>
+    </record>
+</odoo>
