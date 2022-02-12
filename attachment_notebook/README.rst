@@ -11,7 +11,7 @@ Installation
 
 This module depends on ````,
 
-This module is maintained from: https://github.com/vertelab/odoo-event/
+This module is maintained from: https://github.com/vertelab/odoo-base/
 
 Configuration
 =============
