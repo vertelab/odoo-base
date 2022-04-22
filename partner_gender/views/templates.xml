@@ -24,4 +24,23 @@
             </div>
         </xpath>
     </template>
+
+    <template id="portal_my_details" inherit_id="website_contact_management.my_contact_details">
+        <xpath expr="//div[contains(@t-attf-class,'name')]" position="after">
+            <div t-attf-class="form-group #{error.get('gender') and 'o_has_error' or ''} col-xl-6">
+                <t t-set='partner_gender' t-value="gender or partner.gender"/>
+                <label class="col-form-label">Gender</label>
+                <select class="form-control" name="gender" id="gender">
+                    <option t-attf-value="male" t-att-selected="partner_gender == 'male'">Male</option>
+                    <option t-attf-value="female" t-att-selected="partner_gender == 'female'">Female</option>
+                    <option t-attf-value="other" t-att-selected="partner_gender == 'other'">Other</option>
+                    <option t-attf-value="decline" t-att-selected="partner_gender == 'decline'">Decline to answer</option>
+                </select>
+            </div>
+            <div t-attf-class="form-group col-md-12" id="gender_txt">
+                <label class="col-form-label" for="city">Other</label>
+                <input type="text" name="gender_txt" t-attf-class="form-control" t-att-value="gender_txt or partner.gender_txt" id="gender_txt_input" placeholder="Specify Other Gender"/>
+            </div>
+        </xpath>
+    </template>
 </odoo>

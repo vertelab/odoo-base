@@ -37,7 +37,7 @@
         * Adds an select box for gender on personal details form in the user portal.\n
         This module is maintained from: https://github.com/vertelab/odoo-base/\n
     """,
-    'depends': ['partner_ssn'],
+    'depends': ['partner_ssn', 'website_contact_management'],
     'data': [
         'views/res_partner.xml',
         'views/templates.xml',
