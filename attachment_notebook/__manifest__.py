@@ -37,7 +37,9 @@ Attachment Notebook
 
 Adds a notebook for other modules to populate with more functionality.
 """,
-    'depends': [],
+    'depends': [
+        'base',
+        ],
     'data': [
         # 'views/document_templates.xml',
         'views/ir_attachment_view.xml',

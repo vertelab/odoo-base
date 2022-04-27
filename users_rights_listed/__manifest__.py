@@ -35,7 +35,9 @@
         Adds a UserGroup field to the res_users tree-view in debug-mode.\n
         This module is maintained from: https://github.com/vertelab/odoo-base/edit/14.0/users_rights_listed/ \n
 """,
-    'depends': [],
+    'depends': [
+        "base",
+        ],
     'data': [
         "views/usergroup.xml"
     ],
