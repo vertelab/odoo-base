@@ -1,11 +1,19 @@
+import logging
+
 from odoo import models, fields, api, _
 import base64
 import xml.etree.cElementTree as ET
 from fnmatch import fnmatch
 
+_logger = logging.getLogger(__name__)
+
 
 class XMLExport(models.TransientModel):
     _name = 'xml.export'
+
+    active_model = fields.Char()
+    active_id = fields.Integer()
+    attachment_name = fields.Boolean()
 
     def generate_xml_record(self, model_records, records, ir_model_id, names):
         record = ET.SubElement(records, "record")
@@ -44,9 +52,10 @@ class XMLExport(models.TransientModel):
         return record
 
     def generate_xml(self):
-        ir_model_id = self.env['ir.model'].search([('model', '=', self._context['active_model'])])
-        active_id = self._context['active_ids']
-        active_model = self._context['active_model']
+        active_model = self.active_model or self._context['active_model']
+        active_id = self.active_id or self._context['active_ids']
+
+        ir_model_id = self.env['ir.model'].search([('model', '=', active_model)])
         model_id = self.env[active_model].browse(active_id)
 
         xml = ET.Element('xml', encoding="utf-8", version="1.0")
@@ -61,16 +70,23 @@ class XMLExport(models.TransientModel):
         return xml
 
     def create_attachment(self):
-        ir_model_id = self.env['ir.model'].search([('model', '=', self._context['active_model'])])
+        active_model = self.active_model or self._context['active_model']
+        ir_model_id = self.env['ir.model'].search([('model', '=', active_model)])
 
         xml = self.generate_xml()
         xmlstr = ET.tostring(xml)
 
-        return self.env['ir.attachment'].create({
+        attachment_create = {
             'name': str(ir_model_id.name) + '.xml',
             'datas': base64.encodebytes(xmlstr),
             'mimetype': 'application/xml',
-        })
+        }
+
+        if self.add_to_model:
+            attachment_create["res_model"] = active_model
+            attachment_create["res_id"] =self.active_id or self._context["active_ids"]
+
+        return self.env['ir.attachment'].create(attachment_create)
 
     def download_xml_export(self):
         attachment = self.create_attachment()
