@@ -13,7 +13,7 @@ class XMLExport(models.TransientModel):
 
     active_model = fields.Char()
     active_id = fields.Integer()
-    attachment_name = fields.Boolean()
+    attachment_name = fields.Char()
 
     def generate_xml_record(self, model_records, records, ir_model_id, names):
         record = ET.SubElement(records, "record")
@@ -82,9 +82,10 @@ class XMLExport(models.TransientModel):
             'mimetype': 'application/xml',
         }
 
-        if self.add_to_model:
+        if self.attachment_name:
             attachment_create["res_model"] = active_model
-            attachment_create["res_id"] =self.active_id or self._context["active_ids"]
+            attachment_create["res_id"] = self.active_id or self._context["active_ids"]
+            attachment_create["name"] = self.attachment_name
 
         return self.env['ir.attachment'].create(attachment_create)
 
