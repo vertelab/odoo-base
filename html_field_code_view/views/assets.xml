@@ -1,0 +1,7 @@
+<odoo>
+	<template id="assets_backend" inherit_id="web.assets_backend" name="Web Editor Backend Assets (used in backend interface)">
+		<xpath expr="script[@src='/web_editor/static/src/js/backend/field_html.js']" position="replace">
+			<script type="text/javascript" src="/html_field_code_view/static/src/js/field_html.js" />
+		</xpath>
+	</template>
+</odoo>
