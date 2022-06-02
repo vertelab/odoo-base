@@ -6,8 +6,8 @@
         </xpath>
     </template>
 
-    <template id="portal_my_details" inherit_id="portal.portal_my_details">
-        <xpath expr="//div[contains(@t-attf-class,&quot;'name'&quot;)]" position="after">
+    <template id="portal_my_details_extend" inherit_id="portal.portal_my_details">
+        <xpath expr="//div[@class='row']" position="inside">
             <div t-attf-class="form-group #{error.get('gender') and 'o_has_error' or ''} col-xl-6">
                 <t t-set='partner_gender' t-value="gender or partner.gender"/>
                 <label class="col-form-label">Gender</label>
@@ -25,8 +25,9 @@
         </xpath>
     </template>
 
-    <template id="portal_my_details" inherit_id="website_contact_management.my_contact_details">
-        <xpath expr="//div[contains(@t-attf-class,'name')]" position="after">
+    <template id="portal_my_details_contact_extend" inherit_id="website_contact_management.my_contact_details">
+        <xpath expr="//div[@class='row']" position="inside">
+            hej hopp
             <div t-attf-class="form-group #{error.get('gender') and 'o_has_error' or ''} col-xl-6">
                 <t t-set='partner_gender' t-value="gender or partner.gender"/>
                 <label class="col-form-label">Gender</label>
