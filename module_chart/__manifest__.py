@@ -34,7 +34,7 @@
     'license': 'AGPL-3',
     'contributor': 'Vertel AB, N-Development',
     'maintainer': 'Vertel AB',
-    'repository': 'https://github.com/vertelab/odoo-event.git',
+    'repository': 'https://github.com/vertelab/odoo-base.git',
     'depends': [
         'base',
         'web',
