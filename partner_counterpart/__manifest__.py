@@ -31,9 +31,10 @@
     'author': 'Vertel AB',
     'website': 'https://vertel.se/apps/odoo-base/partner_counterpart',
     'images': ['/static/description/banner.png'], # 560x280 px.
-
-    'repository': 'https://github.com/vertelab/odoo-base',
     'license': 'AGPL-3',
+    'contributor': '',
+    'maintainer': 'Vertel AB',
+    'repository': 'https://github.com/vertelab/odoo-base',
     "depends": ["base", "contacts", "sales_team", "account"],
     "data": [
         "security/ir.model.access.csv",
