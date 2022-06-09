@@ -30,6 +30,7 @@
     """,
     'author': 'Vertel AB',
     'website': 'https://vertel.se/apps/odoo-base/html_field_code_view',
+    'images': ['/static/description/banner.png'], # 560x280 px.
     'license': 'AGPL-3',
     'contributor': '',
     'maintainer': 'Vertel AB',
