@@ -21,20 +21,20 @@
 
 {
     'name': 'Base: Module depends Chart',
-    'summary': 'Adds a graphical description of the Odoo database dependencies.',
-    'author': 'Vertel AB',
-    'contributor': 'Vertel AB, N-Development',
-    'maintainer': 'Vertel AB',
-    'repository': 'https://github.com/vertelab/odoo-event.git',
-    'category': 'Tools',
     'version': '14.0.1.0.0',
     # Version ledger: 14.0 = Odoo version. 1 = Major. Non regressionable code. 2 = Minor. New features that are regressionable. 3 = Bug fixes
-    'license': 'AGPL-3',
-    'website': 'https://vertel.se/apps/base',
+    'summary': 'Adds a graphical description of the Odoo database dependencies.',
+    'category': 'Tools',
     'description': """This module adds a graphical description of the Odoo database dependencies.\n
 	Install it and go to Apps -> Module Graph to see a dynamic map of the installed modules.\n-development\n
 	This module is maintained from: https://github.com/vertelab/odoo-base/ \n
 	""",
+    'author': 'Vertel AB',
+    'website': 'https://vertel.se/apps/odoo-base/module_chart',
+    'license': 'AGPL-3',
+    'contributor': 'Vertel AB, N-Development',
+    'maintainer': 'Vertel AB',
+    'repository': 'https://github.com/vertelab/odoo-event.git',
     'depends': [
         'base',
         'web',
