@@ -28,6 +28,7 @@
     'description': """
         Show Code View on HTML Field either in debug mode or not
     """,
+    #'sequence': '1',
     'author': 'Vertel AB',
     'website': 'https://vertel.se/apps/odoo-base/html_field_code_view',
     'images': ['/static/description/banner.png'], # 560x280 px.
