@@ -29,6 +29,7 @@
 	Install it and go to Apps -> Module Graph to see a dynamic map of the installed modules.\n-development\n
 	This module is maintained from: https://github.com/vertelab/odoo-base/ \n
 	""",
+    #'sequence': '1',
     'author': 'Vertel AB',
     'website': 'https://vertel.se/apps/odoo-base/module_chart',
     'images': ['/static/description/banner.png'], # 560x280 px.
