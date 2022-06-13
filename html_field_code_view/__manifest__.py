@@ -20,19 +20,22 @@
 ##############################################################################
 
 {
-    'name': 'Show Code View on HTML Field',
-    'summary': 'Show Code View on HTML Field',
-    'author': 'Vertel AB',
-    'contributor': '',
-    'maintainer': 'Vertel AB',
-    'repository': 'https://github.com/vertelab/odoo-base',
+    'name': 'Base: Show Code View on HTML Field',
     'version': '14.0.0.1.0',
     # Version ledger: 14.0 = Odoo version. 1 = Major. Non regressionable code. 2 = Minor. New features that are regressionable. 3 = Bug fixes
-    'license': 'AGPL-3',
-    'website': 'https://vertel.se/apps/base',
+    'summary': 'Show Code View on HTML Field',
+    'category': 'Accounting',
     'description': """
         Show Code View on HTML Field either in debug mode or not
     """,
+    #'sequence': '1',
+    'author': 'Vertel AB',
+    'website': 'https://vertel.se/apps/odoo-base/html_field_code_view',
+    'images': ['/static/description/banner.png'], # 560x280 px.
+    'license': 'AGPL-3',
+    'contributor': '',
+    'maintainer': 'Vertel AB',
+    'repository': 'https://github.com/vertelab/odoo-base',
     'depends': ['web_editor'],
     'data': [
         'views/assets.xml',

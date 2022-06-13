@@ -21,16 +21,10 @@
 
 {
     'name': 'Base: Export Records to XML',
-    'summary': 'Export Records to XML',
-    'author': 'Vertel AB',
-    'contributor': '',
-    'maintainer': 'Vertel AB',
-    'repository': 'https://github.com/vertelab/odoo-event.git',
-    'category': 'Extra Tools',
     'version': '14.0.0.1.1',
     # Version ledger: 14.0 = Odoo version. 1 = Major. Non regressionable code. 2 = Minor. New features that are regressionable. 3 = Bug fixes
-    'license': 'AGPL-3',
-    'website': 'https://vertel.se/apps/base',
+    'summary': 'Export Records to XML',
+    'category': 'Technical',
     'description': """
         Export Records to XML - Models you can import include: \n
             - users
@@ -41,6 +35,12 @@
             - project/tasks
         \n 14.0.0.1.1 - Added Documentations
     """,
+    'author': 'Vertel AB',
+    'website': 'https://vertel.se/apps/odoo-base/record_export_to_xml',
+    'license': 'AGPL-3',
+        'contributor': '',
+    'maintainer': 'Vertel AB',
+    'repository': 'https://github.com/vertelab/odoo-base.git',
     'depends': ['base', 'event', 'hr', 'sale', 'project'],
     'data': [
         "security/ir.model.access.csv",

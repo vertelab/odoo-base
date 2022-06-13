@@ -21,19 +21,20 @@
 
 {
     'name': 'Base: Website Partner Opening Hours',
-    'summary': 'Add opening hours for a partner.',
-    'author': 'Vertel AB',
-    'contributor': '',
-    'maintainer': 'Vertel AB',
-    'repository': 'https://github.com/vertelab/odoo-base',
     'version': '14.0.0.1.0',
     # Version ledger: 14.0 = Odoo version. 1 = Major. Non regressionable code. 2 = Minor. New features that are regressionable. 3 = Bug fixes
-    'license': 'AGPL-3',
-    'website': 'https://vertel.se/apps/base',
+    'summary': 'Add opening hours for a partner.',
+    'category': 'Technical'
     'description': """
-Add opening hours for a partner.
-===============================
-""",
+    Add opening hours for a partner.
+    ===============================
+    """,
+    'author': 'Vertel AB',
+    'website': 'https://vertel.se/apps/odoo-base/website_partner_opening_hours',
+    'license': 'AGPL-3',
+    'contributor': '',
+    'maintainer': 'Vertel AB',
+    'repository': 'https://github.com/vertelab/odoo-base.git',
     'depends': ['base'],
     'data': [
         'views/res_partner_view.xml',
