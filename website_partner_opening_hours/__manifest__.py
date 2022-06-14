@@ -24,7 +24,7 @@
     'version': '14.0.0.1.0',
     # Version ledger: 14.0 = Odoo version. 1 = Major. Non regressionable code. 2 = Minor. New features that are regressionable. 3 = Bug fixes
     'summary': 'Add opening hours for a partner.',
-    'category': 'Technical'
+    'category': 'Technical',
     'description': """
     Add opening hours for a partner.
     ===============================
