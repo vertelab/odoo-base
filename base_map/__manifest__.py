@@ -36,7 +36,7 @@
     "description": """
 Base mapping
 ============
-This modules allows for quick mapping of odoo fields to fields in other systems.
+This modules allows for quick mapping of Odoo fields to fields in other systems.
 Also supports import / export of field data.
 """,
     "depends": ["base"],
