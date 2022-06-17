@@ -27,7 +27,6 @@
 
     <template id="portal_my_details_contact_extend" inherit_id="website_contact_management.my_contact_details">
         <xpath expr="//div[@class='row']" position="inside">
-            hej hopp
             <div t-attf-class="form-group #{error.get('gender') and 'o_has_error' or ''} col-xl-6">
                 <t t-set='partner_gender' t-value="gender or partner.gender"/>
                 <label class="col-form-label">Gender</label>

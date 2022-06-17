@@ -18,15 +18,18 @@
 #
 ##############################################################################
 {
-    "name": "Partner Company Registry",
-    "version": "14.0",
-    "category": "CRM",
-    "description": """Partner Company Registry
+    'name': 'Base: Partner Company Registry',
+    'version': '14.0.0.0.1',
+    # Version ledger: 14.0 = Odoo version. 1 = Major. Non regressionable code. 2 = Minor. New features that are regressionable. 3 = Bug fixes
+    'summary': '',
+    'category': 'CRM',
+    'description': """Partner Company Registry
     Adds a Partner Registry field to the partner object.
     """,
-    "author": "ICTSTUDIO, André Schenkels",
-    "license": "AGPL-3",
-    "website": "http://www.ictstudio.eu",
-    "depends": ["base"],
-    "data": ["view/partner_view.xml"],
+    'author': 'ICTSTUDIO, André Schenkels',
+    'website': 'http://www.ictstudio.eu',
+    'images': ['/static/description/banner.png'], # 560x280 px.
+    'license': 'AGPL-3',
+    'depends': ["base"],
+    'data': ["view/partner_view.xml"],
 }

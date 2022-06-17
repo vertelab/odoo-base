@@ -2,7 +2,7 @@
 ##############################################################################
 #
 #    Odoo SA, Open Source Management Solution, third party addon
-#    Copyright (C) 2021- Vertel AB (<https://vertel.se>).
+#    Copyright (C) 2022- Vertel AB (<https://vertel.se>).
 #
 #    This program is free software: you can redistribute it and/or modify
 #    it under the terms of the GNU Affero General Public License as
@@ -21,23 +21,24 @@
 
 {
     'name': 'Base: Partner Social Security Number',
-    'summary': 'Adds social security number to partners.',
-    'author': 'Vertel AB',
-    'contributor': '',
-    'maintainer': 'Vertel AB',
-    'repository': 'https://github.com/vertelab/odoo-base.git',
-    'category': '',
     'version': '14.0.0.1.0',
     # Version ledger: 14.0 = Odoo version. 1 = Major. Non regressionable code. 2 = Minor. New features that are regressionable. 3 = Bug fixes
-    'license': 'AGPL-3',
-    'website': 'https://vertel.se/apps/base',
-    
+    'summary': 'Adds social security number to partners.',
+    'category': 'Website',
     'description': """
-Adds social security number to partners
-v14.0.0.1.0 Migration of module from version 12 to 14 \n
-================================================================================================
+    Adds social security number to partners
+    v14.0.0.1.0 Migration of module from version 12 to 14 \n
+    ================================================================================================
 
-""",
+    """,
+    #'sequence': '1',
+    'author': 'Vertel AB',
+    'website': 'https://vertel.se/apps/odoo-base/partner_ssn',
+    'images': ['/static/description/banner.png'], # 560x280 px.
+    'license': 'AGPL-3',
+    'contributor': '',
+    'maintainer': 'Vertel AB',
+    'repository': 'https://github.com/vertelab/odoo-base',
     'depends': [
         'contacts',
     ],

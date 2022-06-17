@@ -1,8 +1,8 @@
 # -*- coding: utf-8 -*-
 ##############################################################################
 #
-#    OpenERP, Open Source Management Solution, third party addon
-#    Copyright (C) 2004-2017 Vertel AB (<http://vertel.se>).
+#    Odoo SA, Open Source Management Solution, third party addon
+#    Copyright (C) 2022- Vertel AB (<https://vertel.se>).
 #
 #    This program is free software: you can redistribute it and/or modify
 #    it under the terms of the GNU Affero General Public License as
@@ -15,17 +15,25 @@
 #    GNU Affero General Public License for more details.
 #
 #    You should have received a copy of the GNU Affero General Public License
-#    along with this program.  If not, see <http://www.gnu.org/licenses/>.
+#    along with this program. If not, see <http://www.gnu.org/licenses/>.
 #
 ##############################################################################
 
 {
-    'name': 'Contact Pivot View',
-    'version': '14.0.0.4',
-    'category': '',
-    'description': """Contact Pivot View""",
+    'name': 'Base: Contact Pivot View',
+    'version': '14.0.0.0.4',
+    # Version ledger: 14.0 = Odoo version. 1 = Major. Non regressionable code. 2 = Minor. New features that are regressionable. 3 = Bug fixes
+    'summary': 'Contact Pivot View.',
+    'category': 'Technical',
+    'description': 'Contact Pivot View.',
+    #'sequence': '1',
     'author': 'Vertel AB',
-    'website': 'https://www.vertel.se',
+    'website': 'https://vertel.se/apps/odoo-base/res_partner_pivot',
+    'images': ['/static/description/banner.png'], # 560x280 px.
+    'license': 'AGPL-3',
+    'contributor': '',
+    'maintainer': 'Vertel AB',
+    'repository': 'https://github.com/vertelab/odoo-base.git',
     'depends': ['contacts', 'res_sni', 'res_ssyk'],
     'data': [
         'views/res_partner_view.xml',

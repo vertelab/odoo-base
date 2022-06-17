@@ -20,17 +20,22 @@
 ##############################################################################
 
 {
-    'name': 'Partner Counterpart',
-    'summary': 'Partner Counterpart.',
-    'author': 'Vertel AB',
-    'repository': 'https://github.com/vertelab/odoo-base',
+    'name': 'Base: Partner Counterpart',
     'version': '14.1.0.0.0',
     # Version ledger: 14.0 = Odoo version. 1 = Major. Non regressionable code. 2 = Minor. New features that are regressionable. 3 = Bug fixes
-    'license': 'AGPL-3',
-    'website': 'https://vertel.se',
+    'summary': 'Partner Counterpart.',
+    'category': 'CMS',
     "description": """
         Partner Counterpart
     """,
+    #'sequence': '1',
+    'author': 'Vertel AB',
+    'website': 'https://vertel.se/apps/odoo-base/partner_counterpart',
+    'images': ['/static/description/banner.png'], # 560x280 px.
+    'license': 'AGPL-3',
+    'contributor': '',
+    'maintainer': 'Vertel AB',
+    'repository': 'https://github.com/vertelab/odoo-base',
     "depends": ["base", "contacts", "sales_team", "account"],
     "data": [
         "security/ir.model.access.csv",
