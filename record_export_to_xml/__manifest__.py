@@ -37,8 +37,9 @@
     """,
     'author': 'Vertel AB',
     'website': 'https://vertel.se/apps/odoo-base/record_export_to_xml',
+    'images': ['static/description/banner.png'], # 560x280 px.
     'license': 'AGPL-3',
-        'contributor': '',
+    'contributor': '',
     'maintainer': 'Vertel AB',
     'repository': 'https://github.com/vertelab/odoo-base.git',
     'depends': ['base', 'event', 'hr', 'sale', 'project'],
