@@ -28,7 +28,7 @@
     """,
     'author': 'ICTSTUDIO, André Schenkels',
     'website': 'http://www.ictstudio.eu',
-    'images': ['/static/description/banner.png'], # 560x280 px.
+    'images': ['static/description/banner.png'], # 560x280 px.
     'license': 'AGPL-3',
     'depends': ["base"],
     'data': ["view/partner_view.xml"],
