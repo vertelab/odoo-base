@@ -32,7 +32,7 @@
     #'sequence': '1',
     'author': 'Vertel AB',
     'website': 'https://vertel.se/apps/odoo-base/module_chart',
-    'images': ['/static/description/banner.png'], # 560x280 px.
+    'images': ['static/description/banner.png'], # 560x280 px.
     'license': 'AGPL-3',
     'contributor': 'Vertel AB, N-Development',
     'maintainer': 'Vertel AB',
