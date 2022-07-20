@@ -8,6 +8,9 @@
             <field eval="1" name="number_increment"/>
             <field eval="False" name="company_id"/>
             <field name="padding">8</field>
-        </record>
+        </record>	
     </data>
+    <data noupdate="1">
+        <function model="res.partner" name="set_all_customers_number"/>
+     </data>
 </odoo>
