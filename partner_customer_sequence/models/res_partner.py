@@ -19,6 +19,7 @@ class ResPartner(models.Model):
 
     customer_sequence = fields.Char(string='Customer Number', readonly=True)
 
+    our_customer_number = fields.Integer(string='Our Customer Number')
     
     @api.model
     def create(self, values):
