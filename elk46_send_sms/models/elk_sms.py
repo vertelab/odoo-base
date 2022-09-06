@@ -17,7 +17,10 @@ class ElkSms(models.Model):
     #46739299019
     #auth=('a6ba22729971395309fd3a973ee352f93', 'AFE26B724029E6B79CFFAAD9C9762545')
     def send(self, number=False, body=False, delete_all=False, auto_commit=False, raise_exception=False):
-        auth_info = (self.env['ir.config_parameter'].get_param('elk_sms_auth')).split(',')
+        try:
+            auth_info = (self.env['ir.config_parameter'].get_param('elk_sms_auth')).split(',')
+        except:
+            raise UserError(_('Error. Create a system parameter called "elk_sms_auth" containing the auth info like this: username,password'))
 
         def read_json_from_site(response):
             url = 'https://api.46elks.com/a1/sms'
@@ -39,20 +42,22 @@ class ElkSms(models.Model):
         if auth_info:
             response = requests.post('https://api.46elks.com/a1/sms',   auth=(auth_info[0], auth_info[1]),
                                      data={'dryrun': 'no', 'from': 'Reboot', 'to': self.convert_number(number), 'message': body,
-                                     'whendelivered': 'moe.vertel.se:1014/sms?db'})
+                                     'whendelivered': 'http://moe.vertel.se:1014/sms?db=reboot'})
             
-            if read_json_from_site(response):
-                if 'Unexpected 0' in response.content.decode('utf-8'):
-                    raise UserError(_('Input a +46.... number instead of 0...'))
 
-                return response
-        else:
-            raise UserError(_('No system parameter containing the mobile authentification token'))
+            if 'Unexpected 0' in response.content.decode('utf-8'):
+                raise UserError(_('Error. Input a +46.... number instead of 0...'))
+
+            if 'requires Basic' in response.content.decode('utf-8'):
+                raise UserError(_('Error. Check if the auth info in the system parameter "elk_sms_auth" is valid.'))
+
+
+            return response
 
     def convert_number(self, number):
-        number_out = 0
         if number[0] == '0':
-            number_out = f"{'+46'}{number[1::]}"
-        return number_out
+            return f"{'+46'}{number[1::]}"
+        elif number[0] == '+':
+            return number
 
     
