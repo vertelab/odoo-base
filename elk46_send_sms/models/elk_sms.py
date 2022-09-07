@@ -14,8 +14,6 @@ class ElkSms(models.Model):
 
     url = fields.Char('https://api.46elks.com/a1/sms')
 
-    #46739299019
-    #auth=('a6ba22729971395309fd3a973ee352f93', 'AFE26B724029E6B79CFFAAD9C9762545')
     def send(self, number=False, body=False, delete_all=False, auto_commit=False, raise_exception=False):
        
         try:
@@ -28,28 +26,10 @@ class ElkSms(models.Model):
         except:
             raise UserError(_('Error. Create a system parameter called "elk_sms_dryrun" containing a yes or no depending on if you want to send actual text messages or not. '))
 
-
-        # def read_json_from_site(response):
-        #     url = 'https://api.46elks.com/a1/sms'
-        #     request = urllib.request.Request(url)
-        #     string = '%s:%s' % (auth_info[0], auth_info[1])
-        #     base64string = base64.standard_b64encode(string.encode('utf-8'))
-        #     request.add_header('Authorization', 'Basic %s' % base64string.decode('utf-8'))
-        #     result = urllib.request.urlopen(request)
-        #     result_json = json.loads(result.read())
-
-        #     for line in result_json['data']:
-        #         if line['id'] == json.loads(response.content.decode('utf-8'))['id']:
-        #             _logger.warning(line['status'])
-        #             if line['status'] == 'delivered':
-
-        #                 return True
-        #     raise UserError(_('Error. Did you input the correct number?'))
-        
         if auth_info:
             response = requests.post('https://api.46elks.com/a1/sms',   auth=(auth_info[0], auth_info[1]),
                                      data={'dryrun': dryrun_toggle, 'from': 'Reboot', 'to': self.convert_number(number), 'message': body,
-                                     'whendelivered': 'http://moe.vertel.se:1014/sms'})
+                                     'whendelivered': f"{self.env['ir.config_parameter'].get_param('web.base.url')}/sms"})
             
 
             if 'Unexpected 0' in response.content.decode('utf-8'):
@@ -63,9 +43,6 @@ class ElkSms(models.Model):
 
             if 'Missing key to' in response.content.decode('utf-8'):
                 raise UserError(_('Error. Missing key to (i have no idea to what, probably weird phone number.)'))
-
-
-
 
             return response
 
