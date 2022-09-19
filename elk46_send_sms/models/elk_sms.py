@@ -7,7 +7,8 @@ import json
 import base64
 import urllib.request
 
-_logger = logging.getLogger("------dmitri-------")
+_logger = logging.getLogger(__name__)
+
 
 class ElkSms(models.Model):
     _inherit = "sms.sms"
@@ -15,22 +16,26 @@ class ElkSms(models.Model):
     url = fields.Char('https://api.46elks.com/a1/sms')
 
     def send(self, number=False, body=False, delete_all=False, auto_commit=False, raise_exception=False):
-       
+
         try:
             auth_info = (self.env['ir.config_parameter'].get_param('elk_sms_auth')).split(',')
         except:
-            raise UserError(_('Error. Create a system parameter called "elk_sms_auth" containing the auth info like this: username,password'))
+            raise UserError(
+                _('Error. Create a system parameter called "elk_sms_auth" containing the auth info like this: '
+                  'username,password'))
 
         try:
             dryrun_toggle = (self.env['ir.config_parameter'].get_param('elk_sms_dryrun')).split(',')
         except:
-            raise UserError(_('Error. Create a system parameter called "elk_sms_dryrun" containing a yes or no depending on if you want to send actual text messages or not. '))
+            raise UserError(
+                _('Error. Create a system parameter called "elk_sms_dryrun" containing a yes or no depending on if '
+                  'you want to send actual text messages or not. '))
 
         if auth_info:
-            response = requests.post('https://api.46elks.com/a1/sms',   auth=(auth_info[0], auth_info[1]),
-                                     data={'dryrun': dryrun_toggle, 'from': 'Reboot', 'to': self.convert_number(number), 'message': body,
-                                     'whendelivered': f"{self.env['ir.config_parameter'].get_param('web.base.url')}/sms"})
-            
+            response = requests.post('https://api.46elks.com/a1/sms', auth=(auth_info[0], auth_info[1]),
+                                     data={'dryrun': dryrun_toggle, 'from': 'Reboot', 'to': self.convert_number(number),
+                                           'message': body,
+                                           'whendelivered': f"{self.env['ir.config_parameter'].get_param('web.base.url')}/sms"})
 
             if 'Unexpected 0' in response.content.decode('utf-8'):
                 raise UserError(_('Error. Input a +46.... number instead of 0...'))
@@ -51,5 +56,3 @@ class ElkSms(models.Model):
             return f"{'+46'}{number[1::]}"
         elif number[0] == '+':
             return number
-
-    

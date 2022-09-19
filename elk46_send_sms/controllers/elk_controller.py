@@ -3,12 +3,13 @@ import odoo.http as http
 from odoo.http import request, Response
 import logging
 
-_logger = logging.getLogger("------dmitri-------")
+_logger = logging.getLogger(__name__)
+
 
 class ElkController(http.Controller):
 
     @http.route('/sms', type='http', auth='none', csrf=False)
-    def recieve_elk_post(self, **kwargs):
+    def receive_elk_post(self, **kwargs):
         ''''
         Process SMS message from service X as described here:
             LINK-PLACEHOLDER
@@ -25,12 +26,15 @@ class ElkController(http.Controller):
 
                     sale_order = http.request.env['sale.order'].sudo().browse(saved_sms_record.sale_id)
                     if kwargs['status'] == 'delivered':
-                        sale_order.message_post(body = f'Message with body: {saved_sms_record.body}, to number: {saved_sms_record.number}, was sucessfully sent.')
+                        sale_order.message_post(
+                            body=f'Message with body: {saved_sms_record.body}, to number: {saved_sms_record.number}, '
+                                 f'was successfully sent.')
                     else:
-                        sale_order.message_post(body = f'Message with body: {saved_sms_record.body}, to number: {saved_sms_record.number}, failed to send.')
+                        sale_order.message_post(
+                            body=f'Message with body: {saved_sms_record.body}, to number: {saved_sms_record.number}, '
+                                 f'failed to send.')
                 except Exception as e:
 
-                     _logger.warning(e)
+                    _logger.warning(e)
 
         return Response(status=200)
-
