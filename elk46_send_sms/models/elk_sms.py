@@ -52,7 +52,7 @@ class ElkSms(models.Model):
             return response
 
     def convert_number(self, number):
-        if number[0] == '0':
+        if number and number[0] == '0':
             return f"{'+46'}{number[1::]}"
-        elif number[0] == '+':
+        elif number and number[0] == '+':
             return number
