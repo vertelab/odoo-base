@@ -35,6 +35,7 @@
     'depends': ['contacts', 'account','purchase'],
     'data': [
         'views/res_partner_view.xml',
+        'views/account_invoice_view.xml',
         'data/ir_sequence.xml',
 
     ],

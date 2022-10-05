@@ -18,8 +18,8 @@ class ResPartner(models.Model):
                 rec.customer_sequence = self.env['ir.sequence'].next_by_code('res.partner')
 
     customer_sequence = fields.Char(string='Customer Number', readonly=True)
-
     our_customer_number = fields.Integer(string='Our Customer Number')
+    company_code_partner = fields.Char(string='Customer Code')
 
     @api.model
     def create(self, values):
