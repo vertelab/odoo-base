@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <record id="account_move_invoice_skf_view" model="ir.ui.view">
+            <field name="name">account.move.invoice.skf.view</field>
+            <field name="model">account.move</field>
+            <field name="inherit_id" ref="account.view_invoice_tree"/>
+            <field name="arch" type="xml">
+                <field name="invoice_partner_display_name" invisible="context.get('default_move_type') not in ('in_invoice', 'in_refund','in_receipt')" position="replace">
+                    <field name="customer_sequence" optional="show"/>
+                    <field name="company_code_partner" optional="show"></field>
+                    <field name="vendor" optional="show"></field>
+                    <field name="invoice_adress" optional="show"></field>
+                </field>
+                <field name="invoice_partner_display_name" invisible="context.get('default_move_type') not in ('out_invoice', 'out_refund','out_receipt')" position="replace">
+                </field>
+            </field>
+        </record>
+    </data>
+</odoo>
