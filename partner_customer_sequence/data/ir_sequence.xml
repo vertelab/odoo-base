@@ -1,5 +1,5 @@
 <odoo>
-    <data>
+    <data noupdate="1">
         <record id="sequence_res_partner_customer_seq" model="ir.sequence">
             <field name="name">Customer sequence</field>
             <field name="code">res.partner</field>
