@@ -8,7 +8,6 @@ class ResPartner(models.Model):
     _inherit = 'res.partner'
 
     def set_all_customers_number(self):
-        _logger.warning("set_all_customers_number" * 100)
         partners = self.env['res.partner'].search([])
         _logger.warning(f"{partners=}")
         partners._set_costumer_number()
