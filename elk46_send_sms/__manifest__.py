@@ -6,6 +6,7 @@
         "sms"
     ],
     'data': [
+        "views/assets.xml",
         "data/ir_config_parameter.xml"
     ],
 }

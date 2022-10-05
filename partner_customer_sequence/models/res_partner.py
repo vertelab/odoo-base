@@ -15,7 +15,10 @@ class ResPartner(models.Model):
     def _set_costumer_number(self):
         for rec in self:
             if not rec.customer_sequence:
-                rec.customer_sequence = self.env['ir.sequence'].next_by_code('res.partner')
+                sequence_code = self.env['ir.sequence'].next_by_code('res.partner')
+                partner_id = self.env['res.partner'].search([('customer_sequence', '=', sequence_code)], limit=1)
+                if not partner_id:
+                    rec.customer_sequence = self.env['ir.sequence'].next_by_code('res.partner')
 
     customer_sequence = fields.Char(string='Customer Number', readonly=True)
 
