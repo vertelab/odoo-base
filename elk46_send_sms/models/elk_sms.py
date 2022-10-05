@@ -15,7 +15,7 @@ class ElkSms(models.Model):
 
     url = fields.Char('https://api.46elks.com/a1/sms')
 
-    def send(self, number=False, body=False, delete_all=False, auto_commit=False, raise_exception=False):
+    def send(self, delete_all=False, auto_commit=False, raise_exception=False):
 
         try:
             auth_info = (self.env['ir.config_parameter'].get_param('elk_sms_auth')).split(',')
@@ -33,10 +33,7 @@ class ElkSms(models.Model):
 
         if auth_info:
             response = requests.post('https://api.46elks.com/a1/sms', auth=(auth_info[0], auth_info[1]),
-                                     data={'dryrun': dryrun_toggle, 'from': 'Reboot', 'to': self.convert_number(number),
-                                           'message': body,
-                                           'whendelivered': f"{self.env['ir.config_parameter'].get_param('web.base.url')}/sms"})
-
+                                     data={'dryrun': dryrun_toggle, 'from': 'Reboot', 'to': self.convert_number(self.number),'message': self.body,'whendelivered': f"{self.env['ir.config_parameter'].get_param('web.base.url')}/sms"})
             if 'Unexpected 0' in response.content.decode('utf-8'):
                 raise UserError(_('Error. Input a +46.... number instead of 0...'))
 
@@ -48,7 +45,7 @@ class ElkSms(models.Model):
 
             if 'Missing key to' in response.content.decode('utf-8'):
                 raise UserError(_('Error. Missing key to (i have no idea to what, probably weird phone number.)'))
-
+            self.state  = "sent"
             return response
 
     def convert_number(self, number):
