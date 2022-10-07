@@ -9,10 +9,14 @@
                 <field name="invoice_partner_display_name" invisible="context.get('default_move_type') not in ('in_invoice', 'in_refund','in_receipt')" position="replace">
                     <field name="customer_sequence" optional="show"/>
                     <field name="company_code_partner" optional="show"></field>
-                    <field name="vendor" optional="show"></field>
-                    <field name="invoice_adress" optional="show"></field>
+                    <field name="vendor" optional="show" string="Vendor Parent"></field>
+                    <field name="invoice_adress" optional="show" string="Vendor"></field>
                 </field>
                 <field name="invoice_partner_display_name" invisible="context.get('default_move_type') not in ('out_invoice', 'out_refund','out_receipt')" position="replace">
+                    <field name="customer_sequence" optional="show"/>
+                    <field name="company_code_partner" optional="show"></field>
+                    <field name="vendor" optional="show" string="Customer Parent"></field>
+                    <field name="invoice_adress" optional="show" string="Customer"></field>
                 </field>
             </field>
         </record>
