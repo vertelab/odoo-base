@@ -20,11 +20,12 @@ class ElkSms(models.Model):
            _logger.warning(f"Unable to send sms: Missing Message {self=}")
            self.state  = "error"
            self.error_code = "sms_number_missing"
+           return False
         if not self.number:
            _logger.warning(f"Unable to send sms: Missing Number {self=}")
            self.state  = "error"
            self.error_code = "sms_server" 
-
+           return False
         try:
             auth_info = (self.env['ir.config_parameter'].get_param('elk_sms_auth')).split(',')
         except:
@@ -46,18 +47,22 @@ class ElkSms(models.Model):
                 #raise UserError(_('Error. Input a +46.... number instead of 0...'))
                 _logger.warning(_('Error. Input a +46.... number instead of 0...'))
                 self.state  = "error"
+                return False
             if 'requires Basic' in response.content.decode('utf-8'):
                 #raise UserError(_('Error. Check if the auth info in the system parameter "elk_sms_auth" is valid.'))
                 _logger.warning(_('Error. Check if the auth info in the system parameter "elk_sms_auth" is valid.'))
                 self.state  = "error"
+                return False
             if 'Not enough credits' in response.content.decode('utf-8'):
                 #raise UserError(_('Error. Not enough money to send message, add funds.'))
                 _logger.warning(_('Error. Not enough money to send message, add funds.'))
                 self.state  = "error"
+                return False
             if 'Missing key to' in response.content.decode('utf-8'):
                 #raise UserError(_('Error. Missing key to (i have no idea to what, probably weird phone number.)'))
                 _logger.warning(_('Error. Missing key to (i have no idea to what, probably weird phone number.)'))
                 self.state  = "error"
+                return False
             self.state  = "sent"
             return response
 
