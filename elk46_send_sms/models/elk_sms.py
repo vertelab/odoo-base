@@ -46,7 +46,6 @@ class ElkSms(models.Model):
                 data={'dryrun': dryrun_toggle, 'from': 'Reboot',
                       'to': self.convert_number(self.number), 'message': self.body,
                       'whendelivered': f"{self.env['ir.config_parameter'].get_param('web.base.url')}/sms"})
-            print(response.text)
             _logger.warning(response.text)
             if response.status_code == 200:
                 response = json.loads(response.content.decode("utf-8"))
