@@ -21,8 +21,8 @@ class ElkSms(models.Model):
         ('failed', 'Failed'),
         ('delivered', 'Delivered')
     ])
-    rec_model = fields.Char(string="Model Rec")
-    rec_id = fields.Char(string="Rec ID")
+    rec_model = fields.Char(string="Model Rec", readonly=True)
+    rec_id = fields.Char(string="Rec ID", readonly=True)
 
     def send(self, delete_all=False, auto_commit=False, raise_exception=False):
         try:
