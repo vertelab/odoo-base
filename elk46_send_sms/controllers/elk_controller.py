@@ -18,19 +18,18 @@ class ElkController(http.Controller):
         """
         _logger.warning(f"incoming POST from 46elks {kwargs=}")
         if kwargs:
-            # if kwargs['status'] != 'created' and kwargs['status'] != 'sent':
             try:
                 saved_sms_id = http.request.env['sms.sms'].sudo().search([('elk_sms_id', '=', kwargs['id'])])
-                saved_sms_id.status = kwargs.get('status')
+                saved_sms_id.elk_sms_status = kwargs.get('status')
 
                 sale_order = http.request.env[saved_sms_id.rec_model].sudo().browse(int(saved_sms_id.rec_id))
                 if kwargs['status'] in ['delivered', 'sent']:
-                    saved_sms_id.status = 'sent'
+                    saved_sms_id.state = 'sent'
                     sale_order.message_post(
                         body=f"Message with body: {saved_sms_id.body}, to number: {saved_sms_id.number}, "
                              f"was successfully {kwargs.get('status')}.")
                 else:
-                    saved_sms_id.status = 'error'
+                    saved_sms_id.state = 'error'
                     sale_order.message_post(
                         body=f'Message with body: {saved_sms_id.body}, to number: {saved_sms_id.number}, '
                              f'failed to send.')
