@@ -7,6 +7,7 @@
     ],
     'data': [
         "views/assets.xml",
+        "views/sms_view.xml",
         "data/ir_config_parameter.xml"
     ],
 }
