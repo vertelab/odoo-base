@@ -10,6 +10,7 @@ _logger = logging.getLogger(__name__)
 
 class XMLExport(models.TransientModel):
     _name = 'xml.export'
+    _description = 'XML Export'
 
     active_model = fields.Char()
     active_id = fields.Integer()
