@@ -1,0 +1,24 @@
+// Sticky Header & Footer in List View
+.o_list_view {
+    .table-responsive {
+        .o_list_table {
+            // th & td are here for compatibility with chrome
+            thead tr:nth-child(1) th {
+                position: sticky;
+                top: 0;
+                z-index: 1;
+            }
+            thead tr:nth-child(1) th {
+                background-color: $o-list-footer-bg-color;
+            }
+            tfoot,
+            tfoot tr:nth-child(1) td {
+                position: sticky;
+                bottom: 0;
+            }
+            tfoot tr:nth-child(1) td {
+                background-color: $o-list-footer-bg-color;
+            }
+        }
+    }
+}
