@@ -12,10 +12,11 @@ class AccountMove(models.Model):
         for rec in self:
             if rec.partner_id and rec.partner_id.name:
                 rec.partner_id_name = rec.partner_id.name
-            elif rec.partner_id and not rec.partner_id.name:
-                rec.partner_id_name = rec.partner_id.type.capitalize()
             else:
-                rec.partner_id_name = False
+                if rec.partner_id.type:
+                    rec.partner_id_name = rec.partner_id.type.capitalize() + " Address"
+                else:
+                    rec.partner_id_name = False
 
     customer_sequence = fields.Char(related='partner_id.customer_sequence', string='Customer Number', readonly=True)
     company_code_partner = fields.Char(related='partner_id.company_code_partner', string='Legal Unit')
