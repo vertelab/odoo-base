@@ -31,6 +31,9 @@
             <field name="arch" type="xml">
                 <field name="name" position="replace">
                     <field name="name" filter_domain="['|', '|', '|', ('display_name', 'ilike', self), ('ref', '=', self), ('email', 'ilike', self), ('customer_sequence', 'ilike', self)]"/>
+                    <field name="our_customer_number"/>
+                    <field name="customer_sequence"/>
+                    <field name="company_code_partner"/>
                 </field>
             </field>
         </record>
