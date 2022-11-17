@@ -1,0 +1,11 @@
+<odoo>
+    <template id="portal_signature" name="Portal Signature">
+        <div class="mt-4">
+            <h2>Signature</h2>
+            <t t-call="portal.signature_form">
+                <t t-set="call_url" t-value="'/web/signature/%s/%s/accept' % (invoice._name, invoice.id)"/>
+                <t t-set="default_name" t-value="'%s' %(invoice.name)"/>
+            </t>
+        </div>
+    </template>
+</odoo>
