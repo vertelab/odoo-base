@@ -1,11 +1,7 @@
 <odoo>
-    <template id="portal_signature" name="Portal Signature">
-        <div class="mt-4">
-            <h2>Signature</h2>
-            <t t-call="portal.signature_form">
-                <t t-set="call_url" t-value="'/web/signature/%s/%s/accept' % (invoice._name, invoice.id)"/>
-                <t t-set="default_name" t-value="'%s' %(invoice.name)"/>
-            </t>
-        </div>
+    <template id="assets_common" name="Common Assets (used in backend interface and website)" inherit_id="web.assets_common">
+        <xpath expr="//link[@href='/web/static/src/scss/name_and_signature.scss']" position="after">
+            <link rel="stylesheet" type="text/scss" href="/base_signature/static/src/scss/style.scss"/>
+        </xpath>
     </template>
 </odoo>
