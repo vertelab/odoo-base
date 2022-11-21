@@ -36,7 +36,6 @@
     "description": """Allows signature to be used anywhere in odoo.""",
     "depends": ["base", "portal"],
     "data": [
-        'views/portal_template.xml'
     ],
     "application": False,
     "installable": True,

@@ -19,7 +19,7 @@ class SignaturePortal(CustomerPortal):
         try:
             rec_sudo = self._document_check_access(model, int(rec_id), access_token=access_token)
         except (AccessError, MissingError):
-            return {'error': _('Invalid order.')}
+            return {'error': _('Invalid Access Token.')}
 
         if not rec_sudo.require_signature:
             return {'error': _('The record does not require signature.')}
@@ -44,6 +44,6 @@ class SignaturePortal(CustomerPortal):
 
         return {
             'force_refresh': True,
-            'redirect_url': '/my/dms/file/%s?%s' % (rec_sudo.id, query_string),
+            'redirect_url': '/my/dms/file/%s?access_token=%s&%s' % (rec_sudo.id, access_token, query_string),
         }
 
