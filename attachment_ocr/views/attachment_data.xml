@@ -1,0 +1,13 @@
+<?xml version="1.0"?>
+<odoo>
+    <data noupdate="1">
+        <!-- server action -->
+        <record model="ir.actions.server" id="ocr2index">
+            <field name="name">OCR</field>
+            <field name="state">code</field>
+            <field name="model_id" ref="base.model_ir_attachment" />
+            <field name="code">model.ocr2index()</field>
+        </record>
+    </data>
+
+</odoo>
