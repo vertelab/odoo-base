@@ -54,4 +54,7 @@
     </div>
 </t>
 
+    <t t-name="WebClient.DebugManager.Global">
+    </t>
+
 </templates>

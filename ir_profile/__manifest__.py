@@ -12,16 +12,12 @@ The kernel of Odoo, needed for all installation.
 """,
     'depends': ['base_setup'],
     'data': [
+        'views/assets.xml',
         'views/ir_profile_views.xml',
         'views/res_config_settings_views.xml',
         'views/speedscope_template.xml',
     ],
     'qweb': ['ir_profile/static/src/xml/*.xml'],
-    'assets': {
-        'web.assets_backend': [
-            'ir_profile/js/profiling_qweb_view.js',
-        ]
-    },
     'installable': True,
     'auto_install': True,
     'license': 'LGPL-3',
