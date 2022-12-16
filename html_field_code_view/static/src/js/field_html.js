@@ -7,24 +7,6 @@ odoo.define('html_field_code_view.field.html', function (require) {
 
 
     FieldHtml.include({
-        commitChanges: function () {
-            var self = this;
-            if (config.isDebug() && this.mode === 'edit') {
-                var layoutInfo = $.summernote.core.dom.makeLayoutInfo(this.wysiwyg.$editor);
-                $.summernote.pluginEvents.codeview(undefined, undefined, layoutInfo, false);
-            }
-            if (this.mode == "readonly" || !this.isRendered) {
-                return this._super();
-            }
-            var _super = this._super.bind(this);
-            return this.wysiwyg.saveModifiedImages(this.$content).then(function () {
-                return self.wysiwyg.save(self.nodeOptions).then(function (result) {
-                    self._isDirty = result.isDirty;
-                    _super();
-                });
-            });
-        },
-
         _getWysiwygOptions: function () {
             var self = this;
             return Object.assign({}, this.nodeOptions, {
