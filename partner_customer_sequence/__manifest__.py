@@ -32,7 +32,7 @@
     'contributor': '',
     'maintainer': 'Vertel AB',
     'repository': 'https://github.com/vertelab/odoo-base.git',
-    'depends': ['contacts', 'account', 'purchase'],
+    'depends': ['contacts', 'account', 'purchase', 'sale'],
     'data': [
         'views/res_partner_view.xml',
         'views/account_invoice_view.xml',

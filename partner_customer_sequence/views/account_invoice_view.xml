@@ -16,10 +16,11 @@
                 <field name="name" position="after">
                     <field name="customer_sequence" optional="show"/>
                     <field name="company_code_partner" optional="show"/>
-                    <field name="partner_id_name" optional="show" string="Vendor" invisible="context.get('default_move_type') not in ('in_invoice', 'in_refund','in_receipt')"/>
-                    <field name="partner_id_parent_name" optional="show" string="Vendor Parent" invisible="context.get('default_move_type') not in ('in_invoice', 'in_refund','in_receipt')"/>
-                    <field name="partner_id_name" optional="show" string="Customer" invisible="context.get('default_move_type') not in ('out_invoice', 'out_refund','out_receipt')"/>
-                    <field name="partner_id_parent_name" optional="show" string="Customer Parent" invisible="context.get('default_move_type') not in ('out_invoice', 'out_refund','out_receipt')"/>
+                    <field name="partner_id_name" optional="show" string="Invoice Address" invisible="context.get('default_move_type') not in ('in_invoice', 'in_refund','in_receipt')"/>
+                    <field name="partner_id_parent_name" optional="show" string="Vendor" invisible="context.get('default_move_type') not in ('in_invoice', 'in_refund','in_receipt')"/>
+                    <field name="partner_id_name" optional="show" string="Invoice Address" invisible="context.get('default_move_type') not in ('out_invoice', 'out_refund','out_receipt')"/>
+                    <field name="partner_id_parent_name" optional="show" string="Customer" invisible="context.get('default_move_type') not in ('out_invoice', 'out_refund','out_receipt')"/>
+                    <field name="partner_shipping_id" optional="show" invisible="context.get('default_move_type') not in ('out_invoice', 'out_refund','out_receipt')"/>
                 </field>
             </field>
         </record>
