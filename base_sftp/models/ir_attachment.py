@@ -17,10 +17,11 @@ class IrAttachment(models.Model):
         """
         Synchronize the file with the SFTP server. ir.attachment(10, )
         """
-        path = f"{self._storage_location()}/{path_names}"
-        with open(path, 'wb') as f:
-            stream = base64.b64decode(content)
-            f.write(stream)
+        if path_names:
+            path = f"{self._storage_location()}/{path_names}"
+            with open(path, 'wb') as f:
+                stream = base64.b64decode(content)
+                f.write(stream)
 
     def write(self, vals):
         full_path = f"{self._storage_location()}/{self.name}"
@@ -28,7 +29,7 @@ class IrAttachment(models.Model):
             os.remove(path=full_path)
         rec = super(IrAttachment, self).write(vals)
         if vals.get('datas') or vals.get('name'):
-            self._sync_with_sftp(path_names=self.path_names, content=self.datas)
+            self._sync_with_sftp(path_names=self.name, content=self.datas)
         return rec
 
     @api.model
