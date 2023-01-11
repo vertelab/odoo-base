@@ -18,6 +18,7 @@ _logger = logging.getLogger(__name__)
 
 class DocumentSFTPServer(ServerInterface):
     def __init__(self, env):
+
         self.env = env
         self.dbname = env.cr.dbname
         super(DocumentSFTPServer, self).__init__()

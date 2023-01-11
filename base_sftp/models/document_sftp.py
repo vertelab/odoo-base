@@ -79,11 +79,4 @@ class DocumentSFTP(models.AbstractModel):
             stop = threading.Event()
             _db2thread[dbname] = (threading.Thread(target=self._run_server, args=(dbname, stop)), stop,)
             _db2thread[dbname][0].start()
-            old_stop = server.stop
-
-            def new_stop():
-                stop.set()
-                old_stop()
-
-            server.stop = new_stop
         return super(DocumentSFTP, self)._register_hook()

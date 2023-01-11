@@ -46,10 +46,13 @@ def setup_session(self, httprequest):
 
     server_socket = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
     server_socket.setsockopt(socket.SOL_SOCKET, socket.SO_REUSEADDR, 1)
-
     host, port = get_config('sftp_bind', 'localhost:0').split(':')
-    _logger.info('Binding to %s:%s', host, port)
-    server_socket.bind((host, int(port)))
+
+    try:
+        _logger.info('Binding to %s:%s', host, port)
+        server_socket.bind((host, int(port)))
+    except socket.error as e:
+        _logger.info('Server %s:%s is already running', host, port)
 
     host_real, port_real = server_socket.getsockname()
     _logger.info('Listening to SFTP connections on %s:%s', host_real, port_real)
