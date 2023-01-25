@@ -2,7 +2,7 @@
     <data>
         <template id="assets_backend" inherit_id="web.assets_backend">
             <xpath expr="//script[@src='/web/static/src/js/control_panel/search_utils.js']" position="replace">
-                <script type="text/javascript" src="/search_utils/static/src/js/search_utils.js"/>
+                <script type="text/javascript" src="/base-search_utils/static/src/js/search_utils.js"/>
             </xpath>
         </template>
     </data>

@@ -28,7 +28,7 @@
         Search Utils
     """,
     'author': 'Vertel AB',
-    'website': 'https://vertel.se/apps/odoo-base/res_ssyk',
+    'website': 'https://vertel.se/apps/odoo-base/base-search_utils',
     'images': ['static/description/banner.png'],  # 560x280 px.
     'license': 'AGPL-3',
     'contributor': '',
