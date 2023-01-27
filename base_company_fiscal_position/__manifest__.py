@@ -20,12 +20,12 @@
 ##############################################################################
 
 {
-    'name': 'Base: Fiscal Position',
+    'name': 'Base: Company Fiscal Position',
     'version': '14.0.1.0.0',
     'summary': 'Adds fiscal position to company',
     'category': '',
     'author': 'Vertel AB',
-    'website': 'https://vertel.se/apps/odoo-base/base_map',
+    'website': 'https://vertel.se/apps/odoo-base/base_company_fiscal_position',
     'images': ['static/description/banner.png'],  # 560x280 px.
     'license': 'AGPL-3',
     'contributor': '',
