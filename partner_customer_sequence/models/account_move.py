@@ -10,16 +10,18 @@ class AccountMove(models.Model):
     @api.depends('partner_id')
     def _compute_partner_child_name(self):
         for rec in self:
+            rec.partner_id_parent_name_rel = rec.partner_id.parent_name
             if rec.partner_id and rec.partner_id.name:
                 rec.partner_id_parent_name_rel = rec.partner_id.parent_name
                 rec.partner_id_name = rec.partner_id.name
             else:
                 if rec.partner_id.type:
                     rec.partner_id_name = rec.partner_id.parent_name
-                    rec.partner_id_parent_name_rel = False
+                    rec.partner_id_parent_name_rel = rec.partner_id.parent_name
                 else:
                     rec.partner_id_name = False
-                    partner_id_parent_name_rel = rec.partner_id.parent_name
+                    rec.partner_id_parent_name_rel = rec.partner_id.parent_name
+
                     
     @api.depends('partner_id')
     def _compute_legal_code(self):
