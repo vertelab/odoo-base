@@ -11,10 +11,12 @@ class AccountMove(models.Model):
     def _compute_partner_child_name(self):
         for rec in self:
             if rec.partner_id and rec.partner_id.name:
+                rec.partner_id_parent_name_rel = rec.partner_id.parent_name
                 rec.partner_id_name = rec.partner_id.name
             else:
                 if rec.partner_id.type:
-                    rec.partner_id_name = rec.partner_id.type.capitalize() + " Address"
+                    rec.partner_id_name = rec.partner_id.parent_name
+                    rec.partner_id_parent_name_rel = False
                 else:
                     rec.partner_id_name = False
                     
@@ -31,5 +33,5 @@ class AccountMove(models.Model):
     customer_sequence = fields.Char(related='partner_id.customer_sequence', string='Customer Number', readonly=True)
     company_code_partner = fields.Char(string='Legal Unit', compute=_compute_legal_code)
     partner_id_name = fields.Char(compute=_compute_partner_child_name)
-    partner_id_name_rel = fields.Char(related='partner_id_name')
+    partner_id_parent_name_rel = fields.Char(compute=_compute_partner_child_name)
     partner_id_parent_name = fields.Char(related='partner_id.parent_name')
