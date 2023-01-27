@@ -19,6 +19,7 @@ class AccountMove(models.Model):
                     rec.partner_id_parent_name_rel = False
                 else:
                     rec.partner_id_name = False
+                    partner_id_parent_name_rel = rec.partner_id.parent_name
                     
     @api.depends('partner_id')
     def _compute_legal_code(self):
