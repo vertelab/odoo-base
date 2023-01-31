@@ -108,21 +108,20 @@ odoo.define('web.searchUtils', function (require) {
             id: 'antepenultimate_month', groupNumber: 1, format: 'MMMM',
             addParam: { months: -2 }, granularity: 'month',
         },
-
         preantepenultimate_month: {
             id: 'preantepenultimate_month', groupNumber: 1, format: 'MMMM',
             addParam: { months: -3 }, granularity: 'month',
         },
         propreantepenultimate_month: {
-            id: 'proantepenultimate_month', groupNumber: 1, format: 'MMMM',
+            id: 'propreantepenultimate_month', groupNumber: 1, format: 'MMMM',
             addParam: { months: -4 }, granularity: 'month',
         },
         eight_month: {
-            id: 'sixth_month', groupNumber: 1, format: 'MMMM',
+            id: 'eight_month', groupNumber: 1, format: 'MMMM',
             addParam: { months: -5 }, granularity: 'month',
         },
         seventh_month: {
-            id: 'sixth_month', groupNumber: 1, format: 'MMMM',
+            id: 'seventh_month', groupNumber: 1, format: 'MMMM',
             addParam: { months: -6 }, granularity: 'month',
         },
         sixth_month: {
