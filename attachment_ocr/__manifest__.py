@@ -27,6 +27,7 @@
         Add a image filed for attachment, it shows in a notebook page in attachment management
     """,
     'author': 'Vertel AB',
+    'programmers_note': 'Use $ sudo pip install pytesseract for module to run.',
     'website': 'http://www.vertel.se',
     'depends': ['attachment_image'],
     'data': ['views/attachment_data.xml'],
