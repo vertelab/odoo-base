@@ -20,7 +20,7 @@
 ##############################################################################
 
 {
-    'name': 'Attachment Image',
+    'name': 'Base: Attachment Image',
     'version': '14.0.0.1.0',
     'category': '',
     'description': """
