@@ -20,7 +20,7 @@
 ##############################################################################
 
 {
-    'name': 'Attachment OCR',
+    'name': 'Base: Attachment OCR',
     'version': '14.0.0.1.0',
     'category': '',
     'description': """
