@@ -37,10 +37,7 @@
     'contributor': 'Vertel AB, N-Development',
     'maintainer': 'Vertel AB',
     'repository': 'https://github.com/vertelab/odoo-base.git',
-    'depends': [
-        'base',
-        'web',
-    ],
+    'depends': ['base','web', ],
     'data': [
         'views/assets.xml',
         'views/ir_module.xml',
