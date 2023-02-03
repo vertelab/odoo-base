@@ -37,9 +37,7 @@
     'contributor': '',
     'maintainer': 'Vertel AB',
     'repository': 'https://github.com/vertelab/odoo-base',
-    'depends': [
-        'base',
-    ],
+    'depends': ['base',],
     'data': [
         'views/res_partner_view.xml',
         'views/assets.xml',
@@ -47,3 +45,4 @@
     'application': False,
     'installable': True,
 }
+# vim:expandtab:smartindent:tabstop=4:softtabstop=4:shiftwidth=4:
