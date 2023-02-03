@@ -32,8 +32,8 @@
     'contributor': '',
     'maintainer': 'Vertel AB',
     'repository': 'https://github.com/vertelab/odoo-document',
-    "depends": ['base', 'mail'],
-    "data": [
+    'depends': ['base', 'mail'],
+    'data': [
         "data/ir_config_parameter.xml",
         # "views/ir_config_view.xml",
     ],
