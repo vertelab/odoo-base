@@ -34,7 +34,7 @@
     "description": """
         This modules adds fiscal position to company.
     """,
-    "depends": ["base", "account"],
+    'depends': ['base', 'account'],
     "data": [
         "views/res_company_view.xml",
     ],
