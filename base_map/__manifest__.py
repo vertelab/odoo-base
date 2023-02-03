@@ -33,13 +33,13 @@
     'contributor': '',
     'maintainer': 'Vertel AB',
     'repository': 'https://github.com/vertelab/odoo-base',
-    "description": """
+    'description': """
 Base mapping
 ============
 This modules allows for quick mapping of Odoo fields to fields in other systems.
 Also supports import / export of field data.
 """,
-    "depends": ["base"],
+    'depends': ['base'],
     "data": [
         "views/ir_model.xml",
         "security/ir.model.access.csv",
@@ -48,3 +48,4 @@ Also supports import / export of field data.
     "application": False,
     "installable": True,
 }
+# vim:expandtab:smartindent:tabstop=4:softtabstop=4:shiftwidth=4:
