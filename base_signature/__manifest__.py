@@ -33,8 +33,10 @@
     'contributor': '',
     'maintainer': 'Vertel AB',
     'repository': 'https://github.com/vertelab/odoo-base',
-    "description": """Allows signature to be used anywhere in odoo.""",
-    "depends": ["base", "portal"],
+    'description': """
+    Allows signature to be used anywhere in odoo.
+    """,
+    'depends': ['base', 'portal'],
     "data": [
     ],
     "application": False,
