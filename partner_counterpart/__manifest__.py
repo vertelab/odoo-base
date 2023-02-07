@@ -36,7 +36,7 @@
     'contributor': '',
     'maintainer': 'Vertel AB',
     'repository': 'https://github.com/vertelab/odoo-base',
-    "depends": ["base", "contacts", "sales_team", "account"],
+    'depends': ['base', 'contacts', 'sales_team', 'account'],
     "data": [
         "security/ir.model.access.csv",
         'views/partner_counterpart_view.xml',

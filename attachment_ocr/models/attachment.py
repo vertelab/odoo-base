@@ -20,7 +20,7 @@
 ##############################################################################
 from odoo import models, fields, api, _
 import subprocess
-import pytesseract
+import pytesseract ## $ sudo pip install pytesseract
 import pdfplumber
 from base64 import b64decode
 import tempfile
