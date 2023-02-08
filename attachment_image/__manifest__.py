@@ -22,12 +22,19 @@
 {
     'name': 'Base: Attachment Image',
     'version': '14.0.0.1.0',
-    'category': '',
+    'summary': 'Add a image filed for attachment, it shows in a notebook page in attachment management.',
+    'category': 'Technical',
     'description': """
-        Add a image filed for attachment, it shows in a notebook page in attachment management
+    Add a image filed for attachment, it shows in a notebook page in attachment management.
     """,
     'author': 'Vertel AB',
-    'website': 'http://www.vertel.se',
+    'website': 'https://vertel.se/apps/odoo-base/attachment_image',
+    'images': ['static/description/banner.png'], # 560x280 px.
+    'license': 'AGPL-3',
+    'contributor': '',
+    'maintainer': 'Vertel AB',
+    'repository': 'https://github.com/vertelab/odoo-base',
+    # Any module necessary for this one to work correctly
     'depends': ['attachment_notebook'],
     'data': ['views/attachment_image_view.xml'],
     'application': False,
