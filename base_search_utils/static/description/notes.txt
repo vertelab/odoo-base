@@ -1,5 +1,5 @@
-odoo-base / base-search_utils
-2023-01-30
+odoo-base / base_search_utils
+2023-02-08
 
 Be aware of these!
 [project]/[module]/static/description/banner.png
