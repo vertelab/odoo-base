@@ -1,4 +1,4 @@
-odoo-base / attachment_base -- icons
+odoo-base / base_map
 2022-06-08
 
 Path:
