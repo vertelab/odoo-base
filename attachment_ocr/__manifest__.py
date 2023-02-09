@@ -37,7 +37,7 @@
     'repository': 'https://github.com/vertelab/odoo-base',
     # Any module necessary for this one to work correctly
     
-    'depends': ['attachment_image'],
+    'depends': ['base_attachment_image'],
     'data': ['views/attachment_data.xml'],
     'application': False,
     'installable': True,
