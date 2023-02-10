@@ -1,5 +1,5 @@
-odoo-base / partner_customer_fiscal_position
-2023-01-30
+odoo-base / base_company_fiscal_position
+2023-02-08
 
 Be aware of these!
 [project]/[module]/static/description/banner.png

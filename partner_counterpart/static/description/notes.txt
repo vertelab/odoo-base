@@ -1,4 +1,4 @@
-odoo-base / partner_counterpart -- icons
+odoo-base / partner_counterpart
 2022-06-13
 
 Path:

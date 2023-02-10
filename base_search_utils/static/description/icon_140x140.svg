@@ -8,7 +8,7 @@
    version="1.1"
    id="SVGRoot"
    sodipodi:docname="icon_140x140.svg"
-   inkscape:export-filename="/usr/share/odoo-base/base-search_utils/static/description/icon.png"
+   inkscape:export-filename="/usr/share/odoo-base/base_search_utils/static/description/icon.png"
    inkscape:export-xdpi="92"
    inkscape:export-ydpi="92"
    inkscape:version="1.1.2 (0a00cf5339, 2022-02-04)"
@@ -95,7 +95,7 @@
          x="72.719994"
          y="84.506187"
          style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:21.3234px;font-family:Ubuntu;-inkscape-font-specification:'Ubuntu, Normal';font-variant-ligatures:normal;font-variant-caps:normal;font-variant-numeric:normal;font-feature-settings:normal;text-align:center;writing-mode:lr-tb;text-anchor:middle;fill:#ffffff;fill-opacity:1;stroke-width:0.999996px"
-         id="tspan38">Base-Search</tspan><tspan
+         id="tspan38">Base Search</tspan><tspan
          sodipodi:role="line"
          x="72.719994"
          y="102.36778"
