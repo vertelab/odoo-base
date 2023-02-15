@@ -28,13 +28,11 @@
     'description': """
     Adds social security number to partners
     v14.0.0.1.0 Migration of module from version 12 to 14 \n
-    ================================================================================================
-
     """,
     #'sequence': '1',
     'author': 'Vertel AB',
     'website': 'https://vertel.se/apps/odoo-base/partner_ssn',
-    'images': ['static/description/banner.png'], # 560x280 px.
+    'images': ['static/description/banner.png'],  # 560x280 px.
     'license': 'AGPL-3',
     'contributor': '',
     'maintainer': 'Vertel AB',

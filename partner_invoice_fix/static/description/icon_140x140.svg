@@ -8,7 +8,7 @@
    version="1.1"
    id="SVGRoot"
    sodipodi:docname="icon_140x140.svg"
-   inkscape:export-filename="/usr/share/odoo-base/base_signature/static/description/icon.png"
+   inkscape:export-filename="/usr/share/odoo-base/partner_invoice_fix/static/description/icon.png"
    inkscape:export-xdpi="92"
    inkscape:export-ydpi="92"
    inkscape:version="1.1.2 (0a00cf5339, 2022-02-04)"
@@ -48,15 +48,15 @@
      inkscape:pageopacity="0.0"
      inkscape:pageshadow="2"
      inkscape:zoom="1.4142136"
-     inkscape:cx="105.00535"
-     inkscape:cy="53.386561"
+     inkscape:cx="51.972347"
+     inkscape:cy="-31.112698"
      inkscape:document-units="px"
      inkscape:current-layer="layer1"
      showgrid="false"
      inkscape:window-width="1128"
-     inkscape:window-height="962"
-     inkscape:window-x="2472"
-     inkscape:window-y="90"
+     inkscape:window-height="805"
+     inkscape:window-x="2162"
+     inkscape:window-y="166"
      inkscape:window-maximized="0"
      inkscape:pagecheckerboard="0" />
   <metadata
@@ -85,22 +85,22 @@
        style="stroke-width:4.60939169" />
     <text
        xml:space="preserve"
-       style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:14.8424px;line-height:125%;font-family:Ubuntu;-inkscape-font-specification:'Ubuntu, Normal';text-align:center;letter-spacing:0px;word-spacing:0px;writing-mode:lr-tb;text-anchor:middle;fill:#ffffff;fill-opacity:1;stroke:none;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
-       x="75.145592"
-       y="82.435219"
+       style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:14.3019px;line-height:125%;font-family:Ubuntu;-inkscape-font-specification:'Ubuntu, Normal';text-align:center;letter-spacing:0px;word-spacing:0px;writing-mode:lr-tb;text-anchor:middle;fill:#ffffff;fill-opacity:1;stroke:none;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
+       x="69.941444"
+       y="88.954842"
        id="text2035"
        inkscape:export-xdpi="92"
        inkscape:export-ydpi="92"><tspan
          sodipodi:role="line"
-         x="75.145592"
-         y="82.435219"
-         style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:26.3866px;font-family:Ubuntu;-inkscape-font-specification:'Ubuntu, Normal';font-variant-ligatures:normal;font-variant-caps:normal;font-variant-numeric:normal;font-feature-settings:normal;text-align:center;writing-mode:lr-tb;text-anchor:middle;fill:#ffffff;fill-opacity:1;stroke-width:1px"
-         id="tspan835">Base</tspan><tspan
+         x="69.941444"
+         y="88.954842"
+         style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:25.4255px;font-family:Ubuntu;-inkscape-font-specification:'Ubuntu, Normal';font-variant-ligatures:normal;font-variant-caps:normal;font-variant-numeric:normal;font-feature-settings:normal;text-align:center;writing-mode:lr-tb;text-anchor:middle;fill:#ffffff;fill-opacity:1;stroke-width:1px"
+         id="tspan832">Partner</tspan><tspan
          sodipodi:role="line"
-         x="75.145592"
-         y="104.53797"
-         style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:26.3866px;font-family:Ubuntu;-inkscape-font-specification:'Ubuntu, Normal';font-variant-ligatures:normal;font-variant-caps:normal;font-variant-numeric:normal;font-feature-settings:normal;text-align:center;writing-mode:lr-tb;text-anchor:middle;fill:#ffffff;fill-opacity:1;stroke-width:1px"
-         id="tspan823">Signature</tspan></text>
+         x="69.941444"
+         y="110.25264"
+         style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:25.4255px;font-family:Ubuntu;-inkscape-font-specification:'Ubuntu, Normal';font-variant-ligatures:normal;font-variant-caps:normal;font-variant-numeric:normal;font-feature-settings:normal;text-align:center;writing-mode:lr-tb;text-anchor:middle;fill:#ffffff;fill-opacity:1;stroke-width:1px"
+         id="tspan835">Invoice Fix</tspan></text>
     <text
        id="text845-2"
        y="42.39505"

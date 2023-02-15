@@ -9,7 +9,7 @@
    id="SVGRoot"
    inkscape:version="1.1.2 (0a00cf5339, 2022-02-04)"
    sodipodi:docname="banner_560x280.svg"
-   inkscape:export-filename="/usr/share/odoo-base/base-search_utils/static/description/banner.png"
+   inkscape:export-filename="/usr/share/odoo-base/base_search_utils/static/description/banner.png"
    inkscape:export-xdpi="92.61972"
    inkscape:export-ydpi="92.61972"
    xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
@@ -180,12 +180,13 @@
        y="69.199997"
        id="text2035"
        inkscape:export-xdpi="92"
-       inkscape:export-ydpi="92"><tspan
+       inkscape:export-ydpi="92"
+       inkscape:export-filename="/usr/share/odoo-base/base_search_utils/static/description/banner.png"><tspan
          sodipodi:role="line"
          x="514.90643"
          y="69.199997"
          style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:26.6667px;font-family:Ubuntu;-inkscape-font-specification:'Ubuntu, Normal';font-variant-ligatures:normal;font-variant-caps:normal;font-variant-numeric:normal;font-feature-settings:normal;text-align:end;writing-mode:lr-tb;text-anchor:end;stroke-width:1px"
-         id="tspan2153">Base-Search Utils</tspan></text>
+         id="tspan2153">Base Search Utils</tspan></text>
     <flowRoot
        xml:space="preserve"
        id="flowRoot844"
