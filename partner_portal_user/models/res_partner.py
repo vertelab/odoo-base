@@ -7,11 +7,13 @@ _logger = logging.getLogger(__name__)
 class ResPartner(models.Model):
     _inherit = "res.partner"
 
-    is_portaluser = fields.Boolean(compute="_set_portalbool", readonly=True)
+    is_portaluser = fields.Boolean(compute="set_portalbool", readonly=True)
 
-    def _set_portalbool(self):
+    def set_portalbool(self):
         self.is_portaluser = False
         for rec in self:
             for user in rec.user_ids:
                 if user.has_group('base.group_portal'):
-                    self.is_portaluser = True
+                    rec.is_portaluser = True
+                else:
+                    rec.is_portaluser = False

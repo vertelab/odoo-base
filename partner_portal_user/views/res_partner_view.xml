@@ -9,4 +9,14 @@
             </field>
         </field>
     </record>
+    <record id="partner_portal_tree" model="ir.ui.view">
+        <field name="name">res.partner.portal_tree</field>
+        <field name="model">res.partner</field>
+        <field name="inherit_id" ref="base.view_partner_tree"/>
+        <field name="arch" type="xml">
+            <field name="vat" position="after">
+                <field name="is_portaluser" />
+            </field>
+        </field>
+    </record>
 </odoo>
