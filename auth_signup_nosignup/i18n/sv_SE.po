@@ -17,5 +17,5 @@ msgstr ""
 
 #. module: auth_signup_nosignup
 #: model_terms:ir.ui.view,arch_db:auth_signup_nosignup.auth_signup_login_nosignup
-msgid "Återställ lösenord"
-msgstr ""
+msgid "Reset Password"
+msgstr "Återställ lösenord"
