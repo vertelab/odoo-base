@@ -83,7 +83,7 @@ msgid "Social security number %s is not correctly formated."
 msgstr "Personnummret %s är felaktigt formaterat"
 
 #. module: partner_ssn
-#: sql_constraint:res.partner:0
+#: model:ir.model.constraint,message:partner_ssn.constraint_res_partner_social_sec_nr_unique
 msgid "social security number field needs to be unique"
 msgstr "Personnummret måste vara unikt."
 
