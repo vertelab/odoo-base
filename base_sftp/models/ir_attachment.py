@@ -39,9 +39,10 @@ class IrAttachment(models.Model):
             self._sync_with_sftp(path_names=res.name, content=res.datas)
         return res
 
-    def unlink(self, os_delete=True):
-        for rec in self:
-            path = f"{self._storage_location()}/{rec.name}"
-            if path and os.path.exists(path) and os_delete:
-                os.remove(f"{path}")
-        return super(IrAttachment, self).unlink()
+    # def unlink(self, os_delete):
+    #     print("deleting ======")
+    #     for rec in self:
+    #         path = f"{self._storage_location()}/{rec.name}"
+    #         if path and os.path.exists(path) and os_delete:
+    #             os.remove(f"{path}")
+    #     return super(IrAttachment, self).unlink()

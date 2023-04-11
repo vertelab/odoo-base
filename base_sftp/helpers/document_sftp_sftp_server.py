@@ -44,7 +44,8 @@ class StubSFTPHandle(SFTPHandle):
                     [('name', '=', file_name)], limit=1)
 
                 if file_obj and action == "Unlink":
-                    file_obj.unlink(os_delete=False)
+                    os_delete = False
+                    file_obj.unlink()
                 elif not file_obj and action == "CreateWrite":
                     self.env['ir.attachment'].with_user(self.env.user).create({
                         'name': file_name,
