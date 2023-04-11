@@ -49,13 +49,13 @@ def setup_session(self, httprequest):
     host, port = get_config('sftp_bind', 'localhost:0').split(':')
 
     try:
-        _logger.info('Binding to %s:%s', host, port)
+        _logger.info('Monkey path Binding to %s:%s', host, port)
         server_socket.bind((host, int(port)))
     except socket.error as e:
-        _logger.info('Server %s:%s is already running', host, port)
+        _logger.info('Monkey path Server %s:%s is already running', host, port)
 
     host_real, port_real = server_socket.getsockname()
-    _logger.info('Listening to SFTP connections on %s:%s', host_real, port_real)
+    _logger.info('Monkey path Listening to SFTP connections on %s:%s', host_real, port_real)
     server_socket.listen(5)
     server_socket.settimeout(2)
 
