@@ -11,10 +11,10 @@ from odoo.service.server import server
 from odoo import SUPERUSER_ID, api, models
 from odoo.modules.registry import Registry
 
-from ..helpers.document_sftp_transport import DocumentSFTPTransport
-from ..helpers.document_sftp_server import DocumentSFTPServer
-from ..helpers.document_sftp_sftp_server import DocumentSFTPSftpServer
-from ..helpers.document_sftp_server_interface import DocumentSFTPSftpServerInterface
+from ..helpers.sftp_transport import ExtendTransport
+from ..helpers.sftp_server_interface import BaseSFTPServerInterface
+from ..helpers.sftp_handle import BaseSFTPServer
+from ..helpers.server_interface import BaseServerInterface
 
 
 _db2thread = {}
@@ -39,8 +39,13 @@ class DocumentSFTP(models.AbstractModel):
         server_socket = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
         server_socket.setsockopt(socket.SOL_SOCKET, socket.SO_REUSEADDR, 1)
         host, port = self.env['ir.config_parameter'].get_param('sftp_bind', 'localhost:0').split(':')
-        _logger.info('Binding to %s:%s', host, port)
-        server_socket.bind((host, int(port)))
+
+        try:
+            _logger.info('Binding to %s:%s', host, port)
+            server_socket.bind((host, int(port)))
+        except socket.error as e:
+            _logger.info('Binding to %s:%s', host, port)
+
         host_real, port_real = server_socket.getsockname()
         _logger.info('Listening to SFTP connections on %s:%s', host_real, port_real)
         if host_real != host or port_real != port:
@@ -59,10 +64,10 @@ class DocumentSFTP(models.AbstractModel):
             key = self.env['ir.config_parameter'].get_param('sftp_host_key')
             host_key = paramiko.Ed25519Key.from_private_key(StringIO(key))
 
-            transport = DocumentSFTPTransport(self.env.cr, conn)
+            transport = ExtendTransport(self.env.cr, conn)
             transport.add_server_key(host_key)
-            transport.set_subsystem_handler('sftp', DocumentSFTPSftpServer, DocumentSFTPSftpServerInterface, self.env)
-            server = DocumentSFTPServer(self.env)
+            transport.set_subsystem_handler('sftp', BaseSFTPServer, BaseSFTPServerInterface, self.env)
+            server = BaseServerInterface(self.env)
             try:
                 transport.start_server(server=server)
                 channel = transport.accept()

@@ -17,12 +17,12 @@ import logging
 _logger = logging.getLogger(__name__)
 
 
-class DocumentSFTPServer(ServerInterface):
+class BaseServerInterface(ServerInterface):
     def __init__(self, env):
 
         self.env = env
         self.dbname = env.cr.dbname
-        super(DocumentSFTPServer, self).__init__()
+        super(BaseServerInterface, self).__init__()
 
     def check_auth_password(self, username, password):
         try:

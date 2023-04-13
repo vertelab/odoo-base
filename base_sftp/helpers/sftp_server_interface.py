@@ -11,12 +11,12 @@ from os import path
 import base64
 import logging
 from paramiko.common import o644, o777
-from .document_sftp_sftp_server import StubSFTPHandle
+from .sftp_handle import BaseSFTPHandle
 
 _logger = logging.getLogger(__name__)
 
 
-class DocumentSFTPSftpServerInterface(SFTPServerInterface):
+class BaseSFTPServerInterface(SFTPServerInterface):
     ROOT = os.path.expanduser('/tmp')
 
     def __init__(self, server, env):
@@ -70,7 +70,7 @@ class DocumentSFTPSftpServerInterface(SFTPServerInterface):
             _logger.info("Error: %s", e)
             return SFTPServer.convert_errno(e.errno)
 
-        fobj = StubSFTPHandle(self.env, x_path, flags)
+        fobj = BaseSFTPHandle(self.env, x_path, flags)
         fobj.filename = x_path
         fobj.readfile = f
         fobj.writefile = f
@@ -83,7 +83,7 @@ class DocumentSFTPSftpServerInterface(SFTPServerInterface):
         else:
             file_path = self._realpath(self.ROOT + file_path)
         try:
-            stfp_handle = StubSFTPHandle(env=self.env, doc_path=file_path)
+            stfp_handle = BaseSFTPHandle(env=self.env, doc_path=file_path)
             stfp_handle._odoo_file_sync(action="Unlink")
             self.env.cr.commit()
             os.remove(file_path)
@@ -122,13 +122,13 @@ class DocumentSFTPSftpServerInterface(SFTPServerInterface):
 
     def session_ended(self):
         self.env.cr.close()
-        return super(DocumentSFTPSftpServerInterface, self).session_ended()
+        return super(BaseSFTPServerInterface, self).session_ended()
 
     def session_started(self):
         self.env = self.env(cr=self.env.registry.cursor())
-        self.ROOT = f"{self.ROOT}/{self.env.user.login}"
+        self.ROOT = f"{self.ROOT}/{self.env.cr.dbname}/{self.env.user.login}"
         if not path.exists(self.ROOT):
-            os.mkdir(self.ROOT, mode=o777)
+            os.makedirs(self.ROOT, mode=o777)
         os.chmod(self.ROOT, mode=o777)
         self._download_attachment(self.ROOT, data=self._fetch_attachments())
 
