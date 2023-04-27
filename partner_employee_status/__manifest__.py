@@ -23,7 +23,7 @@
     'name': 'Account: Employee Status',
     'version': '14.0.0.0.1',
     # Version ledger: 14.0 = Odoo version. 1 = Major. Non regressionable code. 2 = Minor. New features that are regressionable. 3 = Bug fixes
-    'summary': 'Checks if a res.partner is an employee. Adds a true/false field inside the res.partner.form',
+    'summary': 'Sets contact as an employee when pressing "Create Employee" inside the "User Form". Added employee field inside the "Contact Form"',
     'category': 'Accounting',
     #'sequence': '1'
     'author': 'Vertel AB',
@@ -34,7 +34,7 @@
     'maintainer': 'Vertel AB',
     'repository': 'https://github.com/vertelab/odoo-account',
     'description': """
-       Checks if a res.partner is an employee. Adds a true/false field inside the res.partner.form
+      Sets contact as an employee when pressing "Create Employee" inside the "User Form". Added employee field inside the "Contact Form"
     """,
     'depends': ['base','hr'],
     'data': [
