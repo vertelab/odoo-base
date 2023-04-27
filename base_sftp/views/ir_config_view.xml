@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+    <record id="res_config_settings_view_form" model="ir.ui.view">
+        <field name="name">res.config.settings.view.form.sftp.documents</field>
+        <field name="model">res.config.settings</field>
+        <field name="priority" eval="50"/>
+        <field name="inherit_id" ref="base.res_config_settings_view_form" />
+        <field name="arch" type="xml">
+            <xpath expr="//div[@name='dms_settings']" position="inside">
+                <h2 class="mt32">SFTP Server</h2>
+                <div class="row mt16 o_settings_container">
+                    <div class="col-12 col-lg-6 o_setting_box">
+                        <div class="o_setting_right_pane">
+                            <span class="o_form_label">Binding</span>
+                                <div class="text-muted">
+                                    Set the IP and the port the SFTP document server should be bound to.
+                                    <br/> Should be in the: [IP]:[Port] format.
+                                </div>
+                            <field name="sftp_bind"/>
+                        </div>
+                    </div>
+                    <div class="col-12 col-lg-6 o_setting_box">
+                        <div class="o_setting_right_pane">
+                            <span class="o_form_label">Hostkey</span>
+                                <div class="text-muted">
+                                    Set the ssh ed25519 private key the server is to use.
+                                    <br/> Can be generated with this command: ssh-keygen -t ed25519
+                                    <br/> Should star and end with:
+                                    <br/> '-----BEGIN|END OPENSSH PRIVATE KEY-----'
+                                </div>
+                            <field name="sftp_host_key"/>
+                        </div>
+                    </div>
+                </div>
+            </xpath>
+        </field>
+    </record>
+</odoo>

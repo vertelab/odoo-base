@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+    <data noupdate="1">
+        <record id="param_hostkey" model="ir.config_parameter">
+            <field name="key">sftp_host_key</field>
+            <field name="value">If you see this text, initialization went wrong</field>
+        </record>
+
+        <record id="param_bind" model="ir.config_parameter">
+            <field name="key">sftp_bind</field>
+            <field name="value">localhost:2222</field>
+        </record>
+    </data>
+</odoo>

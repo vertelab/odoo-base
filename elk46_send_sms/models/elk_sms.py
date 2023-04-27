@@ -1,58 +1,65 @@
 from urllib import request
 from odoo import api, fields, models, _
-from odoo.exceptions import UserError
+from odoo.exceptions import UserError, ValidationError
 import requests
 import logging
 import json
 import base64
 import urllib.request
 
-_logger = logging.getLogger("------dmitri-------")
+_logger = logging.getLogger(__name__)
+
 
 class ElkSms(models.Model):
     _inherit = "sms.sms"
 
     url = fields.Char('https://api.46elks.com/a1/sms')
+    elk_sms_id = fields.Text(string="ELK SMS ID")
+    elk_sms_status = fields.Selection([
+        ('created', 'Created'),
+        ('sent', 'Sent'),
+        ('failed', 'Failed'),
+        ('delivered', 'Delivered')
+    ])
+    rec_model = fields.Char(string="Model Rec", readonly=True)
+    rec_id = fields.Char(string="Rec ID", readonly=True)
 
-    #46739299019
-    #auth=('a6ba22729971395309fd3a973ee352f93', 'AFE26B724029E6B79CFFAAD9C9762545')
-    def send(self, number=False, body=False, delete_all=False, auto_commit=False, raise_exception=False):
-        auth_info = (self.env['ir.config_parameter'].get_param('elk_sms_auth')).split(',')
+    def send(self, delete_all=False, auto_commit=False, raise_exception=False):
+        try:
+            username, password = (self.env['ir.config_parameter'].get_param('elk_sms_auth')).split(',')
+        except Exception as e:
+            raise UserError(
+                _('Error. Create a system parameter called "elk_sms_auth" containing the auth info like this: '
+                  'username,password'))
 
-        def read_json_from_site(response):
-            url = 'https://api.46elks.com/a1/sms'
-            request = urllib.request.Request(url)
-            string = '%s:%s' % (auth_info[0], auth_info[1])
-            base64string = base64.standard_b64encode(string.encode('utf-8'))
-            request.add_header('Authorization', 'Basic %s' % base64string.decode('utf-8'))
-            result = urllib.request.urlopen(request)
-            result_json = json.loads(result.read())
+        try:
+            dryrun_toggle = (self.env['ir.config_parameter'].get_param('elk_sms_dryrun')).split(',')
+        except Exception as e:
+            raise UserError(
+                _('Error. Create a system parameter called "elk_sms_dryrun" containing a yes or no depending on if '
+                  'you want to send actual text messages or not. '))
 
-            for line in result_json['data']:
-                if line['id'] == json.loads(response.content.decode('utf-8'))['id']:
-                    _logger.warning(line['status'])
-                    if line['status'] == 'delivered':
-
-                        return True
-            raise UserError(_('Error. Did you input the correct number?'))
-        
-        if auth_info:
-            response = requests.post('https://api.46elks.com/a1/sms',   auth=(auth_info[0], auth_info[1]),
-                                     data={'dryrun': 'no', 'from': 'Reboot', 'to': self.convert_number(number), 'message': body,
-                                     'whendelivered': 'moe.vertel.se:1014/sms?db'})
-            
-            if read_json_from_site(response):
-                if 'Unexpected 0' in response.content.decode('utf-8'):
-                    raise UserError(_('Input a +46.... number instead of 0...'))
-
-                return response
-        else:
-            raise UserError(_('No system parameter containing the mobile authentification token'))
+        if username and password:
+            response = requests.post(
+                'https://api.46elks.com/a1/sms',
+                auth=(username, password),
+                data={'dryrun': dryrun_toggle, 'from': 'Reboot',
+                      'to': self.convert_number(self.number), 'message': self.body,
+                      'whendelivered': f"{self.env['ir.config_parameter'].get_param('web.base.url')}/sms"})
+            _logger.warning(response.text)
+            if response.status_code == 200:
+                response = json.loads(response.content.decode("utf-8"))
+                self.write({
+                    'elk_sms_id': response.get('id', False),
+                    'elk_sms_status': response.get('status', False),
+                })
+                self.state = "outgoing"
+            else:
+                response = response.content.decode("utf-8")
+                raise ValidationError(_(response))
 
     def convert_number(self, number):
-        number_out = 0
-        if number[0] == '0':
-            number_out = f"{'+46'}{number[1::]}"
-        return number_out
-
-    
+        if number and number[0] == '0':
+            return f"{'+46'}{number[1::]}"
+        elif number and number[0] == '+':
+            return number

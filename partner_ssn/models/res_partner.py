@@ -11,9 +11,9 @@ _logger = logging.getLogger(__name__)
 class ResPartner(models.Model):
     _inherit = "res.partner"
 
-    age = fields.Char(string="Age",) # compute="calculate_age" removed computed
-    social_sec_nr = fields.Char(string="Social security number")
-    social_sec_nr_age = fields.Char(string="Social security number", compute="combine_social_sec_nr_age")
+    age = fields.Char(string="Age",)  # compute="calculate_age" removed computed
+    social_sec_nr = fields.Char(string="Social Security Number")
+    social_sec_nr_age = fields.Char(string="Social Security Number Age", compute="combine_social_sec_nr_age")
 
     @api.depends('social_sec_nr')
     def combine_social_sec_nr_age(self):

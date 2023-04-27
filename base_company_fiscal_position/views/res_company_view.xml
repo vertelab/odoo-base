@@ -1,0 +1,14 @@
+<odoo>
+    <data>
+        <record id="res_company_form_extended" model="ir.ui.view">
+            <field name="name">res.company.form.extended</field>
+            <field name="model">res.company</field>
+            <field name="inherit_id" ref="base.view_company_form"/>
+            <field name="arch" type="xml">
+                <field name="phone" position="before">
+                    <field name="fiscal_position_id"/>
+                </field>
+            </field>
+        </record>
+    </data>
+</odoo>

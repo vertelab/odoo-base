@@ -20,7 +20,7 @@
 ##############################################################################
 
 {
-    'name': 'Base: Legacy Partner ID',
+    'name': 'Base: Partner Legacy ID',
     'version': '14.0.1.0.0',
     # Version ledger: 14.0 = Odoo version. 1 = Major. Non regressionable code. 2 = Minor. New features that are regressionable. 3 = Bug fixes
     'summary': '',
@@ -34,11 +34,10 @@
     'contributor': '',
     'maintainer': 'Vertel AB',
     'repository': 'https://github.com/vertelab/odoo-base',
-    'depends': [
-        'contacts'
-    ],
+    'depends': ['contacts'],
     'data': [
         'views/partner_view.xml',
     ],
     'installable': True,
 }
+# vim:expandtab:smartindent:tabstop=4:softtabstop=4:shiftwidth=4:

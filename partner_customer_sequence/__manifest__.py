@@ -27,14 +27,15 @@
     'description': """""",
     'author': 'Vertel AB',
     'website': 'https://vertel.se/apps/odoo-base/partner_customer_sequence',
-    'images': ['/static/description/banner.png'], # 560x280 px.
+    'images': ['/static/description/banner.png'],  # 560x280 px.
     'license': 'AGPL-3',
     'contributor': '',
     'maintainer': 'Vertel AB',
     'repository': 'https://github.com/vertelab/odoo-base.git',
-    'depends': ['contacts', 'account','purchase'],
+    'depends': ['contacts', 'account', 'purchase', 'sale'],
     'data': [
         'views/res_partner_view.xml',
+        'views/account_invoice_view.xml',
         'data/ir_sequence.xml',
 
     ],

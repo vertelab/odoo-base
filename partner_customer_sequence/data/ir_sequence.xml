@@ -1,5 +1,5 @@
 <odoo>
-    <data>
+    <data noupdate="1">
         <record id="sequence_res_partner_customer_seq" model="ir.sequence">
             <field name="name">Customer sequence</field>
             <field name="code">res.partner</field>
@@ -8,9 +8,21 @@
             <field eval="1" name="number_increment"/>
             <field eval="False" name="company_id"/>
             <field name="padding">8</field>
-        </record>	
+        </record>
+
+        <record id="action_partner_customer_sequence" model="ir.actions.server">
+            <field name="name">Customer Sequence</field>
+            <field name="model_id" ref="partner_customer_sequence.model_res_partner"/>
+            <field name="binding_model_id" ref="partner_customer_sequence.model_res_partner"/>
+            <field name="binding_view_types">list,form</field>
+            <field name="state">code</field>
+            <field name="code">
+                if records:
+                    action = records._set_costumer_number()
+            </field>
+        </record>
     </data>
     <data noupdate="1">
         <function model="res.partner" name="set_all_customers_number"/>
-     </data>
+    </data>
 </odoo>

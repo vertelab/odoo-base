@@ -1,4 +1,4 @@
-odoo-base / res_ssyk -- icons
+odoo-base / res_ssyk
 2022-06-13
 
 Path:
