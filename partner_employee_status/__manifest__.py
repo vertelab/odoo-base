@@ -2,7 +2,7 @@
 ##############################################################################
 #
 #    Odoo SA, Open Source Management Solution, third party addon
-#    Copyright (C) 2021- Vertel AB (<https://vertel.se>).
+#    Copyright (C) 2023- Vertel AB (<https://vertel.se>).
 #
 #    This program is free software: you can redistribute it and/or modify
 #    it under the terms of the GNU Affero General Public License as
@@ -20,19 +20,19 @@
 ##############################################################################
 
 {
-    'name': 'Account: Employee Status',
-    'version': '14.0.0.0.1',
+    'name': 'Partner: Employee Status',
+    'version': '14.0',
     # Version ledger: 14.0 = Odoo version. 1 = Major. Non regressionable code. 2 = Minor. New features that are regressionable. 3 = Bug fixes
     'summary': 'Sets contact as an employee when pressing "Create Employee" inside the "User Form". Added employee field inside the "Contact Form"',
-    'category': 'Accounting',
+    'category': 'Technical',
     #'sequence': '1'
     'author': 'Vertel AB',
-    'website': '',
+    'website': "https://vertel.se/apps/odoo-base/partner_employee_status",
     'images': ['/static/description/banner.png'], # 560x280 px.
     'license': 'AGPL-3',
     'contributor': '',
     'maintainer': 'Vertel AB',
-    'repository': 'https://github.com/vertelab/odoo-account',
+    'repository': 'https://github.com/vertelab/odoo-base',
     'description': """
       Sets contact as an employee when pressing "Create Employee" inside the "User Form". Added employee field inside the "Contact Form"
     """,
