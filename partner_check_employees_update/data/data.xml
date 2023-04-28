@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+  <data>
+    <record id="update_all_employee_server_action" model="ir.actions.server">
+      <field name="name">Uppdatera anställningsstatus</field>
+      <field name="model_id" ref="base.model_res_users"/>
+      <field name="binding_model_id" ref="base.model_res_users"/>
+      <field name="binding_type">action</field>
+      <field name="state">code</field>
+      <field name="code">records.update_all_employee_status()</field>
+    </record>
+  </data>
+</odoo>
+
