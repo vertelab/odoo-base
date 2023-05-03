@@ -34,7 +34,9 @@
     'maintainer': 'Vertel AB',
     'repository': 'https://github.com/vertelab/odoo-base',
     'description': """
-      Checks connection between all employees and contacts and updates the employee field.
+      When creating a user and pushing the "Create Employee" button the corresponding contact will set its employee field to True.
+      In Settings / Manage Users you can select users and update their employee status with the Action "Update Employee Status",
+      this will set their corresponding Contact employee field to True provided that the User is an Employee.
     """,
     'depends': ['base','hr','contacts'],
     'data': [
