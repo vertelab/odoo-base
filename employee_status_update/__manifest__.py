@@ -27,7 +27,7 @@
     'category': 'Technical',
     #'sequence': '1'
     'author': 'Vertel AB',
-    'website': "https://vertel.se/apps/odoo-base/partner_employee_status",
+    'website': "https://vertel.se/apps/odoo-base/employee_status_update",
     'images': ['/static/description/banner.png'], # 560x280 px.
     'license': 'AGPL-3',
     'contributor': '',
