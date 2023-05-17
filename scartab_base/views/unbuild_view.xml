@@ -1,0 +1,14 @@
+<odoo>
+    <data>
+        <record id="unbuild_form_view" model="ir.ui.view">
+            <field name="name">sorting.order.form.view</field>
+            <field name="model">sorting.order</field>
+            <field name="inherit_id" ref="pways_raw_multi_unbuild.sorting_order_form_view"/>
+            <field name="arch" type="xml">
+                <field name="process_qty" position="after">
+                    <field name="project_id"/>
+                </field>
+            </field>
+        </record>
+    </data>
+</odoo>
