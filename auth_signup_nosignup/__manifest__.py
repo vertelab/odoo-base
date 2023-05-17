@@ -22,8 +22,9 @@
 # License AGPL-3.0 or later (https://www.gnu.org/licenses/agpl).
 {
     "name": "Auth Signup NoSignup",
+    'summary': 'Removes new user signup from the front page',
     'author': 'Vertel AB',
-    'contributor': '',
+    'images': ['static/description/banner.png'], # 560x280 px.
     'maintainer': 'Vertel AB',
     'category': 'Base',
     'version': '14.0.1.0.0',
