@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <record id="role_mass_addition_wizard" model="ir.ui.view">
+            <field name="name">user.role.mass.addition.form</field>
+            <field name="model">role.mass.addition.wizard</field>
+            <field name="arch" type="xml">
+                <form string="Mass add roles to users" method="post" enctype="multipart/form-data">
+                    <group>
+                        <field name="role_id"/>
+                    </group>
+                    <div class="text-muted">
+                        Select the role to add/remove from the selected users.<br />
+                    </div>
+                    <footer>
+                        <button name="mass_add_users_to_role" string="Add Role" class="btn-primary" type="object"/>
+                        <button name="mass_remove_users_from_role" string="Remove Role" class="btn-secondary" type="object"/>
+                        <button string="Cancel" class="btn-secondary" special="cancel"/>
+                    </footer>
+                </form>
+            </field>
+        </record>
+
+        <record id="action_role_mass_addition" model="ir.actions.act_window">
+            <field name="name">Mass add/remove users to/from role</field>
+            <field name="res_model">role.mass.addition.wizard</field>
+            <field name="view_mode">form</field>
+            <field name="view_id" ref="role_mass_addition_wizard"/>
+            <field name="target">new</field>
+        </record>
+    </data>
+</odoo>
