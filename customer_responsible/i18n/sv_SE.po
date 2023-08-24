@@ -1,0 +1,43 @@
+# Translation of Odoo Server.
+# This file contains the translation of the following modules:
+# 	* customer_responsible
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: Odoo Server 14.0-20220428\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2023-08-24 07:33+0000\n"
+"PO-Revision-Date: 2023-08-24 07:33+0000\n"
+"Last-Translator: \n"
+"Language-Team: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: \n"
+"Plural-Forms: \n"
+
+#. module: customer_responsible
+#: model:ir.model,name:customer_responsible.model_res_partner
+msgid "Contact"
+msgstr "Kontakt"
+
+#. module: customer_responsible
+#: model:ir.model.fields,field_description:customer_responsible.field_res_partner__customer_responsible_id
+#: model:ir.model.fields,field_description:customer_responsible.field_res_users__customer_responsible_id
+#: model_terms:ir.ui.view,arch_db:customer_responsible.view_res_partner_filter_customer_responsible
+msgid "Customer Responsible"
+msgstr "Kundansvarig"
+
+#. module: customer_responsible
+#: model:ir.model.fields,field_description:customer_responsible.field_res_partner__display_name
+msgid "Display Name"
+msgstr "Visningsnamn"
+
+#. module: customer_responsible
+#: model:ir.model.fields,field_description:customer_responsible.field_res_partner__id
+msgid "ID"
+msgstr ""
+
+#. module: customer_responsible
+#: model:ir.model.fields,field_description:customer_responsible.field_res_partner____last_update
+msgid "Last Modified on"
+msgstr "Senast redigerad"
