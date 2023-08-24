@@ -32,7 +32,9 @@ class RoleMassAdditionWizard(models.TransientModel):
                 pass
             else:
                 _logger.warning("User %s is added to %s", user.name, self.role_id.name)
-                new_line = self.env['res.users.role.line'].create({'user_id': user.id, 'role_id': self.role_id.id})
+                #new_line = self.env['res.users.role.line'].create()
+                user.write({'role_line_ids': [(0, 0, {'user_id': user.id, 'role_id': self.role_id.id})]})
+                
 
     def mass_remove_users_from_role(self):
         ctx = self.env.context.get
