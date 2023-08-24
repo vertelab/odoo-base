@@ -7,7 +7,7 @@
             <field name="inherit_id" ref="base.view_users_tree"/>
             <field name="arch" type="xml">
                 <xpath expr="//field[@name='login']" position="after">
-                    <field name="role_line_ids" widget="many2many_tags"/>
+                    <field name="role_line_ids" string="Roles" widget="many2many_tags"/>
                 </xpath>
             </field>
         </record>
