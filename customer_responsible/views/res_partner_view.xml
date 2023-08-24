@@ -1,0 +1,37 @@
+<odoo>
+    <data>
+        <record id="customer_responsible_tree_view" model="ir.ui.view">
+            <field name="name">Customer Responsible Tree View</field>
+            <field name="model">res.partner</field>
+            <field name="inherit_id" ref="base.view_partner_tree"/>
+            <field name="arch" type="xml">
+                <xpath expr="//field[@name='user_id']" position="after">
+                    <field name="customer_responsible_id"/>
+                </xpath>
+            </field>
+        </record>
+
+        <record id="customer_responsible_form_view" model="ir.ui.view">
+            <field name="name">Customer Responsible Form View</field>
+            <field name="model">res.partner</field>
+            <field name="inherit_id" ref="base.view_partner_form" />
+            <field name="arch" type="xml">
+                <xpath expr="//field[@name='vat']" position="after">
+                    <field name="customer_responsible_id"/>
+                </xpath>
+            </field>
+        </record>
+
+        <record id="view_res_partner_filter_customer_responsible" model="ir.ui.view">
+            <field name="name">res.partner.filter.customer.responsible</field>
+            <field name="model">res.partner</field>
+            <field name="inherit_id" ref="base.view_res_partner_filter"/>
+            <field name="arch" type="xml">
+                <xpath expr="//filter[@name='salesperson']" position="after">
+                    <filter name="customer_responsible_id" string="Customer Responsible" context="{'group_by' : 'customer_responsible_id'}" />
+                </xpath>
+            </field>
+        </record>
+
+    </data>
+</odoo>
