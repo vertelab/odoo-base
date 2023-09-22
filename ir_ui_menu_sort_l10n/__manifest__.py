@@ -25,7 +25,9 @@
     # Version ledger: 14.0 = Odoo version. 1 = Major. Non regressionable code. 2 = Minor. New features that are regressionable. 3 = Bug fixes
     'summary': 'Sort menus by name',
     'category': 'Technical',
-    'description': 'Sort menus by name',
+    'description': """
+    Sort menus by name.
+    """,
     #'sequence': '1',
     'author': 'Vertel AB',
     'website': 'https://vertel.se/apps/odoo-base/ir_ui_menu_sort_l10n',
