@@ -23,7 +23,8 @@
     # Version ledger: 14.0 = Odoo version. 1 = Major. Non regressionable code. 2 = Minor. New features that are regressionable. 3 = Bug fixes
     'summary': 'Adds a Partner Registry field to the partner object.',
     'category': 'CRM',
-    'description': """Partner Company Registry
+    'description': """
+    Partner Company Registry
     Adds a Partner Registry field to the partner object.
     """,
     'author': 'ICTSTUDIO, André Schenkels',
