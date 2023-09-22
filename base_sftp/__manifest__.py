@@ -20,7 +20,7 @@
 ##############################################################################
 
 {
-    'name': 'Base: Base SFTP',
+    'name': 'Base: SFTP',
     'version': '14.0.1.0.0',
     'summary': 'Access your documents via SFTP.',
     'category': 'Technical',
