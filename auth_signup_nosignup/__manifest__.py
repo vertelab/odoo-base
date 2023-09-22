@@ -29,9 +29,9 @@
     'category': 'Base',
     'version': '14.0.1.0.0',
     'license': 'AGPL-3',
-    'website': 'https://vertel.se/',
+    'website': 'https://vertel.se/apps/odoo-base/auth_signup_nosignup',
     'description': """    
-        Removes new user signup from the front page
+    Removes new user signup from the front page.
     """,
     "depends": [
         "base",
