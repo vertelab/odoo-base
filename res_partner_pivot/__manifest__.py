@@ -25,7 +25,9 @@
     # Version ledger: 14.0 = Odoo version. 1 = Major. Non regressionable code. 2 = Minor. New features that are regressionable. 3 = Bug fixes
     'summary': 'Contact Pivot View.',
     'category': 'Technical',
-    'description': 'Contact Pivot View.',
+    'description': """
+    Contact Pivot View.
+    """,
     #'sequence': '1',
     'author': 'Vertel AB',
     'website': 'https://vertel.se/apps/odoo-base/res_partner_pivot',
