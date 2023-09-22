@@ -26,9 +26,10 @@
     'description': """
     Partner Company Registry
     Adds a Partner Registry field to the partner object.
+    Website: https://www.ictstudio.eu
     """,
     'author': 'ICTSTUDIO, André Schenkels',
-    'website': 'http://www.ictstudio.eu',
+    'website': 'https://vertel.se/apps/odoo-base/partner_company_registry',
     'images': ['static/description/banner.png'], # 560x280 px.
     'license': 'AGPL-3',
     'depends': ["base"],
