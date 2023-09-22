@@ -20,7 +20,7 @@
 ##############################################################################
 
 {
-    'name': 'Employee Status Update',
+    'name': 'Base: Employee Status Update',
     'version': '14.0',
     # Version ledger: 14.0 = Odoo version. 1 = Major. Non regressionable code. 2 = Minor. New features that are regressionable. 3 = Bug fixes
     'summary': 'Effortlessly manage employment status with our Employee-Contact integration.',
