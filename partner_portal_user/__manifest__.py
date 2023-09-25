@@ -30,7 +30,7 @@
     """,
     #'sequence': '1',
     'author': 'Vertel AB',
-    'website': 'https://vertel.se/apps/odoo-base/partner_ssn',
+    'website': 'https://vertel.se/apps/odoo-base/partner_portal_user',
     #'images': ['static/description/banner.png'],  # 560x280 px.
     'license': 'AGPL-3',
     'contributor': '',
