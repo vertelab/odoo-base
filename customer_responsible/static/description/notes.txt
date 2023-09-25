@@ -1,5 +1,5 @@
-odoo-base / attachment_analytic_name
-2023-09-12
+odoo-base / customer_responsible
+2023-09-25
 
 Be aware of these!
 [project]/[module]/static/description/banner.png
