@@ -30,12 +30,12 @@
     """,
     #'sequence': '1'
     'author': 'Vertel AB',
-    'website': 'https://vertel.se/apps/odoo-account/base_user_role_mass_addition',
+    'website': 'https://vertel.se/apps/odoo-base/base_user_role_mass_addition',
     'images': ['static/description/banner.png'], # 560x280 px.
     'license': 'AGPL-3',
     'contributor': '',
     'maintainer': 'Vertel AB',
-    'repository': 'https://github.com/vertelab/odoo-account',
+    'repository': 'https://github.com/vertelab/odoo-base',
     'depends': ['base_user_role','base'],
     'data': [
         'views/base_user_role_mass_addition_wizard.xml',
