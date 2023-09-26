@@ -1,5 +1,5 @@
-odoo-base / users_rights_listed
-2022-06-13
+odoo-base / partner_portal_user
+2023-09-26
 
 Path:
 /static/description/icon.png
