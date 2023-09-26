@@ -1,26 +1,26 @@
-odoo-helpdesk / helpdesk_escalation/
-2023-04-26
+odoo-helpdesk / helpdesk_escalation
+2023-09-26
 
 Be aware of these!
 [project]/[module]/static/description/banner.png
 [project]/[module]/static/description/icon.png
 
-Icon: "life-ring"
+Icon: server
 Icons may be found at: https://fontawesome.com/v5/cheatsheet
 
 Odoo banner: 560 x 280
 Odoo icon: 140 x 140
 
+
 HEX
 #930a57
 #8105a7
+
 
 Source: https://developer.mozilla.org/en-US/docs/Web/CSS/CSS_Colors/Color_picker_tool
 
 Edit image:
 Ubuntu = Pinta, https://www.pinta-project.com/howto/installing-pinta
-Ubuntu = Pinta, "permission denied", https://askubuntu.com/questions/1321337/pinta-can-not-open-file-permission-denied
-
 Windows = Paint.net , https://www.getpaint.net/
 
 Guide:
@@ -34,7 +34,6 @@ Guide:
 8. ...of choice and choose "Export".
 
 
-Make it right the first time! :-)
 
 grep -sR "'name':" */*__.py
 grep -sR "'version':" */*__.py
@@ -48,9 +47,8 @@ grep -sR "'website':" */*__.py
 ls | wc -l
 grep -sR "'website':" */*__.py | tr "'" " "
 
-Find the latest project:
-grep -r "2023-04-*" odoo-*/*/static/description/notes.txt
-grep -r "2023-04-*" */static/description/notes.txt
-
+Find the latest project to copy / paste:
+grep -r "2023-09-*" odoo-*/*/static/description/notes.txt
+grep -r "2023-*" */static/description/notes.txt
 
 

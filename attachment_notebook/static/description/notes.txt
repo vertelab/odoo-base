@@ -1,5 +1,5 @@
 odoo-base / attachment_analytic_name
-2023-09-12
+2023-09-26
 
 Be aware of these!
 [project]/[module]/static/description/banner.png
