@@ -21,7 +21,7 @@
 
 {
     'name': 'Base: Attachment Image',
-    'version': '14.0.0.1.0',
+    'version': '16.0.0.1.0',
     'summary': 'Add a image filed for attachment, it shows in a notebook page in attachment management.',
     'category': 'Technical',
     'description': """
