@@ -21,7 +21,7 @@
 
 {
     'name': 'Base: SFTP',
-    'version': '14.0.1.0.0',
+    'version': '16.0.1.0.0',
     'summary': 'Access your documents via SFTP.',
     'category': 'Technical',
     'description': """
