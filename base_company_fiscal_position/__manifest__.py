@@ -21,7 +21,7 @@
 
 {
     'name': 'Base: Company Fiscal Position',
-    'version': '14.0.1.0.0',
+    'version': '16.0.1.0.0',
     'summary': 'Adds fiscal position to company',
     'category': '',
     'author': 'Vertel AB',
