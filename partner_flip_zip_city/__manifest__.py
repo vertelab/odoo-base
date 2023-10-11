@@ -21,8 +21,8 @@
 
 {
     'name': 'Base: Flip Partner Address',
-    'version': '14.0.1.1.0',
-    # Version ledger: 14.0 = Odoo version. 1 = Major. Non regressionable code. 2 = Minor. New features that are regressionable. 3 = Bug fixes
+    'version': '16.0.1.1.0',
+    # Version ledger: 16.0 = Odoo version. 1 = Major. Non regressionable code. 2 = Minor. New features that are regressionable. 3 = Bug fixes
     'summary': 'Change order to Zip, State, City.',
     'category': 'Website',
     'description': """
