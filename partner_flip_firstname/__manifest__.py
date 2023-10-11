@@ -21,8 +21,8 @@
 
 {
     'name': 'Base: Partner Flip Firstname',
-    'version': '14.0.0.2.0',
-    # Version ledger: 14.0 = Odoo version. 1 = Major. Non regressionable code. 2 = Minor. New features that are regressionable. 3 = Bug fixes
+    'version': '16.0.0.2.0',
+    # Version ledger: 16.0 = Odoo version. 1 = Major. Non regressionable code. 2 = Minor. New features that are regressionable. 3 = Bug fixes
     'summary': 'Change position. Replace by the other.',
     'category': 'Administration',
     'description': """
