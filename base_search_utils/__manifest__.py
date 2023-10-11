@@ -21,7 +21,7 @@
 
 {
     'name': 'Base: Search Utils',
-    'version': '14.0.0.0.4',
+    'version': '16.0.0.0.4',
     'summary': 'Search Utiltilities.',
     'category': 'Technical',
     'description': """
