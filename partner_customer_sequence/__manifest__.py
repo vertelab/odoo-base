@@ -21,7 +21,7 @@
 
 {
     'name': 'Base: Partner Customer Sequence',
-    'version': '14.0.0.0.1',
+    'version': '16.0.0.0.1',
     'summary': 'Partner Customer Sequence.',
     'category': 'Technical',
     'description': """
