@@ -21,8 +21,8 @@
 
 {
     'name': 'Base: Res SSYK',
-    'version': '14.0.0.0.4',
-    # Version ledger: 14.0 = Odoo version. 1 = Major. Non regressionable code. 2 = Minor. New features that are regressionable. 3 = Bug fixes
+    'version': '16.0.0.0.4',
+    # Version ledger: 16.0 = Odoo version. 1 = Major. Non regressionable code. 2 = Minor. New features that are regressionable. 3 = Bug fixes
     'summary': 'Swedish standarg for Workforce ',
     'category': 'Technical',
     'description': """
