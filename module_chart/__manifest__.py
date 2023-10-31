@@ -25,9 +25,10 @@
     # Version ledger: 14.0 = Odoo version. 1 = Major. Non regressionable code. 2 = Minor. New features that are regressionable. 3 = Bug fixes
     'summary': 'Adds a graphical description of the Odoo database dependencies.',
     'category': 'Tools',
-    'description': """This module adds a graphical description of the Odoo database dependencies.\n
-	Install it and go to Apps -> Module Graph to see a dynamic map of the installed modules.\n-development\n
-	This module is maintained from: https://github.com/vertelab/odoo-base/ \n
+    'description': """
+    This module adds a graphical description of the Odoo database dependencies.
+	Install it and go to Apps -> Module Graph to see a dynamic map of the installed modules.
+	This module is maintained from: https://github.com/vertelab/odoo-base/
 	""",
     #'sequence': '1',
     'author': 'Vertel AB',
@@ -45,7 +46,6 @@
     'qweb': [
         'static/src/xml/module_graph.xml',
     ],
-    'images': ['static/description/banner.png'],
     'installable': True,
     "application": False,
 }

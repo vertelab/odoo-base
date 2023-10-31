@@ -21,13 +21,15 @@
     'name': 'Base: Partner Company Registry',
     'version': '14.0.0.0.1',
     # Version ledger: 14.0 = Odoo version. 1 = Major. Non regressionable code. 2 = Minor. New features that are regressionable. 3 = Bug fixes
-    'summary': '',
+    'summary': 'Adds a Partner Registry field to the partner object.',
     'category': 'CRM',
-    'description': """Partner Company Registry
+    'description': """
+    Partner Company Registry
     Adds a Partner Registry field to the partner object.
+    Website: https://www.ictstudio.eu
     """,
     'author': 'ICTSTUDIO, André Schenkels',
-    'website': 'http://www.ictstudio.eu',
+    'website': 'https://vertel.se/apps/odoo-base/partner_company_registry',
     'images': ['static/description/banner.png'], # 560x280 px.
     'license': 'AGPL-3',
     'depends': ["base"],

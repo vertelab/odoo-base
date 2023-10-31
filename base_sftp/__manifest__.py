@@ -20,11 +20,13 @@
 ##############################################################################
 
 {
-    'name': 'Base: Base SFTP',
+    'name': 'Base: SFTP',
     'version': '14.0.1.0.0',
     'summary': 'Access your documents via SFTP.',
     'category': 'Technical',
-    'description': 'The base SFTP connects with ir.attachments.',
+    'description': """
+    The base SFTP connects with ir.attachments.
+    """,
     'author': 'Vertel AB',
     'website': 'https://vertel.se/apps/odoo-base/base_sftp',
     'images': ['static/description/banner.png'],
