@@ -1,5 +1,6 @@
 from odoo import models, fields, api, _
 import logging
+from odoo.osv import expression
 
 _logger = logging.getLogger(__name__)
 
@@ -19,8 +20,8 @@ class ResPartner(models.Model):
                 sequence_code = self.env['ir.sequence'].next_by_code('res.partner')
                 partner_id = self.env['res.partner'].search([('customer_sequence', '=', sequence_code)], limit=1)
                 while partner_id:
-                    sequence_code = self.env['ir.sequence'].next_by_code('res.partner')   
-                    partner_id = self.env['res.partner'].search([('customer_sequence', '=', sequence_code)], limit=1)             
+                    sequence_code = self.env['ir.sequence'].next_by_code('res.partner')
+                    partner_id = self.env['res.partner'].search([('customer_sequence', '=', sequence_code)], limit=1)
                 rec.customer_sequence = sequence_code
 
     customer_sequence = fields.Char(string='Customer Number', readonly=True)
@@ -32,3 +33,9 @@ class ResPartner(models.Model):
         res = super(ResPartner, self).create(values)
         res._set_costumer_number()
         return res
+
+    def name_get(self):
+        result = []
+        for record in self:
+            result.append((record.id, "{} ({})".format(record.name, record.type)))
+        return result
