@@ -59,7 +59,7 @@ class ResPartner(models.Model):
         name = partner.name or ''
         _logger.warning(f"{name=}")
         if name and partner.type in ['invoice', 'delivery', 'other']:
-           name = partner.name + " " + dict(self.fields_get(['type'])['type']['selection'])[partner.type]
+           name = partner.name + " (" + dict(self.fields_get(['type'])['type']['selection'])[partner.type] + ") "
            _logger.warning(f"{name=}")
         
         if partner.company_name or partner.parent_id:
