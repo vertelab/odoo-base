@@ -1,7 +1,0 @@
-<odoo>
-    <template id="assets_common" name="Common Assets (used in backend interface and website)" inherit_id="web.assets_common">
-        <xpath expr="//link[@href='/web/static/src/scss/name_and_signature.scss']" position="after">
-            <link rel="stylesheet" type="text/scss" href="/base_signature/static/src/scss/style.scss"/>
-        </xpath>
-    </template>
-</odoo>

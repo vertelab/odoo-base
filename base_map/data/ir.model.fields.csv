@@ -1,7 +1,0 @@
-id,map_system,map_field,map_table,map_type,map_odoo_master
-base_map.field_ir_model_fields__map_comment,,,,,False
-base_map.field_ir_model_fields__map_field,,,,,False
-base_map.field_ir_model_fields__map_odoo_master,,,,,False
-base_map.field_ir_model_fields__map_system,Testsystem,Testfield,Testtable,TestString,True
-base_map.field_ir_model_fields__map_table,,,,,False
-base_map.field_ir_model_fields__map_type,,,,,False
