@@ -22,10 +22,10 @@
 {
     'name': 'Base: Search Utils',
     'version': '14.0.0.0.4',
-    'summary': 'Search Utils ',
+    'summary': 'Search Utiltilities.',
     'category': 'Technical',
     'description': """
-        Search Utils
+    Search Utiltilities.
     """,
     'author': 'Vertel AB',
     'website': 'https://vertel.se/apps/odoo-base/base_search_utils',

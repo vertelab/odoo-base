@@ -22,9 +22,11 @@
 {
     'name': 'Base: Partner Customer Sequence',
     'version': '14.0.0.0.1',
-    'summary': 'Partner Customer Sequence',
+    'summary': 'Partner Customer Sequence.',
     'category': 'Technical',
-    'description': """""",
+    'description': """
+    Partner Customer Sequence.
+    """,
     'author': 'Vertel AB',
     'website': 'https://vertel.se/apps/odoo-base/partner_customer_sequence',
     'images': ['/static/description/banner.png'],  # 560x280 px.
