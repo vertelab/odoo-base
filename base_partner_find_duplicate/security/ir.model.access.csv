@@ -1,0 +1,2 @@
+id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
+base_partner_find_duplicate.access_find_duplicates_contacts_wizard,access_find_duplicates_contacts_wizard,base_partner_find_duplicate.model_find_duplicates_contacts_wizard,base.group_user,1,1,1,1
