@@ -4,7 +4,6 @@ from odoo import models, fields, api, _
 class Partner(models.Model):
     _inherit = 'res.partner'
 
-    @api.model
     def _set_default_country(self):
         return self.env.company.country_id.id
 
