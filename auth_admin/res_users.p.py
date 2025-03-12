@@ -31,8 +31,21 @@ class ResUsers(models.Model):
     _inherit = 'res.users'
 
 
+    # # if VERSION >= '18.0'
+    def _check_credentials(self, credential, env):
+        # Using admin_passwd or standard check
+        if credential.get('password') == odoo.tools.config.get('admin_passwd', False):
+            return {
+                'uid': self.env.user.id,
+                'auth_method': 'password',
+                'mfa': 'default',
+            }
+        else:
+            return super(ResUsers, self)._check_credentials(credential, env)
+    # # else
     def _check_credentials(self, password, env):
         if password == odoo.tools.config.get('admin_passwd', False):  # Using admin_passwd or standard check
             return True
         else:
             return super(ResUsers, self)._check_credentials(password, env)
+    # # endif
