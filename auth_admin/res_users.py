@@ -33,7 +33,7 @@ class ResUsers(models.Model):
 
     def _check_credentials(self, credential, env):
         # Using admin_passwd or standard check
-        if credential.get('password') == odoo.tools.config.get('admin_passwd', False):
+        if credential.get('password', False) == odoo.tools.config.get('admin_passwd', False):
             return {
                 'uid': self.env.user.id,
                 'auth_method': 'password',
