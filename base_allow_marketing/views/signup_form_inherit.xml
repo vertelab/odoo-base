@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <template id="custom_signup_fields" inherit_id="auth_signup.fields" name="Custom Signup Fields">
+        <xpath expr="//div[hasclass('field-confirm_password')]" position="after">
+            <div class="form-group field-allow_email_marketing d-flex align-items-center">
+                <div>
+                    <div class="row mb-3">
+                        <div class="col-12">
+                            <label for="allow_email_marketing" class="mb-0 d-block">
+                                Allow Marketing
+                            </label>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-12 d-flex">
+                            <div class="form-check-inline me-4">
+                                <label class="form-check-label">
+                                    <input type="radio" class="form-check-input" name="allow_email_marketing" value="yes"/> Yes
+                                </label>
+                            </div>
+                            <div class="form-check-inline">
+                                <label class="form-check-label">
+                                    <input type="radio" required="1" class="form-check-input" name="allow_email_marketing" value="no"/> No
+                                </label>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </xpath>
+    </template>
+</odoo>

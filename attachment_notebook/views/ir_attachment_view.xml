@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="view_attachment_form" model="ir.ui.view">
+        <field name="model">ir.attachment</field>
+        <field name="inherit_id" ref="base.view_attachment_form"/>
+        <field name="arch" type="xml">
+            <xpath expr="//group[@name='description_group']" position="replace" />
+            <xpath expr="//field[@name='index_content']/parent::group" position="replace" />
+            <xpath expr="//sheet/group" position="after">
+                <notebook>
+                    <page name="description" string="Description">
+                        <field name="description" widget="html" nolabel="1"/>
+                    </page>
+                    <page name="indexed_content" string="Indexed Content">
+                        <field name="index_content" nolabel="1"/>
+                    </page>
+                </notebook>
+            </xpath>
+        </field>
+    </record>
+</odoo>

@@ -1,0 +1,41 @@
+<odoo>
+<!--    <template id="portal_allow_marketing" name="Portal Option for Marketing" inherit_id="portal.portal_my_details">-->
+<!--        <xpath expr="//div[hasclass('o_portal_details')]/div/div/div[last()]" position="after">-->
+<!--            <div t-attf-class="form-group #{error.get('state_id') and 'o_has_error' or ''} col-xl-6">-->
+<!--                <label class="col-form-label label-optional" for="state_id">Allow Marketing</label>-->
+<!--                <div class="col-12 d-flex row">-->
+<!--                    <div class="form-check-inline me-4">-->
+<!--                        <label class="form-check-label">-->
+<!--                            <input type="radio" class="form-check-input" name="allow_email_marketing"  value="yes" t-att-checked="partner.allow_email_marketing == 'yes'"/> Yes-->
+<!--                        </label>-->
+<!--                    </div>-->
+<!--                    <div class="form-check-inline">-->
+<!--                        <label class="form-check-label">-->
+<!--                            <input type="radio" required="1" class="form-check-input" name="allow_email_marketing" value="no" t-att-checked="partner.allow_email_marketing == 'no'"/> No-->
+<!--                        </label>-->
+<!--                    </div>-->
+<!--                </div>-->
+<!--            </div>-->
+<!--        </xpath>-->
+<!--    </template>-->
+
+    <template id="portal_allow_marketing" name="Portal Option for Marketing" inherit_id="portal.portal_my_details_fields">
+        <xpath expr="//select[@name='country_id']/.." position="after">
+            <div t-attf-class="form-group #{error.get('state_id') and 'o_has_error' or ''} col-xl-6">
+                <label class="col-form-label label-optional" for="state_id">Allow Marketing</label>
+                <div class="col-12 d-flex row">
+                    <div class="form-check-inline me-4">
+                        <label class="form-check-label">
+                            <input type="radio" class="form-check-input" name="allow_email_marketing"  value="yes" t-att-checked="partner.allow_email_marketing == 'yes'"/> Yes
+                        </label>
+                    </div>
+                    <div class="form-check-inline">
+                        <label class="form-check-label">
+                            <input type="radio" required="1" class="form-check-input" name="allow_email_marketing" value="no" t-att-checked="partner.allow_email_marketing == 'no'"/> No
+                        </label>
+                    </div>
+                </div>
+            </div>
+        </xpath>
+    </template>
+</odoo>

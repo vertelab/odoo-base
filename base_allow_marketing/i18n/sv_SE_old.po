@@ -1,0 +1,61 @@
+# Translation of Odoo Server.
+# This file contains the translation of the following modules:
+# 	* base_allow_marketing
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: Odoo Server 14.0-20231205\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2024-11-12 13:37+0000\n"
+"PO-Revision-Date: 2024-11-12 14:47+0100\n"
+"Last-Translator: \n"
+"Language-Team: \n"
+"Language: sv\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"X-Generator: Poedit 3.4.2\n"
+
+#. module: base_allow_marketing
+#: model:ir.model,name:base_allow_marketing.model_res_partner
+msgid "Contact"
+msgstr "Kontakt"
+
+#. module: base_allow_marketing
+#: model:ir.model.fields,field_description:base_allow_marketing.field_res_partner__display_name
+#: model:ir.model.fields,field_description:base_allow_marketing.field_res_users__display_name
+msgid "Display Name"
+msgstr "Visningsnamn"
+
+#. module: base_allow_marketing
+#: model_terms:ir.ui.view,arch_db:base_allow_marketing.view_partner_form_inherit
+#: model_terms:ir.ui.view,arch_db:base_allow_marketing.view_users_form_inherit
+msgid "Email Rights"
+msgstr "E-post rättigheter"
+
+#. module: base_allow_marketing
+#: model:ir.model,name:base_allow_marketing.model_res_users
+msgid "Find duplicate contacts"
+msgstr ""
+
+#. module: base_allow_marketing
+#: model:ir.model.fields,field_description:base_allow_marketing.field_res_partner__id
+#: model:ir.model.fields,field_description:base_allow_marketing.field_res_users__id
+msgid "ID"
+msgstr ""
+
+#. module: base_allow_marketing
+#: model:ir.model.fields,field_description:base_allow_marketing.field_res_partner____last_update
+#: model:ir.model.fields,field_description:base_allow_marketing.field_res_users____last_update
+msgid "Last Modified on"
+msgstr "Senast redigerad"
+
+#. module: base_allow_marketing
+#: model:ir.model.fields,field_description:base_allow_marketing.field_res_partner__allow_email_marketing
+#: model:ir.model.fields,field_description:base_allow_marketing.field_res_users__allow_email_marketing
+#: model_terms:ir.ui.view,arch_db:base_allow_marketing.custom_signup_fields
+#: model_terms:ir.ui.view,arch_db:base_allow_marketing.view_partner_form_inherit
+#: model_terms:ir.ui.view,arch_db:base_allow_marketing.view_users_form_inherit
+msgid "Tillåt e-postmarknadsförning"
+msgstr ""

@@ -1,0 +1,25 @@
+<odoo>
+    <data>
+        <record id="res_config_settings_view_form" model="ir.ui.view">
+            <field name="name">res.config.settings.view.form.inherit.event</field>
+            <field name="model">res.config.settings</field>
+            <field name="priority" eval="65"/>
+            <field name="inherit_id" ref="base_setup.res_config_settings_view_form"/>
+            <field name="arch" type="xml">
+                <xpath expr="//app/div[@id='invite_users']" position="after">
+                    <div id="default_user_role">
+                        <block title="User Role" name="user_role_setting_container">
+                            <setting id="active_user_setting">
+                                <span class='o_form_label' invisible="active_user_count &gt; 1">
+                                    Default role for new portal users
+                                </span>
+                                <label for="portal_role_id" string="Role" class="col-3 col-lg-3 o_light_label"/>
+                                <field name="portal_role_id" class="oe_inline"/>
+                            </setting>
+                        </block>
+                    </div>
+                </xpath>
+            </field>
+        </record>
+    </data>
+</odoo>

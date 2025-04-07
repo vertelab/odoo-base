@@ -1,0 +1,74 @@
+# Translation of Odoo Server.
+# This file contains the translation of the following modules:
+# 	* base_user_role_default
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: Odoo Server 14.0-20221010\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2024-02-19 10:17+0000\n"
+"PO-Revision-Date: 2024-02-19 11:17+0100\n"
+"Last-Translator: \n"
+"Language-Team: \n"
+"Language: sv\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: \n"
+"X-Generator: Poedit 3.0.1\n"
+
+#. module: base_user_role_default
+#: model:ir.model,name:base_user_role_default.model_res_company
+msgid "Companies"
+msgstr "Bolag"
+
+#. module: base_user_role_default
+#: model:ir.model,name:base_user_role_default.model_res_config_settings
+msgid "Config Settings"
+msgstr "Konfigurationsinställningar"
+
+#. module: base_user_role_default
+#: model_terms:ir.ui.view,arch_db:base_user_role_default.res_config_settings_view_form
+msgid "Default role for new portal users"
+msgstr "Standardrollen för nya portal användare"
+
+#. module: base_user_role_default
+#: model:ir.model.fields,field_description:base_user_role_default.field_portal_wizard_user__display_name
+#: model:ir.model.fields,field_description:base_user_role_default.field_res_company__display_name
+#: model:ir.model.fields,field_description:base_user_role_default.field_res_config_settings__display_name
+msgid "Display Name"
+msgstr "Visningsnamn"
+
+#. module: base_user_role_default
+#: model:ir.model.fields,field_description:base_user_role_default.field_portal_wizard_user__id
+#: model:ir.model.fields,field_description:base_user_role_default.field_res_company__id
+#: model:ir.model.fields,field_description:base_user_role_default.field_res_config_settings__id
+msgid "ID"
+msgstr ""
+
+#. module: base_user_role_default
+#: model:ir.model.fields,field_description:base_user_role_default.field_portal_wizard_user____last_update
+#: model:ir.model.fields,field_description:base_user_role_default.field_res_company____last_update
+#: model:ir.model.fields,field_description:base_user_role_default.field_res_config_settings____last_update
+msgid "Last Modified on"
+msgstr "Senast redigerad"
+
+#. module: base_user_role_default
+#: model:ir.model.fields,field_description:base_user_role_default.field_res_config_settings__portal_role_id
+msgid "Paper format"
+msgstr ""
+
+#. module: base_user_role_default
+#: model:ir.model,name:base_user_role_default.model_portal_wizard_user
+msgid "Portal User Config"
+msgstr "Konfigurerings portalanvändare"
+
+#. module: base_user_role_default
+#: model_terms:ir.ui.view,arch_db:base_user_role_default.res_config_settings_view_form
+msgid "Role"
+msgstr "Roll"
+
+#. module: base_user_role_default
+#: model:ir.model.fields,field_description:base_user_role_default.field_res_company__portal_role_id
+msgid "User Role"
+msgstr "Användarroll"
