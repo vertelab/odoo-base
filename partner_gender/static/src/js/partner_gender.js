@@ -1,5 +1,5 @@
-odoo.define('partner_gender.gender',function(require) {
-    'use strict';
+//odoo.define('partner_gender.gender',function(require) {
+//    'use strict';
 
     $('document').ready(function (event) {
         let gender = $('select[name=gender] option').filter(':selected').val()
@@ -18,5 +18,5 @@ odoo.define('partner_gender.gender',function(require) {
             }
         })
     })
-})
+//})
 
