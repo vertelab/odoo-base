@@ -22,7 +22,7 @@
 # https://www.odoo.com/documentation/14.0/reference/module.html
 #
 {
-    'name': '',
+    'name': 'Base: Migration Helper',
     'version': '1.0',
     'summary': """
         Short (1 phrase/line) summary of the module's purpose, used as
@@ -31,17 +31,12 @@
     'description': """
         Long description of module's purpose
     """,
-    #'sequence': 1,
     'author': 'Vertel AB',
     'website': 'https://vertel.se/apps/odoo-',
     'images': ['static/description/banner.png'], # 560x280
     'license': 'AGPL-3',
-    'depends': [],
-     #"external_dependencies": {
-     #   "bin": ["openssl",], 
-     #   "python": ["acme_tiny", "IPy",],
-     #},
-    'data': [],
+    'depends': ["mail"],
+    'data': ["data/server_action.xml"],
     'demo': [],
     'application': False,
     'installable': True,    

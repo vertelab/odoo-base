@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+
+        <record id="action_create_mock" model="ir.actions.server">
+            <field name="name">Create Mock Models</field>
+            <field name="model_id" ref="model_ir_model_fields"/>
+            <field name="binding_model_id" ref="model_ir_model_fields"/>
+            <field name="binding_type">action</field>
+            <field name="state">code</field>
+            <field name="code">
+records.create_mock()
+            </field>
+        </record>
+
+    </data>
+</odoo>
