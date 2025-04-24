@@ -4,78 +4,120 @@ import logging
 
 _logger = logging.getLogger(__name__)
 
-class IrModelField(models.Model):
-    _inherit = 'ir.model.fields'
+class IrModel(models.Model):
+    _inherit = 'ir.model'
     
-    def get_author(self):
-
-        module_list = []
-
-        for field in self:
-
-            module_author = {
-                "field_authors": set(),
-                "field_modules": [],
-                "field_record_id":field,
-                "model_authors": set(),
-                "model_modules": []
-            }
-
-            field_external_ids = self.env['ir.model.data'].search([('res_id','=',field.id),('model','=','ir.model.fields')])
-            for field_external_id in field_external_ids:
-                field_module = self.env['ir.module.module'].search([('name','=',field_external_id.module)])
-                module_author["field_modules"].append(field_module.name) #name
-                module_author["field_authors"].add(field_module.author) #author
-            model_external_ids = self.env['ir.model.data'].search([('res_id','=',field.model_id.id),('model','=','ir.model')])
-            for model_external_id in model_external_ids:
-                model_module = self.env['ir.module.module'].search([('name','=',model_external_id.module)])
-                module_author["model_modules"].append(model_module.name) #name
-                module_author["model_authors"].add(model_module.author) #author
-            module_list.append(module_author)
-
-        relevant_moduls = list(filter(lambda x: not self.check_if_in(x),module_list))
-        relevant_fields = [relevant_modul["field_record_id"] for relevant_modul in relevant_moduls]
-        relevant_models = set([relevant_field.model_id for relevant_field in relevant_fields])
-        return relevant_models
-
-        raise UserError(f"{module_list=}")
-
-    def create_mock(self):
-        relevant_models = self.get_author()
+    def create_mock(self, model_meta_datas):
         python_file = """from odoo import models, fields, api, _\n\n"""
-        for relevant_model in relevant_models:
-            python_file += f"class {self.fix_class_name(relevant_model)}({'models.Transient' if relevant_model.transient else 'models.Model'}):\n    _name='{relevant_model.model}'\n"
-            for field in relevant_model.field_id: # Why does Odoo call a One2many field 'field_id' and not 'ids'?
-                python_file += f"    {field.name} = fields.{field.ttype.replace(field.ttype[:1],field.ttype[:1].upper(),1)}({self.get_field_fuction_vals(field)})\n"
-            python_file += "\n"
+        for model in model_meta_datas:
+            _logger.warning(f"{model=}")
+            python_file += f"\n\n"
+            python_file += f"class {model['model_model'].replace('.','DOT')}({'models.Model' if not model['model_record'].transient else 'models.TransientModel'}):\n"
+            _logger.warning(f"{python_file=}")
+            python_file += f"    {'_inherit' if model['should_inherit'] else '_name'} = '{model['model_model']}'\n"
+            python_file += f"\n"
+            _logger.warning(f"{python_file=}")
+            # Field Generation
+            for field in model['model_fields']:
+                field_str = self._generate_field_syntax(field)
+                python_file += f"    {field_str}\n"
+        
+        python_file += "\n"
+        _logger.warning(f"{python_file=}")
 
-        with open("/usr/share/odoo-base/base_migration_helper/models/models_mock.py","w+",encoding='utf-8') as file:
+        with open("/usr/share/odoo-base/base_migration_helper/models/models_mock_test.py","w+",encoding='utf-8') as file:
             file.write(python_file)
+    
+    def _generate_field_syntax(self, field):
+        """Generate proper Odoo field syntax"""
+        field_type = field['ttype']
+        params = []
+        
+        # Required Parameters
+        if field['field_description']:
+            params.append(f"string='{field['field_description']}'")
+        
+        # Type-Specific Parameters
+        if field_type in ('many2one', 'many2many', 'one2many'):
+            params.append(f"comodel_name='{field['relation']}'")
+            if field_type == 'one2many':
+                params.append(f"inverse_name='{field['relation_field']}'")
+        
+        # Common Parameters
+        if field['readonly']:
+            params.append("readonly=True")
+        if not field['store']:
+            params.append("store=False")
+        
+        # Selection Field Handling
+        if field_type == 'selection':
+            if field['selection_ids']:
+                selection_items = []
+                for item in field['selection_ids']:
+                    selection_items.append(f"('{item.value}', '{item.name}')")
+                params.append(f"selection=[{','.join(selection_items)}]")
+            else:
+                params.append("selection=[]")
+        
+        return f"{field['name']} = fields.{field_type.capitalize()}({', '.join(params)}) #Source Module {field['module']}, Module author {field['author']}"
+    
+    
+    def loop_on_model(self):
+        model_meta_datas = []
+        for model in self:
+            model_meta_datas.append(model.meta_data_module())
+        model.create_mock(model_meta_datas)
+        
+    def meta_data_module(self):
+        module_meta = {}
+        model_external_id = self.env['ir.model.data'].search(
+            [('res_id', '=', self.id),('model', '=', 'ir.model'),('module','!=','base_migration_helper')],
+            order='create_date asc',
+            limit=1
+        )
+        model_module = self.env['ir.module.module'].search([('name','=',model_external_id.module)])
+        module_meta["module_record"] = model_module
+        module_meta["model_record"] = self
+        module_meta["model_name"] = self.name
+        module_meta["model_model"] = self.model
+        module_meta["model_source_module"] = model_module.name
+        module_meta["model_source_author"] = model_module.author
+        module_meta["should_inherit"] = False
+        if model_module.author == "Odoo S.A" or model_module.author == "Odoo S.A." or "OCA" in model_module.author:
+           module_meta["should_inherit"] = True
+        module_meta["model_fields"] = self.meta_data_field()
+        return module_meta
+        
+    def meta_data_field(self):
+        field_metadata = []
+        for field in self.field_id:
+            field_external_id = self.env['ir.model.data'].search(
+                [('res_id', '=', field.id),('model', '=', 'ir.model.fields'),('module','!=','base_migration_helper')],
+                order='create_date asc',
+                limit=1
+            )
+            field_module = self.env['ir.module.module'].search([('name','=',field_external_id.module)])
+            skip_field = False
+            if field_module.author == "Odoo S.A" or field_module.author == "Odoo S.A." or "OCA" in field_module.author:
+               skip_field = True
+            if not skip_field:
+               field_metadata.append(
+               {
+                   "field_record":field,
+                   "name":field.name,
+                   "field_description":field.field_description,
+                   "model":field.model,
+                   "ttype":field.ttype,
+                   "store":field.store,
+                   "readonly":field.readonly,
+                   "relation":field.relation,
+                   "relation_field":field.relation_field,
+                   "selection_ids":field.selection_ids,
+                   "author":field_module.author,
+                   "module":field_module.name,
+               }
+            )
+        return field_metadata
 
-        #raise UserError(f"{python_file=}")
 
-    def get_field_fuction_vals(self,field):
-        if field.ttype == "many2one" or field.ttype == "many2many":
-            return f"comodel_name='{field.relation}'"
-        elif field.ttype == "one2many":
-            return f"comodel_name='{field.relation}',inverse_name='{field.relation_field}'"
-        else:
-            return ""
-
-    def check_if_in(self,module):
-        authors = ["OCA","Odoo S.A."]
-        check_flag = False
-        for author in authors:
-            check_flag = True if author in module.get("field_authors") or author in module.get("model_authors") else False
-        return check_flag
-
-    def fix_class_name(self,model):
-        name = ""
-        name = model.name.replace(' ','')
-        name = name.replace(name[:1],name[:1].upper())
-        if "." in name:
-            index = [i for i, char in enumerate(name) if char == "."]
-            for count, i in enumerate(index):
-                name = name.replace(name[i-count]+name[i+1-count],name[i+1-count].upper(),1)
-        return name
 
