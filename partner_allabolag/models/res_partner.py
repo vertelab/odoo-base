@@ -5,7 +5,8 @@ import logging
 from odoo.exceptions import ValidationError
 import re
 
-from allabolag import Company, iter_liquidated_companies
+from allabolag import Company
+from allabolag.liquidated_companies import iter_liquidated_companies
 from allabolag.list import iter_list
 from copy import deepcopy
 from datetime import datetime
