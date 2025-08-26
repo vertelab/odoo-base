@@ -1,0 +1,3 @@
+id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
+partner_anonymization_rule.access_anonymization_rule,access_anonymization_rule,partner_anonymization_rule.model_anonymization_rule,base.group_user,1,1,1,1
+
