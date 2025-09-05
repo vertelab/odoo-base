@@ -25,12 +25,6 @@
     # Version ledger: 14.0 = Odoo version. 1 = Major. Non regressionable code. 2 = Minor. New features that are regressionable. 3 = Bug fixes
     'summary': 'Adds a notebook for other modules to populate with more functionality.',
     'category': 'CRM',
-    'description': """
-    Attachment Notebook
-    ===================
-
-    Adds a notebook for other modules to populate with more functionality.
-    """,
     #'sequence': '1',
     'author': 'Vertel AB',
     'website': 'https://vertel.se/apps/odoo-base/attachment_notebook',

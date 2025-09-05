@@ -35,8 +35,8 @@
     'website': 'https://vertel.se/apps/odoo-',
     'images': ['static/description/banner.png'], # 560x280
     'license': 'AGPL-3',
-    'depends': ["mail"],
-    'data': ["data/server_action.xml"],
+    'depends': ['sale_timesheet', 'partner_ssn', 'hr', 'base', 'mail', 'rest_signport', 'attachment_notebook', 'project', 'calendar', 'event', 'sale', 'project_status', 'website_sale', 'hr_timesheet', 'project_task_dependency', 'project_category', 'event_sale', 'website', 'website_event', 'dms', 'sale_management', 'hr_timesheet_sheet'],
+    #'data': ["data/server_action.xml"],
     'demo': [],
     'application': False,
     'installable': True,    
