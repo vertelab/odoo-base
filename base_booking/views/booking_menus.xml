@@ -1,0 +1,81 @@
+<?xml version="1.0"?>
+<odoo>
+
+    <!-- Appointment's main menu-->
+    <menuitem
+        id="main_menu_bookings"
+        name="Bookings"
+        sequence="10"
+        action="base_booking.booking_type_action"
+        web_icon="base_booking,static/description/icon.png"
+        groups="base.group_user"/>
+
+    <!-- Schedule menu -->
+    <menuitem
+        id="menu_booking_schedule_resources"
+        parent="base_booking.main_menu_bookings"
+        name="Schedule"
+        sequence="11"
+        groups="group_booking_user"/>
+
+    <menuitem
+        id="menu_booking_schedule_resource_booking"
+        parent="menu_booking_schedule_resources"
+        action="calendar_event_action_all_resources_bookings"
+        name="Resources Bookings"/>
+<!--    <menuitem-->
+<!--        id="menu_booking_schedule_staff_booking"-->
+<!--        parent="menu_booking_schedule_resources"-->
+<!--        action="calendar_event_action_all_users_bookings"-->
+<!--        name="Staff Bookings"/>-->
+
+    <!-- Appointment's type, report menu-->
+    <menuitem
+        id="booking_type_menu"
+        parent="base_booking.main_menu_bookings"
+        action="booking_type_action"
+        sequence="10"/>
+
+<!--    <menuitem-->
+<!--        id="menu_schedule_report"-->
+<!--        parent="base_booking.main_menu_bookings"-->
+<!--        name="Reporting"-->
+<!--        action="calendar_event_action_booking_reporting"-->
+<!--        sequence="15"/>-->
+    <menuitem
+        id="menu_booking_invite"
+        parent="base_booking.main_menu_bookings"
+        action="booking_invite_action"
+        name="Shared Links"/>
+
+    <!-- Appointment's config menu-->
+    <menuitem
+        id="booking_menu_config"
+        parent="base_booking.main_menu_bookings"
+        name="Configuration"
+        sequence="20"
+        groups="group_booking_user"/>
+    <menuitem
+        id="menu_booking_reminders"
+        parent="base_booking.booking_menu_config"
+        name="Reminders"
+        action="calendar.action_calendar_alarm"
+        groups="group_booking_manager"/>
+    <menuitem
+        id="menu_booking_resource"
+        parent="base_booking.booking_menu_config"
+        action="booking_resource_action"
+        groups="group_booking_manager"/>
+<!--    <menuitem-->
+<!--        id="menu_booking_resource_leaves"-->
+<!--        parent="base_booking.booking_menu_config"-->
+<!--        action="booking.resource_calendar_leaves_action_show_booking_resources"-->
+<!--        groups="group_booking_manager"-->
+<!--        name="Resource Leaves"/>-->
+<!--    <menuitem-->
+<!--        id="menu_booking_type_custom"-->
+<!--        parent="base_booking.booking_menu_config"-->
+<!--        action="booking_type_action_custom"-->
+<!--        groups="group_booking_user"/>-->
+
+</odoo>

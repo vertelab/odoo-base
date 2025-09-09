@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<templates xml:space="preserve">
+    <t t-name="appointment.FormViewDialog.buttons" t-inherit="web.FormViewDialog.ToOne.buttons">
+        <xpath expr="//button[contains(@class, 'o_form_button_save')]" position="replace">
+            <button class="btn btn-primary o_form_button_save" t-on-click="onClickSaveAndCopy" data-hotkey="q">
+            <i class="fa fa-copy me-1" role="img" aria-label="Save and Copy Link"/> Save &amp; Copy Link
+            </button>
+        </xpath>
+
+        <xpath expr="//button[contains(@class, 'o_form_button_cancel')]" position="after">
+            <button class="o_my_button btn btn-link ms-auto" aria-label="More Options" t-on-click="onClickMoreOptions">More Options</button>
+        </xpath>
+    </t>
+</templates>

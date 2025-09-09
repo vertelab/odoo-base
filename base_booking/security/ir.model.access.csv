@@ -1,0 +1,7 @@
+id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
+base_booking.access_booking_type,access_booking_type,base_booking.model_booking_type,base.group_user,1,1,1,0
+base_booking.access_booking_slot,access_booking_slot,base_booking.model_booking_slot,base.group_user,1,1,1,0
+base_booking.access_booking_line,access_booking_line,base_booking.model_booking_line,base.group_user,1,1,1,0
+base_booking.access_booking_resource,access_booking_resource,base_booking.model_booking_resource,base.group_user,1,1,1,0
+base_booking.access_booking_invite,access_booking_invite,base_booking.model_booking_invite,base.group_user,1,1,1,0
+
