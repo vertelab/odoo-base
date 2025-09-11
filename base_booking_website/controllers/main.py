@@ -526,7 +526,7 @@ class BookingControllerExtended(BookingController):
             booking_type,
             json.loads(unquote_plus(kwargs.get('filter_resource_ids') or '[]')),
         )
-        return request.render("booking.booking_form", {
+        return request.render("base_booking.booking_form", {
             'partner_data': partner_data,
             'booking_type': booking_type,
             'available_bookings': available_bookings,

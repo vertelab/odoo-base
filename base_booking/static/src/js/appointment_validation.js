@@ -11,13 +11,13 @@ import { user } from "@web/core/user";
 publicWidget.registry.appointmentValidation = publicWidget.Widget.extend({
     selector: '.o_appointment_validation_details',
     events: {
-        'click .o_appointment_copy_link': '_onCopyVideocallLink',
+        'click .o_appointment_copy_link': '_onCopyVideoCallLink',
         'click .o_appointment_guest_addition_open': '_onGuestAdditionOpen',
         'click .o_appointment_guest_discard': '_onGuestDiscard',
         'click .o_appointment_guest_add': '_onGuestAdd',
     },
 
-    async _onCopyVideocallLink(ev) {
+    async _onCopyVideoCallLink(ev) {
         const copyButtonEl = ev.target;
         const tooltip = Tooltip.getOrCreateInstance(copyButtonEl, {
             title: _t("Link Copied!"),

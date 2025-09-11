@@ -37,19 +37,33 @@ Allow clients to Schedule Appointments through your Website
     #     'data/appointment_demo.xml',
     # ],
     'installable': True,
-    'auto_install': ['base_booking'],
     'license': 'OEEL-1',
     'assets': {
         'web.assets_frontend': [
-            'base_booking_website/static/src/scss/website_calendar_ce.scss',
-            'base_booking_website/static/src/js/website_calendar_ce.js'
+            'base_booking_website/static/src/scss/website_appointment.scss',
+            'base_booking_website/static/src/scss/website_appointment_editor.scss',
+            'base_booking_website/static/src/xml/website_appointment_templates.xml',
+            'base_booking_website/static/src/xml/appointment_no_slot.xml',
         ],
-        'web.assets_backend': [
-            'base_booking_website/static/src/scss/booking_employee_url.scss',
-            'base_booking_website/static/src/js/booking_employee_url.js'
-        ],
-        'website.assets_wysiwyg': [
-            'base_booking_website/static/src/js/website_calendar.editor.js'
-        ]
+        # 'website.assets_editor': [
+        #     'base_booking_website/static/src/js/systray_items/*.js',
+        # ],
+        # 'website.assets_wysiwyg': [
+        #     'base_booking_website/static/src/snippets/s_online_appointment/options.js',
+        #     'base_booking_website/static/src/snippets/s_appointment_type/options.js',
+        #     'base_booking_website/static/src/snippets/s_appointments/options.js',
+        # ],
+
+        # 'web.assets_frontend': [
+        #     'base_booking_website/static/src/scss/website_calendar_ce.scss',
+        #     'base_booking_website/static/src/js/website_calendar_ce.js'
+        # ],
+        # 'web.assets_backend': [
+        #     'base_booking_website/static/src/scss/booking_employee_url.scss',
+        #     'base_booking_website/static/src/js/booking_employee_url.js'
+        # ],
+        # 'website.assets_wysiwyg': [
+        #     'base_booking_website/static/src/js/website_calendar.editor.js'
+        # ]
     }
 }

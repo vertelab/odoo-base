@@ -7,8 +7,10 @@ import { rpc } from "@web/core/network/rpc";
 import { user } from "@web/core/user";
 const { DateTime } = luxon;
 
+console.log("=================")
+
 publicWidget.registry.appointmentSlotSelect = publicWidget.Widget.extend({
-    selector: '.o_appointment_info',
+    selector: '.o_booking_info',
     events: {
         'change select[name="timezone"]': '_onRefresh',
         'change select[id="selectAppointmentResource"]': '_onRefresh',
@@ -138,13 +140,13 @@ publicWidget.registry.appointmentSlotSelect = publicWidget.Widget.extend({
             (!ignoreUpcomingEventUntil || deserializeDateTime(ignoreUpcomingEventUntil) < DateTime.utc()) &&
             (allAppointmentsToken.length !== 0 || user.userId !== false)
         ) {
-            const upcomingAppointmentData = await rpc("/appointment/get_upcoming_appointments", {
+            const upcomingAppointmentData = await rpc("/booking/get_upcoming_bookings", {
                 calendar_event_access_tokens: allAppointmentsToken,
             });
             if (upcomingAppointmentData) {
                 this.el.querySelector('div.o_appointment_calendar').classList.add('d-none');
                 this.el.querySelector('div.o_appointment_calendar_form').classList.add('d-none');
-                const timezone = this.el.querySelector('.o_appointment_info_main').dataset.timezone;
+                const timezone = this.el.querySelector('.o_booking_info_main').dataset.timezone;
                 const upcomingFormattedStart = deserializeDateTime(
                     upcomingAppointmentData.next_upcoming_appointment.start
                 ).setZone(timezone).toLocaleString(DateTime.DATETIME_MED_WITH_WEEKDAY);
@@ -261,6 +263,9 @@ publicWidget.registry.appointmentSlotSelect = publicWidget.Widget.extend({
     },
 
     _onClickHoursSlot: function (ev) {
+        console.log("assign_method", this.el.querySelector("input[name='assign_method']"));
+        console.log("schedule_based_on", this.el.querySelector("input[name='schedule_based_on']"));
+        console.log("appointment_type_id", this.el.querySelector("input[name='booking_type_id']"));
         this.el
             .querySelector(".o_slot_hours.o_slot_hours_selected")
             ?.classList.remove("o_slot_hours_selected", "active");
@@ -273,13 +278,13 @@ publicWidget.registry.appointmentSlotSelect = publicWidget.Widget.extend({
         const scheduleBasedOn = this.el.querySelector("input[name='schedule_based_on']").value;
         if (assignMethod !== "time_resource") {
             const appointmentTypeID = this.el.querySelector(
-                "input[name='appointment_type_id']"
+                "input[name='booking_type_id']"
             ).value;
             const urlParameters = decodeURIComponent(
                 this.el.querySelector(".o_slot_hours_selected").dataset.urlParameters
             );
             const url = new URL(
-                `/appointment/${encodeURIComponent(appointmentTypeID)}/info?${urlParameters}`,
+                `/booking/${encodeURIComponent(appointmentTypeID)}/info?${urlParameters}`,
                 location.origin);
             document.location = encodeURI(url.href);
             return;
@@ -295,7 +300,7 @@ publicWidget.registry.appointmentSlotSelect = publicWidget.Widget.extend({
             "select[name='resource_id']"
         )?.value;
         this.resourceSelectionEl.replaceChildren(
-            renderToFragment("appointment.resources_list", {
+            renderToFragment("base_booking.resources_list", {
                 availableResources,
                 availableStaffUsers,
                 scheduleBasedOn,
@@ -326,7 +331,7 @@ publicWidget.registry.appointmentSlotSelect = publicWidget.Widget.extend({
             this.el.querySelector(".o_slot_hours_selected").dataset.urlParameters
         );
         const url = new URL(
-            `/appointment/${encodeURIComponent(appointmentTypeID)}/info?${urlParameters}`,
+            `/booking/${encodeURIComponent(appointmentTypeID)}/info?${urlParameters}`,
             location.origin);
         const assignMethod = this.el.querySelector("input[name='assign_method']").value;
         if (scheduleBasedOn === "resources") {
@@ -415,7 +420,7 @@ publicWidget.registry.appointmentSlotSelect = publicWidget.Widget.extend({
                     .classList.remove("d-none");
             }
             const updatedAppointmentCalendarHtml = await rpc(
-                `/appointment/${appointmentTypeID}/update_available_slots`,
+                `/booking/${appointmentTypeID}/update_available_slots`,
                 {
                     asked_capacity: resourceCapacity,
                     invite_token: inviteToken,

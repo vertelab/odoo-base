@@ -11,7 +11,7 @@
     'description': """
 A base module to allow booking integrations in any flow
     """,
-    'depends': ['calendar', 'phone_validation', 'portal', 'resource'],
+    'depends': ['calendar', 'phone_validation', 'portal', 'resource', 'mail'],
     'data': [
         # 'data/calendar_data.xml',
         # 'data/mail_message_subtype_data.xml',
@@ -30,8 +30,8 @@ A base module to allow booking integrations in any flow
         # 'views/resource_calendar_leaves_views.xml',
         'views/booking_menus.xml',
         # 'views/calendar_menus.xml',
-        # 'views/booking_templates.xml',
-        # 'views/booking_templates_registration.xml',
+        'views/booking_templates.xml',
+        'views/booking_templates_registration.xml',
         # 'views/booking_templates_validation.xml',
         # 'views/portal_templates.xml',
         # 'wizard/booking_manage_leaves.xml',
@@ -45,16 +45,16 @@ A base module to allow booking integrations in any flow
     'application': True,
     'license': 'OEEL-1',
     'assets': {
-        # 'web.assets_frontend': [
-        #     'mail/static/src/utils/common/format.js',
-        #     'base_booking/static/src/js/utils.js',
-        #     'base_booking/static/src/scss/appointment.scss',
-        #     'base_booking/static/src/js/appointment_select_appointment_type.js',
-        #     'base_booking/static/src/js/appointment_select_appointment_slot.js',
-        #     'base_booking/static/src/js/appointment_validation.js',
-        #     'base_booking/static/src/js/appointment_form.js',
-        #     'base_booking/static/src/xml/*.xml',
-        # ],
+        'web.assets_frontend': [
+            # 'mail/static/src/utils/common/format.js',
+            'base_booking/static/src/js/utils.js',
+            'base_booking/static/src/scss/appointment.scss',
+            'base_booking/static/src/js/appointment_select_appointment_type.js',
+            'base_booking/static/src/js/appointment_select_appointment_slot.js',
+            'base_booking/static/src/js/appointment_validation.js',
+            'base_booking/static/src/js/appointment_form.js',
+            'base_booking/static/src/xml/*.xml',
+        ],
         # 'web.assets_backend': [
         #     'base_booking/static/src/scss/appointment_type_views.scss',
         #     'base_booking/static/src/scss/web_calendar.scss',
