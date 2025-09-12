@@ -41,7 +41,7 @@ class AppointmentPlugin extends Plugin {
             resModel: "appointment.invite",
             context: {
                 form_view_ref: "appointment.appointment_invite_view_form_insert_link",
-                default_appointment_type_ids: [],
+                default_booking_type_ids: [],
                 default_staff_user_ids: [],
             },
             size: "md",

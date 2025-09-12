@@ -14,8 +14,8 @@ class Partner(models.Model):
 
     def _compute_upcoming_appointment_ids(self):
         partner_upcoming_appointments = dict(self.env['calendar.event']._read_group(
-            [('appointment_booker_id', 'in', self.ids), ('appointment_type_id', '!=', False), ('start', '>', datetime.now())],
-            ['appointment_booker_id'],
+            [('booking_booker_id', 'in', self.ids), ('booking_type_id', '!=', False), ('start', '>', datetime.now())],
+            ['booking_booker_id'],
             ['id:recordset'],
         ))
         for partner in self:
@@ -40,7 +40,7 @@ class Partner(models.Model):
             ],
             order='start asc',
         )
-        events_excluding_appointment_resource = all_events.filtered(lambda ev: ev.appointment_type_id.schedule_based_on != 'resources')
+        events_excluding_appointment_resource = all_events.filtered(lambda ev: ev.booking_type_id.schedule_based_on != 'resources')
         for event in events_excluding_appointment_resource:
             if event.allday or (event.start < date_end and event.stop > date_start):
                 if event.attendee_ids.filtered_domain(

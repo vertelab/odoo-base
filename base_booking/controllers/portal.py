@@ -17,9 +17,9 @@ class AppointmentPortal(portal.CustomerPortal):
     def _prepare_home_portal_values(self, counters):
         values = super()._prepare_home_portal_values(counters)
 
-        if 'appointment_count' in counters:
+        if 'booking_count' in counters:
             domain = self._get_portal_default_domain()
-            values['appointment_count'] = request.env['calendar.event'].search_count(domain)
+            values['booking_count'] = request.env['calendar.event'].search_count(domain)
 
         return values
 
@@ -28,10 +28,10 @@ class AppointmentPortal(portal.CustomerPortal):
         return [
             ('user_id', '!=', my_user.id),
             ('partner_ids', 'in', my_user.partner_id.ids),
-            ('appointment_type_id', '!=', False),
+            ('booking_type_id', '!=', False),
         ]
 
-    def _get_appointment_search_domain(self, search_in, search):
+    def _get_booking_search_domain(self, search_in, search):
         search_domains = []
         if search_in in ('all', 'name'):
             search_domains.append([('name', 'ilike', search)])
@@ -41,17 +41,17 @@ class AppointmentPortal(portal.CustomerPortal):
             search_domains.append([('description', 'ilike', search)])
         return OR(search_domains) if search_domains else []
 
-    def _appointment_get_groupby_mapping(self):
+    def _booking_get_groupby_mapping(self):
         return {
             'responsible': 'user_id',
         }
 
-    @http.route(['/my/appointments',
-                 '/my/appointments/page/<int:page>',
+    @http.route(['/my/bookings',
+                 '/my/bookings/page/<int:page>',
                 ], type='http', auth='user', website=True)
-    def portal_my_appointments(self, page=1, sortby=None, filterby=None, search=None, search_in='all', groupby='none', **kwargs):
+    def portal_my_bookings(self, page=1, sortby=None, filterby=None, search=None, search_in='all', groupby='none', **kwargs):
         values = self._prepare_portal_layout_values()
-        # Sudo to access the appointment name and responsible for the groupby
+        # Sudo to access the booking name and responsible for the groupby
         Event = request.env['calendar.event'].sudo()
 
         domain = self._get_portal_default_domain()
@@ -82,7 +82,7 @@ class AppointmentPortal(portal.CustomerPortal):
         if not sortby:
             sortby = 'date'
         sort_order = searchbar_sortings[sortby]['order']
-        groupby_mapping = self._appointment_get_groupby_mapping()
+        groupby_mapping = self._booking_get_groupby_mapping()
         groupby_field = groupby_mapping.get(groupby, None)
         if groupby_field is not None and groupby_field not in Event._fields:
             raise ValueError(_("The field '%s' does not exist in the targeted model", groupby_field))
@@ -92,31 +92,31 @@ class AppointmentPortal(portal.CustomerPortal):
             filterby = 'all'
         domain = AND([domain, searchbar_filters[filterby]['domain']])
 
-        if search and search_in and (search_domain := self._get_appointment_search_domain(search_in, search)):
+        if search and search_in and (search_domain := self._get_booking_search_domain(search_in, search)):
             domain = AND([domain, search_domain])
 
-        appointment_count = Event.search_count(domain)
+        booking_count = Event.search_count(domain)
         pager = portal_pager(
-            url="/my/appointments",
+            url="/my/bookings",
             url_args={'sortby': sortby, 'search_in': search_in, 'search': search, 'groupby': groupby, 'filterby': filterby},
-            total=appointment_count,
+            total=booking_count,
             page=page,
             step=self._items_per_page
         )
-        appointments = Event.search(domain, order=order, limit=self._items_per_page, offset=pager['offset'])
+        bookings = Event.search(domain, order=order, limit=self._items_per_page, offset=pager['offset'])
 
-        grouped_appointments = False
+        grouped_bookings = False
         # If not False, this will contain a list of tuples (record of groupby, recordset of events):
         # [(res.users(2), calendar.event(1, 2)), (...), ...]
         if groupby_field:
-            grouped_appointments = [(g, Event.concat(*events)) for g, events in groupbyelem(appointments, itemgetter(groupby_field))]
+            grouped_bookings = [(g, Event.concat(*events)) for g, events in groupbyelem(bookings, itemgetter(groupby_field))]
 
         values.update({
-            'appointments': appointments,
-            'grouped_appointments': grouped_appointments,
-            'page_name': 'appointment',
+            'bookings': bookings,
+            'grouped_bookings': grouped_bookings,
+            'page_name': 'booking',
             'pager': pager,
-            'default_url': '/my/appointments',
+            'default_url': '/my/bookings',
             'searchbar_sortings': searchbar_sortings,
             'search_in': search_in,
             'search': search,
@@ -127,4 +127,4 @@ class AppointmentPortal(portal.CustomerPortal):
             'searchbar_groupby': searchbar_groupby,
             'searchbar_filters': searchbar_filters,
         })
-        return request.render("appointment.portal_my_appointments", values)
+        return request.render("base_booking.portal_my_bookings", values)

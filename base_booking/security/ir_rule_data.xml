@@ -65,9 +65,9 @@
         <field name="model_id" ref="model_appointment_slot"/>
         <field name="domain_force">[
             '|', '|',
-                ('appointment_type_id.staff_user_ids.id', '=', user.id),
-                ('appointment_type_id.staff_user_ids', '=', False),
-                ('appointment_type_id.schedule_based_on', '=', 'resources')]</field>
+                ('booking_type_id.staff_user_ids.id', '=', user.id),
+                ('booking_type_id.staff_user_ids', '=', False),
+                ('booking_type_id.schedule_based_on', '=', 'resources')]</field>
         <field name="groups" eval="[(4, ref('base.group_user'))]"/>
         <field name="perm_read" eval="True"/>
         <field name="perm_write" eval="False"/>
@@ -78,7 +78,7 @@
     <record id="appointment_slot_rule_internal_published" model="ir.rule">
         <field name="name">appointment.slot: apt internal rule (read published)</field>
         <field name="model_id" ref="model_appointment_slot"/>
-        <field name="domain_force">[('appointment_type_id.is_published', '=', True)]</field>
+        <field name="domain_force">[('booking_type_id.is_published', '=', True)]</field>
         <field name="groups" eval="[(4, ref('base.group_user'))]"/>
         <field name="perm_read" eval="True"/>
         <field name="perm_write" eval="False"/>
@@ -91,10 +91,10 @@
         <field name="model_id" ref="model_appointment_slot"/>
         <field name="domain_force">[
             '|', '|', '|',
-                ('appointment_type_id.create_uid', '=', user.id),
-                ('appointment_type_id.staff_user_ids.id', '=', user.id),
-                ('appointment_type_id.staff_user_ids', '=', False),
-                ('appointment_type_id.schedule_based_on', '=', 'resources')]</field>
+                ('booking_type_id.create_uid', '=', user.id),
+                ('booking_type_id.staff_user_ids.id', '=', user.id),
+                ('booking_type_id.staff_user_ids', '=', False),
+                ('booking_type_id.schedule_based_on', '=', 'resources')]</field>
         <field name="groups" eval="[(4, ref('appointment.group_appointment_user'))]"/>
         <field name="perm_read" eval="True"/>
         <field name="perm_write" eval="False"/>
@@ -108,7 +108,7 @@
         <field name="model_id" ref="model_appointment_slot"/>
         <field name="domain_force">[
             '|',
-                ('appointment_type_id.create_uid', '=', user.id),
+                ('booking_type_id.create_uid', '=', user.id),
                 ('create_uid', '=', user.id)]</field>
         <field name="groups" eval="[(4, ref('appointment.group_appointment_user'))]"/>
         <field name="perm_read" eval="False"/>

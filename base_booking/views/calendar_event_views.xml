@@ -20,7 +20,7 @@
                 <widget name="web_ribbon" title="Cancelled" bg_color="text-bg-danger" invisible="active or not booking_type_id"/>
             </xpath>
             <xpath expr="//page[@name='page_invitations']" position="after">
-                <page name="page_booking" string="Appointment Details"
+                <page name="page_booking" string="Booking Details"
                     invisible="not booking_type_id or booking_type_schedule_based_on != 'resources' or not booking_type_manage_capacity">
                     <field name="booking_line_ids" invisible="not active">
                         <list editable="bottom">
@@ -59,7 +59,7 @@
             </xpath>
             <xpath expr="//filter[@name='responsible']" position="after">
                 <field name="booking_type_id"/>
-                <filter string="Appointment Type" name="group_by_booking_type_id" context="{'group_by': 'booking_type_id'}"/>
+                <filter string="Booking Type" name="group_by_booking_type_id" context="{'group_by': 'booking_type_id'}"/>
             </xpath>
         </field>
     </record>
@@ -276,7 +276,7 @@
         <field name="domain">['|', ('booking_resource_ids.company_id', '=', False), ('booking_resource_ids.company_id', 'in', allowed_company_ids)]</field>
         <field name="help" type="html">
             <p class="o_view_nocontent_smiling_face">
-                No Appointment or Resource were found.
+                No Booking or Resource were found.
             </p>
         </field>
     </record>
@@ -295,7 +295,7 @@
                                'default_partner_ids': []}</field>
         <field name="help" type="html">
             <p class="o_view_nocontent_smiling_face">
-                No Appointment or Resource were found.
+                No Booking or Resource were found.
             </p>
         </field>
     </record>

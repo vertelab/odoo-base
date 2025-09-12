@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <odoo>
     <!-- Pages -->
-    <template id="bookings_list_layout" name="Appointment Types">
+    <template id="bookings_list_layout" name="Booking Types">
         <t t-set="no_breadcrumbs" t-value="True"/>
         <t t-call="portal.portal_layout">
             <div id="wrap" class="o_booking_index bg-o-color-4 mt-4 pb-4 px-4 rounded-3 border">
@@ -29,7 +29,7 @@
         </t>
     </template>
 
-    <template id="booking_type_select" name="Website Appointment: Appointment Select Form Input">
+    <template id="booking_type_select" name="Website Booking: Booking Select Form Input">
         <div id="booking_type_select">
             <select name="booking_type_id" id="booking_type_id"
                 t-attf-class="py-2 px-3 #{'form-control' if len(booking_types) == 1 else 'form-select'}"
@@ -71,7 +71,7 @@
         </ul>
     </template>
 
-    <!-- Appointment Info & Availabilities-->
+    <!-- Booking Info & Availabilities-->
     <template id="booking_info" name="Booking: Booking Info">
         <t t-set="no_breadcrumbs" t-value="True"/>
 
@@ -95,7 +95,7 @@
                                     <h4 class="pb-3">Select a date &amp; time</h4>
                                     <div t-if="state in ['failed-staff-user', 'failed-resource']" class="alert alert-danger" role="alert">
                                         <p>
-                                            <strong>Appointment failed!</strong>
+                                            <strong>Booking failed!</strong>
                                             The selected timeslot is not available anymore.
                                             Someone has booked the same time slot a few
                                             seconds before you.
@@ -106,7 +106,7 @@
                                     </div>
                                     <div t-if="state == 'failed-partner'" class="alert alert-danger" role="alert">
                                         <p>
-                                            <strong>Appointment failed!</strong>
+                                            <strong>Booking failed!</strong>
                                             The selected timeslot is not available.
                                             It appears you already have another meeting with us at that date.
                                         </p>
@@ -115,7 +115,7 @@
                                         </p>
                                     </div>
                                     <div t-if="state == 'cancel'" role="alert" class="o_booking_cancelled pb-4">
-                                        <i class="fa fa-times text-danger me-2"/><strong>Appointment cancelled!</strong>
+                                        <i class="fa fa-times text-danger me-2"/><strong>Booking cancelled!</strong>
                                         You can now choose a different schedule that suits you better.
                                     </div>
                                     <div class="clearfix"/>
@@ -184,8 +184,8 @@
                                                 <t t-if="booking_type.assign_method == 'resource_time' and based_on_users" t-call="base_booking_website.staff_user_select"/>
                                                 <div t-if="booking_type.assign_method == 'resource_time' and not based_on_users"
                                                     name="resource_select" t-attf-class="mb-4 #{'d-none' if hide_select_dropdown else ''}">
-                                                    <label for="selectAppointmentResource" class="mb-2">For</label>
-                                                    <select class="form-select" name="resource_id" id="selectAppointmentResource">
+                                                    <label for="selectBookingResource" class="mb-2">For</label>
+                                                    <select class="form-select" name="resource_id" id="selectBookingResource">
                                                         <t t-foreach="resources_possible" t-as="resource">
                                                             <option t-att-value="resource.id" t-out="resource.name"
                                                                 t-att-selected="resource.id == (resource_selected.id or resources_possible[0].id) and 'selected'"/>
@@ -218,7 +218,7 @@
                                     </div>
                                     <div class="o_booking_no_slot_overall_helper col-12"/>
                                 </div>
-                                <t t-set="editor_message">DROP BUILDING BLOCKS HERE TO MAKE THEM AVAILABLE ACROSS ALL APPOINTMENTS</t>
+                                <t t-set="editor_message">DROP BUILDING BLOCKS HERE TO MAKE THEM AVAILABLE ACROSS ALL BOOKINGS</t>
                                 <div class="oe_structure oe_empty" t-att-data-editor-message="editor_message"/>
                             </div>
                             <div t-attf-class="o_booking_intro border-top pt-4 mt-4 #{'d-none' if not booking_type.active or is_html_empty(booking_type.message_intro) else ''}">
@@ -239,7 +239,7 @@
         </t>
     </template>
 
-    <template id="staff_user_select" name="Website Appointment: Appointment Calendars">
+    <template id="staff_user_select" name="Website Booking: Booking Calendars">
         <div name="staff_user_select" t-attf-class="col-12 mb-3 #{'o_hidden' if hide_select_dropdown else ''}">
             <label for="selectStaffUser" class="mb-1">With</label>
             <select class="form-select cursor-pointer" name="staff_user_id" id="selectStaffUser">
@@ -252,7 +252,7 @@
         </div>
     </template>
 
-    <template id="booking_calendar" name="Appointment">
+    <template id="booking_calendar" name="Booking">
 <!--        <div t-if="booking_type.active" class="o_booking_slots_loading d-flex align-items-center py-5 my-5">-->
 <!--            <i class="fa fa-3x fa-spin fa-spinner mx-auto text-o-color-2"/>-->
 <!--        </div>-->
@@ -303,7 +303,7 @@
         </div>
     </template>
 
-    <template id="booking_edit_in_backend" name="Appointment portal preview alert">
+    <template id="booking_edit_in_backend" name="Booking portal preview alert">
         <t t-call="portal.portal_back_in_edit_mode">
             <t t-set="backend_url" t-value="'/odoo/action-base_booking.booking_type_action/%s' % booking_type.id"/>
             <t t-set="custom_html">This is a preview of the customer booking form.</t>
@@ -313,7 +313,7 @@
     <!-- Details column displayed on the right of the screen -->
     <template id="booking_details_column" name="Details column">
         <aside t-attf-class="o_booking_details_column o_not_editable col-12 col-md-4 col-lg-3 offset-lg-1 position-relative #{'p-4' if not website else 'mb-4 mb-lg-0'}">
-            <h4 class="my-4 d-md-none">Your Appointment</h4>
+            <h4 class="my-4 d-md-none">Your Booking</h4>
             <div class="position-relative">
                 <t t-call="base_booking_website.booking_meeting_details"/>
                 <t t-if="staff_user or resource" t-call="base_booking_website.booking_meeting_user"/>

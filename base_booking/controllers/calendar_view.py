@@ -66,17 +66,17 @@ class AppointmentCalendarView(http.Controller):
         return self._get_staff_user_appointment_invite_info(appointment_type)
 
     @route('/appointment/appointment_type/update_custom', type='json', auth='user')
-    def appointment_type_update_custom(self, appointment_type_id, slots):
+    def appointment_type_update_custom(self, booking_type_id, slots):
         """
             Updates the slots of a custom appointment when a user changes them on
             the calendar view, on sharing link / opening the configuration form.
         """
-        if not appointment_type_id or not request.env.user._is_internal():
+        if not booking_type_id or not request.env.user._is_internal():
             raise Forbidden()
         if not slots:
             raise ValidationError(_("A list of slots information is needed to update this custom appointment type"))
 
-        appointment_type = request.env['appointment.type'].browse(int(appointment_type_id))
+        appointment_type = request.env['appointment.type'].browse(int(booking_type_id))
         if appointment_type.category != 'custom' or appointment_type.create_uid != request.env.user:
             raise Forbidden()
 
@@ -91,14 +91,14 @@ class AppointmentCalendarView(http.Controller):
         return True
 
     @route('/appointment/appointment_type/get_book_url', type='json', auth='user')
-    def appointment_get_book_url(self, appointment_type_id, context=None):
+    def appointment_get_book_url(self, booking_type_id, context=None):
         """
         Get the information of the appointment invitation used to share the link
         of the appointment type selected.
         """
         if context:
             request.update_context(**context)
-        appointment_type = request.env['appointment.type'].browse(int(appointment_type_id)).exists()
+        appointment_type = request.env['appointment.type'].browse(int(booking_type_id)).exists()
         if not appointment_type:
             raise ValidationError(_("An appointment type is needed to get the link."))
         return self._get_staff_user_appointment_invite_info(appointment_type)
@@ -151,7 +151,7 @@ class AppointmentCalendarView(http.Controller):
         appointment_invitation = request.env['appointment.invite'].search(appointment_invitation_domain, limit=1)
         if not appointment_invitation:
             invitation_values = {
-                'appointment_type_ids': appointment_type.ids,
+                'booking_type_ids': appointment_type.ids,
                 'resources_choice': 'current_user',
                 'staff_user_ids': request.env.user.ids,
             }
@@ -171,7 +171,7 @@ class AppointmentCalendarView(http.Controller):
             raise_if_not_found=False
         )
         return {
-            'appointment_type_id': appointment_type.id,
+            'booking_type_id': appointment_type.id,
             'invite_url': appointment_invitation.book_url,
             'view_id': dialog_form_view.id if dialog_form_view else False,
         }
@@ -187,10 +187,10 @@ class AppointmentCalendarView(http.Controller):
         on the fly, we want to search for the invitation that has been created by the current user. """
         if appointment_type.category == 'custom':
             return [
-                ('appointment_type_ids', '=', appointment_type.id),
+                ('booking_type_ids', '=', appointment_type.id),
                 ('create_uid', '=', request.env.user.id),
             ]
         return [
-            ('appointment_type_ids', '=', appointment_type.id),
+            ('booking_type_ids', '=', appointment_type.id),
             ('staff_user_ids', '=', request.env.user.id),
         ]

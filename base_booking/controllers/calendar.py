@@ -58,7 +58,7 @@ class AppointmentCalendarController(CalendarController):
             return request.not_found()
         timezone = request.session.get('timezone')
         if not timezone:
-            timezone = request.env.context.get('tz') or event.appointment_type_id.appointment_tz or event.partner_ids and event.partner_ids[0].tz or event.user_id.tz or 'UTC'
+            timezone = request.env.context.get('tz') or event.booking_type_id.appointment_tz or event.partner_ids and event.partner_ids[0].tz or event.user_id.tz or 'UTC'
             request.session['timezone'] = timezone
         tz_session = pytz.timezone(timezone)
 
@@ -88,7 +88,7 @@ class AppointmentCalendarController(CalendarController):
         encoded_params = url_encode(params)
         google_url = 'https://www.google.com/calendar/render?' + encoded_params
 
-        return request.render("appointment.appointment_validated", {
+        return request.render("base_booking.booking_validated", {
             'cancel_responsible': event.user_id if event.user_id.active and event.user_id._is_internal() else False,
             'event': event,
             'datetime_start': date_start,
@@ -111,7 +111,7 @@ class AppointmentCalendarController(CalendarController):
         event_sudo = event_sudo.sudo().search([('access_token', '=', access_token)], limit=1)
         if not event_sudo:
             return request.not_found()
-        if not event_sudo.appointment_type_id.allow_guests:
+        if not event_sudo.booking_type_id.allow_guests:
             raise BadRequest()
         if not emails_str:
             return []
@@ -129,7 +129,7 @@ class AppointmentCalendarController(CalendarController):
             Route to cancel an appointment event, this route is linked to a button in the validation page
         """
         event = request.env['calendar.event'].sudo().search([('access_token', '=', access_token)], limit=1)
-        appointment_type = event.appointment_type_id
+        appointment_type = event.booking_type_id
         appointment_invite = event.appointment_invite_id
         if not event:
             return request.not_found()
@@ -154,7 +154,7 @@ class AppointmentCalendarController(CalendarController):
             It can be overriden to add other cancelling condition checks and return their status value.
         """
         if (fields.Datetime.from_string(event.allday and event.start_date or event.start)
-            < datetime.now() + timedelta(hours=event.appointment_type_id.min_cancellation_hours)):
+            < datetime.now() + timedelta(hours=event.booking_type_id.min_cancellation_hours)):
             return 'no_time_left'
         return False
 

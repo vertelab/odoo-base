@@ -32,8 +32,8 @@ A base module to allow booking integrations in any flow
         # 'views/calendar_menus.xml',
         'views/booking_templates.xml',
         'views/booking_templates_registration.xml',
-        # 'views/booking_templates_validation.xml',
-        # 'views/portal_templates.xml',
+        'views/booking_templates_validation.xml',
+        'views/portal_templates.xml',
         # 'wizard/booking_manage_leaves.xml',
     ],
     # 'demo': [
@@ -55,20 +55,17 @@ A base module to allow booking integrations in any flow
             'base_booking/static/src/js/appointment_form.js',
             'base_booking/static/src/xml/*.xml',
         ],
-        # 'web.assets_backend': [
-        #     'base_booking/static/src/scss/appointment_type_views.scss',
-        #     'base_booking/static/src/scss/web_calendar.scss',
-        #     'base_booking/static/src/views/**/*',
+        'web.assets_backend': [
+            'base_booking/static/src/scss/appointment_type_views.scss',
+            'base_booking/static/src/scss/web_calendar.scss',
+            # 'base_booking/static/src/views/**/*',
         #     ('remove', 'appointment/static/src/views/gantt/**'),
         #     'base_booking/static/src/components/**/*',
         #     'base_booking/static/src/js/appointment_insert_link_form_controller.js',
         #     'base_booking/static/src/appointment_plugin.js',
-        # ],
-        # 'web.assets_backend_lazy': [
-        #     'appointment/static/src/views/gantt/**',
-        # ],
-        # 'web_editor.backend_assets_wysiwyg': [
-        #     'appointment/static/src/js/wysiwyg.js',
-        # ],
+        ],
+        'web_editor.backend_assets_wysiwyg': [
+            'base_booking/static/src/js/wysiwyg.js',
+        ],
     }
 }

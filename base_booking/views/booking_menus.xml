@@ -1,7 +1,7 @@
 <?xml version="1.0"?>
 <odoo>
 
-    <!-- Appointment's main menu-->
+    <!--  Booking's main menu-->
     <menuitem
         id="main_menu_bookings"
         name="Bookings"
@@ -29,7 +29,7 @@
 <!--        action="calendar_event_action_all_users_bookings"-->
 <!--        name="Staff Bookings"/>-->
 
-    <!-- Appointment's type, report menu-->
+    <!--  Booking's type, report menu-->
     <menuitem
         id="booking_type_menu"
         parent="base_booking.main_menu_bookings"
@@ -48,7 +48,7 @@
         action="booking_invite_action"
         name="Shared Links"/>
 
-    <!-- Appointment's config menu-->
+    <!--  Booking's config menu-->
     <menuitem
         id="booking_menu_config"
         parent="base_booking.main_menu_bookings"

@@ -20,7 +20,7 @@ export class CalendarEvent extends models.Model {
     allday = fields.Boolean({ string: "Allday" });
     partner_ids = fields.Many2many({ string: "Attendees", relation: "res.partner" });
     resource_ids = fields.Many2many({ string: "Resources", relation: "appointment.resource" });
-    appointment_status = fields.Selection({
+    booking_status = fields.Selection({
         selection: [
             ['cancelled', 'Cancelled'],
             ['request', 'Request'],
@@ -30,7 +30,7 @@ export class CalendarEvent extends models.Model {
         ],
         string: "Appointment Status",
     });
-    appointment_type_id = fields.Many2one({
+    booking_type_id = fields.Many2one({
         string: "Appointment Type",
         relation: "appointment.type",
     });
@@ -45,7 +45,7 @@ export class CalendarEvent extends models.Model {
             start: "2022-01-12 10:00:00",
             stop: "2022-01-12 11:00:00",
             allday: false,
-            appointment_status: 'booked',
+            booking_status: 'booked',
             partner_ids: [100, 214],
         },
         {
@@ -57,7 +57,7 @@ export class CalendarEvent extends models.Model {
             start: "2022-01-05 10:00:00",
             stop: "2022-01-05 11:00:00",
             allday: false,
-            appointment_status: 'booked',
+            booking_status: 'booked',
             partner_ids: [214, 216],
         },
         {
@@ -69,7 +69,7 @@ export class CalendarEvent extends models.Model {
             start: "2022-01-05 10:00:00",
             stop: "2022-01-05 11:00:00",
             allday: false,
-            appointment_status: 'booked',
+            booking_status: 'booked',
             partner_ids: [216, 100, 214, 217],
         },
     ];
@@ -128,7 +128,7 @@ class AppointmentResource extends models.Model {
 export class AppointmentSlot extends models.Model {
     _name = "appointment.slot";
 
-    appointment_type_id = fields.Many2one({ relation: "appointment.type" });
+    booking_type_id = fields.Many2one({ relation: "appointment.type" });
     start_datetime = fields.Datetime({ string: "Start" });
     end_datetime = fields.Datetime({ string: "End" });
     duration = fields.Float({ string: "Duration" });

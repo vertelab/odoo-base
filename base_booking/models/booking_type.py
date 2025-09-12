@@ -128,10 +128,10 @@ class BookingType(models.Model):
     min_schedule_hours = fields.Float('Schedule before (hours)', required=True, default=1.0)
     max_schedule_days = fields.Integer('Schedule not after (days)', required=True, default=15)
 
-    # question_ids = fields.One2many('booking.question', 'booking_type_id', string='Questions', copy=True)
+    question_ids = fields.One2many('booking.question', 'booking_type_id', string='Questions', copy=True)
     reminder_ids = fields.Many2many(
         'calendar.alarm', string="Reminders",
-        # default=lambda self: self.env['calendar.alarm'].search([('default_for_new_booking_type', '=', True)])
+        default=lambda self: self.env['calendar.alarm'].search([('default_for_new_booking_type', '=', True)])
     )
     schedule_based_on = fields.Selection([
         ('users', 'Users'),

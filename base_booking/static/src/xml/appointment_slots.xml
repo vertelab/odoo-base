@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <template>
-    <t t-name="appointment.slots_list">
+    <t t-name="base_booking.slots_list">
         <span>Select a time</span>
         <div class="o_slots_list row px-0">
             <t t-foreach="slots" t-as="slot" t-key="slot_index">

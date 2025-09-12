@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <odoo>
     <data noupdate="1">
-        <record id="appointment_default_resource_calendar" model="resource.calendar">
-            <field name="name">Appointment Resource Default Calendar</field>
+        <record id="booking_default_resource_calendar" model="resource.calendar">
+            <field name="name">Booking Resource Default Calendar</field>
             <field name="company_id" eval="False"/>
             <field name="hours_per_day">24</field>
             <field name="attendance_ids"

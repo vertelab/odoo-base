@@ -57,7 +57,7 @@ class BookingControllerExtended(BookingController):
         types filter selection
         """
         kwargs['domain'] = self._booking_website_domain()
-        return request.render('booking.bookings_list_layout', self._prepare_bookings_list_data(**kwargs))
+        return request.render('base_booking.bookings_list_layout', self._prepare_bookings_list_data(**kwargs))
 
     # Tools / Data preparation
     # ------------------------------------------------------------
@@ -845,7 +845,7 @@ class BookingControllerExtended(BookingController):
         return booking_type.booking_tz
 
     # ------------------------------------------------------------
-    # APPOINTMENT TYPE JSON DATA
+    # BOOKING TYPE JSON DATA
     # ------------------------------------------------------------
 
     @http.route(['/booking/get_upcoming_bookings'], type="json", auth="public")

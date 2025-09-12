@@ -18,7 +18,7 @@ mockRegistry.add("/appointment/appointment_type/create_custom", function (route,
     let slotIDs = [];
     slots.forEach(slot => {
         const slotID = this.mockCreate('appointment.slot', {
-            appointment_type_id: customAppointmentTypeID,
+            booking_type_id: customAppointmentTypeID,
             start_datetime: slot.start,
             end_datetime: slot.end,
             slot_type: 'unique',
@@ -26,7 +26,7 @@ mockRegistry.add("/appointment/appointment_type/create_custom", function (route,
         slotIDs.push(slotID);
     });
     return {
-        appointment_type_id: customAppointmentTypeID,
+        booking_type_id: customAppointmentTypeID,
         invite_url: `http://amazing.odoo.com/appointment/3?filter_staff_user_ids=%5B${1}%5D`,
     };
 });
@@ -46,16 +46,16 @@ mockRegistry.add("/appointment/appointment_type/search_create_anytime", function
         });
     }
     return {
-        appointment_type_id: anytimeAppointmentID,
+        booking_type_id: anytimeAppointmentID,
         invite_url: `http://amazing.odoo.com/appointment/3?filter_staff_user_ids=%5B${1}%5D`,
     };
 });
 
 mockRegistry.add("/appointment/appointment_type/get_book_url", function (route, args) {
-    const appointment_type_id = args.appointment_type_id;
+    const booking_type_id = args.booking_type_id;
     return {
-        appointment_type_id: appointment_type_id,
-        invite_url: `http://amazing.odoo.com/appointment/${appointment_type_id}?filter_staff_user_ids=%5B${1}%5D`,
+        booking_type_id: booking_type_id,
+        invite_url: `http://amazing.odoo.com/appointment/${booking_type_id}?filter_staff_user_ids=%5B${1}%5D`,
     }
 });
 

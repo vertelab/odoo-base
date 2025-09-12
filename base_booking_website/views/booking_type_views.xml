@@ -60,7 +60,7 @@
     </record>
 
     <record id="booking_type_action_add_simplified" model="ir.actions.act_window">
-        <field name="name">New Appointment Type</field>
+        <field name="name">New Booking Type</field>
         <field name="res_model">booking.type</field>
         <field name="view_mode">form</field>
         <field name="target">new</field>

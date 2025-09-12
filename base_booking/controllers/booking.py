@@ -87,7 +87,7 @@ class BookingController(http.Controller):
         types filter selection
         """
         kwargs['domain'] = self._booking_website_domain()
-        return request.render('booking.bookings_list_layout', self._prepare_bookings_list_data(**kwargs))
+        return request.render('base_booking.bookings_list_layout', self._prepare_bookings_list_data(**kwargs))
 
     # Tools / Data preparation
     # ------------------------------------------------------------

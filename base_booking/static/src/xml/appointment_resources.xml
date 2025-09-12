@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <template>
-    <t t-name="appointment.resources_list">
+    <t t-name="base_booking.resources_list">
         <label for="resource_id" class="mb-1">Make your choice</label>
         <select class="o_resources_list form-select cursor-pointer" name="resource_id">
             <t t-if="scheduleBasedOn === 'resources'">

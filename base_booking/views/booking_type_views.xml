@@ -5,13 +5,13 @@
         <field name="name">booking.type.search</field>
         <field name="model">booking.type</field>
         <field name="arch" type="xml">
-            <search string="Appointment Types">
+            <search string="Booking Types">
                 <field name="name"/>
                 <field name="location_id"/>
                 <field name="staff_user_ids"/>
                 <field name="resource_ids"/>
                 <field name="category"/>
-                <filter string="My Appointments" name="my_bookings" domain="['|', ('staff_user_ids', 'in', [uid]), ('create_uid', '=', uid)]"/>
+                <filter string="My Bookings" name="my_bookings" domain="['|', ('staff_user_ids', 'in', [uid]), ('create_uid', '=', uid)]"/>
                 <separator/>
                 <filter string="Recurring" name="filter_category_recurring" domain="[('category', '=', 'recurring')]"/>
                 <filter string="Punctual" name="filter_category_punctual" domain="[('category', '=', 'punctual')]"/>
@@ -131,7 +131,7 @@
         <field name="name">booking.type.list</field>
         <field name="model">booking.type</field>
         <field name="arch" type="xml">
-            <list string="Appointment Type" class="o_booking_type_view_list" multi_edit="1">
+            <list string="Booking Type" class="o_booking_type_view_list" multi_edit="1">
                 <header>
                     <button name="action_share_invite" type="object" string="Share"/>
                 </header>
@@ -152,7 +152,7 @@
         <field name="model">booking.type</field>
         <field name="priority">20</field>
         <field name="arch" type="xml">
-            <list string="Appointment Invitations" multi_edit="1" sample="1">
+            <list string="Booking Invitations" multi_edit="1" sample="1">
                 <field name="sequence" widget="handle"/>
                 <field name="name" readonly="1"/>
                 <field name="booking_tz"/>
@@ -170,7 +170,7 @@
         <field name="name">booking.type.form</field>
         <field name="model">booking.type</field>
         <field name="arch" type="xml">
-            <form string="Appointment Type">
+            <form string="Booking Type">
                 <field name="active" invisible="1"/>
                 <field name="is_published" invisible="1"/>
                 <header>
@@ -202,7 +202,7 @@
                         <button class="oe_stat_button" type="object"
                             name="action_calendar_meetings"
                             icon="fa-calendar">
-                            <field string="Appointments" name="booking_count" widget="statinfo"/>
+                            <field string="Bookings" name="booking_count" widget="statinfo"/>
                         </button>
                     </div>
                     <div class="oe_title mb-4">
@@ -281,9 +281,9 @@
                                     <field name="restrict_to_user_ids" widget="many2many_avatar_user" domain="[('id', 'in', parent.staff_user_ids)]"
                                         column_invisible="parent.schedule_based_on != 'users' or parent.category in ['custom', 'anytime']"
                                         options="{'no_create': True}" optional="hide"/>
-<!--                                    <field name="restrict_to_resource_ids" widget="many2many_tags_avatar" domain="[('id', 'in', parent.resource_ids)]"-->
-<!--                                        column_invisible="parent.schedule_based_on == 'users' or parent.category in ['custom', 'anytime']"-->
-<!--                                        options="{'no_create': True}" optional="hide"/>-->
+                                    <field name="restrict_to_resource_ids" widget="many2many_tags_avatar" domain="[('id', 'in', parent.resource_ids)]"
+                                        column_invisible="parent.schedule_based_on == 'users' or parent.category in ['custom', 'anytime']"
+                                        options="{'no_create': True}" optional="hide"/>
                                 </list>
                             </field>
                         </page>
@@ -321,6 +321,46 @@
                                     <field name="allow_guests"/>
                                 </group>
                             </group>
+                        </page>
+
+                        <page string="Questions" name="questions">
+                            <field name="question_ids">
+                                <list>
+                                    <field name="sequence" widget="handle"/>
+                                    <field name="name"/>
+                                    <field name="question_type"/>
+                                    <field name="answer_ids" widget="many2many_tags"/>
+                                    <field name="question_required"/>
+                                    <button name="action_view_question_answer_inputs" type="object" class="fa fa-bar-chart p-0" title="Answer Breakdown" />
+                                </list>
+                                <form string="Questions" name="question_form">
+                                    <sheet>
+                                        <group>
+                                            <group name="question_form_left">
+                                                <field name="name" placeholder='e.g. "What are your symptoms?"'/>
+                                                <field name="question_type" widget="radio"/>
+                                            </group>
+                                            <group name="question_form_right">
+                                                <field name="placeholder" placeholder='e.g. "I feel nauseous..."'
+                                                    invisible="question_type in ('select', 'radio', 'checkbox')"/>
+                                                <field name="question_required"/>
+                                            </group>
+                                        </group>
+                                        <notebook invisible="question_type in ('char', 'text')">
+                                            <page string="Answers" name="answers">
+                                                <field name="answer_ids">
+                                                    <list editable="bottom">
+                                                        <!-- 'display_name' is necessary for the many2many_tags to work on the appointment view -->
+                                                        <field name="display_name" column_invisible="True"/>
+                                                        <field name="sequence" widget="handle"/>
+                                                        <field name="name"/>
+                                                    </list>
+                                                </field>
+                                            </page>
+                                        </notebook>
+                                    </sheet>
+                                </form>
+                            </field>
                         </page>
 
                         <page string="Messages" name="messages">
@@ -384,7 +424,7 @@
     </record>
 
     <record id="booking_type_action" model="ir.actions.act_window">
-        <field name="name">Appointments</field>
+        <field name="name">Bookings</field>
         <field name="path">bookings</field>
         <field name="res_model">booking.type</field>
         <field name="view_mode">kanban,list,form</field>

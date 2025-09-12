@@ -5,12 +5,12 @@ import { findInvalidEmailFromText } from  "./utils.js"
 import { _t } from "@web/core/l10n/translation";
 import { addLoadingEffect } from '@web/core/utils/ui';
 
-publicWidget.registry.appointmentForm = publicWidget.Widget.extend({
-    selector: '.o_appointment_attendee_form',
+publicWidget.registry.bookingForm = publicWidget.Widget.extend({
+    selector: '.o_booking_attendee_form',
     events: {
-        'click div.o_appointment_add_guests button.o_appointment_input_guest_add': '_onAddGuest',
-        'click div.o_appointment_add_guests button.o_appointment_input_guest_cancel': '_onHideGuest',
-        'click .o_appointment_form_confirm_btn': '_onConfirmAppointment',
+        'click div.o_booking_add_guests button.o_booking_input_guest_add': '_onAddGuest',
+        'click div.o_booking_add_guests button.o_booking_input_guest_cancel': '_onHideGuest',
+        'click .o_booking_form_confirm_btn': '_onConfirmBooking',
     },
 
     /**
@@ -19,9 +19,9 @@ publicWidget.registry.appointmentForm = publicWidget.Widget.extend({
     start: function () {
         return this._super(...arguments).then(() => {
             this.hasFormDefaultValues = this._getAttendeeFormData().some(([_, value]) => value !== '');
-            if (!this.hasFormDefaultValues && localStorage.getItem('appointment.form.values')) {
-                const attendeeData = JSON.parse(localStorage.getItem('appointment.form.values'));
-                const form = this.el.querySelector('form.appointment_submit_form');
+            if (!this.hasFormDefaultValues && localStorage.getItem('booking.form.values')) {
+                const attendeeData = JSON.parse(localStorage.getItem('booking.form.values'));
+                const form = this.el.querySelector('form.booking_submit_form');
                 for (const [name, value] of Object.entries(attendeeData)) {
                     const input = form.querySelector(`input[name="${name}"]`);
                     if (input) {
@@ -33,7 +33,7 @@ publicWidget.registry.appointmentForm = publicWidget.Widget.extend({
     },
 
     _getAttendeeFormData: function() {
-        const formData = new FormData(this.el.querySelector('form.appointment_submit_form'));
+        const formData = new FormData(this.el.querySelector('form.booking_submit_form'));
         return Array.from(formData).filter(([key]) => ['name', 'phone', 'email'].includes(key));
     },
 
@@ -42,18 +42,18 @@ publicWidget.registry.appointmentForm = publicWidget.Widget.extend({
      * emails of the guests if allow_guests option is enabled.
      */
     _onAddGuest: function(){
-        const textArea = this.el.querySelector('#o_appointment_input_guest_emails');
+        const textArea = this.el.querySelector('#o_booking_input_guest_emails');
         textArea.classList.remove('d-none');
         textArea.focus();
-        const addGuestDiv = this.el.querySelector('div.o_appointment_add_guests')
-        addGuestDiv.querySelector('button.o_appointment_input_guest_add').classList.add('d-none')
-        addGuestDiv.querySelector('button.o_appointment_input_guest_cancel').classList.remove('d-none')
+        const addGuestDiv = this.el.querySelector('div.o_booking_add_guests')
+        addGuestDiv.querySelector('button.o_booking_input_guest_add').classList.add('d-none')
+        addGuestDiv.querySelector('button.o_booking_input_guest_cancel').classList.remove('d-none')
     },
 
-    _onConfirmAppointment: async function(event) {
+    _onConfirmBooking: async function(event) {
         this._validateCheckboxes();
-        const textArea = this.el.querySelector('#o_appointment_input_guest_emails');
-        const appointmentForm = document.querySelector('.appointment_submit_form');
+        const textArea = this.el.querySelector('#o_booking_input_guest_emails');
+        const bookingForm = document.querySelector('.booking_submit_form');
         if (textArea && textArea.value.trim() !== '') {
             let emailInfo = findInvalidEmailFromText(textArea.value);
             if (emailInfo.invalidEmails.length || emailInfo.emailList.length > 10) {
@@ -64,14 +64,14 @@ publicWidget.registry.appointmentForm = publicWidget.Widget.extend({
                 this._hideErrorMsg();
             }
         }
-        if (appointmentForm.reportValidity()) {
+        if (bookingForm.reportValidity()) {
             if (!this.hasFormDefaultValues) {
                 const attendeeData = this._getAttendeeFormData();
                 if (attendeeData.length) {
-                    localStorage.setItem('appointment.form.values', JSON.stringify(Object.fromEntries(attendeeData)));
+                    localStorage.setItem('booking.form.values', JSON.stringify(Object.fromEntries(attendeeData)));
                 }
             }
-            appointmentForm.submit();
+            bookingForm.submit();
             addLoadingEffect(event.target);
         }
     },
@@ -81,23 +81,23 @@ publicWidget.registry.appointmentForm = publicWidget.Widget.extend({
      */
     _onHideGuest: function() {
         this._hideErrorMsg();
-        const textArea = this.el.querySelector('#o_appointment_input_guest_emails');
+        const textArea = this.el.querySelector('#o_booking_input_guest_emails');
         textArea.classList.add('d-none')
         textArea.value = "";
-        const addGuestDiv = this.el.querySelector('div.o_appointment_add_guests')
-        addGuestDiv.querySelector('button.o_appointment_input_guest_add').classList.remove('d-none');
-        addGuestDiv.querySelector('button.o_appointment_input_guest_cancel').classList.add('d-none');
+        const addGuestDiv = this.el.querySelector('div.o_booking_add_guests')
+        addGuestDiv.querySelector('button.o_booking_input_guest_add').classList.remove('d-none');
+        addGuestDiv.querySelector('button.o_booking_input_guest_cancel').classList.add('d-none');
     },
 
     _hideErrorMsg: function() {
-        const errorMsgDiv = this.el.querySelector('.o_appointment_validation_error');
+        const errorMsgDiv = this.el.querySelector('.o_booking_validation_error');
         errorMsgDiv.classList.add('d-none');
     },
 
     _showErrorMsg: function(errorMessage) {
-        const errorMsgDiv = this.el.querySelector('.o_appointment_validation_error');
+        const errorMsgDiv = this.el.querySelector('.o_booking_validation_error');
         errorMsgDiv.classList.remove('d-none');
-        errorMsgDiv.querySelector('.o_appointment_error_text').textContent = errorMessage;
+        errorMsgDiv.querySelector('.o_booking_error_text').textContent = errorMessage;
     },
 
     _validateCheckboxes: function() {

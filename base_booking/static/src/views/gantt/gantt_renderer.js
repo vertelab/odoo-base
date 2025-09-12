@@ -45,7 +45,7 @@ export class AppointmentBookingGanttRenderer extends GanttRenderer {
     enrichPill(pill) {
         const enrichedPill = super.enrichPill(pill);
         const { record } = pill;
-        if (!record.appointment_type_id) {
+        if (!record.booking_type_id) {
             return enrichedPill;
         }
         const now = DateTime.now();
@@ -53,13 +53,13 @@ export class AppointmentBookingGanttRenderer extends GanttRenderer {
         let color = false;
         if (!record.active) {
             color = false;
-        } else if (record.appointment_status === 'booked') {
+        } else if (record.booking_status === 'booked') {
             color = now.diff(record.start, ['minutes']).minutes > 15 ? 2 : 4;  // orange if late ; light blue if not
-        } else if (record.appointment_status === 'attended') {
+        } else if (record.booking_status === 'attended') {
             color = 10;  // green
-        } else if (record.appointment_status === 'no_show') {
+        } else if (record.booking_status === 'no_show') {
             color = 1;  // red
-        } else if (record.appointment_status === 'request' && record.start < now) {
+        } else if (record.booking_status === 'request' && record.start < now) {
             color = 2;  // orange (request state has info-decoration)
         } else {
             color = 8;  // blue
@@ -196,15 +196,15 @@ export class AppointmentBookingGanttRenderer extends GanttRenderer {
         return [{
             class: "o_appointment_booking_confirm_status btn btn-sm btn-primary",
             onClick: () => {
-                if (this.model.metaData.canEdit && record.appointment_status) {
+                if (this.model.metaData.canEdit && record.booking_status) {
                     const newAppointmentStatus = document.querySelector('.o_appointment_booking_status').selectedOptions[0].value;
                     this.orm.write("calendar.event", [record.id], {
                         active: newAppointmentStatus !== 'cancelled',
-                        appointment_status: newAppointmentStatus,
+                        booking_status: newAppointmentStatus,
                     }).then(() => this.model.fetchData());
                 }
             },
-            text: this.model.metaData.canEdit && record.appointment_status ? _t("Save & Close") : _t('Close'),
+            text: this.model.metaData.canEdit && record.booking_status ? _t("Save & Close") : _t('Close'),
         }, {
             class: "btn btn-sm btn-secondary",
             onClick: () => this.model.mutex.exec(() => this.props.openDialog({ resId: record.id })),

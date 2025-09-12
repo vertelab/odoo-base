@@ -4,7 +4,7 @@
         <field name="name">booking.invite.view.search</field>
         <field name="model">booking.invite</field>
         <field name="arch" type="xml">
-            <search string="Appointment Invitation Links">
+            <search string="Booking Invitation Links">
                 <field name="booking_type_ids"/>
                 <field name="resource_ids"/>
                 <field name="staff_user_ids"/>

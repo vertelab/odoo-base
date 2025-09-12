@@ -18,23 +18,23 @@ class BookingType(models.Model):
 
     def _compute_website_url(self):
         super()._compute_website_url()
-        for appointment_type in self:
-            if appointment_type.id:
-                appointment_type.website_url = '/booking/%s' % appointment_type.id
+        for booking_type in self:
+            if booking_type.id:
+                booking_type.website_url = '/booking/%s' % booking_type.id
             else:
-                appointment_type.website_url = False
+                booking_type.website_url = False
 
     def create_and_get_website_url(self, **kwargs):
-        if 'appointment_tz' not in kwargs:
-            # appointment_tz is a mandatory field defaulting to the environment user's timezone
+        if 'booking_tz' not in kwargs:
+            # booking_tz is a mandatory field defaulting to the environment user's timezone
             # however, sometimes the current user timezone is not defined, let's use a fallback
             website_visitor = self.env['website.visitor']._get_visitor_from_request(force_create=False)
-            kwargs['appointment_tz'] = self.env.user.tz or website_visitor.timezone or 'UTC'
+            kwargs['booking_tz'] = self.env.user.tz or website_visitor.timezone or 'UTC'
 
         return super().create_and_get_website_url(**kwargs)
 
     def copy_data(self, default=None):
-        """ Force False manually for all categories of appointment type when duplicating
+        """ Force False manually for all categories of booking type when duplicating
         even for categories that should be auto-publish. """
         default = dict(default or {})
         default['is_published'] = False
@@ -46,20 +46,20 @@ class BookingType(models.Model):
     # @api.model
     # def _search_get_detail(self, website, order, options):
     #     invite_token = options.get('invite_token')
-    #     allowed_appointment_type_ids = WebsiteAppointment._fetch_and_check_private_appointment_types(
-    #         options.get('filter_appointment_type_ids'),
+    #     allowed_booking_type_ids = WebsiteBooking._fetch_and_check_private_booking_types(
+    #         options.get('filter_booking_type_ids'),
     #         options.get('filter_staff_user_ids'),
     #         options.get('filter_resource_ids'),
     #         invite_token,
-    #         domain=WebsiteAppointment._appointments_base_domain(
-    #             filter_appointment_type_ids=options.get('filter_appointment_type_ids'),
+    #         domain=WebsiteBooking._bookings_base_domain(
+    #             filter_booking_type_ids=options.get('filter_booking_type_ids'),
     #             search=options.get('search'),
     #             invite_token=invite_token,
-    #             additional_domain=WebsiteAppointment._appointment_website_domain(self)
+    #             additional_domain=WebsiteBooking._booking_website_domain(self)
     #         )
     #     ).ids
     #
-    #     domain = [[('id', 'in', allowed_appointment_type_ids)]]
+    #     domain = [[('id', 'in', allowed_booking_type_ids)]]
     #
     #     search_fields = ['name']
     #     mapping = {
@@ -67,7 +67,7 @@ class BookingType(models.Model):
     #         'website_url': {'name': 'website_url', 'type': 'url', 'truncate': False, 'html': False},
     #     }
     #
-    #     mapping['detail'] = {'name': 'appointment_duration_formatted', 'type': 'text', 'html': True}
+    #     mapping['detail'] = {'name': 'booking_duration_formatted', 'type': 'text', 'html': True}
     #     if options['displayDescription']:
     #         mapping['description'] = {'name': 'message_intro', 'type': 'text', 'html': True, 'truncate': True}
     #
@@ -76,7 +76,7 @@ class BookingType(models.Model):
     #         'fetch_fields': [value['name'] for _, value in mapping.items()],
     #         'icon': 'fa-calendar',
     #         'mapping': mapping,
-    #         'model': 'appointment.type',
+    #         'model': 'booking.type',
     #         'requires_sudo': bool(invite_token),
     #         'search_fields': search_fields,
     #     }

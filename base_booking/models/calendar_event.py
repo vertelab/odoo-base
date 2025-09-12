@@ -60,6 +60,7 @@ class CalendarEvent(models.Model):
 
     access_token = fields.Char('Access Token', default=_default_access_token, readonly=True)
     alarm_ids = fields.Many2many(compute='_compute_alarm_ids', store=True, readonly=False)
+    booking_answer_input_ids = fields.One2many('booking.answer.input', 'calendar_event_id', string="Booking Answers")
     booking_status = fields.Selection([
         ('request', 'Request'),
         ('booked', 'Booked'),
@@ -68,10 +69,8 @@ class CalendarEvent(models.Model):
         ('cancelled', 'Cancelled'),
     ], string="Booking Status", compute='_compute_booking_status', store=True, readonly=False, tracking=True)
     booking_type_id = fields.Many2one('booking.type', 'Booking', tracking=True)
-    # booking_type_schedule_based_on = fields.Selection(related="booking_type_id.schedule_based_on")
-    booking_type_schedule_based_on = fields.Char()
-    # booking_type_manage_capacity = fields.Boolean(related="booking_type_id.resource_manage_capacity")
-    booking_type_manage_capacity = fields.Boolean()
+    booking_type_schedule_based_on = fields.Selection(related="booking_type_id.schedule_based_on")
+    booking_type_manage_capacity = fields.Boolean(related="booking_type_id.resource_manage_capacity")
     booking_invite_id = fields.Many2one('booking.invite', 'Booking Invitation', readonly=True, ondelete='set null')
     booking_resource_ids = fields.Many2many('booking.resource', 'booking_booking_line', 'calendar_event_id', 'booking_resource_id',
                                                 string="Booking Resources", group_expand="_read_group_booking_resource_ids",

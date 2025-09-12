@@ -15,28 +15,28 @@ patch(Wysiwyg.prototype, {
         commands.push(
             {
                 category: _t('Navigation'),
-                name: _t('Appointment'),
+                name: _t('Booking'),
                 priority: 10,
-                description: _t('Add a specific appointment'),
+                description: _t('Add a specific booking'),
                 fontawesome: 'fa-calendar',
                 callback: async () => {
                     const selection = this.odooEditor.document.getSelection();
                     const anchorNode = selection && selection.anchorNode;
                     const restoreSelection = preserveCursor(this.odooEditor.document);
-                    Component.env.services.dialog.add(AppointmentFormViewDialog, {
-                        resModel: 'appointment.invite',
+                    Component.env.services.dialog.add(BookingFormViewDialog, {
+                        resModel: 'booking.invite',
                         context: {
-                            form_view_ref: "appointment.appointment_invite_view_form_insert_link",
-                            default_appointment_type_ids: [],
+                            form_view_ref: "base_booking.booking_invite_view_form_insert_link",
+                            default_booking_type_ids: [],
                             default_staff_user_ids: [],
                         },
                         size: 'md',
-                        title: _t("Insert Appointment Link"),
+                        title: _t("Insert Booking Link"),
                         mode: "edit",
                         insertLink: (url) => {
                             this.focus();
                             restoreSelection();
-                            const label = _t('Schedule an Appointment');
+                            const label = _t('Schedule an Booking');
                             const existingLink = closestElement(anchorNode, 'a');
                             if (existingLink) {
                                 existingLink.setAttribute('href', url);
@@ -57,7 +57,7 @@ patch(Wysiwyg.prototype, {
     }
 });
 
-class AppointmentFormViewDialog extends FormViewDialog {
+class BookingFormViewDialog extends FormViewDialog {
     static props = {
         ...FormViewDialog.props,
         insertLink: { type: Function },

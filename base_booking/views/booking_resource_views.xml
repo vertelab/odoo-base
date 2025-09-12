@@ -5,7 +5,7 @@
         <field name="name">booking.resource.view.search</field>
         <field name="model">booking.resource</field>
         <field name="arch" type="xml">
-            <search string="Appointment Resources">
+            <search string="Booking Resources">
                 <field name="name"/>
                 <field name="booking_type_ids"/>
                 <field name="capacity"/>

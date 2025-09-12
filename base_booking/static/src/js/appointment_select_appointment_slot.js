@@ -9,18 +9,18 @@ const { DateTime } = luxon;
 
 console.log("=================")
 
-publicWidget.registry.appointmentSlotSelect = publicWidget.Widget.extend({
+publicWidget.registry.bookingSlotSelect = publicWidget.Widget.extend({
     selector: '.o_booking_info',
     events: {
         'change select[name="timezone"]': '_onRefresh',
-        'change select[id="selectAppointmentResource"]': '_onRefresh',
+        'change select[id="selectBookingResource"]': '_onRefresh',
         'change select[id="selectStaffUser"]': '_onRefresh',
         'change select[id="resourceCapacity"]': '_onRefresh',
         'click .o_js_calendar_navigate': '_onCalendarNavigate',
         'click .o_slot_button': '_onClickDaySlot',
         'click .o_slot_hours': '_onClickHoursSlot',
         'click button[name="submitSlotInfoSelected"]': '_onClickConfirmSlot',
-        'click .o_appointment_show_calendar': '_onClickShowCalendar',
+        'click .o_booking_show_calendar': '_onClickShowCalendar',
     },
 
     /**
@@ -52,13 +52,13 @@ publicWidget.registry.appointmentSlotSelect = publicWidget.Widget.extend({
      * click on the first date where a slot is available.
      */
     selectFirstAvailableMonth: function () {
-        const firstMonthEl = this.firstEl.closest(".o_appointment_month");
-        const currentMonthEl = document.querySelector(".o_appointment_month:not(.d-none)");
+        const firstMonthEl = this.firstEl.closest(".o_booking_month");
+        const currentMonthEl = document.querySelector(".o_booking_month:not(.d-none)");
         currentMonthEl.classList.add("d-none");
         currentMonthEl
             .querySelectorAll("table")
             .forEach((table) => table.classList.remove("d-none"));
-        currentMonthEl.querySelector(".o_appointment_no_slot_month_helper").remove();
+        currentMonthEl.querySelector(".o_booking_no_slot_month_helper").remove();
         firstMonthEl.classList.remove("d-none");
         this.slotsListEl.replaceChildren();
         this.firstEl.click();
@@ -76,7 +76,7 @@ publicWidget.registry.appointmentSlotSelect = publicWidget.Widget.extend({
         const staffUserName = staffUserNameSelectedOption?.textContent;
         monthEl.querySelectorAll("table").forEach((tableEl) => tableEl.classList.add("d-none"));
         monthEl.append(
-            renderToElement("Appointment.appointment_info_no_slot_month", {
+            renderToElement("Booking.booking_info_no_slot_month", {
                 firstAvailabilityDate: DateTime.fromISO(firstAvailabilityDate).toFormat("cccc dd MMMM yyyy"),
                 staffUserName: staffUserName,
             })
@@ -88,12 +88,12 @@ publicWidget.registry.appointmentSlotSelect = publicWidget.Widget.extend({
 
     /**
      * Checks whether any slot is available in the calendar.
-     * If there isn't, adds an explicative message in the slot list, and hides the appointment details,
+     * If there isn't, adds an explicative message in the slot list, and hides the booking details,
      * and make design width adjustment to have the helper message centered to the whole width.
      * In case, there is no slots based on capacity chosen then the details and calendar are not hidden.
-     * If the appointment is missconfigured (missing user or missing availabilities),
+     * If the booking is missconfigured (missing user or missing availabilities),
      * display an explicative message. The calendar is then not displayed.
-     * If there is an upcoming appointment booked, display a information before the the calendar
+     * If there is an upcoming booking booked, display a information before the the calendar
      *
      */
     _updateSlotAvailability: async function () {
@@ -102,7 +102,7 @@ publicWidget.registry.appointmentSlotSelect = publicWidget.Widget.extend({
                 this.el
                     .querySelectorAll("#slots_availabilities")
                     .forEach((slotEl) => slotEl.replaceChildren());
-                this.el.querySelector(".o_appointment_timezone_selection")?.classList.add("d-none");
+                this.el.querySelector(".o_booking_timezone_selection")?.classList.add("d-none");
 
                 const staffUserEl = this.el.querySelector(
                     "#slots_form select[name='staff_user_id']"
@@ -113,55 +113,55 @@ publicWidget.registry.appointmentSlotSelect = publicWidget.Widget.extend({
                     "input[name='hide_select_dropdown']"
                 ).value;
                 const active = this.el.querySelector("input[name='active']").value;
-                this.el.querySelector(".o_appointment_no_slot_overall_helper").replaceChildren(
-                    renderToElement("Appointment.appointment_info_no_slot", {
+                this.el.querySelector(".o_booking_no_slot_overall_helper").replaceChildren(
+                    renderToElement("Booking.booking_info_no_slot", {
                         active: active,
-                        appointmentsCount: parseInt(
-                            this.el.querySelector("#slotsList").dataset.appointmentsCount
+                        bookingsCount: parseInt(
+                            this.el.querySelector("#slotsList").dataset.bookingsCount
                         ),
                         staffUserName: hideSelectDropdown ? staffUserName : false,
                     })
                 );
             } else {
                 this.el
-                    .querySelector(".o_appointment_no_capacity")
-                    ?.replaceChildren(renderToElement("Appointment.appointment_info_no_capacity"));
+                    .querySelector(".o_booking_no_capacity")
+                    ?.replaceChildren(renderToElement("Booking.booking_info_no_capacity"));
             }
         } else {
-            this.el.querySelector(".o_appointment_timezone_selection")?.classList.remove("d-none");
-            this.el.querySelector(".o_appointment_no_capacity")?.replaceChildren();
+            this.el.querySelector(".o_booking_timezone_selection")?.classList.remove("d-none");
+            this.el.querySelector(".o_booking_no_capacity")?.replaceChildren();
         }
-        this.el.querySelector(".o_appointment_missing_configuration")?.classList.remove("d-none");
-        // Check upcoming appointments
-        const allAppointmentsToken = JSON.parse(localStorage.getItem('appointment.upcoming_events_access_token')) || [];
-        const ignoreUpcomingEventUntil = localStorage.getItem('appointment.upcoming_events_ignore_until');
+        this.el.querySelector(".o_booking_missing_configuration")?.classList.remove("d-none");
+        // Check upcoming bookings
+        const allBookingsToken = JSON.parse(localStorage.getItem('booking.upcoming_events_access_token')) || [];
+        const ignoreUpcomingEventUntil = localStorage.getItem('booking.upcoming_events_ignore_until');
         if (
-            !this.el.querySelector('.o_appointment_cancelled') &&
+            !this.el.querySelector('.o_booking_cancelled') &&
             (!ignoreUpcomingEventUntil || deserializeDateTime(ignoreUpcomingEventUntil) < DateTime.utc()) &&
-            (allAppointmentsToken.length !== 0 || user.userId !== false)
+            (allBookingsToken.length !== 0 || user.userId !== false)
         ) {
-            const upcomingAppointmentData = await rpc("/booking/get_upcoming_bookings", {
-                calendar_event_access_tokens: allAppointmentsToken,
+            const upcomingBookingData = await rpc("/booking/get_upcoming_bookings", {
+                calendar_event_access_tokens: allBookingsToken,
             });
-            if (upcomingAppointmentData) {
-                this.el.querySelector('div.o_appointment_calendar').classList.add('d-none');
-                this.el.querySelector('div.o_appointment_calendar_form').classList.add('d-none');
+            if (upcomingBookingData) {
+                this.el.querySelector('div.o_booking_calendar').classList.add('d-none');
+                this.el.querySelector('div.o_booking_calendar_form').classList.add('d-none');
                 const timezone = this.el.querySelector('.o_booking_info_main').dataset.timezone;
                 const upcomingFormattedStart = deserializeDateTime(
-                    upcomingAppointmentData.next_upcoming_appointment.start
+                    upcomingBookingData.next_upcoming_booking.start
                 ).setZone(timezone).toLocaleString(DateTime.DATETIME_MED_WITH_WEEKDAY);
-                this.el.querySelector('.o_appointment_no_slot_overall_helper').replaceChildren(
-                    renderToElement('Appointment.appointment_info_upcoming_appointment', {
-                        appointmentTypeName: upcomingAppointmentData.next_upcoming_appointment.appointment_type_id[1],
-                        appointmentStart: upcomingFormattedStart,
-                        appointmentToken: upcomingAppointmentData.next_upcoming_appointment.access_token,
-                        partnerId: upcomingAppointmentData.next_upcoming_appointment.appointment_booker_id[0],
+                this.el.querySelector('.o_booking_no_slot_overall_helper').replaceChildren(
+                    renderToElement('Booking.booking_info_upcoming_booking', {
+                        bookingTypeName: upcomingBookingData.next_upcoming_booking.booking_type_id[1],
+                        bookingStart: upcomingFormattedStart,
+                        bookingToken: upcomingBookingData.next_upcoming_booking.access_token,
+                        partnerId: upcomingBookingData.next_upcoming_booking.booking_booker_id[0],
                     }));
                 if (user.userId === false) {
-                    localStorage.setItem('appointment.upcoming_events_access_token', JSON.stringify(upcomingAppointmentData.valid_access_tokens));
+                    localStorage.setItem('base_booking.upcoming_events_access_token', JSON.stringify(upcomingBookingData.valid_access_tokens));
                 }
             } else {
-                localStorage.removeItem('appointment.upcoming_events_access_token');
+                localStorage.removeItem('base_booking.upcoming_events_access_token');
             }
         }
     },
@@ -170,12 +170,12 @@ publicWidget.registry.appointmentSlotSelect = publicWidget.Widget.extend({
      * Navigate between the months available in the calendar displayed
      */
     _onCalendarNavigate: function (ev) {
-        const parentEl = this.el.querySelector(".o_appointment_month:not(.d-none)");
+        const parentEl = this.el.querySelector(".o_booking_month:not(.d-none)");
         let monthID = parseInt(parentEl.getAttribute("id").split("-")[1]);
         monthID += ev.currentTarget.getAttribute("id") === "nextCal" ? 1 : -1;
         parentEl.querySelectorAll("table").forEach((table) => table.classList.remove("d-none"));
         parentEl
-            .querySelectorAll(".o_appointment_no_slot_month_helper")
+            .querySelectorAll(".o_booking_no_slot_month_helper")
             .forEach((element) => element.remove());
         parentEl.classList.add("d-none");
         const monthEl = this.el.querySelector(`div#month-${monthID}`);
@@ -215,11 +215,11 @@ publicWidget.registry.appointmentSlotSelect = publicWidget.Widget.extend({
         const slots = JSON.parse(ev.currentTarget.dataset.availableSlots);
         const scheduleBasedOn = this.el.querySelector("input[name='schedule_based_on']").value;
         const resourceAssignMethod = this.el.querySelector("input[name='assign_method']").value;
-        const selectAppointmentResourceEl = this.el.querySelector(
-            "select[id='selectAppointmentResource']"
+        const selectBookingResourceEl = this.el.querySelector(
+            "select[id='selectBookingResource']"
         );
         const resourceId =
-            (selectAppointmentResourceEl && selectAppointmentResourceEl.value) ||
+            (selectBookingResourceEl && selectBookingResourceEl.value) ||
             this.el.querySelector("input[name='resource_selected_id']").value;
         const resourceCapacity = this.el.querySelector("select[name='resourceCapacity']")?.value;
         let commonUrlParams = new URLSearchParams(window.location.search);
@@ -241,7 +241,7 @@ publicWidget.registry.appointmentSlotSelect = publicWidget.Widget.extend({
         }
 
         this.slotsListEl.replaceChildren(
-            renderToFragment("appointment.slots_list", {
+            renderToFragment("base_booking.slots_list", {
                 commonUrlParams: commonUrlParams,
                 resourceAssignMethod: resourceAssignMethod,
                 scheduleBasedOn: scheduleBasedOn,
@@ -265,7 +265,7 @@ publicWidget.registry.appointmentSlotSelect = publicWidget.Widget.extend({
     _onClickHoursSlot: function (ev) {
         console.log("assign_method", this.el.querySelector("input[name='assign_method']"));
         console.log("schedule_based_on", this.el.querySelector("input[name='schedule_based_on']"));
-        console.log("appointment_type_id", this.el.querySelector("input[name='booking_type_id']"));
+        console.log("booking_type_id", this.el.querySelector("input[name='booking_type_id']"));
         this.el
             .querySelector(".o_slot_hours.o_slot_hours_selected")
             ?.classList.remove("o_slot_hours_selected", "active");
@@ -277,14 +277,14 @@ publicWidget.registry.appointmentSlotSelect = publicWidget.Widget.extend({
         const assignMethod = this.el.querySelector("input[name='assign_method']").value;
         const scheduleBasedOn = this.el.querySelector("input[name='schedule_based_on']").value;
         if (assignMethod !== "time_resource") {
-            const appointmentTypeID = this.el.querySelector(
+            const bookingTypeID = this.el.querySelector(
                 "input[name='booking_type_id']"
             ).value;
             const urlParameters = decodeURIComponent(
                 this.el.querySelector(".o_slot_hours_selected").dataset.urlParameters
             );
             const url = new URL(
-                `/booking/${encodeURIComponent(appointmentTypeID)}/info?${urlParameters}`,
+                `/booking/${encodeURIComponent(bookingTypeID)}/info?${urlParameters}`,
                 location.origin);
             document.location = encodeURI(url.href);
             return;
@@ -324,14 +324,14 @@ publicWidget.registry.appointmentSlotSelect = publicWidget.Widget.extend({
     },
 
     _onClickConfirmSlot: function (ev) {
-        const appointmentTypeID = this.el.querySelector("input[name='appointment_type_id']").value;
+        const bookingTypeID = this.el.querySelector("input[name='booking_type_id']").value;
         const resourceId = parseInt(this.el.querySelector("select[name='resource_id']").value);
         const scheduleBasedOn = this.el.querySelector("input[name='schedule_based_on']").value;
         const urlParameters = decodeURIComponent(
             this.el.querySelector(".o_slot_hours_selected").dataset.urlParameters
         );
         const url = new URL(
-            `/booking/${encodeURIComponent(appointmentTypeID)}/info?${urlParameters}`,
+            `/booking/${encodeURIComponent(bookingTypeID)}/info?${urlParameters}`,
             location.origin);
         const assignMethod = this.el.querySelector("input[name='assign_method']").value;
         if (scheduleBasedOn === "resources") {
@@ -355,10 +355,10 @@ publicWidget.registry.appointmentSlotSelect = publicWidget.Widget.extend({
     },
 
     _onClickShowCalendar: function (ev) {
-        this.el.querySelector('.o_appointment_no_slot_overall_helper').innerHTML = "";
-        this.el.querySelector('div.o_appointment_calendar').classList.remove('d-none');
-        this.el.querySelector('div.o_appointment_calendar_form').classList.remove('d-none');
-        localStorage.setItem("appointment.upcoming_events_ignore_until",
+        this.el.querySelector('.o_booking_no_slot_overall_helper').innerHTML = "";
+        this.el.querySelector('div.o_booking_calendar').classList.remove('d-none');
+        this.el.querySelector('div.o_booking_calendar_form').classList.remove('d-none');
+        localStorage.setItem("booking.upcoming_events_ignore_until",
             serializeDateTime(DateTime.utc().plus({ days: 1 })));
     },
 
@@ -370,24 +370,24 @@ publicWidget.registry.appointmentSlotSelect = publicWidget.Widget.extend({
             const daySlotSelected =
                 this.el.querySelector(".o_slot_selected") &&
                 this.el.querySelector(".o_slot_selected").dataset.slotDate;
-            const appointmentTypeID = this.el.querySelector(
-                "input[name='appointment_type_id']"
+            const bookingTypeID = this.el.querySelector(
+                "input[name='booking_type_id']"
             ).value;
-            const filterAppointmentTypeIds = this.el.querySelector(
-                "input[name='filter_appointment_type_ids']"
+            const filterBookingTypeIds = this.el.querySelector(
+                "input[name='filter_booking_type_ids']"
             ).value;
             const filterUserIds = this.el.querySelector(
                 "input[name='filter_staff_user_ids']"
             ).value;
             const inviteToken = this.el.querySelector("input[name='invite_token']").value;
             const previousMonthName = this.el.querySelector(
-                ".o_appointment_month:not(.d-none) .o_appointment_month_name"
+                ".o_booking_month:not(.d-none) .o_booking_month_name"
             )?.textContent;
             const staffUserID = this.el.querySelector(
                 "#slots_form select[name='staff_user_id']"
             )?.value;
             const resourceID =
-                this.el.querySelector("select[id='selectAppointmentResource']")?.value ||
+                this.el.querySelector("select[id='selectBookingResource']")?.value ||
                 this.el.querySelector("input[name='resource_selected_id']")?.value;
             const filterResourceIds = this.el.querySelector(
                 "input[name='filter_resource_ids']"
@@ -397,12 +397,12 @@ publicWidget.registry.appointmentSlotSelect = publicWidget.Widget.extend({
                 (this.el.querySelector("select[name='resourceCapacity']") &&
                     parseInt(this.el.querySelector("select[name='resourceCapacity']").value)) ||
                 1;
-            this.el.querySelector(".o_appointment_no_slot_overall_helper").replaceChildren();
+            this.el.querySelector(".o_booking_no_slot_overall_helper").replaceChildren();
             this.slotsListEl.replaceChildren();
             this.el
-                .querySelectorAll("#calendar, .o_appointment_timezone_selection")
+                .querySelectorAll("#calendar, .o_booking_timezone_selection")
                 .forEach((el) => {
-                    el.classList.add("o_appointment_disable_calendar");
+                    el.classList.add("o_booking_disable_calendar");
                 });
             this.resourceSelectionEl?.replaceChildren();
             const resourceCapacityEl = this.el.querySelector("select[name='resourceCapacity']");
@@ -416,15 +416,15 @@ publicWidget.registry.appointmentSlotSelect = publicWidget.Widget.extend({
                 )
             ) {
                 this.el
-                    .querySelector(".o_appointment_slot_list_loading")
+                    .querySelector(".o_booking_slot_list_loading")
                     .classList.remove("d-none");
             }
-            const updatedAppointmentCalendarHtml = await rpc(
-                `/booking/${appointmentTypeID}/update_available_slots`,
+            const updatedBookingCalendarHtml = await rpc(
+                `/booking/${bookingTypeID}/update_available_slots`,
                 {
                     asked_capacity: resourceCapacity,
                     invite_token: inviteToken,
-                    filter_appointment_type_ids: filterAppointmentTypeIds,
+                    filter_booking_type_ids: filterBookingTypeIds,
                     filter_staff_user_ids: filterUserIds,
                     filter_resource_ids: filterResourceIds,
                     month_before_update: previousMonthName,
@@ -433,11 +433,11 @@ publicWidget.registry.appointmentSlotSelect = publicWidget.Widget.extend({
                     timezone: timezone,
                 }
             );
-            if (updatedAppointmentCalendarHtml) {
-                this.el.querySelector("#slots_availabilities").outerHTML = updatedAppointmentCalendarHtml;
+            if (updatedBookingCalendarHtml) {
+                this.el.querySelector("#slots_availabilities").outerHTML = updatedBookingCalendarHtml;
                 this.initSlots();
                 // If possible, we keep the current month, and display the helper if it has no availability.
-                const displayedMonthEl = this.el.querySelector(".o_appointment_month:not(.d-none)");
+                const displayedMonthEl = this.el.querySelector(".o_booking_month:not(.d-none)");
                 if (!!this.firstEl && !displayedMonthEl.querySelector(".o_day")) {
                     this._renderNoAvailabilityForMonth(displayedMonthEl);
                 }
@@ -452,11 +452,11 @@ publicWidget.registry.appointmentSlotSelect = publicWidget.Widget.extend({
      * Remove the loading spinners when no longer useful
      */
     _removeLoadingSpinner: function () {
-        this.el.querySelector(".o_appointment_slots_loading")?.remove();
-        this.el.querySelector(".o_appointment_slot_list_loading")?.classList.add("d-none");
+        this.el.querySelector(".o_booking_slots_loading")?.remove();
+        this.el.querySelector(".o_booking_slot_list_loading")?.classList.add("d-none");
         this.el.querySelector("#slots_availabilities")?.classList.remove("d-none");
-        this.el.querySelectorAll("#calendar, .o_appointment_timezone_selection").forEach((el) => {
-            el.classList.remove("o_appointment_disable_calendar");
+        this.el.querySelectorAll("#calendar, .o_booking_timezone_selection").forEach((el) => {
+            el.classList.remove("o_booking_disable_calendar");
         });
     },
 });

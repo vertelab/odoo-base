@@ -52,9 +52,9 @@ patch(AttendeeCalendarController.prototype, {
                 context: this.props.context, // This allows to propagate keys like default_opportunity_id / default_applicant_id
             },
         );
-        if (customAppointment.appointment_type_id) {
+        if (customAppointment.booking_type_id) {
             this.appointmentState.lastAppointment = {
-                'id': customAppointment.appointment_type_id,
+                'id': customAppointment.booking_type_id,
                 'isCustom': true,
                 'url': customAppointment.invite_url,
                 'viewId': customAppointment.view_id,
@@ -81,7 +81,7 @@ patch(AttendeeCalendarController.prototype, {
         await rpc(
             "/appointment/appointment_type/update_custom",
             {
-                appointment_type_id: this.appointmentState.lastAppointment.id,
+                booking_type_id: this.appointmentState.lastAppointment.id,
                 slots: this._getSlots(),
             },
         );
@@ -180,9 +180,9 @@ patch(AttendeeCalendarController.prototype, {
         const anytimeAppointment = await rpc("/appointment/appointment_type/search_create_anytime", {
             context: this.props.context,
         });
-        if (anytimeAppointment.appointment_type_id) {
+        if (anytimeAppointment.booking_type_id) {
             this.appointmentState.lastAppointment = {
-                'id': anytimeAppointment.appointment_type_id,
+                'id': anytimeAppointment.booking_type_id,
                 'url': anytimeAppointment.invite_url,
             }
             this._writeUrlToClipboard();
@@ -191,11 +191,11 @@ patch(AttendeeCalendarController.prototype, {
 
     async onClickGetAppointmentUrl(appointmentTypeId) {
         const appointment = await rpc("/appointment/appointment_type/get_book_url", {
-            appointment_type_id: appointmentTypeId,
+            booking_type_id: appointmentTypeId,
             context: this.props.context,
         });
         this.appointmentState.lastAppointment = {
-            'id': appointment.appointment_type_id,
+            'id': appointment.booking_type_id,
             'url': appointment.invite_url,
         }
         this._writeUrlToClipboard();

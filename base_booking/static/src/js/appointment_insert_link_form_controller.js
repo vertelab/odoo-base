@@ -4,7 +4,7 @@ import { registry } from "@web/core/registry";
 import { formView } from "@web/views/form/form_view";
 import { FormController } from "@web/views/form/form_controller";
 
-class AppointmentInsertLinkFormController extends FormController {
+class BookingInsertLinkFormController extends FormController {
     static props = {
         ...FormController.props,
         insertLink: { type: Function },
@@ -26,7 +26,7 @@ class AppointmentInsertLinkFormController extends FormController {
         return super.beforeExecuteActionButton(...arguments);
     }
 }
-registry.category("views").add("appointment_insert_link_form", {
+registry.category("views").add("booking_insert_link_form", {
     ...formView,
-    Controller: AppointmentInsertLinkFormController,
+    Controller: BookingInsertLinkFormController,
 });

@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <odoo>
-    <template id="booking_form" name="Website Appointment: Your Data">
+    <template id="booking_form" name="Website Booking: Your Data">
         <t t-set="no_breadcrumbs" t-value="True"/>
         <t t-call="portal.portal_layout">
             <div id="wrap" class="d-flex">
-                <t t-set="o_portal_fullwidth_alert" groups="base_booking.group_appointment_manager">
+                <t t-set="o_portal_fullwidth_alert" groups="base_booking.group_booking_manager">
                     <t t-call="base_booking.booking_edit_in_backend"/>
                 </t>
                 <div class="container-lg h-100">
@@ -15,7 +15,7 @@
                                     <t t-set="step" t-value="30"/>
                                 </t>
                             </nav>
-                            <div class="oe_structure o_appointment">
+                            <div class="oe_structure o_booking">
                                 <h4 class="pb-3">
                                     <span>Add more details about you</span>
                                     <t t-if="request.env.user._is_public()">
@@ -24,9 +24,9 @@
                                     </t>
                                 </h4>
                                 <div class="oe_structure"/>
-                                <div class="oe_structure o_appointment_attendee_form">
+                                <div class="oe_structure o_booking_attendee_form">
                                     <div class="d-flex row justify-content-between">
-                                        <form class="appointment_submit_form"
+                                        <form class="booking_submit_form"
                                             t-attf-action="/booking/#{booking_type.id}/submit?#{keep_query('*')}"
                                             method="POST">
                                             <input type="hidden" name="csrf_token" t-att-value="request.csrf_token()"/>
@@ -61,13 +61,13 @@
                                             <t t-if="booking_type.allow_guests">
                                                 <div class="row mb-4 mt-1">
                                                     <label class="col-sm-3 col-form-label fw-normal">Guests</label>
-                                                    <div class="o_appointment_add_guests col-sm-9">
-                                                        <button type="button" class="o_appointment_input_guest_add btn btn-link ps-0"><i class="fa fa-plus me-1"/> Add Guests</button>
-                                                        <textarea type="email" id="o_appointment_input_guest_emails" class="form-control s_website_form_input d-none" name="guest_emails_str" placeholder="e.g. john.doe@email.com &#13;&#10;e.g. jane.doe@example.com&#13;&#10;..." rows="5"/>
-                                                        <button type="button" class="o_appointment_input_guest_cancel btn btn-link d-none ps-0">Cancel</button>
-                                                        <div class="o_appointment_validation_error alert alert-danger d-none mt-2">
+                                                    <div class="o_booking_add_guests col-sm-9">
+                                                        <button type="button" class="o_booking_input_guest_add btn btn-link ps-0"><i class="fa fa-plus me-1"/> Add Guests</button>
+                                                        <textarea type="email" id="o_booking_input_guest_emails" class="form-control s_website_form_input d-none" name="guest_emails_str" placeholder="e.g. john.doe@email.com &#13;&#10;e.g. jane.doe@example.com&#13;&#10;..." rows="5"/>
+                                                        <button type="button" class="o_booking_input_guest_cancel btn btn-link d-none ps-0">Cancel</button>
+                                                        <div class="o_booking_validation_error alert alert-danger d-none mt-2">
                                                             <i class="fa fa-warning me-1"/>
-                                                            <span class="o_appointment_error_text"></span>
+                                                            <span class="o_booking_error_text"></span>
                                                         </div>
                                                     </div>
                                                 </div>
@@ -120,14 +120,14 @@
 <!--                                                        t-att-placeholder="question.placeholder"/>-->
 <!--                                                </div>-->
 <!--                                            </t>-->
-                                            <div groups="appointment.group_appointment_manager" class=" o_not_editable alert alert-info mt-4 text-center" role="status">
-                                                <a class="alert-link" t-attf-href="/odoo/action-appointment.appointment_type_action/{{booking_type.id}}">
+                                            <div groups="base_booking.group_booking_manager" class=" o_not_editable alert alert-info mt-4 text-center" role="status">
+                                                <a class="alert-link" t-attf-href="/odoo/action-booking.booking_type_action/{{booking_type.id}}">
                                                     <i class="fa fa-pencil me-2" role="img" aria-label="Edit" title="Create custom questions in backend"/>Add Custom Questions
                                                 </a>
                                             </div>
                                             <div class="my-3 pt-3">
                                                 <div class="o_not_editable text-end">
-                                                    <button type="button" class="o_appointment_form_confirm_btn btn btn-primary ms-auto">Confirm Appointment</button>
+                                                    <button type="button" class="o_booking_form_confirm_btn btn btn-primary ms-auto">Confirm Booking</button>
                                                 </div>
                                             </div>
                                         </form>

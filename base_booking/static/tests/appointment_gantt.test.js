@@ -24,8 +24,8 @@ const ganttViewArch = `
            default_group_by="partner_ids">
 
         <field name="active"/>
-        <field name="appointment_status"/>
-        <field name="appointment_type_id"/>
+        <field name="booking_status"/>
+        <field name="booking_type_id"/>
         <field name="partner_id"/>
         <field name="partner_ids"/>
         <field name="resource_ids"/>
@@ -46,9 +46,9 @@ const ganttViewArch = `
 test("empty default group gantt rendering", async () => {
     expect.assertions(18);
     mockDate("2022-01-03 08:00:00");
-    CalendarEvent._records[0].appointment_type_id = 1;
-    CalendarEvent._records[1].appointment_type_id = 1;
-    CalendarEvent._records[2].appointment_type_id = 1;
+    CalendarEvent._records[0].booking_type_id = 1;
+    CalendarEvent._records[1].booking_type_id = 1;
+    CalendarEvent._records[2].booking_type_id = 1;
     const partners = ["Partner 1", "Partner 214", "Partner 216"];
     const partnerEvents = [
         ["Event 3", "Event 1"],
@@ -156,17 +156,17 @@ test("'Add Closing Days' button rendering - 3", async () => {
 test("group pill colors", async () => {
     mockDate("2022-01-12 11:00:00", 0);
     Object.assign(CalendarEvent._records[0], {
-        appointment_type_id: 1,
+        booking_type_id: 1,
         start: "2022-01-12 11:16:00",
         stop: "2022-01-12 12:00:00",
     });
     Object.assign(CalendarEvent._records[1], {
-        appointment_type_id: 1,
+        booking_type_id: 1,
         start: "2022-01-12 10:30:00",
         stop: "2022-01-12 12:00:00",
     });
     Object.assign(CalendarEvent._records[2], {
-        appointment_type_id: 1,
+        booking_type_id: 1,
         start: "2022-01-12 12:00:00",
         stop: "2022-01-12 13:00:00",
     });
@@ -176,7 +176,7 @@ test("group pill colors", async () => {
     await click(SELECTORS.sparse);
     await animationFrame();
     testGroupPillColorsCheckColors();
-    await selectGroup("appointment_type_id");
+    await selectGroup("booking_type_id");
     // when not grouping by attendees we show "lateness" every time
     expect(document.querySelectorAll(".o_appointment_booking_gantt_color_grey")).toBeEmpty();
     await selectGroup("partner_ids");
@@ -215,25 +215,25 @@ test("appointment status pill colors", async () => {
         'no_show': { 'late': 1, 'current': 1, 'future': 1 }, // red
     };
     Object.assign(CalendarEvent._records[0], {
-        appointment_type_id: 1,
+        booking_type_id: 1,
         start: "2022-01-12 10:00:00", // Late
         stop: "2022-01-12 10:30:00",
     });
     Object.assign(CalendarEvent._records[1], {
-        appointment_type_id: 1,
+        booking_type_id: 1,
         start: "2022-01-12 11:00:00", // Current
         stop: "2022-01-12 11:30:00",
     });
     Object.assign(CalendarEvent._records[2], {
-        appointment_type_id: 1,
+        booking_type_id: 1,
         start: "2022-01-12 12:00:00", // Future
         stop: "2022-01-12 12:30:00",
         partner_ids: [100, 214],
     });
     for (const status in statusExpectedColors) {
-        CalendarEvent._records[0]['appointment_status'] = status;
-        CalendarEvent._records[1]['appointment_status'] = status;
-        CalendarEvent._records[2]['appointment_status'] = status;
+        CalendarEvent._records[0]['booking_status'] = status;
+        CalendarEvent._records[1]['booking_status'] = status;
+        CalendarEvent._records[2]['booking_status'] = status;
         const ganttView = await mountGanttView({ resModel: "calendar.event", arch: ganttViewArch });
         await selectRange("Today");
         const latePill = getPill("Event 1", { nth: 1 });

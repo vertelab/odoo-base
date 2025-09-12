@@ -7,7 +7,7 @@ import { useRecordObserver } from "@web/model/relational_model/utils";
 export class AppointmentTypeSyncDuration extends Many2OneField {
     setup() {
         super.setup();
-        this.appointmentTypeId = this.props.record.data.appointment_type_id[0];
+        this.appointmentTypeId = this.props.record.data.booking_type_id[0];
         this.isDefaultDuration = false;
 
         onWillStart(async () => {
@@ -20,8 +20,8 @@ export class AppointmentTypeSyncDuration extends Many2OneField {
         });
 
         useRecordObserver(async (record) => {
-            if (record.data.appointment_type_id[0] !== this.appointmentTypeId && this.isDefaultDuration) {
-                this.appointmentTypeId = record.data.appointment_type_id[0];
+            if (record.data.booking_type_id[0] !== this.appointmentTypeId && this.isDefaultDuration) {
+                this.appointmentTypeId = record.data.booking_type_id[0];
                 if (this.appointmentTypeId) {
                     const appointmentDuration = await this.orm.read(
                         "appointment.type", [this.appointmentTypeId], ['appointment_duration']

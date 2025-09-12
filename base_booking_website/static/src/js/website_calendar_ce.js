@@ -42,9 +42,9 @@ publicWidget.registry.websiteCalendarSelect = publicWidget.Widget.extend({
      */
     _onBookingTypeChange: function (ev) {
         var bookingID = $(ev.target).val();
-        var previousSelectedEmployeeID = $(".o_website_appointment_form select[name='employee_id']").val();
+        var previousSelectedEmployeeID = $(".o_website_booking_form select[name='employee_id']").val();
         var postURL = '/website/calendar/' + bookingID + '/booking';
-        $(".o_website_appointment_form").attr('action', postURL);
+        $(".o_website_booking_form").attr('action', postURL);
         this._rpc({
             route: "/website/calendar/get_booking_info",
             params: {
@@ -55,10 +55,10 @@ publicWidget.registry.websiteCalendarSelect = publicWidget.Widget.extend({
             if (data) {
                 $('.o_calendar_intro').html(data.message_intro);
                 if (data.assignation_method === 'chosen') {
-                    $(".o_website_appointment_form div[name='employee_select']").replaceWith(data.employee_selection_html);
+                    $(".o_website_booking_form div[name='employee_select']").replaceWith(data.employee_selection_html);
                 } else {
-                    $(".o_website_appointment_form div[name='employee_select']").addClass('o_hidden');
-                    $(".o_website_appointment_form select[name='employee_id']").children().remove();
+                    $(".o_website_booking_form div[name='employee_select']").addClass('o_hidden');
+                    $(".o_website_booking_form select[name='employee_id']").children().remove();
                 }
             }
         });
