@@ -72,7 +72,7 @@ class CalendarEvent(models.Model):
     booking_type_schedule_based_on = fields.Selection(related="booking_type_id.schedule_based_on")
     booking_type_manage_capacity = fields.Boolean(related="booking_type_id.resource_manage_capacity")
     booking_invite_id = fields.Many2one('booking.invite', 'Booking Invitation', readonly=True, ondelete='set null')
-    booking_resource_ids = fields.Many2many('booking.resource', 'booking_booking_line', 'calendar_event_id', 'booking_resource_id',
+    booking_resource_ids = fields.Many2many('booking.resource', 'booking_line', 'calendar_event_id', 'booking_resource_id',
                                                 string="Booking Resources", group_expand="_read_group_booking_resource_ids",
                                                 depends=['booking_line_ids'], readonly=True)
     # This field is used in the form view to create/manage the booking lines based on the resource_total_capacity_reserved
@@ -264,7 +264,7 @@ class CalendarEvent(models.Model):
                     capacity_to_reserve = max(0, capacity_to_reserve)
             else:
                 event.booking_line_ids.sudo().unlink()
-        self.env['booking.booking.line'].sudo().create(booking_lines)
+        self.env['booking.line'].sudo().create(booking_lines)
 
     def _search_resource_ids(self, operator, value):
         return [('booking_resource_ids', operator, value)]

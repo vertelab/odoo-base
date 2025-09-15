@@ -21,7 +21,7 @@ from odoo.addons.base.models.res_partner import _tz_get
 
 class BookingType(models.Model):
     _name = "booking.type"
-    _description = "Appointment Type"
+    _description = "Booking Type"
     _inherit = ['image.mixin', 'mail.thread', 'mail.activity.mixin']
     _order = "sequence, id"
     _mail_post_access = 'read'
@@ -47,11 +47,11 @@ class BookingType(models.Model):
     name = fields.Char('Title', required=True, translate=True)
     active = fields.Boolean(default=True)
 
-    # Global Appointment Type Settings
+    # Global Booking Type Settings
     booking_duration = fields.Float('Duration', required=True, default=1.0)
     booking_duration_formatted = fields.Char(
         'Duration Formatted ', compute='_compute_booking_duration_formatted', readonly=True,
-        help='Appointment Duration formatted in words')
+        help='Booking Duration formatted in words')
     booking_manual_confirmation = fields.Boolean("Manual Confirmation",
         help="""Do not automatically accept meetings created from the booking.
             The booking is still considered as reserved for the slots availability.""")
@@ -160,12 +160,12 @@ class BookingType(models.Model):
     resource_total_capacity = fields.Integer('Total Capacity', compute="_compute_resource_info")
 
     # Statistics / Technical / Misc
-    booking_count = fields.Integer('# Appointments', compute='_compute_booking_counts')
-    booking_count_request = fields.Integer('# Appointments To Confirm', compute="_compute_booking_counts")
-    booking_count_upcoming = fields.Integer('# Upcoming Appointments', compute='_compute_booking_counts')
+    booking_count = fields.Integer('# Bookings', compute='_compute_booking_counts')
+    booking_count_request = fields.Integer('# Bookings To Confirm', compute="_compute_booking_counts")
+    booking_count_upcoming = fields.Integer('# Upcoming Bookings', compute='_compute_booking_counts')
     booking_invite_ids = fields.Many2many('booking.invite', string='Invitation Links')
     booking_invite_count = fields.Integer('# Invitation Links', compute='_compute_booking_invite_count')
-    meeting_ids = fields.One2many('calendar.event', 'booking_type_id', string="Appointment Meetings")
+    meeting_ids = fields.One2many('calendar.event', 'booking_type_id', string="Booking Meetings")
 
     # Onboarding connectors display (see o_booking_cal_sync_alert)
     connectors_displayed = fields.Boolean(compute="_compute_connectors_displayed")
@@ -344,7 +344,7 @@ class BookingType(models.Model):
     def _check_booking_duration(self):
         for record in self:
             if not record.booking_duration > 0.0:
-                raise ValidationError(_('Appointment Duration should be higher than 0.00.'))
+                raise ValidationError(_('Booking Duration should be higher than 0.00.'))
 
     @api.constrains('category', 'staff_user_ids', 'schedule_based_on')
     def _check_staff_user_configuration(self):
@@ -406,7 +406,7 @@ class BookingType(models.Model):
         if self.schedule_based_on == 'users':
             action = self.env["ir.actions.actions"]._for_xml_id("base_booking.calendar_event_action_view_bookings_users")
         else:
-            action = self.env["ir.actions.actions"]._for_xml_id("booking.calendar_event_action_view_bookings_resources")
+            action = self.env["ir.actions.actions"]._for_xml_id("base_booking.calendar_event_action_view_bookings_resources")
         domain = [('start', '>=', datetime.today())]
         if calendar_event_domain:
             domain = expression.AND([domain, calendar_event_domain])
@@ -415,12 +415,8 @@ class BookingType(models.Model):
             ('start', '>=', datetime.today() + timedelta(weeks=1))
         ])
 
-        print("nbr_bookings_week_later", nbr_bookings_week_later)
-
         # Add and reorder views
         action = BookingType.insert_reorder_action_views(action, ['calendar'])
-
-        print("action", action)
 
         action['context'] = ast.literal_eval(action['context'])
         action['context'].update({
@@ -536,7 +532,7 @@ class BookingType(models.Model):
         return 'year'
 
     def _get_placeholder_filename(self, field):
-        return 'booking/static/src/img/booking_cover_0.jpg'
+        return 'base_booking/static/src/img/booking_cover_0.jpg'
 
     # --------------------------------------
     # Slots Generation

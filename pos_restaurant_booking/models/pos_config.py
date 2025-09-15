@@ -8,3 +8,4 @@ class PosConfig(models.Model):
     _inherit = 'pos.config'
 
     booking_type_id = fields.Many2one('booking.type', string='Booking Type')
+    module_pos_restaurant_booking = fields.Boolean("Table Booking")

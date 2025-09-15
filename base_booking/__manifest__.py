@@ -60,7 +60,7 @@ A base module to allow booking integrations in any flow
             'base_booking/static/src/scss/web_calendar.scss',
             # 'base_booking/static/src/views/**/*',
         #     ('remove', 'appointment/static/src/views/gantt/**'),
-        #     'base_booking/static/src/components/**/*',
+            'base_booking/static/src/components/**/*',
         #     'base_booking/static/src/js/appointment_insert_link_form_controller.js',
         #     'base_booking/static/src/appointment_plugin.js',
         ],

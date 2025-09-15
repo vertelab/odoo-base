@@ -97,7 +97,7 @@
         <field name="name">calendar.event.view.list.booking</field>
         <field name="model">calendar.event</field>
         <field name="arch" type="xml">
-            <list sample="1" decoration-danger="not active" js_class="booking_booking_list" multi_edit="1">
+            <list sample="1" decoration-danger="not active" multi_edit="1">
                 <field name="active" column_invisible="True"/>
                 <field name="name" string="Subject"/>
                 <field name="booking_type_id"/>
@@ -111,6 +111,44 @@
            </list>
         </field>
     </record>
+
+<!--    <record id="view_booking_event_calendar" model="ir.ui.view">-->
+<!--        <field name="name">calendar.event.calendar</field>-->
+<!--        <field name="model">calendar.event</field>-->
+<!--        <field name="priority" eval="2"/>-->
+<!--        <field name="arch" type="xml">-->
+<!--            <calendar string="Bookings" date_start="start" date_stop="stop" date_delay="duration" all_day="allday"-->
+<!--                event_open_popup="true"-->
+<!--                event_limit="5"-->
+<!--                quick_create="true"-->
+<!--                quick_create_view_id="%(calendar.view_calendar_event_form_quick_create)d"-->
+<!--                color="partner_ids">-->
+<!--                <field name="location" invisible="not location" options="{'icon': 'fa fa-map-marker'}"/>-->
+<!--                <field name="attendees_count" invisible="1"/>-->
+<!--                <field name="accepted_count" invisible="1"/>-->
+<!--                <field name="declined_count" invisible="1"/>-->
+<!--                <field name="user_can_edit" invisible="1"/>-->
+<!--                <field name="partner_ids" options="{'block': True, 'icon': 'fa fa-users'}"-->
+<!--                       filters="1" widget="many2manyattendeeexpandable" write_model="calendar.filters"-->
+<!--                       write_field="partner_id" filter_field="partner_checked" avatar_field="avatar_128"-->
+<!--                />-->
+<!--                <field name="videocall_location" widget="url" text="Join Video Call" options="{'icon': 'fa fa-lg fa-video-camera'}" invisible="not videocall_location"/>-->
+<!--                <field name="is_highlighted" invisible="1"/>-->
+<!--                <field name="is_organizer_alone" invisible="1"/>-->
+<!--                <field name="display_description" invisible="1"/>-->
+<!--                <field name="description" invisible="not display_description" options="{'icon': 'fa fa-bars'}"/>-->
+<!--                <field name="privacy" invisible="1"/>-->
+<!--                <field name="res_model_name" invisible="not res_model_name"-->
+<!--                       options="{'icon': 'fa fa-link', 'shouldOpenRecord': true}"/>-->
+<!--                <field name="alarm_ids" invisible="not alarm_ids" options="{'icon': 'fa fa-bell-o'}"/>-->
+<!--                <field name="categ_ids" invisible="not categ_ids" options="{'icon': 'fa fa-tag', 'color_field': 'color'}"/>-->
+<!--                &lt;!&ndash; For recurrence update Dialog &ndash;&gt;-->
+<!--                <field name="recurrency" invisible="1"/>-->
+<!--                <field name="recurrence_update" invisible="1"/>-->
+<!--                <field name="partner_id" string="Organizer" options="{'icon': 'fa fa-user-o'}"/>-->
+<!--            </calendar>-->
+<!--        </field>-->
+<!--    </record>-->
 
     <record id="calendar_event_view_form_gantt_booking" model="ir.ui.view">
         <field name="name">calendar.event.view.form.gantt.booking</field>
@@ -269,10 +307,6 @@
         ]"/>
         <field name="view_mode">calendar,list,form</field>
         <field name="search_view_id" ref="base_booking.calendar_event_view_search_booking"/>
-<!--        <field name="context">{'booking_booking_gantt_domain': [('booking_resource_ids', '!=', False)],-->
-<!--                               'booking_default_assign_user_attendees': False,-->
-<!--                               'default_partner_ids': [],-->
-<!--                               'default_resource_total_capacity_reserved': 1}</field>-->
         <field name="domain">['|', ('booking_resource_ids.company_id', '=', False), ('booking_resource_ids.company_id', 'in', allowed_company_ids)]</field>
         <field name="help" type="html">
             <p class="o_view_nocontent_smiling_face">

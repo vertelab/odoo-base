@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <template id="booking_validated" name="Website Booking: Booking Confirmed" inherit_id="base_booking.booking_validated">
+        <xpath expr="//t[@t-call='portal.portal_layout']" position="attributes">
+            <attribute name="t-call">website.layout</attribute>
+        </xpath>
+        <xpath expr="//div[hasclass('o_booking_edit_in_backend')]" position="replace"/>
+        <xpath expr="//div[hasclass('o_booking')]" position="before">
+            <div class="container">
+                <nav class="o_wbooking_navbar d-print-none d-flex justify-content-between mt-4">
+                    <a class="o_wbooking_navbar_link"
+                        t-attf-href="/booking?#{keep_query('filter_booking_type_ids', 'filter_resource_ids', 'filter_staff_user_ids', 'invite_token')}">
+                        <i class="fa fa-long-arrow-left me-2"/>All Bookings
+                    </a>
+                </nav>
+            </div>
+        </xpath>
+        <xpath expr="//div[@id='wrap']" position="after">
+            <input t-if='state == "new" and website.plausible_shared_key' type='hidden' class='js_plausible_push'
+                data-event-name='Lead Generation' data-event-params='{"CTA": "Booking"}' />
+        </xpath>
+        <xpath expr="//div[@id='wrap']" position="attributes">
+            <attribute name="class">o_booking h-100 o_wbooking_wrap mt-4</attribute>
+        </xpath>
+    </template>
+</odoo>

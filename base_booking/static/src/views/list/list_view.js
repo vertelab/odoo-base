@@ -9,7 +9,7 @@ export const AppointmentBookingListView = {
     Renderer: AppointmentBookingListRenderer,
 };
 
-registry.category("views").add("appointment_booking_list", AppointmentBookingListView);
+registry.category("views").add("booking_booking_list", AppointmentBookingListView);
 
 export const AppointmentTypeListView = {
     ...listView,

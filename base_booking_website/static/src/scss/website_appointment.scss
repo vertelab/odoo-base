@@ -1,26 +1,26 @@
 // Make the footer only slightly (2vh) visible. 56px is the height
 // of the top header bar o_header_standard. (navbar + 1rem padding)
-.o_appointment_index, .o_wappointment_wrap {
+.o_booking_index, .o_wbooking_wrap {
     min-height: calc(98vh - 56px);
 }
 
-.o_wappointment_appointment_list_columns {
-    .o_wappointment_card {
-        .o_wappointment_cover_image {
+.o_wbooking_booking_list_columns {
+    .o_wbooking_card {
+        .o_wbooking_cover_image {
             transition: transform .2s;
         }
 
-        &:hover .o_wappointment_cover_image {
+        &:hover .o_wbooking_cover_image {
             transform: scale(1.1);
         }
     }
 
-    .o_wappointment_ressource_badge {
+    .o_wbooking_ressource_badge {
         height: 24px;
     }
 }
 
-.o_wappointment_card_message_intro {
+.o_wbooking_card_message_intro {
     max-height: 150px;
     display: -webkit-box;
     -webkit-line-clamp: 5;
@@ -28,6 +28,6 @@
 }
 
 // Targetting the output of a t-field
-.o_wappointment_card_user_dsc p {
+.o_wbooking_card_user_dsc p {
     margin: 0;
 }

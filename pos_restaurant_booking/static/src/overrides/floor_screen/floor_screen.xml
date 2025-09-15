@@ -2,23 +2,23 @@
 <templates id="template" xml:space="preserve">
     <t t-name="pos_restaurant_booking.FloorScreen" t-inherit="pos_restaurant.FloorScreen" t-inherit-mode="extension">
         <xpath expr="//div[hasclass('label')]" position="after">
-            <t t-set="firstAppointment" t-value="this.getFirstAppointment(table)"/>
+            <t t-set="firstBooking" t-value="this.getFirstBooking(table)"/>
             <div
-                t-if="firstAppointment"
-                t-on-click="(ev) => this.onClickAppointment(ev, table)"
+                t-if="firstBooking"
+                t-on-click="(ev) => this.onClickBooking(ev, table)"
                 class="appointment-label
                     flex-column align-items-center justify-content-center
                     position-absolute start-0 end-0 bottom-0
                     text-bg-dark bg-opacity-25 py-1"
                 t-attf-class="{{ this.isCustomerLate(table) ? 'text-danger' : 'text-white' }}"
                 >
-                <div class="text-center small p-0 text-truncate" t-esc="firstAppointment.name" />
-                <div class="text-center small p-0 text-truncate" t-esc="getFormatedDate(firstAppointment.start)" />
+                <div class="text-center small p-0 text-truncate" t-esc="firstBooking.name" />
+                <div class="text-center small p-0 text-truncate" t-esc="getFormatedDate(firstBooking.start)" />
             </div>
         </xpath>
         <xpath expr="//div[hasclass('label')]" position="attributes">
             <attribute name="class" remove="top-50" separator=" "/>
-            <attribute name="t-attf-class">{{this.getFirstAppointment(table) ? 'top-0 mt-4' : 'top-50'}}</attribute>
+            <attribute name="t-attf-class">{{this.getFirstBooking(table) ? 'top-0 mt-4' : 'top-50'}}</attribute>
         </xpath>
     </t>
 </templates>

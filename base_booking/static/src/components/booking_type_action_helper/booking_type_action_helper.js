@@ -3,8 +3,8 @@
 import { useService } from '@web/core/utils/hooks';
 import { Component, onWillStart } from '@odoo/owl';
 
-export class AppointmentTypeActionHelper extends Component {
-    static template = 'appointment.AppointmentTypeActionHelper';
+export class BookingTypeActionHelper extends Component {
+    static template = 'base_booking.BookingTypeActionHelper';
     static props = {};
 
     setup() {
@@ -12,9 +12,9 @@ export class AppointmentTypeActionHelper extends Component {
         this.action = useService('action');
 
         onWillStart(async () => {
-            this.appointmentTypeTemplateData = await this.orm.call(
-                'appointment.type',
-                'get_appointment_type_templates_data',
+            this.bookingTypeTemplateData = await this.orm.call(
+                'booking.type',
+                'get_booking_type_templates_data',
                 []
             );
         });
@@ -22,8 +22,8 @@ export class AppointmentTypeActionHelper extends Component {
 
     async onTemplateClick(templateInfo) {
         const action = await this.orm.call(
-            'appointment.type',
-            'action_setup_appointment_type_template',
+            'booking.type',
+            'action_setup_booking_type_template',
             [templateInfo.template_key],
         );
         this.action.doAction(action);

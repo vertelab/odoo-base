@@ -358,7 +358,7 @@ publicWidget.registry.bookingSlotSelect = publicWidget.Widget.extend({
         this.el.querySelector('.o_booking_no_slot_overall_helper').innerHTML = "";
         this.el.querySelector('div.o_booking_calendar').classList.remove('d-none');
         this.el.querySelector('div.o_booking_calendar_form').classList.remove('d-none');
-        localStorage.setItem("booking.upcoming_events_ignore_until",
+        localStorage.setItem("base_booking.upcoming_events_ignore_until",
             serializeDateTime(DateTime.utc().plus({ days: 1 })));
     },
 

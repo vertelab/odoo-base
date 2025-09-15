@@ -254,18 +254,6 @@ class BookingControllerExtended(BookingController):
                                               default_filter_record=page_values[f'{filter_prefix}_default'],
                                               possible_filter_records=page_values[f'{filter_prefix}s_possible'],
                                               asked_capacity=asked_capacity)
-        print("=== SLOTS DEBUG ===")
-        print(f"Booking type: {booking_type.name}")
-        print(f"Schedule based on: {booking_type.schedule_based_on}")
-        print(f"Slot IDs count: {len(booking_type.slot_ids)}")
-        print(f"Resource IDs count: {len(booking_type.resource_ids)}")
-        print(f"Staff user IDs count: {len(booking_type.staff_user_ids)}")
-        print(f"Slots data: {len(slots_values.get('slots', []))} months")
-        if slots_values.get('slots'):
-            for month in slots_values['slots']:
-                total_slots = sum(len(day.get('slots', [])) for week in month.get('weeks', []) for day in week)
-                print(f"  Month {month.get('month')}: {total_slots} total slots")
-        print("===================")
 
         # slot_ids = booking_type.sudo()._get_paginated_booking_slots(request.session['timezone'], employee_obj)
 

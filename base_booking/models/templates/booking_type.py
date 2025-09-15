@@ -27,25 +27,25 @@ class BookingType(models.Model):
         return {
             'personal_meeting': {
                 'description': _("Share this link to let others book a meeting in your calendar"),
-                'icon': '/booking/static/src/img/guy.svg',
+                'icon': '/base_booking/static/src/img/guy.svg',
                 'template_key': 'personal_meeting',
                 'title': _("Personal Meeting"),
             },
             'video_call': {
                 'description': _("Schedule 30-minute calls in virtual rooms"),
-                'icon': '/booking/static/src/img/headset.svg',
+                'icon': '/base_booking/static/src/img/headset.svg',
                 'template_key': 'video_call',
                 'title': _("Video Call"),
             },
             'table_booking': {
                 'description': _("Let customers book tables (bars, restaurants, etc.)"),
-                'icon': '/booking/static/src/img/foods.svg',
+                'icon': '/base_booking/static/src/img/foods.svg',
                 'template_key': 'table_booking',
                 'title': _("Table Booking"),
             },
             'book_resource': {
                 'description': _("Book a resource for a specific time slot (e.g. tennis court, etc.)"),
-                'icon': '/booking/static/src/img/clock.svg',
+                'icon': '/base_booking/static/src/img/clock.svg',
                 'template_key': 'book_resource',
                 'title': _("Book a Resource"),
             },

@@ -3,7 +3,7 @@ import { Plugin } from "@html_editor/plugin";
 import { MAIN_PLUGINS } from "@html_editor/plugin_sets";
 import { FormViewDialog } from "@web/views/view_dialogs/form_view_dialog";
 
-class AppointmentFormViewDialog extends FormViewDialog {
+class BookingFormViewDialog extends FormViewDialog {
     static props = {
         ...FormViewDialog.props,
         insertLink: { type: Function },
@@ -15,43 +15,43 @@ class AppointmentFormViewDialog extends FormViewDialog {
     }
 }
 
-class AppointmentPlugin extends Plugin {
-    static id = "appointment";
+class BookingPlugin extends Plugin {
+    static id = "booking";
     static dependencies = ["selection", "link", "dialog"];
      resources = {
         user_commands: [
             {
-                id: "insertAppointment",
-                title: _t("Appointment"),
-                description: _t("Add a specific appointment"),
+                id: "insertBooking",
+                title: _t("Booking"),
+                description: _t("Add a specific booking"),
                 icon: "fa-calendar",
-                run: this.addAppointment.bind(this),
+                run: this.addBooking.bind(this),
             },
         ],
         powerbox_items: [
             {
                 categoryId: "navigation",
-                commandId: "insertAppointment",
+                commandId: "insertBooking",
             },
         ],
     };
 
-    addAppointment() {
-        this.dependencies.dialog.addDialog(AppointmentFormViewDialog, {
-            resModel: "appointment.invite",
+    addBooking() {
+        this.dependencies.dialog.addDialog(BookingFormViewDialog, {
+            resModel: "base_booking.invite",
             context: {
-                form_view_ref: "appointment.appointment_invite_view_form_insert_link",
+                form_view_ref: "base_booking.booking_invite_view_form_insert_link",
                 default_booking_type_ids: [],
                 default_staff_user_ids: [],
             },
             size: "md",
-            title: _t("Insert Appointment Link"),
+            title: _t("Insert Booking Link"),
             mode: "edit",
             insertLink: (url) =>
-                this.dependencies.link.insertLink(url, _t("Schedule an Appointment")),
+                this.dependencies.link.insertLink(url, _t("Schedule an Booking")),
         });
     }
 }
 
-// add appointment plugin for all standard use cases
-MAIN_PLUGINS.push(AppointmentPlugin);
+// add booking plugin for all standard use cases
+MAIN_PLUGINS.push(BookingPlugin);

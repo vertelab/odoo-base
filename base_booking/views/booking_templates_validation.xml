@@ -11,7 +11,7 @@
             <div id="wrap" class="o_booking d-flex bg-o-color-4 p-4">
                 <div class="oe_structure"/>
                 <div class="oe_structure container">
-                    <div class="o_booking_edit_in_backend alert alert-info alert-dismissible fade show d-print-none css_editable_mode_hidden" groups="booking.group_booking_manager">
+                    <div class="o_booking_edit_in_backend alert alert-info alert-dismissible fade show d-print-none css_editable_mode_hidden" groups="base_booking.group_booking_manager">
                         <t t-call="base_booking.booking_edit_in_backend"/>
                     </div>
                     <h2 t-if="is_cancelled" role="alert">
@@ -64,11 +64,11 @@
                                     <span t-if="not booking_type.hide_timezone" class="text-muted"> (<t t-out="request.session.timezone"/>)</span>
                                     <div t-if="not is_cancelled" class="o_booking_add_to_calendar_btns d-flex flex-wrap gap-3 mt-2">
                                         <a role="button" class="o_outlook_calendar btn btn-block bg-white" t-attf-href="/calendar/ics/#{event.access_token}.ics">
-                                            <img src="/booking/static/src/img/outlook-calendar.svg" alt="Outlook"/>
+                                            <img src="/base_booking/static/src/img/outlook-calendar.svg" alt="Outlook"/>
                                             <small>Add to iCal/Outlook</small>
                                         </a>
                                         <a role="button" class="o_google_calendar btn btn-block bg-white" t-att-href="google_url">
-                                            <img src="/booking/static/src/img/google-calendar.svg" alt="Google Agenda"/>
+                                            <img src="/base_booking/static/src/img/google-calendar.svg" alt="Google Agenda"/>
                                             <small>Add to Google Agenda</small>
                                         </a>
                                     </div>

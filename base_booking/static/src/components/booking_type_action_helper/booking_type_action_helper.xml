@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <odoo>
-    <t t-name="appointment.AppointmentTypeActionHelper">
-        <div class="o_view_nocontent o_appointment_helper align-items-start align-items-md-stretch">
+    <t t-name="base_booking.BookingTypeActionHelper">
+        <div class="o_view_nocontent o_booking_helper align-items-start align-items-md-stretch">
             <div class="container">
                 <div class="o_activity_not_found o_nocontent_help container text-center">
                     <h1 class="fw-normal">Ready to make scheduling easy?</h1>
@@ -10,13 +10,13 @@
                     </div>
                 </div>
 
-                <div class="o_appointment_helper_templates justify-content-center row cursor-pointer mt-4">
-                    <t t-set="templateNames" t-value="Object.keys(appointmentTypeTemplateData)"/>
+                <div class="o_booking_helper_templates justify-content-center row cursor-pointer mt-4">
+                    <t t-set="templateNames" t-value="Object.keys(bookingTypeTemplateData)"/>
                     <t t-foreach="templateNames" t-as="templateName" t-key="templateName">
-                        <t t-set="templateInfo" t-value="appointmentTypeTemplateData[templateName]"/>
+                        <t t-set="templateInfo" t-value="bookingTypeTemplateData[templateName]"/>
                         <div class="col-12 col-md-6 col-lg-4 col-xl-3 py-2"
                             t-on-click.stop.prevent="() => this.onTemplateClick(templateInfo)">
-                            <div class="o_appointment_helper_template card rounded row flex-row h-100 p-3 pt-4 g-0">
+                            <div class="o_booking_helper_template card rounded row flex-row h-100 p-3 pt-4 g-0">
                                 <img class="col-3 col-md-4 col-lg-3 h-50 px-1 p-0"
                                     t-attf-src="{{templateInfo.icon}}" t-attf-alt="{{templateInfo.title}}"/>
                                 <div class="col-9 col-md-8 col-lg-9 card-body d-flex flex-column py-0">

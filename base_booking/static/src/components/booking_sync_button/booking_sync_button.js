@@ -5,13 +5,13 @@ import { useService } from "@web/core/utils/hooks";
 import { Component } from "@odoo/owl";
 import { rpc } from "@web/core/network/rpc";
 
-export class AppointmentSyncButton extends Component {
+export class BookingSyncButton extends Component {
     static props = {
         ...standardWidgetProps,
         calendarName: String,
         iconSrc: String,
     };
-    static template = "appointment.AppointmentSyncButton";
+    static template = "base_booking.BookingSyncButton";
 
     setup() {
         this.notification = useService("notification");
@@ -56,12 +56,12 @@ export class AppointmentSyncButton extends Component {
     }
 }
 
-export const appointmentSyncButton = {
-    component: AppointmentSyncButton,
+export const bookingSyncButton = {
+    component: BookingSyncButton,
     extractProps: ({ attrs }) => ({
         calendarName: attrs.calendarName,
         iconSrc: attrs.iconSrc,
     }),
 };
 
-registry.category("view_widgets").add("appointment_sync_button", appointmentSyncButton);
+registry.category("view_widgets").add("booking_sync_button", bookingSyncButton);

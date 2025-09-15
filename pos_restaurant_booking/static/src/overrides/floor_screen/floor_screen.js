@@ -30,7 +30,7 @@ patch(FloorScreen.prototype, {
     async duplicateTableOrFloor() {
         await super.duplicateTableOrFloor(...arguments);
         if (this.selectedTables.length == 0) {
-            const tableWoAppointment = [];
+            const tableWoBooking = [];
 
             for (const table of this.activeTables) {
                 const bookingResource = this.pos.models["booking.resource"].get(
@@ -38,14 +38,14 @@ patch(FloorScreen.prototype, {
                 );
 
                 if (!bookingResource) {
-                    tableWoAppointment.push(table.id);
+                    tableWoBooking.push(table.id);
                 }
             }
 
-            if (tableWoAppointment.length > 0) {
+            if (tableWoBooking.length > 0) {
                 await this.pos.data.searchRead(
                     "booking.resource",
-                    [["pos_table_ids", "in", tableWoAppointment]],
+                    [["pos_table_ids", "in", tableWoBooking]],
                     this.pos.data.fields["booking.resource"]
                 );
             }
@@ -56,39 +56,40 @@ patch(FloorScreen.prototype, {
         return super.createTableFromRaw(table);
     },
 
-    getFirstAppointment(table) {
+    getFirstBooking(table) {
         if (!table.booking_resource_id) {
             return false;
         }
-        const appointments = this.pos.models["calendar.event"].getBy(
-            "booking_resource_ids",
-            table.booking_resource_id.id
+
+        const bookings = this.pos.models["calendar.event"].filter(
+            (booking) => booking.booking_resource_ids.includes(table.booking_resource_id)
         );
-        if (!appointments) {
+
+        if (!bookings) {
             return false;
         }
         const startOfToday = DateTime.now().set({ hours: 0, minutes: 0, seconds: 0 });
-        appointments.map((appointment) => {
+        bookings.map((booking) => {
             if (
-                deserializeDateTime(appointment.start).toFormat("yyyy-MM-dd") <
+                deserializeDateTime(booking.start).toFormat("yyyy-MM-dd") <
                 DateTime.now().toFormat("yyyy-MM-dd")
             ) {
-                appointment.start = serializeDateTime(startOfToday);
+                booking.start = serializeDateTime(startOfToday);
             }
         });
         const dt_now = DateTime.now();
         const dt_tomorrow_ts = dt_now
             .plus({ days: 1 })
             .set({ hours: 0, minutes: 0, seconds: 0 }).ts;
-        const possible_appointments = appointments.filter((a) => {
+        const possible_bookings = bookings.filter((a) => {
             const ts_now = dt_now - (a.duration / 2) * 3600000;
             const dt_ts = deserializeDateTime(a.start).ts;
             return dt_ts > ts_now && dt_ts < dt_tomorrow_ts;
         });
-        if (possible_appointments.length === 0) {
+        if (possible_bookings.length === 0) {
             return false;
         }
-        return getMin(possible_appointments, {
+        return getMin(possible_bookings, {
             criterion: (a) => deserializeDateTime(a.start).ts,
         });
     },
@@ -97,21 +98,21 @@ patch(FloorScreen.prototype, {
     },
     isCustomerLate(table) {
         const dateNow = DateTime.now();
-        const dateStart = deserializeDateTime(this.getFirstAppointment(table)?.start).ts;
+        const dateStart = deserializeDateTime(this.getFirstBooking(table)?.start).ts;
         return (
-            dateNow > dateStart && this.getFirstAppointment(table).booking_status === "booked"
+            dateNow > dateStart && this.getFirstBooking(table).booking_status === "booked"
         );
     },
-    appointmentStarted(table) {
+    bookingStarted(table) {
         return (
-            this.getFirstAppointment(table) &&
-            deserializeDateTime(this.getFirstAppointment(table).start).ts < DateTime.now().ts
+            this.getFirstBooking(table) &&
+            deserializeDateTime(this.getFirstBooking(table).start).ts < DateTime.now().ts
         );
     },
-    onClickAppointment(ev, table) {
+    onClickBooking(ev, table) {
         if (!this.pos.isEditMode) {
             ev.stopPropagation();
-            return this.pos.editBooking(this.getFirstAppointment(table));
+            return this.pos.editBooking(this.getFirstBooking(table));
         }
     },
 });

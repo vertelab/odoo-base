@@ -19,7 +19,7 @@
         </xpath>
         <div id="portal_client_category" position="inside">
             <t t-call="portal.portal_docs_entry">
-                <t t-set="icon" t-value="'/booking/static/src/img/calendar.svg'"/>
+                <t t-set="icon" t-value="'/base_booking/static/src/img/calendar.svg'"/>
                 <t t-set="text">Follow, reschedule or cancel your bookings</t>
                 <t t-set="title">Bookings</t>
                 <t t-set="url" t-value="'/my/bookings'"/>
