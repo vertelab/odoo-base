@@ -1,0 +1,385 @@
+# Translation of Odoo Server.
+# This file contains the translation of the following modules:
+# 	* base_booking_website
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: Odoo Server 18.0-20250915\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2025-09-15 12:26+0000\n"
+"PO-Revision-Date: 2025-09-15 14:41+0200\n"
+"Last-Translator: \n"
+"Language-Team: \n"
+"Language: sv\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"X-Generator: Poedit 3.4.2\n"
+
+#. module: base_booking_website
+#: model_terms:ir.ui.view,arch_db:base_booking_website.booking_calendar
+msgid "#{day['today_cls'] and 'Today' or ''}"
+msgstr "#{day['today_cls'] and 'Today' or ''}"
+
+#. module: base_booking_website
+#: model_terms:ir.ui.view,arch_db:base_booking_website.booking_info
+msgid ""
+"<i class=\"fa fa-times text-danger me-2\"/><strong>Booking cancelled!</strong>\n"
+"                                        You can now choose a different schedule that suits you better."
+msgstr ""
+"<i class=\"fa fa-times text-danger me-2\"/><strong>Bokningen avbruten!</strong>\n"
+"                                        Du kan nu välja ett annat schema som passar dig bättre."
+
+#. module: base_booking_website
+#: model_terms:ir.ui.view,arch_db:base_booking_website.booking_meeting_details
+msgid ""
+"<i class=\"fa fa-video-camera fa-fw me-2 mt-1 text-muted\"/>\n"
+"                <span class=\"o_not_editable\">Online</span>"
+msgstr ""
+"<i class=\"fa fa-video-camera fa-fw me-2 mt-1 text-muted\"/>\n"
+"                <span class=\"o_not_editable\">Online</span>"
+
+#. module: base_booking_website
+#: model_terms:ir.ui.view,arch_db:base_booking_website.booking_meeting_date
+msgid "<small class=\"text-uppercase text-muted\">Date &amp; time</small>"
+msgstr "<small class=\"text-uppercase text-muted\">Datum &amp; tid</small>"
+
+#. module: base_booking_website
+#: model_terms:ir.ui.view,arch_db:base_booking_website.booking_meeting_details
+msgid "<small class=\"text-uppercase text-muted\">Meeting details</small>"
+msgstr "<small class=\"text-uppercase text-muted\">Mötesinformation</small>"
+
+#. module: base_booking_website
+#: model_terms:ir.ui.view,arch_db:base_booking_website.booking_info
+msgid ""
+"<strong>Booking failed!</strong>\n"
+"                                            The selected timeslot is not available anymore.\n"
+"                                            Someone has booked the same time slot a few\n"
+"                                            seconds before you."
+msgstr ""
+"<strong>Bokningen misslyckades!</strong>\n"
+"                                            Den valda tidsluckan är inte längre tillgänglig.\n"
+"                                            Någon har bokat samma tidslucka några sekunder\n"
+"                                            sekunder före dig."
+
+#. module: base_booking_website
+#: model_terms:ir.ui.view,arch_db:base_booking_website.booking_info
+msgid ""
+"<strong>Booking failed!</strong>\n"
+"                                            The selected timeslot is not available.\n"
+"                                            It appears you already have another meeting with us at that date."
+msgstr ""
+"<strong>Bokningen misslyckades!</strong>\n"
+"                                            Den valda tidsluckan är inte tillgänglig.\n"
+"                                            Det verkar som om du redan har ett annat möte med oss på det datumet."
+
+#. module: base_booking_website
+#: model_terms:ir.ui.view,arch_db:base_booking_website.booking_meeting_user
+msgid "Add a function here..."
+msgstr "Lägg till en funktion här..."
+
+#. module: base_booking_website
+#: model_terms:ir.ui.view,arch_db:base_booking_website.booking_meeting_user
+msgid "Add a resource description here..."
+msgstr "Lägg till en resursbeskrivning här..."
+
+#. module: base_booking_website
+#: model_terms:ir.ui.view,arch_db:base_booking_website.booking_info
+msgid "Add an intro message here..."
+msgstr "Lägg till ett introduktionsmeddelande här..."
+
+#. module: base_booking_website
+#: model:ir.model,name:base_booking_website.model_booking_type
+msgid "Appointment Type"
+msgstr "Typ av utnämning"
+
+#. module: base_booking_website
+#: model_terms:ir.ui.view,arch_db:base_booking_website.booking_progress_bar
+msgid "Booked"
+msgstr "Bokad"
+
+#. module: base_booking_website
+#. odoo-javascript
+#: code:addons/base_booking_website/static/src/xml/booking.xml:0
+msgid "Booking"
+msgstr "Bokning"
+
+#. module: base_booking_website
+#. odoo-javascript
+#: code:addons/base_booking_website/static/src/xml/website_appointment_templates.xml:0
+msgid "Booking Type Name"
+msgstr "Bokningstyp Namn"
+
+#. module: base_booking_website
+#: model:ir.model.fields,field_description:base_booking_website.field_booking_type__can_publish
+msgid "Can Publish"
+msgstr "Kan publicera"
+
+#. module: base_booking_website
+#: model_terms:ir.ui.view,arch_db:base_booking_website.bookings_list_layout
+msgid "Choose your booking"
+msgstr "Välj din bokning"
+
+#. module: base_booking_website
+#: model_terms:ir.ui.view,arch_db:base_booking_website.booking_info
+msgid "Configure"
+msgstr "Konfigurera"
+
+#. module: base_booking_website
+#. odoo-javascript
+#: code:addons/base_booking_website/static/src/xml/appointment_no_slot.xml:0
+msgid "Contact us"
+msgstr "Kontakta oss"
+
+#. module: base_booking_website
+#: model_terms:ir.ui.view,arch_db:base_booking_website.bookings_list_layout
+msgid "Continue <span class=\"oi oi-arrow-right\"/>"
+msgstr "Fortsätt <span class=\"oi oi-arrow-right\"/>"
+
+#. module: base_booking_website
+#. odoo-javascript
+#: code:addons/base_booking_website/static/src/js/booking_employee_url.js:0
+msgid "Copied !"
+msgstr "Kopierad!"
+
+#. module: base_booking_website
+#: model_terms:ir.ui.view,arch_db:base_booking_website.booking_info
+msgid "DROP BUILDING BLOCKS HERE TO MAKE THEM AVAILABLE ACROSS ALL BOOKINGS"
+msgstr "SLÄPPA BYGGSTENAR HÄR FÖR ATT GÖRA DEM TILLGÄNGLIGA FÖR ALLA BOKNINGAR"
+
+#. module: base_booking_website
+#: model_terms:ir.ui.view,arch_db:base_booking_website.booking_progress_bar
+msgid "Date &amp; time"
+msgstr "Datum och tid"
+
+#. module: base_booking_website
+#: model_terms:ir.ui.view,arch_db:base_booking_website.booking_info
+msgid "Description"
+msgstr "Beskrivning"
+
+#. module: base_booking_website
+#: model_terms:ir.ui.view,arch_db:base_booking_website.booking_progress_bar
+msgid "Details<span class=\"d-inline-block mx-sm-3 fa fa-angle-right text-muted fs-5\"/>"
+msgstr "Detaljer<span class=\"d-inline-block mx-sm-3 fa fa-angle-right text-muted fs-5\"/>"
+
+#. module: base_booking_website
+#: model_terms:ir.ui.view,arch_db:base_booking_website.booking_info
+msgid "For"
+msgstr "För"
+
+#. module: base_booking_website
+#. odoo-javascript
+#: code:addons/base_booking_website/static/src/xml/appointment_no_slot.xml:0
+msgid "Go back to Booking"
+msgstr "Gå tillbaka till Bokning"
+
+#. module: base_booking_website
+#: model:ir.model.fields,field_description:base_booking_website.field_booking_type__is_published
+msgid "Is Published"
+msgstr "Är publicerad"
+
+#. module: base_booking_website
+#. odoo-javascript
+#: code:addons/base_booking_website/static/src/js/website_calendar.editor.js:0
+msgid "Name"
+msgstr "Namn"
+
+#. module: base_booking_website
+#. odoo-javascript
+#: code:addons/base_booking_website/static/src/js/website_calendar.editor.js:0
+#: model:ir.actions.act_window,name:base_booking_website.booking_type_action_add_simplified
+msgid "New Booking Type"
+msgstr "Ny bokningstyp"
+
+#. module: base_booking_website
+#: model_terms:ir.ui.view,arch_db:base_booking_website.booking_info
+msgid "Number of people"
+msgstr "Antal personer"
+
+#. module: base_booking_website
+#: model_terms:ir.ui.view,arch_db:base_booking_website.booking_meeting_user
+msgid "Operator"
+msgstr "Operatör"
+
+#. module: base_booking_website
+#. odoo-javascript
+#: code:addons/base_booking_website/static/src/xml/website_appointment_templates.xml:0
+msgid "Please fill this field"
+msgstr "Vänligen fyll i detta fält"
+
+#. module: base_booking_website
+#: model_terms:ir.ui.view,arch_db:base_booking_website.booking_info
+msgid "Please, select another date."
+msgstr "Vänligen välj ett annat datum."
+
+#. module: base_booking_website
+#: model_terms:ir.ui.view,arch_db:base_booking_website.booking_type_view_kanban
+#: model_terms:ir.ui.view,arch_db:base_booking_website.booking_type_view_search
+msgid "Published"
+msgstr "Publicerad"
+
+#. module: base_booking_website
+#: model:ir.model.fields,help:base_booking_website.field_booking_type__website_id
+msgid "Restrict to a specific website."
+msgstr "Begränsa till en viss webbplats."
+
+#. module: base_booking_website
+#: model:ir.model.fields,field_description:base_booking_website.field_booking_type__is_seo_optimized
+msgid "SEO optimized"
+msgstr "SEO-optimerad"
+
+#. module: base_booking_website
+#: model_terms:ir.ui.view,arch_db:base_booking_website.booking_info
+msgid "Select a date &amp; time"
+msgstr "Välj ett datum och en tid"
+
+#. module: base_booking_website
+#: model:ir.model.fields,field_description:base_booking_website.field_booking_type__seo_name
+msgid "Seo name"
+msgstr "Seo-namn"
+
+#. module: base_booking_website
+#: model:ir.model.fields,help:base_booking_website.field_booking_type__website_url
+msgid "The full URL to access the document through the website."
+msgstr "Den fullständiga URL:en för att komma åt dokumentet via webbplatsen."
+
+#. module: base_booking_website
+#: model_terms:ir.ui.view,arch_db:base_booking_website.bookings_list_layout
+msgid "There is currently no booking available"
+msgstr "Det finns för närvarande ingen bokning tillgänglig"
+
+#. module: base_booking_website
+#: model_terms:ir.ui.view,arch_db:base_booking_website.booking_info
+msgid "This booking type has no availabilities because it does not have any opening hours configured"
+msgstr "Denna bokningstyp har ingen tillgänglighet eftersom den inte har några öppettider konfigurerade"
+
+#. module: base_booking_website
+#: model_terms:ir.ui.view,arch_db:base_booking_website.booking_info
+msgid "This booking type has no availabilities because it has no resource assigned"
+msgstr "Denna bokningstyp har inga tillgängliga tider eftersom den inte har någon resurs tilldelad"
+
+#. module: base_booking_website
+#: model_terms:ir.ui.view,arch_db:base_booking_website.booking_info
+msgid ""
+"This booking type has no availabilities because it has no resource assigned and does not have any opening hours "
+"configured"
+msgstr ""
+"Denna bokningstyp har ingen tillgänglighet eftersom den inte har någon resurs tilldelad och inte har några "
+"öppettider konfigurerade"
+
+#. module: base_booking_website
+#: model_terms:ir.ui.view,arch_db:base_booking_website.booking_info
+msgid "This booking type has no availabilities because it has no staff assigned"
+msgstr "Denna bokningstyp har inga tillgängliga tider eftersom den inte har någon personal tilldelad"
+
+#. module: base_booking_website
+#: model_terms:ir.ui.view,arch_db:base_booking_website.booking_info
+msgid ""
+"This booking type has no availabilities because it has no staff assigned and does not have any opening hours "
+"configured"
+msgstr ""
+"Denna bokningstyp har ingen tillgänglighet eftersom den inte har någon personal tilldelad och inte har några "
+"öppettider konfigurerade"
+
+#. module: base_booking_website
+#: model_terms:ir.ui.view,arch_db:base_booking_website.booking_edit_in_backend
+msgid "This is a preview of the customer booking form."
+msgstr "Detta är en förhandsgranskning av kundens bokningsformulär."
+
+#. module: base_booking_website
+#: model_terms:ir.ui.view,arch_db:base_booking_website.booking_info
+msgid "Timezone:"
+msgstr "Tidszon:"
+
+#. module: base_booking_website
+#. odoo-javascript
+#: code:addons/base_booking_website/static/src/xml/website_appointment_templates.xml:0
+msgid "Users"
+msgstr "Användare"
+
+#. module: base_booking_website
+#. odoo-javascript
+#: code:addons/base_booking_website/static/src/xml/booking.xml:0
+msgid "View Availability"
+msgstr "Visa tillgänglighet"
+
+#. module: base_booking_website
+#: model:ir.model.fields,field_description:base_booking_website.field_booking_type__website_published
+msgid "Visible on current website"
+msgstr "Synlig på nuvarande webbplats"
+
+#. module: base_booking_website
+#: model:ir.model.fields,field_description:base_booking_website.field_booking_type__website_id
+#: model_terms:ir.ui.view,arch_db:base_booking_website.booking_type_view_search
+msgid "Website"
+msgstr "Webbplats"
+
+#. module: base_booking_website
+#: model:ir.model.fields,field_description:base_booking_website.field_booking_type__website_url
+msgid "Website URL"
+msgstr "URL till webbplats"
+
+#. module: base_booking_website
+#: model:ir.model.fields,field_description:base_booking_website.field_booking_type__website_meta_description
+msgid "Website meta description"
+msgstr "Webbplatsens metabeskrivning"
+
+#. module: base_booking_website
+#: model:ir.model.fields,field_description:base_booking_website.field_booking_type__website_meta_keywords
+msgid "Website meta keywords"
+msgstr "Webbplatsens metanyckelord"
+
+#. module: base_booking_website
+#: model:ir.model.fields,field_description:base_booking_website.field_booking_type__website_meta_title
+msgid "Website meta title"
+msgstr "Webbplatsens metatitel"
+
+#. module: base_booking_website
+#: model:ir.model.fields,field_description:base_booking_website.field_booking_type__website_meta_og_img
+msgid "Website opengraph image"
+msgstr "Webbplats opengraph bild"
+
+#. module: base_booking_website
+#: model_terms:ir.ui.view,arch_db:base_booking_website.staff_user_select
+msgid "With"
+msgstr "Med"
+
+#. module: base_booking_website
+#. odoo-javascript
+#: code:addons/base_booking_website/static/src/xml/booking.xml:0
+msgid "With:"
+msgstr "Med:"
+
+#. module: base_booking_website
+#: model_terms:ir.ui.view,arch_db:base_booking_website.booking_details_column
+msgid "Your Booking"
+msgstr "Din bokning"
+
+#. module: base_booking_website
+#: model_terms:ir.ui.view,arch_db:base_booking_website.booking_meeting_user
+msgid "Your choice"
+msgstr "Ditt val"
+
+#. module: base_booking_website
+#. odoo-javascript
+#: code:addons/base_booking_website/static/src/xml/appointment_no_slot.xml:0
+msgid "contact us"
+msgstr "kontakta oss"
+
+#. module: base_booking_website
+#. odoo-javascript
+#: code:addons/base_booking_website/static/src/xml/website_appointment_templates.xml:0
+msgid "e.g. \"Technical Demo\""
+msgstr "t.ex. \"Teknisk demo\""
+
+#. module: base_booking_website
+#. odoo-javascript
+#: code:addons/base_booking_website/static/src/xml/appointment_no_slot.xml:0
+msgid "or"
+msgstr "eller"
+
+#. module: base_booking_website
+#: model_terms:ir.ui.view,arch_db:base_booking_website.booking_meeting_details
+msgid "people"
+msgstr "människor"
