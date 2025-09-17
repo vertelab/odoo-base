@@ -80,7 +80,7 @@
                     <t t-call="base_booking.booking_edit_in_backend"/>
                 </t>
                 <div class="container-lg h-100 booking-container">
-                    <div t-attf-class="row #{'mt-4' if website else ''}">
+                    <div t-attf-class="row #{'mt-4' if website else ''} mb-4">
                         <div t-attf-class="col-12 col-md-8 #{'p-4' if not website else ''}">
                             <nav class="d-print-none d-flex justify-content-between mb-4" name="navbar">
                                 <t t-call="base_booking.booking_progress_bar">
