@@ -130,7 +130,7 @@ class AppointmentCalendarController(CalendarController):
         """
         event = request.env['calendar.event'].sudo().search([('access_token', '=', access_token)], limit=1)
         appointment_type = event.booking_type_id
-        appointment_invite = event.appointment_invite_id
+        appointment_invite = event.booking_invite_id
         if not event:
             return request.not_found()
         if cancel_status := self._get_prevent_cancel_status(event):
@@ -145,7 +145,7 @@ class AppointmentCalendarController(CalendarController):
                     'resource_selected_id': '',
                     'available_resource_ids': '',
                 })
-            redirect_url = f'/appointment/{appointment_type.id}?{keep_query("*", **reset_params)}'
+            redirect_url = f'/booking/{appointment_type.id}?{keep_query("*", **reset_params)}'
         return request.redirect(redirect_url)
 
     def _get_prevent_cancel_status(self, event):

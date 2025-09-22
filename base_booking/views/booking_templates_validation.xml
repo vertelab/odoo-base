@@ -10,7 +10,7 @@
             <t t-set="attendee_description" t-value="event._get_attendee_description()"/>
             <div id="wrap" class="o_booking d-flex bg-o-color-4 p-4">
                 <div class="oe_structure"/>
-                <div class="oe_structure container">
+                <div class="oe_structure container booking-container">
                     <div class="o_booking_edit_in_backend alert alert-info alert-dismissible fade show d-print-none css_editable_mode_hidden" groups="base_booking.group_booking_manager">
                         <t t-call="base_booking.booking_edit_in_backend"/>
                     </div>
