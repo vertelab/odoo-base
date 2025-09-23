@@ -7,7 +7,6 @@ import { rpc } from "@web/core/network/rpc";
 import { user } from "@web/core/user";
 const { DateTime } = luxon;
 
-console.log("=================")
 
 publicWidget.registry.bookingSlotSelect = publicWidget.Widget.extend({
     selector: '.o_booking_info',
@@ -263,9 +262,6 @@ publicWidget.registry.bookingSlotSelect = publicWidget.Widget.extend({
     },
 
     _onClickHoursSlot: function (ev) {
-        console.log("assign_method", this.el.querySelector("input[name='assign_method']"));
-        console.log("schedule_based_on", this.el.querySelector("input[name='schedule_based_on']"));
-        console.log("booking_type_id", this.el.querySelector("input[name='booking_type_id']"));
         this.el
             .querySelector(".o_slot_hours.o_slot_hours_selected")
             ?.classList.remove("o_slot_hours_selected", "active");

@@ -1,0 +1,72 @@
+.s_booking_map {
+    position: relative;
+    min-height: 100px;
+
+    .map_container {
+        position: absolute;
+        top: 0;
+        right: 0;
+        bottom: 0;
+        left: 0;
+    }
+
+    /* Advanced marker styling */
+    .bb-adv-marker {
+        position: relative;
+        transform: translate(-50%, -100%);
+        .bb-pin {
+            width: 18px;
+            height: 18px;
+            border-radius: 50%;
+            background: #1a73e8;
+            box-shadow: 0 0 0 3px rgba(26,115,232,0.25);
+        }
+        .bb-bubble {
+            position: absolute;
+            left: 22px;
+            top: -2px;
+            background: #fff;
+            border: 1px solid #e0e0e0;
+            border-radius: 6px;
+            padding: 6px 8px;
+            font-size: 12px;
+            color: #222;
+            white-space: nowrap;
+            box-shadow: 0 2px 6px rgba(0,0,0,0.15);
+        }
+        .bb-count {
+            display: inline-block;
+            margin-left: 8px;
+            padding: 2px 6px;
+            border-radius: 10px;
+            background: #1e8e3e;
+            color: #fff;
+            font-weight: 600;
+        }
+    }
+
+    /* Popup card styling */
+    .bb-card { min-width: 280px; }
+    .bb-card-header { padding: 8px 10px; border-bottom: 1px solid #e5e5e5; display:flex; align-items:center; justify-content: space-between; }
+    .bb-header-title { font-weight: 700; }
+    .bb-close { background: transparent; border: 0; font-size: 18px; line-height: 1; cursor: pointer; color: #666; }
+    .bb-close:hover { color: #333; }
+    .bb-card-body { padding: 6px 8px; }
+    .bb-card-footer { padding: 10px; border-top: 1px solid #e5e5e5; }
+    .bb-entry { padding: 8px; border-bottom: 1px solid #eee; }
+    .bb-entry:last-child { border-bottom: 0; }
+    .bb-entry-header { display: flex; align-items: center; gap: 10px; margin-bottom: 6px; }
+    .bb-icon { width: 28px; height: 28px; border-radius: 50%; background: #e8f0fe; display:flex; align-items:center; justify-content:center; color:#1a73e8; }
+    .bb-title { font-weight: 700; }
+    .bb-sub { font-size: 12px; color: #666; }
+    .bb-list { list-style: none; padding: 0; margin: 0; display: grid; row-gap: 4px; }
+    .bb-list li { display: flex; justify-content: space-between; gap: 12px; }
+    .bb-label { font-size: 12px; color: #777; }
+    .bb-val { font-weight: 600; color: #333; }
+    .bb-price { color: #1e8e3e; }
+    .bb-entry-footer { margin-top: 10px; display: flex; }
+    .bb-btn { padding: 10px 16px; font-weight: 600; }
+    .bb-btn-full { width: 100%; display: inline-block; text-align: center; }
+}
+
+
