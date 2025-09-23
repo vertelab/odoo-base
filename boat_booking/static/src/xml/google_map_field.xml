@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<templates xml:space="preserve">
+    <t t-name="boat_booking.GoogleMapField" t-inherit="web.CharField" t-inherit-mode="primary" owl="1">
+        <xpath expr="//input" position="replace">
+            <!-- input section -->
+            <input class="o_input o_google_map_field" t-att-class="{'o_field_translate': props.isTranslatable}" t-att-id="props.id" t-att-type="props.isPassword ? 'password' : 'text'" t-att-autocomplete="props.autocomplete or (props.isPassword ? 'new-password' : 'off')" t-att-maxlength="props.maxLength > 0 and props.maxLength" t-att-placeholder="props.placeholder" t-ref="input" />
+            <!-- api input section -->
+            <div t-if="state.isShowingApiInput" class="popup-overlay">
+                <div class="backdrop"></div>
+                <div class="popup popup-med">
+                    <div class="popup-header">
+                        <h2>Enter API Key</h2>
+                    </div>
+                    <div class="popup-body">
+                        <p>Please enter your Google Maps API key below. This key will be stored securely in the system parameters, ensuring it is available whenever needed. Rest assured, your key will not be exposed or shared.</p>
+                        <input type="text" placeholder="Enter your API key" class="api-input" t-ref="api_input" />
+                    </div>
+                    <div class="popup-footer">
+                        <button t-on-click="inputApiKey" class="btn-save">Save</button>
+                        <button t-on-click="closePopup" class="btn-cancel">Cancel</button>
+                    </div>
+                </div>
+            </div>
+        </xpath>
+        <xpath expr="//t[@t-else='']" position="after">
+            <div>
+                <img class="o_google_map_pin" src="/google_map_field/static/img/google_map_pin_icon.png" t-ref="map_pin_ref" />
+                <div role="map-dialog" class="map-modal-dialog" t-ref="map_popup_ref">
+                    <div class="backdrop"></div>
+                    <div class="popup">
+                        <main class="popup-body">
+                            <input type="text" placeholder="Search location..." class="map-address-input" t-ref="map_address_input" />
+                            <div t-ref="geomap_ref" class="map-container">
+                            </div>
+                        </main>
+                    </div>
+                </div>
+
+            </div>
+        </xpath>
+    </t>
+</templates>

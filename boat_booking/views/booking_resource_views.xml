@@ -1,0 +1,46 @@
+<odoo>
+    <record id="booking_type_view_form" model="ir.ui.view">
+        <field name="name">booking.type.view.form</field>
+        <field name="model">booking.type</field>
+        <field name="inherit_id" ref="base_booking.booking_type_view_form"/>
+        <field name="arch" type="xml">
+            <xpath expr="//group[@name='left_details']/div[last()]" position="after">
+                <field name="booking_type"/>
+            </xpath>
+        </field>
+    </record>
+
+    <record id="booking_resource_view_form" model="ir.ui.view">
+        <field name="name">booking.resource.view.form</field>
+        <field name="model">booking.resource</field>
+        <field name="inherit_id" ref="base_booking.booking_resource_view_form"/>
+        <field name="arch" type="xml">
+            <page name="description" position="after">
+                <page name="location" string="Location">
+                    <group>
+                        <group>
+                            <div class="o_address_format">
+                                <field name="street" placeholder="Street..." class="o_address_street"/>
+                                <field name="street2" placeholder="Street 2..." class="o_address_street"/>
+                                <field name="city" placeholder="City" class="o_address_city"/>
+                                <field name="state_id" class="o_address_state" placeholder="State" options="{'no_open': True, 'no_quick_create': True}" context="{'country_id': country_id, 'default_country_id': country_id, 'zip': zip}"/>
+                                <field name="zip" placeholder="ZIP" class="o_address_zip"/>
+                                <div name="partner_address_country" class="d-flex justify-content-between">
+                                    <field name="country_id" placeholder="Country" class="o_address_country" options="{&quot;no_open&quot;: True, &quot;no_create&quot;: True}"/>
+                                </div>
+                            </div>
+                        </group>
+                        <group>
+                            <field name="longitude"/>
+                            <field name="latitude"/>
+                            <field name="length"/>
+                            <field name="width"/>
+                            <field name="depth"/>
+                            <field name="product_id"/>
+                        </group>
+                    </group>
+                </page>
+            </page>
+        </field>
+    </record>
+</odoo>

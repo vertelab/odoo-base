@@ -1,0 +1,36 @@
+<odoo>
+    <template id="index" name="Resource Map">
+
+    </template>
+
+    <template id="booking_info_maps" inherit_id="base_booking.booking_info">
+        <xpath expr="//div[@id='wrap']/div[hasclass('booking-container')]" position="after">
+            <div class="container-lg mt-4 h-auto">
+
+               <section class="s_booking_map pt256 pb256" t-att-data-booking-type-id="booking_type.id" data-map-type="ROADMAP" data-map-color="" data-map-zoom="12" data-pin-style="flat" data-map-id="763443d62643d7e2d0a7f530" style="position: relative;">
+                   <div class="map_container"></div>
+               </section>
+                <div class="mb-4"/>
+            </div>
+        </xpath>
+    </template>
+
+    <template id="booking_info_dimensions" inherit_id="base_booking.booking_info">
+        <xpath expr="//div[hasclass('o_booking_info_main')]/div[hasclass('row')]/div[last()]/div[last()]" position="after">
+            <div id="bb-dimension-form" class="g-3 align-items-end mb-2">
+                <div class="col-12 col-md-12">
+                    <label class="form-label">Length (m)</label>
+                    <input type="number" step="0.01" min="0" class="form-control" id="bb-length" placeholder="e.g. 10"/>
+                </div>
+                <div class="col-12 col-md-12">
+                    <label class="form-label">Width (m)</label>
+                    <input type="number" step="0.01" min="0" class="form-control" id="bb-width" placeholder="e.g. 4"/>
+                </div>
+                <div class="col-12 col-md-12">
+                    <label class="form-label">Depth (m)</label>
+                    <input type="number" step="0.01" min="0" class="form-control" id="bb-depth" placeholder="e.g. 2"/>
+                </div>
+            </div>
+        </xpath>
+    </template>
+</odoo>
