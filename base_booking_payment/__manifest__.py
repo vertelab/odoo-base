@@ -16,6 +16,7 @@
         'views/booking_type_views.xml',
         'views/calendar_booking_templates.xml',
         'views/calendar_booking_views.xml',
+        'views/booking_resource_views.xml',
     ],
     #'assets': {
     #    'web.assets_frontend': [

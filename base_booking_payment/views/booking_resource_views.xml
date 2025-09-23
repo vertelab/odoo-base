@@ -1,0 +1,12 @@
+<odoo>
+    <record id="booking_resource_view_form" model="ir.ui.view">
+        <field name="name">booking.resource.view.form</field>
+        <field name="model">booking.resource</field>
+        <field name="inherit_id" ref="base_booking.booking_resource_view_form"/>
+        <field name="arch" type="xml">
+            <field name="capacity" position="before">
+                  <field name="product_id"/>
+            </field>
+        </field>
+    </record>
+</odoo>

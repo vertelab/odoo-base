@@ -16,5 +16,5 @@ class BookingResource(models.Model):
     length = fields.Float(string="Length")
     width = fields.Float(string="Width")
     depth = fields.Float(string="Depth")
-    product_id = fields.Many2one("product.product", string="Product")
+    #product_id = fields.Many2one("product.product", string="Product")
 
