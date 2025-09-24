@@ -193,7 +193,7 @@ publicWidget.registry.BoatBookingMap = publicWidget.Widget.extend({
 
         let AdvancedMarkerElement = null;
         const mapId = this.el.dataset.mapId;
-        if (mapId) {
+        if (mapId && google.maps.importLibrary) {
             try {
                 const markerLib = await google.maps.importLibrary('marker');
                 AdvancedMarkerElement = markerLib && markerLib.AdvancedMarkerElement;
@@ -224,6 +224,10 @@ publicWidget.registry.BoatBookingMap = publicWidget.Widget.extend({
             map.fitBounds(bounds);
         } else if ((locations || []).length === 1) {
             map.setZoom(14);
+            const only = locations[0];
+            if (only && only.lat != null && only.lng != null) {
+                map.setCenter(new google.maps.LatLng(only.lat, only.lng));
+            }
         }
     },
 
@@ -310,7 +314,7 @@ publicWidget.registry.BoatBookingMap = publicWidget.Widget.extend({
         const length = (primary.length != null) ? primary.length.toFixed(2) + ' m' : '-';
         const width = (primary.width != null) ? primary.width.toFixed(2) + ' m' : '-';
         const depth = (primary.depth != null) ? primary.depth.toFixed(2) + ' m' : '-';
-        const url = primary.book_url || (primary.id ? ('/booking?filter_resource_ids=' + encodeURIComponent('[' + primary.id + ']')) : '#');
+        const resourceId = primary.id;
 
         const body = ''+
             '<div class="bb-entry">'
@@ -323,10 +327,62 @@ publicWidget.registry.BoatBookingMap = publicWidget.Widget.extend({
             + '</div>';
 
         const header = '<div class="bb-card-header"><span class="bb-header-title">' + escapeHtml(loc.location_name) + '</span></div>';
-        const footer = '<div class="bb-card-footer"><a class="btn btn-primary bb-btn bb-btn-full" href="' + url + '">Book this Spot</a></div>';
+        const footer = '<div class="bb-card-footer"><a id="bb-book-btn" class="btn btn-primary bb-btn bb-btn-full" href="#">Book this Spot</a></div>';
         const content = '<div class="bb-card">' + header + '<div class="bb-card-body">' + body + '</div>' + footer + '</div>';
         infoWindow.setContent(content);
         infoWindow.open({ map, anchor: marker });
+
+        // Bind click after DOM is ready in the info window
+        google.maps.event.addListenerOnce(infoWindow, 'domready', () => {
+            const btn = document.getElementById('bb-book-btn');
+            if (!btn) return;
+            btn.addEventListener('click', (ev) => {
+                ev.preventDefault();
+                if (!resourceId) return;
+                const url = this._buildBookingUrlForResource(resourceId);
+                if (url) {
+                    document.location = encodeURI(url.href);
+                } else {
+                    // If no slot selected, hint the user
+                    this.setOverlay(true, 'Please select a time first, then choose a spot on the map.');
+                    setTimeout(() => this.setOverlay(false), 2500);
+                }
+            });
+        });
+    },
+
+    _buildBookingUrlForResource(resourceId) {
+        try {
+            const bookingTypeID = this.el.closest('body').querySelector("input[name='booking_type_id']")?.value;
+            const selectedSlot = this.el.closest('body').querySelector('.o_slot_hours.o_slot_hours_selected');
+            if (!bookingTypeID || !selectedSlot) return null;
+            const urlParameters = decodeURIComponent(selectedSlot.dataset.urlParameters || '');
+            const url = new URL(`/booking/${encodeURIComponent(bookingTypeID)}/info?${urlParameters}`, location.origin);
+
+            const resourceCapacity = parseInt(this.el.closest('body').querySelector("select[name='resourceCapacity']")?.value) || 1;
+            const assignMethod = this.el.closest('body').querySelector("input[name='assign_method']")?.value;
+            const scheduleBasedOn = this.el.closest('body').querySelector("input[name='schedule_based_on']")?.value;
+
+            if (scheduleBasedOn === 'resources') {
+                url.searchParams.set('resource_selected_id', encodeURIComponent(resourceId));
+                url.searchParams.set('available_resource_ids', JSON.stringify([resourceId]));
+                url.searchParams.set('asked_capacity', encodeURIComponent(resourceCapacity));
+            } else {
+                // Fallback: treat as staff user id if configured that way
+                url.searchParams.set('staff_user_id', encodeURIComponent(resourceId));
+            }
+            // Include boat dimensions so they propagate to submit step
+            const lengthEl = document.getElementById('bb-length');
+            const widthEl = document.getElementById('bb-width');
+            const depthEl = document.getElementById('bb-depth');
+            if (lengthEl?.value) url.searchParams.set('length', lengthEl.value);
+            if (widthEl?.value) url.searchParams.set('width', widthEl.value);
+            if (depthEl?.value) url.searchParams.set('depth', depthEl.value);
+            return url;
+        } catch (e) {
+            console.warn('Failed to build booking URL:', e);
+            return null;
+        }
     },
 });
 

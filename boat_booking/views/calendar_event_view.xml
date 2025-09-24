@@ -1,0 +1,14 @@
+<odoo>
+    <record id="calendar_event_view_form" model="ir.ui.view">
+        <field name="name">calendar.event.view.form</field>
+        <field name="model">calendar.event</field>
+        <field name="inherit_id" ref="calendar.view_calendar_event_form"/>
+        <field name="arch" type="xml">
+            <field name="description" position="after">
+                <field name="length"/>
+                <field name="width"/>
+                <field name="depth"/>
+            </field>
+        </field>
+    </record>
+</odoo>

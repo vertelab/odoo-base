@@ -1,12 +1,19 @@
-from odoo import http
+from odoo import http, fields
 from odoo.http import request
+import pytz
+from dateutil.relativedelta import relativedelta
+# from odoo.addons.base_booking.models.
 
 
 class BoatBookingController(http.Controller):
     
     @http.route('/boat_booking/locations', type='json', auth='public', website=True)
-    def get_boat_locations(self, booking_type_id=False, min_length=None, min_width=None, min_depth=None, **kwargs):
+    def get_boat_locations(self, booking_type_id=False, min_length=None, min_width=None, min_depth=None,
+                           asked_capacity=None, timezone=None, **kwargs):
         """Return grouped resource locations for a given booking type.
+
+        This method enhances the simple dimension-based filtering by also checking
+        for actual availability of resources.
 
         Response format:
         [
@@ -51,6 +58,27 @@ class BoatBookingController(http.Controller):
         # Fetch resources via search to let DB filter
         resources = request.env['booking.resource'].sudo().search(domain)
 
+        # Further filter resources by checking their actual availability using base_booking's logic.
+        # This ensures we don't show markers for resources that have no slots available at all.
+        try:
+            tz = timezone or request.session.get('timezone') or booking_type.booking_tz
+            capacity = int(asked_capacity or 1)
+            all_slots = booking_type._get_booking_slots(tz, filter_resources=resources, asked_capacity=capacity)
+            
+            available_ids = set()
+            for month in all_slots:
+                for week in month.get('weeks', []):
+                    for day in week:
+                        for slot in day.get('slots', []):
+                            for resource_info in slot.get('available_resources', []):
+                                available_ids.add(resource_info['id'])
+            
+            available_resources = resources.filtered(lambda r: r.id in available_ids)
+        except Exception:
+            # In case of any error during availability calculation, fall back to showing all
+            # dimension-matching resources to avoid breaking the map entirely.
+            available_resources = resources
+
         # Group by rounded coordinates to avoid floating point duplicates
         def _round_or_none(val):
             try:
@@ -59,8 +87,7 @@ class BoatBookingController(http.Controller):
                 return None
 
         locations = {}
-        for res in resources:
-            # Already filtered by the ORM domain above
+        for res in available_resources:
             try:
                 r_len = float(res.length) if res.length not in (None, False, '') else None
                 r_wid = float(res.width) if res.width not in (None, False, '') else None
