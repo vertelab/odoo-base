@@ -4,7 +4,7 @@
         <xpath expr="//div[@id='wrap']/div[hasclass('booking-container')]" position="after">
             <div class="container-lg mt-4 h-auto" t-if="booking_type.booking_type == 'boat'">
 
-               <section class="s_booking_map pt256 pb256" t-att-data-booking-type-id="booking_type.id" data-map-type="ROADMAP" data-map-color="" data-map-zoom="12" data-pin-style="flat" data-map-id="763443d62643d7e2d0a7f530" style="position: relative;">
+               <section class="s_booking_map pt256 pb256" t-att-data-booking-type-id="booking_type.id" data-map-type="ROADMAP" data-map-color="" data-map-zoom="12" data-pin-style="flat" t-att-data-map-id="request.website.map_id" style="position: relative;">
                    <div class="map_container"></div>
                </section>
                 <div class="mb-4"/>

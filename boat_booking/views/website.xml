@@ -6,6 +6,7 @@
         <field name="arch" type="xml">
             <field name="default_lang_id" position="after">
                 <field name="google_maps_api_key" password="True"/>
+                <field name="map_id" password="True"/>
             </field>
         </field>
     </record>
