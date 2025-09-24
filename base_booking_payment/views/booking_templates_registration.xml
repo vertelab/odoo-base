@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+<template id="booking_form" inherit_id="base_booking.booking_form">
+    <xpath expr="//button[hasclass('o_booking_form_confirm_btn')]" position="replace">
+        <button t-if="booking_type.has_payment_step and booking_type.product_id.lst_price" type="button" class="btn btn-primary o_booking_form_confirm_btn">
+            Proceed to Payment
+        </button>
+        <button t-else="" type="button" class="btn btn-primary o_booking_form_confirm_btn">Confirm booking</button>
+    </xpath>
+</template>
+</odoo>

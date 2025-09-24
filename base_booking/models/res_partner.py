@@ -25,7 +25,7 @@ class Partner(models.Model):
         """ Verify availability of the partner(s) between 2 datetimes on their calendar.
         We only verify events that are not linked to an appointment type with resources since
         someone could take multiple appointment for multiple resources. The availability of
-        resources is managed separately by booking lines (see ``appointment.booking.line`` model)
+        resources is managed separately by booking lines (see ``booking.booking.line`` model)
 
         :param datetime date_start: beginning of slot boundary. Not timezoned UTC;
         :param datetime date_end: end of slot boundary. Not timezoned UTC;

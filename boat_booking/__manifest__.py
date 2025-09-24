@@ -7,7 +7,7 @@
     'author': "Vertel AB",
     'website': "https://www.vertel.se",
     'license': 'AGPL-3',
-    "depends": ["base_booking", "website"],
+    "depends": ["base_booking", "website" , "base_booking_payment"],
     'demo': [
         "demo/boat_booking_demo.xml",
     ],
