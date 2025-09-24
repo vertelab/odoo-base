@@ -16,8 +16,8 @@
         <field name="booking_duration">2</field>
         <field name="max_schedule_days">14</field>
         <field name="schedule_based_on">resources</field>
-        <field name="assign_method">time_auto_assign</field>
-        <field name="resource_manage_capacity" eval="True"/>
+        <field name="assign_method">time_resource</field>
+        <field name="resource_manage_capacity" eval="False"/>
         <field name="booking_manual_confirmation" eval="True"/>
         <field name="resource_manual_confirmation_percentage">0.8</field>
         <field name="message_partner_ids" eval="[(6, 0, [ref('base.partner_admin')])]"/>
@@ -25,22 +25,18 @@
         <field name="is_published" eval="True"/>
         <field name="hide_timezone" eval="True"/>
         <field name="hide_duration" eval="True"/>
-        <!-- Demo availabilities: Wed-Sun evenings; Wed/Sat/Sun midday -->
+        <!-- Monday to Sunday with morning and afternoon slots -->
         <field name="slot_ids" eval="[(5, 0, 0)] + [
             (0, 0, {'weekday': weekday, 'start_hour': start_hour, 'end_hour': start_hour + 2.0})
-            for weekday in ('3', '4', '5', '6', '7')
-            for start_hour in (19, 19.50, 20)
-        ] + [
-            (0, 0, {'weekday': weekday, 'start_hour': start_hour, 'end_hour': start_hour + 2.0})
-            for weekday in ('3', '6', '7')
-            for start_hour in (12, 12.50)
+            for weekday in ('1', '2', '3', '4', '5', '6', '7')
+            for start_hour in (9, 9.5, 10, 10.5, 11, 14, 14.5, 15, 15.5, 16)
         ]"/>
     </record>
 
     <!-- Boats with coordinates -->
     <record id="booking_type_boat_table_01" model="booking.resource">
         <field name="name">Speed Boat A</field>
-        <field name="capacity">4</field>
+        <field name="capacity">1</field>
         <field name="booking_type_ids" eval="[(6, 0, [ref('booking_type_boat')])]"/>
         <field name="latitude">58.410043</field>
         <field name="longitude">15.621372</field>
@@ -48,7 +44,7 @@
 
     <record id="booking_type_boat_table_02" model="booking.resource">
         <field name="name">Family Boat B</field>
-        <field name="capacity">6</field>
+        <field name="capacity">1</field>
         <field name="booking_type_ids" eval="[(6, 0, [ref('booking_type_boat')])]"/>
         <field name="latitude">58.411100</field>
         <field name="longitude">15.618900</field>
@@ -57,18 +53,15 @@
 
     <record id="booking_type_boat_table_03" model="booking.resource">
         <field name="name">Fishing Boat C</field>
-        <field name="capacity">2</field>
+        <field name="capacity">1</field>
         <field name="booking_type_ids" eval="[(6, 0, [ref('booking_type_boat')])]"/>
-        <field name="linked_resource_ids" eval="[(6, 0, [
-            ref('boat_booking.booking_type_boat_table_01'),
-            ref('boat_booking.booking_type_boat_table_02')])]"/>
         <field name="latitude">58.409500</field>
         <field name="longitude">15.620100</field>
     </record>
 
     <record id="booking_type_boat_table_04" model="booking.resource">
         <field name="name">Pontoon Boat D</field>
-        <field name="capacity">8</field>
+        <field name="capacity">1</field>
         <field name="booking_type_ids" eval="[(6, 0, [ref('booking_type_boat')])]"/>
         <field name="latitude">58.410800</field>
         <field name="longitude">15.622900</field>
@@ -76,42 +69,24 @@
 
     <record id="booking_type_boat_table_05" model="booking.resource">
         <field name="name">Sailboat E</field>
-        <field name="capacity">4</field>
+        <field name="capacity">1</field>
         <field name="booking_type_ids" eval="[(6, 0, [ref('booking_type_boat')])]"/>
-        <field name="linked_resource_ids" eval="[(6, 0, [
-            ref('boat_booking.booking_type_boat_table_01'),
-            ref('boat_booking.booking_type_boat_table_02'),
-            ref('boat_booking.booking_type_boat_table_03'),
-            ref('boat_booking.booking_type_boat_table_04')])]"/>
         <field name="latitude">58.409900</field>
         <field name="longitude">15.617800</field>
     </record>
 
     <record id="booking_type_boat_table_06" model="booking.resource">
         <field name="name">Cabin Cruiser F</field>
-        <field name="capacity">6</field>
+        <field name="capacity">1</field>
         <field name="booking_type_ids" eval="[(6, 0, [ref('booking_type_boat')])]"/>
-        <field name="linked_resource_ids" eval="[(6, 0, [
-            ref('boat_booking.booking_type_boat_table_01'),
-            ref('boat_booking.booking_type_boat_table_02'),
-            ref('boat_booking.booking_type_boat_table_03'),
-            ref('boat_booking.booking_type_boat_table_04'),
-            ref('boat_booking.booking_type_boat_table_05')])]"/>
         <field name="latitude">58.412100</field>
         <field name="longitude">15.620900</field>
     </record>
 
     <record id="booking_type_boat_table_07" model="booking.resource">
         <field name="name">Rowboat G</field>
-        <field name="capacity">2</field>
+        <field name="capacity">1</field>
         <field name="booking_type_ids" eval="[(6, 0, [ref('booking_type_boat')])]"/>
-        <field name="linked_resource_ids" eval="[(6, 0, [
-            ref('boat_booking.booking_type_boat_table_01'),
-            ref('boat_booking.booking_type_boat_table_02'),
-            ref('boat_booking.booking_type_boat_table_03'),
-            ref('boat_booking.booking_type_boat_table_04'),
-            ref('boat_booking.booking_type_boat_table_05'),
-            ref('boat_booking.booking_type_boat_table_06')])]"/>
         <field name="latitude">58.410400</field>
         <field name="longitude">15.619500</field>
     </record>
@@ -120,49 +95,22 @@
         <field name="name">Kayak H</field>
         <field name="capacity">1</field>
         <field name="booking_type_ids" eval="[(6, 0, [ref('booking_type_boat')])]"/>
-        <field name="linked_resource_ids" eval="[(6, 0, [
-            ref('boat_booking.booking_type_boat_table_01'),
-            ref('boat_booking.booking_type_boat_table_02'),
-            ref('boat_booking.booking_type_boat_table_03'),
-            ref('boat_booking.booking_type_boat_table_04'),
-            ref('boat_booking.booking_type_boat_table_05'),
-            ref('boat_booking.booking_type_boat_table_06'),
-            ref('boat_booking.booking_type_boat_table_07')])]"/>
         <field name="latitude">58.411700</field>
         <field name="longitude">15.617200</field>
     </record>
 
     <record id="booking_type_boat_table_09" model="booking.resource">
         <field name="name">Yacht I</field>
-        <field name="capacity">10</field>
+        <field name="capacity">1</field>
         <field name="booking_type_ids" eval="[(6, 0, [ref('booking_type_boat')])]"/>
-        <field name="linked_resource_ids" eval="[(6, 0, [
-            ref('boat_booking.booking_type_boat_table_01'),
-            ref('boat_booking.booking_type_boat_table_02'),
-            ref('boat_booking.booking_type_boat_table_03'),
-            ref('boat_booking.booking_type_boat_table_04'),
-            ref('boat_booking.booking_type_boat_table_05'),
-            ref('boat_booking.booking_type_boat_table_06'),
-            ref('boat_booking.booking_type_boat_table_07'),
-            ref('boat_booking.booking_type_boat_table_08')])]"/>
         <field name="latitude">58.413300</field>
         <field name="longitude">15.621500</field>
     </record>
 
     <record id="booking_type_boat_table_10" model="booking.resource">
         <field name="name">Houseboat J</field>
-        <field name="capacity">6</field>
+        <field name="capacity">1</field>
         <field name="booking_type_ids" eval="[(6, 0, [ref('booking_type_boat')])]"/>
-        <field name="linked_resource_ids" eval="[(6, 0, [
-            ref('boat_booking.booking_type_boat_table_01'),
-            ref('boat_booking.booking_type_boat_table_02'),
-            ref('boat_booking.booking_type_boat_table_03'),
-            ref('boat_booking.booking_type_boat_table_04'),
-            ref('boat_booking.booking_type_boat_table_05'),
-            ref('boat_booking.booking_type_boat_table_06'),
-            ref('boat_booking.booking_type_boat_table_07'),
-            ref('boat_booking.booking_type_boat_table_08'),
-            ref('boat_booking.booking_type_boat_table_09')])]"/>
         <field name="latitude">58.412600</field>
         <field name="longitude">15.623200</field>
     </record>

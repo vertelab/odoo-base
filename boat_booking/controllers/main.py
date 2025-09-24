@@ -1,143 +1,83 @@
-from odoo import http, fields
-from odoo.http import request
 import pytz
-from dateutil.relativedelta import relativedelta
-# from odoo.addons.base_booking.models.
+
+from babel.dates import format_datetime
+from werkzeug.exceptions import NotFound
+
+from odoo import Command, fields, http
+from odoo.http import request
+from odoo.addons.base_booking.controllers.booking import BookingController
+from odoo.addons.base_booking_payment.controllers.booking import BookingAccountPayment
+from odoo.addons.base.models.ir_qweb import keep_query
+from odoo.addons.payment import utils as payment_utils
+from odoo.tools.misc import get_lang
 
 
-class BoatBookingController(http.Controller):
-    
-    @http.route('/boat_booking/locations', type='json', auth='public', website=True)
-    def get_boat_locations(self, booking_type_id=False, min_length=None, min_width=None, min_depth=None,
-                           asked_capacity=None, timezone=None, **kwargs):
-        """Return grouped resource locations for a given booking type.
+class BoatBookingControllerExtended(BookingAccountPayment):
 
-        This method enhances the simple dimension-based filtering by also checking
-        for actual availability of resources.
+    def _calendar_booking_type_values(
+            self, booking_type, selected_resource, date_start, date_end, duration, answer_input_values, name,
+            customer, booking_invite, guests=None, staff_user=None, asked_capacity=1, booking_line_values=None
+    ):
+        return {
+            'booking_answer_input_ids': [Command.create(vals) for vals in answer_input_values],
+            'booking_invite_id': booking_invite.id,
+            'booking_type_id': booking_type.id,
+            'booking_line_ids': [Command.create(vals) for vals in booking_line_values],
+            'asked_capacity': asked_capacity,
+            'guest_ids': [Command.link(pid) for pid in guests.ids] if guests else [],
+            'name': name,
+            'partner_id': customer.id,
+            'product_id': booking_type.product_id.id or selected_resource.product_id.id,
+            'staff_user_id': staff_user.id,
+            'start': date_start,
+            'stop': date_end,
+        }
 
-        Response format:
-        [
-            {
-                'location_name': str,
-                'lat': float,
-                'lng': float,
-                'resources': [{ 'id': int, 'name': str }]
-            },
-            ...
-        ]
-        """
-        if not booking_type_id:
-            return []
+    def _calendar_booking_resource_values(
+            self, booking_type, selected_resource, date_start, date_end, duration, answer_input_values, name,
+            customer, booking_invite, guests=None, staff_user=None, asked_capacity=1, booking_line_values=None
+    ):
+        vals =  {
+            'booking_answer_input_ids': [Command.create(vals) for vals in answer_input_values],
+            'booking_invite_id': booking_invite.id,
+            'booking_type_id': booking_type.id,
+            'booking_line_ids': [Command.create(vals) for vals in booking_line_values],
+            'asked_capacity': asked_capacity,
+            'guest_ids': [Command.link(pid) for pid in guests.ids] if guests else [],
+            'name': name,
+            'partner_id': customer.id,
+            'product_id': booking_type.product_id.id,
+            'staff_user_id': staff_user.id,
+            'start': date_start,
+            'stop': date_end,
+        }
+        if booking_type.booking_type == 'boat' and selected_resource.product_id:
+            vals["product_id"] = selected_resource.product_id.id
+        return vals
 
-
-        booking_type = request.env['booking.type'].sudo().browse(int(booking_type_id)).exists()
-
-        if not booking_type:
-            return []
-
-        # Parse filters
-        def _flt(val):
-            try:
-                return float(val)
-            except Exception:
-                return None
-
-        f_len = _flt(min_length)
-        f_wid = _flt(min_width)
-        f_dep = _flt(min_depth)
-
-        # Build domain: attached to booking type and meets dimensions
-        domain = [('id', 'in', booking_type.resource_ids.ids)]
-        if f_len is not None and f_len > 0:
-            domain.append(('length', '>=', f_len))
-        if f_wid is not None and f_wid > 0:
-            domain.append(('width', '>=', f_wid))
-        if f_dep is not None and f_dep > 0:
-            domain.append(('depth', '>=', f_dep))
-
-        # Fetch resources via search to let DB filter
-        resources = request.env['booking.resource'].sudo().search(domain)
-
-        # Further filter resources by checking their actual availability using base_booking's logic.
-        # This ensures we don't show markers for resources that have no slots available at all.
-        try:
-            tz = timezone or request.session.get('timezone') or booking_type.booking_tz
-            capacity = int(asked_capacity or 1)
-            all_slots = booking_type._get_booking_slots(tz, filter_resources=resources, asked_capacity=capacity)
-            
-            available_ids = set()
-            for month in all_slots:
-                for week in month.get('weeks', []):
-                    for day in week:
-                        for slot in day.get('slots', []):
-                            for resource_info in slot.get('available_resources', []):
-                                available_ids.add(resource_info['id'])
-            
-            available_resources = resources.filtered(lambda r: r.id in available_ids)
-        except Exception:
-            # In case of any error during availability calculation, fall back to showing all
-            # dimension-matching resources to avoid breaking the map entirely.
-            available_resources = resources
-
-        # Group by rounded coordinates to avoid floating point duplicates
-        def _round_or_none(val):
-            try:
-                return round(float(val), 6)
-            except Exception:
-                return None
-
-        locations = {}
-        for res in available_resources:
-            try:
-                r_len = float(res.length) if res.length not in (None, False, '') else None
-                r_wid = float(res.width) if res.width not in (None, False, '') else None
-                r_dep = float(res.depth) if res.depth not in (None, False, '') else None
-            except Exception:
-                r_len = r_wid = r_dep = None
-            lat = _round_or_none(res.latitude)
-            lng = _round_or_none(res.longitude)
-            if lat is None or lng is None:
-                continue
-
-            loc_key = (lat, lng)
-            if loc_key not in locations:
-                display = res.address or res.city or res.name or f"{lat}, {lng}"
-                locations[loc_key] = {
-                    'location_name': display,
-                    'lat': lat,
-                    'lng': lng,
-                    'resources': [],
-                }
-
-            # Prepare pricing info if a product is linked
-            price = None
-            currency_symbol = None
-            currency_position = None
-            product = res.product_id
-            if product:
-                price = float(product.lst_price or 0.0)
-                currency = product.currency_id or request.env.company.currency_id
-                currency_symbol = currency.symbol
-                currency_position = currency.position
-
-            # Numeric dimensions if possible
-            def _to_float_or_none(val):
-                try:
-                    return float(val)
-                except Exception:
-                    return None
-
-            locations[loc_key]['resources'].append({
-                'id': res.id,
-                'name': res.name,
-                'capacity': res.capacity,
-                'length': r_len if r_len is not None else _to_float_or_none(res.length),
-                'width': r_wid if r_wid is not None else _to_float_or_none(res.width),
-                'depth': r_dep if r_dep is not None else _to_float_or_none(res.depth),
-                'price': price,
-                'currency_symbol': currency_symbol,
-                'currency_position': currency_position,
-                'book_url': f"/booking/{booking_type.id}?resource_selected_id={res.id}",
-            })
-
-        return list(locations.values())
+    def _handle_booking_form_submission(
+        self, booking_type, selected_resource,
+        date_start, date_end, duration,
+        answer_input_values, name, customer, booking_invite, guests=None,
+        staff_user=None, asked_capacity=1, booking_line_values=None
+    ):
+        """ Override: when a payment step is necessary, we create the calendar booking model to store all relevant information
+            instead of creating an calendar.event. This prevents synchronizing calendars with non-confirmed events. It will
+            be transformed to a calendar.event on payment (or confirmation). See _make_event_from_paid_booking on calendar.booking.
+            Redirects to payment if needed. See _redirect_to_payment"""
+        if (booking_type.has_payment_step and booking_type.product_id.lst_price) or selected_resource.product_id.lst_price:
+            calendar_booking = request.env['calendar.booking'].sudo().create([
+                self._calendar_booking_type_values(
+                    booking_type=booking_type,
+                    selected_resource=selected_resource,
+                    date_start=date_start, date_end=date_end,
+                    duration=duration, answer_input_values=answer_input_values, name=name,
+                    customer=customer, booking_invite=booking_invite, guests=guests, staff_user=staff_user,
+                    asked_capacity=asked_capacity, booking_line_values=booking_line_values
+                )
+            ])
+            return self._redirect_to_payment(calendar_booking)
+        return super()._handle_booking_form_submission(
+            booking_type, date_start, date_end, duration, answer_input_values, name,
+            customer, booking_invite, guests, staff_user, asked_capacity, booking_line_values
+        )

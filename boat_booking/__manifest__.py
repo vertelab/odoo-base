@@ -16,6 +16,8 @@
         "views/templates.xml",
         'demo/boat_booking_demo.xml',
         "views/calendar_event_view.xml",
+        "views/website.xml",
+        "views/booking_templates_registration.xml",
     ],
     'assets': {
         'web.assets_frontend': [
