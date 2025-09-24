@@ -205,7 +205,11 @@ publicWidget.registry.bookingSlotSelect = publicWidget.registry.bookingSlotSelec
      */
     _showResourcesListDirectly: function() {
         console.log("Showing resources list directly (non-boat booking)");
-
+        if (this._getBookingType() === 'boat') {
+            // For boat bookings, keep the attribute + map flow
+            this._showResourceAttributesForm();
+            return;
+        }
         const previousResourceIdSelected = this.el.querySelector("select[name='resource_id']")?.value;
 
         this.resourceSelectionEl.replaceChildren(
@@ -257,6 +261,11 @@ publicWidget.registry.bookingSlotSelect = publicWidget.registry.bookingSlotSelec
             if (lengthInput) {
                 lengthInput.focus();
             }
+            // Hide base confirm button for boat flow
+            if (this._getBookingType() === 'boat') {
+                const confirmBtn = this.el.querySelector('button[name="submitSlotInfoSelected"]');
+                confirmBtn?.classList.add('d-none');
+            }
         }, 100);
     },
 
@@ -300,7 +309,7 @@ publicWidget.registry.bookingSlotSelect = publicWidget.registry.bookingSlotSelec
     /**
      * Show the resources list after attributes are validated
      */
-    _showResourcesList: function() {
+    _showResourcesList: async function() {
         console.log("Showing resources list");
 
         const resourcesListContainer = this.el.querySelector('#resources-list-container');
@@ -308,8 +317,48 @@ publicWidget.registry.bookingSlotSelect = publicWidget.registry.bookingSlotSelec
 
         const previousResourceIdSelected = this.el.querySelector("select[name='resource_id']")?.value;
 
+        // Apply client-side dimension filtering using booking.resource dimensions
+        let availableResources = this.currentSlotData.availableResources || [];
+        try {
+            const filters = this._getDimensionFilterValues();
+            if (filters && availableResources.length) {
+                const ids = availableResources.map(r => r.id).filter(Boolean);
+                const dims = await rpc('/web/dataset/call_kw', {
+                    model: 'booking.resource',
+                    method: 'read',
+                    args: [ids, ['id', 'length', 'width', 'depth']],
+                    kwargs: {},
+                });
+                const allowedIds = new Set(dims.filter(d =>
+                    (Number(d.length || 0) >= filters.length) &&
+                    (Number(d.width || 0) >= filters.width) &&
+                    (Number(d.depth || 0) >= filters.depth)
+                ).map(d => d.id));
+                availableResources = availableResources.filter(r => allowedIds.has(r.id));
+            }
+        } catch (e) {
+            console.warn('Dimension filtering failed, falling back to unfiltered resources', e);
+        }
+
+        // If boat booking, do not render the base resources dropdown; only update the map
+        if (this._getBookingType() === 'boat') {
+            try {
+                const locations = await this._buildLocationsFromResources(availableResources);
+                const availableIds = availableResources.map(r => r.id);
+                await this._updateMapMarkers(locations, availableIds);
+                if (availableIds.length === 0) {
+                    this._setMapOverlay(true, 'No available locations for the selected time and boat size');
+                } else {
+                    this._setMapOverlay(false);
+                }
+            } catch (e) {
+                console.warn('Map update failed', e);
+            }
+            return;
+        }
+
         const resourcesFragment = renderToFragment("base_booking.resources_list", {
-            availableResources: this.currentSlotData.availableResources,
+            availableResources: availableResources,
             availableStaffUsers: this.currentSlotData.availableStaffUsers,
             scheduleBasedOn: this.currentSlotData.scheduleBasedOn,
         });
@@ -318,7 +367,7 @@ publicWidget.registry.bookingSlotSelect = publicWidget.registry.bookingSlotSelec
         resourcesListContainer.classList.remove('d-none');
 
         const availableEntity = this.currentSlotData.scheduleBasedOn === "resources"
-            ? this.currentSlotData.availableResources
+            ? availableResources
             : this.currentSlotData.availableStaffUsers;
 
         const resourceIdEl = this.el.querySelector("select[name='resource_id']");
@@ -332,8 +381,31 @@ publicWidget.registry.bookingSlotSelect = publicWidget.registry.bookingSlotSelec
             resourceIdEl.value = previousResourceIdSelected;
         }
 
-        // Update map with available resources
-        this._updateMapWithCurrentData();
+        // Update map with newly filtered resources
+        try {
+            const locations = await this._buildLocationsFromResources(availableResources);
+            const availableIds = availableResources.map(r => r.id);
+            await this._updateMapMarkers(locations, availableIds);
+            this._setMapOverlay(false);
+        } catch (e) {
+            console.warn('Map update failed', e);
+        }
+    },
+
+    /**
+     * Get numeric dimension filters from inputs
+     */
+    _getDimensionFilterValues: function() {
+        const lengthEl = this.el.querySelector('#bb-length');
+        const widthEl = this.el.querySelector('#bb-width');
+        const depthEl = this.el.querySelector('#bb-depth');
+        const length = parseFloat(lengthEl?.value || '0');
+        const width = parseFloat(widthEl?.value || '0');
+        const depth = parseFloat(depthEl?.value || '0');
+        if (length > 0 && width > 0 && depth > 0) {
+            return { length, width, depth };
+        }
+        return null;
     },
 
     /**
@@ -386,18 +458,87 @@ publicWidget.registry.bookingSlotSelect = publicWidget.registry.bookingSlotSelec
      * Fetch locations from server
      */
     _fetchLocations: async function(filters) {
-        try {
-            const bookingTypeId = this.el.querySelector("input[name='booking_type_id']")?.value;
-            if (!bookingTypeId) return [];
+        // Not used anymore; replaced by _buildLocationsFromResources
+        return [];
+    },
 
-            return await rpc('/boat_booking/locations', {
-                booking_type_id: bookingTypeId,
-                ...filters
+    /**
+     * Build map locations from a list of available resources.
+     */
+    _buildLocationsFromResources: async function(availableResources) {
+        if (!Array.isArray(availableResources) || availableResources.length === 0) return [];
+
+        const ids = availableResources.map(r => r.id).filter(Boolean);
+        const records = await rpc('/web/dataset/call_kw', {
+            model: 'booking.resource',
+            method: 'read',
+            args: [ids, ['id', 'name', 'capacity', 'latitude', 'longitude', 'address', 'city', 'length', 'width', 'depth', 'product_id']],
+            kwargs: {},
+        });
+
+        // Read product pricing info if any
+        let productInfo = {};
+        const productIds = records.map(r => Array.isArray(r.product_id) ? r.product_id[0] : null).filter(Boolean);
+        if (productIds.length) {
+            const products = await rpc('/web/dataset/call_kw', {
+                model: 'product.product',
+                method: 'read',
+                args: [productIds, ['id', 'lst_price', 'currency_id']],
+                kwargs: {},
             });
-        } catch (error) {
-            console.error("Failed to fetch locations:", error);
-            return [];
+            const currencyIds = products.map(p => Array.isArray(p.currency_id) ? p.currency_id[0] : null).filter(Boolean);
+            let currencies = [];
+            if (currencyIds.length) {
+                currencies = await rpc('/web/dataset/call_kw', {
+                    model: 'res.currency',
+                    method: 'read',
+                    args: [currencyIds, ['id', 'symbol', 'position']],
+                    kwargs: {},
+                });
+            }
+            const currencyMap = Object.fromEntries(currencies.map(c => [c.id, c]));
+            productInfo = Object.fromEntries(products.map(p => [p.id, {
+                price: typeof p.lst_price === 'number' ? p.lst_price : null,
+                currency: currencyMap[Array.isArray(p.currency_id) ? p.currency_id[0] : p.currency_id] || null,
+            }]));
         }
+
+        const locationsMap = {};
+        const round6 = (v) => {
+            const n = Number(v);
+            return Number.isFinite(n) ? Math.round(n * 1e6) / 1e6 : null;
+        };
+
+        records.forEach(r => {
+            const lat = round6(r.latitude);
+            const lng = round6(r.longitude);
+            if (lat == null || lng == null) return;
+
+            const key = `${lat}:${lng}`;
+            if (!locationsMap[key]) {
+                locationsMap[key] = {
+                    location_name: r.address || r.city || r.name || `${lat}, ${lng}`,
+                    lat,
+                    lng,
+                    resources: [],
+                };
+            }
+            const prodId = Array.isArray(r.product_id) ? r.product_id[0] : null;
+            const p = prodId ? productInfo[prodId] : null;
+            locationsMap[key].resources.push({
+                id: r.id,
+                name: r.name,
+                capacity: r.capacity,
+                length: Number(r.length || 0) || null,
+                width: Number(r.width || 0) || null,
+                depth: Number(r.depth || 0) || null,
+                price: p ? p.price : null,
+                currency_symbol: p && p.currency ? p.currency.symbol : null,
+                currency_position: p && p.currency ? p.currency.position : null,
+            });
+        });
+
+        return Object.values(locationsMap);
     },
 
     /**
