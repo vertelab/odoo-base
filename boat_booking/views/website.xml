@@ -1,0 +1,13 @@
+<odoo>
+    <record id="website_website_view_form" model="ir.ui.view">
+        <field name="name">website.website.view.form</field>
+        <field name="model">website</field>
+        <field name="inherit_id" ref="website.view_website_form"/>
+        <field name="arch" type="xml">
+            <field name="default_lang_id" position="after">
+                <field name="google_maps_api_key" password="True"/>
+                <field name="map_id" password="True"/>
+            </field>
+        </field>
+    </record>
+</odoo>

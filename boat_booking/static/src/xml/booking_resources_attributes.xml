@@ -1,9 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <template>
-    <!-- Override resources list with boat size inputs -->
-    <t t-name="base_booking.resources_list">
-        <div>
-            <label class="mb-1">Your boat size</label>
+    <t t-name="boat_booking.resources_attributes">
+        <div class="mb-2">
+<!--            <label class="mb-1">Your boat size</label>-->
             <div class="row g-2">
                 <div class="col-12">
                     <label class="form-label">Length (m)</label>
@@ -18,10 +17,6 @@
                     <input type="number" step="0.01" min="0" class="form-control" id="bb-depth" placeholder="e.g. 2"/>
                 </div>
             </div>
-            <!-- Hidden select to keep base JS happy when it looks for name='resource_id' -->
-            <select class="o_resources_list d-none" name="resource_id">
-                <option value=""/>
-            </select>
         </div>
     </t>
 </template>

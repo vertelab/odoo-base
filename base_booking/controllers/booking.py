@@ -610,7 +610,7 @@ class BookingController(http.Controller):
     @http.route(['/booking/<int:booking_type_id>/submit'],
                 type='http', auth="public", website=True, methods=["POST"])
     def booking_form_submit(self, booking_type_id, datetime_str, duration_str, name, phone, email, staff_user_id=None, available_resource_ids=None, asked_capacity=1,
-                                guest_emails_str=None, **kwargs):
+                                guest_emails_str=None, resource_selected_id=None, **kwargs):
         """
         Create the event for the booking and redirect on the validation page with a summary of the booking.
 
@@ -626,6 +626,12 @@ class BookingController(http.Controller):
         :param str guest_emails: optional line-separated guest emails. It will
           fetch or create partners to add them as event attendees;
         """
+        print("resource_selected_id", resource_selected_id)
+        print("kwargs", kwargs)
+
+        selected_resource = request.env['booking.resource'].sudo().browse(int(resource_selected_id)) if resource_selected_id else \
+        request.env['booking.resource']
+
         domain = self._bookings_base_domain(
             filter_booking_type_ids=kwargs.get('filter_booking_type_ids'),
             search=kwargs.get('search'),
@@ -758,12 +764,12 @@ class BookingController(http.Controller):
             booking_invite = request.env['booking.invite']
 
         return self._handle_booking_form_submission(
-            booking_type, date_start, date_end, duration, answer_input_values, name,
+            booking_type, selected_resource, date_start, date_end, duration, answer_input_values, name,
             customer, booking_invite, guests, staff_user, asked_capacity, booking_line_values
         )
 
     def _handle_booking_form_submission(
-        self, booking_type,
+        self, booking_type, selected_resource,
         date_start, date_end, duration,  # booking boundaries
         answer_input_values, name, customer, booking_invite, guests=None,  # customer info
         staff_user=None, asked_capacity=1, booking_line_values=None  # booking staff / resources

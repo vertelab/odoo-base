@@ -30,6 +30,9 @@ publicWidget.registry.BoatBookingMap = publicWidget.Widget.extend({
     async start() {
         await this._super(...arguments);
 
+        // Store widget reference for other widgets to access
+        this.el.__widget = this;
+
         // Ensure Google Maps API is loaded via website root
         if (typeof google !== 'object' || typeof google.maps !== 'object') {
             await new Promise(resolve => {
@@ -38,7 +41,6 @@ publicWidget.registry.BoatBookingMap = publicWidget.Widget.extend({
                     onSuccess: () => resolve(),
                 });
             });
-            // Continue: our snippet isn't auto-restarted by the website callback
             if (typeof google !== 'object' || typeof google.maps !== 'object') {
                 console.warn('Google Maps API still unavailable (no key configured or network issue).');
                 return;
@@ -47,6 +49,13 @@ publicWidget.registry.BoatBookingMap = publicWidget.Widget.extend({
 
         const bookingTypeId = this.el.dataset.bookingTypeId;
         this.bookingTypeId = bookingTypeId;
+        
+        // Track available resources from the booking widget
+        this.availableResourceIds = [];
+        
+        // Listen for resource updates from booking widget
+        this._setupResourceUpdateListeners();
+        
         // Defer map rendering until we know whether inputs are set
         const lengthEl = document.getElementById('bb-length');
         const widthEl = document.getElementById('bb-width');
@@ -67,42 +76,112 @@ publicWidget.registry.BoatBookingMap = publicWidget.Widget.extend({
             }
         };
 
-        const reloadWithFilters = async () => {
+        this.reloadWithFilters = async () => {
             const minL = parseFloat(lengthEl?.value || '0');
             const minW = parseFloat(widthEl?.value || '0');
             const minD = parseFloat(depthEl?.value || '0');
             const allProvided = [minL, minW, minD].every(n => Number.isFinite(n) && n > 0);
+            
             await ensureMap();
+            
             if (!allProvided) {
                 this.setOverlay(true);
                 this.setEmptyState(false);
-                // Hide markers until ready
-                this.filterMarkers({ minL: Number.POSITIVE_INFINITY, minW: Number.POSITIVE_INFINITY, minD: Number.POSITIVE_INFINITY });
+                // Hide all markers until dimensions are provided
+                this.filterMarkers({ 
+                    minL: Number.POSITIVE_INFINITY, 
+                    minW: Number.POSITIVE_INFINITY, 
+                    minD: Number.POSITIVE_INFINITY,
+                    availableResourceIds: []
+                });
                 return;
             }
-            const locations = await fetchLocations({ min_length: minL, min_width: minW, min_depth: minD });
+            
+            const locations = await fetchLocations({ 
+                min_length: minL, 
+                min_width: minW, 
+                min_depth: minD
+            });
+            
             const hasAny = Array.isArray(locations) && locations.length > 0;
             if (!hasAny) {
-                this.setOverlay(true, 'Fully booked — We found no locations that fit your boat, check the dates and size.');
+                this.setOverlay(true, 'No locations found that fit your boat dimensions.');
             } else {
                 this.setOverlay(false);
             }
             this.setEmptyState(false);
             await this.setMarkers(locations || []);
-            this.filterMarkers({ minL: minL, minW: minW, minD: minD });
+            
+            // Apply current filters (dimensions + available resources)
+            this.filterMarkers({ 
+                minL: minL, 
+                minW: minW, 
+                minD: minD,
+                availableResourceIds: this.availableResourceIds
+            });
         };
 
         // Initial boot
         await ensureMap();
-        await reloadWithFilters();
+        await this.reloadWithFilters();
 
-        // Wire up dimension inputs to filter markers and gate map interactions
+        // Wire up dimension inputs
         if (lengthEl && widthEl && depthEl) {
             ['input', 'change'].forEach(evt => {
-                lengthEl.addEventListener(evt, reloadWithFilters);
-                widthEl.addEventListener(evt, reloadWithFilters);
-                depthEl.addEventListener(evt, reloadWithFilters);
+                lengthEl.addEventListener(evt, this.reloadWithFilters);
+                widthEl.addEventListener(evt, this.reloadWithFilters);
+                depthEl.addEventListener(evt, this.reloadWithFilters);
             });
+        }
+    },
+
+    /**
+     * Setup listeners for resource updates from booking widget
+     */
+    _setupResourceUpdateListeners: function() {
+        // Listen for custom event from booking widget
+        document.addEventListener('bookingResourcesUpdated', (event) => {
+            console.log('Map received resource update:', event.detail);
+            this.updateAvailableResources(event.detail.availableResourceIds);
+        });
+    },
+
+    /**
+     * Update available resources and refresh map display
+     */
+    updateAvailableResources: function(resourceIds) {
+        console.log('Updating map with available resource IDs:', resourceIds);
+        this.availableResourceIds = resourceIds || [];
+        
+        // Re-filter markers based on new available resources
+        if (this._markers && this._markers.length > 0) {
+            const lengthEl = document.getElementById('bb-length');
+            const widthEl = document.getElementById('bb-width');
+            const depthEl = document.getElementById('bb-depth');
+            
+            const minL = parseFloat(lengthEl?.value || '0');
+            const minW = parseFloat(widthEl?.value || '0');
+            const minD = parseFloat(depthEl?.value || '0');
+            
+            this.filterMarkers({
+                minL: minL,
+                minW: minW,
+                minD: minD,
+                availableResourceIds: this.availableResourceIds
+            });
+            
+            // Update overlay message if no resources are available
+            const hasVisibleMarkers = this._markers.some(({ marker }) => {
+                return marker.getVisible && marker.getVisible();
+            });
+            
+            if (this.availableResourceIds.length === 0) {
+                this.setOverlay(true, 'Please select a time slot to see available locations on the map.');
+            } else if (!hasVisibleMarkers) {
+                this.setOverlay(true, 'No available locations for the selected time and boat size.');
+            } else {
+                this.setOverlay(false);
+            }
         }
     },
 
@@ -292,19 +371,37 @@ publicWidget.registry.BoatBookingMap = publicWidget.Widget.extend({
         empty.style.display = show ? 'block' : 'none';
     },
 
-    filterMarkers({ minL, minW, minD }) {
+    filterMarkers({ minL, minW, minD, availableResourceIds = [] }) {
         if (!this._markers) return;
-        const meets = (r) => (
-            (r.length == null || r.length >= minL) &&
-            (r.width == null || r.width >= minW) &&
-            (r.depth == null || r.depth >= minD)
-        );
+        
+        console.log('Filtering markers with:', { minL, minW, minD, availableResourceIds });
+        
         this._markers.forEach(({ marker, loc }) => {
-            const ok = (loc.resources || []).some(meets);
-            if (marker.map) {
-                marker.map.setVisible ? marker.map.setVisible(ok) : null;
+            let isVisible = false;
+            
+            // Check if location has resources that meet dimensional requirements
+            const dimensionMatches = (loc.resources || []).filter(r => (
+                (r.length == null || r.length >= minL) &&
+                (r.width == null || r.width >= minW) &&
+                (r.depth == null || r.depth >= minD)
+            ));
+            
+            if (dimensionMatches.length > 0) {
+                // If no available resources specified, show all that meet dimensions
+                if (availableResourceIds.length === 0) {
+                    isVisible = true;
+                } else {
+                    // Only show if at least one resource is in available list AND meets dimensions
+                    isVisible = dimensionMatches.some(r => availableResourceIds.includes(r.id));
+                }
             }
-            if (marker.setVisible) marker.setVisible(ok);
+            
+            // Apply visibility to marker
+            if (marker.setVisible) {
+                marker.setVisible(isVisible);
+            } else if (marker.map) {
+                marker.map.setVisible ? marker.map.setVisible(isVisible) : null;
+            }
         });
     },
 
@@ -385,5 +482,3 @@ publicWidget.registry.BoatBookingMap = publicWidget.Widget.extend({
         }
     },
 });
-
-
