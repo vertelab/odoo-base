@@ -19,9 +19,11 @@
     ],
     'assets': {
         'web.assets_frontend': [
-            "boat_booking/static/src/js/map.js",
+            # "boat_booking/static/src/js/map.js",
             # "boat_booking/static/src/js/boat_booking_slot_select.js",
             "boat_booking/static/src/scss/booking_map.scss",
+            "boat_booking/static/src/js/appointment_select_appointment_slot.js",
+            "boat_booking/static/src/xml/booking_resources_attributes.xml",
         ],
         # "web.assets_backend": [
         #     "boat_booking/static/src/xml/google_map_field.xml",
