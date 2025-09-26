@@ -78,6 +78,6 @@ class BoatBookingControllerExtended(BookingAccountPayment):
             ])
             return self._redirect_to_payment(calendar_booking)
         return super()._handle_booking_form_submission(
-            booking_type, date_start, date_end, duration, answer_input_values, name,
+            booking_type, selected_resource, date_start, date_end, duration, answer_input_values, name,
             customer, booking_invite, guests, staff_user, asked_capacity, booking_line_values
         )
