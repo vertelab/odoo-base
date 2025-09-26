@@ -9,13 +9,13 @@
         <page name="messages" position="after">
           <page string="Communication" name="booking_communication">
             <field name="booking_mail_ids">
-              <list>
+              <list string="Communication" editable="bottom">
                 <field name="sequence" widget="handle"/>
                  <field name="template_ref" options="{'no_quick_create': True}" /> <!-- context="{'filter_template_on_event': True, 'default_model': 'event.registration'}" widget="EventMailTemplateReferenceField" -->
                 <field name="interval_nbr" readonly="interval_unit == 'now'"/>
                 <field name="interval_unit"/>
                 <field name="interval_type"/>
-                <!-- <field name="scheduled_date" groups="base.group_no_one"/> -->
+                <field name="scheduled_date" groups="base.group_no_one"/>
                 <field name="mail_count_done"/>
                 <field name="mail_state" widget="event_icon_selection" string=" " nolabel="1" options="{'sent': 'fa fa-check', 'scheduled': 'fa fa-hourglass-half', 'running': 'fa fa-cogs'}"/>
               </list>
@@ -25,20 +25,5 @@
       </field>
     </record>
 
-
-    <!-- Top menu item -->
-    <!--
-    <menuitem name="scaffold_test" id="scaffold_test.menu_root"/>
--->
-    <!-- menu categories -->
-    <!--
-    <menuitem name="Menu 1" id="scaffold_test.menu_1" parent="scaffold_test.menu_root"/>
-    <menuitem name="Menu 2" id="scaffold_test.menu_2" parent="scaffold_test.menu_root"/>
--->
-    <!-- actions -->
-    <!--
-    <menuitem name="List" id="scaffold_test.menu_1_list" parent="scaffold_test.menu_1" action="scaffold_test.action_window"/>
-    <menuitem name="Server to list" id="scaffold_test" parent="scaffold_test.menu_2" action="scaffold_test.action_server"/>
--->
   </data>
 </odoo>

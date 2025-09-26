@@ -23,7 +23,7 @@ class BookingMail(models.Model):
         ('before_event', 'Before the event'),
         ('after_event', 'After the event')],
         string='Trigger ', default="before_event", required=True)
-    mail_count_done = fields.Integer('# Sent', copy=False, readonly=True)
+    mail_count_done = fields.Integer('# Sent', copy=False, compute="_compute_mail_count_done")
     template_ref = fields.Reference(string='Template', ondelete={'mail.template': 'cascade'}, required=True, selection=[('mail.template', 'Mail')])
     mail_state = fields.Selection(
         [('running', 'Running'), ('scheduled', 'Scheduled'), ('sent', 'Sent')],
@@ -34,7 +34,7 @@ class BookingMail(models.Model):
 
     def _compute_scheduled_date(self):
         for scheduler in self:
-            if scheduler.booking_mail_calendar_ids[0].scheduled_date:
+            if scheduler.booking_mail_calendar_ids and scheduler.booking_mail_calendar_ids[0].scheduled_date:
                 scheduler.scheduled_date = scheduler.booking_mail_calendar_ids[0].scheduled_date
             else:
                 scheduler.scheduled_date = False
@@ -45,6 +45,17 @@ class BookingMail(models.Model):
                 scheduler.mail_done = all(scheduler.booking_mail_calendar_ids.mapped("mail_done"))
             else:
                 scheduler.mail_done = False
+
+    def _compute_mail_count_done(self):
+        for scheduler in self:
+            if scheduler.booking_mail_calendar_ids:
+                mail_count_done = scheduler.booking_mail_calendar_ids.mapped("mail_count_done")
+                if mail_count_done:
+                    scheduler.mail_count_done = sum(mail_count_done)/len(mail_count_done)
+                else:
+                    scheduler.mail_count_done = 0
+            else:
+                scheduler.mail_count_done = False
 
     @api.depends('interval_type', 'mail_done')
     def _compute_mail_state(self):

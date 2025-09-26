@@ -41,6 +41,7 @@
         "views/booking_mail_views.xml",
         "views/booking_type_views.xml",
         "views/booking_menu_views.xml",
+        "data/ir_cron_data.xml"
         ],
     'demo': [],
     'application': False,

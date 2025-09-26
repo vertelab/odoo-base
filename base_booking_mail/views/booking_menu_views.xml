@@ -1,37 +1,7 @@
 <odoo>
     <data>
 
-        <!-- server action to the one above -->
-        <!--
-    <record model="ir.actions.server" id="scaffold_test.action_server">
-      <field name="name">scaffold_test server</field>
-      <field name="model_id" ref="model_scaffold_test_scaffold_test"/>
-      <field name="state">code</field>
-      <field name="code">
-        action = {
-          "type": "ir.actions.act_window",
-          "view_mode": "tree,form",
-          "res_model": model._name,
-        }
-      </field>
-    </record>
--->
-
         <menuitem id="menu_booking_mail" action="booking_mail_action" parent="base_booking.booking_menu_config" name="Postplanerare" groups="base_booking.group_booking_manager"/>
-
-        <!-- Top menu item -->
-        <!--
-    <menuitem name="scaffold_test" id="scaffold_test.menu_root"/>
--->
-        <!-- menu categories -->
-        <!--
-    <menuitem name="Menu 1" id="scaffold_test.menu_1" parent="scaffold_test.menu_root"/>
-    <menuitem name="Menu 2" id="scaffold_test.menu_2" parent="scaffold_test.menu_root"/>
--->
-        <!-- actions -->
-        <!--
-    <menuitem name="List" id="scaffold_test.menu_1_list" parent="scaffold_test.menu_1" action="scaffold_test.action_window"/>
-    <menuitem name="Server to list" id="scaffold_test" parent="scaffold_test.menu_2" action="scaffold_test.action_server"/>
--->
+        
     </data>
 </odoo>
