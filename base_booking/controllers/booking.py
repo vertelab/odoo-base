@@ -626,9 +626,6 @@ class BookingController(http.Controller):
         :param str guest_emails: optional line-separated guest emails. It will
           fetch or create partners to add them as event attendees;
         """
-        print("resource_selected_id", resource_selected_id)
-        print("kwargs", kwargs)
-
         selected_resource = request.env['booking.resource'].sudo().browse(int(resource_selected_id)) if resource_selected_id else \
         request.env['booking.resource']
 
@@ -763,8 +760,6 @@ class BookingController(http.Controller):
         else:
             booking_invite = request.env['booking.invite']
 
-        print("staff user", staff_user)
-
         return self._handle_booking_form_submission(
             booking_type, selected_resource, date_start, date_end, duration, answer_input_values, name,
             customer, booking_invite, guests, staff_user, asked_capacity, booking_line_values
@@ -782,10 +777,6 @@ class BookingController(http.Controller):
 
             :returns: a dict of useful values used in the redirection to next step
         """
-        print("_get_allowed_companies staff_user", staff_user)
-        print("_get_allowed_companies booking_type", booking_type)
-        print("_get_allowed_companies booking_type create_uid", booking_type.create_uid)
-        print("_get_allowed_companies booking_type create_uid =========0", self._get_allowed_companies(staff_user or booking_type.create_uid))
         event = request.env['calendar.event'].with_context(
             mail_notify_author=True,
             mail_create_nolog=True,
@@ -808,7 +799,6 @@ class BookingController(http.Controller):
         :param: <res.users> organizer: the organizer of the event
         :return: recordset of res.company
         """
-        print("organizer", organizer)
         return organizer.company_ids
 
     def _get_customer_partner(self):
