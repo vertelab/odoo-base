@@ -5,9 +5,9 @@
         <field name="inherit_id" ref="calendar.view_calendar_event_form"/>
         <field name="arch" type="xml">
             <field name="description" position="after">
-                <field name="length"/>
-                <field name="width"/>
-                <field name="depth"/>
+                <field name="length" invisible="length == 0"/>
+                <field name="width" invisible="width == 0"/>
+                <field name="depth" invisible="depth == 0"/>
             </field>
         </field>
     </record>

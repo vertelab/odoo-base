@@ -626,9 +626,6 @@ class BookingController(http.Controller):
         :param str guest_emails: optional line-separated guest emails. It will
           fetch or create partners to add them as event attendees;
         """
-        print("resource_selected_id", resource_selected_id)
-        print("kwargs", kwargs)
-
         selected_resource = request.env['booking.resource'].sudo().browse(int(resource_selected_id)) if resource_selected_id else \
         request.env['booking.resource']
 
