@@ -1,14 +1,8 @@
-import pytz
-
-from babel.dates import format_datetime
-from werkzeug.exceptions import NotFound
-
 from odoo import Command, fields, http
 from odoo.http import request
 from odoo.addons.base_booking.controllers.booking import BookingController
 from odoo.addons.base_booking_payment.controllers.booking import BookingAccountPayment
 from odoo.addons.base.models.ir_qweb import keep_query
-from odoo.addons.payment import utils as payment_utils
 from odoo.tools.misc import get_lang
 
 
