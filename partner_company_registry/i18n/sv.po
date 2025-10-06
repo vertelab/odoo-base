@@ -36,9 +36,9 @@ msgstr "Visningsnamn"
 #. module: partner_company_registry
 #: model:ir.model.fields,field_description:partner_company_registry.field_res_partner__id
 msgid "ID"
-msgstr ""
+msgstr "ID"
 
 #. module: partner_company_registry
 #: model:ir.model.fields,field_description:partner_company_registry.field_res_partner____last_update
 msgid "Last Modified on"
-msgstr "Senast ändrad den"
+msgstr "Senast redigerad den"
