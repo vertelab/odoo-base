@@ -44,19 +44,19 @@ msgstr "Visningsnamn"
 #: model:ir.model.fields,field_description:base_user_role_default.field_res_company__id
 #: model:ir.model.fields,field_description:base_user_role_default.field_res_config_settings__id
 msgid "ID"
-msgstr ""
+msgstr "ID"
 
 #. module: base_user_role_default
 #: model:ir.model.fields,field_description:base_user_role_default.field_portal_wizard_user____last_update
 #: model:ir.model.fields,field_description:base_user_role_default.field_res_company____last_update
 #: model:ir.model.fields,field_description:base_user_role_default.field_res_config_settings____last_update
 msgid "Last Modified on"
-msgstr "Senast redigerad"
+msgstr "Senast redigerad den"
 
 #. module: base_user_role_default
 #: model:ir.model.fields,field_description:base_user_role_default.field_res_config_settings__portal_role_id
 msgid "Paper format"
-msgstr ""
+msgstr "Pappersformat"
 
 #. module: base_user_role_default
 #: model:ir.model,name:base_user_role_default.model_portal_wizard_user

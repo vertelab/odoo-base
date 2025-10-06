@@ -58,7 +58,7 @@ msgstr "ID"
 #: model:ir.model.fields,field_description:res_sni.field_res_partner____last_update
 #: model:ir.model.fields,field_description:res_sni.field_res_sni____last_update
 msgid "Last Modified on"
-msgstr "Senast redigerad"
+msgstr "Senast redigerad den"
 
 #. module: res_sni
 #: model:ir.model.fields,field_description:res_sni.field_res_sni__write_uid
@@ -89,7 +89,7 @@ msgstr "Officiell kod, grupp, undergrupp eller detaljgrupp."
 #. module: res_sni
 #: model:ir.model.fields,field_description:res_sni.field_res_sni__parent_id
 msgid "Parent"
-msgstr "Förälder"
+msgstr "Överliggande"
 
 #. module: res_sni
 #: model:ir.model.fields,field_description:res_sni.field_res_sni__partner_ids
@@ -123,4 +123,4 @@ msgstr "Sök SNI"
 #. module: res_sni
 #: model:ir.model,name:res_sni.model_res_sni
 msgid "res.sni"
-msgstr "SNI"
+msgstr "res.sni"
