@@ -28,7 +28,7 @@ msgstr "Visningsnamn"
 #. module: partner_portal_user
 #: model:ir.model.fields,field_description:partner_portal_user.field_res_partner__id
 msgid "ID"
-msgstr ""
+msgstr "ID"
 
 #. module: partner_portal_user
 #: model:ir.model.fields,field_description:partner_portal_user.field_res_partner__is_portaluser
@@ -39,4 +39,4 @@ msgstr "Är portalanvändare"
 #. module: partner_portal_user
 #: model:ir.model.fields,field_description:partner_portal_user.field_res_partner____last_update
 msgid "Last Modified on"
-msgstr "Senast redigerad"
+msgstr "Senast redigerad den"
