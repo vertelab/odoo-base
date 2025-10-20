@@ -29,7 +29,7 @@ patch(PosStore.prototype, {
         this.orderToTransferUuid = null;
         this.showScreen("ActionScreen", { actionName: "ManageBookings" });
         await this.action.doAction(
-            await this.data.call("calendar.event", "action_open_booking_gantt_view", [
+            await this.data.call("calendar.event", "action_open_booking_calendar_view", [
                 this.config.raw.booking_type_id,
             ])
         );
