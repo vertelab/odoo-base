@@ -5,6 +5,7 @@
     'category': 'Booking',
     'summary': 'Booking payment',
     'description': """Booking payment""",
+    'license': 'AGPL-3',
     'depends': ['base_booking', 'account_payment'],
     'data': [
         'security/ir.model.access.csv',
