@@ -118,7 +118,6 @@ class ResPartnerMixin(models.AbstractModel):
                     if type(bw[k]) == str:
                         rec[key] = bw[k]
                     else:
-                        # ~ rec[key] = bw[k].strftime("%Y-%m-%d %H:%M:%S")
                         rec[key] = bw[k]
                 else:
                     _logger.warning(f"{key=} {f[key]['type']=}")
