@@ -13,7 +13,6 @@ COMPANY_NO_IAP=True
 class ResPartnerMixin(models.AbstractModel):
     _name = "res.builtwith.mixin"
     
-    # ~ data['categories']
     bw_analytics = fields.Char(string='Analytics')
     bw_blogs = fields.Char(string='Blogs')
     bw_cache_tools = fields.Char(string='Cache Tools')
