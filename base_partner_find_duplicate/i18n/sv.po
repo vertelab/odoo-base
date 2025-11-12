@@ -25,12 +25,12 @@ msgstr "Avbryt"
 #. module: base_partner_find_duplicate
 #: model:ir.model.fields,field_description:base_partner_find_duplicate.field_find_duplicates_contacts_wizard__create_uid
 msgid "Created by"
-msgstr ""
+msgstr "Skapad av"
 
 #. module: base_partner_find_duplicate
 #: model:ir.model.fields,field_description:base_partner_find_duplicate.field_find_duplicates_contacts_wizard__create_date
 msgid "Created on"
-msgstr "Skapat"
+msgstr "Skapat den"
 
 #. module: base_partner_find_duplicate
 #: model:ir.model.fields,field_description:base_partner_find_duplicate.field_find_duplicates_contacts_wizard__display_name
@@ -40,12 +40,12 @@ msgstr "Visningsnamn"
 #. module: base_partner_find_duplicate
 #: model:ir.model.fields.selection,name:base_partner_find_duplicate.selection__find_duplicates_contacts_wizard__find_duplicates_filter__email
 msgid "Email"
-msgstr "Mejl"
+msgstr "Epost"
 
 #. module: base_partner_find_duplicate
 #: model:ir.ui.menu,name:base_partner_find_duplicate.menu_find_duplicate_contacts_root
 msgid "Find Duplicate Contacts"
-msgstr "Hitta duplicerade kontakter"
+msgstr "Hitta kontakter, dubletter"
 
 #. module: base_partner_find_duplicate
 #: model:ir.ui.menu,name:base_partner_find_duplicate.menu_find_duplicate_contact
@@ -56,7 +56,7 @@ msgstr "Hitta dubbletter"
 #. module: base_partner_find_duplicate
 #: model:ir.model.fields,field_description:base_partner_find_duplicate.field_find_duplicates_contacts_wizard__find_duplicates_filter
 msgid "Find Duplicates Filter"
-msgstr "Duplicerat fält"
+msgstr "Hitta filter, dubletter"
 
 #. module: base_partner_find_duplicate
 #: model:ir.actions.act_window,name:base_partner_find_duplicate.action_find_duplicates_contacts
@@ -66,27 +66,27 @@ msgstr "Hitta dubbletter"
 #. module: base_partner_find_duplicate
 #: model:ir.model,name:base_partner_find_duplicate.model_find_duplicates_contacts_wizard
 msgid "Find duplicates of contact information"
-msgstr "Hitta duplicerad kontaktinformation"
+msgstr "Hitta dubetter med kontaktinformation"
 
 #. module: base_partner_find_duplicate
 #: model:ir.model.fields,field_description:base_partner_find_duplicate.field_find_duplicates_contacts_wizard__id
 msgid "ID"
-msgstr ""
+msgstr "ID"
 
 #. module: base_partner_find_duplicate
 #: model:ir.model.fields,field_description:base_partner_find_duplicate.field_find_duplicates_contacts_wizard____last_update
 msgid "Last Modified on"
-msgstr ""
+msgstr "Senast redigerad den"
 
 #. module: base_partner_find_duplicate
 #: model:ir.model.fields,field_description:base_partner_find_duplicate.field_find_duplicates_contacts_wizard__write_uid
 msgid "Last Updated by"
-msgstr ""
+msgstr "Senast uppdaterad av"
 
 #. module: base_partner_find_duplicate
 #: model:ir.model.fields,field_description:base_partner_find_duplicate.field_find_duplicates_contacts_wizard__write_date
 msgid "Last Updated on"
-msgstr ""
+msgstr "Senast uppdaterad den"
 
 #. module: base_partner_find_duplicate
 #: model:ir.model.fields.selection,name:base_partner_find_duplicate.selection__find_duplicates_contacts_wizard__find_duplicates_filter__name

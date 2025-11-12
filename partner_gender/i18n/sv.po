@@ -20,7 +20,7 @@ msgstr ""
 #. module: partner_gender
 #: model:ir.model.fields.selection,name:partner_gender.selection__res_partner__gender__other
 msgid "Annat"
-msgstr ""
+msgstr "Other"
 
 #. module: partner_gender
 #: model:ir.model,name:partner_gender.model_res_partner
@@ -33,7 +33,7 @@ msgstr "Kontakt"
 #: model_terms:ir.ui.view,arch_db:partner_gender.portal_my_details
 #, python-format
 msgid "Decline to answer"
-msgstr "Vill ej svara"
+msgstr "Avstår att svara"
 
 #. module: partner_gender
 #: model:ir.model.fields,field_description:partner_gender.field_res_partner__display_name
@@ -58,7 +58,7 @@ msgstr "Kön"
 #: model:ir.model.fields,field_description:partner_gender.field_res_partner__gender_txt
 #: model:ir.model.fields,field_description:partner_gender.field_res_users__gender_txt
 msgid "Gender Txt"
-msgstr ""
+msgstr "Kön txt"
 
 #. module: partner_gender
 #: model:ir.model.fields,field_description:partner_gender.field_res_partner__id
@@ -68,7 +68,7 @@ msgstr "ID"
 #. module: partner_gender
 #: model:ir.model.fields,field_description:partner_gender.field_res_partner____last_update
 msgid "Last Modified on"
-msgstr "Senast ändrad"
+msgstr "Senast redigerad den"
 
 #. module: partner_gender
 #: code:addons/partner_gender/models/res_partner.py:0

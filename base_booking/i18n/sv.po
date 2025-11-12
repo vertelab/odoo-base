@@ -1024,7 +1024,7 @@ msgstr "Stäng"
 #. module: base_booking
 #: model:ir.model.fields,field_description:base_booking.field_booking_resource__company_id
 msgid "Company"
-msgstr "Företag"
+msgstr "Bolag"
 
 #. module: base_booking
 #: model:ir.model.fields,field_description:base_booking.field_booking_invite__disable_save_button
@@ -1541,7 +1541,7 @@ msgstr ""
 #. module: base_booking
 #: model:ir.model.fields,help:base_booking.field_booking_resource__resource_calendar_id
 msgid "If kept empty, the working schedule of the company set on the resource will be used"
-msgstr "Om den lämnas tom kommer arbetsschemat för det företag som anges på resursen att användas"
+msgstr "Om den lämnas tom kommer arbetsschemat för det bolaget som anges på resursen att användas"
 
 #. module: base_booking
 #: model:ir.model.fields,help:base_booking.field_booking_type__canceled_mail_template_id

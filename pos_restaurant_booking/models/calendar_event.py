@@ -57,17 +57,16 @@ class CalendarEvent(models.Model):
                 "event": item['event'],
             }))
 
-    def action_open_booking_gantt_view(self):
+    def action_open_booking_calendar_view(self):
         booking_type_id = self.booking_resource_ids[0].booking_type_ids[0].id if self.booking_resource_ids else self.id
+        calendar_view = self.env.ref('pos_restaurant_booking.calendar_event_view_booking_resource_inherited')
         return {
             'name': 'Manage Bookings',
             'type': 'ir.actions.act_window',
             'res_model': 'calendar.event',
-            # "views": [(self.env.ref("pos_restaurant_booking.calendar_event_view_gantt_booking_resource_inherited").id, "gantt")],
-            "views": [(self.env.ref("pos_restaurant_booking.calendar_event_view_booking_resource_inherited").id, "calendar")],
+            "views": [(calendar_view.id, "calendar")],
             'target': 'current',
             'context': {
-                # 'appointment_booking_gantt_show_all_resources': True,
                 'active_model': 'booking.type',
                 "search_default_booking_type_id": booking_type_id,
             }
@@ -79,7 +78,7 @@ class CalendarEvent(models.Model):
             'target': 'new',
             'type': 'ir.actions.act_window',
             'res_model': 'calendar.event',
-            'views': [(self.env.ref('pos_restaurant_booking.calendar_event_view_form_gantt_booking_inherit').id, 'form')],
+            'views': [(self.env.ref('pos_restaurant_booking.calendar_event_view_form_booking_inherit').id, 'form')],
             'res_id': self.id,
         }
 

@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<odoo>
+    <data>
+        <record id="group_confidentiality_marking_manager" model="res.groups">
+            <field name="name">Confidentiality Manager</field>
+            <field name="category_id" ref="base.module_category_hidden" />
+            <field name="users" eval="[(4, ref('base.user_admin'))]" />
+        </record>
+    </data>
+</odoo>

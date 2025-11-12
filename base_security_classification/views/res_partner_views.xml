@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<odoo>
+    <data>
+        <record model="ir.ui.view" id="res_partner_form_confidentiality">
+            <field name="name">res.partner.form.confidentiality</field>
+            <field name="model">res.partner</field>
+            <field name="inherit_id" ref="base.view_partner_form"/>
+            <field name="arch" type="xml">
+                <field name="function" position="after">
+                    <field name="confidentiality_marking"/>
+                    <field name="cm_uuid" invisible="1"/>
+                </field>
+
+                <xpath expr="//notebook" position="inside">
+                    <page string="Confidentiality"
+                          groups="base_security_classification.group_confidentiality_marking_manager"
+                          invisible="not confidentiality_marking">
+                        <group string="Confidentiality Settings">
+                            <group>
+                                <field name="cm_uuid" readonly="1"/>
+                            </group>
+                        </group>
+
+                        <group string="Fields to Hide"
+                               invisible="not confidentiality_marking">
+                            <group>
+                                <field name="cm_name" string="Hide Name"/>
+                                <field name="cm_mobile" string="Hide Mobile"/>
+                                <field name="cm_phone" string="Hide Phone"/>
+                            </group>
+                            <group>
+                                <field name="cm_address" string="Hide Address"/>
+                                <field name="cm_email" string="Hide Email"/>
+                                <field name="cm_ssnr" string="Hide SSN/VAT"/>
+                            </group>
+                        </group>
+
+                        <group string="Technical Information"
+                               invisible="not confidentiality_marking">
+                            <field name="cm_vault" readonly="1" widget="text"/>
+                        </group>
+
+                        <div class="alert alert-warning"
+                             role="alert"
+                             invisible="not confidentiality_marking">
+                            <strong>Warning:</strong> When confidentiality marking is enabled,
+                            selected fields will be encrypted and hidden from users who are not
+                            in the Confidentiality Manager group. The UUID will be displayed instead.
+                        </div>
+                    </page>
+                </xpath>
+
+                <xpath expr="//form/sheet" position="before">
+                    <div class="alert alert-info text-center"
+                         role="alert"
+                         invisible="not confidentiality_marking">
+                        <i class="fa fa-lock" title="Locked"/>
+                        <strong style="margin-left: 5px;">Confidential Contact</strong> -
+                        Some information is protected (UUID: <field name="cm_uuid" readonly="1" class="oe_inline"/>)
+                    </div>
+                </xpath>
+            </field>
+        </record>
+    </data>
+</odoo>

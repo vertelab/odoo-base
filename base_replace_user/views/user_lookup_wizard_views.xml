@@ -1,0 +1,41 @@
+<odoo>
+    <data>
+        <record id="view_user_lookup_wizard" model="ir.ui.view">
+            <field name="name">user.lookup.wizard.form</field>
+            <field name="model">user.lookup.wizard</field>
+            <field name="arch" type="xml">
+                <form string="Replace Users Wizard">
+                    <header>
+                        <button string="Lookup" name="action_user_lookup" type="object" class="oe_highlight" data-hotkey="q" invisible="line_ids"/>
+                    </header>
+                    <sheet>
+                        <group>
+                            <group>
+                                <field name="old_user_id"/>
+                                <field name="new_user_id"/>
+                            </group>
+                        </group>
+                        <field name="line_ids" options="{'no_open': True, 'no_create': True}" invisible="1"/>
+                    </sheet>
+                </form>
+            </field>
+        </record>
+
+        <record id="action_view_user_lookup_wizard" model="ir.actions.act_window">
+            <field name="name">Replace Users</field>
+            <field name="res_model">user.lookup.wizard</field>
+            <field name="view_mode">form</field>
+            <field name="view_id" ref="view_user_lookup_wizard"/>
+            <field name="target">inline</field>
+        </record>
+
+        <menuitem
+            id="menu_action_user_lookup"
+            name="Replace Users"
+            action="action_view_user_lookup_wizard"
+            parent="sale.menu_sale_config"
+            sequence="800"
+            groups="base.group_no_one,sales_team.group_sale_manager"/>
+
+    </data>
+</odoo>

@@ -13,7 +13,6 @@ COMPANY_NO_IAP=True
 class ResPartnerMixin(models.AbstractModel):
     _name = "res.builtwith.mixin"
     
-    # ~ data['categories']
     bw_analytics = fields.Char(string='Analytics')
     bw_blogs = fields.Char(string='Blogs')
     bw_cache_tools = fields.Char(string='Cache Tools')
@@ -75,14 +74,14 @@ class ResPartnerMixin(models.AbstractModel):
                 partner.website = partner.name2website()
             if partner.website:
                 partner.bw_enrich()
-        super(ResPartner,self).partner_enrich()
+        super(ResPartnerMixin, self).partner_enrich()
 
     @api.model
-    def enrich_company(self, company_domain, partner_gid, vat,timeout=COMPANY_AC_TIMEOUT):
+    def enrich_company(self, company_domain, partner_gid, vat, timeout=COMPANY_AC_TIMEOUT):
         res = {}
         _logger.warning(f"builtwith enrich_company {company_domain=} {partner_gid=} {vat=} {self=}")
-        if COMPANY_NO_IAP == True:
-            res = super(ResPartner, self).enrich_company(company_domain,partner_gid,vat)
+        if COMPANY_NO_IAP:
+            res = super(ResPartnerMixin, self).enrich_company(company_domain,partner_gid,vat)
         return res
 
     def bw_enrich(self):
@@ -92,7 +91,6 @@ class ResPartnerMixin(models.AbstractModel):
 
             rec = {}
             f = p.fields_get()
-            # ~ _logger.warning(f"{f=}")
 
             for k in bw.keys():
                 key = f'bw_{k}'.replace('-','_')
@@ -102,7 +100,6 @@ class ResPartnerMixin(models.AbstractModel):
                 if not key in f.keys():
                     _logger.warning(f"missing field {key=}")
                     continue
-                # ~ _logger.warning(f"{key=} {bk=} {bw[bk]=}")
                 _logger.warning(f"working with field {key=}  {bw[k]=}  {f[key]['type']=}  {type(bw[k])=}")
 
                 if f[key]['type'] == 'char':
@@ -121,7 +118,6 @@ class ResPartnerMixin(models.AbstractModel):
                     if type(bw[k]) == str:
                         rec[key] = bw[k]
                     else:
-                        # ~ rec[key] = bw[k].strftime("%Y-%m-%d %H:%M:%S")
                         rec[key] = bw[k]
                 else:
                     _logger.warning(f"{key=} {f[key]['type']=}")
@@ -160,6 +156,6 @@ class ResPartner(models.Model):
     def enrich_company(self, company_domain, partner_gid, vat):
         res = {}
         _logger.warning(f"builtwith enrich_company {company_domain=} {partner_gid=} {vat=} {self=}")
-        if COMPANY_NO_IAP == True:
+        if COMPANY_NO_IAP:
             res = super(ResPartner, self).enrich_company(company_domain,partner_gid,vat)
         return res

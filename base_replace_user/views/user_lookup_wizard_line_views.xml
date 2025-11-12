@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<odoo>
+    <data>
+        <record id="user_lookup_wizard_line_view_list" model="ir.ui.view">
+            <field name="name">user.lookup.wizard.line.view.list</field>
+            <field name="model">user.lookup.wizard.line</field>
+            <field name="arch" type="xml">
+                <list create="0" edit="0">
+                    <field name="res_model_id"/>
+                    <field name="res_name" column_invisible="True"/>
+                    <field name="res_model" column_invisible="True"/>
+                    <field name="resource_ref"
+                           options="{'model_field': 'res_model_id', 'no_create': True}"
+                           invisible="not resource_ref"/>
+                    <button name="action_open_record"
+                            type="object"
+                            icon="fa-external-link"
+                            invisible="not resource_ref"
+                            title="Open Record"/>
+                    <field name="res_id" string="ID"/>
+                    <field name="is_updated" widget="boolean_toggle" readonly="1"/>
+                    <button name="action_update_user"
+                            string="Update"
+                            type="object"
+                            icon="fa-edit"
+                            invisible="is_updated"
+                            class="btn-primary"/>
+                </list>
+            </field>
+        </record>
+
+        <record id="user_lookup_wizard_line_view_search" model="ir.ui.view">
+            <field name="name">user.lookup.wizard.line.view.search</field>
+            <field name="model">user.lookup.wizard.line</field>
+            <field name="arch" type="xml">
+                <search string="Search References">
+                    <field name="res_model_id"/>
+                    <field name="is_updated" invisible="1"/>
+                    <filter string="Not Updated" name="not_updated" domain="[('is_updated', '=', False)]"/>
+                    <filter string="Updated" name="updated" domain="[('is_updated', '=', True)]"/>
+                    <group expand="0" string="Group By">
+                        <filter string="Model" name="group_by_res_model_id" domain="[]" context="{'group_by': 'res_model_id'}"/>
+                    </group>
+                </search>
+            </field>
+        </record>
+
+        <record id="action_user_lookup_wizard_line" model="ir.actions.act_window">
+            <field name="name">User Lookup Results</field>
+            <field name="res_model">user.lookup.wizard.line</field>
+            <field name="view_mode">list</field>
+            <field name="view_id" ref="user_lookup_wizard_line_view_list"/>
+            <field name="context">{'search_default_group_by_res_model_id': 1, 'search_default_not_updated': 1}</field>
+            <field name="target">current</field>
+        </record>
+
+        <!-- Server Action to Update Selected Lines -->
+        <record id="ir_action_server_update_user_lines" model="ir.actions.server">
+            <field name="name">Update User ID</field>
+            <field name="model_id" ref="base_replace_user.model_user_lookup_wizard_line"/>
+            <field name="binding_model_id" ref="base_replace_user.model_user_lookup_wizard_line"/>
+            <field name="binding_view_types">list</field>
+            <field name="groups_id" eval="[Command.link(ref('base.group_system'))]"/>
+            <field name="state">code</field>
+            <field name="code">
+if records:
+    action = records.action_update_user()
+            </field>
+        </record>
+    </data>
+</odoo>
