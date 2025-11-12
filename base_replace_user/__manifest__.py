@@ -34,10 +34,11 @@
     'author': 'Vertel AB',
     'website': 'https://vertel.se/apps/odoo-base',
     'license': 'AGPL-3',
-    'depends': ["account", "base"],
+    'depends': ["sales_team", "base"],
     'data': [
         "security/ir.model.access.csv",
-        "views/replace_user_wizard_views.xml",
+        "views/user_lookup_wizard_views.xml",
+        "views/user_lookup_wizard_line_views.xml",
     ],
     'application': False,
     'installable': True,
