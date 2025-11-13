@@ -1,0 +1,21 @@
+<odoo>
+  <data>
+
+    <record id="res_partner_template_form" model="ir.ui.view">
+            <field name="name">res.partner.template.form</field>
+            <field name="model">res.partner</field>
+            <field name="inherit_id" ref="base.view_partner_form"/>
+            <field name="arch" type="xml">
+                <sheet position="before">
+                    <header >
+                        <button string="Create From Template" name="create_partner_from_template" type="object"  class="oe_highlight" invisible="not is_template"/>
+                    </header>
+                </sheet>
+                <field name="category_id" position="after">
+                    <field name="is_template" widget="boolean_toggle"/>
+                </field>
+            </field>
+          </record> 
+
+  </data>
+</odoo>
