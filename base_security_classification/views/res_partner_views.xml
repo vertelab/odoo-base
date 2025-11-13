@@ -7,7 +7,7 @@
             <field name="inherit_id" ref="base.view_partner_form"/>
             <field name="arch" type="xml">
                 <field name="function" position="after">
-                    <field name="confidentiality_marking"/>
+                    <field name="confidentiality_marking" groups="base_security_classification.group_confidentiality_marking_manager"/>
                     <field name="cm_uuid" invisible="1"/>
                 </field>
 
