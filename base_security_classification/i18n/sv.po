@@ -1,0 +1,146 @@
+# Translation of Odoo Server.
+# This file contains the translation of the following modules:
+# 	* base_security_classification
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: Odoo Server 18.0-20251110\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2025-11-13 10:33+0000\n"
+"PO-Revision-Date: 2025-11-13 11:42+0100\n"
+"Last-Translator: \n"
+"Language-Team: \n"
+"Language: sv_SE\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"X-Generator: Poedit 3.4.2\n"
+
+#. module: base_security_classification
+#: model_terms:ir.ui.view,arch_db:base_security_classification.res_partner_form_confidentiality
+msgid ""
+"<i class=\"fa fa-lock\" title=\"Locked\"/>\n"
+"                        <strong style=\"margin-left: 5px;\">Confidential Contact</strong> -\n"
+"                        Some information is protected (UUID:"
+msgstr ""
+"<i class=\"fa fa-lock\" title=\"Locked\"/>\n"
+"                        <strong style=\"margin-left: 5px;\">Konfidentiell kontakt</strong> -\n"
+"                        Viss information är skyddad (UUID:"
+
+#. module: base_security_classification
+#: model_terms:ir.ui.view,arch_db:base_security_classification.res_partner_form_confidentiality
+msgid ""
+"<strong>Warning:</strong> When confidentiality marking is enabled,\n"
+"                            selected fields will be encrypted and hidden from users who are not\n"
+"                            in the Confidentiality Manager group. The UUID will be displayed instead."
+msgstr ""
+"<strong>Varning:</strong> När sekretessmarkering är aktiverad \n"
+"                            kommer valda fält att krypteras och döljas för användare som inte \n"
+"                            finns i gruppen Sekretesshanterare. UUID visas istället."
+
+#. module: base_security_classification
+#: model:ir.model.fields,field_description:base_security_classification.field_res_partner__cm_vault
+#: model:ir.model.fields,field_description:base_security_classification.field_res_users__cm_vault
+msgid "Confidential Vault"
+msgstr "Konfidentiellt valv"
+
+#. module: base_security_classification
+#: model_terms:ir.ui.view,arch_db:base_security_classification.res_partner_form_confidentiality
+msgid "Confidentiality"
+msgstr "Sekretess"
+
+#. module: base_security_classification
+#: model:res.groups,name:base_security_classification.group_confidentiality_marking_manager
+msgid "Confidentiality Manager"
+msgstr "Sekretessansvarig"
+
+#. module: base_security_classification
+#: model:ir.model.fields,field_description:base_security_classification.field_res_partner__confidentiality_marking
+#: model:ir.model.fields,field_description:base_security_classification.field_res_users__confidentiality_marking
+msgid "Confidentiality Marking"
+msgstr "Sekretessmärkning"
+
+#. module: base_security_classification
+#: model_terms:ir.ui.view,arch_db:base_security_classification.res_partner_form_confidentiality
+msgid "Confidentiality Settings"
+msgstr "Sekretessinställnigar"
+
+#. module: base_security_classification
+#: model:ir.model.fields,field_description:base_security_classification.field_res_partner__cm_uuid
+#: model:ir.model.fields,field_description:base_security_classification.field_res_users__cm_uuid
+msgid "Confidentiality UUID"
+msgstr "Sekretess UUID"
+
+#. module: base_security_classification
+#: model:ir.model,name:base_security_classification.model_res_partner
+msgid "Contact"
+msgstr "Kontakt"
+
+#. module: base_security_classification
+#: model_terms:ir.ui.view,arch_db:base_security_classification.res_partner_form_confidentiality
+msgid "Fields to Hide"
+msgstr "Fält att dölja"
+
+#. module: base_security_classification
+#: model:ir.model.fields,field_description:base_security_classification.field_res_partner__cm_address
+#: model:ir.model.fields,field_description:base_security_classification.field_res_users__cm_address
+#: model_terms:ir.ui.view,arch_db:base_security_classification.res_partner_form_confidentiality
+msgid "Hide Address"
+msgstr "Dölj adress"
+
+#. module: base_security_classification
+#: model:ir.model.fields,field_description:base_security_classification.field_res_partner__cm_email
+#: model:ir.model.fields,field_description:base_security_classification.field_res_users__cm_email
+#: model_terms:ir.ui.view,arch_db:base_security_classification.res_partner_form_confidentiality
+msgid "Hide Email"
+msgstr "Dölj e-post"
+
+#. module: base_security_classification
+#: model:ir.model.fields,field_description:base_security_classification.field_res_partner__cm_mobile
+#: model:ir.model.fields,field_description:base_security_classification.field_res_users__cm_mobile
+#: model_terms:ir.ui.view,arch_db:base_security_classification.res_partner_form_confidentiality
+msgid "Hide Mobile"
+msgstr "Dölj mobilnummer"
+
+#. module: base_security_classification
+#: model:ir.model.fields,field_description:base_security_classification.field_res_partner__cm_name
+#: model:ir.model.fields,field_description:base_security_classification.field_res_users__cm_name
+#: model_terms:ir.ui.view,arch_db:base_security_classification.res_partner_form_confidentiality
+msgid "Hide Name"
+msgstr "Dölj namn"
+
+#. module: base_security_classification
+#: model:ir.model.fields,field_description:base_security_classification.field_res_partner__cm_phone
+#: model:ir.model.fields,field_description:base_security_classification.field_res_users__cm_phone
+#: model_terms:ir.ui.view,arch_db:base_security_classification.res_partner_form_confidentiality
+msgid "Hide Phone"
+msgstr "Dölj telefonnummer"
+
+#. module: base_security_classification
+#: model:ir.model.fields,field_description:base_security_classification.field_res_partner__cm_ssnr
+#: model:ir.model.fields,field_description:base_security_classification.field_res_users__cm_ssnr
+msgid "Hide SSN/Registration"
+msgstr "Dölj SSN/Registrering"
+
+#. module: base_security_classification
+#: model_terms:ir.ui.view,arch_db:base_security_classification.res_partner_form_confidentiality
+msgid "Hide SSN/VAT"
+msgstr "Dölj SSN/moms"
+
+#. module: base_security_classification
+#: model_terms:ir.ui.view,arch_db:base_security_classification.res_partner_form_confidentiality
+msgid "Technical Information"
+msgstr "Teknisk information"
+
+#. module: base_security_classification
+#. odoo-python
+#: code:addons/base_security_classification/models/res_partner.py:0
+msgid "You don't have permission to delete partners with confidentiality marking."
+msgstr "Du har inte behörighet att ta bort partners med sekretessmarkering."
+
+#. module: base_security_classification
+#. odoo-python
+#: code:addons/base_security_classification/models/res_partner.py:0
+msgid "You don't have permission to modify these confidential fields: %s"
+msgstr "Du har inte behörighet att ändra dessa konfidentiella fält: %s"

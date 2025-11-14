@@ -1,0 +1,233 @@
+# Translation of Odoo Server.
+# This file contains the translation of the following modules:
+# 	* base_booking_mail
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: Odoo Server 18.0-20251110\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2025-11-13 14:40+0000\n"
+"PO-Revision-Date: 2025-11-13 15:55+0100\n"
+"Last-Translator: \n"
+"Language-Team: \n"
+"Language: sv\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"X-Generator: Poedit 3.4.2\n"
+
+#. module: base_booking_mail
+#: model:ir.model.fields,field_description:base_booking_mail.field_booking_mail__mail_count_done
+#: model:ir.model.fields,field_description:base_booking_mail.field_booking_mail_calendar__mail_count_done
+msgid "# Sent"
+msgstr "# Skickat"
+
+#. module: base_booking_mail
+#: model:ir.model.fields.selection,name:base_booking_mail.selection__booking_mail__interval_type__after_sub
+msgid "After each registration"
+msgstr "Efter varje registrering"
+
+#. module: base_booking_mail
+#: model:ir.model.fields.selection,name:base_booking_mail.selection__booking_mail__interval_type__after_event
+msgid "After the event"
+msgstr "Efter evenemanget"
+
+#. module: base_booking_mail
+#: model:ir.model.fields.selection,name:base_booking_mail.selection__booking_mail__interval_type__before_event
+msgid "Before the event"
+msgstr "Före evenemanget"
+
+#. module: base_booking_mail
+#: model:ir.model,name:base_booking_mail.model_booking_mail
+msgid "Booking Automated Mailing"
+msgstr "Bokning av automatiserade utskick"
+
+#. module: base_booking_mail
+#: model:ir.model.fields,field_description:base_booking_mail.field_booking_mail_calendar__booking_mail_id
+#: model:ir.model.fields,field_description:base_booking_mail.field_booking_type__booking_mail_ids
+msgid "Booking Mail"
+msgstr "Bokning e-post"
+
+#. module: base_booking_mail
+#: model:ir.model.fields,field_description:base_booking_mail.field_booking_mail__booking_mail_calendar_ids
+#: model:ir.model.fields,field_description:base_booking_mail.field_calendar_event__booking_mail_calendar_ids
+msgid "Booking Mail Calendar"
+msgstr "Bokning e-post Kalender"
+
+#. module: base_booking_mail
+#: model:ir.model,name:base_booking_mail.model_booking_type
+#: model:ir.model.fields,field_description:base_booking_mail.field_booking_mail__booking_type_id
+msgid "Booking Type"
+msgstr "Bokningstyp"
+
+#. module: base_booking_mail
+#: model:ir.actions.server,name:base_booking_mail.booking_mail_scheduler_ir_actions_server
+msgid "Booking: Mail Scheduler"
+msgstr "Bokning: Schemaläggare för e-post"
+
+#. module: base_booking_mail
+#: model:ir.model,name:base_booking_mail.model_calendar_event
+#: model:ir.model.fields,field_description:base_booking_mail.field_booking_mail_calendar__calendar_event_id
+msgid "Calendar Event"
+msgstr "Kalenderhändelse"
+
+#. module: base_booking_mail
+#: model_terms:ir.ui.view,arch_db:base_booking_mail.booking_type_view_form
+msgid "Communication"
+msgstr "Kommunikation"
+
+#. module: base_booking_mail
+#: model:ir.model.fields,field_description:base_booking_mail.field_booking_mail__create_uid
+#: model:ir.model.fields,field_description:base_booking_mail.field_booking_mail_calendar__create_uid
+msgid "Created by"
+msgstr "Skapad av"
+
+#. module: base_booking_mail
+#: model:ir.model.fields,field_description:base_booking_mail.field_booking_mail__create_date
+#: model:ir.model.fields,field_description:base_booking_mail.field_booking_mail_calendar__create_date
+msgid "Created on"
+msgstr "Skapad på"
+
+#. module: base_booking_mail
+#: model:ir.model.fields.selection,name:base_booking_mail.selection__booking_mail__interval_unit__days
+msgid "Days"
+msgstr "Dagar"
+
+#. module: base_booking_mail
+#: model:ir.model.fields,field_description:base_booking_mail.field_booking_mail__display_name
+#: model:ir.model.fields,field_description:base_booking_mail.field_booking_mail_calendar__display_name
+msgid "Display Name"
+msgstr "Visningsnamn"
+
+#. module: base_booking_mail
+#: model:ir.model.fields,field_description:base_booking_mail.field_booking_mail__sequence
+msgid "Display order"
+msgstr "Visningsordning"
+
+#. module: base_booking_mail
+#: model:ir.model.fields,field_description:base_booking_mail.field_booking_mail__mail_state
+msgid "Global communication Status"
+msgstr "Global kommunikationsstatus"
+
+#. module: base_booking_mail
+#: model:ir.model,name:base_booking_mail.model_booking_mail_calendar
+msgid "Glue model between booking.mail and calendar.event"
+msgstr "Limmodell mellan booking.mail och calendar.event"
+
+#. module: base_booking_mail
+#: model:ir.model.fields.selection,name:base_booking_mail.selection__booking_mail__interval_unit__hours
+msgid "Hours"
+msgstr "Timmar"
+
+#. module: base_booking_mail
+#: model:ir.model.fields,field_description:base_booking_mail.field_booking_mail__id
+#: model:ir.model.fields,field_description:base_booking_mail.field_booking_mail_calendar__id
+msgid "ID"
+msgstr "ID"
+
+#. module: base_booking_mail
+#: model:ir.model.fields.selection,name:base_booking_mail.selection__booking_mail__interval_unit__now
+msgid "Immediately"
+msgstr "Omedelbart"
+
+#. module: base_booking_mail
+#: model:ir.model.fields,field_description:base_booking_mail.field_booking_mail__interval_nbr
+#: model:ir.model.fields,field_description:base_booking_mail.field_booking_mail_calendar__interval_nbr
+msgid "Interval"
+msgstr "Intervall"
+
+#. module: base_booking_mail
+#: model:ir.model.fields,field_description:base_booking_mail.field_booking_mail__write_uid
+#: model:ir.model.fields,field_description:base_booking_mail.field_booking_mail_calendar__write_uid
+msgid "Last Updated by"
+msgstr "Senast uppdaterad av"
+
+#. module: base_booking_mail
+#: model:ir.model.fields,field_description:base_booking_mail.field_booking_mail__write_date
+#: model:ir.model.fields,field_description:base_booking_mail.field_booking_mail_calendar__write_date
+msgid "Last Updated on"
+msgstr "Senast uppdaterad den"
+
+#. module: base_booking_mail
+#: model:ir.model.fields.selection,name:base_booking_mail.selection__booking_mail__template_ref__mail_template
+msgid "Mail"
+msgstr "Post"
+
+#. module: base_booking_mail
+#: model:ir.actions.act_window,name:base_booking_mail.booking_mail_action
+#: model_terms:ir.ui.view,arch_db:base_booking_mail.booking_mail_view_list
+msgid "Mail Bookings"
+msgstr "Bokningar per post"
+
+#. module: base_booking_mail
+#: model:ir.model.fields.selection,name:base_booking_mail.selection__booking_mail__interval_unit__months
+msgid "Months"
+msgstr "Månader"
+
+#. module: base_booking_mail
+#: model:ir.model.fields,field_description:base_booking_mail.field_booking_mail_calendar__partner_ids
+msgid "Partner"
+msgstr "Partner"
+
+#. module: base_booking_mail
+#: model:ir.ui.menu,name:base_booking_mail.menu_booking_mail
+msgid "Postplanerare"
+msgstr "Postplanerare"
+
+#. module: base_booking_mail
+#: model_terms:ir.ui.view,arch_db:base_booking_mail.booking_mail_view_form
+msgid "Registration Mails"
+msgstr "Registreringsmeddelanden"
+
+#. module: base_booking_mail
+#: model_terms:ir.ui.view,arch_db:base_booking_mail.booking_mail_view_form
+msgid "Registration mail"
+msgstr "Registreringsmeddelande"
+
+#. module: base_booking_mail
+#: model:ir.model.fields.selection,name:base_booking_mail.selection__booking_mail__mail_state__running
+msgid "Running"
+msgstr "Körning"
+
+#. module: base_booking_mail
+#: model:ir.model.fields,field_description:base_booking_mail.field_booking_mail__scheduled_date
+#: model:ir.model.fields,field_description:base_booking_mail.field_booking_mail_calendar__scheduled_date
+msgid "Schedule Date"
+msgstr "Schema Datum"
+
+#. module: base_booking_mail
+#: model:ir.model.fields.selection,name:base_booking_mail.selection__booking_mail__mail_state__scheduled
+msgid "Scheduled"
+msgstr "Planerad"
+
+#. module: base_booking_mail
+#: model:ir.model.fields,field_description:base_booking_mail.field_booking_mail__mail_done
+#: model:ir.model.fields,field_description:base_booking_mail.field_booking_mail_calendar__mail_done
+#: model:ir.model.fields.selection,name:base_booking_mail.selection__booking_mail__mail_state__sent
+#: model_terms:ir.ui.view,arch_db:base_booking_mail.booking_mail_view_form
+msgid "Sent"
+msgstr "Skickat"
+
+#. module: base_booking_mail
+#: model:ir.model.fields,field_description:base_booking_mail.field_booking_mail__template_ref
+#: model:ir.model.fields,field_description:base_booking_mail.field_booking_mail_calendar__template_ref
+msgid "Template"
+msgstr "Mall"
+
+#. module: base_booking_mail
+#: model:ir.model.fields,field_description:base_booking_mail.field_booking_mail__interval_type
+#: model:ir.model.fields,field_description:base_booking_mail.field_booking_mail_calendar__interval_type
+msgid "Trigger "
+msgstr "Utlösare"
+
+#. module: base_booking_mail
+#: model:ir.model.fields,field_description:base_booking_mail.field_booking_mail__interval_unit
+#: model:ir.model.fields,field_description:base_booking_mail.field_booking_mail_calendar__interval_unit
+msgid "Unit"
+msgstr "Enhet"
+
+#. module: base_booking_mail
+#: model:ir.model.fields.selection,name:base_booking_mail.selection__booking_mail__interval_unit__weeks
+msgid "Weeks"
+msgstr "Veckor"
