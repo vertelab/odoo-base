@@ -8,14 +8,13 @@
             <field name="arch" type="xml">
                 <field name="function" position="after">
                     <field name="confidentiality_marking" groups="base_security_classification.group_confidentiality_marking_manager"/>
-                    <field name="cm_uuid" invisible="1"/>
                 </field>
 
                 <xpath expr="//notebook" position="inside">
                     <page string="Confidentiality"
                           groups="base_security_classification.group_confidentiality_marking_manager"
                           invisible="not confidentiality_marking">
-                        <group string="Confidentiality Settings">
+                        <group string="Confidentiality Settings" invisible="1">
                             <group>
                                 <field name="cm_uuid" readonly="1"/>
                             </group>
@@ -35,10 +34,6 @@
                             </group>
                         </group>
 
-                        <group string="Technical Information"
-                               invisible="not confidentiality_marking">
-                            <field name="cm_vault" readonly="1" widget="text"/>
-                        </group>
 
                         <div class="alert alert-warning"
                              role="alert"

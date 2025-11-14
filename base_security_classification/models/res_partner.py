@@ -2,7 +2,7 @@ import json
 import uuid
 import logging
 from odoo import models, fields, api, _
-from odoo.exceptions import AccessError, ValidationError
+from odoo.exceptions import AccessError
 
 _logger = logging.getLogger(__name__)
 
@@ -20,18 +20,20 @@ class Partner(models.Model):
         'cm_ssnr': ['vat', 'ref'],
     }
 
-    confidentiality_marking = fields.Boolean(
-        string="Confidentiality Marking",
-        default=False,
-    )
+    confidentiality_marking = fields.Boolean(string="Confidentiality Marking", default=False)
     cm_name = fields.Boolean(string="Hide Name")
     cm_address = fields.Boolean(string="Hide Address")
     cm_mobile = fields.Boolean(string="Hide Mobile")
     cm_phone = fields.Boolean(string="Hide Phone")
     cm_email = fields.Boolean(string="Hide Email")
     cm_ssnr = fields.Boolean(string="Hide SSN/Registration")
-    cm_vault = fields.Text(string="Confidential Vault", readonly=True, copy=False)
-    cm_uuid = fields.Char(string="Confidentiality UUID", readonly=True, copy=False, index=True)
+    cm_uuid = fields.Char(
+        string="Confidentiality UUID",
+        readonly=True,
+        copy=False,
+        index=True,
+        default=lambda self: str(uuid.uuid4())
+    )
 
     def _is_confidentiality_manager(self):
         """Check if current user is a confidentiality manager"""
@@ -47,296 +49,279 @@ class Partner(models.Model):
             for field in field_names
         })
 
-    def _get_fields_to_hide_from_vals(self, vals):
-        """Get list of fields to hide based on CM flags in vals dict"""
-        fields_to_hide = []
-        for cm_flag, field_names in self.CM_FIELD_MAPPING.items():
-            if vals.get(cm_flag):
-                fields_to_hide.extend(field_names)
-        return list(set(fields_to_hide))
-
-    def _prepare_vault_data(self):
-        """Prepare data dictionary for encryption"""
-        self.ensure_one()
-        vault_data = {}
-        for field_name in self._get_fields_to_hide():
-            if field_name in self._fields:
-                field_value = self[field_name]
-                vault_data[field_name] = field_value.id if isinstance(field_value, models.BaseModel) else field_value
-        return vault_data
-
-    def _prepare_vault_data_from_vals(self, vals):
-        """Prepare data dictionary for encryption from vals dict"""
-        vault_data = {}
-        fields_to_hide = self._get_fields_to_hide_from_vals(vals)
-
-        for field_name in fields_to_hide:
-            if field_name in vals:
-                vault_data[field_name] = vals[field_name]
-
-        return vault_data
-
     def _get_vault_name(self):
         """Get the vault name for encrypted.data storage"""
         self.ensure_one()
         return f"res.partner,{self.id}"
 
-    def _write_without_tracking(self, vals):
-        """Write without tracking in chatter - for confidential updates"""
-        return super(Partner, self.with_context(
-            tracking_disable=True,
-            mail_notrack=True,
-            mail_create_nosubscribe=True,
-            mail_create_nolog=True,
-            mail_auto_subscribe_no_notify=True
-        )).write(vals)
-
-    def _encrypt_to_vault(self):
-        """Encrypt sensitive data and store in vault"""
+    def _get_vault_data(self):
+        """Get current vault data"""
         self.ensure_one()
-        if not self.confidentiality_marking:
-            return
-
-        new_uuid = self.cm_uuid or str(uuid.uuid4())
-        vault_data = self._prepare_vault_data()
-
-        if not vault_data:
-            return
-
-        # Store encrypted data
-        vault_name = self._get_vault_name()
-        self.env['encrypted.data'].sudo()._encrypted_store_json(vault_name, vault_data)
-
-        # Prepare masked values
-        masked_vals = {
-            'cm_vault': json.dumps({
-                'encrypted': True,
-                'uuid': new_uuid,
-                'fields': list(vault_data.keys())
-            }),
-            'cm_uuid': new_uuid
-        }
-
-        # Mask sensitive fields
-        for field_name in vault_data.keys():
-            if field_name in self._fields:
-                field = self._fields[field_name]
-                masked_vals[field_name] = (
-                    False if field.type == 'many2one'
-                    else new_uuid if field.type in ('char', 'text')
-                    else False
-                )
-
-        # Write without tracking to prevent chatter logs
-        self._write_without_tracking(masked_vals)
-
-    def _restore_from_vault(self):
-        """Restore data from vault back to database fields"""
-        self.ensure_one()
-        if not self.cm_uuid:
-            return
-
-        decrypted_data = self._decrypt_from_vault()
-        if not decrypted_data:
-            _logger.warning(f"No data found in vault for partner {self.id}")
-            return
-
-        # Prepare restoration values
-        restore_vals = {k: v for k, v in decrypted_data.items() if k in self._fields}
-        restore_vals.update({'cm_vault': False, 'cm_uuid': False})
-
-        # Write without tracking
-        if restore_vals:
-            self._write_without_tracking(restore_vals)
-
-        # Cleanup encrypted data
-        self._cleanup_vault()
-
-    def _decrypt_from_vault(self):
-        """Decrypt sensitive data from vault"""
-        self.ensure_one()
-        if not self.cm_uuid:
-            return {}
-
         vault_name = self._get_vault_name()
         return self.env['encrypted.data'].sudo()._encrypted_read_json(vault_name) or {}
+
+    def _save_vault_data(self, vault_data):
+        """Save vault data"""
+        self.ensure_one()
+        vault_name = self._get_vault_name()
+        self.env['encrypted.data'].sudo()._encrypted_store_json(vault_name, vault_data)
 
     def _cleanup_vault(self):
         """Remove encrypted data from vault"""
         self.ensure_one()
         vault_name = self._get_vault_name()
-        existing_data = self.env['encrypted.data'].sudo().search([('name', '=', vault_name)])
-        if existing_data:
-            existing_data.unlink()
+        vault = self.env['encrypted.data'].sudo().search([('name', '=', vault_name)])
+        if vault:
+            vault.unlink()
             self.env.registry.clear_cache()
 
-    def _check_confidential_access(self, vals):
-        """Check if non-manager is trying to modify confidential fields"""
-        if self._is_confidentiality_manager():
+    def _mask_field(self, field_name):
+        """Get masked value for a field"""
+        self.ensure_one()
+        if field_name not in self._fields:
+            return None
+
+        field = self._fields[field_name]
+        if field.type == 'many2one':
+            return False
+        elif field.type in ('char', 'text'):
+            return self.cm_uuid
+        else:
+            return 0 if field.type in ('integer', 'float', 'monetary') else False
+
+    def _sync_vault(self):
+        """Sync fields with vault based on CM flags"""
+        self.ensure_one()
+
+        if not self.confidentiality_marking or not self.cm_uuid:
             return
 
-        for record in self.filtered('confidentiality_marking'):
-            restricted_fields = set(vals.keys()) & set(record._get_fields_to_hide())
-            if restricted_fields:
-                raise AccessError(
-                    _("You don't have permission to modify these confidential fields: %s")
-                    % ', '.join(restricted_fields)
-                )
+        fields_to_hide = self._get_fields_to_hide()
+        vault_data = self._get_vault_data()
 
-    def _handle_cm_activation(self, record, vals):
-        """Handle confidentiality marking activation"""
-        # Use write without tracking for CM activation
-        record._write_without_tracking(vals)
-        record._encrypt_to_vault()
-        record.invalidate_recordset()
-        return True
+        # Get all possible confidential fields
+        all_conf_fields = {f for fields in self.CM_FIELD_MAPPING.values() for f in fields}
 
-    def _handle_cm_deactivation(self, record, vals):
-        """Handle confidentiality marking deactivation"""
-        record._restore_from_vault()
-        # Use write without tracking for CM deactivation
-        result = record._write_without_tracking(vals)
-        record.invalidate_recordset()
-        return result
+        restore_vals = {}
+        mask_vals = {}
 
-    def _handle_cm_update(self, record, vals):
-        """Handle updates to already confidential records"""
-        cm_flags = list(self.CM_FIELD_MAPPING.keys())
-        fields_to_hide = record._get_fields_to_hide()
+        for field_name in all_conf_fields:
+            if field_name not in self._fields:
+                continue
 
-        # Check if any CM flags or sensitive fields changed
-        if any(flag in vals for flag in cm_flags) or any(f in vals for f in fields_to_hide):
-            result = record._write_without_tracking(vals)
-            record.invalidate_recordset()
-            record._encrypt_to_vault()
-            return result
+            should_hide = field_name in fields_to_hide
+            in_vault = field_name in vault_data
+            current_value = self[field_name]
+            is_masked = isinstance(current_value, str) and current_value == self.cm_uuid
 
-        return None
+            if should_hide:
+                # Need to hide this field
+                if not is_masked:
+                    # Not masked yet - store to vault and mask
+                    if not in_vault:
+                        # Store real value (not UUID)
+                        field_value = current_value
+                        # Don't store if it's already the UUID
+                        if isinstance(field_value, models.BaseModel):
+                            vault_data[field_name] = field_value.id if field_value else False
+                        elif field_value != self.cm_uuid:
+                            vault_data[field_name] = field_value
+                    mask_vals[field_name] = self._mask_field(field_name)
+            else:
+                # Should NOT be hidden
+                if in_vault:
+                    # Restore from vault
+                    restore_vals[field_name] = vault_data.pop(field_name)
+
+        # Save vault if changed
+        self._save_vault_data(vault_data)
+
+        # Apply field changes
+        if restore_vals or mask_vals:
+            super(Partner, self).write({**restore_vals, **mask_vals})
+            self.invalidate_recordset()
+
+    def _restore_all_from_vault(self):
+        """Restore all fields from vault and cleanup"""
+        self.ensure_one()
+        vault_data = self._get_vault_data()
+
+        if vault_data:
+            restore_vals = {k: v for k, v in vault_data.items() if k in self._fields}
+
+            super(Partner, self).write(restore_vals)
+
+            self._cleanup_vault()
+            self.invalidate_recordset()
 
     def _read(self, field_names):
-        """Override _read to apply confidentiality masking/unmasking"""
+        """Override _read to apply masking/unmasking"""
         super(Partner, self)._read(field_names)
 
         is_manager = self._is_confidentiality_manager()
         cache = self.env.cache
 
         for record in self:
-            if not record.confidentiality_marking:
+            if not record.confidentiality_marking or not record.cm_uuid:
                 continue
 
             fields_to_hide = record._get_fields_to_hide()
-            if not fields_to_hide or not record.cm_uuid:
+            if not fields_to_hide:
                 continue
 
             if is_manager:
-                self._apply_decryption(record, fields_to_hide, cache)
+                # Show real values from vault
+                vault_data = record._get_vault_data()
+                for field_name in fields_to_hide:
+                    if field_name in vault_data and field_name in self._fields:
+                        field = self._fields[field_name]
+                        value = vault_data[field_name]
+                        cache.set(record, field, value if field.type != 'many2one' or value else False)
             else:
-                self._apply_masking(record, fields_to_hide, cache)
-
-    def _apply_decryption(self, record, fields_to_hide, cache):
-        """Apply decryption for managers"""
-        decrypted_data = record._decrypt_from_vault()
-
-        for field_name in fields_to_hide:
-            if field_name in decrypted_data and field_name in self._fields:
-                field = self._fields[field_name]
-                value = decrypted_data[field_name]
-                cache.set(record, field, value if field.type != 'many2one' or value else False)
-
-    def _apply_masking(self, record, fields_to_hide, cache):
-        """Apply masking for non-managers"""
-        uuid_value = record.cm_uuid
-
-        for field_name in fields_to_hide:
-            if field_name in self._fields:
-                field = self._fields[field_name]
-                masked_value = (
-                    False if field.type == 'many2one'
-                    else uuid_value if field.type in ('char', 'text')
-                    else 0 if field.type in ('integer', 'float', 'monetary')
-                    else False
-                )
-                cache.set(record, field, masked_value)
+                # Show masked values
+                for field_name in fields_to_hide:
+                    if field_name in self._fields:
+                        cache.set(record, self._fields[field_name], record._mask_field(field_name))
 
     def write(self, vals):
-        """Override write to handle confidentiality marking"""
-        # Check access for non-managers
-        self._check_confidential_access(vals)
-
-        # Check if CM is being changed
-        cm_changing = 'confidentiality_marking' in vals
+        """Override write to handle confidentiality"""
         is_manager = self._is_confidentiality_manager()
 
+        # Access check for non-managers
+        if not is_manager:
+            for record in self.filtered('confidentiality_marking'):
+                restricted = set(vals.keys()) & set(record._get_fields_to_hide())
+                if restricted:
+                    raise AccessError(_("You cannot modify confidential fields: %s") % ', '.join(restricted))
+            return super(Partner, self).write(vals)
+
+        cm_flags = list(self.CM_FIELD_MAPPING.keys())
+        cm_changed = 'confidentiality_marking' in vals
+        flags_changed = any(f in vals for f in cm_flags)
+
         for record in self:
-            if not is_manager:
-                continue
+            # Deactivating CM
+            if cm_changed and not vals['confidentiality_marking'] and record.confidentiality_marking:
+                record._restore_all_from_vault()
+                result = super(Partner, record).write(vals)
+                # Reactivate messages when removing confidentiality
+                record._activate_tracking()
+                return result
 
-            # Handle CM deactivation
-            if cm_changing and not vals['confidentiality_marking'] and record.confidentiality_marking:
-                return self._handle_cm_deactivation(record, vals)
+            # Activating CM
+            if cm_changed and vals['confidentiality_marking'] and not record.confidentiality_marking:
+                if not record.cm_uuid:
+                    super(Partner, record).write({'cm_uuid': str(uuid.uuid4())})
+                result = super(Partner, record).write(vals)
+                record._sync_vault()
+                record._deactivate_tracking()
+                return result
 
-            # Handle CM activation
-            if cm_changing and vals['confidentiality_marking']:
-                return self._handle_cm_activation(record, vals)
+            # Changing CM flags
+            if record.confidentiality_marking and flags_changed:
+                result = super(Partner, record).write(vals)
+                record._sync_vault()
+                record._deactivate_tracking()
+                return result
 
-            # Handle updates to confidential records
+            # Updating hidden fields
             if record.confidentiality_marking:
-                result = self._handle_cm_update(record, vals)
-                if result is not None:
-                    return result
+                fields_to_hide = record._get_fields_to_hide()
+                updating_hidden = any(f in vals for f in fields_to_hide)
 
-        # Normal write for non-confidential changes
+                if updating_hidden:
+                    # Update vault
+                    vault_data = record._get_vault_data()
+                    for field_name in fields_to_hide:
+                        if field_name in vals:
+                            vault_data[field_name] = vals[field_name]
+                    record._save_vault_data(vault_data)
+
+                    # Mask in write
+                    masked_vals = vals.copy()
+                    for field_name in fields_to_hide:
+                        if field_name in masked_vals:
+                            masked_vals[field_name] = record._mask_field(field_name)
+
+                    result = super(Partner, record).write(masked_vals)
+                    record._deactivate_tracking()
+                    return result
+                else:
+                    # Normal write with tracking
+                    return super(Partner, record).write(vals)
+
         return super(Partner, self).write(vals)
+
+    def _deactivate_tracking(self):
+        """Deactivate all tracking messages for this partner"""
+        self.ensure_one()
+
+        # Flush to ensure message is created, then invalidate cache to get fresh data
+        self.env.cr.flush()
+        self.invalidate_recordset(['message_ids'])
+
+        # Find all notification messages (tracking messages) for this partner
+        tracking_messages = self.env['mail.message'].search([
+            ('model', '=', 'res.partner'),
+            ('res_id', '=', self.id),
+            ('message_type', '=', 'notification'),
+            ('active', '=', True),
+        ])
+
+        if tracking_messages:
+            tracking_messages.write({'active': False})
+            _logger.info(
+                f"Deactivated {len(tracking_messages)} tracking messages for partner {self.id}"
+            )
+
+    def _activate_tracking(self):
+        """Reactivate all messages when confidentiality is removed"""
+        self.ensure_one()
+
+        # Find all inactive messages for this partner
+        inactive_messages = self.env['mail.message'].search([
+            ('model', '=', 'res.partner'),
+            ('res_id', '=', self.id),
+            ('active', '=', False),
+        ])
+
+        if inactive_messages:
+            inactive_messages.write({'active': True})
+            _logger.info(
+                f"Reactivated {len(inactive_messages)} messages for partner {self.id}"
+            )
 
     @api.model_create_multi
     def create(self, vals_list):
-        """Override create to handle confidentiality marking"""
+        """Override create to handle CM"""
         is_manager = self._is_confidentiality_manager()
 
-        # Don't handle CM during create - let it be handled on first write/save
-        # This prevents UUID generation issues
-        if is_manager:
-            # Remove CM from vals during create to prevent auto-encryption
-            processed_vals_list = []
-            cm_states = []  # Store original CM states
+        if not is_manager:
+            return super(Partner, self).create(vals_list)
 
-            for vals in vals_list:
-                cm_active = vals.get('confidentiality_marking', False)
-                cm_states.append(cm_active)
+        # Ensure UUID for CM records
+        processed = []
+        for vals in vals_list:
+            vals_copy = vals.copy()
+            if vals_copy.get('confidentiality_marking') and not vals_copy.get('cm_uuid'):
+                vals_copy['cm_uuid'] = str(uuid.uuid4())
+            processed.append(vals_copy)
 
-                # If CM is active, temporarily disable it during create
-                if cm_active:
-                    vals_copy = vals.copy()
-                    vals_copy['confidentiality_marking'] = False
-                    processed_vals_list.append(vals_copy)
-                else:
-                    processed_vals_list.append(vals)
+        records = super(Partner, self).create(processed)
 
-            # Create records without CM active
-            records = super(Partner, self).create(processed_vals_list)
-
-            # Now activate CM for records that need it
-            for record, cm_active in zip(records, cm_states):
-                if cm_active:
-                    # Activate CM which will trigger encryption
-                    record._write_without_tracking({'confidentiality_marking': True})
-                    record._encrypt_to_vault()
-                    record.invalidate_recordset()
-        else:
-            records = super(Partner, self).create(vals_list)
+        # Sync vault for CM records
+        for record in records.filtered('confidentiality_marking'):
+            record._sync_vault()
 
         return records
 
     def unlink(self):
-        """Override unlink to clean up encrypted data"""
+        """Override unlink to cleanup vault"""
         is_manager = self._is_confidentiality_manager()
 
         for record in self.filtered('confidentiality_marking'):
             if not is_manager:
-                raise AccessError(
-                    _("You don't have permission to delete partners with confidentiality marking.")
-                )
-
+                raise AccessError(_("You cannot delete partners with confidentiality marking."))
             if record.cm_uuid:
                 record._cleanup_vault()
 

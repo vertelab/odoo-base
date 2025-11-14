@@ -34,7 +34,7 @@
     'author': 'Vertel AB',
     'website': 'https://vertel.se/apps/odoo-base',
     'license': 'AGPL-3',
-    'depends': ["server_environment_data_encryption", "base"],
+    'depends': ["server_environment_data_encryption", "base", "mail"],
     'data': [
         "security/res_group.xml",
         "views/res_partner_views.xml",
