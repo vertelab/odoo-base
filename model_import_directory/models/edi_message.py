@@ -2,6 +2,7 @@ import base64
 import logging
 from io import BytesIO
 from openpyxl import load_workbook
+from markupsafe import Markup
 
 from odoo import api, fields, models, _
 from odoo.exceptions import UserError
@@ -56,8 +57,19 @@ class EdiMessage(models.Model):
         removed_prefix = self.name.split("-")[-1]
         split_filename = removed_prefix.split(".")
         model = self.env[split_filename[0].replace("_",".")]
-        res = self.env[model._name].create(vals_list)
-        return res
+        res_ids = self.env[model._name].create(vals_list)
+        links = [
+                    Markup('<a href="#" data-oe-model="res.partner" data-oe-id="{id}">{name}</a>').format(
+                        id=res_id.id,
+                        name=res_id.name if res_id.name else res_id.id
+                    )
+                    for res_id in res_ids
+                ]
+        move_links_str = Markup(", ").join(links)
+        body = Markup("<p>Contact import completed successfully: {}</p>").format(move_links_str)
+        self.message_post(body=body, message_type='comment')
+        self.state = 'done'
+        return res_ids
 
            
     # def create_account_move(self,header_fields,sheet,first_row):
