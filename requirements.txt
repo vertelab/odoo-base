@@ -11,4 +11,5 @@ PySocks
 stem
 openpyxl
 xlrd
-
+inotify
+odoorpc

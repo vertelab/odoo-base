@@ -1,0 +1,10 @@
+<odoo>
+    <data>
+
+        <record id="edi_message_format_model_import_directory" model="edi.message.format">
+            <field name="name">edi:model:import:directory</field>
+            <field name="description">Model Import Directory</field>
+        </record>
+
+    </data>
+</odoo>

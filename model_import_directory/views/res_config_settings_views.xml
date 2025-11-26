@@ -1,0 +1,17 @@
+<?xml version="1.0"?>
+<odoo>
+    <record id="res_config_settings_view_form" model="ir.ui.view">
+        <field name="name">res.config.settings.directory.watch.form</field>
+        <field name="model">res.config.settings</field>
+        <field name="inherit_id" ref="base_setup.res_config_settings_view_form"/>
+        <field name="arch" type="xml">
+            <block id="pwa_settings" position="after">
+                <block title="Directory Watch" id="directory_watch">
+                    <setting id="import_directory_watch" help="Add the path of the directory you want watched.">
+                        <field name="model_import_directory" string="Model Import Directory"/>
+                    </setting>
+                </block>
+            </block>
+        </field>
+    </record>
+</odoo>
