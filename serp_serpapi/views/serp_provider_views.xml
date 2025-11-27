@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <!-- Inherit Provider Form View to show API key prominently for SerpAPI -->
+    <record id="view_serp_provider_form_serpapi" model="ir.ui.view">
+        <field name="name">serp.provider.form.serpapi</field>
+        <field name="model">serp.provider</field>
+        <field name="inherit_id" ref="base_serp.view_serp_provider_form"/>
+        <field name="arch" type="xml">
+
+
+            <xpath expr="//field[@name='api_key']" position="attributes">
+                <attribute name="required">provider_type == 'serpapi'</attribute>
+                <attribute name="placeholder">Enter your SerpAPI key from https://serpapi.com</attribute>
+            </xpath>
+
+            <!-- Add help message for SerpAPI -->
+            <xpath expr="//group[@id='api_credentials']" position="after">
+                <div class="alert alert-info" role="alert" invisible="provider_type != 'serpapi'">
+                    <strong>SerpAPI Setup:</strong>
+                    <ol>
+                        <li>Sign up at <a href="https://serpapi.com" target="_blank">https://serpapi.com</a></li>
+                        <li>Get your API key from the dashboard</li>
+                        <li>Paste it in the API Key field above</li>
+                        <li>Activate this provider</li>
+                    </ol>
+                    <p class="mb-0">
+                        <strong>Pricing:</strong> SerpAPI offers 100 free searches per month, then pay-as-you-go.
+                    </p>
+                </div>
+            </xpath>
+
+        </field>
+    </record>
+
+</odoo>

@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data noupdate="1">
+
+        <!-- Default SerpAPI Provider for Google -->
+        <record id="serp_provider_serpapi_google" model="serp.provider">
+            <field name="name">Google SerpAPI</field>
+            <field name="provider_type">serpapi</field>
+            <field name="search_engine">google</field>
+            <field name="sequence">5</field>
+            <field name="num_results">10</field>
+            <field name="active" eval="True"/>
+        </record>
+
+    </data>
+</odoo>

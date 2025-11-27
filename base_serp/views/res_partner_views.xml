@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <!-- Inherit Partner Form View -->
+    <record id="view_partner_form_serp" model="ir.ui.view">
+        <field name="name">res.partner.form.serp</field>
+        <field name="model">res.partner</field>
+        <field name="inherit_id" ref="base.view_partner_form"/>
+        <field name="arch" type="xml">
+
+            <!-- Add invisible fields for button box -->
+            <xpath expr="//sheet" position="before">
+                <field name="serp_result_count" invisible="1"/>
+                <field name="serp_avg_position" invisible="1"/>
+                <field name="serp_domain" invisible="1"/>
+            </xpath>
+
+            <!-- Add button in button box -->
+            <xpath expr="//div[@name='button_box']" position="inside">
+                <button name="%(base_serp.action_serp_result)d"
+                        type="action"
+                        class="oe_stat_button"
+                        icon="fa-line-chart"
+                        invisible="not serp_domain"
+                        domain="[('search_default_domain', '=', serp_domain), ('search_default_res_id', '=', id)]">
+                    <div class="o_field_widget o_stat_info">
+                        <span class="o_stat_value">
+                            <field name="serp_result_count" nolabel="1"/>
+                        </span>
+                        <span class="o_stat_text">SERP Results</span>
+                    </div>
+                </button>
+            </xpath>
+
+            <!-- Add SERP tab in notebook -->
+            <xpath expr="//notebook" position="inside">
+                <page string="SERP Tracking" name="serp_tracking">
+                    <group>
+                        <group string="Configuration">
+                            <field name="serp_domain"/>
+                            <field name="serp_provider_id"/>
+                            <field name="serp_keywords" placeholder="e.g., solceller, solpaneler, solenergi"/>
+                        </group>
+                        <group string="Search Context">
+                            <field name="serp_country_code"/>
+                            <field name="serp_language"/>
+                            <field name="serp_last_check" readonly="1"/>
+                        </group>
+                    </group>
+
+                    <group string="Results">
+                        <field name="serp_result_ids" nolabel="1">
+                            <list>
+                                <field name="search_date"/>
+                                <field name="keyword"/>
+                                <field name="position"/>
+                                <field name="url"/>
+                            </list>
+                        </field>
+                    </group>
+                </page>
+            </xpath>
+
+        </field>
+    </record>
+
+</odoo>

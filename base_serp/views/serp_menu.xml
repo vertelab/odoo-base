@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <!-- Main Menu -->
+    <menuitem id="menu_serp_root"
+              name="SERP"
+              sequence="100"
+              web_icon="base_serp,static/description/icon.png"/>
+
+    <!-- Submenu: Results -->
+    <menuitem id="menu_serp_results"
+              name="Results"
+              parent="menu_serp_root"
+              action="action_serp_result"
+              sequence="10"/>
+
+    <!-- Submenu: Configuration -->
+    <menuitem id="menu_serp_configuration"
+              name="Configuration"
+              parent="menu_serp_root"
+              sequence="90"/>
+
+    <!-- Submenu: Providers -->
+    <menuitem id="menu_serp_providers"
+              name="Providers"
+              parent="menu_serp_configuration"
+              action="action_serp_provider"
+              sequence="10"/>
+
+</odoo>

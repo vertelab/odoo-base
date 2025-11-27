@@ -1,0 +1,114 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <!-- Form View -->
+    <record id="view_serp_provider_form" model="ir.ui.view">
+        <field name="name">serp.provider.form</field>
+        <field name="model">serp.provider</field>
+        <field name="arch" type="xml">
+            <form string="SERP Provider">
+                <sheet>
+                    <div class="oe_button_box" name="button_box">
+                        <button name="test_search" type="object" class="oe_stat_button" icon="fa-search">
+                            <div class="o_field_widget o_stat_info">
+                                <span class="o_stat_text">Test</span>
+                                <span class="o_stat_text">Search</span>
+                            </div>
+                        </button>
+                    </div>
+
+                    <widget name="web_ribbon" title="Archived" bg_color="text-bg-danger" invisible="active"/>
+
+                    <div class="oe_title">
+                        <label for="name" string="Provider Name"/>
+                        <h1>
+                            <field name="name" placeholder="e.g. Google BeautifulSoup"/>
+                        </h1>
+                    </div>
+
+                    <group>
+                        <group>
+                            <field name="provider_type"/>
+                            <field name="search_engine"/>
+                            <field name="sequence"/>
+                            <field name="active"/>
+                        </group>
+                        <group>
+                            <field name="total_searches" readonly="1"/>
+                            <field name="last_search_date" readonly="1"/>
+                        </group>
+                    </group>
+
+                    <notebook>
+                        <page string="Configuration">
+                            <group>
+                                <group string="Rate Limiting">
+                                    <field name="rate_limit_delay"/>
+                                    <field name="timeout"/>
+                                    <field name="num_results"/>
+                                </group>
+                                <group string="API Credentials" id="api_credentials">
+                                    <field name="api_key" password="True"/>
+                                    <field name="api_secret" password="True"/>
+                                </group>
+                            </group>
+                        </page>
+                    </notebook>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+    <!-- Tree View -->
+    <record id="view_serp_provider_list" model="ir.ui.view">
+        <field name="name">serp.provider.list</field>
+        <field name="model">serp.provider</field>
+        <field name="arch" type="xml">
+            <list string="SERP Providers">
+                <field name="sequence" widget="handle"/>
+                <field name="name"/>
+                <field name="provider_type"/>
+                <field name="search_engine"/>
+                <field name="total_searches"/>
+                <field name="last_search_date"/>
+                <field name="active"/>
+            </list>
+        </field>
+    </record>
+
+    <!-- Search View -->
+    <record id="view_serp_provider_search" model="ir.ui.view">
+        <field name="name">serp.provider.search</field>
+        <field name="model">serp.provider</field>
+        <field name="arch" type="xml">
+            <search string="SERP Providers">
+                <field name="name"/>
+                <field name="provider_type"/>
+                <field name="search_engine"/>
+                <filter string="Active" name="active" domain="[('active', '=', True)]"/>
+                <filter string="Archived" name="inactive" domain="[('active', '=', False)]"/>
+                <group expand="0" string="Group By">
+                    <filter string="Provider Type" name="group_provider_type" context="{'group_by': 'provider_type'}"/>
+                    <filter string="Search Engine" name="group_search_engine" context="{'group_by': 'search_engine'}"/>
+                </group>
+            </search>
+        </field>
+    </record>
+
+    <!-- Action -->
+    <record id="action_serp_provider" model="ir.actions.act_window">
+        <field name="name">SERP Providers</field>
+        <field name="res_model">serp.provider</field>
+        <field name="view_mode">list,form</field>
+        <field name="context">{'search_default_active': 1}</field>
+        <field name="help" type="html">
+            <p class="o_view_nocontent_smiling_face">
+                Create your first SERP Provider
+            </p>
+            <p>
+                Providers define how to search for keywords in search engines.
+                BeautifulSoup is the default web scraping provider.
+            </p>
+        </field>
+    </record>
+
+</odoo>
