@@ -1,0 +1,41 @@
+# Translation of Odoo Server.
+# This file contains the translation of the following modules:
+# 	* base_partner_se
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: Odoo Server 18.0-20251125\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2025-12-02 13:12+0000\n"
+"PO-Revision-Date: 2025-12-02 14:19+0100\n"
+"Last-Translator: \n"
+"Language-Team: \n"
+"Language: se_SV\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=3; plural=(n==1 ? 0 : n==2 ? 1 : 2);\n"
+"X-Generator: Poedit 3.4.2\n"
+
+#. module: base_partner_se
+#: model:ir.model.fields,field_description:base_partner_se.field_res_partner__coordination_number
+#: model:ir.model.fields,field_description:base_partner_se.field_res_users__coordination_number
+msgid "Coordination Number"
+msgstr "Samordningsnummer"
+
+#. module: base_partner_se
+#: model:ir.model,name:base_partner_se.model_res_partner
+msgid "Edi Envelope"
+msgstr "Kontakt"
+
+#. module: base_partner_se
+#: model:ir.model.fields,field_description:base_partner_se.field_res_partner__personal_number
+#: model:ir.model.fields,field_description:base_partner_se.field_res_users__personal_number
+msgid "Personal Number"
+msgstr "Personnummer"
+
+#. module: base_partner_se
+#: model:ir.model.fields,field_description:base_partner_se.field_res_partner__temporary_personal_number
+#: model:ir.model.fields,field_description:base_partner_se.field_res_users__temporary_personal_number
+msgid "Temporary Personal Number"
+msgstr "Tillfälligt personnummer"
