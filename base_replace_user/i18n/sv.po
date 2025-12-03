@@ -1,0 +1,245 @@
+# Translation of Odoo Server.
+# This file contains the translation of the following modules:
+# 	* base_replace_user
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: Odoo Server 18.0-20251201\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2025-12-03 09:51+0000\n"
+"PO-Revision-Date: 2025-12-03 11:07+0100\n"
+"Last-Translator: \n"
+"Language-Team: \n"
+"Language: sv_SE\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"X-Generator: Poedit 3.4.2\n"
+
+#. module: base_replace_user
+#. odoo-python
+#: code:addons/base_replace_user/wizard/user_lookup_wizard_line.py:0
+msgid "%s already updated"
+msgstr "%s redan uppdaterad"
+
+#. module: base_replace_user
+#. odoo-python
+#: code:addons/base_replace_user/wizard/user_lookup_wizard_line.py:0
+msgid "%s failed"
+msgstr "%s misslyckades"
+
+#. module: base_replace_user
+#. odoo-python
+#: code:addons/base_replace_user/wizard/user_lookup_wizard.py:0
+#: code:addons/base_replace_user/wizard/user_lookup_wizard_line.py:0
+msgid "%s records updated"
+msgstr "%s poster uppdaterade"
+
+#. module: base_replace_user
+#: model:ir.model.fields,field_description:base_replace_user.field_user_lookup_wizard__create_uid
+#: model:ir.model.fields,field_description:base_replace_user.field_user_lookup_wizard_line__create_uid
+msgid "Created by"
+msgstr "Skapad av"
+
+#. module: base_replace_user
+#: model:ir.model.fields,field_description:base_replace_user.field_user_lookup_wizard__create_date
+#: model:ir.model.fields,field_description:base_replace_user.field_user_lookup_wizard_line__create_date
+msgid "Created on"
+msgstr "Skapad den"
+
+#. module: base_replace_user
+#: model:ir.model.fields,field_description:base_replace_user.field_user_lookup_wizard__display_name
+#: model:ir.model.fields,field_description:base_replace_user.field_user_lookup_wizard_line__display_name
+msgid "Display Name"
+msgstr "Visningsnamn"
+
+#. module: base_replace_user
+#: model:ir.model.fields,field_description:base_replace_user.field_user_lookup_wizard_line__res_model
+msgid "Document Model"
+msgstr "Dokumentmodell"
+
+#. module: base_replace_user
+#: model_terms:ir.ui.view,arch_db:base_replace_user.user_lookup_wizard_line_view_search
+msgid "Group By"
+msgstr "Gruppera efter"
+
+#. module: base_replace_user
+#: model:ir.model.fields,field_description:base_replace_user.field_user_lookup_wizard__id
+#: model:ir.model.fields,field_description:base_replace_user.field_user_lookup_wizard_line__id
+#: model_terms:ir.ui.view,arch_db:base_replace_user.user_lookup_wizard_line_view_list
+msgid "ID"
+msgstr "ID"
+
+#. module: base_replace_user
+#: model:ir.model.fields,field_description:base_replace_user.field_user_lookup_wizard__write_uid
+#: model:ir.model.fields,field_description:base_replace_user.field_user_lookup_wizard_line__write_uid
+msgid "Last Updated by"
+msgstr "Senast uppdaterad av"
+
+#. module: base_replace_user
+#: model:ir.model.fields,field_description:base_replace_user.field_user_lookup_wizard__write_date
+#: model:ir.model.fields,field_description:base_replace_user.field_user_lookup_wizard_line__write_date
+msgid "Last Updated on"
+msgstr "Senast uppdaterad den"
+
+#. module: base_replace_user
+#: model:ir.model.fields,field_description:base_replace_user.field_user_lookup_wizard__line_ids
+msgid "Line"
+msgstr "Rad"
+
+#. module: base_replace_user
+#: model:ir.model.fields,field_description:base_replace_user.field_user_lookup_wizard__line_count
+msgid "Line Count"
+msgstr "Antal rader"
+
+#. module: base_replace_user
+#: model_terms:ir.ui.view,arch_db:base_replace_user.view_user_lookup_wizard
+msgid "Lookup"
+msgstr "Uppslag"
+
+#. module: base_replace_user
+#: model_terms:ir.ui.view,arch_db:base_replace_user.user_lookup_wizard_line_view_search
+msgid "Model"
+msgstr "Modell"
+
+#. module: base_replace_user
+#: model:ir.model.fields,field_description:base_replace_user.field_user_lookup_wizard__new_user_id
+msgid "New User"
+msgstr "Ny användare"
+
+#. module: base_replace_user
+#. odoo-python
+#: code:addons/base_replace_user/wizard/user_lookup_wizard_line.py:0
+msgid "No records selected"
+msgstr "Inga poster valda"
+
+#. module: base_replace_user
+#: model_terms:ir.ui.view,arch_db:base_replace_user.user_lookup_wizard_line_view_search
+msgid "Not Updated"
+msgstr "Ej uppdaterad"
+
+#. module: base_replace_user
+#: model:ir.model.fields,field_description:base_replace_user.field_user_lookup_wizard__old_user_id
+msgid "Old User"
+msgstr "Gammal användare"
+
+#. module: base_replace_user
+#. odoo-python
+#: code:addons/base_replace_user/wizard/user_lookup_wizard.py:0
+#: code:addons/base_replace_user/wizard/user_lookup_wizard_line.py:0
+msgid "Old user and new user cannot be the same"
+msgstr "Gammal användare och ny användare kan inte vara samma"
+
+#. module: base_replace_user
+#: model_terms:ir.ui.view,arch_db:base_replace_user.user_lookup_wizard_line_view_list
+msgid "Open Record"
+msgstr "Öppen post"
+
+#. module: base_replace_user
+#. odoo-python
+#: code:addons/base_replace_user/wizard/user_lookup_wizard.py:0
+msgid "Please select a new user"
+msgstr "Vänligen välj en ny användare"
+
+#. module: base_replace_user
+#. odoo-python
+#: code:addons/base_replace_user/wizard/user_lookup_wizard_line.py:0
+msgid "Please select a new user in the wizard"
+msgstr "Välj en ny användare i guiden"
+
+#. module: base_replace_user
+#. odoo-python
+#: code:addons/base_replace_user/wizard/user_lookup_wizard.py:0
+msgid "Please select an old user"
+msgstr "Vänligen välj en gammal användare"
+
+#. module: base_replace_user
+#: model:ir.model.fields,field_description:base_replace_user.field_user_lookup_wizard_line__resource_ref
+msgid "Record"
+msgstr "Post"
+
+#. module: base_replace_user
+#: model:ir.model.fields,field_description:base_replace_user.field_user_lookup_wizard_line__res_model_id
+msgid "Related Document Model"
+msgstr "Relaterade dokument Modell"
+
+#. module: base_replace_user
+#: model:ir.actions.act_window,name:base_replace_user.action_view_user_lookup_wizard
+#: model:ir.ui.menu,name:base_replace_user.menu_action_user_lookup
+msgid "Replace Users"
+msgstr "Ersätt användare"
+
+#. module: base_replace_user
+#: model_terms:ir.ui.view,arch_db:base_replace_user.view_user_lookup_wizard
+msgid "Replace Users Wizard"
+msgstr "Guiden Ersätt användare"
+
+#. module: base_replace_user
+#: model:ir.model.fields,field_description:base_replace_user.field_user_lookup_wizard_line__res_id
+msgid "Resource ID"
+msgstr "Resursens ID"
+
+#. module: base_replace_user
+#: model:ir.model.fields,field_description:base_replace_user.field_user_lookup_wizard_line__res_name
+msgid "Resource name"
+msgstr "Resursens namn"
+
+#. module: base_replace_user
+#: model_terms:ir.ui.view,arch_db:base_replace_user.user_lookup_wizard_line_view_search
+msgid "Search References"
+msgstr "Sök referenser"
+
+#. module: base_replace_user
+#. odoo-python
+#: code:addons/base_replace_user/wizard/user_lookup_wizard.py:0
+msgid "Success"
+msgstr "Framgång"
+
+#. module: base_replace_user
+#: model_terms:ir.ui.view,arch_db:base_replace_user.user_lookup_wizard_line_view_list
+msgid "Update"
+msgstr "Uppdatera"
+
+#. module: base_replace_user
+#: model:ir.actions.server,name:base_replace_user.ir_action_server_update_user_lines
+msgid "Update User ID"
+msgstr "Uppdatera användar-ID"
+
+#. module: base_replace_user
+#: model:ir.model.fields,field_description:base_replace_user.field_user_lookup_wizard_line__is_updated
+#: model_terms:ir.ui.view,arch_db:base_replace_user.user_lookup_wizard_line_view_search
+msgid "Updated"
+msgstr "Uppdaterad"
+
+#. module: base_replace_user
+#. odoo-python
+#: code:addons/base_replace_user/wizard/user_lookup_wizard.py:0
+msgid "User Lookup"
+msgstr "Användaruppslagning"
+
+#. module: base_replace_user
+#: model:ir.actions.act_window,name:base_replace_user.action_user_lookup_wizard_line
+msgid "User Lookup Results"
+msgstr "Resultat av användaruppslagning"
+
+#. module: base_replace_user
+#: model:ir.model,name:base_replace_user.model_user_lookup_wizard
+msgid "User Lookup Wizard"
+msgstr "Guiden för användaruppslagning"
+
+#. module: base_replace_user
+#: model:ir.model,name:base_replace_user.model_user_lookup_wizard_line
+msgid "User Lookup Wizard Line"
+msgstr "Guiden för användaruppslagningsrad"
+
+#. module: base_replace_user
+#. odoo-python
+#: code:addons/base_replace_user/wizard/user_lookup_wizard_line.py:0
+msgid "User Update Complete"
+msgstr "Uppdatering av användare slutförd"
+
+#. module: base_replace_user
+#: model:ir.model.fields,field_description:base_replace_user.field_user_lookup_wizard_line__wizard_id
+msgid "Wizard"
+msgstr "Guide"
