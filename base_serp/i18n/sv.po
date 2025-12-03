@@ -1,0 +1,641 @@
+# Translation of Odoo Server.
+# This file contains the translation of the following modules:
+# 	* base_serp
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: Odoo Server 18.0-20251202\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2025-12-03 10:36+0000\n"
+"PO-Revision-Date: 2025-12-03 11:49+0100\n"
+"Last-Translator: \n"
+"Language-Team: \n"
+"Language: sv_SE\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"X-Generator: Poedit 3.4.2\n"
+
+#. module: base_serp
+#. odoo-python
+#: code:addons/base_serp/models/serp_mixin.py:0
+msgid ""
+"\n"
+"\n"
+"Errors: %s"
+msgstr ""
+"\n"
+"\n"
+"Fel: %s"
+
+#. module: base_serp
+#. odoo-python
+#: code:addons/base_serp/models/serp_mixin.py:0
+msgid "%s results found and saved"
+msgstr "%s resultat hittade och sparade"
+
+#. module: base_serp
+#: model_terms:ir.ui.view,arch_db:base_serp.view_partner_form_serp
+msgid "<span class=\"o_stat_text\">SERP Results</span>"
+msgstr "<span class=\"o_stat_text\">SERP-resultat</span>"
+
+#. module: base_serp
+#: model_terms:ir.ui.view,arch_db:base_serp.view_serp_provider_form
+msgid ""
+"<span class=\"o_stat_text\">Test</span>\n"
+"                                <span class=\"o_stat_text\">Search</span>"
+msgstr ""
+"<span class=\"o_stat_text\">Test</span>.\n"
+"                                <span class=\"o_stat_text\">Sökning</span>"
+
+#. module: base_serp
+#: model_terms:ir.ui.view,arch_db:base_serp.view_serp_provider_form
+msgid "API Credentials"
+msgstr "API-autentiseringsuppgifter"
+
+#. module: base_serp
+#: model:ir.model.fields,field_description:base_serp.field_serp_provider__api_key
+msgid "API Key"
+msgstr "API-nyckel"
+
+#. module: base_serp
+#: model:ir.model.fields,field_description:base_serp.field_serp_provider__api_secret
+msgid "API Secret"
+msgstr "API-hemlighet"
+
+#. module: base_serp
+#: model:ir.model.fields,help:base_serp.field_serp_provider__api_key
+msgid "API key for provider (if required)"
+msgstr "API-nyckel för leverantören (om så krävs)"
+
+#. module: base_serp
+#: model:ir.model.fields,help:base_serp.field_serp_provider__api_secret
+msgid "API secret for provider (if required)"
+msgstr "API-hemlighet för leverantören (om så krävs)"
+
+#. module: base_serp
+#: model:ir.model.fields,field_description:base_serp.field_serp_provider__active
+#: model_terms:ir.ui.view,arch_db:base_serp.view_serp_provider_search
+msgid "Active"
+msgstr "Aktiv"
+
+#. module: base_serp
+#: model_terms:ir.ui.view,arch_db:base_serp.view_serp_provider_form
+#: model_terms:ir.ui.view,arch_db:base_serp.view_serp_provider_search
+msgid "Archived"
+msgstr "Arkiverad"
+
+#. module: base_serp
+#: model:ir.model.fields,field_description:base_serp.field_res_partner__serp_avg_position
+#: model:ir.model.fields,field_description:base_serp.field_res_users__serp_avg_position
+#: model:ir.model.fields,field_description:base_serp.field_serp_mixin__serp_avg_position
+msgid "Average Position"
+msgstr "Genomsnittlig position"
+
+#. module: base_serp
+#: model:ir.model.fields,help:base_serp.field_res_partner__serp_avg_position
+#: model:ir.model.fields,help:base_serp.field_res_users__serp_avg_position
+#: model:ir.model.fields,help:base_serp.field_serp_mixin__serp_avg_position
+msgid "Average ranking position across all keywords"
+msgstr "Genomsnittlig rankingposition för alla sökord"
+
+#. module: base_serp
+#: model:ir.model.fields.selection,name:base_serp.selection__serp_provider__provider_type__beautifulsoup
+msgid "BeautifulSoup (Web Scraping)"
+msgstr "BeautifulSoup (webbskrapning)"
+
+#. module: base_serp
+#: model:ir.actions.server,name:base_serp.action_partner_check_serp
+msgid "Check SERP"
+msgstr "Kontrollera SERP"
+
+#. module: base_serp
+#: model:ir.model.fields,help:base_serp.field_res_partner__serp_keywords
+#: model:ir.model.fields,help:base_serp.field_res_users__serp_keywords
+#: model:ir.model.fields,help:base_serp.field_serp_mixin__serp_keywords
+msgid "Comma-separated keywords"
+msgstr "Kommaseparerade nyckelord"
+
+#. module: base_serp
+#: model:ir.ui.menu,name:base_serp.menu_serp_configuration
+#: model_terms:ir.ui.view,arch_db:base_serp.view_partner_form_serp
+#: model_terms:ir.ui.view,arch_db:base_serp.view_serp_provider_form
+msgid "Configuration"
+msgstr "Konfiguration"
+
+#. module: base_serp
+#: model:ir.model,name:base_serp.model_res_partner
+msgid "Contact"
+msgstr "Kontakt"
+
+#. module: base_serp
+#: model_terms:ir.ui.view,arch_db:base_serp.view_serp_result_form
+msgid "Content"
+msgstr "Innehåll"
+
+#. module: base_serp
+#: model:ir.model.fields,field_description:base_serp.field_serp_result__country_code
+msgid "Country"
+msgstr "Land"
+
+#. module: base_serp
+#: model:ir.model.fields,field_description:base_serp.field_res_partner__serp_country_code
+#: model:ir.model.fields,field_description:base_serp.field_res_users__serp_country_code
+#: model:ir.model.fields,field_description:base_serp.field_serp_mixin__serp_country_code
+msgid "Country Code"
+msgstr "Landskod"
+
+#. module: base_serp
+#: model:ir.model.fields,help:base_serp.field_res_partner__serp_country_code
+#: model:ir.model.fields,help:base_serp.field_res_users__serp_country_code
+#: model:ir.model.fields,help:base_serp.field_serp_mixin__serp_country_code
+msgid "Country code for search (e.g., SE, US, GB)"
+msgstr "Landskod för sökning (t.ex. SE, US, GB)"
+
+#. module: base_serp
+#: model_terms:ir.actions.act_window,help:base_serp.action_serp_provider
+msgid "Create your first SERP Provider"
+msgstr "Skapa din första SERP-leverantör"
+
+#. module: base_serp
+#: model:ir.model.fields,field_description:base_serp.field_serp_provider__create_uid
+#: model:ir.model.fields,field_description:base_serp.field_serp_result__create_uid
+msgid "Created by"
+msgstr "Skapad av"
+
+#. module: base_serp
+#: model:ir.model.fields,field_description:base_serp.field_serp_provider__create_date
+#: model:ir.model.fields,field_description:base_serp.field_serp_result__create_date
+msgid "Created on"
+msgstr "Skapad den"
+
+#. module: base_serp
+#: model:ir.model.fields,help:base_serp.field_serp_provider__rate_limit_delay
+msgid "Delay between requests to avoid being blocked"
+msgstr "Fördröjning mellan förfrågningar för att undvika att bli blockerad"
+
+#. module: base_serp
+#: model:ir.model.fields,field_description:base_serp.field_serp_provider__display_name
+#: model:ir.model.fields,field_description:base_serp.field_serp_result__display_name
+msgid "Display Name"
+msgstr "Visningsnamn"
+
+#. module: base_serp
+#: model:ir.model.fields,field_description:base_serp.field_serp_result__domain
+#: model_terms:ir.ui.view,arch_db:base_serp.view_serp_result_search
+msgid "Domain"
+msgstr "Domän"
+
+#. module: base_serp
+#: model:ir.model.fields,help:base_serp.field_res_partner__serp_domain
+#: model:ir.model.fields,help:base_serp.field_res_users__serp_domain
+#: model:ir.model.fields,help:base_serp.field_serp_mixin__serp_domain
+msgid "Domain to track (e.g., vertel.se)"
+msgstr "Domän att spåra (t.ex. vertel.se)"
+
+#. module: base_serp
+#: model:ir.model.fields.selection,name:base_serp.selection__res_partner__serp_language__en
+#: model:ir.model.fields.selection,name:base_serp.selection__serp_mixin__serp_language__en
+msgid "English"
+msgstr "Engelska"
+
+#. module: base_serp
+#: model:ir.model.fields.selection,name:base_serp.selection__serp_provider__search_engine__google
+msgid "Google"
+msgstr "Google"
+
+#. module: base_serp
+#: model_terms:ir.ui.view,arch_db:base_serp.view_serp_provider_search
+#: model_terms:ir.ui.view,arch_db:base_serp.view_serp_result_search
+msgid "Group By"
+msgstr "Gruppera efter"
+
+#. module: base_serp
+#: model:ir.model.fields,field_description:base_serp.field_serp_provider__id
+#: model:ir.model.fields,field_description:base_serp.field_serp_result__id
+msgid "ID"
+msgstr "ID"
+
+#. module: base_serp
+#: model:ir.model.fields,field_description:base_serp.field_serp_result__keyword
+#: model_terms:ir.ui.view,arch_db:base_serp.view_serp_result_search
+msgid "Keyword"
+msgstr "Nyckelord"
+
+#. module: base_serp
+#: model:ir.model.fields,field_description:base_serp.field_res_partner__serp_keywords
+#: model:ir.model.fields,field_description:base_serp.field_res_users__serp_keywords
+#: model:ir.model.fields,field_description:base_serp.field_serp_mixin__serp_keywords
+msgid "Keywords"
+msgstr "Nyckelord"
+
+#. module: base_serp
+#: model:ir.model.fields,field_description:base_serp.field_res_partner__serp_result_count
+#: model:ir.model.fields,field_description:base_serp.field_res_users__serp_result_count
+#: model:ir.model.fields,field_description:base_serp.field_serp_mixin__serp_result_count
+msgid "Keywords Tracked"
+msgstr "Nyckelord spåras"
+
+#. module: base_serp
+#: model:ir.model.fields,field_description:base_serp.field_res_partner__serp_language
+#: model:ir.model.fields,field_description:base_serp.field_res_users__serp_language
+#: model:ir.model.fields,field_description:base_serp.field_serp_mixin__serp_language
+#: model:ir.model.fields,field_description:base_serp.field_serp_result__language
+msgid "Language"
+msgstr "Språk"
+
+#. module: base_serp
+#: model:ir.model.fields,field_description:base_serp.field_res_partner__serp_last_check
+#: model:ir.model.fields,field_description:base_serp.field_res_users__serp_last_check
+#: model:ir.model.fields,field_description:base_serp.field_serp_mixin__serp_last_check
+msgid "Last SERP Check"
+msgstr "Senaste SERP-kontrollen"
+
+#. module: base_serp
+#: model:ir.model.fields,field_description:base_serp.field_serp_provider__last_search_date
+msgid "Last Search Date"
+msgstr "Datum för senaste sökning"
+
+#. module: base_serp
+#: model:ir.model.fields,field_description:base_serp.field_serp_provider__write_uid
+#: model:ir.model.fields,field_description:base_serp.field_serp_result__write_uid
+msgid "Last Updated by"
+msgstr "Senast uppdaterad av"
+
+#. module: base_serp
+#: model:ir.model.fields,field_description:base_serp.field_serp_provider__write_date
+#: model:ir.model.fields,field_description:base_serp.field_serp_result__write_date
+msgid "Last Updated on"
+msgstr "Senast uppdaterad den"
+
+#. module: base_serp
+#: model:ir.model.fields,help:base_serp.field_serp_provider__timeout
+msgid "Maximum time to wait for a response"
+msgstr "Maximal tid att vänta på svar"
+
+#. module: base_serp
+#: model_terms:ir.actions.act_window,help:base_serp.action_serp_result
+msgid "No SERP results yet"
+msgstr "Inga SERP-resultat ännu"
+
+#. module: base_serp
+#. odoo-python
+#: code:addons/base_serp/models/serp_mixin.py:0
+msgid "No results found"
+msgstr "Inga resultat hittades"
+
+#. module: base_serp
+#. odoo-python
+#: code:addons/base_serp/models/serp_mixin.py:0
+msgid "No valid keywords found"
+msgstr "Inga giltiga nyckelord hittades"
+
+#. module: base_serp
+#: model:ir.model.fields,field_description:base_serp.field_serp_provider__num_results
+msgid "Number of Results"
+msgstr "Antal resultat"
+
+#. module: base_serp
+#: model:ir.model.fields,help:base_serp.field_serp_provider__num_results
+msgid "Number of results to fetch per page"
+msgstr "Antal resultat som ska hämtas per sida"
+
+#. module: base_serp
+#: model:ir.model.fields,help:base_serp.field_serp_result__title
+msgid "Page title"
+msgstr "Sidans titel"
+
+#. module: base_serp
+#. odoo-python
+#: code:addons/base_serp/models/serp_mixin.py:0
+msgid "Please add keywords to track"
+msgstr "Lägg till nyckelord för att spåra"
+
+#. module: base_serp
+#. odoo-python
+#: code:addons/base_serp/models/serp_mixin.py:0
+msgid "Please select a SERP provider"
+msgstr "Vänligen välj en SERP-leverantör"
+
+#. module: base_serp
+#: model:ir.model.fields,field_description:base_serp.field_serp_result__position
+msgid "Position"
+msgstr "Position"
+
+#. module: base_serp
+#: model:ir.model.fields,help:base_serp.field_serp_result__snippet
+msgid "Preview text"
+msgstr "Förhandsgranska text"
+
+#. module: base_serp
+#: model:ir.model.fields,field_description:base_serp.field_serp_result__provider_id
+#: model_terms:ir.ui.view,arch_db:base_serp.view_serp_result_search
+msgid "Provider"
+msgstr "Leverantör"
+
+#. module: base_serp
+#: model:ir.model.fields,field_description:base_serp.field_serp_provider__name
+#: model_terms:ir.ui.view,arch_db:base_serp.view_serp_provider_form
+msgid "Provider Name"
+msgstr "Leverantörens namn"
+
+#. module: base_serp
+#. odoo-python
+#: code:addons/base_serp/models/serp_provider.py:0
+msgid "Provider Test"
+msgstr "Test av leverantör"
+
+#. module: base_serp
+#. odoo-python
+#: code:addons/base_serp/models/serp_provider.py:0
+msgid "Provider Test Failed"
+msgstr "Test av leverantör misslyckades"
+
+#. module: base_serp
+#: model:ir.model.fields,field_description:base_serp.field_serp_provider__provider_type
+#: model_terms:ir.ui.view,arch_db:base_serp.view_serp_provider_search
+msgid "Provider Type"
+msgstr "Typ av leverantör"
+
+#. module: base_serp
+#. odoo-python
+#: code:addons/base_serp/models/serp_provider.py:0
+msgid "Provider method %s not implemented"
+msgstr "Provider-metoden %s är inte implementerad"
+
+#. module: base_serp
+#: model:ir.model.constraint,message:base_serp.constraint_serp_provider_unique_provider_type_engine
+msgid "Provider type and search engine combination must be unique!"
+msgstr "Kombinationen av leverantörstyp och sökmotor måste vara unik!"
+
+#. module: base_serp
+#. odoo-python
+#: code:addons/base_serp/models/serp_provider.py:0
+msgid "Provider type is not set"
+msgstr "Leverantörstyp är inte angiven"
+
+#. module: base_serp
+#: model:ir.ui.menu,name:base_serp.menu_serp_providers
+msgid "Providers"
+msgstr "Leverantörer"
+
+#. module: base_serp
+#: model_terms:ir.actions.act_window,help:base_serp.action_serp_provider
+msgid ""
+"Providers define how to search for keywords in search engines.\n"
+"                BeautifulSoup is the default web scraping provider."
+msgstr ""
+"Leverantörer definierar hur man söker efter nyckelord i sökmotorer.\n"
+"                BeautifulSoup är standardleverantören för webbskrapning."
+
+#. module: base_serp
+#: model:ir.model.fields,field_description:base_serp.field_serp_provider__rate_limit_delay
+msgid "Rate Limit Delay (seconds)"
+msgstr "Fördröjning av hastighetsbegränsning (sekunder)"
+
+#. module: base_serp
+#: model_terms:ir.ui.view,arch_db:base_serp.view_serp_provider_form
+msgid "Rate Limiting"
+msgstr "Begränsning av hastighet"
+
+#. module: base_serp
+#: model:ir.model.fields,field_description:base_serp.field_serp_result__resource_ref
+msgid "Related Document"
+msgstr "Relaterat dokument"
+
+#. module: base_serp
+#: model:ir.model.fields,field_description:base_serp.field_serp_result__res_id
+msgid "Related Document ID"
+msgstr "ID för relaterat dokument"
+
+#. module: base_serp
+#: model:ir.model.fields,field_description:base_serp.field_serp_result__res_model
+msgid "Related Document Model"
+msgstr "Relaterade dokument Modell"
+
+#. module: base_serp
+#: model_terms:ir.ui.view,arch_db:base_serp.view_serp_result_form
+msgid "Related Record"
+msgstr "Relaterad post"
+
+#. module: base_serp
+#: model:ir.model.fields,field_description:base_serp.field_serp_provider__timeout
+msgid "Request Timeout (seconds)"
+msgstr "Timeout för begäran (sekunder)"
+
+#. module: base_serp
+#: model:ir.ui.menu,name:base_serp.menu_serp_results
+#: model_terms:ir.ui.view,arch_db:base_serp.view_partner_form_serp
+msgid "Results"
+msgstr "Resultat"
+
+#. module: base_serp
+#: model_terms:ir.actions.act_window,help:base_serp.action_serp_result
+msgid "Results will appear here after running SERP checks on partners."
+msgstr ""
+"Resultaten kommer att visas här efter att ha kört SERP-kontroller på "
+"partners."
+
+#. module: base_serp
+#: model:ir.ui.menu,name:base_serp.menu_serp_root
+msgid "SERP"
+msgstr "SERP"
+
+#. module: base_serp
+#. odoo-python
+#: code:addons/base_serp/models/serp_mixin.py:0
+msgid "SERP Check Complete"
+msgstr "SERP-kontroll slutförd"
+
+#. module: base_serp
+#: model:ir.model.fields,field_description:base_serp.field_res_partner__serp_domain
+#: model:ir.model.fields,field_description:base_serp.field_res_users__serp_domain
+#: model:ir.model.fields,field_description:base_serp.field_serp_mixin__serp_domain
+msgid "SERP Domain"
+msgstr "SERP-domän"
+
+#. module: base_serp
+#: model:ir.model,name:base_serp.model_serp_provider
+#: model:ir.model.fields,field_description:base_serp.field_res_partner__serp_provider_id
+#: model:ir.model.fields,field_description:base_serp.field_res_users__serp_provider_id
+#: model:ir.model.fields,field_description:base_serp.field_serp_mixin__serp_provider_id
+#: model_terms:ir.ui.view,arch_db:base_serp.view_serp_provider_form
+msgid "SERP Provider"
+msgstr "SERP-leverantör"
+
+#. module: base_serp
+#: model:ir.actions.act_window,name:base_serp.action_serp_provider
+#: model_terms:ir.ui.view,arch_db:base_serp.view_serp_provider_list
+#: model_terms:ir.ui.view,arch_db:base_serp.view_serp_provider_search
+msgid "SERP Providers"
+msgstr "SERP-leverantörer"
+
+#. module: base_serp
+#: model:ir.model,name:base_serp.model_serp_result
+#: model_terms:ir.ui.view,arch_db:base_serp.view_serp_result_form
+msgid "SERP Result"
+msgstr "SERP-resultat"
+
+#. module: base_serp
+#: model:ir.actions.act_window,name:base_serp.action_serp_result
+#: model:ir.model.fields,field_description:base_serp.field_res_partner__serp_result_ids
+#: model:ir.model.fields,field_description:base_serp.field_res_users__serp_result_ids
+#: model:ir.model.fields,field_description:base_serp.field_serp_mixin__serp_result_ids
+#: model_terms:ir.ui.view,arch_db:base_serp.view_serp_result_graph
+#: model_terms:ir.ui.view,arch_db:base_serp.view_serp_result_list
+#: model_terms:ir.ui.view,arch_db:base_serp.view_serp_result_pivot
+#: model_terms:ir.ui.view,arch_db:base_serp.view_serp_result_search
+msgid "SERP Results"
+msgstr "SERP-resultat"
+
+#. module: base_serp
+#: model_terms:ir.ui.view,arch_db:base_serp.view_partner_form_serp
+msgid "SERP Tracking"
+msgstr "SERP-spårning"
+
+#. module: base_serp
+#: model:ir.model,name:base_serp.model_serp_mixin
+msgid "SERP Tracking Mixin"
+msgstr "Mixin för SERP-spårning"
+
+#. module: base_serp
+#: model:ir.actions.server,name:base_serp.ir_cron_serp_check_partners_ir_actions_server
+msgid "SERP: Check Partners Daily"
+msgstr "SERP: Kontrollera partners dagligen"
+
+#. module: base_serp
+#: model_terms:ir.ui.view,arch_db:base_serp.view_partner_form_serp
+#: model_terms:ir.ui.view,arch_db:base_serp.view_serp_result_form
+msgid "Search Context"
+msgstr "Sök kontext"
+
+#. module: base_serp
+#: model:ir.model.fields,field_description:base_serp.field_serp_result__search_date
+#: model_terms:ir.ui.view,arch_db:base_serp.view_serp_result_search
+msgid "Search Date"
+msgstr "Datum för sökning"
+
+#. module: base_serp
+#: model:ir.model.fields,field_description:base_serp.field_serp_provider__search_engine
+#: model:ir.model.fields,field_description:base_serp.field_serp_result__search_engine
+#: model_terms:ir.ui.view,arch_db:base_serp.view_serp_provider_search
+msgid "Search Engine"
+msgstr "Sökmotor"
+
+#. module: base_serp
+#: model_terms:ir.ui.view,arch_db:base_serp.view_serp_result_form
+msgid "Search Information"
+msgstr "Sök information"
+
+#. module: base_serp
+#: model:ir.model.fields,help:base_serp.field_serp_provider__search_engine
+msgid "Search engine to use for queries"
+msgstr "Sökmotor att använda för frågor"
+
+#. module: base_serp
+#. odoo-python
+#: code:addons/base_serp/models/serp_provider.py:0
+msgid "Search failed: %s"
+msgstr "Sökningen misslyckades: %s"
+
+#. module: base_serp
+#: model:ir.model.fields,help:base_serp.field_res_partner__serp_language
+#: model:ir.model.fields,help:base_serp.field_res_users__serp_language
+#: model:ir.model.fields,help:base_serp.field_serp_mixin__serp_language
+msgid "Search language"
+msgstr "Sök språk"
+
+#. module: base_serp
+#: model:ir.model.fields,field_description:base_serp.field_serp_provider__sequence
+msgid "Sequence"
+msgstr "Sekvens"
+
+#. module: base_serp
+#: model:ir.model.fields,field_description:base_serp.field_serp_result__snippet
+msgid "Snippet"
+msgstr "Snippet"
+
+#. module: base_serp
+#: model:ir.model.fields.selection,name:base_serp.selection__res_partner__serp_language__sv
+#: model:ir.model.fields.selection,name:base_serp.selection__serp_mixin__serp_language__sv
+msgid "Swedish"
+msgstr "Svenska"
+
+#. module: base_serp
+#. odoo-python
+#: code:addons/base_serp/models/serp_provider.py:0
+msgid "Test failed: %s"
+msgstr "Testet misslyckades: %s"
+
+#. module: base_serp
+#. odoo-python
+#: code:addons/base_serp/models/serp_provider.py:0
+msgid ""
+"Test successful!\n"
+"\n"
+"Domain: %s\n"
+"Keyword: %s\n"
+"Position: %s\n"
+"URL: %s"
+msgstr ""
+"Testet lyckades!\n"
+"\n"
+"Domän: %s\n"
+"Nyckelord: %s\n"
+"Position: %s\n"
+"URL: %s"
+
+#. module: base_serp
+#. odoo-python
+#: code:addons/base_serp/models/serp_provider.py:0
+msgid ""
+"Test successful, but domain not found in top results.\n"
+"\n"
+"Domain: %s\n"
+"Keyword: %s"
+msgstr ""
+"Testet lyckades, men domänen hittades inte i toppresultaten.\n"
+"\n"
+"Domän: %s\n"
+"Nyckelord: %s"
+
+#. module: base_serp
+#: model_terms:ir.ui.view,arch_db:base_serp.view_serp_result_search
+msgid "This Month"
+msgstr "Denna månad"
+
+#. module: base_serp
+#: model_terms:ir.ui.view,arch_db:base_serp.view_serp_result_search
+msgid "This Week"
+msgstr "Denna vecka"
+
+#. module: base_serp
+#: model:ir.model.fields,field_description:base_serp.field_serp_result__title
+msgid "Title"
+msgstr "Titel"
+
+#. module: base_serp
+#: model_terms:ir.ui.view,arch_db:base_serp.view_serp_result_search
+msgid "Today"
+msgstr "I dag"
+
+#. module: base_serp
+#: model:ir.model.fields,field_description:base_serp.field_serp_provider__total_searches
+msgid "Total Searches"
+msgstr "Totalt antal sökningar"
+
+#. module: base_serp
+#: model:ir.model.fields,field_description:base_serp.field_serp_result__url
+msgid "URL"
+msgstr "URL"
+
+#. module: base_serp
+#: model_terms:ir.ui.view,arch_db:base_serp.view_serp_provider_form
+msgid "e.g. Google BeautifulSoup"
+msgstr "t.ex. Google BeautifulSoup"
+
+#. module: base_serp
+#: model_terms:ir.ui.view,arch_db:base_serp.view_partner_form_serp
+msgid "e.g., solceller, solpaneler, solenergi"
+msgstr "t.ex. solceller, solpaneler, solenergi"
