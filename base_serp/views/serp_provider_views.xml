@@ -29,8 +29,7 @@
                         <group>
                             <field name="provider_type"/>
                             <field name="search_engine"/>
-                            <field name="sequence"/>
-                            <field name="active"/>
+                            <field name="active" invisible="1"/>
                         </group>
                         <group>
                             <field name="total_searches" readonly="1"/>
@@ -41,11 +40,11 @@
                     <notebook>
                         <page string="Configuration">
                             <group>
-                                <group string="Rate Limiting">
-                                    <field name="rate_limit_delay"/>
-                                    <field name="timeout"/>
-                                    <field name="num_results"/>
-                                </group>
+<!--                                <group string="Rate Limiting">-->
+<!--                                    <field name="rate_limit_delay"/>-->
+<!--                                    <field name="timeout"/>-->
+<!--                                    <field name="num_results"/>-->
+<!--                                </group>-->
                                 <group string="API Credentials" id="api_credentials">
                                     <field name="api_key" password="True"/>
                                     <field name="api_secret" password="True"/>
@@ -64,7 +63,6 @@
         <field name="model">serp.provider</field>
         <field name="arch" type="xml">
             <list string="SERP Providers">
-                <field name="sequence" widget="handle"/>
                 <field name="name"/>
                 <field name="provider_type"/>
                 <field name="search_engine"/>

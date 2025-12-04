@@ -1,65 +1,60 @@
 <?xml version="1.0" encoding="utf-8"?>
 <odoo>
-    <!-- Inherit Partner Form View -->
+    <!-- Partner Form View - SERP Fields -->
     <record id="view_partner_form_serp" model="ir.ui.view">
         <field name="name">res.partner.form.serp</field>
         <field name="model">res.partner</field>
         <field name="inherit_id" ref="base.view_partner_form"/>
         <field name="arch" type="xml">
-
-            <!-- Add invisible fields for button box -->
-            <xpath expr="//sheet" position="before">
-                <field name="serp_result_count" invisible="1"/>
-                <field name="serp_avg_position" invisible="1"/>
-                <field name="serp_domain" invisible="1"/>
-            </xpath>
-
-            <!-- Add button in button box -->
             <xpath expr="//div[@name='button_box']" position="inside">
-                <button name="%(base_serp.action_serp_result)d"
-                        type="action"
+                <button name="action_view_reports"
+                        type="object"
                         class="oe_stat_button"
                         icon="fa-line-chart"
-                        invisible="not serp_domain"
-                        domain="[('search_default_domain', '=', serp_domain), ('search_default_res_id', '=', id)]">
+                        invisible="not project_id">
                     <div class="o_field_widget o_stat_info">
                         <span class="o_stat_value">
-                            <field name="serp_result_count" nolabel="1"/>
+                            <field name="serp_report_count" nolabel="1"/>
                         </span>
-                        <span class="o_stat_text">SERP Results</span>
+                        <span class="o_stat_text">SERP Report</span>
                     </div>
                 </button>
             </xpath>
 
-            <!-- Add SERP tab in notebook -->
-            <xpath expr="//notebook" position="inside">
+            <notebook position="inside">
                 <page string="SERP Tracking" name="serp_tracking">
                     <group>
-                        <group string="Configuration">
-                            <field name="serp_domain"/>
-                            <field name="serp_provider_id"/>
-                            <field name="serp_keywords" placeholder="e.g., solceller, solpaneler, solenergi"/>
+                        <group string="Domain Configuration">
+                            <field name="serp_domain" required="1"/>
                         </group>
-                        <group string="Search Context">
-                            <field name="serp_country_code"/>
-                            <field name="serp_language"/>
+                        <group string="Provider">
+                            <field name="serp_provider_id"/>
+                        </group>
+                    </group>
+
+                    <group>
+                        <group string="Keywords &amp; Countries">
+                            <field name="serp_keyword_ids" widget="many2many_tags"/>
+                            <field name="serp_country_ids" widget="many2many_tags"/>
+                        </group>
+                        <group string="Automatic Checking">
+                            <field name="project_id"/>
+                            <label for="serp_interval_number" string="Check Every"/>
+                            <div class="o_row">
+                                <field name="serp_interval_number" class="oe_inline"/>
+                                <field name="serp_interval_type" class="oe_inline"/>
+                            </div>
+                            <field name="serp_nextcall"/>
+                        </group>
+                    </group>
+
+                    <group>
+                        <group string="Statistics">
                             <field name="serp_last_check" readonly="1"/>
                         </group>
                     </group>
-
-                    <group string="Results">
-                        <field name="serp_result_ids" nolabel="1">
-                            <list>
-                                <field name="search_date"/>
-                                <field name="keyword"/>
-                                <field name="position"/>
-                                <field name="url"/>
-                            </list>
-                        </field>
-                    </group>
                 </page>
-            </xpath>
-
+            </notebook>
         </field>
     </record>
 

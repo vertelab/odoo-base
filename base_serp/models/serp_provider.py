@@ -4,10 +4,9 @@ import requests
 from bs4 import BeautifulSoup
 from fake_useragent import UserAgent
 import time
-import random
 
 from odoo import api, fields, models, _
-from odoo.exceptions import UserError, ValidationError
+from odoo.exceptions import UserError
 
 _logger = logging.getLogger(__name__)
 
@@ -15,7 +14,7 @@ _logger = logging.getLogger(__name__)
 class SerpProvider(models.Model):
     _name = 'serp.provider'
     _description = 'SERP Provider'
-    _order = 'sequence, name'
+    _order = 'name'
 
     name = fields.Char(string='Provider Name', required=True)
     provider_type = fields.Selection(
@@ -26,29 +25,11 @@ class SerpProvider(models.Model):
         required=True,
         default='beautifulsoup'
     )
-    sequence = fields.Integer(string='Sequence', default=10)
     active = fields.Boolean(string='Active', default=True)
 
-    # Configuration fields
-    rate_limit_delay = fields.Float(
-        string='Rate Limit Delay (seconds)',
-        default=2.0,
-        help='Delay between requests to avoid being blocked'
-    )
-    timeout = fields.Integer(
-        string='Request Timeout (seconds)',
-        default=10,
-        help='Maximum time to wait for a response'
-    )
-    num_results = fields.Integer(
-        string='Number of Results',
-        default=10,
-        help='Number of results to fetch per page'
-    )
     search_engine = fields.Selection(
         selection=[
             ('google', 'Google'),
-            # Future: ('bing', 'Bing'), ('duckduckgo', 'DuckDuckGo')
         ],
         string='Search Engine',
         default='google',
@@ -85,22 +66,17 @@ class SerpProvider(models.Model):
         if not url:
             return None
 
-        # Convert to string and lowercase
         domain = str(url).lower().strip()
-
-        # Remove protocol
         domain = domain.replace('https://', '').replace('http://', '')
-
-        # Remove www.
         domain = domain.replace('www.', '')
-
-        # Remove path (take only domain part before first /)
         domain = domain.split('/')[0]
-
-        # Remove trailing dots
         domain = domain.rstrip('.')
 
         return domain
+
+    def _get_max_position(self):
+        """Get maximum position from system parameters"""
+        return int(self.env['ir.config_parameter'].sudo().get_param('base_serp.max_position', 50))
 
     def execute_search(self, keyword, domain=None, country='SE', language='sv'):
         """Execute search based on provider_type"""
@@ -118,10 +94,7 @@ class SerpProvider(models.Model):
             )
 
         try:
-            # Normalize domain if provided, otherwise None
             normalized_domain = self._normalize_domain(domain) if domain else None
-
-            # Execute the search
             result = method(keyword, normalized_domain, country, language)
 
             # Update statistics
@@ -133,39 +106,38 @@ class SerpProvider(models.Model):
             return result
 
         except Exception as e:
-            _logger.error(
-                f"Error executing search with provider {self.name}: {str(e)}"
-            )
-            raise UserError(
-                _('Search failed: %s') % str(e)
-            )
+            _logger.error(f"Error executing search with provider {self.name}: {str(e)}")
+            raise UserError(_('Search failed: %s') % str(e))
 
     def _search_beautifulsoup(self, keyword, domain=None, country='SE', language='sv'):
         """BeautifulSoup web scraping implementation"""
         self.ensure_one()
 
-        _logger.info(f"Searching for '{keyword}' with BeautifulSoup (domain: {domain})")
+        _logger.info(f"Searching for '{keyword}' with BeautifulSoup (domain: {domain}, country: {country})")
 
-        # Get search results HTML
         html = self._get_google_results(keyword, country, language)
 
         if not html:
-            return {
+            return [{
                 'success': False,
                 'keyword': keyword,
                 'domain': domain,
                 'position': None,
                 'url': None,
                 'error': 'Failed to fetch search results'
-            }
+            }]
 
         # Parse the results
-        result = self._parse_serp_beautifulsoup(html, keyword, domain)
+        matches = self._parse_serp_beautifulsoup(html, keyword, domain)
 
-        # Add delay to respect rate limiting
-        time.sleep(self.rate_limit_delay)
-
-        return result
+        return matches if matches else [{
+            'success': False,
+            'keyword': keyword,
+            'domain': domain,
+            'position': None,
+            'url': None,
+            'error': f'Domain {domain} not found in search results'
+        }]
 
     def _get_google_results(self, keyword, country, language):
         """Fetch Google search results HTML"""
@@ -174,7 +146,6 @@ class SerpProvider(models.Model):
         google_url = "https://www.google.com/search"
         ua = UserAgent()
 
-        # Generate random user agent
         headers = {
             "User-Agent": ua.random,
             "Accept-Language": f"{language}-{country},{language};q=0.9",
@@ -183,9 +154,9 @@ class SerpProvider(models.Model):
 
         params = {
             "q": keyword,
-            "gl": country,  # Country
-            "hl": language,  # Language
-            "num": self.num_results,  # Number of results
+            "gl": country,
+            "hl": language,
+            "num": self._get_max_position(),
         }
 
         try:
@@ -193,7 +164,7 @@ class SerpProvider(models.Model):
                 google_url,
                 headers=headers,
                 params=params,
-                timeout=self.timeout
+                timeout=10  # Hardcoded timeout
             )
             response.raise_for_status()
             return response.text
@@ -202,23 +173,19 @@ class SerpProvider(models.Model):
             _logger.error(f"Error fetching Google results for '{keyword}': {str(e)}")
             return None
 
-    def _parse_serp_beautifulsoup(self, html, keyword, domain=None):
+    def _parse_serp_beautifulsoup(self, html, keyword, domain):
         """Parse Google SERP HTML and find domain position"""
         self.ensure_one()
 
         soup = BeautifulSoup(html, "html.parser")
-
-        # Google search result containers
         results = soup.find_all("div", class_="g")
 
         if not results:
-            # Try alternative container class (Google changes this sometimes)
             results = soup.find_all("div", class_="tF2Cxc")
 
         matches = []
 
         for idx, result in enumerate(results, start=1):
-            # Find the link
             link_tag = result.find("a")
 
             if not link_tag or not link_tag.get("href"):
@@ -226,24 +193,18 @@ class SerpProvider(models.Model):
 
             url = link_tag["href"]
 
-            # Extract domain from URL
             try:
-                result_domain = url.replace('https://', '').replace('http://', '')
-                result_domain = result_domain.split('/')[0]
-                result_domain = result_domain.replace('www.', '')
+                result_domain = self._normalize_domain(url)
             except:
-                result_domain = url
+                continue
 
-            # If domain filter is provided, only save matching results
-            # If no domain filter, save ALL results
-            if not domain or domain.lower() in result_domain.lower():
+            # Check if this result matches our target domain
+            if domain and result_domain and domain.lower() == result_domain.lower():
                 _logger.info(f"Found '{result_domain}' at position {idx} for keyword '{keyword}'")
 
-                # Extract title
                 title_tag = result.find("h3")
                 title = title_tag.get_text() if title_tag else None
 
-                # Extract snippet
                 snippet_tag = result.find("div", class_="VwiC3b")
                 if not snippet_tag:
                     snippet_tag = result.find("span", class_="aCOpRe")
@@ -269,40 +230,36 @@ class SerpProvider(models.Model):
         """Test the provider with a sample search"""
         self.ensure_one()
 
-        # Test search
         test_keyword = "odoo erp"
         test_domain = "odoo.com"
 
         try:
-            result = self.execute_search(
+            results = self.execute_search(
                 keyword=test_keyword,
                 domain=test_domain,
                 country='SE',
                 language='sv'
             )
 
-            if result.get('success'):
-                if result.get('position'):
-                    message = _(
-                        'Test successful!\n\n'
-                        'Domain: %s\n'
-                        'Keyword: %s\n'
-                        'Position: %s\n'
-                        'URL: %s'
-                    ) % (
-                                  test_domain,
-                                  test_keyword,
-                                  result['position'],
-                                  result['url']
-                              )
-                else:
-                    message = _(
-                        'Test successful, but domain not found in top results.\n\n'
-                        'Domain: %s\n'
-                        'Keyword: %s'
-                    ) % (test_domain, test_keyword)
+            # Get first result
+            result = results[0] if results else {}
+
+            if result.get('success') and result.get('position'):
+                message = _(
+                    'Test successful!\n\n'
+                    'Domain: %s\n'
+                    'Keyword: %s\n'
+                    'Position: %s\n'
+                    'URL: %s'
+                ) % (test_domain, test_keyword, result['position'], result['url'])
+                msg_type = 'success'
             else:
-                message = _('Test failed: %s') % result.get('error', 'Unknown error')
+                message = _(
+                    'Test completed, but domain not found in top results.\n\n'
+                    'Domain: %s\n'
+                    'Keyword: %s'
+                ) % (test_domain, test_keyword)
+                msg_type = 'warning'
 
             return {
                 'type': 'ir.actions.client',
@@ -310,7 +267,7 @@ class SerpProvider(models.Model):
                 'params': {
                     'title': _('Provider Test'),
                     'message': message,
-                    'type': 'success' if result.get('success') else 'danger',
+                    'type': msg_type,
                     'sticky': True,
                 }
             }

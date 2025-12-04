@@ -5,6 +5,10 @@ class SerpKeyword(models.Model):
     _description = 'SERP Keyword'
 
     name = fields.Char(string='Keyword', required=True)
+    serp_last_check = fields.Datetime(
+        string='Last SERP Check',
+        readonly=True
+    )
 
     _sql_constraints = [
         ('unique_keyword', 'unique(name)', 'Keyword already exists!')

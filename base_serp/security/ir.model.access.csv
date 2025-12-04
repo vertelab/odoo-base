@@ -3,3 +3,5 @@ access_serp_provider_user,serp.provider.user,model_serp_provider,base.group_user
 access_serp_provider_manager,serp.provider.manager,model_serp_provider,base.group_system,1,1,1,1
 access_serp_result_user,serp.result.user,model_serp_result,base.group_user,1,0,0,0
 access_serp_result_manager,serp.result.manager,model_serp_result,base.group_system,1,1,1,1
+base_serp.access_serp_keyword,access_serp_keyword,base_serp.model_serp_keyword,base.group_user,1,1,1,1
+base_serp.access_serp_report_wizard,access_serp_report_wizard,base_serp.model_serp_report_wizard,base.group_user,1,1,1,1

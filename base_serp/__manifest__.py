@@ -29,8 +29,9 @@ Provider System:
     'website': 'https://vertel.se',
     'license': 'LGPL-3',
     'depends': [
-        'base',
+        'base_setup',
         'web',
+        'website',
     ],
     'external_dependencies': {
         'python': [
@@ -48,6 +49,8 @@ Provider System:
         'views/serp_result_views.xml',
         'views/serp_menu.xml',
         'views/res_partner_views.xml',
+        'views/res_config_views.xml',
+        'wizards/serp_report_wizard_views.xml',
     ],
     'demo': [],
     'installable': True,

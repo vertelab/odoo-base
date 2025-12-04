@@ -22,7 +22,7 @@ class SerpProvider(models.Model):
         """SerpAPI implementation"""
         self.ensure_one()
 
-        _logger.info(f"Searching for '{keyword}' with SerpAPI (domain: {domain})")
+        _logger.info(f"Searching for '{keyword}' with SerpAPI (domain: {domain}, country: {country})")
 
         # Check if API key is configured
         if not self.api_key:
@@ -31,9 +31,9 @@ class SerpProvider(models.Model):
         # Prepare search parameters
         params = {
             "q": keyword,
-            "gl": country.lower(),  # Country code
+            "gl": country,  # Country code (uppercase like 'SE')
             "hl": language,  # Language
-            "num": self.num_results,  # Number of results
+            "num": self._get_max_position(),  # Number of results
             "api_key": self.api_key,
         }
 
@@ -47,20 +47,27 @@ class SerpProvider(models.Model):
             results = search.get_dict()
 
             # Parse results
-            result = self._parse_serp_serpapi(results, keyword, domain)
+            matches = self._parse_serp_serpapi(results, keyword, domain)
 
-            return result
+            return matches if matches else [{
+                'success': False,
+                'keyword': keyword,
+                'domain': domain,
+                'position': None,
+                'url': None,
+                'error': f'Domain {domain} not found in search results'
+            }]
 
         except Exception as e:
             _logger.error(f"SerpAPI search failed for '{keyword}': {str(e)}")
-            return {
+            return [{
                 'success': False,
                 'keyword': keyword,
                 'domain': domain,
                 'position': None,
                 'url': None,
                 'error': str(e)
-            }
+            }]
 
     def _parse_serp_serpapi(self, results, keyword, domain=None):
         """Parse SerpAPI results and find domain position"""
@@ -78,21 +85,19 @@ class SerpProvider(models.Model):
         for idx, result in enumerate(organic_results, start=1):
             link = result.get('link', '')
 
-            # Extract domain from URL
-            try:
-                # Remove protocol
-                result_domain = link.replace('https://', '').replace('http://', '')
-                # Get domain part (before first /)
-                result_domain = result_domain.split('/')[0]
-                # Remove www.
-                result_domain = result_domain.replace('www.', '')
-            except:
-                result_domain = link
+            if not link:
+                continue
 
-            # If domain filter is provided, only save matching results
-            # If no domain filter, save ALL results
-            if not domain or domain.lower() in result_domain.lower():
+            # Use the base model's normalize method
+            result_domain = self._normalize_domain(link)
+
+            if not result_domain:
+                continue
+
+            # Check if this result matches our target domain
+            if domain and result_domain and domain.lower() == result_domain.lower():
                 _logger.info(f"Found '{result_domain}' at position {idx} for keyword '{keyword}'")
+
                 matches.append({
                     'success': True,
                     'keyword': keyword,

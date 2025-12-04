@@ -20,3 +20,4 @@ class ResPartner(models.Model):
             domain = domain.split('/')[0]
 
             self.serp_domain = domain
+

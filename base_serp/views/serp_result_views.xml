@@ -5,19 +5,19 @@
         <field name="name">serp.result.form</field>
         <field name="model">serp.result</field>
         <field name="arch" type="xml">
-            <form string="SERP Result" create="false" edit="false">
+<!--            create="false" edit="false"-->
+            <form string="SERP Result">
                 <sheet>
                     <group>
                         <group string="Search Information">
                             <field name="keyword"/>
-                            <field name="domain"/>
                             <field name="position"/>
-                            <field name="url" widget="url"/>
+                            <field name="url" widget="url" invisible="1"/>
                             <field name="title"/>
                         </group>
                         <group string="Search Context">
                             <field name="search_date"/>
-                            <field name="provider_id"/>
+                            <field name="provider_id" invisible="1"/>
                             <field name="search_engine"/>
                             <field name="country_code"/>
                             <field name="language"/>
@@ -26,8 +26,6 @@
 
                     <group string="Related Record">
                         <field name="resource_ref"/>
-                        <field name="res_model"/>
-                        <field name="res_id"/>
                     </group>
                     <group string="Content">
                         <field name="snippet" nolabel="1"/>
@@ -45,13 +43,11 @@
             <list string="SERP Results" create="false" edit="false">
                 <field name="search_date"/>
                 <field name="keyword"/>
-                <field name="domain"/>
                 <field name="position"/>
                 <field name="title"/>
                 <field name="url"/>
                 <field name="country_code"/>
                 <field name="language"/>
-                <field name="provider_id"/>
             </list>
         </field>
     </record>
@@ -63,11 +59,9 @@
         <field name="arch" type="xml">
             <search string="SERP Results">
                 <field name="keyword"/>
-                <field name="domain"/>
                 <field name="position"/>
                 <field name="search_date"/>
                 <field name="provider_id"/>
-                <field name="res_id"/>
                 <filter string="Today" name="today"
                     domain="[('search_date', '&gt;=', context_today().strftime('%Y-%m-%d 00:00:00'))]"/>
                 <filter string="This Week" name="this_week"
@@ -76,44 +70,41 @@
                     domain="[('search_date', '&gt;=', (context_today() - relativedelta(months=1)).strftime('%Y-%m-%d 00:00:00'))]"/>
                 <group expand="0" string="Group By">
                     <filter string="Keyword" name="group_keyword" context="{'group_by': 'keyword'}"/>
-                    <filter string="Domain" name="group_domain" context="{'group_by': 'domain'}"/>
                     <filter string="Search Date" name="group_search_date" context="{'group_by': 'search_date:month'}"/>
-                    <filter string="Provider" name="group_provider" context="{'group_by': 'provider_id'}"/>
                 </group>
             </search>
         </field>
     </record>
 
     <!-- Graph View -->
-    <record id="view_serp_result_graph" model="ir.ui.view">
-        <field name="name">serp.result.graph</field>
-        <field name="model">serp.result</field>
-        <field name="arch" type="xml">
-            <graph string="SERP Results" type="line">
-                <field name="search_date" interval="day"/>
-                <field name="position" type="measure"/>
-            </graph>
-        </field>
-    </record>
+<!--    <record id="view_serp_result_graph" model="ir.ui.view">-->
+<!--        <field name="name">serp.result.graph</field>-->
+<!--        <field name="model">serp.result</field>-->
+<!--        <field name="arch" type="xml">-->
+<!--            <graph string="SERP Ranking Trends" type="line">-->
+<!--                <field name="search_date" interval="day"/>-->
+<!--                <field name="keyword" type="row"/>-->
+<!--            </graph>-->
+<!--        </field>-->
+<!--    </record>-->
 
     <!-- Pivot View -->
-    <record id="view_serp_result_pivot" model="ir.ui.view">
-        <field name="name">serp.result.pivot</field>
-        <field name="model">serp.result</field>
-        <field name="arch" type="xml">
-            <pivot string="SERP Results">
-                <field name="keyword" type="row"/>
-                <field name="search_date" interval="month" type="col"/>
-                <field name="position" type="measure"/>
-            </pivot>
-        </field>
-    </record>
+<!--    <record id="view_serp_result_pivot" model="ir.ui.view">-->
+<!--        <field name="name">serp.result.pivot</field>-->
+<!--        <field name="model">serp.result</field>-->
+<!--        <field name="arch" type="xml">-->
+<!--            <pivot string="SERP Results">-->
+<!--                <field name="keyword" type="row"/>-->
+<!--                <field name="search_date" interval="month" type="col"/>-->
+<!--            </pivot>-->
+<!--        </field>-->
+<!--    </record>-->
 
     <!-- Action -->
     <record id="action_serp_result" model="ir.actions.act_window">
         <field name="name">SERP Results</field>
         <field name="res_model">serp.result</field>
-        <field name="view_mode">list,form,graph,pivot</field>
+        <field name="view_mode">list,form</field>
         <field name="context">{'search_default_this_month': 1}</field>
         <field name="help" type="html">
             <p class="o_view_nocontent_smiling_face">

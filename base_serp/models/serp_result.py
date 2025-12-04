@@ -1,18 +1,10 @@
+# -*- coding: utf-8 -*-
 from odoo import api, fields, models, _
-
 
 class SerpResult(models.Model):
     _name = 'serp.result'
     _description = 'SERP Result'
     _order = 'search_date desc'
-
-    # partner_id = fields.Many2one(
-    #     'res.partner',
-    #     string='Partner',
-    #     required=True,
-    #     ondelete='cascade',
-    #     index=True
-    # )
 
     @api.model
     def _selection_target_model(self):
@@ -28,11 +20,8 @@ class SerpResult(models.Model):
 
     res_model = fields.Char('Related Document Model', required=True, index=True)
     res_id = fields.Integer('Related Document ID', required=True, index=True)
-    resource_ref = fields.Reference('_selection_target_model', 'Related Document', compute=_compute_resource_ref)
-
-    # What was searched
+    resource_ref = fields.Reference('_selection_target_model', 'Related Document', compute='_compute_resource_ref')
     keyword = fields.Char(string='Keyword', required=True, index=True)
-    domain = fields.Char(string='Domain')
 
     # Result
     position = fields.Integer(string='Position', required=True)

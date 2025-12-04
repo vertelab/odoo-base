@@ -1,30 +1,16 @@
 <?xml version="1.0" encoding="utf-8"?>
 <odoo>
-    <data noupdate="1">
+    <data noupdate="0">
 
-        <!-- Cron Job: Daily SERP Check for Partners -->
+        <!-- Cron Job: SERP Check for Partners -->
         <record id="ir_cron_serp_check_partners" model="ir.cron">
-            <field name="name">SERP: Check Partners Daily</field>
+            <field name="name">SERP: Check Partners</field>
             <field name="model_id" ref="base.model_res_partner"/>
             <field name="state">code</field>
-            <field name="code">
-# Find all partners with SERP configuration
-partners = env['res.partner'].search([
-    ('serp_domain', '!=', False),
-    ('serp_keywords', '!=', False),
-    ('serp_provider_id', '!=', False)
-])
-
-# Execute SERP check for each partner
-for partner in partners:
-    try:
-        partner.action_check_serp()
-    except Exception as e:
-        _logger.error(f"SERP check failed for partner {partner.name}: {str(e)}")
-            </field>
+            <field name="code">model._cron_check_serp()</field>
             <field name="interval_number">1</field>
             <field name="interval_type">days</field>
-            <field name="active" eval="False"/>
+            <field name="active" eval="True"/>
         </record>
 
     </data>
