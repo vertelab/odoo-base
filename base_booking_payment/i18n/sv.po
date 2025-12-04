@@ -1,0 +1,484 @@
+# Translation of Odoo Server.
+# This file contains the translation of the following modules:
+# 	* base_booking_payment
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: Odoo Server 18.0-20251125\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2025-12-02 13:12+0000\n"
+"PO-Revision-Date: 2025-12-03 09:59+0100\n"
+"Last-Translator: \n"
+"Language-Team: \n"
+"Language: sv\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"X-Generator: Poedit 3.4.2\n"
+
+#. module: base_booking_payment
+#. odoo-python
+#: code:addons/base_booking_payment/models/calendar_booking.py:0
+msgid ""
+"%(name)s\n"
+"%(date_start)s at %(time_start)s to\n"
+"%(date_end)s at %(time_end)s (%(timezone)s)"
+msgstr ""
+"%(name)s\n"
+"%(date_start)s vid %(time_start)s till\n"
+"%(date_end)s vid %(time_end)s (%(timezone)s)"
+
+#. module: base_booking_payment
+#. odoo-python
+#: code:addons/base_booking_payment/models/calendar_booking.py:0
+msgid ""
+"%(name)s with %(staff_user)s\n"
+"%(date_start)s at %(time_start)s to\n"
+"%(date_end)s at %(time_end)s (%(timezone)s)"
+msgstr ""
+"%(namn)s med %(personal_användare)s\n"
+"%(date_start)s vid %(time_start)s till\n"
+"%(date_end)s vid %(time_slut)s (%(timezon)s)"
+
+#. module: base_booking_payment
+#: model_terms:ir.ui.view,arch_db:base_booking_payment.booking_validated
+msgid "<i class=\"fa fa-check-circle text-success me-3\"/>booking Scheduled!"
+msgstr "<i class=\"fa fa-check-circle text-success me-3\"/>bokning Schemalagd!"
+
+#. module: base_booking_payment
+#: model_terms:ir.ui.view,arch_db:base_booking_payment.booking_payment
+msgid "<i class=\"fa fa-pencil fa-fw me-1\"/>Edit my booking"
+msgstr "<i class=\"fa fa-pencil fa-fw me-1\"/>Redigera min bokning"
+
+#. module: base_booking_payment
+#: model_terms:ir.ui.view,arch_db:base_booking_payment.calendar_booking_view
+msgid "<i class=\"fa fa-pencil-square-o text-warning me-3\"/>booking waiting for payment"
+msgstr "<i class=\"fa fa-pencil-square-o text-warning me-3\"/>bokning väntar på betalning"
+
+#. module: base_booking_payment
+#: model_terms:ir.ui.view,arch_db:base_booking_payment.calendar_booking_view
+msgid "<i class=\"fa fa-times-circle text-danger me-3\"/>booking Unavailable!"
+msgstr "<i class=\"fa fa-times-circle text-danger me-3\"/>bokning Ej tillgänglig!"
+
+#. module: base_booking_payment
+#: model_terms:ir.ui.view,arch_db:base_booking_payment.booking_type_view_form
+msgid "<i class=\"oi oi-fw o_button_icon oi-arrow-right\"/> Configure Payment Providers"
+msgstr "<i class=\"oi oi-fw o_button_icon oi-arrow-right\"/> Konfigurera betalningsleverantörer"
+
+#. module: base_booking_payment
+#: model_terms:ir.ui.view,arch_db:base_booking_payment.booking_type_view_form
+msgid ""
+"<span invisible=\"resource_manage_capacity\" class=\"ms-1\">per booking</span>\n"
+"                            <span invisible=\"not resource_manage_capacity\" class=\"ms-1\">per seat</span>"
+msgstr ""
+"<span invisible=\"resource_manage_capacity\" class=\"ms-1\">per bokning</span>\n"
+"                            <span invisible=\"not resource_manage_capacity\" class=\"ms-1\">per plats</span>"
+
+#. module: base_booking_payment
+#: model_terms:ir.ui.view,arch_db:base_booking_payment.calendar_booking_view
+msgid "<span>Online</span>"
+msgstr "<span>Online</span>"
+
+#. module: base_booking_payment
+#: model_terms:ir.ui.view,arch_db:base_booking_payment.booking_progress_bar
+msgid ""
+"<span>Payment</span>\n"
+"            <span class=\"d-inline-block mx-sm-3 fa fa-angle-right text-muted fs-5\"/>"
+msgstr ""
+"<span>Betalning</span>\n"
+"            <span class=\"d-inline-block mx-sm-3 fa fa-angle-right text-muted fs-5\"/>"
+
+#. module: base_booking_payment
+#: model_terms:ir.ui.view,arch_db:base_booking_payment.booking_payment
+msgid "<strong>Warning</strong> Make sure you are logged in as the right partner before making this payment."
+msgstr "<strong>Varning</strong> Se till att du är inloggad som rätt partner innan du gör denna betalning."
+
+#. module: base_booking_payment
+#: model_terms:ir.ui.view,arch_db:base_booking_payment.booking_payment
+msgid "<strong>Warning</strong> The currency is missing or incorrect."
+msgstr "<strong>Warning</strong> Valutan saknas eller är felaktig."
+
+#. module: base_booking_payment
+#: model_terms:ir.ui.view,arch_db:base_booking_payment.booking_payment
+msgid "<strong>Warning</strong> You must be logged in to pay."
+msgstr "<strong>Varning</strong> Du måste vara inloggad för att betala."
+
+#. module: base_booking_payment
+#: model:ir.model.fields,field_description:base_booking_payment.field_calendar_booking__booking_token
+msgid "Access Token"
+msgstr "Åtkomsttoken"
+
+#. module: base_booking_payment
+#: model:ir.model.constraint,message:base_booking_payment.constraint_booking_type_check_product_and_payment_step
+msgid "Activating the payment step requires a product"
+msgstr "För att aktivera betalningssteget krävs en produkt"
+
+#. module: base_booking_payment
+#: model_terms:ir.ui.view,arch_db:base_booking_payment.booking_payment
+msgid "Amount"
+msgstr "Belopp"
+
+#. module: base_booking_payment
+#: model_terms:ir.ui.view,arch_db:base_booking_payment.calendar_booking_view_form
+msgid "Answers"
+msgstr "Svar"
+
+#. module: base_booking_payment
+#: model:ir.model.fields,field_description:base_booking_payment.field_calendar_booking__asked_capacity
+msgid "Asked Capacity"
+msgstr "Frågad kapacitet"
+
+#. module: base_booking_payment
+#: model_terms:ir.ui.view,arch_db:base_booking_payment.calendar_booking_view
+msgid "Attendees"
+msgstr "Deltagare"
+
+#. module: base_booking_payment
+#: model_terms:ir.ui.view,arch_db:base_booking_payment.calendar_booking_view_form
+msgid "Booking"
+msgstr "Bokning"
+
+#. module: base_booking_payment
+#: model:ir.model,name:base_booking_payment.model_booking_answer_input
+msgid "Booking Answer Inputs"
+msgstr "Svar på bokningsfrågor"
+
+#. module: base_booking_payment
+#: model:ir.model.fields,field_description:base_booking_payment.field_calendar_booking__booking_invite_id
+msgid "Booking Invite"
+msgstr "Inbjudan till bokning"
+
+#. module: base_booking_payment
+#: model:ir.model.fields,field_description:base_booking_payment.field_calendar_booking__booking_line_ids
+msgid "Booking Lines"
+msgstr "Bokningsrader"
+
+#. module: base_booking_payment
+#: model:ir.model.fields,field_description:base_booking_payment.field_booking_type__product_id
+msgid "Booking Product"
+msgstr "Bokningsprodukt"
+
+#. module: base_booking_payment
+#: model:ir.model,name:base_booking_payment.model_booking_resource
+msgid "Booking Resource"
+msgstr "Bokningsresurs"
+
+#. module: base_booking_payment
+#: model:ir.model,name:base_booking_payment.model_booking_type
+#: model:ir.model.fields,field_description:base_booking_payment.field_calendar_booking__booking_type_id
+msgid "Booking Type"
+msgstr "Bokningstyp"
+
+#. module: base_booking_payment
+#: model:ir.model.fields,field_description:base_booking_payment.field_booking_answer_input__calendar_event_id
+msgid "Calendar Event"
+msgstr "Kalenderhändelse"
+
+#. module: base_booking_payment
+#: model:ir.model.fields,field_description:base_booking_payment.field_calendar_booking_line__capacity_reserved
+msgid "Capacity Reserved"
+msgstr "Reserverad kapacitet"
+
+#. module: base_booking_payment
+#: model:ir.model.fields,field_description:base_booking_payment.field_calendar_booking_line__capacity_used
+msgid "Capacity Used"
+msgstr "Utnyttjad kapacitet"
+
+#. module: base_booking_payment
+#: model_terms:ir.ui.view,arch_db:base_booking_payment.booking_form
+msgid "Confirm booking"
+msgstr "Bekräfta bokningen"
+
+#. module: base_booking_payment
+#: model:ir.model.fields,field_description:base_booking_payment.field_calendar_booking__partner_id
+msgid "Contact"
+msgstr "Kontakt"
+
+#. module: base_booking_payment
+#: model:ir.model.fields,field_description:base_booking_payment.field_calendar_booking__create_uid
+#: model:ir.model.fields,field_description:base_booking_payment.field_calendar_booking_line__create_uid
+msgid "Created by"
+msgstr "Skapad av"
+
+#. module: base_booking_payment
+#: model:ir.model.fields,field_description:base_booking_payment.field_calendar_booking__create_date
+#: model:ir.model.fields,field_description:base_booking_payment.field_calendar_booking_line__create_date
+msgid "Created on"
+msgstr "Skapad den"
+
+#. module: base_booking_payment
+#: model:ir.model.fields,field_description:base_booking_payment.field_booking_type__product_currency_id
+msgid "Currency"
+msgstr "Valuta"
+
+#. module: base_booking_payment
+#: model:ir.model.fields,field_description:base_booking_payment.field_calendar_booking__name
+msgid "Customer Name"
+msgstr "Kundnamn"
+
+#. module: base_booking_payment
+#: model:ir.model.fields,field_description:base_booking_payment.field_calendar_booking__display_name
+#: model:ir.model.fields,field_description:base_booking_payment.field_calendar_booking_line__display_name
+msgid "Display Name"
+msgstr "Visningsnamn"
+
+#. module: base_booking_payment
+#: model:ir.model.fields,field_description:base_booking_payment.field_calendar_booking__duration
+#: model_terms:ir.ui.view,arch_db:base_booking_payment.calendar_booking_view
+msgid "Duration"
+msgstr "Varaktighet"
+
+#. module: base_booking_payment
+#: model_terms:ir.ui.view,arch_db:base_booking_payment.calendar_booking_view
+msgid "For"
+msgstr "För"
+
+#. module: base_booking_payment
+#: model:ir.model.fields,field_description:base_booking_payment.field_calendar_booking__guest_ids
+msgid "Guests"
+msgstr "Gäster"
+
+#. module: base_booking_payment
+#: model:ir.model.fields,field_description:base_booking_payment.field_calendar_booking__id
+#: model:ir.model.fields,field_description:base_booking_payment.field_calendar_booking_line__id
+msgid "ID"
+msgstr "ID"
+
+#. module: base_booking_payment
+#: model:ir.model.fields,field_description:base_booking_payment.field_calendar_booking__not_available
+msgid "Is Not Available"
+msgstr "Är inte tillgänglig"
+
+#. module: base_booking_payment
+#: model:ir.model,name:base_booking_payment.model_account_move
+msgid "Journal Entry"
+msgstr "Verifikat"
+
+#. module: base_booking_payment
+#: model:ir.model.fields,field_description:base_booking_payment.field_calendar_booking__write_uid
+#: model:ir.model.fields,field_description:base_booking_payment.field_calendar_booking_line__write_uid
+msgid "Last Updated by"
+msgstr "Senast uppdaterad av"
+
+#. module: base_booking_payment
+#: model:ir.model.fields,field_description:base_booking_payment.field_calendar_booking__write_date
+#: model:ir.model.fields,field_description:base_booking_payment.field_calendar_booking_line__write_date
+msgid "Last Updated on"
+msgstr "Senast uppdaterad den"
+
+#. module: base_booking_payment
+#. odoo-python
+#: code:addons/base_booking_payment/models/templates/booking_type.py:0
+msgid "Make customers pay a fee per person when booking your resources"
+msgstr "Få kunderna att betala en avgift per person när de bokar dina resurser"
+
+#. module: base_booking_payment
+#. odoo-python
+#: code:addons/base_booking_payment/models/templates/booking_type.py:0
+msgid "Make sure customers pay before they can take a slot in your calendar"
+msgstr "Se till att kunderna betalar innan de kan ta en plats i din kalender"
+
+#. module: base_booking_payment
+#: model:ir.model.fields,field_description:base_booking_payment.field_calendar_booking__calendar_event_id
+msgid "Meeting"
+msgstr "Möte"
+
+#. module: base_booking_payment
+#: model:ir.model,name:base_booking_payment.model_calendar_booking
+#: model:ir.model.fields,field_description:base_booking_payment.field_account_bank_statement_line__calendar_booking_ids
+#: model:ir.model.fields,field_description:base_booking_payment.field_account_move__calendar_booking_ids
+#: model:ir.model.fields,field_description:base_booking_payment.field_booking_answer_input__calendar_booking_id
+#: model:ir.model.fields,field_description:base_booking_payment.field_calendar_booking_line__calendar_booking_id
+msgid "Meeting Booking"
+msgstr "Mötesbokning"
+
+#. module: base_booking_payment
+#: model:ir.model,name:base_booking_payment.model_calendar_booking_line
+msgid "Meeting Resource Booking"
+msgstr "Bokning av mötesresurser"
+
+#. module: base_booking_payment
+#: model_terms:ir.ui.view,arch_db:base_booking_payment.booking_validated
+msgid "Oops! Paid booking cannot be cancelled via our website.<br/>"
+msgstr "Oj! Betalda bokningar kan inte avbokas via vår hemsida.<br/>"
+
+#. module: base_booking_payment
+#: model:ir.model.fields,field_description:base_booking_payment.field_calendar_booking__staff_user_id
+msgid "Operator"
+msgstr "Operatör"
+
+#. module: base_booking_payment
+#. odoo-python
+#: code:addons/base_booking_payment/models/templates/booking_type.py:0
+msgid "Paid Consultation"
+msgstr "Betald konsultation"
+
+#. module: base_booking_payment
+#. odoo-python
+#: code:addons/base_booking_payment/models/templates/booking_type.py:0
+msgid "Paid Seats"
+msgstr "Betalda platser"
+
+#. module: base_booking_payment
+#: model_terms:ir.ui.view,arch_db:base_booking_payment.booking_payment
+msgid "Payment for \""
+msgstr "Betalning för \""
+
+#. module: base_booking_payment
+#: model_terms:ir.ui.view,arch_db:base_booking_payment.booking_type_view_form
+msgid "Pick a Product"
+msgstr "Välj en produkt"
+
+#. module: base_booking_payment
+#: model_terms:ir.ui.view,arch_db:base_booking_payment.booking_form
+msgid "Proceed to Payment"
+msgstr "Fortsätt till betalning"
+
+#. module: base_booking_payment
+#: model:ir.model.fields,field_description:base_booking_payment.field_booking_resource__product_id
+#: model:ir.model.fields,field_description:base_booking_payment.field_calendar_booking__product_id
+msgid "Product"
+msgstr "Produkt"
+
+#. module: base_booking_payment
+#: model:ir.model.fields,help:base_booking_payment.field_booking_type__has_payment_step
+msgid "Require visitors to pay to confirm their booking"
+msgstr "Kräva att besökare betalar för att bekräfta sin bokning"
+
+#. module: base_booking_payment
+#: model:ir.model.fields,field_description:base_booking_payment.field_calendar_booking_line__booking_resource_id
+msgid "Resource Booking"
+msgstr "Bokningsresurs"
+
+#. module: base_booking_payment
+#: model_terms:ir.ui.view,arch_db:base_booking_payment.calendar_booking_view
+#: model_terms:ir.ui.view,arch_db:base_booking_payment.calendar_booking_view_form
+msgid "Resources"
+msgstr "Resurser"
+
+#. module: base_booking_payment
+#. odoo-python
+#: code:addons/base_booking_payment/models/templates/booking_type.py:0
+msgid "Room %s"
+msgstr "Rum %s"
+
+#. module: base_booking_payment
+#: model:ir.model.fields,field_description:base_booking_payment.field_booking_type__product_lst_price
+msgid "Sales Price"
+msgstr "Försäljningspris"
+
+#. module: base_booking_payment
+#: model_terms:ir.ui.view,arch_db:base_booking_payment.booking_payment
+msgid "Service"
+msgstr "Service"
+
+#. module: base_booking_payment
+#: model:ir.model.fields,field_description:base_booking_payment.field_calendar_booking__start
+msgid "Start"
+msgstr "Start"
+
+#. module: base_booking_payment
+#: model:ir.model.fields,field_description:base_booking_payment.field_calendar_booking__stop
+msgid "Stop"
+msgstr "Stopp"
+
+#. module: base_booking_payment
+#: model:ir.model.constraint,message:base_booking_payment.constraint_booking_answer_input_check_event_or_booking
+msgid "The answer inputs must be linked to a meeting or to a booking"
+msgstr "Svarsalternativen måste vara kopplade till ett möte eller en bokning"
+
+#. module: base_booking_payment
+#. odoo-python
+#: code:addons/base_booking_payment/models/calendar_booking.py:0
+msgid "The following booking was not confirmed due to insufficient availability or configuration changes: %s"
+msgstr ""
+"Följande bokning kunde inte bekräftas på grund av otillräcklig tillgänglighet eller "
+"konfigurationsändringar: %s"
+
+#. module: base_booking_payment
+#: model:ir.model.fields,help:base_booking_payment.field_booking_type__product_lst_price
+msgid ""
+"The sale price is managed from the product template. Click on the 'Configure Variants' button to set the "
+"extra attribute prices."
+msgstr ""
+"Försäljningspriset hanteras från produktmallen. Klicka på knappen \"Konfigurera varianter\" för att ställa "
+"in priser för extra attribut."
+
+#. module: base_booking_payment
+#: model_terms:ir.ui.view,arch_db:base_booking_payment.booking_payment
+msgid "There is nothing to pay."
+msgstr "Det finns inget att betala."
+
+#. module: base_booking_payment
+#: model_terms:ir.ui.view,arch_db:base_booking_payment.booking_payment
+msgid "This invoice is already paid for."
+msgstr "Denna faktura är redan betald."
+
+#. module: base_booking_payment
+#: model_terms:ir.ui.view,arch_db:base_booking_payment.booking_payment
+msgid "This is a preview of the customer booking payment form."
+msgstr "Detta är en förhandsgranskning av betalningsformuläret för kundbokning."
+
+#. module: base_booking_payment
+#: model_terms:ir.ui.view,arch_db:base_booking_payment.booking_validated
+msgid "To make any changes, please contact"
+msgstr "För att göra ändringar, vänligen kontakta"
+
+#. module: base_booking_payment
+#: model_terms:ir.ui.view,arch_db:base_booking_payment.booking_validated
+msgid "To make any changes, please contact us."
+msgstr "För att göra ändringar, vänligen kontakta oss."
+
+#. module: base_booking_payment
+#: model_terms:ir.ui.view,arch_db:base_booking_payment.calendar_booking_view
+msgid ""
+"Unfortunately, it looks like this booking is not possible anymore. Please contact us to find an alternative."
+msgstr ""
+"Tyvärr ser det ut som om denna bokning inte är möjlig längre. Vänligen kontakta oss för att hitta ett "
+"alternativ."
+
+#. module: base_booking_payment
+#: model:ir.model.fields,field_description:base_booking_payment.field_booking_type__has_payment_step
+msgid "Up-front Payment"
+msgstr "Förskottsbetalning"
+
+#. module: base_booking_payment
+#: model_terms:ir.ui.view,arch_db:base_booking_payment.calendar_booking_view
+msgid "When"
+msgstr "När"
+
+#. module: base_booking_payment
+#: model_terms:ir.ui.view,arch_db:base_booking_payment.calendar_booking_view
+msgid "Where"
+msgstr "Var"
+
+#. module: base_booking_payment
+#: model_terms:ir.ui.view,arch_db:base_booking_payment.booking_validated
+msgid "at"
+msgstr "på"
+
+#. module: base_booking_payment
+#: model:ir.model.fields,field_description:base_booking_payment.field_calendar_booking__booking_answer_input_ids
+msgid "booking Answers"
+msgstr "bokning av svar"
+
+#. module: base_booking_payment
+#: model:ir.model.fields,field_description:base_booking_payment.field_calendar_booking__account_move_id
+msgid "booking Invoice"
+msgstr "bokning Faktura"
+
+#. module: base_booking_payment
+#: model_terms:ir.ui.view,arch_db:base_booking_payment.booking_validated
+msgid "or"
+msgstr "eller"
+
+#. module: base_booking_payment
+#: model_terms:ir.ui.view,arch_db:base_booking_payment.calendar_booking_view
+msgid "people"
+msgstr "människor"
+
+#. module: base_booking_payment
+#: model_terms:ir.ui.view,arch_db:base_booking_payment.booking_info
+msgid "per seat"
+msgstr "per plats"

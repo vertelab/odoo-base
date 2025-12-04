@@ -1,0 +1,105 @@
+# Translation of Odoo Server.
+# This file contains the translation of the following modules:
+# 	* partner_anonymization_rule
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: Odoo Server 18.0-20251125\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2025-12-02 13:13+0000\n"
+"PO-Revision-Date: 2025-12-03 10:38+0100\n"
+"Last-Translator: \n"
+"Language-Team: \n"
+"Language: sv\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"X-Generator: Poedit 3.4.2\n"
+
+#. module: partner_anonymization_rule
+#: model_terms:ir.ui.view,arch_db:partner_anonymization_rule.view_anonymization_rule_form
+msgid "Account"
+msgstr "Konto"
+
+#. module: partner_anonymization_rule
+#: model:ir.actions.act_window,name:partner_anonymization_rule.action_anonymization_rule
+#: model:ir.ui.menu,name:partner_anonymization_rule.menu_anonymization_rule
+msgid "Anonymization Rule"
+msgstr "Anonymiseringsregel"
+
+#. module: partner_anonymization_rule
+#: model:ir.model,name:partner_anonymization_rule.model_anonymization_rule
+msgid "Anonymization Rules"
+msgstr "Anonymiseringsregler"
+
+#. module: partner_anonymization_rule
+#: model:ir.actions.server,name:partner_anonymization_rule.ir_cron_anonymization_scheduler_action_ir_actions_server
+msgid "Anonymization: Anonymization Rule Manager"
+msgstr "Anonymisering: Anonymiseringsregelhanterare"
+
+#. module: partner_anonymization_rule
+#: model:ir.model.fields,field_description:partner_anonymization_rule.field_anonymization_rule__create_uid
+msgid "Created by"
+msgstr "Skapad av"
+
+#. module: partner_anonymization_rule
+#: model:ir.model.fields,field_description:partner_anonymization_rule.field_anonymization_rule__create_date
+msgid "Created on"
+msgstr "Skapad den"
+
+#. module: partner_anonymization_rule
+#: model:ir.model.fields,field_description:partner_anonymization_rule.field_anonymization_rule__display_name
+msgid "Display Name"
+msgstr "Visningsnamn"
+
+#. module: partner_anonymization_rule
+#: model:ir.model.fields,field_description:partner_anonymization_rule.field_anonymization_rule__domain
+msgid "Domain"
+msgstr "Domän"
+
+#. module: partner_anonymization_rule
+#: model:ir.model.fields,help:partner_anonymization_rule.field_anonymization_rule__domain
+msgid "Domain applied to the active id of the parent model"
+msgstr "Domän som tillämpas på det aktiva id:et för den överordnade modellen"
+
+#. module: partner_anonymization_rule
+#: model:ir.model.fields,field_description:partner_anonymization_rule.field_anonymization_rule__id
+msgid "ID"
+msgstr "ID"
+
+#. module: partner_anonymization_rule
+#: model:ir.model.fields,field_description:partner_anonymization_rule.field_anonymization_rule__write_uid
+msgid "Last Updated by"
+msgstr "Senast uppdaterad av"
+
+#. module: partner_anonymization_rule
+#: model:ir.model.fields,field_description:partner_anonymization_rule.field_anonymization_rule__write_date
+msgid "Last Updated on"
+msgstr "Senast uppdaterad den"
+
+#. module: partner_anonymization_rule
+#: model:ir.model.fields,field_description:partner_anonymization_rule.field_anonymization_rule__model_name
+msgid "Model Name"
+msgstr "Modellnamn"
+
+#. module: partner_anonymization_rule
+#: model:ir.model.fields,field_description:partner_anonymization_rule.field_anonymization_rule__model_id
+msgid "Model to Anonymize"
+msgstr "Modell för att anonymisera"
+
+#. module: partner_anonymization_rule
+#: model:ir.model.fields,field_description:partner_anonymization_rule.field_anonymization_rule__name
+msgid "Name"
+msgstr "Namn"
+
+#. module: partner_anonymization_rule
+#: model_terms:ir.ui.view,arch_db:partner_anonymization_rule.view_anonymization_rule_form
+msgid "Run Anonymization"
+msgstr "Kör Anonymisering"
+
+#. module: partner_anonymization_rule
+#. odoo-python
+#: code:addons/partner_anonymization_rule/models/anonymization_rule.py:0
+msgid "You don't have permission to anonymize partners."
+msgstr "Du har inte tillåtelse att anonymisera partners."

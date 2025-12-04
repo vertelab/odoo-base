@@ -13,3 +13,4 @@ openpyxl
 xlrd
 inotify
 odoorpc
+fake-useragent
