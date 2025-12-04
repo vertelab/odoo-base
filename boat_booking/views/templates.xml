@@ -19,7 +19,8 @@
     </template>
 
     <template id="booking_form_append_dimensions" inherit_id="base_booking.booking_form">
-        <xpath expr="//form[contains(@class,'booking_submit_form')]" position="inside">
+<!--        <xpath expr="//form[contains(@class,'booking_submit_form')]" position="inside">-->
+        <xpath expr="//form[hasclass('booking_submit_form')]" position="inside">
             <input type="hidden" name="length" t-att-value="request.params.get('length') or request.params.get('boat_length')"/>
             <input type="hidden" name="width" t-att-value="request.params.get('width') or request.params.get('boat_width')"/>
             <input type="hidden" name="depth" t-att-value="request.params.get('depth') or request.params.get('boat_depth')"/>
