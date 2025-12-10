@@ -1,8 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <odoo>
     <data noupdate="1">
-        <!-- Default Matomo Provider -->
-        <record id="provider_matomo_default" model="website.analytics.provider">
+        <record id="analytics_provider_matomo" model="website.analytics.provider">
             <field name="name">Matomo</field>
             <field name="provider_type">matomo</field>
             <field name="base_url">https://matomo.example.com</field>

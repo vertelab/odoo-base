@@ -12,6 +12,42 @@ _logger = logging.getLogger(__name__)
 class SERPMixin(models.AbstractModel):
     _inherit = 'serp.mixin'
 
+    @api.onchange('analytics_provider_id')
+    def _analytics_provider_id(self):
+        if self.analytics_provider_id == self.env.ref('matomo_website_analytics.analytics_provider_matomo'):
+            template = self.env.ref('matomo_website_analytics.matomo_analytics_template', raise_if_not_found=False)
+            if template:
+                self.analytics_report_template_id = template.id
+        return None
+
+    def _get_analytics_report(self, report_type_uuid):
+        self.ensure_one()
+        if not report_type_uuid:
+            _logger.warning("No report_type_uuid provided to _get_analytics_report.")
+            return None
+
+        report_type = self.env['website.analytics.report.type'].search([
+            ('report_type_id', '=', report_type_uuid)
+        ], limit=1)
+
+        if not report_type:
+            _logger.warning(f"Analytics report type not found for UUID: {report_type_uuid}")
+            return None
+
+        if not self.analytics_provider_id:
+            _logger.warning(f"No analytics provider configured for {self.display_name}. Cannot fetch report {report_type.name}.")
+            return None
+
+        try:
+            image_data = self.analytics_provider_id.fetch_report_image(self, report_type)
+            return image_data
+        except Exception as e:
+            _logger.error(
+                f"Failed to fetch analytics report '{report_type.name}' for {self.display_name}: {str(e)}",
+                exc_info=True
+            )
+            return None
+
     def action_fetch_analytics(self):
         """Fetch analytics data from Matomo"""
         self.ensure_one()

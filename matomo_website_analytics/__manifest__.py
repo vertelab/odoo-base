@@ -20,6 +20,10 @@
     'depends': ['base_serp'],
     'data': [
         'data/website_analytics_provider_data.xml',
+        'data/website_analytics_report_data.xml',
+
+        'views/website_analytics_report_type_views.xml',
+        'views/templates.xml',
     ],
     'external_dependencies': {
         'python': ['requests'],

@@ -1,0 +1,16 @@
+<odoo>
+
+    <template id="matomo_analytics_template" inherit_id="base_serp.analytics_template">
+        <xpath expr="//div[@id='website_analytics_content']" position="inside">
+            <!-- Matomo Analytics -->
+            <div style="margin: 20px 0;">
+                <img t-att-src="'data:image/png;base64,' + object._get_analytics_report('2114925f')" style="max-width: 100%; height: auto;"/>
+            </div>
+
+            <div style="margin: 20px 0;">
+                <img t-att-src="'data:image/png;base64,' + object._get_analytics_report('81cd93ab')" style="max-width: 100%; height: auto;"/>
+            </div>
+        </xpath>
+    </template>
+
+</odoo>

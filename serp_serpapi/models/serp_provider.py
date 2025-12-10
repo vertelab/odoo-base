@@ -22,7 +22,9 @@ class SerpProvider(models.Model):
         """SerpAPI implementation"""
         self.ensure_one()
 
-        _logger.info(f"Searching for '{keyword}' with SerpAPI (domain: {domain}, country: {country})")
+        _logger.info(
+            f"Searching for '{keyword}' with SerpAPI (domain: {domain}, country: {country}), language: {language}"
+        )
 
         # Check if API key is configured
         if not self.api_key:

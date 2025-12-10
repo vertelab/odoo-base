@@ -113,7 +113,9 @@ class SerpProvider(models.Model):
         """BeautifulSoup web scraping implementation"""
         self.ensure_one()
 
-        _logger.info(f"Searching for '{keyword}' with BeautifulSoup (domain: {domain}, country: {country})")
+        _logger.info(
+            f"Searching for '{keyword}' with BeautifulSoup (domain: {domain}, country: {country}), language: {language}"
+        )
 
         html = self._get_google_results(keyword, country, language)
 
@@ -225,61 +227,3 @@ class SerpProvider(models.Model):
             _logger.info(f"Domain '{domain}' not found in top {len(results)} results for '{keyword}'")
 
         return matches
-
-    def test_search(self):
-        """Test the provider with a sample search"""
-        self.ensure_one()
-
-        test_keyword = "odoo erp"
-        test_domain = "odoo.com"
-
-        try:
-            results = self.execute_search(
-                keyword=test_keyword,
-                domain=test_domain,
-                country='SE',
-                language='sv'
-            )
-
-            # Get first result
-            result = results[0] if results else {}
-
-            if result.get('success') and result.get('position'):
-                message = _(
-                    'Test successful!\n\n'
-                    'Domain: %s\n'
-                    'Keyword: %s\n'
-                    'Position: %s\n'
-                    'URL: %s'
-                ) % (test_domain, test_keyword, result['position'], result['url'])
-                msg_type = 'success'
-            else:
-                message = _(
-                    'Test completed, but domain not found in top results.\n\n'
-                    'Domain: %s\n'
-                    'Keyword: %s'
-                ) % (test_domain, test_keyword)
-                msg_type = 'warning'
-
-            return {
-                'type': 'ir.actions.client',
-                'tag': 'display_notification',
-                'params': {
-                    'title': _('Provider Test'),
-                    'message': message,
-                    'type': msg_type,
-                    'sticky': True,
-                }
-            }
-
-        except Exception as e:
-            return {
-                'type': 'ir.actions.client',
-                'tag': 'display_notification',
-                'params': {
-                    'title': _('Provider Test Failed'),
-                    'message': str(e),
-                    'type': 'danger',
-                    'sticky': True,
-                }
-            }

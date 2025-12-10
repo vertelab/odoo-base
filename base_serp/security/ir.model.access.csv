@@ -4,8 +4,6 @@ access_serp_provider_manager,serp.provider.manager,model_serp_provider,base.grou
 access_serp_result_user,serp.result.user,model_serp_result,base.group_user,1,0,0,0
 access_serp_result_manager,serp.result.manager,model_serp_result,base.group_system,1,1,1,1
 base_serp.access_serp_keyword,access_serp_keyword,base_serp.model_serp_keyword,base.group_user,1,1,1,1
-base_serp.access_serp_report_wizard,access_serp_report_wizard,base_serp.model_serp_report_wizard,base.group_user,1,1,1,1
-base_serp.access_serp_report_send_wizard,access_serp_report_send_wizard,base_serp.model_serp_report_send_wizard,base.group_user,1,1,1,1
 base_serp.access_website_analytics_provider,access_website_analytics_provider,base_serp.model_website_analytics_provider,base.group_user,1,1,1,1
 base_serp.access_website_analytics_report_type,access_website_analytics_report_type,base_serp.model_website_analytics_report_type,base.group_user,1,1,1,1
 base_serp.access_website_analytics_report_type_preview,access_website_analytics_report_type_preview,base_serp.model_website_analytics_report_type_preview,base.group_user,1,1,1,0

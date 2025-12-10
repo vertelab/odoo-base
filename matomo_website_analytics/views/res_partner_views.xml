@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <!-- Partner Form View - SERP Fields -->
+    <record id="view_partner_form_serp" model="ir.ui.view">
+        <field name="name">res.partner.form.serp</field>
+        <field name="model">res.partner</field>
+        <field name="inherit_id" ref="base.view_partner_form"/>
+        <field name="arch" type="xml">
+
+
+            <notebook position="inside">
+                <page string="SERP Tracking" name="serp_tracking">
+                    <group>
+                        <group string="SERP Configuration">
+                            <field name="serp_provider_id"/>
+                            <field name="project_id"/>
+                            <field name="serp_last_check" readonly="1"/>
+                        </group>
+                        <group string="Analytics">
+                            <field name="analytics_provider_id"/>
+                            <field name="analytics_site_id"/>
+<!--                            <field name="analytics_report_type_ids" widget="many2many_tags"/>-->
+                        </group>
+                    </group>
+
+
+                </page>
+            </notebook>
+        </field>
+    </record>
+
+</odoo>

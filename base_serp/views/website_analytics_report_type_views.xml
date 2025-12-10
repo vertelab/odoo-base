@@ -6,11 +6,7 @@
         <field name="arch" type="xml">
             <list>
                 <field name="name"/>
-                <field name="api_module"/>
-                <field name="api_action"/>
-                <field name="graph_type"/>
-                <field name="width"/>
-                <field name="height"/>
+                <field name="report_type_id"/>
             </list>
         </field>
     </record>
@@ -27,25 +23,10 @@
                     <group>
                         <group>
                             <field name="name"/>
+                            <field name="report_type_id"/>
                         </group>
                         <group>
                             <field name="analytics_provider_id"/>
-                        </group>
-                    </group>
-                    <group>
-                        <group string="API Configuration">
-                            <field name="api_module"/>
-                            <field name="api_action"/>
-                        </group>
-                        <group string="Graph Configuration">
-                            <field name="graph_type"/>
-                            <field name="width"/>
-                            <field name="height"/>
-                        </group>
-                        <group string="Report Filters">
-                            <field name="period"/>
-                            <field name="date"/>
-                            <field name="last_n"/>
                         </group>
                     </group>
                 </sheet>

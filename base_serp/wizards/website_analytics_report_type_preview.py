@@ -22,46 +22,10 @@ class WebsiteAnalyticsReportTypePreview(models.TransientModel):
         domain="[('analytics_provider_id', '!=', False)]"
     )
 
-    # period = fields.Selection([
-    #     ('day', 'Day'),
-    #     ('week', 'Week'),
-    #     ('month', 'Month'),
-    #     ('year', 'Year'),
-    #     ('range', 'Range'),
-    # ], string='Period', required=True)
-    #
-    # date = fields.Selection([
-    #     ('today', 'Today'),
-    #     ('yesterday', 'Yesterday'),
-    #     ('lastWeek', 'Last Week'),
-    #     ('lastMonth', 'Last Month'),
-    #     ('lastYear', 'Last Year'),
-    # ], string='Date', required=True)
-    #
-    # last_n = fields.Integer(
-    #     string='Last N',
-    #     help='Number of periods to show (e.g., last 30 days, last 12 weeks). Leave 0 to disable.',
-    #     default=0
-    # )
 
     # Preview result
     preview_image = fields.Binary(string='Preview', readonly=True)
     preview_generated = fields.Boolean(default=False)
-
-    # @api.model
-    # def default_get(self, fields_list):
-    #     """Set default values from report type"""
-    #     res = super().default_get(fields_list)
-    #
-    #     if self._context.get('default_report_type_id'):
-    #         report_type = self.env['website.analytics.report.type'].browse(
-    #             self._context['default_report_type_id']
-    #         )
-    #         res['period'] = report_type.period
-    #         res['date'] = report_type.date
-    #         res['last_n'] = report_type.last_n
-    #
-    #     return res
 
     def action_generate_preview(self):
         """Generate preview image"""

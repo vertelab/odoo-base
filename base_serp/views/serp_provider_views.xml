@@ -7,15 +7,6 @@
         <field name="arch" type="xml">
             <form string="SERP Provider">
                 <sheet>
-                    <div class="oe_button_box" name="button_box">
-                        <button name="test_search" type="object" class="oe_stat_button" icon="fa-search">
-                            <div class="o_field_widget o_stat_info">
-                                <span class="o_stat_text">Test</span>
-                                <span class="o_stat_text">Search</span>
-                            </div>
-                        </button>
-                    </div>
-
                     <widget name="web_ribbon" title="Archived" bg_color="text-bg-danger" invisible="active"/>
 
                     <div class="oe_title">
