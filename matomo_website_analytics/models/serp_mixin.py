@@ -49,7 +49,6 @@ class SERPMixin(models.AbstractModel):
             return None
 
     def action_fetch_analytics(self):
-        """Fetch analytics data from Matomo"""
         self.ensure_one()
 
         if not self.analytics_provider_id:
@@ -61,7 +60,6 @@ class SERPMixin(models.AbstractModel):
         return self._fetch_matomo_analytics()
 
     def _fetch_matomo_analytics(self):
-        """Fetch analytics from Matomo API"""
         self.ensure_one()
 
         provider = self.analytics_provider_id
@@ -97,7 +95,6 @@ class SERPMixin(models.AbstractModel):
         }
 
     def _fetch_matomo_site_summary(self):
-        """Fetch overall site summary from Matomo"""
         self.ensure_one()
 
         provider = self.analytics_provider_id
@@ -129,7 +126,6 @@ class SERPMixin(models.AbstractModel):
             raise UserError(_('Failed to connect to Matomo: %s') % str(e))
 
     def _fetch_matomo_page_metrics(self):
-        """Fetch metrics for specific pages"""
         self.ensure_one()
 
         provider = self.analytics_provider_id
@@ -164,7 +160,6 @@ class SERPMixin(models.AbstractModel):
             raise UserError(_('Failed to fetch page metrics: %s') % str(e))
 
     def _fetch_matomo_traffic_sources(self):
-        """Fetch traffic source data"""
         self.ensure_one()
 
         provider = self.analytics_provider_id
@@ -205,7 +200,6 @@ class SERPMixin(models.AbstractModel):
             _logger.error(f"Failed to fetch Matomo traffic sources: {e}")
 
     def _find_page_in_matomo_data(self, page, matomo_data):
-        """Find matching page data in Matomo response"""
         if not isinstance(matomo_data, list):
             return None
 
@@ -243,7 +237,6 @@ class SERPMixin(models.AbstractModel):
         return traffic_data
 
     def _create_or_update_result(self, data, page_id=None):
-        """Create or update analytics result"""
         self.ensure_one()
 
         values = {

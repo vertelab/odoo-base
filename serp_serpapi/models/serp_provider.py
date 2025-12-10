@@ -19,7 +19,6 @@ class SerpProvider(models.Model):
     )
 
     def _search_serpapi(self, keyword, domain=None, country='SE', language='sv'):
-        """SerpAPI implementation"""
         self.ensure_one()
 
         _logger.info(
@@ -72,7 +71,6 @@ class SerpProvider(models.Model):
             }]
 
     def _parse_serp_serpapi(self, results, keyword, domain=None):
-        """Parse SerpAPI results and find domain position"""
         self.ensure_one()
 
         # Check if we got organic results

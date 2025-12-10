@@ -221,7 +221,7 @@ class SERPMixin(models.AbstractModel):
         except Exception as e:
             return [], str(e)
 
-    def _create_serp_results(self, search_results, keyword, country_code):
+    def _create_serp_results(self, search_results, keyword, country_code, language):
         self.ensure_one()
         created_count = 0
 
@@ -238,7 +238,7 @@ class SERPMixin(models.AbstractModel):
                     'search_date': fields.Datetime.now(),
                     'provider_id': self.serp_provider_id.id,
                     'country_code': country_code,
-                    # 'language': language,
+                    'language': language,
                     'search_engine': self.serp_provider_id.search_engine,
                 })
                 created_count += 1
@@ -263,7 +263,7 @@ class SERPMixin(models.AbstractModel):
                 errors.append(f"{keyword} ({country_code}): {error}")
                 continue
 
-            created = self._create_serp_results(search_results, keyword, country_code)
+            created = self._create_serp_results(search_results, keyword, country_code, language)
             results_created += created
 
         self.write({

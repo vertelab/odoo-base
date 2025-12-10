@@ -26,7 +26,6 @@ class WebsiteAnalyticsReportType(models.Model):
     ]
 
     def action_preview_report(self):
-        """Open preview wizard"""
         self.ensure_one()
 
         return {

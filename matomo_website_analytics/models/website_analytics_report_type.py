@@ -6,7 +6,6 @@ from odoo import models, fields
 class WebsiteAnalyticsReportType(models.Model):
     _inherit = 'website.analytics.report.type'
 
-    # API Configuration
     api_module = fields.Selection([
         ('VisitsSummary', 'Visits Summary'),
         ('Actions', 'Actions (Pages, Downloads, etc.)'),
@@ -30,7 +29,6 @@ class WebsiteAnalyticsReportType(models.Model):
         ('getResolution', 'Get Resolution'),
     ], string='API Action', required=True)
 
-    # Graph Configuration
     graph_type = fields.Selection([
         ('evolution', 'Evolution (Line Chart)'),
         ('verticalBar', 'Vertical Bar Chart'),
@@ -38,7 +36,6 @@ class WebsiteAnalyticsReportType(models.Model):
         ('horizontalBar', 'Horizontal Bar Chart'),
     ], string='Graph Type', required=True, default='evolution')
 
-    # Report Filters (Time Configuration)
     period = fields.Selection([
         ('day', 'Day'),
         ('week', 'Week'),
@@ -64,6 +61,5 @@ class WebsiteAnalyticsReportType(models.Model):
         default=0
     )
 
-    # Image Dimensions
     width = fields.Integer(string='Width', default=800)
     height = fields.Integer(string='Height', default=300)

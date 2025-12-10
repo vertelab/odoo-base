@@ -14,13 +14,11 @@ class WebsiteAnalyticsProvider(models.Model):
 
     @api.model
     def _get_provider_types(self):
-        """Extend provider types with Matomo"""
         types = super()._get_provider_types()
         types.append(('matomo', 'Matomo'))
         return types
 
     def _fetch_matomo_report_image(self, resource, report_type):
-        """Fetch a graph image from Matomo ImageGraph API"""
         self.ensure_one()
 
         if not self.base_url or not self.token_auth:
@@ -69,7 +67,6 @@ class WebsiteAnalyticsProvider(models.Model):
             return None
 
     def _fetch_matomo_analytics(self, resource):
-        """Fetch all analytics from Matomo"""
         self.ensure_one()
 
         if not self.base_url or not self.token_auth:
@@ -89,7 +86,6 @@ class WebsiteAnalyticsProvider(models.Model):
         self._fetch_matomo_traffic_sources(resource)
 
     def _fetch_matomo_site_summary(self, resource):
-        """Fetch overall site summary from Matomo"""
         self.ensure_one()
 
         base_url = self.base_url.rstrip('/')
@@ -120,7 +116,6 @@ class WebsiteAnalyticsProvider(models.Model):
             raise UserError(_('Failed to connect to Matomo: %s') % str(e))
 
     def _fetch_matomo_page_metrics(self, resource):
-        """Fetch metrics for specific pages"""
         self.ensure_one()
 
         base_url = self.base_url.rstrip('/')
@@ -154,7 +149,6 @@ class WebsiteAnalyticsProvider(models.Model):
             raise UserError(_('Failed to fetch page metrics: %s') % str(e))
 
     def _fetch_matomo_traffic_sources(self, resource):
-        """Fetch traffic source data"""
         self.ensure_one()
 
         base_url = self.base_url.rstrip('/')
@@ -205,7 +199,6 @@ class WebsiteAnalyticsProvider(models.Model):
         return None
 
     def _parse_traffic_sources(self, data):
-        """Parse traffic source data from Matomo"""
         traffic_data = {
             'traffic_search': 0,
             'traffic_direct': 0,
@@ -232,7 +225,6 @@ class WebsiteAnalyticsProvider(models.Model):
         return traffic_data
 
     def _create_or_update_result(self, resource, data, page_id=None):
-        """Create or update analytics result"""
         self.ensure_one()
 
         values = {

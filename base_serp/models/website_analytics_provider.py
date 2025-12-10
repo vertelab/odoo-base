@@ -18,11 +18,9 @@ class WebsiteAnalyticsProvider(models.Model):
 
     @api.model
     def _get_provider_types(self):
-        """Return available provider types - to be extended by implementation modules"""
         return []
 
     def fetch_analytics(self, resource):
-        """Fetch analytics for a resource - to be implemented by provider type"""
         method_name = f'_fetch_{self.provider_type}_analytics'
         if hasattr(self, method_name):
             return getattr(self, method_name)(resource)
@@ -30,7 +28,6 @@ class WebsiteAnalyticsProvider(models.Model):
             raise NotImplementedError(f'Provider type {self.provider_type} not implemented')
 
     def fetch_site_summary(self, resource):
-        """Fetch site summary - to be implemented by provider"""
         method_name = f'_fetch_{self.provider_type}_site_summary'
         if hasattr(self, method_name):
             return getattr(self, method_name)(resource)
@@ -38,7 +35,6 @@ class WebsiteAnalyticsProvider(models.Model):
             raise NotImplementedError(f'Site summary for {self.provider_type} not implemented')
 
     def fetch_page_metrics(self, resource):
-        """Fetch page metrics - to be implemented by provider"""
         method_name = f'_fetch_{self.provider_type}_page_metrics'
         if hasattr(self, method_name):
             return getattr(self, method_name)(resource)
@@ -46,7 +42,6 @@ class WebsiteAnalyticsProvider(models.Model):
             raise NotImplementedError(f'Page metrics for {self.provider_type} not implemented')
 
     def fetch_traffic_sources(self, resource):
-        """Fetch traffic sources - to be implemented by provider"""
         method_name = f'_fetch_{self.provider_type}_traffic_sources'
         if hasattr(self, method_name):
             return getattr(self, method_name)(resource)

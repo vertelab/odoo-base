@@ -6,7 +6,6 @@ class ProjectTask(models.Model):
     _inherit = 'project.task'
 
     def action_send_serp_report(self):
-        """Open wizard to send SERP report email"""
         self.ensure_one()
 
         if not self.partner_id:

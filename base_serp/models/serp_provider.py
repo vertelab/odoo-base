@@ -75,11 +75,9 @@ class SerpProvider(models.Model):
         return domain
 
     def _get_max_position(self):
-        """Get maximum position from system parameters"""
         return int(self.env['ir.config_parameter'].sudo().get_param('base_serp.max_position', 50))
 
     def execute_search(self, keyword, domain=None, country='SE', language='sv'):
-        """Execute search based on provider_type"""
         self.ensure_one()
 
         if not self.provider_type:
@@ -110,7 +108,6 @@ class SerpProvider(models.Model):
             raise UserError(_('Search failed: %s') % str(e))
 
     def _search_beautifulsoup(self, keyword, domain=None, country='SE', language='sv'):
-        """BeautifulSoup web scraping implementation"""
         self.ensure_one()
 
         _logger.info(
@@ -142,7 +139,6 @@ class SerpProvider(models.Model):
         }]
 
     def _get_google_results(self, keyword, country, language):
-        """Fetch Google search results HTML"""
         self.ensure_one()
 
         google_url = "https://www.google.com/search"
