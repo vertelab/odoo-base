@@ -1,0 +1,31 @@
+# -*- coding: utf-8 -*-
+{
+    'name': 'Matomo Website Analytics',
+    'version': '18.0.1.0.0',
+    'category': 'Marketing',
+    'summary': 'Matomo integration for website analytics',
+    'description': """
+        Matomo Website Analytics
+        ========================
+        Concrete implementation of website analytics using Matomo.
+
+        Features:
+        - Fetch analytics data from Matomo API
+        - Support for multiple sites
+        - Page tracking
+        - Traffic source tracking
+    """,
+    'author': 'Vertel AB',
+    'website': 'https://vertel.se',
+    'depends': ['base_serp'],
+    'data': [
+        'data/website_analytics_provider_data.xml',
+    ],
+    'external_dependencies': {
+        'python': ['requests'],
+    },
+    'installable': True,
+    'application': False,
+    'auto_install': False,
+    'license': 'LGPL-3',
+}

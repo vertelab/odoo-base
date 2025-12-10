@@ -1,8 +1,9 @@
 # -*- coding: utf-8 -*-
 from odoo import models, fields, api, _
 from odoo.exceptions import UserError
-from datetime import timedelta
+from datetime import date, timedelta
 from dateutil.relativedelta import relativedelta
+from markupsafe import Markup
 import matplotlib
 
 matplotlib.use('Agg')
@@ -19,32 +20,42 @@ class SERPMixin(models.AbstractModel):
     _name = 'serp.mixin'
     _description = 'SERP Tracking Mixin'
 
-    # Domain configuration
-    serp_domain = fields.Char(
-        string='SERP Domain',
-        help='Domain to track (e.g., vertel.se)',
-        required=True
-    )
-
     # Tracking configuration
-    serp_provider_id = fields.Many2one(
-        'serp.provider',
-        string='SERP Provider'
-    )
-    serp_keyword_ids = fields.Many2many('serp.keyword', string='Keywords')
-    serp_country_ids = fields.Many2many('res.country', string='Countries')
+    serp_provider_id = fields.Many2one('serp.provider', string='SERP Provider')
 
-    # Scheduling
-    serp_interval_number = fields.Integer(string="Interval Number", default=1)
+    # SERP Scheduling
+    serp_interval_number = fields.Integer(string="Check Interval", default=1)
     serp_interval_type = fields.Selection([
         ('minutes', 'Minutes'),
         ('hours', 'Hours'),
         ('days', 'Days'),
         ('weeks', 'Weeks'),
         ('months', 'Months')
-    ], string="Interval Type", default='days')
-    serp_nextcall = fields.Datetime(string="Next Check")
+    ], string="Check Interval Type", default='days')
+    serp_nextcall = fields.Datetime(string="Next SERP Check")
 
+    # Report Scheduling
+    report_interval_number = fields.Integer(string="Report Interval", default=7)
+    report_interval_type = fields.Selection([
+        ('minutes', 'Minutes'),
+        ('hours', 'Hours'),
+        ('days', 'Days'),
+        ('weeks', 'Weeks'),
+        ('months', 'Months')
+    ], string="Report Interval Type", default='days')
+    report_nextcall = fields.Datetime(string="Next Report Generation")
+
+    # Date Range
+    date_from = fields.Date(
+        string='From Date',
+        required=True,
+        default=lambda self: self._default_date_from()
+    )
+    date_to = fields.Date(
+        string='To Date',
+        required=True,
+        default=lambda self: self._default_date_to()
+    )
 
     # Results
     serp_result_ids = fields.One2many(
@@ -52,22 +63,48 @@ class SERPMixin(models.AbstractModel):
         compute='_compute_serp_result_ids',
         string='SERP Results'
     )
-
-    # Stats
     serp_last_check = fields.Datetime(string='Last SERP Check', readonly=True)
     serp_result_count = fields.Integer(
         string='Results Count',
         compute='_compute_serp_result_count',
         help='Total number of SERP results tracked'
     )
-
     serp_report_count = fields.Integer(
-        string='SERP Report',
+        string='SERP Reports',
         compute='_compute_serp_report_count',
         help='Total number of SERP reports'
     )
 
+    # Project for reports
     project_id = fields.Many2one('project.project', string="Project")
+
+    # Website Analytics
+    analytics_provider_id = fields.Many2one('website.analytics.provider', string='Analytics Provider')
+    analytics_site_id = fields.Char(string='Site ID', help='The site/property ID in the analytics platform')
+    analytics_last_sync = fields.Datetime(string='Last Sync', readonly=True)
+    analytics_report_type_ids = fields.Many2many(
+        'website.analytics.report.type',
+        string='Reports to Generate',
+        help='Select which reports/graphs to generate'
+    )
+
+    # -------------------------------------------------------------------------
+    # DEFAULTS
+    # -------------------------------------------------------------------------
+
+    def _default_date_from(self):
+        """First day of current month"""
+        return date.today().replace(day=1)
+
+    def _default_date_to(self):
+        """Last day of current month"""
+        today = date.today()
+        next_month = today.replace(day=28) + relativedelta(days=4)
+        return next_month.replace(day=1) - relativedelta(days=1)
+
+    # -------------------------------------------------------------------------
+    # COMPUTE METHODS
+    # -------------------------------------------------------------------------
 
     @api.depends()
     def _compute_serp_result_ids(self):
@@ -95,8 +132,12 @@ class SERPMixin(models.AbstractModel):
             else:
                 rec.serp_report_count = 0
 
+    # -------------------------------------------------------------------------
+    # SCHEDULING HELPERS
+    # -------------------------------------------------------------------------
+
     def _compute_nextcall(self):
-        """Calculate next call time based on interval settings"""
+        """Calculate next SERP check time based on interval settings"""
         self.ensure_one()
         now = fields.Datetime.now()
 
@@ -111,32 +152,53 @@ class SERPMixin(models.AbstractModel):
         delta = interval_map.get(self.serp_interval_type, timedelta(days=1))
         return now + delta
 
+    def _compute_report_nextcall(self):
+        """Calculate next report generation time based on interval settings"""
+        self.ensure_one()
+        now = fields.Datetime.now()
+
+        interval_map = {
+            'minutes': timedelta(minutes=self.report_interval_number),
+            'hours': timedelta(hours=self.report_interval_number),
+            'days': timedelta(days=self.report_interval_number),
+            'weeks': timedelta(weeks=self.report_interval_number),
+            'months': timedelta(days=self.report_interval_number * 30),
+        }
+
+        delta = interval_map.get(self.report_interval_type, timedelta(days=7))
+        return now + delta
+
+    # -------------------------------------------------------------------------
+    # SERP CHECK LOGIC
+    # -------------------------------------------------------------------------
+
     def _validate_serp_config(self):
         """Validate SERP configuration before running check"""
         self.ensure_one()
 
-        if not self.serp_domain:
-            raise UserError(_('Please set a domain to track'))
+        if not self.website:
+            raise UserError(_('Please set a website URL'))
         if not self.serp_provider_id:
             raise UserError(_('Please select a SERP provider'))
         if not self.serp_keyword_ids:
             raise UserError(_('Please add keywords to track'))
-        if not self.serp_country_ids:
-            raise UserError(_('Please select at least one country'))
 
-    def _execute_serp_search(self, keyword, country_code):
+        keywords_without_country = self.serp_keyword_ids.filtered(lambda k: not k.country_id)
+        if keywords_without_country:
+            raise UserError(_('All keywords must have a country selected'))
+
+    def _execute_serp_search(self, keyword, country_code, language='sv'):
         """Execute a single SERP search and return results"""
         self.ensure_one()
 
         try:
             search_results = self.serp_provider_id.execute_search(
                 keyword=keyword,
-                domain=self.serp_domain,
+                domain=self.website,
                 country=country_code,
-                language='sv'  # Default for now
+                language=language
             )
 
-            # Normalize to list format
             if isinstance(search_results, dict):
                 search_results = [search_results]
 
@@ -174,41 +236,36 @@ class SERPMixin(models.AbstractModel):
         self.ensure_one()
         self._validate_serp_config()
 
-        keywords = self.serp_keyword_ids.mapped('name')
-        countries = self.serp_country_ids.mapped('code')
-
         results_created = 0
         errors = []
 
-        for country_code in countries:
-            for keyword in keywords:
-                search_results, error = self._execute_serp_search(keyword, country_code)
+        for keyword_record in self.serp_keyword_ids:
+            keyword = keyword_record.keyword
+            country_code = keyword_record.country_id.code
+            language = keyword_record.language.iso_code
 
-                if error:
-                    errors.append(f"{keyword} ({country_code}): {error}")
-                    continue
+            search_results, error = self._execute_serp_search(keyword, country_code, language)
 
-                created = self._create_serp_results(search_results, keyword, country_code)
-                results_created += created
+            if error:
+                errors.append(f"{keyword} ({country_code}): {error}")
+                continue
 
-        # Update tracking fields
+            created = self._create_serp_results(search_results, keyword, country_code)
+            results_created += created
+
         self.write({
             'serp_last_check': fields.Datetime.now(),
             'serp_nextcall': self._compute_nextcall()
         })
 
-        # Auto-generate report after SERP check
-        if results_created > 0:
-            try:
-                self._auto_generate_report()
-            except Exception as e:
-                _logger.error(f"Failed to auto-generate report: {str(e)}")
-                errors.append(f"Report generation failed: {str(e)}")
-
         return results_created, errors
 
+    # -------------------------------------------------------------------------
+    # REPORT GENERATION
+    # -------------------------------------------------------------------------
+
     def _auto_generate_report(self):
-        """Automatically generate a report after SERP check"""
+        """Automatically generate a report"""
         self.ensure_one()
 
         # Ensure project exists
@@ -218,41 +275,47 @@ class SERPMixin(models.AbstractModel):
                 'partner_id': self.id if self._name == 'res.partner' else False,
             })
 
-        # Get date range (last 30 days)
-        date_to = fields.Date.today()
-        date_from = date_to - relativedelta(days=30)
-        # date_from = fields.Date.today()
-
         # Get results
         results = self.env['serp.result'].search([
             ('res_model', '=', self._name),
             ('res_id', '=', self.id),
-            ('search_date', '>=', date_from),
-            ('search_date', '<=', date_to),
+            ('search_date', '>=', self.date_from),
+            ('search_date', '<=', self.date_to),
         ], order='search_date asc')
 
         if not results:
             _logger.info(f"No results to generate report for {self.display_name}")
             return
 
-        # Generate graph
+        # Prepare data for template
         graph_image = self._generate_report_graph(results)
+        keywords_data = self._prepare_keywords_data(results)
+        analytics_reports = self._fetch_analytics_reports_data()
 
-        # Build description
-        description_html = f'''
-        <img src="data:image/png;base64,{graph_image}" style="max-width: 100%; height: auto;"/>
-
-        <h3>Summary</h3>
-        <ul>
-            <li><strong>Total Results:</strong> {len(results)}</li>
-            <li><strong>Keywords Tracked:</strong> {', '.join(results.mapped('keyword'))}</li>
-            <li><strong>Date Range:</strong> {date_from} to {date_to}</li>
-        </ul>
-        '''
+        # Render template
+        description_html = self.env['mail.render.mixin']._render_template(
+            'base_serp.serp_report_content',
+            'res.partner',
+            self.ids,
+            engine='qweb_view',
+            add_context={
+                'graph_image': graph_image,
+                'keywords_data': keywords_data,
+                'total_results': len(results),
+                'keywords_list': ', '.join(set(results.mapped('keyword'))),
+                'date_from': str(self.date_from),
+                'date_to': str(self.date_to),
+                'analytics_reports': analytics_reports,
+            },
+            options={
+                'preserve_comments': True,
+                'post_process': True,
+            },
+        )[self.id]
 
         # Create task
         task = self.env['project.task'].create({
-            'name': f'SERP Report - {self.display_name} ({date_from} to {date_to})',
+            'name': f'SERP Report - {self.display_name} ({self.date_from} to {self.date_to})',
             'project_id': self.project_id.id,
             'partner_id': self.id if self._name == 'res.partner' else False,
             'description': description_html,
@@ -261,15 +324,69 @@ class SERPMixin(models.AbstractModel):
         _logger.info(f"Created SERP report task {task.id}")
         return task
 
+    def _prepare_keywords_data(self, results):
+        """Prepare keyword statistics data for template"""
+        # Get all keywords (including those without results)
+        all_keywords = sorted(list(set(self.serp_keyword_ids.mapped('keyword'))))
+        keywords_data = []
+
+        for keyword in all_keywords:
+            keyword_results = results.filtered(lambda r: r.keyword == keyword).sorted('search_date')
+
+            if keyword_results:
+                # Has results
+                first_position = keyword_results[0].position
+                last_position = keyword_results[-1].position
+                position_change = first_position - last_position
+
+                if position_change > 0:
+                    change_icon = '📈'
+                    change_class = 'green'
+                    change_text = f'+{position_change}'
+                elif position_change < 0:
+                    change_icon = '📉'
+                    change_class = 'red'
+                    change_text = f'{position_change}'
+                else:
+                    change_icon = '➡️'
+                    change_class = 'gray'
+                    change_text = '0'
+
+                keywords_data.append({
+                    'keyword': keyword,
+                    'first_position': first_position,
+                    'last_position': last_position,
+                    'change_icon': change_icon,
+                    'change_class': change_class,
+                    'change_text': change_text,
+                    'has_data': True,
+                })
+            else:
+                # No results yet
+                keywords_data.append({
+                    'keyword': keyword,
+                    'first_position': '-',
+                    'last_position': '-',
+                    'change_icon': '',
+                    'change_class': 'gray',
+                    'change_text': 'No data',
+                    'has_data': False,
+                })
+
+        return keywords_data
+
     def _generate_report_graph(self, results):
         """Generate matplotlib graph and return base64 image"""
-        keywords = sorted(list(set(results.mapped('keyword'))))
+        # Get all keywords (including those without results)
+        all_keywords = sorted(list(set(self.serp_keyword_ids.mapped('keyword'))))
 
         fig, ax = plt.subplots(figsize=(12, 6))
 
-        for keyword in keywords:
+        for keyword in all_keywords:
             keyword_results = results.filtered(lambda r: r.keyword == keyword).sorted('search_date')
+
             if not keyword_results:
+                # Skip keywords with no data in graph
                 continue
 
             dates = [d.date() if hasattr(d, 'date') else d for d in keyword_results.mapped('search_date')]
@@ -295,13 +412,40 @@ class SERPMixin(models.AbstractModel):
 
         return image_base64
 
+    def _fetch_analytics_reports_data(self):
+        """Fetch analytics report data (just data, no HTML)"""
+        self.ensure_one()
+
+        if not self.analytics_report_type_ids:
+            return []
+
+        reports_data = []
+        for report_type in self.analytics_report_type_ids:
+            try:
+                image_data = self.analytics_provider_id.fetch_report_image(self, report_type)
+                reports_data.append({
+                    'name': report_type.name,
+                    'image_data': image_data if image_data else None,
+                })
+            except Exception as e:
+                _logger.error(f"Failed to fetch {report_type.name}: {e}")
+                reports_data.append({
+                    'name': report_type.name,
+                    'image_data': None,
+                })
+
+        return reports_data
+
+    # -------------------------------------------------------------------------
+    # ACTIONS
+    # -------------------------------------------------------------------------
+
     def action_check_serp(self):
-        """Manually trigger SERP check - shows notification"""
+        """Manually trigger SERP check"""
         self.ensure_one()
 
         results_created, errors = self._process_serp_check()
 
-        # Build notification message
         if results_created:
             message = _('%s results found and saved') % results_created
         else:
@@ -321,17 +465,29 @@ class SERPMixin(models.AbstractModel):
             }
         }
 
+    def action_view_reports(self):
+        self.ensure_one()
+        return {
+            'name': _('SERP Reports'),
+            'view_mode': 'kanban,form',
+            'res_model': 'project.task',
+            'domain': [('project_id', '=', self.project_id.id)],
+            'type': 'ir.actions.act_window',
+        }
+
+    # -------------------------------------------------------------------------
+    # CRON JOBS
+    # -------------------------------------------------------------------------
+
     @api.model
     def _cron_check_serp(self):
         """Cron job to check SERP for scheduled records"""
         now = fields.Datetime.now()
 
-        # Find records ready for checking
         records = self.search([
-            ('serp_domain', '!=', False),
+            ('website', '!=', False),
             ('serp_provider_id', '!=', False),
             ('serp_keyword_ids', '!=', False),
-            ('serp_country_ids', '!=', False),
             '|',
             ('serp_nextcall', '=', False),
             ('serp_nextcall', '<=', now)
@@ -360,12 +516,30 @@ class SERPMixin(models.AbstractModel):
                     exc_info=True
                 )
 
-    def action_view_reports(self):
-        self.ensure_one()
-        return {
-            'name': _('SERP Report'),
-            'view_mode': 'kanban,form',
-            'res_model': 'project.task',
-            'domain': [('project_id', '=', self.project_id.id)],
-            'type': 'ir.actions.act_window',
-        }
+    @api.model
+    def _cron_generate_serp_report(self):
+        """Cron job to generate SERP Report for scheduled records"""
+        now = fields.Datetime.now()
+
+        records = self.search([
+            ('website', '!=', False),
+            ('serp_provider_id', '!=', False),
+            ('serp_keyword_ids', '!=', False),
+            '|',
+            ('report_nextcall', '=', False),
+            ('report_nextcall', '<=', now)
+        ])
+
+        _logger.info(f"SERP Report Cron: Found {len(records)} records to generate reports")
+
+        for record in records:
+            try:
+                record._auto_generate_report()
+                record.write({'report_nextcall': record._compute_report_nextcall()})
+                _logger.info(f"SERP report generated for {record._name} {record.id}")
+
+            except Exception as e:
+                _logger.error(
+                    f"SERP report generation failed for {record._name} {record.id}: {str(e)}",
+                    exc_info=True
+                )

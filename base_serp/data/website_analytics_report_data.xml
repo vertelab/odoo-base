@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data noupdate="0">
+        <record id="report_visits_summary" model="website.analytics.report.type">
+            <field name="name">Visits Summary</field>
+            <field name="api_module">VisitsSummary</field>
+            <field name="api_action">get</field>
+            <field name="graph_type">evolution</field>
+            <field name="period">day</field>
+            <field name="date">previous30</field>
+            <field name="width">800</field>
+            <field name="height">300</field>
+        </record>
+
+        <record id="report_user_country" model="website.analytics.report.type">
+            <field name="name">Visitors by Country</field>
+            <field name="api_module">UserCountry</field>
+            <field name="api_action">getCountry</field>
+            <field name="graph_type">horizontalBar</field>
+            <field name="period">month</field>
+            <field name="date">today</field>
+            <field name="width">800</field>
+            <field name="height">400</field>
+        </record>
+
+        <record id="report_page_urls" model="website.analytics.report.type">
+            <field name="name">Top Page URLs</field>
+            <field name="api_module">Actions</field>
+            <field name="api_action">getPageUrls</field>
+            <field name="graph_type">verticalBar</field>
+            <field name="period">month</field>
+            <field name="date">today</field>
+            <field name="width">800</field>
+            <field name="height">300</field>
+        </record>
+
+        <record id="report_browsers" model="website.analytics.report.type">
+            <field name="name">Browsers</field>
+            <field name="api_module">DevicesDetection</field>
+            <field name="api_action">getBrowsers</field>
+            <field name="graph_type">horizontalBar</field>
+            <field name="period">month</field>
+            <field name="date">today</field>
+            <field name="width">600</field>
+            <field name="height">400</field>
+        </record>
+
+        <record id="report_device_type" model="website.analytics.report.type">
+            <field name="name">Device Types</field>
+            <field name="api_module">DevicesDetection</field>
+            <field name="api_action">getType</field>
+            <field name="graph_type">pie</field>
+            <field name="period">month</field>
+            <field name="date">today</field>
+            <field name="width">600</field>
+            <field name="height">400</field>
+        </record>
+    </data>
+</odoo>

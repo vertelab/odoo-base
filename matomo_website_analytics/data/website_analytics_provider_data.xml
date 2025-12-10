@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data noupdate="1">
+        <!-- Default Matomo Provider -->
+        <record id="provider_matomo_default" model="website.analytics.provider">
+            <field name="name">Matomo</field>
+            <field name="provider_type">matomo</field>
+            <field name="base_url">https://matomo.example.com</field>
+            <field name="token_auth">your_token_here</field>
+            <field name="active" eval="True"/>
+        </record>
+    </data>
+</odoo>

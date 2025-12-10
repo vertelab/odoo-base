@@ -11,28 +11,28 @@
         <field name="code">
 if records:
     for record in records:
-        if record.serp_domain and record.serp_provider_id and record.serp_keyword_ids and record.serp_country_ids:
+        if record.serp_domain and record.serp_provider_id and record.serp_keyword_ids:
             record.action_check_serp()
         </field>
     </record>
 
      <!-- Server Action: Generate SERP Report -->
-    <record id="action_partner_serp_report" model="ir.actions.server">
-        <field name="name">Generate SERP Report</field>
-        <field name="model_id" ref="base.model_res_partner"/>
-        <field name="binding_model_id" ref="base.model_res_partner"/>
-        <field name="binding_view_types">form</field>
-        <field name="state">code</field>
-        <field name="code">
-if records:
-    action = {
-        'type': 'ir.actions.act_window',
-        'res_model': 'serp.report.wizard',
-        'view_mode': 'form',
-        'target': 'new',
-        'context': {'default_partner_id': records[0].id},
-    }
-        </field>
-    </record>
+<!--    <record id="action_partner_serp_report" model="ir.actions.server">-->
+<!--        <field name="name">Generate SERP Report</field>-->
+<!--        <field name="model_id" ref="base.model_res_partner"/>-->
+<!--        <field name="binding_model_id" ref="base.model_res_partner"/>-->
+<!--        <field name="binding_view_types">form</field>-->
+<!--        <field name="state">code</field>-->
+<!--        <field name="code">-->
+<!--if records:-->
+<!--    action = {-->
+<!--        'type': 'ir.actions.act_window',-->
+<!--        'res_model': 'serp.report.wizard',-->
+<!--        'view_mode': 'form',-->
+<!--        'target': 'new',-->
+<!--        'context': {'default_partner_id': records[0].id},-->
+<!--    }-->
+<!--        </field>-->
+<!--    </record>-->
 
 </odoo>

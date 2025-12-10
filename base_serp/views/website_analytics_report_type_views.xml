@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="view_website_analytics_report_type_list" model="ir.ui.view">
+        <field name="name">website.analytics.report.type.list</field>
+        <field name="model">website.analytics.report.type</field>
+        <field name="arch" type="xml">
+            <list>
+                <field name="name"/>
+                <field name="api_module"/>
+                <field name="api_action"/>
+                <field name="graph_type"/>
+                <field name="width"/>
+                <field name="height"/>
+            </list>
+        </field>
+    </record>
+
+    <record id="view_website_analytics_report_type_form" model="ir.ui.view">
+        <field name="name">website.analytics.report.type.form</field>
+        <field name="model">website.analytics.report.type</field>
+        <field name="arch" type="xml">
+            <form>
+                <header>
+                    <button string="Preview" name="action_preview_report" type="object" class="btn-primary"/>
+                </header>
+                <sheet>
+                    <group>
+                        <group>
+                            <field name="name"/>
+                        </group>
+                        <group>
+                            <field name="analytics_provider_id"/>
+                        </group>
+                    </group>
+                    <group>
+                        <group string="API Configuration">
+                            <field name="api_module"/>
+                            <field name="api_action"/>
+                        </group>
+                        <group string="Graph Configuration">
+                            <field name="graph_type"/>
+                            <field name="width"/>
+                            <field name="height"/>
+                        </group>
+                        <group string="Report Filters">
+                            <field name="period"/>
+                            <field name="date"/>
+                            <field name="last_n"/>
+                        </group>
+                    </group>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+    <record id="action_website_analytics_report_type" model="ir.actions.act_window">
+        <field name="name">Analytics Report Types</field>
+        <field name="res_model">website.analytics.report.type</field>
+        <field name="view_mode">list,form</field>
+    </record>
+
+
+</odoo>

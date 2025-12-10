@@ -1,0 +1,62 @@
+<odoo>
+    <template id="serp_report_content">
+        <div style="margin: 0px; padding: 0px;">
+            <h2 style="margin: 10px 0;">SERP Position Report</h2>
+
+            <!-- Graph Section -->
+            <div style="margin: 20px 0;">
+                <img t-att-src="'data:image/png;base64,' + graph_image" style="max-width: 100%; height: auto;"/>
+            </div>
+
+            <!-- Keywords Table -->
+            <h3>Keywords Overview</h3>
+            <table style="width: 100%; border-collapse: collapse; margin: 20px 0;">
+                <thead>
+                    <tr style="background-color: #f8f9fa;">
+                        <th style="padding: 10px; border: 1px solid #ddd; text-align: left;">Keyword</th>
+                        <th style="padding: 10px; border: 1px solid #ddd; text-align: center;">Start Position</th>
+                        <th style="padding: 10px; border: 1px solid #ddd; text-align: center;">Current Position</th>
+                        <th style="padding: 10px; border: 1px solid #ddd; text-align: center;">Change</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <t t-foreach="keywords_data" t-as="kw">
+                        <tr>
+                            <td style="padding: 8px; border: 1px solid #ddd;"><strong t-esc="kw['keyword']"/></td>
+                            <td style="padding: 8px; border: 1px solid #ddd; text-align: center;" t-esc="kw['first_position']"/>
+                            <td style="padding: 8px; border: 1px solid #ddd; text-align: center;" t-esc="kw['last_position']"/>
+                            <td t-attf-style="padding: 8px; border: 1px solid #ddd; text-align: center; color: {{kw['change_class']}};">
+                                <t t-if="kw.get('change_icon')" t-esc="kw['change_icon']"/> <t t-esc="kw['change_text']"/>
+                            </td>
+                        </tr>
+                    </t>
+                </tbody>
+            </table>
+
+            <!-- Summary Section -->
+            <h3>Summary</h3>
+            <ul>
+                <li><strong>Total Results:</strong> <t t-esc="total_results"/></li>
+                <li><strong>Keywords Tracked:</strong> <t t-esc="keywords_list"/></li>
+                <li><strong>Date Range:</strong> <t t-esc="date_from"/> to <t t-esc="date_to"/></li>
+            </ul>
+
+            <!-- Analytics Section -->
+            <t t-if="analytics_reports">
+                <hr/>
+                <h3>Website Analytics</h3>
+                <t t-foreach="analytics_reports" t-as="report">
+                    <div style="margin: 20px 0;">
+                        <h4 t-esc="report['name']"/>
+                        <t t-if="report.get('image_data')">
+                            <img t-att-src="'data:image/png;base64,' + report['image_data']" style="max-width: 100%; height: auto;"/>
+                        </t>
+                        <t t-else="">
+                            <p style="color: red;">Failed to load <t t-esc="report['name']"/></p>
+                        </t>
+                    </div>
+                </t>
+            </t>
+        </div>
+    </template>
+</odoo>

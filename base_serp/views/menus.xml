@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <menuitem id="menu_serp_root" name="SERP" sequence="100" web_icon="base_serp,static/description/icon.png">
+        <menuitem id="menu_serp_results" name="Results" action="action_serp_result" sequence="10"/>
+
+        <menuitem id="menu_serp_configuration" name="Configuration" sequence="90">
+            <menuitem id="menu_serp_providers" name="SERP Providers" action="action_serp_provider" sequence="10"/>
+            <menuitem id="menu_website_analytics_report" name="Analytics Report Types" action="action_website_analytics_report_type" sequence="30"/>
+            <menuitem id="menu_website_analytics_provider" name="Analytics Providers" action="action_website_analytics_provider" sequence="10"/>
+        </menuitem>
+    </menuitem>
+
+
+</odoo>

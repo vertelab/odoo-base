@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="view_website_analytics_report_type_preview_form" model="ir.ui.view">
+        <field name="name">website.analytics.report.type.preview.form</field>
+        <field name="model">website.analytics.report.type.preview</field>
+        <field name="arch" type="xml">
+            <form>
+                <sheet>
+                    <group>
+                        <field name="report_type_id" invisible="1"/>
+                        <field name="preview_generated" invisible="1"/>
+                        <field name="partner_id"/>
+                    </group>
+
+                    <group invisible="not preview_generated">
+                        <field name="preview_image" widget="image" nolabel="1"/>
+                    </group>
+                </sheet>
+                <footer>
+                    <button string="Generate Preview"
+                            name="action_generate_preview"
+                            type="object"
+                            class="btn-primary"/>
+                    <button string="Close" special="cancel" class="btn-secondary"/>
+                </footer>
+            </form>
+        </field>
+    </record>
+</odoo>

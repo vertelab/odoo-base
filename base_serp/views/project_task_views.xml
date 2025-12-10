@@ -1,0 +1,19 @@
+<odoo>
+    <data>
+        <!-- Add button to project.task form view -->
+        <record id="project_task_view_form_serp_email" model="ir.ui.view">
+            <field name="name">project.task.form.serp.email</field>
+            <field name="model">project.task</field>
+            <field name="inherit_id" ref="project.view_task_form2"/>
+            <field name="arch" type="xml">
+                <xpath expr="//header" position="inside">
+                    <button name="action_send_serp_report"
+                            string="Send Report"
+                            type="object"
+                            class="btn-primary"
+                            groups="base.group_user"/>
+                </xpath>
+            </field>
+        </record>
+    </data>
+</odoo>

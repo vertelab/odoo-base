@@ -42,15 +42,27 @@ Provider System:
     },
     'data': [
         'security/ir.model.access.csv',
+
         'data/serp_provider_data.xml',
         'data/serp_cron.xml',
         'data/serp_actions.xml',
+        'data/mail_templates.xml',
+        'data/website_analytics_report_data.xml',
+
         'views/serp_provider_views.xml',
         'views/serp_result_views.xml',
-        'views/serp_menu.xml',
         'views/res_partner_views.xml',
         'views/res_config_views.xml',
-        'wizards/serp_report_wizard_views.xml',
+        'views/project_task_views.xml',
+        'views/website_analytics_provider_views.xml',
+        'views/website_analytics_report_type_views.xml',
+        'views/templates.xml',
+
+        # 'wizards/serp_report_wizard_views.xml',
+        'wizards/serp_report_send_wizard_views.xml',
+        'wizards/website_analytics_report_type_preview_views.xml',
+
+        'views/menus.xml',
     ],
     'demo': [],
     'installable': True,
