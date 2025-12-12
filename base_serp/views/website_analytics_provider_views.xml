@@ -27,7 +27,6 @@
                         <group>
                             <field name="base_url"/>
                             <field name="token_auth" password="True"/>
-                            <field name="active"/>
                         </group>
                     </group>
                 </sheet>

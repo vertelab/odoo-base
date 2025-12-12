@@ -25,9 +25,9 @@
                             <field name="name"/>
                             <field name="report_type_id"/>
                         </group>
-                        <group>
-                            <field name="analytics_provider_id"/>
-                        </group>
+<!--                        <group>-->
+<!--                            <field name="analytics_provider_id"/>-->
+<!--                        </group>-->
                     </group>
                 </sheet>
             </form>

@@ -13,4 +13,8 @@
         </xpath>
     </template>
 
+    <record id="matomo_analytics_template" model="ir.ui.view">
+        <field name="is_serp_view" eval="True"/>
+    </record>
+
 </odoo>

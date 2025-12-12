@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="view_view_form_serp" model="ir.ui.view">
+        <field name="name">ir.ui.view.form</field>
+        <field name="model">ir.ui.view</field>
+        <field name="inherit_id" ref="base.view_view_form"/>
+        <field name="arch" type="xml">
+            <field name="xml_id" position="after">
+                <field name="is_serp_view"/>
+            </field>
+        </field>
+    </record>
+</odoo>

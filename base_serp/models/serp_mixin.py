@@ -78,7 +78,7 @@ class SERPMixin(models.AbstractModel):
     serp_report_template_id = fields.Many2one(
         'ir.ui.view',
         string="SERP Report Template",
-        domain="[('type', '=', 'qweb')]",
+        domain="[('type', '=', 'qweb'), ('is_serp_view', '=', True)]",
         default=lambda self: self._get_default_serp_template(),
     )
 
@@ -92,7 +92,7 @@ class SERPMixin(models.AbstractModel):
     analytics_report_template_id = fields.Many2one(
         'ir.ui.view',
         string="Analytics Template",
-        domain="[('type', '=', 'qweb')]",
+        domain="[('type', '=', 'qweb'), ('is_serp_view', '=', True)]",
         default=lambda self: self._get_default_analytics_template(),
     )
 
@@ -307,6 +307,8 @@ class SERPMixin(models.AbstractModel):
         keywords_data = self._prepare_keywords_data(results)
         # analytics_reports = self._fetch_analytics_reports_data()
 
+        keywords = ', '.join(sorted(self.serp_keyword_ids.mapped('keyword')))
+
         # Render template
         description_html = self.env['mail.render.mixin']._render_template(
             'base_serp.serp_report_content',
@@ -317,7 +319,8 @@ class SERPMixin(models.AbstractModel):
                 'graph_image': graph_image,
                 'keywords_data': keywords_data,
                 'total_results': len(results),
-                'keywords_list': ', '.join(set(results.mapped('keyword'))),
+                # 'keywords_list': ', '.join(set(results.mapped('keyword'))),
+                'keywords_list': keywords,
                 'date_from': str(effective_date_from),
                 'date_to': str(effective_date_to),
                 'object': self,

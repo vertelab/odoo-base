@@ -45,8 +45,6 @@
         <div id="website_analytics_content"/>
     </template>
 
-
-
     <!-- Main template: Report -->
     <template id="serp_report_content">
         <div style="margin: 0px; padding: 0px;">
@@ -58,4 +56,16 @@
             <t t-call="base_serp.analytics_template"/>
         </div>
     </template>
+
+    <record id="serp_keywords_template" model="ir.ui.view">
+        <field name="is_serp_view" eval="True"/>
+    </record>
+
+    <record id="analytics_template" model="ir.ui.view">
+        <field name="is_serp_view" eval="True"/>
+    </record>
+
+    <record id="serp_report_content" model="ir.ui.view">
+        <field name="is_serp_view" eval="True"/>
+    </record>
 </odoo>

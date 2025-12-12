@@ -1,6 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
 <odoo>
-    <!-- Form View -->
     <record id="view_serp_provider_form" model="ir.ui.view">
         <field name="name">serp.provider.form</field>
         <field name="model">serp.provider</field>
@@ -20,7 +19,6 @@
                         <group>
                             <field name="provider_type"/>
                             <field name="search_engine"/>
-                            <field name="active" invisible="1"/>
                         </group>
                         <group>
                             <field name="total_searches" readonly="1"/>
@@ -31,11 +29,6 @@
                     <notebook>
                         <page string="Configuration">
                             <group>
-<!--                                <group string="Rate Limiting">-->
-<!--                                    <field name="rate_limit_delay"/>-->
-<!--                                    <field name="timeout"/>-->
-<!--                                    <field name="num_results"/>-->
-<!--                                </group>-->
                                 <group string="API Credentials" id="api_credentials">
                                     <field name="api_key" password="True"/>
                                     <field name="api_secret" password="True"/>
@@ -48,7 +41,6 @@
         </field>
     </record>
 
-    <!-- Tree View -->
     <record id="view_serp_provider_list" model="ir.ui.view">
         <field name="name">serp.provider.list</field>
         <field name="model">serp.provider</field>
@@ -64,7 +56,6 @@
         </field>
     </record>
 
-    <!-- Search View -->
     <record id="view_serp_provider_search" model="ir.ui.view">
         <field name="name">serp.provider.search</field>
         <field name="model">serp.provider</field>

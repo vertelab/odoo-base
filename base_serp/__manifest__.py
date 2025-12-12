@@ -55,6 +55,7 @@ Provider System:
         'views/project_task_views.xml',
         'views/website_analytics_provider_views.xml',
         'views/website_analytics_report_type_views.xml',
+        'views/ir_ui_view.xml',
         'views/templates.xml',
 
         'wizards/website_analytics_report_type_preview_views.xml',

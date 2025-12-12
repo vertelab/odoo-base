@@ -9,4 +9,5 @@ from . import serp_keyword
 from . import project_task
 from . import website_analytics_provider
 from . import website_analytics_report_type
+from . import ir_ui_view
 
