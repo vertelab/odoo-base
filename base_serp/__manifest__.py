@@ -43,6 +43,9 @@ Provider System:
     'data': [
         'security/ir.model.access.csv',
 
+        'report/ir_actions_report.xml',
+        'report/ir_actions_report_templates.xml',
+
         'data/serp_provider_data.xml',
         'data/serp_cron.xml',
         'data/serp_actions.xml',
@@ -60,8 +63,7 @@ Provider System:
 
         'wizards/website_analytics_report_type_preview_views.xml',
 
-        'report/ir_actions_report.xml',
-        'report/ir_actions_report_templates.xml',
+
 
         'views/menus.xml',
     ],
