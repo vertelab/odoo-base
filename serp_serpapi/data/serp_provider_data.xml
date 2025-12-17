@@ -7,8 +7,6 @@
             <field name="name">Google SerpAPI</field>
             <field name="provider_type">serpapi</field>
             <field name="search_engine">google</field>
-            <field name="sequence">5</field>
-            <field name="num_results">10</field>
             <field name="active" eval="True"/>
         </record>
 
