@@ -14,10 +14,8 @@
         Dear <t t-out="object.partner_id.name or ''">Customer</t>,
         <br /><br />
         Here is your latest SERP position tracking report. This report shows how your keywords are performing in search engine results.
-        <br /><br />
-        <t t-out="object.description or ''"/>
-        <br /><br />
-        Do not hesitate to contact us if you have any questions.
+
+
         <t t-if="not is_html_empty(user.signature)">
             <br /><br />
             <t t-out="user.signature or ''">--<br/>User</t>
@@ -25,7 +23,7 @@
     </p>
 </div>
             </field>
-            <field name="report_template_ids" eval="[]"/>
+            <field name="report_template_ids" eval="[(4, ref('base_serp.action_report_serp_pdf'))]"/>
             <field name="lang">{{ object.partner_id.lang }}</field>
             <field name="auto_delete" eval="False"/>
         </record>

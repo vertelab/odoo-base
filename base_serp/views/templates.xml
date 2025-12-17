@@ -4,23 +4,23 @@
 
         <!-- Graph Section -->
         <div style="margin: 20px 0;">
-            <img t-att-src="'data:image/png;base64,' + graph_image" style="max-width: 100%; height: auto;"/>
+            <img t-att-src="'data:image/png;base64,' + graph_image" style="max-width: 100%; height: auto; display: block;"/>
         </div>
 
         <h3>Keywords Overview</h3>
-        <table style="width: 100%; border-collapse: collapse; margin: 20px 0;">
+        <table style="width: 100%; table-layout: fixed; border-collapse: collapse; margin: 20px 0;">
             <thead>
                 <tr style="background-color: #f8f9fa;">
-                    <th style="padding: 10px; border: 1px solid #ddd; text-align: left;">Keyword</th>
-                    <th style="padding: 10px; border: 1px solid #ddd; text-align: center;">Start Position</th>
-                    <th style="padding: 10px; border: 1px solid #ddd; text-align: center;">Current Position</th>
-                    <th style="padding: 10px; border: 1px solid #ddd; text-align: center;">Change</th>
+                    <th style="padding: 10px; border: 1px solid #ddd; text-align: left; width: 35%;">Keyword</th>
+                    <th style="padding: 10px; border: 1px solid #ddd; text-align: center; width: 20%;">Start Position</th>
+                    <th style="padding: 10px; border: 1px solid #ddd; text-align: center; width: 20%;">Current Position</th>
+                    <th style="padding: 10px; border: 1px solid #ddd; text-align: center; width: 25%;">Change</th>
                 </tr>
             </thead>
             <tbody>
                 <t t-foreach="keywords_data" t-as="kw">
                     <tr>
-                        <td style="padding: 8px; border: 1px solid #ddd;"><strong t-esc="kw['keyword']"/></td>
+                        <td style="padding: 8px; border: 1px solid #ddd; word-wrap: break-word;"><strong t-esc="kw['keyword']"/></td>
                         <td style="padding: 8px; border: 1px solid #ddd; text-align: center;" t-esc="kw['first_position']"/>
                         <td style="padding: 8px; border: 1px solid #ddd; text-align: center;" t-esc="kw['last_position']"/>
                         <td t-attf-style="padding: 8px; border: 1px solid #ddd; text-align: center; color: {{kw['change_class']}};">
@@ -31,16 +31,13 @@
             </tbody>
         </table>
 
-        <h3>Summary</h3>
         <ul>
-            <li><strong>Total Results:</strong> <t t-esc="total_results"/></li>
             <li><strong>Keywords Tracked:</strong> <t t-esc="keywords_list"/></li>
-            <li><strong>Date Range:</strong> <t t-esc="date_from"/> to <t t-esc="date_to"/></li>
         </ul>
     </template>
 
     <template id="analytics_template">
-        <h3>Website Analytics</h3>
+<!--        <h3>Website Analytics</h3>-->
 
         <div id="website_analytics_content"/>
     </template>
@@ -51,7 +48,7 @@
 
             <!-- SERP -->
             <t t-call="base_serp.serp_keywords_template"/>
-            <hr/>
+<!--            <hr/>-->
             <!-- Analytics -->
             <t t-call="base_serp.analytics_template"/>
         </div>

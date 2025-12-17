@@ -7,12 +7,12 @@
             <field name="inherit_id" ref="project.view_task_form2"/>
             <field name="arch" type="xml">
                 <xpath expr="//header" position="inside">
-                    <button name="action_send_serp_report"
-                            string="Send Report"
-                            type="object"
-                            class="btn-primary"
-                            groups="base.group_user"/>
+                    <button name="action_send_serp_report" string="Send Report" type="object" class="btn-primary" groups="base.group_user"/>
+                    <button name="action_preview_serp_report" type="object" string="Preview Report" invisible="not project_id"/>
                 </xpath>
+                <field name="tag_ids" position="after">
+                    <field name="report_date" invisible="1"/>
+                </field>
             </field>
         </record>
     </data>

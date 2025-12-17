@@ -62,8 +62,9 @@
                                 <field name="report_interval_number" class="oe_inline"/>
                                 <field name="report_interval_type" class="oe_inline"/>
                             </div>
-                            <field name="date_from" string="Date Range" widget="daterange" options="{'end_date_field': 'date_to'}" />
-                            <field name="date_to" invisible="1" />
+<!--                            <field name="date_from" string="Date Range" widget="daterange" options="{'end_date_field': 'date_to'}" />-->
+<!--                            <field name="date_to" invisible="1" />-->
+                            <field name="serp_date_range"/>
                             <field name="report_nextcall"/>
 <!--                            <field name="report_template_id"/>-->
                         </group>

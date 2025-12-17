@@ -85,6 +85,14 @@ class SERPMixin(models.AbstractModel):
     # Project for reports
     project_id = fields.Many2one('project.project', string="Project")
 
+    serp_date_range = fields.Selection([
+        ('last7', 'Last 7 Days'),  # Dec 11-17 (if today is Dec 17) - rolling 7 days including today
+        ('last30', 'Last 30 Days'),  # Nov 18 - Dec 17 (if today is Dec 17) - rolling 30 days including today
+        ('last90', 'Last 90 Days'),  # Sep 19 - Dec 17 (if today is Dec 17) - rolling 90 days including today
+        ('lastMonth', 'Last Month'), # Nov 1-30 (if today is in December) - complete previous calendar month (28-31 days)
+        ('lastYear', 'Last Year'),  # Jan 1 - Dec 31, 2024 (if today is in 2025) - complete previous calendar year
+    ], string='Report Date Range', required=True, default='lastMonth')
+
     # Website Analytics
     analytics_provider_id = fields.Many2one('website.analytics.provider', string='Analytics Provider')
     analytics_site_id = fields.Char(string='Site ID', help='The site/property ID in the analytics platform')
@@ -95,13 +103,6 @@ class SERPMixin(models.AbstractModel):
         domain="[('type', '=', 'qweb'), ('is_serp_view', '=', True)]",
         default=lambda self: self._get_default_analytics_template(),
     )
-
-
-    # analytics_report_type_ids = fields.Many2many(
-    #     'website.analytics.report.type',
-    #     string='Reports to Generate',
-    #     help='Select which reports/graphs to generate'
-    # )
 
     # -------------------------------------------------------------------------
     # DEFAULTS
@@ -150,6 +151,34 @@ class SERPMixin(models.AbstractModel):
                 rec.serp_report_count = len(rec.project_id.task_ids)
             else:
                 rec.serp_report_count = 0
+
+    def _compute_serp_date_range(self):
+        """Calculate date_from and date_to based on serp_date_range"""
+        self.ensure_one()
+        today = date.today()
+
+        if self.serp_date_range == 'last7':
+            # Last 7 days including today
+            return today - timedelta(days=6), today
+
+        elif self.serp_date_range == 'last30':
+            # Last 30 days including today
+            return today - timedelta(days=29), today
+
+        elif self.serp_date_range == 'last90':
+            # Last 90 days including today
+            return today - timedelta(days=89), today
+
+        elif self.serp_date_range == 'lastYear':
+            # Complete previous calendar year
+            last_year = today.year - 1
+            return date(last_year, 1, 1), date(last_year, 12, 31)
+
+        # Default: lastMonth (also fallback)
+        first_day_this_month = today.replace(day=1)
+        last_day_last_month = first_day_this_month - timedelta(days=1)
+        first_day_last_month = last_day_last_month.replace(day=1)
+        return first_day_last_month, last_day_last_month
 
     # -------------------------------------------------------------------------
     # SCHEDULING HELPERS
@@ -280,8 +309,11 @@ class SERPMixin(models.AbstractModel):
     def _auto_generate_report(self, date_from=None, date_to=None):
         self.ensure_one()
 
-        effective_date_from = date_from or self.date_from
-        effective_date_to = date_to or self.date_to
+        # effective_date_from = date_from or self.date_from
+        # effective_date_to = date_to or self.date_to
+
+        effective_date_from, effective_date_to = self._compute_serp_date_range()
+
 
         # Ensure project exists
         if not self.project_id:
@@ -338,6 +370,7 @@ class SERPMixin(models.AbstractModel):
             'project_id': self.project_id.id,
             'partner_id': self.id if self._name == 'res.partner' else False,
             'description': description_html,
+            'report_date': f"{effective_date_from} - {effective_date_to}",
         })
 
         _logger.info(f"Created SERP report task {task.id}")
@@ -357,15 +390,15 @@ class SERPMixin(models.AbstractModel):
                 position_change = first_position - last_position
 
                 if position_change > 0:
-                    change_icon = '📈'
+                    change_icon = '↑'
                     change_class = 'green'
                     change_text = f'+{position_change}'
                 elif position_change < 0:
-                    change_icon = '📉'
+                    change_icon = '↓'
                     change_class = 'red'
                     change_text = f'{position_change}'
                 else:
-                    change_icon = '➡️'
+                    change_icon = '→'
                     change_class = 'gray'
                     change_text = '0'
 

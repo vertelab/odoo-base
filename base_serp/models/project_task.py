@@ -1,9 +1,11 @@
-from odoo import models, api, _
+from odoo import models, api, _, fields
 from odoo.exceptions import UserError
 
 
 class ProjectTask(models.Model):
     _inherit = 'project.task'
+
+    report_date = fields.Char(string='Report Date', readonly=True)
 
     def action_send_serp_report(self):
         self.ensure_one()
@@ -34,3 +36,7 @@ class ProjectTask(models.Model):
                 'force_email': True,
             },
         }
+
+    def action_preview_serp_report(self):
+        self.ensure_one()
+        return self.env.ref('base_serp.action_report_serp_pdf').report_action(self)

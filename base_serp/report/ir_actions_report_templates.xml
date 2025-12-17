@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <template id="report_serp_pdf_document">
+        <t t-call="web.html_container">
+            <t t-foreach="docs" t-as="o">
+                <t t-call="web.external_layout">
+                    <div class="page">
+
+                        <div class="row mb-3">
+                            <div class="col-6">
+                                <strong>Customer:</strong> <span t-field="o.partner_id.name"/><br/>
+                                <strong>Website:</strong> <span t-field="o.partner_id.website"/><br/>
+                            </div>
+                            <div class="col-6 text-right">
+                                <strong>Period:</strong> <span t-esc="o.report_date"/><br/>
+                                <strong>Date:</strong> <span t-esc="o.create_date.strftime('%Y-%m-%d')"/><br/>
+                            </div>
+                        </div>
+
+                        <hr/>
+
+                        <!-- Render the report content from task description -->
+                        <t t-raw="o.description"/>
+
+                    </div>
+                </t>
+            </t>
+        </t>
+    </template>
+
+</odoo>

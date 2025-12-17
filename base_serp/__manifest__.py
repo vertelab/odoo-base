@@ -60,6 +60,9 @@ Provider System:
 
         'wizards/website_analytics_report_type_preview_views.xml',
 
+        'report/ir_actions_report.xml',
+        'report/ir_actions_report_templates.xml',
+
         'views/menus.xml',
     ],
     'demo': [],
