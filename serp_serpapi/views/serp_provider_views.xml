@@ -24,9 +24,6 @@
                         <li>Paste it in the API Key field above</li>
                         <li>Activate this provider</li>
                     </ol>
-                    <p class="mb-0">
-                        <strong>Pricing:</strong> SerpAPI offers 100 free searches per month, then pay-as-you-go.
-                    </p>
                 </div>
             </xpath>
 
