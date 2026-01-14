@@ -43,7 +43,7 @@
                                 <list editable="bottom">
                                     <field name="keyword"/>
                                     <field name="country_id"/>
-                                    <field name="language_id"/>
+                                    <field name="language_id" context="{'active_test': False}" options="{'no_quick_create': True, 'no_create_edit': True}"/>
                                 </list>
                             </field>
                         </group>
