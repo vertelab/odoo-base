@@ -16,7 +16,7 @@
         <field name="inherit_id" ref="base.view_partner_tree"/>
         <field name="arch" type="xml">
             <field name="vat" position="after">
-                <field name="is_portaluser" />
+                <field name="is_portaluser" optional="hide"/>
             </field>
         </field>
     </record>
