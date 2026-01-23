@@ -8,7 +8,7 @@
             <field name="model">res.partner</field>
             <field name="inherit_id" ref="base.view_partner_form"/>
             <field name="arch" type="xml">
-                <xpath expr="//field[@name='vat']" position="after">
+                <xpath expr="//group/group[//field[@name='vat']]" position="inside">
                     <field name="legacy_no"/>
                 </xpath>
             </field>
