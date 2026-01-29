@@ -2394,7 +2394,7 @@ msgstr "Sekvens"
 #: model_terms:ir.ui.view,arch_db:base_booking.booking_type_view_form model_terms:ir.ui.view,arch_db:base_booking.booking_type_view_kanban
 #: model_terms:ir.ui.view,arch_db:base_booking.booking_type_view_tree
 msgid "Share"
-msgstr "Aktie"
+msgstr "Dela"
 
 #. module: base_booking
 #. odoo-javascript
@@ -2408,7 +2408,7 @@ msgstr "Dela länk till avtalad tid"
 #: code:addons/base_booking/static/src/views/appointment_calendar/appointment_calendar_controller.xml:0
 #: model_terms:ir.ui.view,arch_db:base_booking.booking_type_view_form_custom_share
 msgid "Share Availabilities"
-msgstr "Aktietillgångar"
+msgstr "Dela tillgänglighet"
 
 #. module: base_booking
 #. odoo-javascript
