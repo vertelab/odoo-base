@@ -40,22 +40,25 @@ class ElkSms(models.Model):
                   'you want to send actual text messages or not. '))
 
         if username and password:
-            response = requests.post(
-                'https://api.46elks.com/a1/sms',
-                auth=(username, password),
-                data={'dryrun': dryrun_toggle, 'from': 'Reboot',
-                      'to': self.convert_number(self.number), 'message': self.body,
-                      'whendelivered': f"{self.env['ir.config_parameter'].get_param('web.base.url')}/sms"})
-            if response.status_code == 200:
-                response = json.loads(response.content.decode("utf-8"))
-                self.write({
-                    'elk_sms_id': response.get('id', False),
-                    'elk_sms_status': response.get('status', False),
-                })
-                self.state = "outgoing"
-            else:
-                response = response.content.decode("utf-8")
-                raise ValidationError(_(response))
+            from_name = self.env.company.name or 'Reboot'
+
+            for sms in self:
+                response = requests.post(
+                    'https://api.46elks.com/a1/sms',
+                    auth=(username, password),
+                    data={'dryrun': dryrun_toggle, 'from': from_name,
+                          'to': sms.convert_number(sms.number), 'message': sms.body,
+                          'whendelivered': f"{self.env['ir.config_parameter'].get_param('web.base.url')}/sms"})
+                if response.status_code == 200:
+                    response = json.loads(response.content.decode("utf-8"))
+                    sms.write({
+                        'elk_sms_id': response.get('id', False),
+                        'elk_sms_status': response.get('status', False),
+                    })
+                    sms.state = "outgoing"
+                else:
+                    response = response.content.decode("utf-8")
+                    raise ValidationError(_(response))
 
     def convert_number(self, number):
         if number and number[0] == '0':
