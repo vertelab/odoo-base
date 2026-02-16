@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="res_config_settings_view_form" model="ir.ui.view">
+        <field name="name">res.config.settings.view.form.inherit.base.tic.identity</field>
+        <field name="model">res.config.settings</field>
+        <field name="inherit_id" ref="base_setup.res_config_settings_view_form"/>
+        <field name="arch" type="xml">
+            <xpath expr="//div[@id='companies']" position="before">
+                <div id="tic_identity" >
+                    <block title="TIC Identity Settings" id='tic_identity_setting_container'>
+                        <setting help="Configure TIC identity parameters.">
+                            <div class="content-group">
+                                <div class="row mt16">
+                                    <label for="tic_id" class="col-lg-3 o_light_label"/>
+                                    <field name="tic_id"/>
+                                </div>
+                                <div class="row mt16">
+                                    <label for="tic_tenant" class="col-lg-3 o_light_label"/>
+                                    <field name="tic_tenant"/>
+                                </div>
+                                <div class="row mt16">
+                                    <label for="tic_api_key" class="col-lg-3 o_light_label"/>
+                                    <field name="tic_api_key" password="True"/>
+                                </div>
+                            </div>
+                        </setting>
+
+
+                    </block>
+                </div>
+            </xpath>
+        </field>
+    </record>
+</odoo>

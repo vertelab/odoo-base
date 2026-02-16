@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="view_partner_form_inherit_tic" model="ir.ui.view">
+        <field name="name">res.partner.form.inherit.tic</field>
+        <field name="model">res.partner</field>
+        <field name="inherit_id" ref="base.view_partner_form"/>
+        <field name="arch" type="xml">
+            <field name="category_id" position="before">
+                <field name="tic_identity_status" />
+                <field name="tic_identity_verified_date" />
+            </field>
+        </field>
+    </record>
+</odoo>
