@@ -1,11 +1,9 @@
-from urllib import request
+import re
 from odoo import api, fields, models, _
 from odoo.exceptions import UserError, ValidationError
 import requests
 import logging
 import json
-import base64
-import urllib.request
 
 _logger = logging.getLogger(__name__)
 
@@ -40,7 +38,7 @@ class ElkSms(models.Model):
                   'you want to send actual text messages or not. '))
 
         if username and password:
-            from_name = self.env.company.name or 'Reboot'
+            from_name = re.sub(r'[^a-zA-Z]', '', self.env.company.name or 'Reboot')[:11]
 
             for sms in self:
                 response = requests.post(
