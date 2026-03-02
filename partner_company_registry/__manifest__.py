@@ -33,5 +33,5 @@
     'images': ['static/description/banner.png'], # 560x280 px.
     'license': 'AGPL-3',
     'depends': ["base"],
-    'data': ["view/partner_view.xml"],
+    #'data': ["view/partner_view.xml"],
 }
