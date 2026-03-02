@@ -15,6 +15,45 @@ class PortalWizardUser(models.TransientModel):
     """
 
     _inherit = 'portal.wizard.user'
+    def action_grant_access(self):
+        """Grant the portal access to the partner.
+
+        If the partner has no linked user, we will create a new one in the same company
+        as the partner (or in the current company if not set).
+
+        An invitation email will be sent to the partner.
+        """
+        default_portal_role_id = self.env['ir.config_parameter'].sudo().get_param('portal_role_id')
+
+
+        self.ensure_one()
+        self._assert_user_email_uniqueness()
+
+        if self.is_portal or self.is_internal:
+            raise UserError(_('The partner "%s" already has the portal access.', self.partner_id.name))
+
+        group_portal = self.env.ref('base.group_portal')
+        group_public = self.env.ref('base.group_public')
+
+        self._update_partner_email()
+        user_sudo = self.user_id.sudo()
+
+        if not user_sudo:
+            # create a user if necessary and make sure it is in the portal group
+            company = self.partner_id.company_id or self.env.company
+            user_sudo = self.sudo().with_company(company.id)._create_user()
+
+        if not user_sudo.active or not self.is_portal:
+            user_sudo.write({'active': True, 'groups_id': [(4, group_portal.id), (3, group_public.id)]})
+            # prepare for the signup process
+            user_sudo.partner_id.signup_prepare()
+
+        self._assign_user_role(default_portal_role_id, self.user_id)
+        self.with_context(active_test=True)._send_email()
+
+        return self.action_refresh_modal()
+
+
 
     def action_apply(self):
         self.env['res.partner'].check_access_rights('write')
@@ -82,6 +121,3 @@ class PortalWizardUser(models.TransientModel):
                 })
             else:
                 default_portal_role_id.write({'line_ids': [(2, user_in_role.id)]})
-
-
-
