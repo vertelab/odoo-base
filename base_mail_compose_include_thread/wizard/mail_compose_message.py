@@ -1,11 +1,10 @@
 # -*- coding: utf-8 -*-
 
 from odoo import models, fields, api, _
-from odoo.tools import html2plaintext
-
+import lxml.html
 
 class MailComposeMessage(models.TransientModel):
-    _inherit = "mail.compose.message"
+    _inherit = 'mail.compose.message'
 
     include_thread = fields.Boolean(
         string="Include Thread",
@@ -13,7 +12,8 @@ class MailComposeMessage(models.TransientModel):
     )
 
     def get_mail_values(self, res_ids):
-        results = super().get_mail_values(res_ids)
+        """ Generate mail values, separating clean body for DB and full body for email. """
+        results = super(MailComposeMessage, self).get_mail_values(res_ids)
 
         if not self.include_thread:
             return results
@@ -24,29 +24,22 @@ class MailComposeMessage(models.TransientModel):
                 continue
 
             thread_html = self._build_thread_html(res_id)
-
             if not thread_html:
                 continue
 
-            # body_html is used by mass_mail mode; body is used by message_post mode
-            for body_key in ('body_html', 'body'):
-                if body_key in mail_values and mail_values[body_key]:
-                    mail_values[body_key] = mail_values[body_key] + thread_html
-                elif body_key in mail_values:
-                    mail_values[body_key] = thread_html
+            # We keep 'body' clean for the database/chatter
+            # We add 'full_body_with_thread' for our notification system to intercept
+            clean_body = mail_values.get('body', '')
+            mail_values['full_body_with_thread'] = clean_body + thread_html
+            
+            # For mass mailing (mail.mail), we want the full thread in body_html
+            if self.composition_mode == 'mass_mail' and 'body_html' in mail_values:
+                 mail_values['body_html'] = (mail_values.get('body_html') or '') + thread_html
 
         return results
 
     def _build_thread_html(self, res_id):
-        """Build an HTML block of previous messages for the given record.
-
-        Only includes messages of type 'comment' or 'email' that are not
-        internal notes, ordered from oldest to newest, excluding the
-        current wizard body to avoid duplication.
-
-        :param int res_id: ID of the related document record.
-        :returns str: HTML string of the thread, or empty string if none found.
-        """
+        """ Build an HTML block of previous messages, stripping nested threads. """
         if not self.model or not res_id:
             return ""
 
@@ -55,21 +48,19 @@ class MailComposeMessage(models.TransientModel):
             ("res_id", "=", res_id),
             ("message_type", "in", ("comment", "email")),
             ("is_internal", "=", False),
-            ("subtype_id.internal", "=", False),
         ]
-
-        # Exclude the message being composed right now
+        
         if self.parent_id:
-            domain.append(("id", "<", self.parent_id.id))
+            domain.append(("id", "<=", self.parent_id.id))
 
-        messages = self.env["mail.message"].search(domain, order="id asc")
+        messages = self.env["mail.message"].search(domain, order="id desc", limit=10)
 
         if not messages:
             return ""
 
         parts = [
             """
-            <div style="margin-top:20px; padding-top:16px;
+            <div class="o_mail_thread_history" style="margin-top:20px; padding-top:16px;
                         border-top:1px solid #d0d0d0; color:#555;
                         font-family:Arial, sans-serif; font-size:12px;">
                 <p style="margin:0 0 12px 0; font-weight:bold; color:#333;">
@@ -80,9 +71,18 @@ class MailComposeMessage(models.TransientModel):
 
         for msg in messages:
             author = msg.author_id.name if msg.author_id else (msg.email_from or _("Unknown"))
-            date_str = msg.date.strftime("%d %b %Y %H:%M") if msg.date else ""
-            subject = msg.subject or ""
+            date_str = fields.Datetime.to_string(msg.date) if msg.date else ""
             body = msg.body or ""
+            
+            # Strip previous history from this message's body to avoid exponential duplication
+            if 'o_mail_thread_history' in body:
+                try:
+                    root = lxml.html.fromstring(body)
+                    for node in root.xpath('//*[contains(@class, "o_mail_thread_history")]'):
+                        node.getparent().remove(node)
+                    body = lxml.html.tostring(root, pretty_print=False, encoding='unicode')
+                except Exception:
+                    pass
 
             parts.append(
                 f"""
@@ -92,7 +92,6 @@ class MailComposeMessage(models.TransientModel):
                     <p style="margin:0 0 4px 0; font-size:11px; color:#888;">
                         <strong style="color:#333;">{author}</strong>
                         &nbsp;·&nbsp; {date_str}
-                        {"&nbsp;·&nbsp; <em>" + subject + "</em>" if subject else ""}
                     </p>
                     <div style="margin-top:6px; color:#444; font-size:12px;">
                         {body}
