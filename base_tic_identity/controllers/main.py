@@ -206,7 +206,7 @@ class TICCustomerPortal(CustomerPortal):
         return response
 
     @http.route(_VERIFICATION_URL, type='http', auth='user', website=True)
-    def verify_identity(self, **kw):
+    def verify_identity(self, redirect=None, **kw):
         config = self._get_tic_config()
 
         if not config['api_key'] or not config['tenant']:
@@ -217,6 +217,8 @@ class TICCustomerPortal(CustomerPortal):
 
         request.session['tic_state_token'] = state_token
         request.session['tic_partner_id'] = request.env.user.partner_id.id
+        if redirect:
+            request.session['tic_redirect'] = redirect
 
         callback_url = f"{config['base_url']}{self._CALLBACK_URL}?state={state_token}"
 
@@ -231,32 +233,41 @@ class TICCustomerPortal(CustomerPortal):
         _logger.info("TIC Callback received - session_id: %s", session_id)
 
         valid_state, partner_id = self._validate_state_token(state)
+        redirect_url = request.session.pop('tic_redirect', '/my/account')
+
         if not valid_state:
-            return request.redirect('/my/account?error=1')
+            sep = '&' if '?' in redirect_url else '?'
+            return request.redirect(f'{redirect_url}{sep}error=1')
 
         if not session_id:
             _logger.error("No session_id in TIC callback")
-            return request.redirect('/my/account?error=1')
+            sep = '&' if '?' in redirect_url else '?'
+            return request.redirect(f'{redirect_url}{sep}error=1')
 
         config = self._get_tic_config()
         if not config['api_key']:
             _logger.error("TIC API key not configured")
-            return request.redirect('/my/account?error=1')
+            sep = '&' if '?' in redirect_url else '?'
+            return request.redirect(f'{redirect_url}{sep}error=1')
 
         success, session_data, error = self._collect_tic_session(session_id, config['api_key'])
         if not success:
-            return request.redirect('/my/account?error=1')
+            sep = '&' if '?' in redirect_url else '?'
+            return request.redirect(f'{redirect_url}{sep}error=1')
 
         valid, user_data, error = self._validate_session_data(session_data)
         if not valid:
-            return request.redirect('/my/account?error=1')
+            sep = '&' if '?' in redirect_url else '?'
+            return request.redirect(f'{redirect_url}{sep}error=1')
 
         if partner_id:
             success, error = self._update_partner_identity(partner_id, user_data)
             if not success:
-                return request.redirect('/my/account?error=1')
+                sep = '&' if '?' in redirect_url else '?'
+                return request.redirect(f'{redirect_url}{sep}error=1')
         else:
             _logger.warning("No partner_id in session, skipping partner update")
 
         _logger.info("TIC identity verification completed successfully for partner %s", partner_id)
-        return request.redirect('/my/account?verified=1')
+        sep = '&' if '?' in redirect_url else '?'
+        return request.redirect(f'{redirect_url}{sep}verified=1')
