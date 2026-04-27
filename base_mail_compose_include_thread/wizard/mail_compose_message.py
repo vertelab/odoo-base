@@ -31,7 +31,7 @@ class MailComposeMessage(models.TransientModel):
             # We add 'full_body_with_thread' for our notification system to intercept
             clean_body = mail_values.get('body', '')
             mail_values['full_body_with_thread'] = clean_body + thread_html
-            
+
             # For mass mailing (mail.mail), we want the full thread in body_html
             if self.composition_mode == 'mass_mail' and 'body_html' in mail_values:
                  mail_values['body_html'] = (mail_values.get('body_html') or '') + thread_html
@@ -49,14 +49,14 @@ class MailComposeMessage(models.TransientModel):
             ("message_type", "in", ("comment", "email")),
             ("is_internal", "=", False),
         ]
-        
+
         if self.parent_id:
             domain.append(("id", "<=", self.parent_id.id))
 
         messages = self.env["mail.message"].search(domain, order="id desc", limit=10)
-
         if not messages:
             return ""
+        messages = messages.sorted("id")
 
         parts = [
             """
@@ -73,7 +73,7 @@ class MailComposeMessage(models.TransientModel):
             author = msg.author_id.name if msg.author_id else (msg.email_from or _("Unknown"))
             date_str = fields.Datetime.to_string(msg.date) if msg.date else ""
             body = msg.body or ""
-            
+
             # Strip previous history from this message's body to avoid exponential duplication
             if 'o_mail_thread_history' in body:
                 try:
