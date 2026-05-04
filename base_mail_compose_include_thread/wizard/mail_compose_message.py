@@ -53,10 +53,10 @@ class MailComposeMessage(models.TransientModel):
         if self.parent_id:
             domain.append(("id", "<=", self.parent_id.id))
 
-        messages = self.env["mail.message"].search(domain, order="id desc", limit=10)
+        messages = self.env["mail.message"].search(domain, order="date desc", limit=10)
         if not messages:
             return ""
-        messages = messages.sorted("id")
+        #messages = messages.sorted("id")
 
         parts = [
             """
