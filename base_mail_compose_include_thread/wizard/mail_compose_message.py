@@ -46,7 +46,7 @@ class MailComposeMessage(models.TransientModel):
         domain = [
             ("model", "=", self.model),
             ("res_id", "=", res_id),
-            ("message_type", "in", ("comment", "email")),
+            ("message_type", "=", "comment"),
             ("is_internal", "=", False),
         ]
 
