@@ -6,6 +6,6 @@ class ResPartner(models.Model):
 
     tic_identity_status = fields.Selection([
         ('verified','Verified'), ('unverified','Unverified')],
-        string="Tic Identity", default='unverified', readonly=True)
-    tic_identity_verified_date = fields.Datetime(string="Verified Date", readonly=True)
+        string="Tic Identity", default='unverified', readonly=True, tracking=True)
+    tic_identity_verified_date = fields.Datetime(string="Verified Date", readonly=True, tracking=True)
 
