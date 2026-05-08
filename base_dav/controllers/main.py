@@ -1,23 +1,24 @@
 # Copyright 2018 Therp BV <https://therp.nl>
 # License AGPL-3.0 or later (https://www.gnu.org/licenses/agpl.html).
-
+import sys
 import logging
-from configparser import RawConfigParser as ConfigParser
-
 import werkzeug
 from odoo import http
 from odoo.http import request
 
 try:
     import radicale
-    from radicale import config
+    import radicale.app
+    import radicale.config
 except ImportError:
     radicale = None
 
 PREFIX = '/.dav'
+_logger = logging.getLogger(__name__)
 
 
 class Main(http.Controller):
+
     @http.route(
         ['/.well-known/carddav', '/.well-known/caldav', '/.well-known/webdav'],
         type='http', auth='none', csrf=False,
@@ -30,36 +31,52 @@ class Main(http.Controller):
         csrf=False,
     )
     def handle_dav_request(self, davpath=None):
-        config = ConfigParser()
-        for section, values in radicale.config.INITIAL_CONFIG.items():
-            config.add_section(section)
-            for key, data in values.items():
-                config.set(section, key, data["value"])
-        config.set('auth', 'type', 'odoo.addons.base_dav.radicale.auth')
-        config.set(
-            'storage', 'type', 'odoo.addons.base_dav.radicale.collection'
-        )
-        config.set(
-            'rights', 'type', 'odoo.addons.base_dav.radicale.rights'
-        )
-        config.set('web', 'type', 'none')
-        application = radicale.Application(
-            config, logging.getLogger('radicale'),
+        if radicale is None:
+            return http.Response('radicale not installed', status=500)
+
+        configuration = radicale.config.load()
+        configuration.update(
+            {
+                "auth": {
+                    "type": "odoo.addons.base_dav.radicale.auth",
+                },
+                "storage": {
+                    "type": "odoo.addons.base_dav.radicale.collection",
+                },
+                "rights": {
+                    "type": "odoo.addons.base_dav.radicale.rights",
+                },
+                "web": {
+                    "type": "none",
+                },
+            },
+            "odoo base_dav config",
         )
 
-        response = None
+        application = radicale.app.Application(configuration)
+
+        response_holder = {}
 
         def start_response(status, headers):
-            nonlocal response
-            response = http.Response(status=status, headers=headers)
+            response_holder['status'] = status
+            response_holder['headers'] = headers
 
-        result = application(
-            dict(
-                request.httprequest.environ,
-                HTTP_X_SCRIPT_NAME=PREFIX,
-                PATH_INFO=davpath or '',
-            ),
-            start_response,
+        environ = dict(
+            request.httprequest.environ,
+            HTTP_X_SCRIPT_NAME=PREFIX,
+            PATH_INFO='/' + (davpath or ''),
+            **({'wsgi.errors': sys.stderr}
+               if 'wsgi.errors' not in request.httprequest.environ else {}),
         )
-        response.stream.write(result and result[0] or b'')
+
+        result = application(environ, start_response)
+
+        status = response_holder.get('status', '500 Internal Server Error')
+        headers = response_holder.get('headers', [])
+
+        response = http.Response(
+            status=status,
+            headers=dict(headers),
+        )
+        response.stream.write(b''.join(result))
         return response

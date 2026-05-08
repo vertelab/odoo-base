@@ -13,7 +13,8 @@ import vobject
 
 # pylint: disable=missing-import-error
 from ..controllers.main import PREFIX
-from odoo.addons.base_dav.radicale.collection import Collection, FileItem, Item
+from odoo.addons.base_dav.radicale.collection import Collection, FileItem
+from radicale.item import Item
 
 
 class DavCollection(models.Model):
@@ -227,7 +228,6 @@ class DavCollection(models.Model):
         components = self._split_path(href)
         collection_model = self.env[self.model_id.model]
         if self.dav_type == 'files':
-            # TODO: Handle upload of attachments
             return None
 
         data = self.from_vobject(item)
@@ -236,7 +236,6 @@ class DavCollection(models.Model):
         if not record:
             if self.field_uuid:
                 data[self.field_uuid.name] = components[-1]
-
             record = collection_model.create(data)
             uuid = components[-1] if self.field_uuid else record.id
             href = "%s/%s" % (href, uuid)
@@ -244,8 +243,8 @@ class DavCollection(models.Model):
             record.write(data)
 
         return Item(
-            collection,
-            item=self.to_vobject(record),
+            collection=collection,
+            vobject_item=self.to_vobject(record),  # was item=
             href=href,
             last_modified=self._odoo_to_http_datetime(record.write_date),
         )
@@ -255,11 +254,10 @@ class DavCollection(models.Model):
 
         components = self._split_path(href)
         collection_model = self.env[self.model_id.model]
+
         if self.dav_type == 'files':
             if len(components) == 3:
-                result = Collection(href)
-                result.logger = self.logger
-                return result
+                return Collection(href)
             if len(components) == 4:
                 record = collection_model.browse(map(
                     itemgetter(0),
@@ -274,22 +272,18 @@ class DavCollection(models.Model):
                     ('name', '=', components[3]),
                 ], limit=1)
                 return FileItem(
-                    collection,
                     item=attachment,
                     href=href,
-                    last_modified=self._odoo_to_http_datetime(
-                        record.write_date
-                    ),
+                    collection=collection,
                 )
 
         record = self.get_record(components)
-
         if not record:
             return None
 
         return Item(
-            collection,
-            item=self.to_vobject(record),
+            collection=collection,
+            vobject_item=self.to_vobject(record),
             href=href,
             last_modified=self._odoo_to_http_datetime(record.write_date),
         )
