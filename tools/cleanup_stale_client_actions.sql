@@ -107,3 +107,19 @@ ORDER BY tag;
 
 -- To actually delete, uncomment:
 -- SELECT cleanup_stale_client_actions();
+
+
+ Kör mot vilken Odoo 18-databas som helst:
+
+     # 1. Förhandsgranska vad som tas bort
+     psql -d skog-test -f /path/to/cleanup_stale_client_actions.sql
+
+     # 2. Om det ser rätt ut, kör själva rensningen
+     psql -d skog-test -c "SELECT cleanup_stale_client_actions();"
+
+     Skriptet:
+
+     - Skapar en funktion cleanup_stale_client_actions() som raderar alla client actions vars tag inte matchar Odoo 18:s
+       JS-registry
+     - Visar först en SELECT-förhandsgranskning
+     - Listan med valida tags uppdateras enkelt i toppen av filen när ni lägger till custom actions
