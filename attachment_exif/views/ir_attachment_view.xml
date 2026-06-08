@@ -16,7 +16,7 @@
         <field name="inherit_id" ref="base.view_attachment_form"/>
         <field name="arch" type="xml">
             <xpath expr="//sheet" position="inside">
-                <group invisible="not has_exif">
+                <group invisible="has_exif == False">
                     <field name="has_exif" invisible="1"/>
                     <group string="EXIF Data">
                         <field name="exif_ids" nolabel="1"/>
