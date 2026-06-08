@@ -15,7 +15,7 @@
         - Page tracking
         - Traffic source tracking
     """,
-    'author': 'Vertel AB',
+    'author': 'Vertel Sverige AB',
     'website': 'https://vertel.se',
     'depends': ['base_serp'],
     'data': [
@@ -31,5 +31,5 @@
     'installable': True,
     'application': False,
     'auto_install': False,
-    'license': 'LGPL-3',
+    'license': 'AGPL-3',
 }

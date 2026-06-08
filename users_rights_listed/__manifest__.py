@@ -30,7 +30,7 @@
         This module is maintained from: https://github.com/vertelab/odoo-base/edit/14.0/users_rights_listed/ \n
     """,
     #'sequence': '1',
-    'author': 'Vertel AB',
+    'author': 'Vertel Sverige AB',
     'website': 'https://vertel.se/apps/odoo-base/user_rights_listed',
     'images': ['static/description/banner.png'], # 560x280 px.
     'license': 'AGPL-3',

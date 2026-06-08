@@ -35,7 +35,7 @@
             - project/tasks
         \n 18.0.0.1.1 - Added Documentations
     """,
-    'author': 'Vertel AB',
+    'author': 'Vertel Sverige AB',
     'website': 'https://vertel.se/apps/odoo-base/record_export_to_xml',
     'images': ['static/description/banner.png'], # 560x280 px.
     'license': 'AGPL-3',

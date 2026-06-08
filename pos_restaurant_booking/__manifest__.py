@@ -15,7 +15,7 @@
     'demo': [
         'demo/pos_restaurant_booking_demo.xml',
     ],
-    'license': 'OEEL-1',
+    'license': 'AGPL-3',
     'post_init_hook': '_pos_restaurant_booking_after_init',
     'assets': {
         'point_of_sale._assets_pos': [

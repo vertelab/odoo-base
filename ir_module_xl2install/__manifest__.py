@@ -33,7 +33,7 @@ Install modules from a excel document
 
 """,
     #'sequence': '1',
-    'author': 'Vertel AB',
+    'author': 'Vertel Sverige AB',
     'website': 'https://vertel.se/apps/odoo-base/ir_module_xl2install',
     'images': ['static/description/banner.png'], # 560x280 px.
     'license': 'AGPL-3',

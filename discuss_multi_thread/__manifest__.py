@@ -32,7 +32,7 @@
     Multi Thread in Odoo Discuss.
     """,
     #'sequence': '1',
-    'author': 'Vertel AB',
+    'author': 'Vertel Sverige AB',
     'website': 'https://vertel.se/apps/odoo-base/discuss_multi_thread',
     'images': ['static/description/banner.png'], # 560x280 px.
     'license': 'AGPL-3',

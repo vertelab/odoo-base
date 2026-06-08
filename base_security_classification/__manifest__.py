@@ -31,7 +31,7 @@
     'description': """
         Security Classification
     """,
-    'author': 'Vertel AB',
+    'author': 'Vertel Sverige AB',
     'website': 'https://vertel.se/apps/odoo-base',
     'license': 'AGPL-3',
     'depends': ["server_environment_data_encryption", "base", "mail"],

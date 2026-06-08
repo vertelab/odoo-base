@@ -34,7 +34,7 @@ Usage:
     """,
     'author': 'Your Company',
     'website': 'https://www.yourcompany.com',
-    'license': 'LGPL-3',
+    'license': 'AGPL-3',
     'depends': [
         'base_serp',
     ],

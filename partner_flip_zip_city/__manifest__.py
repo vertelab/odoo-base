@@ -30,7 +30,7 @@
 		v18.0.1.1.0 Added translation \n
     """,
     #'sequence': '1',
-    'author': 'Vertel AB',
+    'author': 'Vertel Sverige AB',
     'website': 'https://vertel.se/apps/odoo-base/partner_flip_zip_city',
     'images': ['static/description/banner.png'], # 560x280 px.
     'license': 'AGPL-3',

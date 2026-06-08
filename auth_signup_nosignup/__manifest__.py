@@ -24,7 +24,7 @@
     "name": "Auth Signup NoSignup",
     'version': '18.0.1.0.0',
     'summary': 'Removes new user signup from the front page',
-    'author': 'Vertel AB',
+    'author': 'Vertel Sverige AB',
     'images': ['static/description/banner.png'], # 560x280 px.
     'maintainer': 'Vertel AB',
     'category': 'Base',

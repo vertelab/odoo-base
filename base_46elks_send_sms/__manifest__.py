@@ -27,7 +27,7 @@
     'description': """
     
     """,
-    'author': 'Vertel AB',
+    'author': 'Vertel Sverige AB',
     'website': 'https://vertel.se/apps/odoo-base/base_46elks_send_sms',
     'images': ['static/description/banner.png'], # 560x280 px.
     'license': 'AGPL-3',

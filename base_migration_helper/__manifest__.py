@@ -31,7 +31,7 @@
     'description': """
         Long description of module's purpose
     """,
-    'author': 'Vertel AB',
+    'author': 'Vertel Sverige AB',
     'website': 'https://vertel.se/apps/odoo-',
     'images': ['static/description/banner.png'], # 560x280
     'license': 'AGPL-3',

@@ -30,7 +30,7 @@ Add an extra repo
 =================
 """,
     #'sequence': '1',
-    'author': 'Vertel AB',
+    'author': 'Vertel Sverige AB',
     'website': 'https://vertel.se/apps/odoo-base/ir_module_extra_repo',
     'images': ['static/description/banner.png'],  # 560x280 px.
     'license': 'AGPL-3',

@@ -43,7 +43,7 @@ A base module to allow booking integrations in any flow
     # ],
     'installable': True,
     'application': True,
-    'license': 'OEEL-1',
+    'license': 'AGPL-3',
     'assets': {
         'web.assets_frontend': [
             # 'mail/static/src/utils/common/format.js',

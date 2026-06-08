@@ -36,7 +36,7 @@ Allow clients to Schedule Appointments through your Website
     #     'data/appointment_demo.xml',
     # ],
     'installable': True,
-    'license': 'OEEL-1',
+    'license': 'AGPL-3',
     'assets': {
         'web.assets_frontend': [
             'base_booking_website/static/src/scss/website_appointment.scss',

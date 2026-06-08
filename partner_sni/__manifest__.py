@@ -49,7 +49,7 @@ v12.0.0.2 Added automatic install of the codes.
 AFC-156
 """,
     #'sequence': '1',
-    'author': 'Vertel AB',
+    'author': 'Vertel Sverige AB',
     'website': 'https://vertel.se/apps/odoo-base/partner_sni',
     'images': ['static/description/banner.png'], # 560x280 px.
     'license': 'AGPL-3',

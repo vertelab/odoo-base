@@ -25,9 +25,9 @@ Provider System:
 * Default: BeautifulSoup (web scraping)
 * Easily extend with additional providers (SerpAPI, etc.)
     """,
-    'author': 'Vertel AB',
+    'author': 'Vertel Sverige AB',
     'website': 'https://vertel.se',
-    'license': 'LGPL-3',
+    'license': 'AGPL-3',
     'depends': [
         'base_setup',
         'web',

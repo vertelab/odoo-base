@@ -29,7 +29,7 @@
         Flips the position of the firstname and lastname fields on users and partners
     """,
     #'sequence': '1',
-    'author': 'Vertel AB',
+    'author': 'Vertel Sverige AB',
     'website': 'https://vertel.se/apps/odoo-base/partner_flip_firstname',
     'images': ['static/description/banner.png'], # 560x280 px.
     'license': 'AGPL-3',

@@ -29,7 +29,7 @@
     Extends the User Roles to enable assiging several users to a role, at the same time, via the use of a server action.
     """,
     #'sequence': '1'
-    'author': 'Vertel AB',
+    'author': 'Vertel Sverige AB',
     'website': 'https://vertel.se/apps/odoo-base/base_user_role_mass_addition',
     'images': ['static/description/banner.png'], # 560x280 px.
     'license': 'AGPL-3',

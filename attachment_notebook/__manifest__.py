@@ -32,7 +32,7 @@
     Adds a notebook for other modules to populate with more functionality.
     """,
     #'sequence': '1',
-    'author': 'Vertel AB',
+    'author': 'Vertel Sverige AB',
     'website': 'https://vertel.se/apps/odoo-base/attachment_notebook',
     'images': ['static/description/banner.png'], # 560x280 px.
     'license': 'AGPL-3',
