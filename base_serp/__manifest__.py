@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 {
     'name': 'Base SERP Tracker',
-    'version': '18.0.1.1.0',
+    'version': '18.0.1.2.0',
     'category': 'Marketing',
     'summary': 'Track Search Engine Results Page (SERP) positions for domains and keywords',
     'description': """
@@ -41,6 +41,7 @@ Provider System:
         ],
     },
     'data': [
+        'security/serp_security.xml',
         'security/ir.model.access.csv',
 
         'report/ir_actions_report.xml',
