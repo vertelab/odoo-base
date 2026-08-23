@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 {
     'name': 'Base SERP Tracker',
-    'version': '1.0.0',
+    'version': '18.0.1.1.0',
     'category': 'Marketing',
     'summary': 'Track Search Engine Results Page (SERP) positions for domains and keywords',
     'description': """
