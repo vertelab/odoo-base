@@ -1,0 +1,100 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="view_partner_form_foretagssok" model="ir.ui.view">
+        <field name="name">res.partner.form.foretagssok</field>
+        <field name="model">res.partner</field>
+        <field name="inherit_id" ref="base.view_partner_form"/>
+        <field name="arch" type="xml">
+            <sheet position="before">
+                <header>
+                    <button
+                        name="action_foretagsapi_enrich"
+                        string="Enrich from FöretagsAPI"
+                        type="object"
+                        class="oe_highlight"
+                        invisible="company_type != 'company'"/>
+                    <button
+                        name="action_foretagsapi_find_similar"
+                        string="Find Similar Companies"
+                        type="object"
+                        invisible="company_type != 'company' or not sni_id"/>
+                </header>
+            </sheet>
+
+            <notebook position="inside">
+                <page name="foretagssok" string="FöretagsAPI">
+                    <group>
+                        <group string="Status">
+                            <field name="foretagssok_status"/>
+                            <field name="foretagssok_registration_date"/>
+                            <field name="foretagssok_deregistration_date"/>
+                        </group>
+                        <group string="Estimates">
+                            <field name="foretagssok_revenue_estimate"/>
+                            <field name="foretagssok_employees_estimate"/>
+                            <field name="foretagssok_estimates_reference_year"/>
+                        </group>
+                    </group>
+                    <group string="Business Description">
+                        <field name="foretagssok_business_description" nolabel="1"/>
+                    </group>
+                    <field name="foretagssok_financial_ids">
+                        <list>
+                            <field name="fiscal_year"/>
+                            <field name="net_sales"/>
+                            <field name="operating_profit"/>
+                            <field name="net_result"/>
+                            <field name="total_assets"/>
+                            <field name="equity"/>
+                            <field name="solidity"/>
+                            <field name="employees"/>
+                        </list>
+                    </field>
+                </page>
+            </notebook>
+        </field>
+    </record>
+
+    <record id="view_foretagssok_similar_wizard_form" model="ir.ui.view">
+        <field name="name">foretagssok.similar.wizard.form</field>
+        <field name="model">foretagssok.similar.wizard</field>
+        <field name="arch" type="xml">
+            <form>
+                <sheet>
+                    <group>
+                        <field name="partner_id" readonly="1"/>
+                        <field name="sni_code" readonly="1"/>
+                        <field name="sni_name" readonly="1"/>
+                        <field name="city"/>
+                    </group>
+                    <group>
+                        <group string="Revenue Range">
+                            <field name="min_revenue"/>
+                            <field name="max_revenue"/>
+                        </group>
+                        <group string="Options">
+                            <field name="has_annual_report"/>
+                            <field name="exact_only"/>
+                            <field name="sort_by"/>
+                            <field name="limit"/>
+                        </group>
+                    </group>
+                    <field name="line_ids">
+                        <list editable="bottom">
+                            <field name="selected" widget="boolean_toggle"/>
+                            <field name="name"/>
+                            <field name="org_number"/>
+                            <field name="city"/>
+                            <field name="business_description"/>
+                        </list>
+                    </field>
+                </sheet>
+                <footer>
+                    <button name="action_search" string="Search" type="object" class="oe_highlight"/>
+                    <button name="action_create_partners" string="Create Selected Partners" type="object"/>
+                    <button string="Close" class="btn-secondary" special="cancel"/>
+                </footer>
+            </form>
+        </field>
+    </record>
+</odoo>

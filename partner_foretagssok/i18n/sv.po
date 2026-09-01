@@ -1,0 +1,479 @@
+# Translation of partner_foretagssok.
+# This file contains the Swedish translations for the module.
+msgid ""
+msgstr ""
+"Project-Id-Version: Odoo Server 18.0\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2026-09-01 12:00+0000\n"
+"PO-Revision-Date: 2026-09-01 12:00+0000\n"
+"Last-Translator: \n"
+"Language-Team: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: \n"
+"Language: sv\n"
+
+#. module: partner_foretagssok
+#: model:ir.model.fields,field_description:partner_foretagssok.field_res_config_settings__foretagssok_api_key
+msgid "FöretagsAPI API Key"
+msgstr "FöretagsAPI API-nyckel"
+
+#. module: partner_foretagssok
+#: model:ir.model.fields,field_description:partner_foretagssok.field_res_config_settings__foretagssok_base_url
+msgid "FöretagsAPI Base URL"
+msgstr "FöretagsAPI bas-URL"
+
+#. module: partner_foretagssok
+#: model:ir.model,name:partner_foretagssok.model_res_partner_financials
+msgid "Partner Financials from FöretagsAPI"
+msgstr "Partnerfinanser från FöretagsAPI"
+
+#. module: partner_foretagssok
+#: model:ir.model.fields,field_description:partner_foretagssok.field_res_partner_financials__partner_id
+msgid "Partner"
+msgstr "Partner"
+
+#. module: partner_foretagssok
+#: model:ir.model.fields,field_description:partner_foretagssok.field_res_partner_financials__fiscal_year
+msgid "Fiscal Year"
+msgstr "Räkenskapsår"
+
+#. module: partner_foretagssok
+#: model:ir.model.fields,field_description:partner_foretagssok.field_res_partner_financials__fiscal_year_start
+msgid "Fiscal Year Start"
+msgstr "Räkenskapsårets början"
+
+#. module: partner_foretagssok
+#: model:ir.model.fields,field_description:partner_foretagssok.field_res_partner_financials__fiscal_year_end
+msgid "Fiscal Year End"
+msgstr "Räkenskapsårets slut"
+
+#. module: partner_foretagssok
+#: model:ir.model.fields,field_description:partner_foretagssok.field_res_partner_financials__taxonomy
+msgid "Taxonomy"
+msgstr "Taxonomi"
+
+#. module: partner_foretagssok
+#: model:ir.model.fields,field_description:partner_foretagssok.field_res_partner_financials__currency
+msgid "Currency"
+msgstr "Valuta"
+
+#. module: partner_foretagssok
+#: model:ir.model.fields,field_description:partner_foretagssok.field_res_partner_financials__net_sales
+msgid "Net Sales"
+msgstr "Nettoomsättning"
+
+#. module: partner_foretagssok
+#: model:ir.model.fields,field_description:partner_foretagssok.field_res_partner_financials__operating_profit
+msgid "Operating Profit"
+msgstr "Rörelseresultat"
+
+#. module: partner_foretagssok
+#: model:ir.model.fields,field_description:partner_foretagssok.field_res_partner_financials__net_result
+msgid "Net Result"
+msgstr "Årets resultat"
+
+#. module: partner_foretagssok
+#: model:ir.model.fields,field_description:partner_foretagssok.field_res_partner_financials__result_after_financial_items
+msgid "Result After Financial Items"
+msgstr "Resultat efter finansnetto"
+
+#. module: partner_foretagssok
+#: model:ir.model.fields,field_description:partner_foretagssok.field_res_partner_financials__profit_before_tax
+msgid "Profit Before Tax"
+msgstr "Resultat före skatt"
+
+#. module: partner_foretagssok
+#: model:ir.model.fields,field_description:partner_foretagssok.field_res_partner_financials__total_assets
+msgid "Total Assets"
+msgstr "Summa tillgångar"
+
+#. module: partner_foretagssok
+#: model:ir.model.fields,field_description:partner_foretagssok.field_res_partner_financials__equity
+msgid "Equity"
+msgstr "Eget kapital"
+
+#. module: partner_foretagssok
+#: model:ir.model.fields,field_description:partner_foretagssok.field_res_partner_financials__current_assets
+msgid "Current Assets"
+msgstr "Omsättningstillgångar"
+
+#. module: partner_foretagssok
+#: model:ir.model.fields,field_description:partner_foretagssok.field_res_partner_financials__current_liabilities
+msgid "Current Liabilities"
+msgstr "Kortfristiga skulder"
+
+#. module: partner_foretagssok
+#: model:ir.model.fields,field_description:partner_foretagssok.field_res_partner_financials__cash_and_bank
+msgid "Cash and Bank"
+msgstr "Kassa och bank"
+
+#. module: partner_foretagssok
+#: model:ir.model.fields,field_description:partner_foretagssok.field_res_partner_financials__long_term_liabilities
+msgid "Long Term Liabilities"
+msgstr "Långfristiga skulder"
+
+#. module: partner_foretagssok
+#: model:ir.model.fields,field_description:partner_foretagssok.field_res_partner_financials__fixed_assets
+msgid "Fixed Assets"
+msgstr "Anläggningstillgångar"
+
+#. module: partner_foretagssok
+#: model:ir.model.fields,field_description:partner_foretagssok.field_res_partner_financials__restricted_equity
+msgid "Restricted Equity"
+msgstr "Bundet eget kapital"
+
+#. module: partner_foretagssok
+#: model:ir.model.fields,field_description:partner_foretagssok.field_res_partner_financials__unrestricted_equity
+msgid "Unrestricted Equity"
+msgstr "Fritt eget kapital"
+
+#. module: partner_foretagssok
+#: model:ir.model.fields,field_description:partner_foretagssok.field_res_partner_financials__untaxed_reserves
+msgid "Untaxed Reserves"
+msgstr "Obeskattade reserver"
+
+#. module: partner_foretagssok
+#: model:ir.model.fields,field_description:partner_foretagssok.field_res_partner_financials__proposed_dividend
+msgid "Proposed Dividend"
+msgstr "Föreslagen utdelning"
+
+#. module: partner_foretagssok
+#: model:ir.model.fields,field_description:partner_foretagssok.field_res_partner_financials__employees
+msgid "Employees"
+msgstr "Anställda"
+
+#. module: partner_foretagssok
+#: model:ir.model.fields,field_description:partner_foretagssok.field_res_partner_financials__solidity
+msgid "Solvency"
+msgstr "Soliditet"
+
+#. module: partner_foretagssok
+#: model:ir.model.fields,field_description:partner_foretagssok.field_res_partner_financials__operating_margin
+msgid "Operating Margin"
+msgstr "Rörelsemarginal"
+
+#. module: partner_foretagssok
+#: model:ir.model.fields,field_description:partner_foretagssok.field_res_partner__foretagssok_business_description
+msgid "Business Description"
+msgstr "Verksamhetsbeskrivning"
+
+#. module: partner_foretagssok
+#: model:ir.model.fields,field_description:partner_foretagssok.field_res_partner__foretagssok_registration_date
+msgid "Registration Date"
+msgstr "Registreringsdatum"
+
+#. module: partner_foretagssok
+#: model:ir.model.fields,field_description:partner_foretagssok.field_res_partner__foretagssok_deregistration_date
+msgid "Deregistration Date"
+msgstr "Avregistreringsdatum"
+
+#. module: partner_foretagssok
+#: model:ir.model.fields,field_description:partner_foretagssok.field_res_partner__foretagssok_status
+msgid "Company Status"
+msgstr "Företagsstatus"
+
+#. module: partner_foretagssok
+#: model:ir.model.fields,field_description:partner_foretagssok.field_res_partner__foretagssok_revenue_estimate
+msgid "Revenue Estimate"
+msgstr "Omsättningsuppskattning"
+
+#. module: partner_foretagssok
+#: model:ir.model.fields,field_description:partner_foretagssok.field_res_partner__foretagssok_employees_estimate
+msgid "Employees Estimate"
+msgstr "Anställda, uppskattning"
+
+#. module: partner_foretagssok
+#: model:ir.model.fields,field_description:partner_foretagssok.field_res_partner__foretagssok_estimates_reference_year
+msgid "Estimates Reference Year"
+msgstr "Uppskattningarnas referensår"
+
+#. module: partner_foretagssok
+#: model:ir.model.fields,field_description:partner_foretagssok.field_res_partner__foretagssok_financial_ids
+msgid "Financials"
+msgstr "Finansiell data"
+
+#. module: partner_foretagssok
+#: model:ir.model,name:partner_foretagssok.model_foretagssok_similar_wizard
+msgid "Find Similar Companies by SNI"
+msgstr "Hitta liknande företag efter SNI"
+
+#. module: partner_foretagssok
+#: model:ir.model.fields,field_description:partner_foretagssok.field_foretagssok_similar_wizard__partner_id
+msgid "Partner"
+msgstr "Partner"
+
+#. module: partner_foretagssok
+#: model:ir.model.fields,field_description:partner_foretagssok.field_foretagssok_similar_wizard__sni_code
+msgid "SNI Code"
+msgstr "SNI-kod"
+
+#. module: partner_foretagssok
+#: model:ir.model.fields,field_description:partner_foretagssok.field_foretagssok_similar_wizard__sni_name
+msgid "SNI Description"
+msgstr "SNI-beskrivning"
+
+#. module: partner_foretagssok
+#: model:ir.model.fields,field_description:partner_foretagssok.field_foretagssok_similar_wizard__city
+msgid "City"
+msgstr "Stad"
+
+#. module: partner_foretagssok
+#: model:ir.model.fields,field_description:partner_foretagssok.field_foretagssok_similar_wizard__min_revenue
+msgid "Min Revenue"
+msgstr "Minsta omsättning"
+
+#. module: partner_foretagssok
+#: model:ir.model.fields,field_description:partner_foretagssok.field_foretagssok_similar_wizard__max_revenue
+msgid "Max Revenue"
+msgstr "Högsta omsättning"
+
+#. module: partner_foretagssok
+#: model:ir.model.fields,field_description:partner_foretagssok.field_foretagssok_similar_wizard__has_annual_report
+msgid "Has Digital Annual Report"
+msgstr "Har digital årsredovisning"
+
+#. module: partner_foretagssok
+#: model:ir.model.fields,field_description:partner_foretagssok.field_foretagssok_similar_wizard__exact_only
+msgid "Exact Figures Only"
+msgstr "Endast exakta siffror"
+
+#. module: partner_foretagssok
+#: model:ir.model.fields,help:partner_foretagssok.field_foretagssok_similar_wizard__exact_only
+msgid 'Only include companies with exact figures from digital annual reports.'
+msgstr "Inkludera endast företag med exakta siffror från digital årsredovisning."
+
+#. module: partner_foretagssok
+#: model:ir.model.fields,field_description:partner_foretagssok.field_foretagssok_similar_wizard__sort_by
+msgid "Sort By"
+msgstr "Sortering"
+
+#. module: partner_foretagssok
+#: model:ir.model.fields.selection,name:partner_foretagssok.selection__foretagssok_similar_wizard__sort_by__revenue_desc
+msgid "Revenue (high to low)"
+msgstr "Omsättning (fallande)"
+
+#. module: partner_foretagssok
+#: model:ir.model.fields.selection,name:partner_foretagssok.selection__foretagssok_similar_wizard__sort_by__revenue_asc
+msgid "Revenue (low to high)"
+msgstr "Omsättning (stigande)"
+
+#. module: partner_foretagssok
+#: model:ir.model.fields.selection,name:partner_foretagssok.selection__foretagssok_similar_wizard__sort_by__name_asc
+msgid "Name (A-Z)"
+msgstr "Namn (A-Ö)"
+
+#. module: partner_foretagssok
+#: model:ir.model.fields.selection,name:partner_foretagssok.selection__foretagssok_similar_wizard__sort_by__name_desc
+msgid "Name (Z-A)"
+msgstr "Namn (Ö-A)"
+
+#. module: partner_foretagssok
+#: model:ir.model.fields,field_description:partner_foretagssok.field_foretagssok_similar_wizard__limit
+msgid "Limit"
+msgstr "Max antal"
+
+#. module: partner_foretagssok
+#: model:ir.model.fields,field_description:partner_foretagssok.field_foretagssok_similar_wizard__line_ids
+msgid "Results"
+msgstr "Resultat"
+
+#. module: partner_foretagssok
+#: model:ir.model,name:partner_foretagssok.model_foretagssok_similar_wizard_line
+msgid "Similar Company Search Result"
+msgstr "Sökresultat för liknande företag"
+
+#. module: partner_foretagssok
+#: model:ir.model.fields,field_description:partner_foretagssok.field_foretagssok_similar_wizard_line__wizard_id
+msgid "Wizard"
+msgstr "Wizard"
+
+#. module: partner_foretagssok
+#: model:ir.model.fields,field_description:partner_foretagssok.field_foretagssok_similar_wizard_line__selected
+msgid "Select"
+msgstr "Välj"
+
+#. module: partner_foretagssok
+#: model:ir.model.fields,field_description:partner_foretagssok.field_foretagssok_similar_wizard_line__name
+msgid "Company Name"
+msgstr "Företagsnamn"
+
+#. module: partner_foretagssok
+#: model:ir.model.fields,field_description:partner_foretagssok.field_foretagssok_similar_wizard_line__org_number
+msgid "Org. Number"
+msgstr "Org.nr"
+
+#. module: partner_foretagssok
+#: model:ir.model.fields,field_description:partner_foretagssok.field_foretagssok_similar_wizard_line__street
+msgid "Street"
+msgstr "Gata"
+
+#. module: partner_foretagssok
+#: model:ir.model.fields,field_description:partner_foretagssok.field_foretagssok_similar_wizard_line__postal_code
+msgid "Postal Code"
+msgstr "Postnummer"
+
+#. module: partner_foretagssok
+#: model:ir.model.fields,field_description:partner_foretagssok.field_foretagssok_similar_wizard_line__city
+msgid "City"
+msgstr "Stad"
+
+#. module: partner_foretagssok
+#: model:ir.model.fields,field_description:partner_foretagssok.field_foretagssok_similar_wizard_line__business_description
+msgid "Business Description"
+msgstr "Verksamhetsbeskrivning"
+
+#. module: partner_foretagssok
+#: model:ir.model.fields,field_description:partner_foretagssok.field_foretagssok_similar_wizard_line__raw_data
+msgid "Raw Data"
+msgstr "Rådata"
+
+#. module: partner_foretagssok
+#: code:addons/partner_foretagssok/models/res_partner.py:0
+msgid "FöretagsAPI API key is missing. Add it in Settings -> Contacts, or place FORETAGSSOK_API_KEY in partner_foretagssok/.env."
+msgstr "FöretagsAPI API-nyckel saknas. Lägg till den under Inställningar -> Kontakter, eller placera FORETAGSSOK_API_KEY i partner_foretagssok/.env."
+
+#. module: partner_foretagssok
+#: code:addons/partner_foretagssok/models/res_partner.py:0
+msgid "FöretagsAPI authentication failed. Check your API key."
+msgstr "FöretagsAPI-autentisering misslyckades. Kontrollera din API-nyckel."
+
+#. module: partner_foretagssok
+#: code:addons/partner_foretagssok/models/res_partner.py:0
+msgid "FöretagsAPI returned an error: %s"
+msgstr "FöretagsAPI returnerade ett fel: %s"
+
+#. module: partner_foretagssok
+#: code:addons/partner_foretagssok/models/res_partner.py:0
+msgid "Could not reach FöretagsAPI: %s"
+msgstr "Kunde inte nå FöretagsAPI: %s"
+
+#. module: partner_foretagssok
+#: code:addons/partner_foretagssok/models/res_partner.py:0
+msgid "FöretagsAPI enrichment is only available for companies."
+msgstr "FöretagsAPI-anrikning är endast tillgänglig för företag."
+
+#. module: partner_foretagssok
+#: code:addons/partner_foretagssok/models/res_partner.py:0
+msgid "FöretagsAPI found several matches for \"%s\". Please provide an organisation number and try again."
+msgstr "FöretagsAPI hittade flera träffar för \"%s\". Ange ett organisationsnummer och försök igen."
+
+#. module: partner_foretagssok
+#: code:addons/partner_foretagssok/models/res_partner.py:0
+msgid "FöretagsAPI could not find any company for %s."
+msgstr "FöretagsAPI kunde inte hitta något företag för %s."
+
+#. module: partner_foretagssok
+#: code:addons/partner_foretagssok/models/res_partner.py:0
+msgid "This company has no SNI code to search from."
+msgstr "Detta företag har ingen SNI-kod att söka från."
+
+#. module: partner_foretagssok
+#: code:addons/partner_foretagssok/models/foretagssok_similar_wizard.py:0
+msgid "Could not search for similar companies. The API may require a city filter for large SNI branches.\n\n%s"
+msgstr "Kunde inte söka efter liknande företag. API:t kan kräva ett stadsfilter för stora SNI-branches.\n\n%s"
+
+#. module: partner_foretagssok
+#: code:addons/partner_foretagssok/models/foretagssok_similar_wizard.py:0
+msgid "No rows were selected."
+msgstr "Inga rader valdes."
+
+#. module: partner_foretagssok
+#: code:addons/partner_foretagssok/models/res_partner.py:0
+msgid "Companies with SNI %s"
+msgstr "Företag med SNI %s"
+
+#. module: partner_foretagssok
+#: code:addons/partner_foretagssok/models/foretagssok_similar_wizard.py:0
+msgid "Created Partners"
+msgstr "Skapade partners"
+
+#. module: partner_foretagssok
+#: code:addons/partner_foretagssok/models/res_partner.py:0
+msgid "Partner enriched from FöretagsAPI: %s (org. %s)"
+msgstr "Partner anrikad från FöretagsAPI: %s (org. %s)"
+
+#. module: partner_foretagssok
+#: code:addons/partner_foretagssok/models/foretagsapi_mapping.py:0
+msgid "Active"
+msgstr "Aktiv"
+
+#. module: partner_foretagssok
+#: code:addons/partner_foretagssok/models/foretagsapi_mapping.py:0
+msgid "Deregistered"
+msgstr "Avregistrerad"
+
+#. module: partner_foretagssok
+#: model_terms:ir.ui.view,arch_db:partner_foretagssok.view_partner_form_foretagssok
+msgid "Enrich from FöretagsAPI"
+msgstr "Anrik från FöretagsAPI"
+
+#. module: partner_foretagssok
+#: model_terms:ir.ui.view,arch_db:partner_foretagssok.view_partner_form_foretagssok
+msgid "Find Similar Companies"
+msgstr "Hitta liknande företag"
+
+#. module: partner_foretagssok
+#: model_terms:ir.ui.view,arch_db:partner_foretagssok.view_partner_form_foretagssok
+msgid "FöretagsAPI"
+msgstr "FöretagsAPI"
+
+#. module: partner_foretagssok
+#: model_terms:ir.ui.view,arch_db:partner_foretagssok.view_partner_form_foretagssok
+msgid "Status"
+msgstr "Status"
+
+#. module: partner_foretagssok
+#: model_terms:ir.ui.view,arch_db:partner_foretagssok.view_partner_form_foretagssok
+msgid "Estimates"
+msgstr "Uppskattningar"
+
+#. module: partner_foretagssok
+#: model_terms:ir.ui.view,arch_db:partner_foretagssok.view_partner_form_foretagssok
+msgid "Business Description"
+msgstr "Verksamhetsbeskrivning"
+
+#. module: partner_foretagssok
+#: model_terms:ir.ui.view,arch_db:partner_foretagssok.view_foretagssok_similar_wizard_form
+msgid "Revenue Range"
+msgstr "Omsättningsintervall"
+
+#. module: partner_foretagssok
+#: model_terms:ir.ui.view,arch_db:partner_foretagssok.view_foretagssok_similar_wizard_form
+msgid "Options"
+msgstr "Alternativ"
+
+#. module: partner_foretagssok
+#: model_terms:ir.ui.view,arch_db:partner_foretagssok.view_foretagssok_similar_wizard_form
+msgid "Search"
+msgstr "Sök"
+
+#. module: partner_foretagssok
+#: model_terms:ir.ui.view,arch_db:partner_foretagssok.view_foretagssok_similar_wizard_form
+msgid "Create Selected Partners"
+msgstr "Skapa valda partners"
+
+#. module: partner_foretagssok
+#: model_terms:ir.ui.view,arch_db:partner_foretagssok.view_foretagssok_similar_wizard_form
+msgid "Close"
+msgstr "Stäng"
+
+#. module: partner_foretagssok
+#: model_terms:ir.ui.view,arch_db:partner_foretagssok.res_config_settings_view_form
+msgid "Configure access to FöretagsAPI.se"
+msgstr "Konfigurera åtkomst till FöretagsAPI.se"
+
+#. module: partner_foretagssok
+#: model_terms:ir.ui.view,arch_db:partner_foretagssok.res_config_settings_view_form
+msgid "API Key"
+msgstr "API-nyckel"
+
+#. module: partner_foretagssok
+#: model_terms:ir.ui.view,arch_db:partner_foretagssok.res_config_settings_view_form
+msgid "Base URL"
+msgstr "Bas-URL"
+
+#. module: partner_foretagssok
+#: model:ir.actions.server,name:partner_foretagssok.action_enrich_foretagsapi
+msgid "Enrich with FöretagsAPI"
+msgstr "Anrik med FöretagsAPI"
