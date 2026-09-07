@@ -4,7 +4,7 @@
     'summary': "",
     'description': """Allows visualization of map on odoo website""",
     'category': 'Sales',
-    'author': "Vertel AB",
+    'author': "Vertel Sverige AB",
     'website': "https://www.vertel.se",
     'license': 'AGPL-3',
     "depends": ["base_booking", "website" , "base_booking_payment"],

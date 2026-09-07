@@ -1,6 +1,7 @@
 # -*- coding: utf-8 -*-
 {
     'name': 'Booking payment',
+'author': 'Vertel Sverige AB',
     'version': '18.0',
     'category': 'Booking',
     'summary': 'Booking payment',

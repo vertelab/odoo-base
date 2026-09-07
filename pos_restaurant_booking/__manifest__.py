@@ -1,6 +1,7 @@
 # -*- coding: utf-8 -*-
 {
     'name': 'Point of Sale Restaurant Booking',
+'author': 'Vertel Sverige AB',
     'version': '1.0',
     'category': 'Sales/Point of Sale',
     'sequence': 6,

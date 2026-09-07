@@ -4,6 +4,7 @@
 
 {
     'name': 'Website Appointments',
+'author': 'Vertel Sverige AB',
     'version': '1.0',
     'category': 'Services/Appointment',
     'sequence': 215,

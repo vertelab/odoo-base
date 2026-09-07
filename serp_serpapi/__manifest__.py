@@ -32,7 +32,7 @@ Usage:
 5. Enter your API key
 6. Use it on partners for tracking
     """,
-    'author': 'Your Company',
+    'author': 'Vertel Sverige AB',
     'website': 'https://www.yourcompany.com',
     'license': 'AGPL-3',
     'depends': [

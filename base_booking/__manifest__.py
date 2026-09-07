@@ -3,6 +3,7 @@
 
 {
     'name': 'Bookings: ',
+'author': 'Vertel Sverige AB',
     'version': '1.3',
     'category': 'Booking/Appointment',
     'sequence': 215,
