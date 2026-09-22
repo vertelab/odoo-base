@@ -32,7 +32,7 @@
         Localized Partner Records
     """,
     'author': 'Vertel Sverige AB',
-    'website': 'https://vertel.se/apps/odoo-base',
+    'website': 'https://vertel.se/apps/odoo-base/base_partner_se',
     'license': 'AGPL-3',
     'depends': ["mail"],
     'data': [

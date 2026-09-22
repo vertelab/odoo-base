@@ -31,7 +31,7 @@
     """,
     #'sequence': '1',
     'author': 'Vertel Sverige AB',
-    'website': 'https://vertel.se/apps/odoo-base/user_rights_listed',
+    'website': 'https://vertel.se/apps/odoo-base/users_rights_listed',
     'images': ['static/description/banner.png'], # 560x280 px.
     'license': 'AGPL-3',
     'contributor': '',

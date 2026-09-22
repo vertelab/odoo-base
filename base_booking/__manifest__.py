@@ -8,7 +8,7 @@
     'category': 'Booking/Appointment',
     'sequence': 215,
     'summary': 'A base module to allow booking integrations in any flow',
-    'website': 'https://www.odoo.com/app/appointments',
+    'website': 'https://vertel.se/apps/odoo-base/base_booking',
     'description': """
 A base module to allow booking integrations in any flow
     """,

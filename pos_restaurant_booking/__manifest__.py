@@ -6,7 +6,7 @@
     'category': 'Sales/Point of Sale',
     'sequence': 6,
     'summary': 'This module lets you manage online reservations for restaurant tables',
-    'website': 'https://www.vertelab.se',
+    'website': 'https://vertel.se/apps/odoo-base/pos_restaurant_booking',
     'depends': ['base_booking', 'pos_restaurant'],
     'data': [
         'views/calendar_event_views.xml',

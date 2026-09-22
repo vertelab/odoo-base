@@ -5,7 +5,7 @@
     'description': """Allows visualization of map on odoo website""",
     'category': 'Sales',
     'author': "Vertel Sverige AB",
-    'website': "https://www.vertel.se",
+    'website': 'https://vertel.se/apps/odoo-base/boat_booking',
     'license': 'AGPL-3',
     "depends": ["base_booking", "website" , "base_booking_payment"],
     'demo': [

@@ -32,7 +32,7 @@
         Replace User on Records
     """,
     'author': 'Vertel Sverige AB',
-    'website': 'https://vertel.se/apps/odoo-base',
+    'website': 'https://vertel.se/apps/odoo-base/base_replace_user',
     'license': 'AGPL-3',
     'depends': ["sale","sale_management", "sales_team", "base"],
     'data': [

@@ -11,6 +11,7 @@ after module upgrades that add/remove apps, users see a stale menu until they
 manually clear the browser cache.
     """,
     'author': 'Vertel AB',
+    'website': 'https://vertel.se/apps/odoo-base/web_menu_no_cache',
     'license': 'AGPL-3',
     'depends': ['web'],
     'data': [],

@@ -29,7 +29,7 @@
     """,
     #'sequence': '1',
     'author': 'Vertel Sverige AB',
-    'website': 'https://vertel.se/apps/odoo-base/partner_gender',
+    'website': 'https://vertel.se/apps/odoo-base/partner_get_logos',
     'images': ['static/description/banner.png'], # 560x280 px.
     'license': 'AGPL-3',
     'contributor': '',

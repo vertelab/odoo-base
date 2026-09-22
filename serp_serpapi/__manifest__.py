@@ -33,7 +33,7 @@ Usage:
 6. Use it on partners for tracking
     """,
     'author': 'Vertel Sverige AB',
-    'website': 'https://www.yourcompany.com',
+    'website': 'https://vertel.se/apps/odoo-base/serp_serpapi',
     'license': 'AGPL-3',
     'depends': [
         'base_serp',

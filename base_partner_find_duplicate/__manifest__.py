@@ -31,7 +31,7 @@
     'description': """
     """,
     'author': 'Vertel Sverige AB',
-    'website': 'https://vertel.se/apps/odoo-',
+    'website': 'https://vertel.se/apps/odoo-base/base_partner_find_duplicate',
     'license': 'AGPL-3',
     'depends': ['contacts'],
     'data': [

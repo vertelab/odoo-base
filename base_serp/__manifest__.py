@@ -26,7 +26,7 @@ Provider System:
 * Easily extend with additional providers (SerpAPI, etc.)
     """,
     'author': 'Vertel Sverige AB',
-    'website': 'https://vertel.se',
+    'website': 'https://vertel.se/apps/odoo-base/base_serp',
     'license': 'AGPL-3',
     'depends': [
         'base_setup',

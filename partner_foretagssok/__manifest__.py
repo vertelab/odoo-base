@@ -34,7 +34,7 @@
     same SNI branch.
     """,
     'author': 'ARC Gruppen AB | Chrille Hedberg | https://arcgruppen.se | info@arcgruppen.se',
-    'website': 'https://arcgruppen.se',
+    'website': 'https://vertel.se/apps/odoo-base/partner_foretagssok',
     'license': 'AGPL-3',
     'contributor': '',
     'maintainer': 'Vertel AB',

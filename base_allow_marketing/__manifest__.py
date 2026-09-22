@@ -32,7 +32,7 @@
         Opt-in for marketing email
     """,
     'author': 'Vertel Sverige AB',
-    'website': 'https://vertel.se/apps/odoo-',
+    'website': 'https://vertel.se/apps/odoo-base/base_allow_marketing',
     'images': ['static/description/banner.png'],  # 560x280
     'license': 'AGPL-3',
     'depends': ["auth_signup", "portal"],

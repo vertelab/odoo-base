@@ -2,6 +2,7 @@
 {
     'name': 'Booking payment',
 'author': 'Vertel Sverige AB',
+    'website': 'https://vertel.se/apps/odoo-base/base_booking_payment',
     'version': '18.0',
     'category': 'Booking',
     'summary': 'Booking payment',

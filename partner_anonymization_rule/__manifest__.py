@@ -8,7 +8,7 @@
     "summary": "Partner Anonymization Rule for GDPR compliance",
     "author": "Vertel Sverige AB",
     "license": "AGPL-3",
-    "website": "https://vertel.se",
+    "website": "https://vertel.se/apps/odoo-base/partner_anonymization_rule",
     'repository': 'https://github.com/vertelab/odoo-base',
     "depends": ["privacy_partner_to_be_forgotten"],
     "data": [

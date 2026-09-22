@@ -32,7 +32,7 @@
         Long description of module's purpose
     """,
     'author': 'Vertel Sverige AB',
-    'website': 'https://vertel.se/apps/odoo-',
+    'website': 'https://vertel.se/apps/odoo-base/base_partner_template',
     'images': ['static/description/banner.png'],
     'license': 'AGPL-3',
     'depends': ["contacts"],

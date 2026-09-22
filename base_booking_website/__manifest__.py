@@ -8,7 +8,7 @@
     'version': '1.0',
     'category': 'Services/Appointment',
     'sequence': 215,
-    'website': 'https://www.odoo.com/app/appointments',
+    'website': 'https://vertel.se/apps/odoo-base/base_booking_website',
     'description': """
 Allow clients to Schedule Appointments through your Website
 -------------------------------------------------------------

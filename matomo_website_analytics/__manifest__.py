@@ -16,7 +16,7 @@
         - Traffic source tracking
     """,
     'author': 'Vertel Sverige AB',
-    'website': 'https://vertel.se',
+    'website': 'https://vertel.se/apps/odoo-base/matomo_website_analytics',
     'depends': ['base_serp'],
     'data': [
         'data/website_analytics_provider_data.xml',
