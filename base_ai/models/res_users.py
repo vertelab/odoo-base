@@ -9,12 +9,18 @@ automatiskt länkar — `_okf_links_source()` i mixinen länkar bara dit
 målet har mixinen. Regeln är självregistrerande.
 """
 
-from odoo import models
+from odoo import models, fields
 
 
 class ResUsers(models.Model):
     _name = 'res.users'
     _inherit = ['res.users', 'ai.okf.mixin']
+
+    # OKF-taggar: egen relationstabell (en many2many kan inte ligga
+    # pa en abstrakt mixin — den ger samma tabell for alla arvande).
+    okf_tags = fields.Many2many(
+        'ai.okf.tag', 'res_users_okf_tag_rel', 'res_id', 'tag_id',
+        string='OKF Tags')
 
     # ── Källor ─────────────────────────────────────────────────────────
     #

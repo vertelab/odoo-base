@@ -2,13 +2,11 @@
 <odoo>
     <!-- Artefakttyper för base_ai (okf-mixin D12).
          Bryggan äger sina typer; bridge_module gör taxonomin spårbar. -->
-    <record id="artifact_type_partner" model="ai.artifact.type">
-        <field name="name">partner</field>
-        <field name="kind">knowledge</field>
-        <field name="bridge_module">base_ai</field>
-        <field name="model_id" ref="base.model_res_partner"/>
-        <field name="okf_contract" eval="{'generated_by': 'process', 'stale_policy': 'source', 'stale_ttl_days': 0, 'retention_purpose': 'none', 'retention_days': 0}"/>
-    </record>
+    <!-- OBS: 'partner' finns REDAN i kärnans okf_default_artifact_types.xml
+         (artifact_type_partner, bridge_module='ai_agent_core').
+         Vi ÅTERANVÄNDER den — att skapa en dubblett kraschar på
+         UNIQUE(name). Kärnans typ är generisk ('knowledge'); base_ai
+         behöver ingen egen för partner. -->
     <record id="artifact_type_company" model="ai.artifact.type">
         <field name="name">company</field>
         <field name="kind">knowledge</field>

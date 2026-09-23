@@ -9,12 +9,18 @@ automatiskt länkar — `_okf_links_source()` i mixinen länkar bara dit
 målet har mixinen. Regeln är självregistrerande.
 """
 
-from odoo import models
+from odoo import models, fields
 
 
 class ResPartner(models.Model):
     _name = 'res.partner'
     _inherit = ['res.partner', 'ai.okf.mixin']
+
+    # OKF-taggar: egen relationstabell (en many2many kan inte ligga
+    # pa en abstrakt mixin — den ger samma tabell for alla arvande).
+    okf_tags = fields.Many2many(
+        'ai.okf.tag', 'res_partner_okf_tag_rel', 'res_id', 'tag_id',
+        string='OKF Tags')
 
     # ── Källor ─────────────────────────────────────────────────────────
     #
@@ -26,7 +32,11 @@ class ResPartner(models.Model):
     # Bryggan skriver därför bara det som är specifikt för modellen.
 
     def _okf_artifact_type(self):
-        """Bryggans egen typ (okf-mixin D12)."""
+        """Kärnans befintliga 'partner'-typ (okf-mixin D12).
+
+        Den finns redan i okf_default_artifact_types.xml — vi återanvänder
+        den i stället för att skapa en dubblett (UNIQUE(name)).
+        """
         return 'partner'
 
     def _okf_dirty_fields(self):
