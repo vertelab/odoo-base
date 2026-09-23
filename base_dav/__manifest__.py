@@ -21,4 +21,29 @@
     "external_dependencies": {
         'python': ['radicale'],
     },
+    # ------------------------------------------------------------------
+    # INSTALLABLE: False — 2026-09-22
+    #
+    # Detta är OCA/Radicale-sparet för DAV. Vertel har ett EGET, fristaende
+    # CalDAV-spar: calendar_caldav (endpoint /caldav/). Bada registrerar
+    # /.well-known/caldav och kolliderar — bara ett far vara installerat.
+    #
+    # Beslut 2026-09-22: calendar_caldav ar standard (se README
+    # "CalDAV: val av spar"). base_dav-sparet ar trasigt pa njannja:
+    #   - PROPFIND /.dav/ -> 500
+    #     (radicale/collection.py:113, odoo_collection=None for roten)
+    #   - /.dav/__system__/1 -> 403 / 500
+    # calendar_caldav ger DAV: 1, 2, calendar-access + RFC 6764 och
+    # fungerar skarpt (GET/PUT/PROPFIND/OPTIONS).
+    #
+    # Konsekvens: aven calendar_dav, user_settings_dav, contact_carddav och
+    # personal_contact_carddav (som beror pa base_dav) spärras — de tillhor
+    # samma spar. Adressboks-funktionaliteten (CardDAV) saknar da
+    # motsvarighet i calendar_caldav och far byggas separat om behov uppstar.
+    #
+    # installable=False -> Odoo satter state='uninstallable' och vagrar
+    # bade installera och auto-installera modulen (db.py:54,90).
+    # ------------------------------------------------------------------
+    "installable": False,
+    "auto_install": False,
 }
