@@ -41,9 +41,6 @@
     # samma spar. Adressboks-funktionaliteten (CardDAV) saknar da
     # motsvarighet i calendar_caldav och far byggas separat om behov uppstar.
     #
-    # installable=False -> Odoo satter state='uninstallable' och vagrar
-    # bade installera och auto-installera modulen (db.py:54,90).
-    # ------------------------------------------------------------------
-    "installable": False,
+    "installable": True,
     "auto_install": False,
 }
