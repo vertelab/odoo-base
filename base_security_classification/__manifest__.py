@@ -23,14 +23,20 @@
 #
 {
     'name': 'Base: Security Classification',
-    'version': '1.0',
-    'summary': """
-        Security Classification
-    """,
+    'version': '18.0.1.0.0',
+    'summary': """Security Classification.""",
     'category': '',
-    'description': """
-        Security Classification
-    """,
+    'description': '''
+Security Classification
+=======================
+
+    Security Classification.
+
+    Features:
+
+        - UI Integration: Extends 1 view(s) in the Odoo interface.
+        - Extends Odoo: Builds on mail.message, mail.tracking.value.
+    ''',
     'author': 'Vertel Sverige AB',
     'website': 'https://vertel.se/apps/odoo-base/base_security_classification',
     'license': 'AGPL-3',

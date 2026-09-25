@@ -23,11 +23,19 @@
     'name': 'Base: Partner Legacy ID',
     'version': '18.0.1.0.0',
     # Version ledger: 14.0 = Odoo version. 1 = Major. Non regressionable code. 2 = Minor. New features that are regressionable. 3 = Bug fixes
-    'summary': '',
+    'summary': "Stores legacy IDs on contacts.",
     'category': 'Website',
-    'description': """
-    
-    """,
+    'description': '''
+Partner Legacy ID
+=================
+
+    Stores legacy IDs on contacts.
+
+    Features:
+
+        - UI Integration: Extends 1 view(s) in the Odoo interface.
+        - Extends Odoo: Builds on existing Odoo models.
+    ''',
     #'sequence': '1',
     'author': 'Vertel Sverige AB',
     'website': 'https://vertel.se/apps/odoo-base/partner_legacy_id',

@@ -21,14 +21,20 @@
 
 {
     'name': 'Base: Module Extra Repos',
-    'version': '0.3',
+    'version': '18.0.1.0.0',
     # Version ledger: 14.0 = Odoo version. 1 = Major. Non regressionable code. 2 = Minor. New features that are regressionable. 3 = Bug fixes
-    'summary': 'Add an extra repos',
+    'summary': 'Add an extra repos.',
     'category': 'Technical',
-    'description': """
-Add an extra repo
-=================
-""",
+    'description': '''
+Module Extra Repos
+==================
+
+    Add an extra repos.
+
+    Features:
+
+        - Extends Odoo: Builds on existing Odoo models.
+    ''',
     #'sequence': '1',
     'author': 'Vertel Sverige AB',
     'website': 'https://vertel.se/apps/odoo-base/ir_module_extra_repos',

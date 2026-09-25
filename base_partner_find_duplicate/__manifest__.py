@@ -24,12 +24,19 @@
 {
     'name': 'Find Duplicate Contacts',
     'version': '18.0.0.0.0',
-    'summary': """
-        The module adds a new meny choice under Configuration in Contacts.
-        This meny choice will present the existing contact, sorted by matching names, email, or phone number.""",
+    'summary': """The module adds a new meny choice under Configuration in Contacts. This meny choice will present the existing contact, sorted by matching names, email, or phone number.""",
     'category': '', # Technical Settings|Localization|Payroll Localization|Account Charts|User types|Invoicing|Sales|Human Resources|Operations|Marketing|Manufacturing|Website|Theme|Administration|Appraisals|Sign|Helpdesk|Administration|Extra Rights|Other Extra Rights|
-    'description': """
-    """,
+    'description': '''
+Find Duplicate Contacts
+=======================
+
+    The module adds a new meny choice under Configuration in Contacts.
+
+    Features:
+
+        - Guided Wizards: Step-by-step dialogs for data entry.
+        - UI Integration: Extends 1 view(s) in the Odoo interface.
+    ''',
     'author': 'Vertel Sverige AB',
     'website': 'https://vertel.se/apps/odoo-base/base_partner_find_duplicate',
     'license': 'AGPL-3',

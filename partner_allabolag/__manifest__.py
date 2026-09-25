@@ -21,15 +21,21 @@
 
 {
     'name': 'Base: Enrich partner information from Allabolag',
-    'version': '1.1.0',
+    'version': '18.0.1.1.0',
     # Version ledger: XX.0 = Odoo version. 1 = Major. Non regressionable code. 2 = Minor. New features that are regressionable. 3 = Bug fixes
-    'summary': 'Enrich partner with data from Allabolag',
+    'summary': 'Enrich partner with data from Allabolag.',
     'category': 'Website',
-    'description': """
-    Enrich with information from allabolag
+    'description': '''
+Enrich partner information from Allabolag
+=========================================
 
-      
-    """,
+    Enrich partner with data from Allabolag.
+
+    Features:
+
+        - UI Integration: Extends 1 view(s) in the Odoo interface.
+        - Extends Odoo: Builds on existing Odoo models.
+    ''',
     #'sequence': '1',
     'author': 'Vertel Sverige AB',
     'website': 'https://vertel.se/apps/odoo-base/partner_allabolag',

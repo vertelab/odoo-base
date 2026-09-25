@@ -1,6 +1,10 @@
 odoo-base / partner_flip_zip_city -- icons
 2022-06-13
 
+Be aware of these!
+odoo-base/partner_gender/static/description/banner.png
+odoo-base/partner_gender/static/description/icon.png
+
 Path:
 /static/description/icon.png
 

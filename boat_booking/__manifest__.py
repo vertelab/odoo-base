@@ -1,8 +1,19 @@
 {
     'name': 'Website Product Map',
-    'version': '18.0.1.0',
-    'summary': "",
-    'description': """Allows visualization of map on odoo website""",
+    'version': '18.0.1.0.0',
+    'summary': "Booking of boats and other bookable resources.",
+    'description': '''
+Website Product Map
+===================
+
+    Booking of boats and other bookable resources.
+
+    Features:
+
+        - Web integration: Exposes HTTP endpoints for external systems.
+        - UI Integration: Extends 5 view(s) in the Odoo interface.
+        - Extends Odoo: Builds on booking.resource, booking.type, calendar.event, website.
+    ''',
     'category': 'Sales',
     'author': "Vertel Sverige AB",
     'website': 'https://vertel.se/apps/odoo-base/boat_booking',

@@ -23,14 +23,20 @@
 #
 {
     'name': 'Base: Partner',
-    'version': '1.0',
-    'summary': """
-        Localized Partner Records
-    """,
+    'version': '18.0.1.0.0',
+    'summary': """Localized Partner Records.""",
     'category': '',
-    'description': """
-        Localized Partner Records
-    """,
+    'description': '''
+Partner
+=======
+
+    Localized Partner Records.
+
+    Features:
+
+        - UI Integration: Extends 1 view(s) in the Odoo interface.
+        - Extends Odoo: Builds on existing Odoo models.
+    ''',
     'author': 'Vertel Sverige AB',
     'website': 'https://vertel.se/apps/odoo-base/base_partner_se',
     'license': 'AGPL-3',

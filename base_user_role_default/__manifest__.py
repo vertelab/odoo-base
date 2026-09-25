@@ -25,9 +25,17 @@
     # Version ledger: 14.0 = Odoo version. 1 = Major. Non regressionable code. 2 = Minor. New features that are regressionable. 3 = Bug fixes
     'summary': 'Extends the User Roles to add portal user to res.users.role.',
     'category': 'Tools',
-    'description': """
+    'description': '''
+User Roles Permission
+=====================
+
     Extends the User Roles to enable assiging several users to a role, at the same time, via the use of a server action.
-    """,
+
+    Features:
+
+        - UI Integration: Extends 1 view(s) in the Odoo interface.
+        - Extends Odoo: Builds on portal.wizard.user.
+    ''',
     #'sequence': '1'
     'author': 'Vertel Sverige AB',
     'website': 'https://vertel.se/apps/odoo-base/base_user_role_default',

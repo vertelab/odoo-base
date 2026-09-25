@@ -4,16 +4,25 @@
 
 {
     'name': 'Website Appointments',
+    'summary': "Adds booking types to the website.",
 'author': 'Vertel Sverige AB',
-    'version': '1.0',
+    'version': '18.0.1.0.0',
     'category': 'Services/Appointment',
     'sequence': 215,
     'website': 'https://vertel.se/apps/odoo-base/base_booking_website',
-    'description': """
-Allow clients to Schedule Appointments through your Website
--------------------------------------------------------------
+    'description': '''
+Website Appointments
+====================
 
-""",
+    Allow clients to Schedule Appointments through your Website
+    -------------------------------------------------------------
+
+    Features:
+
+        - Web integration: Exposes HTTP endpoints for external systems.
+        - UI Integration: Extends 7 view(s) in the Odoo interface.
+        - Extends Odoo: Builds on booking.invite, booking.type, website.
+    ''',
     'depends': ['base_booking', 'website_partner'],
     'data': [
         'data/website_data.xml',

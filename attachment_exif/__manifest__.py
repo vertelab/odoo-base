@@ -3,14 +3,19 @@
     'version': '18.0.1.0.0',
     'category': 'Technical',
     'summary': 'Extract and display EXIF metadata from image attachments.',
-    'description': """
-    Attachment Exif
-    ===============
+    'description': '''
+Attachment Exif
+===============
 
     Extracts EXIF metadata from image attachments (JPEG, TIFF, etc.)
-    and displays it in the attachment form view.
-    Uses Pillow for EXIF reading — no additional dependencies required.
-    """,
+        and displays it in the attachment form view.
+        Uses Pillow for EXIF reading — no additional dependencies required.
+
+    Features:
+
+        - UI Integration: Extends 1 view(s) in the Odoo interface.
+        - Extends Odoo: Builds on existing Odoo models.
+    ''',
     'author': 'Vertel Sverige AB',
     'website': 'https://vertel.se/apps/odoo-base/attachment_exif',
     'license': 'AGPL-3',

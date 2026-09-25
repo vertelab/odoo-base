@@ -23,11 +23,18 @@
     'name': 'Base: Show Code View on HTML Field',
     'version': '18.0.0.1.0',
     # Version ledger: 14.0 = Odoo version. 1 = Major. Non regressionable code. 2 = Minor. New features that are regressionable. 3 = Bug fixes
-    'summary': 'Show Code View on HTML Field',
+    'summary': 'Show Code View on HTML Field.',
     'category': 'Accounting',
-    'description': """
-        Show Code View on HTML Field either in debug mode or not
-    """,
+    'description': '''
+Show Code View on HTML Field
+============================
+
+    Show Code View on HTML Field.
+
+    Features:
+
+        - UI Integration: Extends 1 view(s) in the Odoo interface.
+    ''',
     #'sequence': '1',
     'author': 'Vertel Sverige AB',
     'website': 'https://vertel.se/apps/odoo-base/html_field_code_view',

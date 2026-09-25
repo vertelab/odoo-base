@@ -21,16 +21,20 @@
 
 {
     'name': 'Base: Attachment Notebook',
-    'version': '18.0.0.1',
+    'version': '18.0.0.1.0',
     # Version ledger: 14.0 = Odoo version. 1 = Major. Non regressionable code. 2 = Minor. New features that are regressionable. 3 = Bug fixes
     'summary': 'Adds a notebook for other modules to populate with more functionality.',
     'category': 'CRM',
-    'description': """
-    Attachment Notebook
-    ===================
+    'description': '''
+Attachment Notebook
+===================
 
     Adds a notebook for other modules to populate with more functionality.
-    """,
+
+    Features:
+
+        - UI Integration: Extends 1 view(s) in the Odoo interface.
+    ''',
     #'sequence': '1',
     'author': 'Vertel Sverige AB',
     'website': 'https://vertel.se/apps/odoo-base/attachment_notebook',

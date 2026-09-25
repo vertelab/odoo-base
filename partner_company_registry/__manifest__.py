@@ -19,15 +19,22 @@
 ##############################################################################
 {
     'name': 'Base: Partner Company Registry',
-    'version': '0.1',
+    'version': '18.0.1.0.0',
     # Version ledger: XX.0 = Odoo version. 1 = Major. Non regressionable code. 2 = Minor. New features that are regressionable. 3 = Bug fixes
     'summary': 'Adds a Partner Registry field to the partner object.',
     'category': 'CRM',
-    'description': """
+    'description': '''
+Partner Company Registry
+========================
+
     Partner Company Registry
-    Adds a Partner Registry field to the partner object.
-    Website: https://www.ictstudio.eu
-    """,
+        Adds a Partner Registry field to the partner object.
+        Website: https://www.ictstudio.eu
+
+    Features:
+
+        - Focused Fix: A small, targeted improvement to standard Odoo behaviour.
+    ''',
     'author': 'Vertel Sverige AB, ICTSTUDIO, André Schenkels',
     'website': 'https://vertel.se/apps/odoo-base/partner_company_registry',
     'images': ['static/description/banner.png'], # 560x280 px.

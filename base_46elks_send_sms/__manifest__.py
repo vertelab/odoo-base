@@ -22,11 +22,20 @@
 {
     'name': 'Base: 46Elks Send SMS',
     'version': '18.0.0.0.0',
-    'summary': '',
+    'summary': "Sends SMS messages through the 46elks gateway.",
     'category': 'Technical',
-    'description': """
-    
-    """,
+    'description': '''
+46Elks Send SMS
+===============
+
+    Sends SMS messages through the 46elks gateway.
+
+    Features:
+
+        - Web integration: Exposes HTTP endpoints for external systems.
+        - UI Integration: Extends 2 view(s) in the Odoo interface.
+        - Extends Odoo: Builds on sms.sms.
+    ''',
     'author': 'Vertel Sverige AB',
     'website': 'https://vertel.se/apps/odoo-base/base_46elks_send_sms',
     'images': ['static/description/banner.png'], # 560x280 px.

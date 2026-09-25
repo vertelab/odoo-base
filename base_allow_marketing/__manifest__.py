@@ -23,14 +23,21 @@
 #
 {
     'name': 'Base Allow Marketing',
-    'version': '1.0',
-    'summary': """
-        Opt-in for marketing email
-    """,
+    'version': '18.0.1.0.0',
+    'summary': """Opt-in for marketing email.""",
     'category': 'Administration',
-    'description': """
-        Opt-in for marketing email
-    """,
+    'description': '''
+Base Allow Marketing
+====================
+
+    Opt-in for marketing email.
+
+    Features:
+
+        - Web integration: Exposes HTTP endpoints for external systems.
+        - UI Integration: Extends 4 view(s) in the Odoo interface.
+        - Extends Odoo: Builds on existing Odoo models.
+    ''',
     'author': 'Vertel Sverige AB',
     'website': 'https://vertel.se/apps/odoo-base/base_allow_marketing',
     'images': ['static/description/banner.png'],  # 560x280

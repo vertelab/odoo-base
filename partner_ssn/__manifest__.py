@@ -25,10 +25,18 @@
     # Version ledger: 14.0 = Odoo version. 1 = Major. Non regressionable code. 2 = Minor. New features that are regressionable. 3 = Bug fixes
     'summary': 'Adds social security number to partners.',
     'category': 'Website',
-    'description': """
+    'description': '''
+Partner Social Security Number
+==============================
+
     Adds social security number to partners
-    v14.0.0.1.0 Migration of module from version 12 to 14 \n
-    """,
+        v14.0.0.1.0 Migration of module from version 12 to 14 \n
+
+    Features:
+
+        - UI Integration: Extends 1 view(s) in the Odoo interface.
+        - Extends Odoo: Builds on existing Odoo models.
+    ''',
     #'sequence': '1',
     'author': 'Vertel Sverige AB',
     'website': 'https://vertel.se/apps/odoo-base/partner_ssn',

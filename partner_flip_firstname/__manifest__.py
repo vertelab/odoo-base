@@ -25,9 +25,16 @@
     # Version ledger: 14.0 = Odoo version. 1 = Major. Non regressionable code. 2 = Minor. New features that are regressionable. 3 = Bug fixes
     'summary': 'Change position. Replace by the other.',
     'category': 'Administration',
-    'description': """
-        Flips the position of the firstname and lastname fields on users and partners
-    """,
+    'description': '''
+Partner Flip Firstname
+======================
+
+    Flips the position of the firstname and lastname fields on users and partners
+
+    Features:
+
+        - UI Integration: Extends 2 view(s) in the Odoo interface.
+    ''',
     #'sequence': '1',
     'author': 'Vertel Sverige AB',
     'website': 'https://vertel.se/apps/odoo-base/partner_flip_firstname',

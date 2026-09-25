@@ -2,10 +2,21 @@
 {
     'name': 'Point of Sale Restaurant Booking',
 'author': 'Vertel Sverige AB',
-    'version': '1.0',
+    'version': '18.0.1.0.0',
     'category': 'Sales/Point of Sale',
     'sequence': 6,
-    'summary': 'This module lets you manage online reservations for restaurant tables',
+    'summary': 'This module lets you manage online reservations for restaurant tables.',
+    'description': '''
+Point of Sale Restaurant Booking
+================================
+
+    This module lets you manage online reservations for restaurant tables.
+
+    Features:
+
+        - UI Integration: Extends 3 view(s) in the Odoo interface.
+        - Extends Odoo: Builds on booking.resource, calendar.event, pos.config, pos.session.
+    ''',
     'website': 'https://vertel.se/apps/odoo-base/pos_restaurant_booking',
     'depends': ['base_booking', 'pos_restaurant'],
     'data': [

@@ -21,16 +21,21 @@
 
 {
     'name': 'Base: Partner Builtwith',
-    'version': '1.1.0',
+    'version': '18.0.1.1.0',
     # Version ledger: XX.0 = Odoo version. 1 = Major. Non regressionable code. 2 = Minor. New features that are regressionable. 3 = Bug fixes
     'summary': 'Enrich partner with technical information.',
     'category': 'Website',
-    'description': """
-      Enrich with technical information using builtwith-library and other tools
-      
+    'description': '''
+Partner Builtwith
+=================
 
-      
-    """,
+    Enrich with technical information using builtwith-library and other tools
+
+    Features:
+
+        - UI Integration: Extends 1 view(s) in the Odoo interface.
+        - Extends Odoo: Builds on existing Odoo models.
+    ''',
     #'sequence': '1',
     'author': 'Vertel Sverige AB',
     'website': 'https://vertel.se/apps/odoo-base/partner_builtwith',

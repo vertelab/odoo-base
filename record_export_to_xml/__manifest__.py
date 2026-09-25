@@ -23,18 +23,26 @@
     'name': 'Base: Export Records to XML',
     'version': '18.0.0.1.1',
     # Version ledger: 14.0 = Odoo version. 1 = Major. Non regressionable code. 2 = Minor. New features that are regressionable. 3 = Bug fixes
-    'summary': 'Export Records to XML',
+    'summary': 'Export Records to XML.',
     'category': 'Technical',
-    'description': """
-        Export Records to XML - Models you can import include: \n
-            - users
-            - contacts
-            - sale orders
-            - events
-            - hr employee
-            - project/tasks
-        \n 18.0.0.1.1 - Added Documentations
-    """,
+    'description': '''
+Export Records to XML
+=====================
+
+    Export Records to XML - Models you can import include: \n
+                - users
+                - contacts
+                - sale orders
+                - events
+                - hr employee
+                - project/tasks
+            \n 18.0.0.1.1 - Added Documentations
+
+    Features:
+
+        - UI Integration: Extends 1 view(s) in the Odoo interface.
+        - Extends Odoo: Builds on xml.export.
+    ''',
     'author': 'Vertel Sverige AB',
     'website': 'https://vertel.se/apps/odoo-base/record_export_to_xml',
     'images': ['static/description/banner.png'], # 560x280 px.

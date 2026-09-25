@@ -23,16 +23,23 @@
 {
     "name": "Auth Signup NoSignup",
     'version': '18.0.1.0.0',
-    'summary': 'Removes new user signup from the front page',
+    'summary': 'Removes new user signup from the front page.',
     'author': 'Vertel Sverige AB',
     'images': ['static/description/banner.png'], # 560x280 px.
     'maintainer': 'Vertel AB',
     'category': 'Base',
     'license': 'AGPL-3',
     'website': 'https://vertel.se/apps/odoo-base/auth_signup_nosignup',
-    'description': """    
+    'description': '''
+Auth Signup NoSignup
+====================
+
     Removes new user signup from the front page.
-    """,
+
+    Features:
+
+        - UI Integration: Extends 1 view(s) in the Odoo interface.
+    ''',
     "depends": [
         "base",
         "auth_signup"

@@ -21,33 +21,31 @@
 
 {
     'name': 'Base: Res SNI',
-    'version': '0.2',
+    'version': '18.0.1.0.0',
     # Version ledger: 14.0 = Odoo version. 1 = Major. Non regressionable code. 2 = Minor. New features that are regressionable. 3 = Bug fixes
     'summary': 'SNI Swedish Standard Industrial Classification.',
     'category': 'Technical',
-    'description': """
-SNI Swedish Standard Industrial Classification
-==============================================
-Industry classification or industry taxonomy is a type of economic taxonomy that organizes companies into industrial groupings based on similar production processes, similar products, or similar behavior in financial markets.
+    'description': '''
+Res SNI
+=======
 
-The SNI standard is modeled on the Statistical Classification of Economic Activities in the European Community, commonly referred to as NACE. The SNI standard is maintained by Statistics Sweden (also known as SCB), a Swedish government office
+    Industry classification or industry taxonomy is a type of economic taxonomy that organizes companies into industrial groupings based on similar production processes, similar products, or similar behavior in financial markets.
 
-SNI 2007
+    The SNI standard is modeled on the Statistical Classification of Economic Activities in the European Community, commonly referred to as NACE. The SNI standard is maintained by Statistics Sweden (also known as SCB), a Swedish government office
 
-The Standard Industrial Classification (SIC) is a system for classifying industries by a four-digit code. Established in the United States in 1937, it is used by government agencies to classify industry areas. The SIC system is also used by agencies in other countries, e.g., by the United Kingdom's Companies House.
-Standard Industrial Classification - Wikipedia
-https://en.wikipedia.org/wiki/Standard_Industrial_Classification
+    The Standard Industrial Classification (SIC) is a system for classifying industries by a four-digit code. Established in the United States in 1937, it is used by government agencies to classify industry areas. The SIC system is also used by agencies in other countries, e.g., by the United Kingdom's Companies House.
+    Standard Industrial Classification - Wikipedia
+    https://en.wikipedia.org/wiki/Standard_Industrial_Classification
 
+    Industry classification or industry taxonomy is a type of economic taxonomy that organizes companies into industrial groupings based on similar production processes, similar products, or similar behavior in financial markets.
 
-Industry classification or industry taxonomy is a type of economic taxonomy that organizes companies into industrial groupings based on similar production processes, similar products, or similar behavior in financial markets.
+    https://en.wikipedia.org/wiki/Swedish_Standard_Industrial_Classification
 
-SNI Swedish Standard Industrial Classification
+    Features:
 
-https://en.wikipedia.org/wiki/Swedish_Standard_Industrial_Classification
-
-v12.0.0.2 Added automatic install of the codes.
-AFC-156
-""",
+        - UI Integration: Extends 2 view(s) in the Odoo interface.
+        - Extends Odoo: Builds on existing Odoo models.
+    ''',
     #'sequence': '1',
     'author': 'Vertel Sverige AB',
     'website': 'https://vertel.se/apps/odoo-base/partner_sni',

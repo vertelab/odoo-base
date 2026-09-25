@@ -21,12 +21,20 @@
 
 {
     'name': 'Base: Partner Enrich Base',
-    'version': '1.1.0',
-    'description': """
-      Base module for Enrich Partner records with updated data. This module 
-      does nothin but are a base fpr other enrichement modules
-      
-    """,
+    'summary': "Base module for partner data enrichment.",
+    'version': '18.0.1.1.0',
+    'description': '''
+Partner Enrich Base
+===================
+
+    Base module for Enrich Partner records with updated data. This module 
+          does nothin but are a base fpr other enrichement modules
+
+    Features:
+
+        - UI Integration: Extends 1 view(s) in the Odoo interface.
+        - Extends Odoo: Builds on existing Odoo models.
+    ''',
     #'sequence': '1',
     'author': 'Vertel Sverige AB',
     'category': 'Technical',

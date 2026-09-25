@@ -21,13 +21,21 @@
 
 {
     'name': 'Base: Partner Portal User',
-    'version': '18.0.0.1',
+    'version': '18.0.0.1.0',
     # Version ledger: 14.0 = Odoo version. 1 = Major. Non regressionable code. 2 = Minor. New features that are regressionable. 3 = Bug fixes
     'summary': 'Adds a field on partners that shows if the partner is connected to a portal user.',
     'category': 'Website',
-    'description': """
+    'description': '''
+Partner Portal User
+===================
+
     Adds a field on partners that shows if the partner is connected to a portal user.
-    """,
+
+    Features:
+
+        - UI Integration: Extends 1 view(s) in the Odoo interface.
+        - Extends Odoo: Builds on existing Odoo models.
+    ''',
     #'sequence': '1',
     'author': 'Vertel Sverige AB',
     'website': 'https://vertel.se/apps/odoo-base/partner_portal_user',
