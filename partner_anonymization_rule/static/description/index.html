@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Partner Anonymization Rule &mdash; Vertel for Odoo</title>
+  <title>Base: Partner Anonymization Rule &mdash; Vertel for Odoo</title>
   <style>
     :root { --navy:#0F172A; --darkBg:#1E293B; --white:#F8FAFC; --gray:#94A3B8;
              --lightGray:#E2E8F0; --brand:#930a57; --brand2:#8105a7; }
@@ -43,7 +43,7 @@
 </head>
 <body>
 <div class="hero">
-  <h1>Partner Anonymization Rule</h1>
+  <h1>Base: Partner Anonymization Rule</h1>
   <p class="subtitle">Partner Anonymization Rule for GDPR compliance.</p>
   <div class="meta">
     <span>Odoo 18.0</span><span>&middot;</span>
@@ -54,27 +54,26 @@
 <div class="container">
   <section id="overview">
     <h2>Overview</h2>
-    <p>Partner Anonymization Rule for GDPR compliance.</p>
-    <p>It introduces the model(s) <code>AnonymizeRule</code> to handle this workflow.</p>
+    <p>GDPR gives individuals the right to erasure. Deleting a contact outright destroys accounting history, so anonymisation is often the correct response.</p>
+    <p>This module defines anonymisation rules per model, so personal data can be masked while the record and its history remain intact.</p>
+    <p><strong>Typical use:</strong> Use it to meet GDPR erasure requests without breaking financial or audit records.</p>
   </section>
   <section id="features">
     <h2>Key Features</h2>
     <div class="feature-grid">
-      <div class="feature-card"><h4>Dedicated data model</h4><p>Adds its own models: AnonymizeRule.</p></div>
-      <div class="feature-card"><h4>Automation</h4><p>Scheduled jobs: Anonymization: Anonymization Rule Manager.</p></div>
-      <div class="feature-card"><h4>Actions</h4><p>Adds action_anonymize.</p></div>
-      <div class="feature-card"><h4>UI integration</h4><p>Extends 1 view(s) in the Odoo interface.</p></div>
+      <div class="feature-card"><h4>Rule model</h4><p>An <code>anonymization.rule</code> model defines how each model is anonymised.</p></div>
+      <div class="feature-card"><h4>Per-model configuration</h4><p>Rules are configured per model via a related <code>model_name</code> field.</p></div>
     </div>
   </section>
   <section id="screenshots">
     <h2>Module Graphics</h2>
     <div class="screenshots">
       <figure>
-        <img src="icon.png" alt="Partner Anonymization Rule icon" width="140" height="140">
+        <img src="icon.png" alt="Base: Partner Anonymization Rule icon" width="140" height="140">
         <figcaption>Icon &mdash; 140 &times; 140 px</figcaption>
       </figure>
       <figure>
-        <img src="banner.png" alt="Partner Anonymization Rule banner" width="560" height="280">
+        <img src="banner.png" alt="Base: Partner Anonymization Rule banner" width="560" height="280">
         <figcaption>Banner &mdash; 560 &times; 280 px</figcaption>
       </figure>
     </div>
@@ -96,7 +95,7 @@
   </section>
 </div>
 <footer>
-  <p><strong>Partner Anonymization Rule</strong> &mdash; by <a href="https://vertel.se">Vertel Sverige AB</a></p>
+  <p><strong>Base: Partner Anonymization Rule</strong> &mdash; by <a href="https://vertel.se">Vertel Sverige AB</a></p>
   <p><a href="https://vertel.se">vertel.se</a> &middot;
      <a href="mailto:info@vertel.se">info@vertel.se</a></p>
 </footer>

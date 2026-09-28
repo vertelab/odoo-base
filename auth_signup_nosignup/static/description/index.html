@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Auth Signup NoSignup &mdash; Vertel for Odoo</title>
+  <title>Base: Auth Signup NoSignup &mdash; Vertel for Odoo</title>
   <style>
     :root { --navy:#0F172A; --darkBg:#1E293B; --white:#F8FAFC; --gray:#94A3B8;
              --lightGray:#E2E8F0; --brand:#930a57; --brand2:#8105a7; }
@@ -43,7 +43,7 @@
 </head>
 <body>
 <div class="hero">
-  <h1>Auth Signup NoSignup</h1>
+  <h1>Base: Auth Signup NoSignup</h1>
   <p class="subtitle">Removes new user signup from the front page.</p>
   <div class="meta">
     <span>Odoo 18.0</span><span>&middot;</span>
@@ -54,23 +54,26 @@
 <div class="container">
   <section id="overview">
     <h2>Overview</h2>
-    <p>Removes new user signup from the front page.</p>
+    <p>By default Odoo invites visitors to create an account from the login page. For internal or invitation-only systems that is unwanted — and a potential source of spam accounts.</p>
+    <p>This module removes the signup option from the front page so accounts are only created by administrators or via invitation.</p>
+    <p><strong>Typical use:</strong> Deploy on internal databases, extranets and portals where self-registration should not be possible.</p>
   </section>
   <section id="features">
     <h2>Key Features</h2>
     <div class="feature-grid">
-      <div class="feature-card"><h4>UI integration</h4><p>Extends 1 view(s) in the Odoo interface.</p></div>
+      <div class="feature-card"><h4>No public signup</h4><p>The sign-up link is removed from the login page.</p></div>
+      <div class="feature-card"><h4>Invitation-only</h4><p>New users are created by admins or through explicit invites.</p></div>
     </div>
   </section>
   <section id="screenshots">
     <h2>Module Graphics</h2>
     <div class="screenshots">
       <figure>
-        <img src="icon.png" alt="Auth Signup NoSignup icon" width="140" height="140">
+        <img src="icon.png" alt="Base: Auth Signup NoSignup icon" width="140" height="140">
         <figcaption>Icon &mdash; 140 &times; 140 px</figcaption>
       </figure>
       <figure>
-        <img src="banner.png" alt="Auth Signup NoSignup banner" width="560" height="280">
+        <img src="banner.png" alt="Base: Auth Signup NoSignup banner" width="560" height="280">
         <figcaption>Banner &mdash; 560 &times; 280 px</figcaption>
       </figure>
     </div>
@@ -92,7 +95,7 @@
   </section>
 </div>
 <footer>
-  <p><strong>Auth Signup NoSignup</strong> &mdash; by <a href="https://vertel.se">Vertel Sverige AB</a></p>
+  <p><strong>Base: Auth Signup NoSignup</strong> &mdash; by <a href="https://vertel.se">Vertel Sverige AB</a></p>
   <p><a href="https://vertel.se">vertel.se</a> &middot;
      <a href="mailto:info@vertel.se">info@vertel.se</a></p>
 </footer>

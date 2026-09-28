@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Web Menu No Cache &mdash; Vertel for Odoo</title>
+  <title>Base: Web Menu No Cache &mdash; Vertel for Odoo</title>
   <style>
     :root { --navy:#0F172A; --darkBg:#1E293B; --white:#F8FAFC; --gray:#94A3B8;
              --lightGray:#E2E8F0; --brand:#930a57; --brand2:#8105a7; }
@@ -43,8 +43,8 @@
 </head>
 <body>
 <div class="hero">
-  <h1>Web Menu No Cache</h1>
-  <p class="subtitle">Send no-cache for /web/webclient/load_menus so menu updates always reach clients.</p>
+  <h1>Base: Web Menu No Cache</h1>
+  <p class="subtitle">Send no-cache for /web/webclient/load_menus so menu changes appear immediately.</p>
   <div class="meta">
     <span>Odoo 18.0</span><span>&middot;</span>
     <span>Technical</span><span>&middot;</span>
@@ -54,23 +54,26 @@
 <div class="container">
   <section id="overview">
     <h2>Overview</h2>
-    <p>Send no-cache for /web/webclient/load_menus so menu updates always reach clients.</p>
+    <p>Odoo caches the menu structure in the browser. After changing menus or permissions, users keep seeing the old menu until the cache expires — which causes confusion and support tickets.</p>
+    <p>This module sends no-cache headers for the menu endpoint, so menu changes take effect immediately.</p>
+    <p><strong>Typical use:</strong> Useful during configuration and rollout, when menus change often.</p>
   </section>
   <section id="features">
     <h2>Key Features</h2>
     <div class="feature-grid">
-      <div class="feature-card"><h4>API integration</h4><p>Exposes HTTP endpoints for external systems.</p></div>
+      <div class="feature-card"><h4>No-cache menu endpoint</h4><p>Adds no-cache headers to <code>/web/webclient/load_menus</code>.</p></div>
+      <div class="feature-card"><h4>Immediate effect</h4><p>Menu and permission changes appear without a hard refresh.</p></div>
     </div>
   </section>
   <section id="screenshots">
     <h2>Module Graphics</h2>
     <div class="screenshots">
       <figure>
-        <img src="icon.png" alt="Web Menu No Cache icon" width="140" height="140">
+        <img src="icon.png" alt="Base: Web Menu No Cache icon" width="140" height="140">
         <figcaption>Icon &mdash; 140 &times; 140 px</figcaption>
       </figure>
       <figure>
-        <img src="banner.png" alt="Web Menu No Cache banner" width="560" height="280">
+        <img src="banner.png" alt="Base: Web Menu No Cache banner" width="560" height="280">
         <figcaption>Banner &mdash; 560 &times; 280 px</figcaption>
       </figure>
     </div>
@@ -92,7 +95,7 @@
   </section>
 </div>
 <footer>
-  <p><strong>Web Menu No Cache</strong> &mdash; by <a href="https://vertel.se">Vertel Sverige AB</a></p>
+  <p><strong>Base: Web Menu No Cache</strong> &mdash; by <a href="https://vertel.se">Vertel Sverige AB</a></p>
   <p><a href="https://vertel.se">vertel.se</a> &middot;
      <a href="mailto:info@vertel.se">info@vertel.se</a></p>
 </footer>

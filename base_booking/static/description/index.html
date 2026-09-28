@@ -44,7 +44,7 @@
 <body>
 <div class="hero">
   <h1>Bookings: </h1>
-  <p class="subtitle">A base module to allow booking integrations in any flow.</p>
+  <p class="subtitle">A base module to allow booking integrations in any module.</p>
   <div class="meta">
     <span>Odoo 18.0</span><span>&middot;</span>
     <span>Booking/Appointment</span><span>&middot;</span>
@@ -54,17 +54,17 @@
 <div class="container">
   <section id="overview">
     <h2>Overview</h2>
-    <p>A base module to allow booking integrations in any flow.</p>
-    <p>It introduces the model(s) <code>BookingQuestion</code>, <code>Attendee</code>, <code>BookingLine</code> to handle this workflow.</p>
-    <p>It extends Odoo's contacts.</p>
+    <p>Bookings — appointments, resources, rooms, equipment — share the same core needs: bookable types, resources, questions and calendar integration.</p>
+    <p>This module provides that shared base so booking features can be added to any module without reimplementing the fundamentals.</p>
+    <p><strong>Typical use:</strong> A foundation module for the booking family — install it as a dependency, not on its own.</p>
   </section>
   <section id="features">
     <h2>Key Features</h2>
     <div class="feature-grid">
-      <div class="feature-card"><h4>Dedicated data model</h4><p>Adds its own models: BookingQuestion, Attendee, BookingLine.</p></div>
-      <div class="feature-card"><h4>API integration</h4><p>Exposes HTTP endpoints for external systems.</p></div>
-      <div class="feature-card"><h4>Actions</h4><p>Adds action_view_question_answer_inputs, action_calendar_more_options, action_cancel_meeting.</p></div>
-      <div class="feature-card"><h4>UI integration</h4><p>Extends 16 view(s) in the Odoo interface.</p></div>
+      <div class="feature-card"><h4>Booking types</h4><p>A <code>booking.type</code> model defines what can be booked.</p></div>
+      <div class="feature-card"><h4>Booking lines</h4><p>A <code>booking.line</code> model records individual bookings.</p></div>
+      <div class="feature-card"><h4>Booking questions</h4><p><code>booking.question</code> collects information at booking time.</p></div>
+      <div class="feature-card"><h4>Calendar integration</h4><p>Extends <code>calendar.event</code> and attendees so bookings appear in the calendar.</p></div>
     </div>
   </section>
   <section id="screenshots">

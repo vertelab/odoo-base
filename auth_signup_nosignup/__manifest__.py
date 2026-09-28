@@ -21,7 +21,7 @@
 
 # License AGPL-3.0 or later (https://www.gnu.org/licenses/agpl).
 {
-    "name": "Auth Signup NoSignup",
+    "name": "Base: Auth Signup NoSignup",
     'version': '18.0.1.0.0',
     'summary': 'Removes new user signup from the front page.',
     'author': 'Vertel Sverige AB',

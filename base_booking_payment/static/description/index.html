@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Booking payment &mdash; Vertel for Odoo</title>
+  <title>Base: Booking Payment &mdash; Vertel for Odoo</title>
   <style>
     :root { --navy:#0F172A; --darkBg:#1E293B; --white:#F8FAFC; --gray:#94A3B8;
              --lightGray:#E2E8F0; --brand:#930a57; --brand2:#8105a7; }
@@ -43,7 +43,7 @@
 </head>
 <body>
 <div class="hero">
-  <h1>Booking payment</h1>
+  <h1>Base: Booking Payment</h1>
   <p class="subtitle">Booking payment.</p>
   <div class="meta">
     <span>Odoo 18.0</span><span>&middot;</span>
@@ -54,27 +54,27 @@
 <div class="container">
   <section id="overview">
     <h2>Overview</h2>
-    <p>Booking payment.</p>
-    <p>It introduces the model(s) <code>CalendarBooking</code>, <code>CalendarBookingLine</code> to handle this workflow.</p>
-    <p>It extends Odoo's invoices and journal entries.</p>
+    <p>Paid bookings — courses, treatments, rentals — need the payment to be part of the booking flow, not a separate manual step.</p>
+    <p>This module connects bookings to payments and accounting, so a booking can be paid for and the amount recorded correctly.</p>
+    <p><strong>Typical use:</strong> Use it when bookings must be paid for, such as courses or paid appointments.</p>
   </section>
   <section id="features">
     <h2>Key Features</h2>
     <div class="feature-grid">
-      <div class="feature-card"><h4>Dedicated data model</h4><p>Adds its own models: CalendarBooking, CalendarBookingLine.</p></div>
-      <div class="feature-card"><h4>API integration</h4><p>Exposes HTTP endpoints for external systems.</p></div>
-      <div class="feature-card"><h4>UI integration</h4><p>Extends 9 view(s) in the Odoo interface.</p></div>
+      <div class="feature-card"><h4>Booking payments</h4><p>Attach payment to a booking.</p></div>
+      <div class="feature-card"><h4>Accounting integration</h4><p>Extends <code>account.move</code> so bookings produce proper accounting entries.</p></div>
+      <div class="feature-card"><h4>Resource and type pricing</h4><p>Prices are defined on booking resources and types.</p></div>
     </div>
   </section>
   <section id="screenshots">
     <h2>Module Graphics</h2>
     <div class="screenshots">
       <figure>
-        <img src="icon.png" alt="Booking payment icon" width="140" height="140">
+        <img src="icon.png" alt="Base: Booking Payment icon" width="140" height="140">
         <figcaption>Icon &mdash; 140 &times; 140 px</figcaption>
       </figure>
       <figure>
-        <img src="banner.png" alt="Booking payment banner" width="560" height="280">
+        <img src="banner.png" alt="Base: Booking Payment banner" width="560" height="280">
         <figcaption>Banner &mdash; 560 &times; 280 px</figcaption>
       </figure>
     </div>
@@ -96,7 +96,7 @@
   </section>
 </div>
 <footer>
-  <p><strong>Booking payment</strong> &mdash; by <a href="https://vertel.se">Vertel Sverige AB</a></p>
+  <p><strong>Base: Booking Payment</strong> &mdash; by <a href="https://vertel.se">Vertel Sverige AB</a></p>
   <p><a href="https://vertel.se">vertel.se</a> &middot;
      <a href="mailto:info@vertel.se">info@vertel.se</a></p>
 </footer>

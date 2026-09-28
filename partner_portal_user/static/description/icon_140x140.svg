@@ -48,15 +48,15 @@
      inkscape:pageopacity="0.0"
      inkscape:pageshadow="2"
      inkscape:zoom="1"
-     inkscape:cx="-5.5"
-     inkscape:cy="-31.5"
+     inkscape:cx="9.5"
+     inkscape:cy="-30.5"
      inkscape:document-units="px"
      inkscape:current-layer="layer1"
      showgrid="false"
      inkscape:window-width="1128"
      inkscape:window-height="962"
-     inkscape:window-x="2081"
-     inkscape:window-y="39"
+     inkscape:window-x="390"
+     inkscape:window-y="71"
      inkscape:window-maximized="0"
      inkscape:pagecheckerboard="0" />
   <metadata
@@ -85,34 +85,20 @@
        style="stroke-width:4.60939169" />
     <text
        xml:space="preserve"
-       style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:14.8424px;line-height:125%;font-family:Ubuntu;-inkscape-font-specification:'Ubuntu, Normal';text-align:center;letter-spacing:0px;word-spacing:0px;writing-mode:lr-tb;text-anchor:middle;fill:#ffffff;fill-opacity:1;stroke:none;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
-       x="71.145592"
-       y="92.435219"
+       style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:24.25px;line-height:125%;font-family:Ubuntu;-inkscape-font-specification:'Ubuntu, Normal';text-align:start;letter-spacing:0px;word-spacing:0px;writing-mode:lr-tb;text-anchor:start;fill:#ffffff;fill-opacity:1;stroke:none;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
+       x="70.0"
+       y="81.734192"
        id="text2035"
        inkscape:export-xdpi="92"
-       inkscape:export-ydpi="92"><tspan
-         sodipodi:role="line"
-         x="71.145592"
-         y="92.435219"
-         style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:26.3866px;font-family:Ubuntu;-inkscape-font-specification:'Ubuntu, Normal';font-variant-ligatures:normal;font-variant-caps:normal;font-variant-numeric:normal;font-feature-settings:normal;text-align:center;writing-mode:lr-tb;text-anchor:middle;fill:#ffffff;fill-opacity:1;stroke-width:1px"
-         id="tspan835">Partner</tspan><tspan
-         sodipodi:role="line"
-         x="71.145592"
-         y="114.53797"
-         style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:26.3866px;font-family:Ubuntu;-inkscape-font-specification:'Ubuntu, Normal';font-variant-ligatures:normal;font-variant-caps:normal;font-variant-numeric:normal;font-feature-settings:normal;text-align:center;writing-mode:lr-tb;text-anchor:middle;fill:#ffffff;fill-opacity:1;stroke-width:1px"
-         id="tspan823">Portal User</tspan></text>
-    <text
-       id="text845-2"
-       y="42.39505"
-       x="6.9329834"
-       style="font-style:normal;font-variant:normal;font-weight:500;font-stretch:normal;font-size:39.5584px;line-height:1.25;font-family:'Futura PT';-inkscape-font-specification:'Futura PT, Medium';font-variant-ligatures:normal;font-variant-caps:normal;font-variant-numeric:normal;font-feature-settings:normal;text-align:start;letter-spacing:0px;word-spacing:0px;writing-mode:lr-tb;text-anchor:start;fill:#ffffff;fill-opacity:0.994609;stroke:none;stroke-width:1"
-       xml:space="preserve"
-       inkscape:export-xdpi="92"
-       inkscape:export-ydpi="92"><tspan
-         style="fill:#ffffff;fill-opacity:0.994609;stroke-width:1"
-         y="42.39505"
-         x="6.9329834"
-         id="tspan843-9"
-         sodipodi:role="line"></tspan></text>
+       inkscape:export-ydpi="92"><tspan sodipodi:role="line" x="70.0" y="65.75" style="font-size:24.25px;text-anchor:middle;fill:#ffffff">Base</tspan><tspan sodipodi:role="line" x="70.0" y="94.85" style="font-size:24.25px;text-anchor:middle;fill:#ffffff">Partner</tspan><tspan sodipodi:role="line" x="70.0" y="123.95" style="font-size:24.25px;text-anchor:middle;fill:#ffffff">Portal User</tspan></text>
+    <image
+       width="29.0"
+       height="29.0"
+       preserveAspectRatio="none"
+       style="stroke-width:1.14035;image-rendering:optimizeQuality"
+       xlink:href="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAADIAAAAyCAYAAAAeP4ixAAAFjklEQVR4nO3afeieVR3H8ZdbTltQazaRYfUtdSt7WJrBasGYES2DLEM2FQwfCnp+JBohLizUJGVUQmBqZFKZDmNJT1oKk6w1siJLS79GLK3WVq4n11x/nOsn9339ruu+r+u+b//bG378uM51zuec73XO+Z5zvufmEId4Sjhs1oKZuQArsQrLsASL8Rj24E/YGRF/mGW9MzEkM5fgrdiA1+IZHYrtxvfxNXwnIv47TRumMiQzn4dNOB+LppDag6uwJSL+MYnARIZk5mJ8Cu8xnQF19uBifD4iDvYp2NuQzFyD63H8mKy/wt04D4f3rOZOnBcRD3UtsKCPemZegB+Zb8Ru/ALvxq4qbSnuwhW4H/vwsY5VrcWO6qN1onOPZObF2FxL3oeLsAOvxHU4EUcoXuu6iHgsM49RHMGt+B0Wdqz2PzgnIm4Zl7GTIZn5YXy2lrwdZ3dxo5m5HPfiOV3qq/E41kfED0dlGmtIZp6BmwwPwxtw4TiXmZkL8S28TumlOR5ShttqPGtcG7AXayLi120ZRs6RzDwW19byfQXndvT7b8Fpho2AeyJiPZYrw5Hy5dtYghszs9VpjJvs1xj+Yt/D+T1c42405d0DEfEvfBqX4SXIEVqr8Im2l61DKzPfhm8OJP0FL4uIR0dU1qSzEscpC+erlN55FM+v92pmblBW+jb2Y0VEZP1FoyGZeRh+jpcPJF8ZER/pbkKj7nF4AK+OiHta8izH1Ti9ReaaiHhHPbFtaJ1u2Ah4Z2a+oVuTm4mI3+Mz5s+ZQfYqi2kbb6+2RkO09chWZaLWeRybIuLKERX1otruvFnxbCfi6ThpTLFNEXHZYMK8HsnMZ2J9i8AirMzMp/VucTvLlLm4FK8x3gjYWE9oGlqvx5EjRO6OiP91aWEXIuJhrMMLexRblZnPHUxoMuSUMSK7xrzvRWZ+TnHrr+hZdKidTUPk5DECMxlW1ap/Lc6eUOJkbJ17aOqRF4wROHfCip8kM4/ETyqtST/M0FBsMuTZYwQ2ZubaCSuf44l6QyZgyeBDkyFdNnE3T7mmbKw3ZAKGyjcZcqCDyFG4NTNPyMyj+tSemTfgy33KtDDkOZvG514c00HoCHwQD5p/Vpnb5szNp3PwW3yp0p8FQzpNPfK3HmIX4mBmNi2gNytn++uVtem9+IYSApoFewYfmgz5TQ+xRTgTV2dm3Uksa8h/Aj7QQ38U9w0+NBmys6fgasVlb6/c6hxHt+Rf11O/jaF2Nhny4wmFX6wYNcf91f9/411qQ2FKDigBjydpMuRO5WQ3CRdV5wlK6Oc2JeC23fTudpA7ImL0HKk2hFvr6R05FQ9k5iWK57skIq7ASyvNfRPq1vl6PaHtPHIKfjqDCp/A+/DViPh7Zn4cl06puQdRjxE3nhAjYocyLKZlAb6AvZm5WjlzzHEQtyjxrj5c1RToHhVF2aw5AjIpNypRxnsVB7BBieKfVP1txuVG7yx2Y0vTi5EBuszcgvf3bfEI9uOL2BURjUOs2sNt07zrOCsiGqMs4+Jam5SvOCsOV1b4Y9syRMR3lUPTP2uvtrYZwRhDqgDaGZjo8mUSMvNFSph18NbrPlwwqtzYa4WI+KVizP5pGjjAg/hk04vMPEtZcwbDPY/gjfV1o06n+5GIuF0JD9W7exK2RcSfBxMy8/jM/LbiEAY928M4tQpQjKTzMTMibqtOhtt02+a3sRiqgPQ6ZZ05zfyPuhNviohHuohOcvW2TFkbzuxbtuIHykK5RvPt7wHllmtzn5veiW91q3uTS7FiUo0G7sJHI6L3rmLa6+mFSjjnQ7pFCJs4gNtxeUTcMWlbZvbLh8xcoazWaxWjlo7I/kf8TBlmN/W9qmhi5j/hmKO67Tra/J9w7IqIvz5V9R7iEDPm/wrzmRWKInDNAAAAAElFTkSuQmCC"
+       id="image2838"
+       x="7"
+       y="9.5" />
   </g>
 </svg>

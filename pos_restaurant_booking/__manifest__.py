@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 {
-    'name': 'Point of Sale Restaurant Booking',
+    'name': 'Base: POS Restaurant Booking',
 'author': 'Vertel Sverige AB',
     'version': '18.0.1.0.0',
     'category': 'Sales/Point of Sale',

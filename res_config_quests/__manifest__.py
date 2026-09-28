@@ -1,5 +1,5 @@
 {
-    'name': 'Res Config Quests',
+    'name': 'Base: Res Config Quests',
 'author': 'Vertel Sverige AB',
     'website': 'https://vertel.se/apps/odoo-base/res_config_quests',
     'version': '18.0.1.0.0',

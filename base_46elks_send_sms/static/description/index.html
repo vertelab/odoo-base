@@ -54,15 +54,15 @@
 <div class="container">
   <section id="overview">
     <h2>Overview</h2>
-    <p>Sends SMS messages through the 46elks gateway.</p>
-    <p>It introduces the model(s) <code>ElkSms</code> to handle this workflow.</p>
+    <p>SMS is still the most reliable way to reach people in Sweden. Odoo supports SMS, but needs a provider configured for it.</p>
+    <p>This module adds 46elks as an SMS provider, so messages can be sent through that gateway.</p>
+    <p><strong>Typical use:</strong> Configure it when your organisation sends SMS via 46elks.</p>
   </section>
   <section id="features">
     <h2>Key Features</h2>
     <div class="feature-grid">
-      <div class="feature-card"><h4>Dedicated data model</h4><p>Adds its own models: ElkSms.</p></div>
-      <div class="feature-card"><h4>API integration</h4><p>Exposes HTTP endpoints for external systems.</p></div>
-      <div class="feature-card"><h4>UI integration</h4><p>Extends 2 view(s) in the Odoo interface.</p></div>
+      <div class="feature-card"><h4>46elks provider</h4><p>Extends <code>sms.sms</code> to send through 46elks.</p></div>
+      <div class="feature-card"><h4>Sender name</h4><p>Derives a valid sender name from the company name.</p></div>
     </div>
   </section>
   <section id="screenshots">

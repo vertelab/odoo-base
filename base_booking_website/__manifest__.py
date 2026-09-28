@@ -3,7 +3,7 @@
 
 
 {
-    'name': 'Website Appointments',
+    'name': 'Base: Booking Website',
     'summary': "Adds booking types to the website.",
 'author': 'Vertel Sverige AB',
     'version': '18.0.1.0.0',

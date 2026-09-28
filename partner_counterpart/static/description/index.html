@@ -54,15 +54,15 @@
 <div class="container">
   <section id="overview">
     <h2>Overview</h2>
-    <p>Partner Counterpart.</p>
-    <p>It introduces the model(s) <code>Partner</code>, <code>PartnerCounterPart</code> to handle this workflow.</p>
-    <p>It extends Odoo's contacts.</p>
+    <p>Some contacts are two sides of the same relationship — a person and the company they represent, or a sender and a receiver. Keeping that link explicit avoids duplicate records.</p>
+    <p>This module adds a counterpart relation on partners, linking the paired contact through a dedicated model.</p>
+    <p><strong>Typical use:</strong> Helpful in B2B contexts where a person and their company, or two trading parties, must be connected.</p>
   </section>
   <section id="features">
     <h2>Key Features</h2>
     <div class="feature-grid">
-      <div class="feature-card"><h4>Dedicated data model</h4><p>Adds its own models: Partner, PartnerCounterPart.</p></div>
-      <div class="feature-card"><h4>UI integration</h4><p>Extends 2 view(s) in the Odoo interface.</p></div>
+      <div class="feature-card"><h4>Counterpart relation</h4><p>Links two partners as counterparts of each other.</p></div>
+      <div class="feature-card"><h4>Dedicated model</h4><p>A <code>res.partner.counterpart</code> model holds the relationship.</p></div>
     </div>
   </section>
   <section id="screenshots">

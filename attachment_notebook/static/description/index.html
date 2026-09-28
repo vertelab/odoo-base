@@ -44,7 +44,7 @@
 <body>
 <div class="hero">
   <h1>Base: Attachment Notebook</h1>
-  <p class="subtitle">Adds a notebook for other modules to populate with more functionality.</p>
+  <p class="subtitle">Adds a notebook page for other modules to populate with attachments.</p>
   <div class="meta">
     <span>Odoo 18.0</span><span>&middot;</span>
     <span>CRM</span><span>&middot;</span>
@@ -54,12 +54,15 @@
 <div class="container">
   <section id="overview">
     <h2>Overview</h2>
-    <p>Adds a notebook for other modules to populate with more functionality.</p>
+    <p>Several Vertel modules need to show attachments in a structured way on their own forms. Rather than each module re-inventing the same UI, this module provides a shared notebook page that others can inherit and fill.</p>
+    <p>It is a small, reusable building block: a common place to put attachment widgets that stays consistent across modules.</p>
+    <p><strong>Typical use:</strong> A dependency for other Vertel modules that need an attachment area on their forms without duplicating view code.</p>
   </section>
   <section id="features">
     <h2>Key Features</h2>
     <div class="feature-grid">
-      <div class="feature-card"><h4>UI integration</h4><p>Extends 1 view(s) in the Odoo interface.</p></div>
+      <div class="feature-card"><h4>Shared notebook page</h4><p>Provides a reusable notebook page other modules inherit to display their attachments.</p></div>
+      <div class="feature-card"><h4>Consistent UI</h4><p>One definition means every consuming module shows attachments the same way.</p></div>
     </div>
   </section>
   <section id="screenshots">

@@ -44,7 +44,7 @@
 <body>
 <div class="hero">
   <h1>Base: Res SNI</h1>
-  <p class="subtitle">SNI Swedish Standard Industrial Classification.</p>
+  <p class="subtitle">SNI — Swedish Standard Industrial Classification.</p>
   <div class="meta">
     <span>Odoo 18.0</span><span>&middot;</span>
     <span>Technical</span><span>&middot;</span>
@@ -54,15 +54,15 @@
 <div class="container">
   <section id="overview">
     <h2>Overview</h2>
-    <p>SNI Swedish Standard Industrial Classification.</p>
-    <p>It introduces the model(s) <code>Sni</code>, <code>Partner</code> to handle this workflow.</p>
-    <p>It extends Odoo's contacts.</p>
+    <p>Swedish organisations classify their activity using SNI codes. Reporting, segmentation and statistics all depend on them, but Odoo has no standard SNI support.</p>
+    <p>This module adds an SNI code model and links it to partners, so industry classification can be recorded properly.</p>
+    <p><strong>Typical use:</strong> Use it for Swedish reporting, segmentation and any process that groups companies by industry.</p>
   </section>
   <section id="features">
     <h2>Key Features</h2>
     <div class="feature-grid">
-      <div class="feature-card"><h4>Dedicated data model</h4><p>Adds its own models: Sni, Partner.</p></div>
-      <div class="feature-card"><h4>UI integration</h4><p>Extends 2 view(s) in the Odoo interface.</p></div>
+      <div class="feature-card"><h4>SNI code model</h4><p>A <code>res.sni</code> model holds the Swedish industry codes.</p></div>
+      <div class="feature-card"><h4>Classification on partners</h4><p>Partners are classified by their SNI code.</p></div>
     </div>
   </section>
   <section id="screenshots">

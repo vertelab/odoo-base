@@ -54,13 +54,15 @@
 <div class="container">
   <section id="overview">
     <h2>Overview</h2>
-    <p>Base module for partner data enrichment.</p>
-    <p>It extends Odoo's contacts.</p>
+    <p>Several Vertel modules enrich contacts with external data — company information, technical details, credit status. They share the same need to fetch, map and store that data.</p>
+    <p>This module provides the common base those enrichment modules build on, so each provider only implements its own source.</p>
+    <p><strong>Typical use:</strong> A dependency for the provider modules (Allabolag, FöretagsAPI, BuiltWith) rather than something you install alone.</p>
   </section>
   <section id="features">
     <h2>Key Features</h2>
     <div class="feature-grid">
-      <div class="feature-card"><h4>UI integration</h4><p>Extends 1 view(s) in the Odoo interface.</p></div>
+      <div class="feature-card"><h4>Enrichment base</h4><p>Shared foundation for partner data-enrichment modules.</p></div>
+      <div class="feature-card"><h4>Extends partners</h4><p>Hooks into <code>res.partner</code> for the enrichment flow.</p></div>
     </div>
   </section>
   <section id="screenshots">

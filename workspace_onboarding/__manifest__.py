@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 {
-    'name': 'Kom igång med Vertel',
+    'name': 'Base: Kom igång med Vertel',
     'version': '18.0.1.0.0',
     'summary': 'Sammanhållande onboardingskurs: navigering, mobil och PWA',
     'description': """

@@ -54,13 +54,14 @@
 <div class="container">
   <section id="overview">
     <h2>Overview</h2>
-    <p>Adds a partner_uuid field to partners.</p>
-    <p>It extends Odoo's contacts.</p>
+    <p>Integrations and external systems often need a stable, system-independent identifier for a contact. Database ids change between environments.</p>
+    <p>This module adds a UUID field to partners, giving each contact an identifier that stays the same across databases and systems.</p>
+    <p><strong>Typical use:</strong> Use it when synchronising contacts with external systems that need a durable key.</p>
   </section>
   <section id="features">
     <h2>Key Features</h2>
     <div class="feature-grid">
-      <div class="feature-card"><h4>UI integration</h4><p>Extends 1 view(s) in the Odoo interface.</p></div>
+      <div class="feature-card"><h4>UUID on partners</h4><p>A <code>partner_uuid</code> field provides a stable, unique identifier.</p></div>
     </div>
   </section>
   <section id="screenshots">

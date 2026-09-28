@@ -44,7 +44,7 @@
 <body>
 <div class="hero">
   <h1>Base: Enrich partner information from FöretagsAPI</h1>
-  <p class="subtitle">Enrich partner with data from FöretagsAPI.se.</p>
+  <p class="subtitle">Enrich partner information from FöretagsAPI.se.</p>
   <div class="meta">
     <span>Odoo 18.0</span><span>&middot;</span>
     <span>Website</span><span>&middot;</span>
@@ -54,16 +54,16 @@
 <div class="container">
   <section id="overview">
     <h2>Overview</h2>
-    <p>Enrich partner with data from FöretagsAPI.se.</p>
-    <p>It introduces the model(s) <code>ResPartnerFinancials</code> to handle this workflow.</p>
-    <p>It extends Odoo's settings, contacts.</p>
+    <p>FöretagsAPI.se provides Swedish company data including similar-company suggestions. Manually researching each contact does not scale.</p>
+    <p>This module enriches partners from FöretagsAPI.se and includes a wizard for finding similar companies.</p>
+    <p><strong>Typical use:</strong> Use it for Swedish company enrichment and prospecting.</p>
   </section>
   <section id="features">
     <h2>Key Features</h2>
     <div class="feature-grid">
-      <div class="feature-card"><h4>Dedicated data model</h4><p>Adds its own models: ResPartnerFinancials.</p></div>
-      <div class="feature-card"><h4>Actions</h4><p>Adds action_search, action_create_partners, action_foretagsapi_enrich.</p></div>
-      <div class="feature-card"><h4>UI integration</h4><p>Extends 2 view(s) in the Odoo interface.</p></div>
+      <div class="feature-card"><h4>FöretagsAPI lookup</h4><p>Fetch company data from FöretagsAPI.se onto the partner.</p></div>
+      <div class="feature-card"><h4>Similar-company wizard</h4><p>A <code>foretagssok.similar.wizard</code> suggests related companies.</p></div>
+      <div class="feature-card"><h4>Mapping mixin</h4><p>A <code>foretagsapi.mapping.mixin</code> maps the API fields.</p></div>
     </div>
   </section>
   <section id="screenshots">

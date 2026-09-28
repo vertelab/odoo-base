@@ -54,14 +54,16 @@
 <div class="container">
   <section id="overview">
     <h2>Overview</h2>
-    <p>Helpers for migrating data between Odoo instances.</p>
-    <p>It introduces the model(s) <code>rkDOTdocument</code>, <code>rkDOTdocumentDOTtype</code>, <code>rkDOTlawDOTsection</code> to handle this workflow.</p>
+    <p>Moving data between Odoo instances — staging to production, old to new — is repetitive and error-prone. Each migration ends up rebuilding the same wizards.</p>
+    <p>This module provides reusable helpers for migrations, including wizards for adding files and records to a migration run.</p>
+    <p><strong>Typical use:</strong> A tool for developers and consultants performing data migrations between instances.</p>
   </section>
   <section id="features">
     <h2>Key Features</h2>
     <div class="feature-grid">
-      <div class="feature-card"><h4>Dedicated data model</h4><p>Adds its own models: rkDOTdocument, rkDOTdocumentDOTtype, rkDOTlawDOTsection.</p></div>
-      <div class="feature-card"><h4>UI integration</h4><p>Extends 2 view(s) in the Odoo interface.</p></div>
+      <div class="feature-card"><h4>Migration wizards</h4><p><code>rk.add.file.wizard</code> and <code>rk.add.record.wizard</code> drive a migration.</p></div>
+      <div class="feature-card"><h4>Classification</h4><p>A <code>rk.classification</code> model groups what is being migrated.</p></div>
+      <div class="feature-card"><h4>Model awareness</h4><p>Extends <code>ir.model</code> so migrations know their targets.</p></div>
     </div>
   </section>
   <section id="screenshots">

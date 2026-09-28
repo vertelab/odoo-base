@@ -54,13 +54,15 @@
 <div class="container">
   <section id="overview">
     <h2>Overview</h2>
-    <p>Add an extra repos.</p>
-    <p>It introduces the model(s) <code>Module</code> to handle this workflow.</p>
+    <p>Odoo's Apps list only knows about the addons paths it was configured with. Adding another repository normally means editing configuration and restarting.</p>
+    <p>This module lets extra module repositories be registered so their modules appear in the Apps list.</p>
+    <p><strong>Typical use:</strong> Convenient in development and multi-repository deployments.</p>
   </section>
   <section id="features">
     <h2>Key Features</h2>
     <div class="feature-grid">
-      <div class="feature-card"><h4>Dedicated data model</h4><p>Adds its own models: Module.</p></div>
+      <div class="feature-card"><h4>Extra repositories</h4><p>Register additional module repositories from within Odoo.</p></div>
+      <div class="feature-card"><h4>Apps integration</h4><p>Extends <code>ir.module.module</code> so new modules are discovered.</p></div>
     </div>
   </section>
   <section id="screenshots">

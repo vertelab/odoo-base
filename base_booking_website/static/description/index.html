@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Website Appointments &mdash; Vertel for Odoo</title>
+  <title>Base: Booking Website &mdash; Vertel for Odoo</title>
   <style>
     :root { --navy:#0F172A; --darkBg:#1E293B; --white:#F8FAFC; --gray:#94A3B8;
              --lightGray:#E2E8F0; --brand:#930a57; --brand2:#8105a7; }
@@ -43,7 +43,7 @@
 </head>
 <body>
 <div class="hero">
-  <h1>Website Appointments</h1>
+  <h1>Base: Booking Website</h1>
   <p class="subtitle">Adds booking types to the website.</p>
   <div class="meta">
     <span>Odoo 18.0</span><span>&middot;</span>
@@ -54,27 +54,26 @@
 <div class="container">
   <section id="overview">
     <h2>Overview</h2>
-    <p>Adds booking types to the website.</p>
-    <p>It introduces the model(s) <code>BookingAppointmentType</code>, <code>BookingType</code> to handle this workflow.</p>
+    <p>Publishing bookable types on the website lets customers book online instead of calling.</p>
+    <p>This module exposes booking types on the website with public invite pages.</p>
+    <p><strong>Typical use:</strong> Enable it to accept bookings directly from your website.</p>
   </section>
   <section id="features">
     <h2>Key Features</h2>
     <div class="feature-grid">
-      <div class="feature-card"><h4>Dedicated data model</h4><p>Adds its own models: BookingAppointmentType, BookingType.</p></div>
-      <div class="feature-card"><h4>API integration</h4><p>Exposes HTTP endpoints for external systems.</p></div>
-      <div class="feature-card"><h4>Actions</h4><p>Adds action_share_invite.</p></div>
-      <div class="feature-card"><h4>UI integration</h4><p>Extends 7 view(s) in the Odoo interface.</p></div>
+      <div class="feature-card"><h4>Bookings on the website</h4><p>Publish bookable types for online booking.</p></div>
+      <div class="feature-card"><h4>Public invite pages</h4><p>A <code>booking.invite</code> model handles public booking links.</p></div>
     </div>
   </section>
   <section id="screenshots">
     <h2>Module Graphics</h2>
     <div class="screenshots">
       <figure>
-        <img src="icon.png" alt="Website Appointments icon" width="140" height="140">
+        <img src="icon.png" alt="Base: Booking Website icon" width="140" height="140">
         <figcaption>Icon &mdash; 140 &times; 140 px</figcaption>
       </figure>
       <figure>
-        <img src="banner.png" alt="Website Appointments banner" width="560" height="280">
+        <img src="banner.png" alt="Base: Booking Website banner" width="560" height="280">
         <figcaption>Banner &mdash; 560 &times; 280 px</figcaption>
       </figure>
     </div>
@@ -96,7 +95,7 @@
   </section>
 </div>
 <footer>
-  <p><strong>Website Appointments</strong> &mdash; by <a href="https://vertel.se">Vertel Sverige AB</a></p>
+  <p><strong>Base: Booking Website</strong> &mdash; by <a href="https://vertel.se">Vertel Sverige AB</a></p>
   <p><a href="https://vertel.se">vertel.se</a> &middot;
      <a href="mailto:info@vertel.se">info@vertel.se</a></p>
 </footer>

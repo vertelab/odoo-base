@@ -54,15 +54,16 @@
 <div class="container">
   <section id="overview">
     <h2>Overview</h2>
-    <p>Extract and display EXIF metadata from image attachments.</p>
-    <p>It introduces the model(s) <code>IrAttachmentExif</code> to handle this workflow.</p>
-    <p>It extends Odoo's attachments.</p>
+    <p>Photos taken with phones and cameras carry EXIF metadata — capture time, GPS coordinates, camera model, orientation. Odoo stores the image but discards that information.</p>
+    <p>This module adds a dedicated <code>ir.attachment.exif</code> model and parses the metadata out of image attachments, making it visible and searchable directly on the attachment record.</p>
+    <p><strong>Typical use:</strong> Useful for field documentation, insurance claims or any process where the time and place a photo was taken matters.</p>
   </section>
   <section id="features">
     <h2>Key Features</h2>
     <div class="feature-grid">
-      <div class="feature-card"><h4>Dedicated data model</h4><p>Adds its own models: IrAttachmentExif.</p></div>
-      <div class="feature-card"><h4>UI integration</h4><p>Extends 1 view(s) in the Odoo interface.</p></div>
+      <div class="feature-card"><h4>Dedicated EXIF model</h4><p>A new <code>ir.attachment.exif</code> record stores the parsed tags for each image attachment.</p></div>
+      <div class="feature-card"><h4>Tag name mapping</h4><p>Raw numeric EXIF tag ids are mapped to readable names (<code>tag_map</code>), so values are human-readable.</p></div>
+      <div class="feature-card"><h4>Extends ir.attachment</h4><p>Hooks into <code>ir.attachment</code> so extraction happens where the files already live.</p></div>
     </div>
   </section>
   <section id="screenshots">

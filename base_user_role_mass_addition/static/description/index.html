@@ -44,7 +44,7 @@
 <body>
 <div class="hero">
   <h1>Base: User Roles Mass addition</h1>
-  <p class="subtitle">Extends the User Roles to enable assiging several users to a role, at the same time.</p>
+  <p class="subtitle">Extends the User Roles to enable assigning several roles at once.</p>
   <div class="meta">
     <span>Odoo 18.0</span><span>&middot;</span>
     <span>Tools</span><span>&middot;</span>
@@ -54,12 +54,15 @@
 <div class="container">
   <section id="overview">
     <h2>Overview</h2>
-    <p>Extends the User Roles to enable assiging several users to a role, at the same time.</p>
+    <p>Assigning roles one user at a time does not scale when a whole team or department needs the same access. This module adds a wizard for mass role assignment.</p>
+    <p>It extends <code>res.users</code> and the role line model, and adds a dedicated mass-addition wizard so many users can receive the same roles in a single operation.</p>
+    <p><strong>Typical use:</strong> Perfect when onboarding a department or rolling out a new permission model to a large group.</p>
   </section>
   <section id="features">
     <h2>Key Features</h2>
     <div class="feature-grid">
-      <div class="feature-card"><h4>UI integration</h4><p>Extends 4 view(s) in the Odoo interface.</p></div>
+      <div class="feature-card"><h4>Mass role wizard</h4><p>A <code>role.mass.addition.wizard</code> assigns several roles to many users at once.</p></div>
+      <div class="feature-card"><h4>Extends role lines</h4><p>Works through <code>res.users.role.line</code> so the result is identical to manual assignment.</p></div>
     </div>
   </section>
   <section id="screenshots">

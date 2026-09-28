@@ -44,7 +44,7 @@
 <body>
 <div class="hero">
   <h1>Base: Module XL2Install</h1>
-  <p class="subtitle">Install modules from a excel document.</p>
+  <p class="subtitle">Install modules from a Excel document.</p>
   <div class="meta">
     <span>Odoo 18.0</span><span>&middot;</span>
     <span>Technical</span><span>&middot;</span>
@@ -54,14 +54,16 @@
 <div class="container">
   <section id="overview">
     <h2>Overview</h2>
-    <p>Install modules from a excel document.</p>
-    <p>It introduces the model(s) <code>Module</code> to handle this workflow.</p>
+    <p>Setting up a database for a customer means installing a specific list of modules. Clicking through the Apps list each time is slow and error-prone.</p>
+    <p>This module installs modules from an Excel document, with wizards that handle missing and Enterprise modules.</p>
+    <p><strong>Typical use:</strong> Speeds up repeatable deployments where the module set is known in advance.</p>
   </section>
   <section id="features">
     <h2>Key Features</h2>
     <div class="feature-grid">
-      <div class="feature-card"><h4>Dedicated data model</h4><p>Adds its own models: Module.</p></div>
-      <div class="feature-card"><h4>UI integration</h4><p>Extends 1 view(s) in the Odoo interface.</p></div>
+      <div class="feature-card"><h4>Install from Excel</h4><p>A wizard installs the modules listed in a spreadsheet.</p></div>
+      <div class="feature-card"><h4>Missing-module handling</h4><p>A dedicated wizard reports modules that could not be found.</p></div>
+      <div class="feature-card"><h4>Enterprise awareness</h4><p>Handles Enterprise-only modules separately.</p></div>
     </div>
   </section>
   <section id="screenshots">

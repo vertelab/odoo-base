@@ -44,7 +44,7 @@
 <body>
 <div class="hero">
   <h1>Base: Users Rights Listed</h1>
-  <p class="subtitle">Adds a UserGroup field to the res_users tree-view in debug-mode.</p>
+  <p class="subtitle">Adds a UserGroup field to the res_users list view.</p>
   <div class="meta">
     <span>Odoo 18.0</span><span>&middot;</span>
     <span>Technical</span><span>&middot;</span>
@@ -54,12 +54,14 @@
 <div class="container">
   <section id="overview">
     <h2>Overview</h2>
-    <p>Adds a UserGroup field to the res_users tree-view in debug-mode.</p>
+    <p>The user list view shows names and logins but not which groups each user belongs to. Auditing access means opening users one by one.</p>
+    <p>This module adds a user-group field to the list view so access can be reviewed at a glance.</p>
+    <p><strong>Typical use:</strong> Useful for access audits and for spotting users who have ended up in the wrong groups.</p>
   </section>
   <section id="features">
     <h2>Key Features</h2>
     <div class="feature-grid">
-      <div class="feature-card"><h4>UI integration</h4><p>Extends 1 view(s) in the Odoo interface.</p></div>
+      <div class="feature-card"><h4>Groups in the list view</h4><p>A <code>UserGroup</code> column shows each user's groups directly in the user list.</p></div>
     </div>
   </section>
   <section id="screenshots">

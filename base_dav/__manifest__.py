@@ -2,7 +2,7 @@
 # Copyright 2019-2020 initOS GmbH <https://initos.com>
 # License AGPL-3.0 or later (https://www.gnu.org/licenses/agpl.html).
 {
-    "name": "Caldav and Carddav support",
+    "name": "Base: CalDAV and CardDAV",
     "version": "18.0.1.0.0",
     "author": "Vertel Sverige AB, initOS GmbH,Therp BV,Odoo Community Association (OCA)",
     "website": "https://vertel.se/apps/odoo-base/base_dav",

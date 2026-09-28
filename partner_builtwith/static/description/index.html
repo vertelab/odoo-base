@@ -54,14 +54,16 @@
 <div class="container">
   <section id="overview">
     <h2>Overview</h2>
-    <p>Enrich partner with technical information.</p>
-    <p>It introduces the model(s) <code>ResPartner</code> to handle this workflow.</p>
+    <p>Knowing which technologies a prospect's website uses helps qualify and tailor a sales conversation. Gathering that by hand is slow.</p>
+    <p>This module enriches partners with technical data from BuiltWith, such as the domain and detected technologies.</p>
+    <p><strong>Typical use:</strong> Useful in B2B sales to understand a prospect's technology stack before contact.</p>
   </section>
   <section id="features">
     <h2>Key Features</h2>
     <div class="feature-grid">
-      <div class="feature-card"><h4>Dedicated data model</h4><p>Adds its own models: ResPartner.</p></div>
-      <div class="feature-card"><h4>UI integration</h4><p>Extends 1 view(s) in the Odoo interface.</p></div>
+      <div class="feature-card"><h4>BuiltWith lookup</h4><p>Fetch technical information for a partner's domain.</p></div>
+      <div class="feature-card"><h4>Domain field</h4><p>A <code>bw_domain_name</code> field anchors the lookup.</p></div>
+      <div class="feature-card"><h4>Mixin architecture</h4><p>A <code>res.builtwith.mixin</code> holds the fetched data.</p></div>
     </div>
   </section>
   <section id="screenshots">

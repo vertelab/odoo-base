@@ -54,15 +54,16 @@
 <div class="container">
   <section id="overview">
     <h2>Overview</h2>
-    <p>Enrich partner with data from Allabolag.</p>
-    <p>It introduces the model(s) <code>ResPartner</code> to handle this workflow.</p>
-    <p>It extends Odoo's settings.</p>
+    <p>Allabolag publishes Swedish company data — board, turnover, industry, status. Filling that in by hand is slow and goes stale.</p>
+    <p>This module fetches company information from Allabolag and writes it onto the partner, keeping contact records accurate.</p>
+    <p><strong>Typical use:</strong> Use it to enrich Swedish company contacts with verified registry data.</p>
   </section>
   <section id="features">
     <h2>Key Features</h2>
     <div class="feature-grid">
-      <div class="feature-card"><h4>Dedicated data model</h4><p>Adds its own models: ResPartner.</p></div>
-      <div class="feature-card"><h4>UI integration</h4><p>Extends 1 view(s) in the Odoo interface.</p></div>
+      <div class="feature-card"><h4>Allabolag lookup</h4><p>Fetch company data from Allabolag for a partner.</p></div>
+      <div class="feature-card"><h4>Mixin architecture</h4><p>A <code>res.partner.allabolag.mixin</code> holds the fetched fields.</p></div>
+      <div class="feature-card"><h4>Configuration</h4><p>Settings are managed through <code>res.config.settings</code>.</p></div>
     </div>
   </section>
   <section id="screenshots">

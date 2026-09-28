@@ -44,7 +44,7 @@
 <body>
 <div class="hero">
   <h1>Base: User Roles Permission</h1>
-  <p class="subtitle">Extends the User Roles to add portal user to res.users.role.</p>
+  <p class="subtitle">Extends the User Roles to add portal user to res.users.</p>
   <div class="meta">
     <span>Odoo 18.0</span><span>&middot;</span>
     <span>Tools</span><span>&middot;</span>
@@ -54,16 +54,16 @@
 <div class="container">
   <section id="overview">
     <h2>Overview</h2>
-    <p>Extends the User Roles to add portal user to res.users.role.</p>
-    <p>It introduces the model(s) <code>Company</code> to handle this workflow.</p>
-    <p>It extends Odoo's settings, company settings.</p>
+    <p>User Roles organises permissions into named roles. New portal users, however, still need a sensible default role assigned or they end up with no access at all.</p>
+    <p>This module extends User Roles so a default role is applied to portal users automatically, and exposes the setting on the company and in configuration.</p>
+    <p><strong>Typical use:</strong> Use it where portal users must always land in a known role, avoiding manual role assignment after every invitation.</p>
   </section>
   <section id="features">
     <h2>Key Features</h2>
     <div class="feature-grid">
-      <div class="feature-card"><h4>Dedicated data model</h4><p>Adds its own models: Company.</p></div>
-      <div class="feature-card"><h4>Actions</h4><p>Adds action_grant_access, action_apply.</p></div>
-      <div class="feature-card"><h4>UI integration</h4><p>Extends 1 view(s) in the Odoo interface.</p></div>
+      <div class="feature-card"><h4>Default role for portal users</h4><p>Portal users get a configured default role on creation.</p></div>
+      <div class="feature-card"><h4>Company-level setting</h4><p>The default role is configured per company.</p></div>
+      <div class="feature-card"><h4>Portal wizard integration</h4><p>Extends <code>portal.wizard.user</code> so the role is applied when portal access is granted.</p></div>
     </div>
   </section>
   <section id="screenshots">

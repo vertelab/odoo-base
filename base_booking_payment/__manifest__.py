@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 {
-    'name': 'Booking payment',
+    'name': 'Base: Booking Payment',
 'author': 'Vertel Sverige AB',
     'website': 'https://vertel.se/apps/odoo-base/base_booking_payment',
     'version': '18.0.1.0.0',

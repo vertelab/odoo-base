@@ -54,15 +54,15 @@
 <div class="container">
   <section id="overview">
     <h2>Overview</h2>
-    <p>Sends emails for bookings.</p>
-    <p>It introduces the model(s) <code>BookingMail</code>, <code>BookingMailCalendar</code> to handle this workflow.</p>
+    <p>Bookings need confirmation and reminder emails to work in practice.</p>
+    <p>This module sends the emails around a booking and tracks what was sent.</p>
+    <p><strong>Typical use:</strong> Enable alongside the booking modules.</p>
   </section>
   <section id="features">
     <h2>Key Features</h2>
     <div class="feature-grid">
-      <div class="feature-card"><h4>Dedicated data model</h4><p>Adds its own models: BookingMail, BookingMailCalendar.</p></div>
-      <div class="feature-card"><h4>Automation</h4><p>Scheduled jobs: Booking: Mail Scheduler.</p></div>
-      <div class="feature-card"><h4>UI integration</h4><p>Extends 3 view(s) in the Odoo interface.</p></div>
+      <div class="feature-card"><h4>Booking emails</h4><p>Sends confirmation and notification emails.</p></div>
+      <div class="feature-card"><h4>Mail tracking</h4><p><code>booking.mail</code> records what was sent.</p></div>
     </div>
   </section>
   <section id="screenshots">

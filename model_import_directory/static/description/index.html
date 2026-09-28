@@ -54,13 +54,16 @@
 <div class="container">
   <section id="overview">
     <h2>Overview</h2>
-    <p>Imports records from a directory of files.</p>
-    <p>It extends Odoo's settings.</p>
+    <p>Bulk imports usually arrive as a folder of files, not a single spreadsheet. Importing them one by one is slow and easy to get wrong.</p>
+    <p>This module imports records from a directory of files, driven through the EDI framework, so large batches can be processed in one run.</p>
+    <p><strong>Typical use:</strong> Use it for recurring bulk imports delivered as file drops.</p>
   </section>
   <section id="features">
     <h2>Key Features</h2>
     <div class="feature-grid">
-      <div class="feature-card"><h4>UI integration</h4><p>Extends 1 view(s) in the Odoo interface.</p></div>
+      <div class="feature-card"><h4>Directory import</h4><p>Import records from a folder of files in one operation.</p></div>
+      <div class="feature-card"><h4>EDI integration</h4><p>Builds on <code>edi.message</code> for reliable processing.</p></div>
+      <div class="feature-card"><h4>Configuration</h4><p>Settings managed through <code>res.config.settings</code>.</p></div>
     </div>
   </section>
   <section id="screenshots">

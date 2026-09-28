@@ -54,16 +54,15 @@
 <div class="container">
   <section id="overview">
     <h2>Overview</h2>
-    <p>Adds paying-user tracking to contracts.</p>
-    <p>It introduces the model(s) <code>Users</code>, <code>Users</code> to handle this workflow.</p>
-    <p>It extends Odoo's settings.</p>
+    <p>In subscription and contract setups, the person who uses the service and the person who pays for it are not always the same. Odoo does not track that distinction.</p>
+    <p>This module adds paying-user tracking so contracts record who pays separately from who uses.</p>
+    <p><strong>Typical use:</strong> Useful for family accounts, company-paid subscriptions and similar split-responsibility setups.</p>
   </section>
   <section id="features">
     <h2>Key Features</h2>
     <div class="feature-grid">
-      <div class="feature-card"><h4>Dedicated data model</h4><p>Adds its own models: Users, Users.</p></div>
-      <div class="feature-card"><h4>Actions</h4><p>Adds action_active_paying_users.</p></div>
-      <div class="feature-card"><h4>UI integration</h4><p>Extends 2 view(s) in the Odoo interface.</p></div>
+      <div class="feature-card"><h4>Paying-user tracking</h4><p>Record the paying party on contracts and users.</p></div>
+      <div class="feature-card"><h4>Configuration</h4><p>Managed through <code>res.config.settings</code>.</p></div>
     </div>
   </section>
   <section id="screenshots">

@@ -54,15 +54,16 @@
 <div class="container">
   <section id="overview">
     <h2>Overview</h2>
-    <p>Security Classification.</p>
-    <p>It introduces the model(s) <code>Partner</code> to handle this workflow.</p>
-    <p>It extends Odoo's contacts.</p>
+    <p>Not all information is equally sensitive. Without a classification, everything is treated the same — which usually means either too little protection or too much friction.</p>
+    <p>This module adds security classification to records and messages, so information can be marked and handled according to its sensitivity.</p>
+    <p><strong>Typical use:</strong> Suitable for organisations handling protected information that must be classified and, where needed, anonymised.</p>
   </section>
   <section id="features">
     <h2>Key Features</h2>
     <div class="feature-grid">
-      <div class="feature-card"><h4>Dedicated data model</h4><p>Adds its own models: Partner.</p></div>
-      <div class="feature-card"><h4>UI integration</h4><p>Extends 1 view(s) in the Odoo interface.</p></div>
+      <div class="feature-card"><h4>Classification on records</h4><p>Mark partners and other records with a security classification.</p></div>
+      <div class="feature-card"><h4>Message classification</h4><p>Extends <code>mail.message</code> and tracking values so communication can be classified too.</p></div>
+      <div class="feature-card"><h4>Hide name option</h4><p>A <code>Hide Name</code> flag allows the subject to be masked where required.</p></div>
     </div>
   </section>
   <section id="screenshots">
