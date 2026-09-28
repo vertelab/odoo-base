@@ -184,9 +184,7 @@ class DavCollection(models.Model):
                     )
                 ))
                 return [
-                    '/' + '/'.join(
-                        path_components + [quote_plus(attachment.name)]
-                    )
+                    quote_plus(attachment.name)
                     for attachment in self.env['ir.attachment'].search([
                         ('type', '=', 'binary'),
                         ('res_model', '=', record._name),
@@ -195,9 +193,7 @@ class DavCollection(models.Model):
                 ]
             elif len(path_components) == 2:
                 return [
-                    '/' + '/'.join(
-                        path_components + [quote_plus(record.display_name)]
-                    )
+                    quote_plus(record.display_name)
                     for record in self.eval()
                 ]
 
@@ -210,7 +206,7 @@ class DavCollection(models.Model):
                 uuid = record[self.field_uuid.name]
             else:
                 uuid = str(record.id)
-            result.append('/' + '/'.join(path_components + [uuid]))
+            result.append(str(uuid))
         return result
 
     def dav_delete(self, collection, components):
