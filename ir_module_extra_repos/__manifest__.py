@@ -49,4 +49,3 @@ Module Extra Repos
     'installable': True,
     'auto_install': False,
 }
-# vim:expandtab:smartindent:tabstop=4s:softtabstop=4:shiftwidth=4:
