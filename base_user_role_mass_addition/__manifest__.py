@@ -21,21 +21,13 @@
 
 {
     'name': 'Base: User Roles Mass addition',
-    'version': '18.0.1.0.0',
+    'version': '1.0',
     # Version ledger: 16.0 = Odoo version. 1 = Major. Non regressionable code. 2 = Minor. New features that are regressionable. 3 = Bug fixes
     'summary': 'Extends the User Roles to enable assiging several users to a role, at the same time.',
     'category': 'Tools',
-    'description': '''
-User Roles Mass addition
-========================
-
+    'description': """
     Extends the User Roles to enable assiging several users to a role, at the same time, via the use of a server action.
-
-    Features:
-
-        - UI Integration: Extends 4 view(s) in the Odoo interface.
-        - Extends Odoo: Builds on role.mass.addition.wizard.
-    ''',
+    """,
     #'sequence': '1'
     'author': 'Vertel Sverige AB',
     'website': 'https://vertel.se/apps/odoo-base/base_user_role_mass_addition',
@@ -56,3 +48,4 @@ User Roles Mass addition
     'auto_install': True,
 
 }
+# vim:expandtab:smartindent:tabstop=4:softtabstop=4:shiftwidth=4:
