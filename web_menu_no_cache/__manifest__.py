@@ -1,5 +1,5 @@
 # -*- coding: utf-8 -*-
-# Copyright 2026 Vertel AB — License AGPL-3.0
+# Copyright 2026 Vertel Sverige AB — License AGPL-3.0
 {
     'name': 'Base: Web Menu No Cache',
     'version': '18.0.1.0.0',
@@ -17,7 +17,7 @@ Web Menu No Cache
 
         - Web integration: Exposes HTTP endpoints for external systems.
     ''',
-    'author': 'Vertel AB',
+    'author': 'Vertel Sverige AB',
     'website': 'https://vertel.se/apps/odoo-base/web_menu_no_cache',
     'license': 'AGPL-3',
     'depends': ['web'],

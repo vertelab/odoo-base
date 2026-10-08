@@ -2,7 +2,7 @@
 ##############################################################################
 #
 #    Odoo SA, Open Source Management Solution, third party addon
-#    Copyright (C) 2021- Vertel AB (<https://vertel.se>).
+#    Copyright (C) 2021- Vertel Sverige AB (<https://vertel.se>).
 #
 #    This program is free software: you can redistribute it and/or modify
 #    it under the terms of the GNU Affero General Public License as
@@ -26,7 +26,7 @@
     'summary': 'Removes new user signup from the front page.',
     'author': 'Vertel Sverige AB',
     'images': ['static/description/banner.png'], # 560x280 px.
-    'maintainer': 'Vertel AB',
+    'maintainer': 'Vertel Sverige AB',
     'category': 'Base',
     'license': 'AGPL-3',
     'website': 'https://vertel.se/apps/odoo-base/auth_signup_nosignup',

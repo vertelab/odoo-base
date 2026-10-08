@@ -6,7 +6,7 @@
     'description': """
 Den första kursen: logga in, hitta rätt, installera appen och få en översikt över hela arbetsytan.
 """,
-    'author': 'Vertel AB',
+    'author': 'Vertel Sverige AB',
     'website': 'https://vertel.se',
     'license': 'LGPL-3',
     'category': 'Website/eLearning',

@@ -1,5 +1,5 @@
 # -*- coding: utf-8 -*-
-# Copyright 2026 Vertel AB — License AGPL-3.0
+# Copyright 2026 Vertel Sverige AB — License AGPL-3.0
 from odoo import http
 from odoo.addons.web.controllers.home import Home
 
