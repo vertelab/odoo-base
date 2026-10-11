@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data noupdate="1">
+        <!-- ============================================================
+             Fem tick-cron — en per kadens.
+
+             Motorn känner inte till några uppgifter; den plockar förfallna
+             poster ur `cron.task` och kör dem. Kadens-uppdelningen ger
+             naturlig isolering: en hängande `daily`-uppgift blockerar inte
+             `min`-ticken.
+
+             `min` är 5 minuter, inte 1 — `_heartbeat_all` m.fl. har redan
+             en intern 5-minuterskontroll, så 4 av 5 väckningar var
+             garanterat slöseri när cron:en körde varje minut.
+             ============================================================ -->
+
+        <record id="cron_min" model="ir.cron">
+            <field name="name">Cron: Tick (5 min)</field>
+            <field name="cron_name">Cron: Tick (5 min)</field>
+            <field name="model_id" ref="model_cron_task"/>
+            <field name="state">code</field>
+            <field name="code">model._cron_tick('min')</field>
+            <field name="interval_number">5</field>
+            <field name="interval_type">minutes</field>
+            <field name="active" eval="True"/>
+            <field name="user_id" ref="base.user_root"/>
+        </record>
+
+        <record id="cron_hour" model="ir.cron">
+            <field name="name">Cron: Tick (timme)</field>
+            <field name="cron_name">Cron: Tick (timme)</field>
+            <field name="model_id" ref="model_cron_task"/>
+            <field name="state">code</field>
+            <field name="code">model._cron_tick('hour')</field>
+            <field name="interval_number">1</field>
+            <field name="interval_type">hours</field>
+            <field name="active" eval="True"/>
+            <field name="user_id" ref="base.user_root"/>
+        </record>
+
+        <record id="cron_daily" model="ir.cron">
+            <field name="name">Cron: Tick (dygn)</field>
+            <field name="cron_name">Cron: Tick (dygn)</field>
+            <field name="model_id" ref="model_cron_task"/>
+            <field name="state">code</field>
+            <field name="code">model._cron_tick('daily')</field>
+            <field name="interval_number">1</field>
+            <field name="interval_type">days</field>
+            <field name="active" eval="True"/>
+            <field name="user_id" ref="base.user_root"/>
+        </record>
+
+        <record id="cron_week" model="ir.cron">
+            <field name="name">Cron: Tick (vecka)</field>
+            <field name="cron_name">Cron: Tick (vecka)</field>
+            <field name="model_id" ref="model_cron_task"/>
+            <field name="state">code</field>
+            <field name="code">model._cron_tick('week')</field>
+            <field name="interval_number">7</field>
+            <field name="interval_type">days</field>
+            <field name="active" eval="True"/>
+            <field name="user_id" ref="base.user_root"/>
+        </record>
+
+        <record id="cron_month" model="ir.cron">
+            <field name="name">Cron: Tick (månad)</field>
+            <field name="cron_name">Cron: Tick (månad)</field>
+            <field name="model_id" ref="model_cron_task"/>
+            <field name="state">code</field>
+            <field name="code">model._cron_tick('month')</field>
+            <field name="interval_number">1</field>
+            <field name="interval_type">months</field>
+            <field name="active" eval="True"/>
+            <field name="user_id" ref="base.user_root"/>
+        </record>
+    </data>
+</odoo>

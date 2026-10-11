@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data noupdate="1">
+        <!-- Webhook-konfiguration för händelsedriven triggning.
+
+             `webhook_enabled` kan stängas av utan kodändring.
+             `webhook_token` är tom som standard — då återanvänds
+             `saltstack.alert.webhook_token`, så Salt-minions inte behöver
+             en andra nyckel. Sätts den här prioriteras den. -->
+        <record id="config_webhook_enabled" model="ir.config_parameter">
+            <field name="key">cron_tick.webhook_enabled</field>
+            <field name="value">True</field>
+        </record>
+    </data>
+</odoo>

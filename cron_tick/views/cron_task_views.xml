@@ -1,0 +1,169 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <!-- ================================================================
+         Listvy — översikten som saknades när 26 ir.cron låg i en platt lista.
+         Färgkodning: röd vid fel, orange vid försenad körning.
+         ================================================================ -->
+    <record id="view_cron_task_list" model="ir.ui.view">
+        <field name="name">cron.task.list</field>
+        <field name="model">cron.task</field>
+        <field name="arch" type="xml">
+            <list string="Schemalagda uppgifter"
+                  decoration-danger="failure_count &gt; 0"
+                  decoration-warning="is_overdue"
+                  decoration-muted="not active">
+                <field name="sequence" widget="handle"/>
+                <field name="name"/>
+                <field name="technical_name"/>
+                <field name="module" optional="show"/>
+                <field name="cadence" optional="show"/>
+                <field name="last_run"/>
+                <field name="last_duration_ms" optional="show"/>
+                <field name="failure_count" optional="show"/>
+                <field name="is_locked" optional="hide"/>
+                <field name="is_overdue" optional="hide"/>
+                <field name="active" widget="boolean_toggle"/>
+            </list>
+        </field>
+    </record>
+
+    <!-- ================================================================
+         Formulär — alla fält + "Kör nu".
+         ================================================================ -->
+    <record id="view_cron_task_form" model="ir.ui.view">
+        <field name="name">cron.task.form</field>
+        <field name="model">cron.task</field>
+        <field name="arch" type="xml">
+            <form string="Schemalagd uppgift">
+                <header>
+                    <button name="action_run_now" type="object"
+                            string="Kör nu" class="btn-primary"
+                            invisible="is_locked"/>
+                    <field name="is_locked" invisible="1"/>
+                    <field name="is_overdue" invisible="1"/>
+                </header>
+                <sheet>
+                    <div class="oe_button_box" name="button_box"/>
+                    <widget name="web_ribbon" title="Inaktiverad"
+                            bg_color="text-bg-danger" invisible="active"/>
+                    <group>
+                        <group string="Identitet">
+                            <field name="name" placeholder="Läsbart namn"/>
+                            <field name="technical_name"
+                                   placeholder="t.ex. skill_sync"/>
+                            <field name="module"/>
+                            <field name="active"/>
+                        </group>
+                        <group string="Vad som körs">
+                            <field name="model_name"
+                                   placeholder="t.ex. ai.skill"/>
+                            <field name="method_name"
+                                   placeholder="t.ex. _sync_from_filesystem"/>
+                        </group>
+                    </group>
+                    <group>
+                        <group string="När">
+                            <field name="cadence"/>
+                            <field name="sequence"/>
+                        </group>
+                        <group string="Körning">
+                            <field name="timeout_seconds"/>
+                            <field name="max_failures"/>
+                        </group>
+                    </group>
+                    <group string="Körhistorik" colspan="2">
+                        <group>
+                            <field name="last_run"/>
+                            <field name="last_duration_ms"/>
+                        </group>
+                        <group>
+                            <field name="failure_count"/>
+                            <field name="locked_by"/>
+                            <field name="locked_at"/>
+                        </group>
+                    </group>
+                    <notebook>
+                        <page string="Senaste fel" name="error"
+                              invisible="not last_error">
+                            <field name="last_error" readonly="1"
+                                   widget="text" nolabel="1"/>
+                        </page>
+                    </notebook>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+    <!-- ================================================================
+         Sökvy — filter och gruppering.
+         ================================================================ -->
+    <record id="view_cron_task_search" model="ir.ui.view">
+        <field name="name">cron.task.search</field>
+        <field name="model">cron.task</field>
+        <field name="arch" type="xml">
+            <search string="Sök schemalagda uppgifter">
+                <field name="name"/>
+                <field name="technical_name"/>
+                <field name="module"/>
+                <field name="model_name"/>
+                <filter name="filter_active" string="Aktiva"
+                        domain="[('active', '=', True)]"/>
+                <filter name="filter_inactive" string="Inaktiva"
+                        domain="[('active', '=', False)]"/>
+                <separator/>
+                <filter name="filter_failed" string="Misslyckade"
+                        domain="[('failure_count', '&gt;', 0)]"/>
+                <filter name="filter_overdue" string="Försenade"
+                        domain="[('is_overdue', '=', True)]"/>
+                <filter name="filter_locked" string="Körs nu"
+                        domain="[('is_locked', '=', True)]"/>
+                <separator/>
+                <filter name="filter_min" string="Var 5:e minut"
+                        domain="[('cadence', '=', 'min')]"/>
+                <filter name="filter_hour" string="Varje timme"
+                        domain="[('cadence', '=', 'hour')]"/>
+                <filter name="filter_daily" string="Dagligen"
+                        domain="[('cadence', '=', 'daily')]"/>
+                <filter name="filter_week" string="Veckovis"
+                        domain="[('cadence', '=', 'week')]"/>
+                <filter name="filter_month" string="Månadsvis"
+                        domain="[('cadence', '=', 'month')]"/>
+                <group expand="0" string="Gruppera på">
+                    <filter name="group_module" string="Modul"
+                            context="{'group_by': 'module'}"/>
+                    <filter name="group_cadence" string="Kadens"
+                            context="{'group_by': 'cadence'}"/>
+                </group>
+            </search>
+        </field>
+    </record>
+
+    <!-- ================================================================
+         Åtgärder och meny.
+         Technical-meny = base.menu_custom (Odoo 18).
+         ================================================================ -->
+    <record id="action_cron_task" model="ir.actions.act_window">
+        <field name="name">Schemalagda uppgifter</field>
+        <field name="res_model">cron.task</field>
+        <field name="view_mode">list,form</field>
+        <field name="search_view_id" ref="view_cron_task_search"/>
+        <field name="context">{'search_default_filter_active': 1}</field>
+        <field name="help" type="html">
+            <p class="o_view_nocontent_smiling_face">
+                Inga schemalagda uppgifter
+            </p>
+            <p>
+                Moduler registrerar sina uppgifter som data-XML. Motorn kör
+                dem via fem tick-cron — en per kadens.
+            </p>
+        </field>
+    </record>
+
+    <menuitem id="menu_cron_task_root"
+              name="Cron Tasks"
+              parent="base.menu_custom"
+              action="action_cron_task"
+              sequence="95"/>
+
+</odoo>
