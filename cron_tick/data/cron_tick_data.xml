@@ -2,21 +2,20 @@
 <odoo>
     <data noupdate="1">
         <!-- ============================================================
-             Fem tick-cron — en per kadens.
+             Five tick crons — one per cadence.
 
-             Motorn känner inte till några uppgifter; den plockar förfallna
-             poster ur `cron.task` och kör dem. Kadens-uppdelningen ger
-             naturlig isolering: en hängande `daily`-uppgift blockerar inte
-             `min`-ticken.
+             The engine knows nothing about any task; it picks due records
+             from `cron.task` and runs them. The cadence split provides
+             natural isolation: a hanging `daily` task does not block the
+             `min` tick.
 
-             `min` är 5 minuter, inte 1 — `_heartbeat_all` m.fl. har redan
-             en intern 5-minuterskontroll, så 4 av 5 väckningar var
-             garanterat slöseri när cron:en körde varje minut.
+             `min` is 5 minutes, not 1 — `_heartbeat_all` and friends
+             already have an internal 5-minute check, so 4 of 5 wakeups
+             were guaranteed waste when the cron ran every minute.
              ============================================================ -->
 
         <record id="cron_min" model="ir.cron">
             <field name="name">Cron: Tick (5 min)</field>
-            <field name="cron_name">Cron: Tick (5 min)</field>
             <field name="model_id" ref="model_cron_task"/>
             <field name="state">code</field>
             <field name="code">model._cron_tick('min')</field>
@@ -27,8 +26,7 @@
         </record>
 
         <record id="cron_hour" model="ir.cron">
-            <field name="name">Cron: Tick (timme)</field>
-            <field name="cron_name">Cron: Tick (timme)</field>
+            <field name="name">Cron: Tick (hourly)</field>
             <field name="model_id" ref="model_cron_task"/>
             <field name="state">code</field>
             <field name="code">model._cron_tick('hour')</field>
@@ -39,8 +37,7 @@
         </record>
 
         <record id="cron_daily" model="ir.cron">
-            <field name="name">Cron: Tick (dygn)</field>
-            <field name="cron_name">Cron: Tick (dygn)</field>
+            <field name="name">Cron: Tick (daily)</field>
             <field name="model_id" ref="model_cron_task"/>
             <field name="state">code</field>
             <field name="code">model._cron_tick('daily')</field>
@@ -51,8 +48,7 @@
         </record>
 
         <record id="cron_week" model="ir.cron">
-            <field name="name">Cron: Tick (vecka)</field>
-            <field name="cron_name">Cron: Tick (vecka)</field>
+            <field name="name">Cron: Tick (weekly)</field>
             <field name="model_id" ref="model_cron_task"/>
             <field name="state">code</field>
             <field name="code">model._cron_tick('week')</field>
@@ -63,8 +59,7 @@
         </record>
 
         <record id="cron_month" model="ir.cron">
-            <field name="name">Cron: Tick (månad)</field>
-            <field name="cron_name">Cron: Tick (månad)</field>
+            <field name="name">Cron: Tick (monthly)</field>
             <field name="model_id" ref="model_cron_task"/>
             <field name="state">code</field>
             <field name="code">model._cron_tick('month')</field>

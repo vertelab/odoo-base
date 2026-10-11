@@ -2,44 +2,46 @@
 {
     'name': 'Cron: Tick Engine',
     'version': '18.0.1.0.0',
-    'summary': 'Deklarativ schemaläggning — en motor, fem kadenser',
+    'summary': 'Declarative scheduling — one engine, five cadences',
     'category': 'Hidden',
     'author': 'Vertel Sverige AB',
     'website': 'https://vertel.se',
     'license': 'AGPL-3',
     'description': """
-        Schemaläggningsmotor för hela ekosystemet.
+        Scheduling engine for the entire ecosystem.
 
-        Ersätter hundratals enskilda `ir.cron` med EN registreringsmodell
-        (`cron.task`) och fem tick-cron — en per kadens:
+        Replaces hundreds of individual `ir.cron` with ONE registry model
+        (`cron.task`) and five tick crons — one per cadence:
 
-            min     var 5:e minut
-            hour    varje timme
-            daily   dagligen (spridd över en timme)
-            week    veckovis (spridd över en dag)
-            month   månadsvis (spridd över en vecka)
+            min     every 5 minutes
+            hour    hourly
+            daily   daily (spread over an hour)
+            week    weekly (spread over a day)
+            month   monthly (spread over a week)
 
-        En modul deklarerar sina uppgifter som data-XML och lägger `cron_tick`
-        i `depends`. Motorn känner inte till några uppgifter.
+        A module declares its tasks as data XML and adds `cron_tick` to
+        `depends`. The engine knows nothing about any task.
 
-        TRE UTLÖSARTYPER mot samma metod:
+        THREE TRIGGER TYPES against the same method:
 
-          1. Schemalagd  — tick-cron:en kör förfallna uppgifter
-          2. Händelsedriven — POST /cron/trigger/<technical_name> (Bearer)
-          3. Manuell    — server action + knapp i formuläret
+          1. Scheduled    — the tick cron runs due tasks
+          2. Event-driven — POST /cron/trigger/<technical_name> (Bearer)
+          3. Manual       — server action + button in the form
 
-        VARFÖR I ODOO-BASE: cron-schemaläggning är infrastruktur, inte AI.
-        Modulen beror ENDAST på `base`, så `odoo-project`, `odoo-saltstack`,
-        `odoo-bifrost` och `odoo-keykeep` kan använda den utan att bero på
-        AI-stacken. `odoo-project` kan därmed installeras utan `odoo-ai`.
+        WHY IN ODOO-BASE: cron scheduling is infrastructure, not AI.
+        The module depends ONLY on `base`, so `odoo-project`,
+        `odoo-saltstack`, `odoo-bifrost` and `odoo-keykeep` can use it
+        without depending on the AI stack. `odoo-project` can therefore be
+        installed without `odoo-ai`.
 
-        ISOLERAD FELHANTERING: varje uppgift körs i egen savepoint — en
-        kraschande uppgift stoppar inte kedjan.
+        ISOLATED ERROR HANDLING: each task runs in its own savepoint — a
+        crashing task does not stop the chain.
 
-        ATOMISKT LÅS: sessionsbundet PostgreSQL advisory-lock per uppgift.
-        En villkorlig UPDATE räcker INTE — Odoo kör under `repeatable read`,
-        där två workers kan båda se låset som tomt och båda skriva.
-        `locked_by`/`locked_at` visas i UI:t som information.
+        ATOMIC LOCK: session-bound PostgreSQL advisory lock per task.
+        A conditional UPDATE is NOT sufficient — Odoo runs under
+        `repeatable read`, where two workers can both see the lock as free
+        and both write. `locked_by`/`locked_at` are shown in the UI as
+        information.
     """,
     'depends': [
         'base',

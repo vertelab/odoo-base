@@ -1,0 +1,434 @@
+# Translation of Odoo Server.
+# This file contains the translation of the following modules:
+# 	* cron_tick
+#
+msgid ""
+msgstr ""
+
+#. module: cron_tick
+#. odoo-python
+#: code:addons/cron_tick/models/cron_task.py:0
+msgid "%s ran in %s ms."
+msgstr "%s kördes på %s ms."
+
+#. module: cron_tick
+#: model:ir.model.fields,field_description:cron_tick.field_cron_task__active
+#: model_terms:ir.ui.view,arch_db:cron_tick.view_cron_task_search
+msgid "Active"
+msgstr "Aktiv"
+
+#. module: cron_tick
+#: model:ir.model.fields,field_description:cron_tick.field_cron_task__cadence
+#: model_terms:ir.ui.view,arch_db:cron_tick.view_cron_task_search
+msgid "Cadence"
+msgstr "Kadens"
+
+#. module: cron_tick
+#: model:ir.model.fields,field_description:cron_tick.field_cron_task__cadence_label
+msgid "Cadence Label"
+msgstr "Kadens (text)"
+
+#. module: cron_tick
+#: model:ir.model.fields,field_description:cron_tick.field_cron_task__create_uid
+msgid "Created by"
+msgstr "Skapad av"
+
+#. module: cron_tick
+#: model:ir.model.fields,field_description:cron_tick.field_cron_task__create_date
+msgid "Created on"
+msgstr "Skapad den"
+
+#. module: cron_tick
+#: model:ir.ui.menu,name:cron_tick.menu_cron_task_root
+msgid "Cron Tasks"
+msgstr "Schemalagda uppgifter"
+
+#. module: cron_tick
+#: model:ir.actions.server,name:cron_tick.cron_min_ir_actions_server
+msgid "Cron: Tick (5 min)"
+msgstr "Cron: Tick (5 min)"
+
+#. module: cron_tick
+#: model:ir.actions.server,name:cron_tick.cron_daily_ir_actions_server
+msgid "Cron: Tick (dygn)"
+msgstr "Cron: Tick (dygn)"
+
+#. module: cron_tick
+#: model:ir.actions.server,name:cron_tick.cron_month_ir_actions_server
+msgid "Cron: Tick (månad)"
+msgstr "Cron: Tick (månad)"
+
+#. module: cron_tick
+#: model:ir.actions.server,name:cron_tick.cron_hour_ir_actions_server
+msgid "Cron: Tick (timme)"
+msgstr "Cron: Tick (timme)"
+
+#. module: cron_tick
+#: model:ir.actions.server,name:cron_tick.cron_week_ir_actions_server
+msgid "Cron: Tick (vecka)"
+msgstr "Cron: Tick (vecka)"
+
+#. module: cron_tick
+#: model:ir.model.fields.selection,name:cron_tick.selection__cron_task__cadence__daily
+#: model_terms:ir.ui.view,arch_db:cron_tick.view_cron_task_search
+msgid "Daily"
+msgstr "Dagligen"
+
+#. module: cron_tick
+#: model_terms:ir.ui.view,arch_db:cron_tick.view_cron_task_form
+msgid "Deactivated"
+msgstr "Inaktiverad"
+
+#. module: cron_tick
+#: model:ir.model.fields,field_description:cron_tick.field_cron_task__display_name
+msgid "Display Name"
+msgstr "Visningsnamn"
+
+#. module: cron_tick
+#: model:ir.model.fields.selection,name:cron_tick.selection__cron_task__cadence__min
+#: model_terms:ir.ui.view,arch_db:cron_tick.view_cron_task_search
+msgid "Every 5 minutes"
+msgstr "Var 5:e minut"
+
+#. module: cron_tick
+#: model_terms:ir.ui.view,arch_db:cron_tick.view_cron_task_form
+msgid "Execution"
+msgstr "Körning"
+
+#. module: cron_tick
+#: model_terms:ir.ui.view,arch_db:cron_tick.view_cron_task_search
+msgid "Failed"
+msgstr "Misslyckade"
+
+#. module: cron_tick
+#: model:ir.model.fields,field_description:cron_tick.field_cron_task__failure_count
+msgid "Failure Count"
+msgstr "Fel i följd"
+
+#. module: cron_tick
+#: model_terms:ir.ui.view,arch_db:cron_tick.view_cron_task_search
+msgid "Group By"
+msgstr "Gruppera på"
+
+#. module: cron_tick
+#: model:ir.model.fields.selection,name:cron_tick.selection__cron_task__cadence__hour
+#: model_terms:ir.ui.view,arch_db:cron_tick.view_cron_task_search
+msgid "Hourly"
+msgstr "Varje timme"
+
+#. module: cron_tick
+#: model:ir.model.fields,field_description:cron_tick.field_cron_task__id
+msgid "ID"
+msgstr "ID"
+
+#. module: cron_tick
+#: model_terms:ir.ui.view,arch_db:cron_tick.view_cron_task_form
+msgid "Identity"
+msgstr "Identitet"
+
+#. module: cron_tick
+#: model_terms:ir.ui.view,arch_db:cron_tick.view_cron_task_search
+msgid "Inactive"
+msgstr "Inaktiva"
+
+#. module: cron_tick
+#: model:ir.model.fields,field_description:cron_tick.field_cron_task__is_locked
+msgid "Is Locked"
+msgstr "Körs nu"
+
+#. module: cron_tick
+#: model:ir.model.fields,field_description:cron_tick.field_cron_task__is_overdue
+msgid "Is Overdue"
+msgstr "Försenad"
+
+#. module: cron_tick
+#: model:ir.model.fields,field_description:cron_tick.field_cron_task__last_duration_ms
+msgid "Last Duration Ms"
+msgstr "Varaktighet (ms)"
+
+#. module: cron_tick
+#: model:ir.model.fields,field_description:cron_tick.field_cron_task__last_error
+msgid "Last Error"
+msgstr "Senaste fel"
+
+#. module: cron_tick
+#: model:ir.model.fields,field_description:cron_tick.field_cron_task__last_run
+msgid "Last Run"
+msgstr "Senast körd"
+
+#. module: cron_tick
+#: model:ir.model.fields,field_description:cron_tick.field_cron_task__write_uid
+msgid "Last Updated by"
+msgstr "Senast uppdaterad av"
+
+#. module: cron_tick
+#: model:ir.model.fields,field_description:cron_tick.field_cron_task__write_date
+msgid "Last Updated on"
+msgstr "Senast uppdaterad den"
+
+#. module: cron_tick
+#: model_terms:ir.ui.view,arch_db:cron_tick.view_cron_task_form
+msgid "Last error"
+msgstr "Senaste fel"
+
+#. module: cron_tick
+#: model:ir.model.fields,field_description:cron_tick.field_cron_task__locked_at
+msgid "Locked At"
+msgstr "Låst sedan"
+
+#. module: cron_tick
+#: model:ir.model.fields,field_description:cron_tick.field_cron_task__locked_by
+msgid "Locked By"
+msgstr "Låst av"
+
+#. module: cron_tick
+#: model:ir.model.fields,field_description:cron_tick.field_cron_task__max_failures
+msgid "Max Failures"
+msgstr "Max fel"
+
+#. module: cron_tick
+#: model:ir.model.fields,field_description:cron_tick.field_cron_task__method_name
+msgid "Method Name"
+msgstr "Metod"
+
+#. module: cron_tick
+#: model:ir.model.fields,help:cron_tick.field_cron_task__method_name
+msgid ""
+"Method name on the model, e.g. \"_sync_from_filesystem\". Called without "
+"arguments."
+msgstr ""
+"Metodnamn på modellen, t.ex. \"_sync_from_filesystem\". Anropas utan "
+"argument."
+
+#. module: cron_tick
+#: model:ir.model.fields,field_description:cron_tick.field_cron_task__model_name
+msgid "Model Name"
+msgstr "Modell"
+
+#. module: cron_tick
+#: model:ir.model.fields,field_description:cron_tick.field_cron_task__module
+#: model_terms:ir.ui.view,arch_db:cron_tick.view_cron_task_search
+msgid "Module"
+msgstr "Modul"
+
+#. module: cron_tick
+#: model_terms:ir.actions.act_window,help:cron_tick.action_cron_task
+msgid ""
+"Modules register their tasks as data XML. The engine runs\n"
+"                them via five tick crons — one per cadence."
+msgstr ""
+"Moduler registrerar sina uppgifter som data-XML. Motorn kör\n"
+"                dem via fem tick-cron — en per kadens."
+
+#. module: cron_tick
+#: model:ir.model.fields.selection,name:cron_tick.selection__cron_task__cadence__month
+#: model_terms:ir.ui.view,arch_db:cron_tick.view_cron_task_search
+msgid "Monthly"
+msgstr "Månadsvis"
+
+#. module: cron_tick
+#: model:ir.model.fields,field_description:cron_tick.field_cron_task__name
+msgid "Name"
+msgstr "Namn"
+
+#. module: cron_tick
+#: model_terms:ir.actions.act_window,help:cron_tick.action_cron_task
+msgid "No scheduled tasks"
+msgstr "Inga schemalagda uppgifter"
+
+#. module: cron_tick
+#: model:ir.model.fields,help:cron_tick.field_cron_task__max_failures
+msgid ""
+"Number of consecutive failures before the task is automatically deactivated."
+msgstr "Antal konsekutiva fel innan uppgiften inaktiveras automatiskt."
+
+#. module: cron_tick
+#: model_terms:ir.ui.view,arch_db:cron_tick.view_cron_task_search
+msgid "Overdue"
+msgstr "Försenade"
+
+#. module: cron_tick
+#: model_terms:ir.ui.view,arch_db:cron_tick.view_cron_task_form
+msgid "Readable name"
+msgstr "Läsbart namn"
+
+#. module: cron_tick
+#: model:ir.model.fields,help:cron_tick.field_cron_task__name
+msgid "Readable name shown in the list."
+msgstr "Läsbart namn som visas i listan."
+
+#. module: cron_tick
+#: model_terms:ir.ui.view,arch_db:cron_tick.view_cron_task_form
+msgid "Run history"
+msgstr "Körhistorik"
+
+#. module: cron_tick
+#: model_terms:ir.ui.view,arch_db:cron_tick.view_cron_task_form
+msgid "Run now"
+msgstr "Kör nu"
+
+#. module: cron_tick
+#: model:ir.model.fields,help:cron_tick.field_cron_task__sequence
+msgid "Run order within the cadence. Lower value runs first."
+msgstr "Körordning inom kadensen. Lägre värde körs först."
+
+#. module: cron_tick
+#: model_terms:ir.ui.view,arch_db:cron_tick.view_cron_task_search
+msgid "Running"
+msgstr "Körs nu"
+
+#. module: cron_tick
+#: model:ir.model,name:cron_tick.model_cron_task
+#: model_terms:ir.ui.view,arch_db:cron_tick.view_cron_task_form
+msgid "Scheduled Task"
+msgstr "Schemalagd uppgift"
+
+#. module: cron_tick
+#: model:ir.actions.act_window,name:cron_tick.action_cron_task
+#: model_terms:ir.ui.view,arch_db:cron_tick.view_cron_task_list
+msgid "Scheduled Tasks"
+msgstr "Schemalagda uppgifter"
+
+#. module: cron_tick
+#: model_terms:ir.ui.view,arch_db:cron_tick.view_cron_task_search
+msgid "Search Scheduled Tasks"
+msgstr "Sök schemalagda uppgifter"
+
+#. module: cron_tick
+#: model:ir.model.fields,field_description:cron_tick.field_cron_task__sequence
+msgid "Sequence"
+msgstr "Sekvens"
+
+#. module: cron_tick
+#: model:ir.model.fields,help:cron_tick.field_cron_task__timeout_seconds
+msgid ""
+"Soft time limit. The engine measures the run time and logs a warning when "
+"the limit is exceeded. Python threads cannot be aborted safely — the limit "
+"is therefore measuring, not aborting. A task that consistently exceeds the "
+"limit should be moved to queue_job."
+msgstr "Mjuk tidsgräns. Motorn mäter körtiden och loggar en varning när gränsen passeras. Python-trådar kan inte avbrytas säkert — gränsen är därför mätande, inte avbrytande. En uppgift som konsekvent överskrider gränsen bör flyttas till queue_job."
+
+#. module: cron_tick
+#: model:ir.model.fields,help:cron_tick.field_cron_task__technical_name
+msgid ""
+"Stable identifier. Used by event-driven triggering "
+"(/cron/trigger/<technical_name>) and for daily spread. Never change it on a "
+"task already in production."
+msgstr "Stabil identifierare. Används av händelsedriven triggning (/cron/trigger/<technical_name>) och för dygnsspridning. Ändra aldrig på en uppgift som redan är i drift."
+
+#. module: cron_tick
+#. odoo-python
+#: code:addons/cron_tick/models/cron_task.py:0
+msgid "Task executed"
+msgstr "Uppgift körd"
+
+#. module: cron_tick
+#: model:ir.model.fields,field_description:cron_tick.field_cron_task__technical_name
+msgid "Technical Name"
+msgstr "Tekniskt namn"
+
+#. module: cron_tick
+#: model:ir.model.fields,help:cron_tick.field_cron_task__model_name
+msgid ""
+"Technical model name, e.g. \"ai.skill\". Resolved at run time — therefore "
+"robust against modules being uninstalled."
+msgstr ""
+"Tekniskt modellnamn, t.ex. \"ai.skill\". Slås upp vid körning — därför "
+"robust mot moduler som avinstalleras."
+
+#. module: cron_tick
+#. odoo-python
+#: code:addons/cron_tick/models/cron_task.py:0
+msgid "The method \"%s\" does not exist on the model \"%s\" \(task %s\)\."
+msgstr "Metoden \"%s\" finns inte på modellen \"%s\" (uppgift %s)."
+
+#. module: cron_tick
+#. odoo-python
+#: code:addons/cron_tick/models/cron_task.py:0
+msgid "The model \"%s\" does not exist \(task %s\)\. The module may be uninstalled\."
+msgstr "Modellen \"%s\" finns inte (uppgift %s). Modulen kan vara avinstallerad."
+
+#. module: cron_tick
+#: model:ir.model.fields,help:cron_tick.field_cron_task__module
+msgid ""
+"The module that owns the task. On uninstall the XML record is removed and "
+"the task disappears."
+msgstr "Modulen som äger uppgiften. Vid avinstallation tas XML-posten bort och uppgiften försvinner."
+
+#. module: cron_tick
+#. odoo-python
+#: code:addons/cron_tick/models/cron_task.py:0
+msgid ""
+"The task \"%s\" failed:\n"
+"%s"
+msgstr ""
+"Uppgiften \"%s\" misslyckades:\n"
+"%s"
+
+#. module: cron_tick
+#. odoo-python
+#: code:addons/cron_tick/models/cron_task.py:0
+msgid "The task \"%s\" is already running \(%s\)\. Try again when it has finished\."
+msgstr "Uppgiften \"%s\" körs redan (%s). Försök igen när den är klar."
+
+#. module: cron_tick
+#: model:ir.model.constraint,message:cron_tick.constraint_cron_task_technical_name_uniq
+msgid "The technical name must be unique — it is the identity of the task."
+msgstr "Det tekniska namnet måste vara unikt — det är uppgiftens identitet."
+
+#. module: cron_tick
+#: model:ir.model.fields,field_description:cron_tick.field_cron_task__timeout_seconds
+msgid "Timeout Seconds"
+msgstr "Tidsgräns (s)"
+
+#. module: cron_tick
+#: model:ir.model.fields,help:cron_tick.field_cron_task__is_overdue
+msgid "True when the task has not run within three cadence intervals."
+msgstr "True när uppgiften inte körts inom tre kadensintervall."
+
+#. module: cron_tick
+#: model:ir.model.fields.selection,name:cron_tick.selection__cron_task__cadence__week
+#: model_terms:ir.ui.view,arch_db:cron_tick.view_cron_task_search
+msgid "Weekly"
+msgstr "Veckovis"
+
+#. module: cron_tick
+#: model_terms:ir.ui.view,arch_db:cron_tick.view_cron_task_form
+msgid "What runs"
+msgstr "Vad som körs"
+
+#. module: cron_tick
+#: model_terms:ir.ui.view,arch_db:cron_tick.view_cron_task_form
+msgid "When"
+msgstr "När"
+
+#. module: cron_tick
+#: model:ir.model.fields,help:cron_tick.field_cron_task__cadence
+msgid ""
+"Which tick cron runs the task. The cadence is a FIELD — a name prefix in the"
+" technical name does not affect execution."
+msgstr "Vilken tick-cron som kör uppgiften. Kadensen är ett FÄLT — ett namnprefix i det tekniska namnet påverkar inte körningen."
+
+#. module: cron_tick
+#: model:ir.model.fields,help:cron_tick.field_cron_task__locked_by
+msgid ""
+"Who is running the task right now (e.g. \"tick:min\" or \"webhook\"). Empty "
+"= free."
+msgstr ""
+"Vem som kör uppgiften just nu (t.ex. \"tick:min\" eller \"webhook\"). Tomt "
+"= ledig."
+
+#. module: cron_tick
+#: model_terms:ir.ui.view,arch_db:cron_tick.view_cron_task_form
+msgid "e.g. _sync_from_filesystem"
+msgstr "t.ex. _sync_from_filesystem"
+
+#. module: cron_tick
+#: model_terms:ir.ui.view,arch_db:cron_tick.view_cron_task_form
+msgid "e.g. ai.skill"
+msgstr "t.ex. ai.skill"
+
+#. module: cron_tick
+#: model_terms:ir.ui.view,arch_db:cron_tick.view_cron_task_form
+msgid "e.g. skill_sync"
+msgstr "t.ex. skill_sync"

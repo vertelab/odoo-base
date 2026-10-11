@@ -1,36 +1,37 @@
 # Copyright (C) 2026 Vertel Sverige AB (<https://vertel.se>).
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl).
 
-"""cron.task — deklarativ schemaläggning.
+"""cron.task — declarative scheduling.
 
-En post per schemalagd uppgift. Moduler deklarerar sina uppgifter som
-data-XML; denna modul äger motorn. Motorn känner inte till några uppgifter.
+One record per scheduled task. Modules declare their tasks as data XML;
+this module owns the engine. The engine knows nothing about any task.
 
-KADENS, INTE INTERVALL
-    En uppgift säger *vilken* kadens den tillhör (min/hour/daily/week/month),
-    inte ett intervall i sekunder. Därmed försvinner `next_run`-aritmetiken
-    per uppgift och hela klassen av beräkningsfel (fel timedelta, fel tidszon,
-    glömd next_run vid fel). Bara tick:en behöver veta när den ska köra.
+CADENCE, NOT INTERVAL
+    A task states *which* cadence it belongs to (min/hour/daily/week/month),
+    not an interval in seconds. That removes the per-task `next_run`
+    arithmetic and the entire class of calculation errors (wrong timedelta,
+    wrong timezone, forgotten next_run on failure). Only the tick needs to
+    know when to run.
 
-MOTORN ÄGER KÖRHISTORIKEN
-    `_run()` rör ALDRIG `last_run`/`failure_count`. Motorn skriver dessa
-    efter att uppgiften returnerat eller kastat — en skrivpunkt, inte två.
-    Om `_run()` satte `last_run` och sedan kastade skulle savepointen rulla
-    tillbaka skrivningen och motorn tro att uppgiften aldrig körts.
+THE ENGINE OWNS THE RUN HISTORY
+    `_run()` NEVER touches `last_run`/`failure_count`. The engine writes
+    those after the task returned or raised — one write point, not two.
+    If `_run()` set `last_run` and then raised, the savepoint would roll
+    back the write and the engine would believe the task never ran.
 """
 
 import hashlib
 import logging
 import time
-from datetime import datetime, timedelta
+from datetime import timedelta
 
 from odoo import _, api, fields, models
 from odoo.exceptions import UserError
 
 _logger = logging.getLogger(__name__)
 
-# Kadens → ungefärligt antal sekunder. Används bara för försenad-detektion
-# och loggning — INTE för schemaläggning (tick-cron:en äger den).
+# Cadence → approximate number of seconds. Used only for overdue detection
+# and logging — NOT for scheduling (the tick cron owns that).
 CADENCE_SECONDS = {
     'min': 300,
     'hour': 3600,
@@ -39,10 +40,10 @@ CADENCE_SECONDS = {
     'month': 2592000,
 }
 
-# Spridningsfönster per kadens (minuter). En `daily`-uppgift sprids över en
-# timme, en `week`-uppgift över en dag, en `month`-uppgift över en vecka.
-# Utan spridning skulle 19 dygnsjobb alla köra kl 00:00 och skapa en spik av
-# tunga batch-operationer samtidigt.
+# Spread window per cadence (minutes). A `daily` task spreads over an hour,
+# a `week` task over a day, a `month` task over a week. Without spreading,
+# 19 daily jobs would all run at 00:00 and create a spike of heavy batch
+# operations at the same moment.
 SPREAD_MINUTES = {
     'min': 0,
     'hour': 0,
@@ -54,93 +55,90 @@ SPREAD_MINUTES = {
 
 class CronTask(models.Model):
     _name = 'cron.task'
-    _description = 'Schemalagd uppgift (cron.task)'
+    _description = 'Scheduled Task'
     _order = 'sequence, id'
 
-    # ── Identitet ──────────────────────────────────────────────────────
+    # ── Identity ───────────────────────────────────────────────────────
     name = fields.Char(
-        'Namn', required=True,
-        help='Läsbart namn som visas i listan.')
+        required=True,
+        help='Readable name shown in the list.')
     technical_name = fields.Char(
-        'Tekniskt namn', required=True, index=True,
-        help='Stabil identifierare. Används av händelsedriven triggning '
-             '(/cron/trigger/<technical_name>) och för dygnsspridning. '
-             'Ändra aldrig på en uppgift som redan är i drift.')
+        required=True, index=True,
+        help='Stable identifier. Used by event-driven triggering '
+             '(/cron/trigger/<technical_name>) and for daily spread. '
+             'Never change it on a task already in production.')
     module = fields.Char(
-        'Modul', index=True,
-        help='Modulen som äger uppgiften. Vid avinstallation tas XML-posten '
-             'bort och uppgiften försvinner.')
+        index=True,
+        help='The module that owns the task. On uninstall the XML record is '
+             'removed and the task disappears.')
 
-    # ── Vad som ska köras ──────────────────────────────────────────────
+    # ── What to run ────────────────────────────────────────────────────
     model_name = fields.Char(
-        'Modell', required=True,
-        help='Tekniskt modellnamn, t.ex. "ai.skill". Slås upp vid körning — '
-             'därför robust mot moduler som avinstalleras.')
+        required=True,
+        help='Technical model name, e.g. "ai.skill". Resolved at run time — '
+             'therefore robust against modules being uninstalled.')
     method_name = fields.Char(
-        'Metod', required=True,
-        help='Metodnamn på modellen, t.ex. "_sync_from_filesystem". '
-             'Anropas utan argument.')
+        required=True,
+        help='Method name on the model, e.g. "_sync_from_filesystem". '
+             'Called without arguments.')
 
-    # ── När ────────────────────────────────────────────────────────────
+    # ── When ───────────────────────────────────────────────────────────
     cadence = fields.Selection([
-        ('min', 'Var 5:e minut'),
-        ('hour', 'Varje timme'),
-        ('daily', 'Dagligen'),
-        ('week', 'Veckovis'),
-        ('month', 'Månadsvis'),
-    ], string='Kadens', required=True, index=True, default='daily',
-        help='Vilken tick-cron som kör uppgiften. Kadensen är ett FÄLT — '
-             'ett namnprefix i det tekniska namnet påverkar inte körningen.')
+        ('min', 'Every 5 minutes'),
+        ('hour', 'Hourly'),
+        ('daily', 'Daily'),
+        ('week', 'Weekly'),
+        ('month', 'Monthly'),
+    ], required=True, index=True, default='daily',
+        help='Which tick cron runs the task. The cadence is a FIELD — a name '
+             'prefix in the technical name does not affect execution.')
     sequence = fields.Integer(
-        'Sekvens', default=10,
-        help='Körordning inom kadensen. Lägre värde körs först.')
-    active = fields.Boolean('Aktiv', default=True)
+        default=10,
+        help='Run order within the cadence. Lower value runs first.')
+    active = fields.Boolean(default=True)
 
-    # ── Körning ────────────────────────────────────────────────────────
+    # ── Execution ──────────────────────────────────────────────────────
     timeout_seconds = fields.Integer(
-        'Tidsgräns (s)', default=120,
-        help='Mjuk tidsgräns. Motorn mäter körtiden och loggar en varning när '
-             'gränsen passeras. Python-trådar kan inte avbrytas säkert — '
-             'gränsen är därför mätande, inte avbrytande. En uppgift som '
-             'konsekvent överskrider gränsen bör flyttas till queue_job.')
+        default=120,
+        help='Soft time limit. The engine measures the run time and logs a '
+             'warning when the limit is exceeded. Python threads cannot be '
+             'aborted safely — the limit is therefore measuring, not '
+             'aborting. A task that consistently exceeds the limit should be '
+             'moved to queue_job.')
     max_failures = fields.Integer(
-        'Max fel', default=10,
-        help='Antal konsekutiva fel innan uppgiften inaktiveras automatiskt.')
+        default=10,
+        help='Number of consecutive failures before the task is '
+             'automatically deactivated.')
 
-    # ── Körhistorik (ägs av motorn) ────────────────────────────────────
-    last_run = fields.Datetime(
-        'Senast körd', readonly=True)
-    last_duration_ms = fields.Integer(
-        'Varaktighet (ms)', readonly=True)
-    failure_count = fields.Integer(
-        'Fel i följd', readonly=True, default=0)
-    last_error = fields.Text(
-        'Senaste fel', readonly=True)
+    # ── Run history (owned by the engine) ──────────────────────────────
+    last_run = fields.Datetime(readonly=True)
+    last_duration_ms = fields.Integer(readonly=True)
+    failure_count = fields.Integer(readonly=True, default=0)
+    last_error = fields.Text(readonly=True)
 
-    # ── Lås (atomiskt, D10) ────────────────────────────────────────────
+    # ── Lock (atomic, D10) ─────────────────────────────────────────────
     locked_by = fields.Char(
-        'Låst av', readonly=True,
-        help='Vem som kör uppgiften just nu (t.ex. "tick:min" eller '
-             '"webhook"). Tomt = ledig.')
-    locked_at = fields.Datetime(
-        'Låst sedan', readonly=True)
+        readonly=True,
+        help='Who is running the task right now (e.g. "tick:min" or '
+             '"webhook"). Empty = free.')
+    locked_at = fields.Datetime(readonly=True)
 
-    # ── Beräknade fält ─────────────────────────────────────────────────
+    # ── Computed fields ────────────────────────────────────────────────
     is_locked = fields.Boolean(
-        'Körs nu', compute='_compute_is_locked', search='_search_is_locked')
+        compute='_compute_is_locked', search='_search_is_locked')
     is_overdue = fields.Boolean(
-        'Försenad', compute='_compute_is_overdue', search='_search_is_overdue',
-        help='True när uppgiften inte körts inom tre kadensintervall.')
+        compute='_compute_is_overdue', search='_search_is_overdue',
+        help='True when the task has not run within three cadence intervals.')
     cadence_label = fields.Char(
-        'Kadens (text)', compute='_compute_cadence_label')
+        compute='_compute_cadence_label')
 
     _sql_constraints = [
         ('technical_name_uniq', 'UNIQUE(technical_name)',
-         'Det tekniska namnet måste vara unikt — det är uppgiftens identitet.'),
+         'The technical name must be unique — it is the identity of the task.'),
     ]
 
     # ───────────────────────────────────────────────────────────────────
-    # Beräknade fält
+    # Computed fields
     # ───────────────────────────────────────────────────────────────────
 
     @api.depends('locked_by')
@@ -165,7 +163,7 @@ class CronTask(models.Model):
             task.cadence_label = labels.get(task.cadence, task.cadence or '')
 
     def _search_is_locked(self, operator, value):
-        """Sökbar motsvarighet till `is_locked` (locked_by är satt)."""
+        """Searchable counterpart of `is_locked` (locked_by is set)."""
         if operator in ('=', '!=') and isinstance(value, bool):
             # is_locked = True  → locked_by != False
             # is_locked = False → locked_by = False
@@ -175,22 +173,26 @@ class CronTask(models.Model):
         return [('locked_by', operator, value)]
 
     def _search_is_overdue(self, operator, value):
-        """Sökbar motsvarighet till `is_overdue`.
+        """Searchable counterpart of `is_overdue`.
 
-        Försenad = aktiv, har körts, och senaste körning är äldre än tre
-        kadensintervall. Tröskeln beror på kadensen, så vi bygger ett OR
-        över kadenserna.
+        Overdue = active, has run, and the last run is older than three
+        cadence intervals. The threshold depends on the cadence, so we build
+        an OR across the cadences.
 
-        ⚠ `['!'] + ['|']*N + terms` negerar INTE hela OR-gruppen i Odoos
-        prefix-notation — det ger en domän som varken matchar sant eller
-        falskt. Vi negerar därför varje term för sig.
+        WARNING: Odoo 18 wants a FLAT domain in prefix notation — nested
+        lists crash in `domain_combine_anies`.
+
+        WARNING: prefix notation requires one operator TOKEN per join:
+        a group of 3 operands needs '&','&' (not a single '&' — then the
+        operator binds incorrectly and the domain matches nothing).
+        The same applies to the OR chain: N branches require N-1 leading '|'.
         """
         now = fields.Datetime.now()
         if operator not in ('=', '!='):
             return []
         want = value if operator == '=' else not value
 
-        # En OR-gren per kadens: (cadence = X AND last_run < tröskel)
+        # One OR branch per cadence: (cadence = X AND last_run < threshold)
         branches = []
         for cadence, seconds in CADENCE_SECONDS.items():
             limit = now - timedelta(seconds=seconds * 3)
@@ -200,13 +202,6 @@ class CronTask(models.Model):
                 ('last_run', '<', limit),
             ])
 
-        # ⚠ Odoo 18 vill ha en PLATT domän i prefix-notation — nestlade
-        # listor kraschar i `domain_combine_anies`.
-        #
-        # ⚠⚠ Prefix-notation kräver ett operator-TEKEN per sammanfogning:
-        # en grupp med 3 operander behöver '&','&' (inte ett enda '&' —
-        # då binder operatorn fel och domänen matchar ingenting).
-        # Samma gäller OR-kedjan: N grenar kräver N-1 inledande '|'.
         def _and_group(branch):
             return ['&'] * (len(branch) - 1) + list(branch)
 
@@ -214,21 +209,21 @@ class CronTask(models.Model):
             or_ops = ['|'] * (len(branches) - 1)
             return or_ops + [t for b in branches for t in _and_group(b)]
 
-        # NOT(OR över grenar) — negera varje gren för sig och AND:a dem.
+        # NOT(OR over branches) — negate each branch separately and AND them.
         # NOT(a OR b) == (NOT a) AND (NOT b)
         negated = [['!'] + _and_group(b) for b in branches]
         and_ops = ['&'] * (len(negated) - 1)
         return and_ops + [t for g in negated for t in g]
 
     # ───────────────────────────────────────────────────────────────────
-    # Spridning (D7)
+    # Spread (D7)
     # ───────────────────────────────────────────────────────────────────
 
     def _spread_offset_minutes(self):
-        """Deterministisk spridning inom kadensens fönster.
+        """Deterministic spread within the cadence window.
 
-        Samma tekniska namn ger samma offset varje gång — en `daily`-uppgift
-        körs alltså vid samma klockslag varje dag, inte slumpmässigt.
+        The same technical name yields the same offset every time — a
+        `daily` task therefore runs at the same time every day, not randomly.
         """
         self.ensure_one()
         window = SPREAD_MINUTES.get(self.cadence, 0)
@@ -239,15 +234,16 @@ class CronTask(models.Model):
         return int(digest, 16) % window
 
     # ───────────────────────────────────────────────────────────────────
-    # Kadenslogik (D7)
+    # Cadence logic (D7)
     # ───────────────────────────────────────────────────────────────────
 
     def _is_due(self, now=None):
-        """Är uppgiften förfallen i sin kadens?
+        """Is the task due in its cadence?
 
-        `min`/`hour` styrs av tidsgränsen sedan senaste körning.
-        `daily`/`week`/`month` styrs av spridningsfönstret — uppgiften körs
-        när fönstret öppnat och den inte redan körts i perioden.
+        `min`/`hour` are governed by the time elapsed since the last run.
+        `daily`/`week`/`month` are governed by the spread window — the task
+        runs when the window has opened and it has not already run in the
+        period.
         """
         self.ensure_one()
         now = now or fields.Datetime.now()
@@ -260,24 +256,24 @@ class CronTask(models.Model):
                 return True
             return (now - self.last_run).total_seconds() >= 3600
 
-        # daily / week / month — spridning över ett fönster.
+        # daily / week / month — spread over a window.
         offset = self._spread_offset_minutes()
         if self.cadence == 'daily':
-            # Fönstret är en timme: kör när minut >= offset och inte körts idag.
+            # The window is one hour: run when minute >= offset and not run today.
             if not self.last_run:
                 return now.minute >= offset
             return self.last_run.date() < now.date() and now.minute >= offset
 
         if self.cadence == 'week':
-            # Fönstret är en dag (1440 min): offset i minuter sedan midnatt.
+            # The window is one day (1440 min): offset in minutes since midnight.
             window_open = now.hour * 60 + now.minute >= offset
             if not self.last_run:
                 return window_open
             return (now - self.last_run).days >= 7 and window_open
 
         if self.cadence == 'month':
-            # Fönstret är en vecka (10080 min): offset i minuter sedan
-            # veckans start (måndag 00:00).
+            # The window is one week (10080 min): offset in minutes since
+            # the start of the week (Monday 00:00).
             minutes_into_week = now.weekday() * 1440 + now.hour * 60 + now.minute
             window_open = minutes_into_week >= offset
             if not self.last_run:
@@ -287,34 +283,34 @@ class CronTask(models.Model):
         return False
 
     # ───────────────────────────────────────────────────────────────────
-    # Körning — den enda körvägen (D9, D12)
+    # Execution — the single run path (D9, D12)
     # ───────────────────────────────────────────────────────────────────
 
     def _run(self):
-        """Kör uppgiften. REN metod — rör aldrig körhistoriken.
+        """Run the task. A PURE method — never touches the run history.
 
-        Returnerar metodens resultat. Kastar vidare fel till anroparen, som
-        bokför dem. Motorn (och webhook/manuell) äger `last_run`,
-        `last_duration_ms` och `failure_count`.
+        Returns the method's result. Propagates errors to the caller, which
+        records them. The engine (and webhook/manual) owns `last_run`,
+        `last_duration_ms` and `failure_count`.
         """
         self.ensure_one()
         model = self.env.get(self.model_name)
         if model is None:
             raise UserError(_(
-                'Modellen "%s" finns inte (uppgift %s). Modulen kan vara '
-                'avinstallerad.') % (self.model_name, self.technical_name))
+                'The model "%s" does not exist (task %s). The module may be '
+                'uninstalled.') % (self.model_name, self.technical_name))
         method = getattr(model, self.method_name, None)
         if method is None or not callable(method):
             raise UserError(_(
-                'Metoden "%s" finns inte på modellen "%s" (uppgift %s).'
+                'The method "%s" does not exist on the model "%s" (task %s).'
             ) % (self.method_name, self.model_name, self.technical_name))
         return method()
 
     def _execute(self, owner='manual'):
-        """Kör uppgiften med lås, mätning och bokföring.
+        """Run the task with locking, measuring and recording.
 
-        Detta är den gemensamma vägen för alla tre utlösartyper. Returnerar
-        en dict med status och varaktighet.
+        This is the common path for all three trigger types. Returns a dict
+        with status and duration.
         """
         self.ensure_one()
         if not self._acquire_lock(owner):
@@ -327,12 +323,12 @@ class CronTask(models.Model):
             try:
                 with self.env.cr.savepoint():
                     self._run()
-            except Exception as exc:  # noqa: BLE001 — motorn fångar allt
+            except Exception as exc:  # noqa: BLE001 — the engine catches all
                 duration_ms = int((time.monotonic() - started) * 1000)
                 self.env.invalidate_all()
                 self.browse(self.id)._record_failure(exc, duration_ms)
                 _logger.exception(
-                    'cron.task %s misslyckades (%s ms)',
+                    'cron.task %s failed (%s ms)',
                     self.technical_name, duration_ms)
                 return {
                     'status': 'error',
@@ -346,7 +342,7 @@ class CronTask(models.Model):
             task._record_success(duration_ms)
             if duration_ms > self.timeout_seconds * 1000:
                 _logger.warning(
-                    'cron.task %s överskred tidsgränsen: %s ms > %s s',
+                    'cron.task %s exceeded the time limit: %s ms > %s s',
                     self.technical_name, duration_ms, self.timeout_seconds)
             return {
                 'status': 'ok',
@@ -354,29 +350,29 @@ class CronTask(models.Model):
                 'duration_ms': duration_ms,
             }
         finally:
-            # Släpp advisory-låset ÄVEN vid fel — annars hålls det till
-            # anslutningen stängs och uppgiften kan aldrig köras igen.
+            # Release the advisory lock EVEN on error — otherwise it is held
+            # until the connection closes and the task can never run again.
             self.browse(self.id)._release_lock()
 
     # ───────────────────────────────────────────────────────────────────
-    # Lås (D10 — atomiskt via advisory-lock, oberoende av isolationsnivå)
+    # Lock (D10 — atomic via advisory lock, independent of isolation level)
     # ───────────────────────────────────────────────────────────────────
 
     def _acquire_lock(self, owner):
-        """Ta låset atomiskt. Returnerar True om vi fick det.
+        """Acquire the lock atomically. Returns True if we got it.
 
-        ⚠ En villkorlig UPDATE är INTE tillräcklig: Odoo kör under
-        `repeatable read`, och två transaktioner kan båda se `locked_by`
-        som tomt i sin snapshot och båda få `rowcount == 1`. Verifierat i
-        drift — två samtidiga workers körde samma uppgift.
+        WARNING: a conditional UPDATE is NOT sufficient: Odoo runs under
+        `repeatable read`, and two transactions can both see `locked_by` as
+        empty in their snapshot and both get `rowcount == 1`. Verified in
+        production — two concurrent workers ran the same task.
 
-        Vi använder i stället ett sessionsbundet advisory-lock per uppgift
-        (`pg_try_advisory_lock`), som är atomiskt oavsett isolationsnivå.
-        `locked_by`/`locked_at` skrivs som INFORMATION (vem kör), inte som
-        själva låset — det senare ägs av PostgreSQL.
+        We use a session-bound advisory lock per task
+        (`pg_try_advisory_lock`), which is atomic regardless of isolation
+        level. `locked_by`/`locked_at` are written as INFORMATION (who is
+        running), not as the lock itself — the latter is owned by PostgreSQL.
 
-        Låset släpps av `_release_lock()` eller automatiskt när sessionen
-        (anslutningen) stängs.
+        The lock is released by `_release_lock()` or automatically when the
+        session (connection) closes.
         """
         self.ensure_one()
         lock_id = self._task_lock_id()
@@ -384,7 +380,7 @@ class CronTask(models.Model):
         row = self.env.cr.fetchone()
         if not row or not row[0]:
             return False
-        # Vi äger låset. Skriv information om vem som kör.
+        # We own the lock. Write information about who is running.
         self.env.cr.execute("""
             UPDATE cron_task
                SET locked_by = %s, locked_at = now()
@@ -394,7 +390,7 @@ class CronTask(models.Model):
         return True
 
     def _release_lock(self):
-        """Frigör låset efter körning."""
+        """Release the lock after the run."""
         self.ensure_one()
         lock_id = self._task_lock_id()
         self.env.cr.execute('SELECT pg_advisory_unlock(%s)', (lock_id,))
@@ -406,10 +402,10 @@ class CronTask(models.Model):
         self.env.invalidate_all()
 
     def _task_lock_id(self):
-        """Stabilt advisory-lock-id per uppgift (ryms i int8).
+        """Stable advisory lock id per task (fits in int8).
 
-        Ett eget namnrymdsprefix håller uppgiftslåsen åtskilda från
-        kadenslåsen i `_advisory_lock_id`.
+        A dedicated namespace prefix keeps task locks separate from the
+        cadence locks in `_advisory_lock_id`.
         """
         self.ensure_one()
         digest = hashlib.sha256(
@@ -418,11 +414,11 @@ class CronTask(models.Model):
         return int(digest, 16) % (2 ** 31)
 
     # ───────────────────────────────────────────────────────────────────
-    # Bokföring (D8, D9)
+    # Recording (D8, D9)
     # ───────────────────────────────────────────────────────────────────
 
     def _record_success(self, duration_ms):
-        """Bokför lyckad körning. Nollställer felräknaren."""
+        """Record a successful run. Resets the failure counter."""
         self.ensure_one()
         self.write({
             'last_run': fields.Datetime.now(),
@@ -434,11 +430,11 @@ class CronTask(models.Model):
         })
 
     def _record_failure(self, exc, duration_ms=0):
-        """Bokför misslyckad körning. Inaktiverar efter `max_failures`.
+        """Record a failed run. Deactivates after `max_failures`.
 
-        ⚠ Anropas EFTER att savepointen rullats tillbaka — anroparen måste
-        ha kört `invalidate_all()` och hämtat posten på nytt, annars skriver
-        vi till en post vars transaktion är borta.
+        WARNING: called AFTER the savepoint has been rolled back — the caller
+        must have run `invalidate_all()` and re-fetched the record, otherwise
+        we write to a record whose transaction is gone.
         """
         self.ensure_one()
         count = self.failure_count + 1
@@ -453,28 +449,27 @@ class CronTask(models.Model):
         if count >= self.max_failures:
             vals['active'] = False
             _logger.error(
-                'cron.task %s inaktiverad efter %s fel i följd',
+                'cron.task %s deactivated after %s consecutive failures',
                 self.technical_name, count)
         self.write(vals)
 
     # ───────────────────────────────────────────────────────────────────
-    # Motorn (D6, D8, D11)
+    # The engine (D6, D8, D11)
     # ───────────────────────────────────────────────────────────────────
 
     @api.model
     def _cron_tick(self, cadence):
-        """Kör alla förfallna uppgifter i en kadens.
+        """Run all due tasks in one cadence.
 
-        Skyddad av ett globalt advisory-lock per kadens (D11) så att två
-        Odoo-workers inte kör samma kadens samtidigt.
+        Protected by a global advisory lock per cadence (D11) so that two
+        Odoo workers do not run the same cadence simultaneously.
         """
         lock_id = self._advisory_lock_id(cadence)
-        self.env.cr.execute(
-            'SELECT pg_try_advisory_lock(%s)', (lock_id,))
+        self.env.cr.execute('SELECT pg_try_advisory_lock(%s)', (lock_id,))
         got_lock = self.env.cr.fetchone()
         if not got_lock or not got_lock[0]:
             _logger.info(
-                'cron.tick %s: en annan worker kör redan — hoppar över',
+                'cron.tick %s: another worker is already running — skipping',
                 cadence)
             return {'cadence': cadence, 'skipped': 'locked'}
 
@@ -499,13 +494,13 @@ class CronTask(models.Model):
                             task._run()
                     except Exception as exc:  # noqa: BLE001
                         duration_ms = int((time.monotonic() - started) * 1000)
-                        # Savepointen rullades tillbaka — ORM-cachen är
-                        # korrupt. Hämta posten på nytt innan felet skrivs
-                        # (D8).
+                        # The savepoint was rolled back — the ORM cache is
+                        # corrupt. Re-fetch the record before writing the
+                        # error (D8).
                         self.env.invalidate_all()
                         self.browse(task_id)._record_failure(exc, duration_ms)
                         _logger.exception(
-                            'cron.task %s misslyckades i tick %s',
+                            'cron.task %s failed in tick %s',
                             task.technical_name, cadence)
                         failed += 1
                         continue
@@ -514,17 +509,17 @@ class CronTask(models.Model):
                     self.browse(task_id)._record_success(duration_ms)
                     if duration_ms > task.timeout_seconds * 1000:
                         _logger.warning(
-                            'cron.task %s överskred tidsgränsen: %s ms > %s s',
+                            'cron.task %s exceeded the time limit: %s ms > %s s',
                             task.technical_name, duration_ms,
                             task.timeout_seconds)
                     ran += 1
                 finally:
-                    # Släpp uppgiftslåset i varje varv — annars hålls det
-                    # till anslutningen stängs och uppgiften blockeras.
+                    # Release the task lock every iteration — otherwise it is
+                    # held until the connection closes and the task is blocked.
                     self.browse(task_id)._release_lock()
 
             _logger.info(
-                'cron.tick %s: %s körda, %s misslyckade, %s låsta',
+                'cron.tick %s: %s ran, %s failed, %s locked',
                 cadence, ran, failed, locked)
             return {
                 'cadence': cadence,
@@ -538,38 +533,38 @@ class CronTask(models.Model):
 
     @api.model
     def _advisory_lock_id(self, cadence):
-        """Stabilt advisory-lock-id per kadens (ryms i int4)."""
+        """Stable advisory lock id per cadence (fits in int4)."""
         digest = hashlib.sha256(
             ('cron_tick:%s' % cadence).encode('utf-8')).hexdigest()
         return int(digest, 16) % (2 ** 31)
 
     # ───────────────────────────────────────────────────────────────────
-    # Manuell körning (D12)
+    # Manual run (D12)
     # ───────────────────────────────────────────────────────────────────
 
     def action_run_now(self):
-        """Kör uppgiften omedelbart — manuell utlösare.
+        """Run the task immediately — manual trigger.
 
-        Respekterar låset: en uppgift som redan körs nekas med ett tydligt
-        meddelande i stället för att köras dubbelt.
+        Respects the lock: a task already running is refused with a clear
+        message instead of being run twice.
         """
         self.ensure_one()
         result = self._execute(owner='manual')
         if result['status'] == 'locked':
             raise UserError(_(
-                'Uppgiften "%s" körs redan (%s). Försök igen när den är klar.'
-            ) % (self.name, self.locked_by or 'okänd'))
+                'The task "%s" is already running (%s). Try again when it '
+                'has finished.') % (self.name, self.locked_by or 'unknown'))
         if result['status'] == 'error':
             raise UserError(_(
-                'Uppgiften "%s" misslyckades:\n%s'
+                'The task "%s" failed:\n%s'
             ) % (self.name, result.get('error', '')))
         return {
             'type': 'ir.actions.client',
             'tag': 'display_notification',
             'params': {
-                'title': _('Uppgift körd'),
+                'title': _('Task executed'),
                 'message': _(
-                    '%s kördes på %s ms.') % (
+                    '%s ran in %s ms.') % (
                     self.name, result.get('duration_ms', 0)),
                 'type': 'success',
                 'sticky': False,
@@ -577,12 +572,12 @@ class CronTask(models.Model):
         }
 
     # ───────────────────────────────────────────────────────────────────
-    # Hjälp för webhook (D12)
+    # Helpers for the webhook (D12)
     # ───────────────────────────────────────────────────────────────────
 
     @api.model
     def _find_by_technical_name(self, technical_name):
-        """Slå upp en uppgift på tekniskt namn. Tom recordset om ingen."""
+        """Look up a task by technical name. Empty recordset if none."""
         return self.search([
             ('technical_name', '=', technical_name),
         ], limit=1)
