@@ -52,6 +52,22 @@ SPREAD_MINUTES = {
     'month': 10080,
 }
 
+# Interval type → number of seconds. Used by tasks that set
+# `interval_number`/`interval_type` instead of a cadence. Approximate for
+# months (30 days), which is the same convention as CADENCE_SECONDS.
+INTERVAL_SECONDS = {
+    'minutes': 60,
+    'hours': 3600,
+    'days': 86400,
+    'weeks': 604800,
+    'months': 2592000,
+}
+
+# The cadence the interval tick runs under. Interval tasks are checked by a
+# tick cron of this cadence; the task itself is due when its own interval has
+# elapsed. 5 minutes matches ir.cron's granularity.
+INTERVAL_TICK_CADENCE = 'min'
+
 
 class CronTask(models.Model):
     _name = 'cron.task'
@@ -89,9 +105,24 @@ class CronTask(models.Model):
         ('daily', 'Daily'),
         ('week', 'Weekly'),
         ('month', 'Monthly'),
-    ], required=True, index=True, default='daily',
+    ], index=True,
         help='Which tick cron runs the task. The cadence is a FIELD — a name '
-             'prefix in the technical name does not affect execution.')
+             'prefix in the technical name does not affect execution.\n\n'
+             'Leave empty when `interval_number`/`interval_type` are set: a '
+             'task uses EITHER a cadence OR an interval, never both.')
+    interval_number = fields.Integer(
+        help='Run every N `interval_type` units, measured from the last run. '
+             'Use this instead of `cadence` when the task needs an interval '
+             'the five cadences cannot express (15 minutes, 6 hours, 14 days).\n\n'
+             'The task is checked by the "interval" tick every 5 minutes, so '
+             'the effective granularity is 5 minutes — the same as ir.cron.')
+    interval_type = fields.Selection([
+        ('minutes', 'Minutes'),
+        ('hours', 'Hours'),
+        ('days', 'Days'),
+        ('weeks', 'Weeks'),
+        ('months', 'Months'),
+    ], help='Unit for `interval_number`.')
     sequence = fields.Integer(
         default=10,
         help='Run order within the cadence. Lower value runs first.')
