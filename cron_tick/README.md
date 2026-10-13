@@ -50,6 +50,44 @@ are spread across the window so they do not collide.
 internal 5-minute check. When the cron ran every minute, 4 of 5 wakeups were
 guaranteed waste.
 
+## Custom intervals
+
+The five cadences cannot express every interval. The original `ir.cron` set
+included 15 minutes, 6 hours and 14 days — mapping those onto the nearest
+cadence would have changed behaviour (15 min → `min` is 3x more often,
+6 h → `hour` is 6x, 14 days → `month` is 14x).
+
+A task may therefore set an interval instead of a cadence:
+
+```xml
+<record id="cron_usage_snapshots" model="cron.task">
+    <field name="name">Bifrost: usage snapshots</field>
+    <field name="technical_name">bifrost_usage_snapshots</field>
+    <field name="model_name">bifrost.usage.snapshot</field>
+    <field name="method_name">cron_snapshots</field>
+    <field name="interval_number">15</field>
+    <field name="interval_type">minutes</field>
+    <field name="module">bifrost</field>
+</record>
+```
+
+Rules:
+
+- **Cadence XOR interval.** A task sets one of them, never both and never
+  neither. Enforced in Python (`_check_schedule` + `create`) so the message
+  is readable.
+- **The `min` tick carries interval tasks.** They are checked every 5
+  minutes and run when their own interval has elapsed, so the granularity
+  matches `ir.cron`. No sixth tick cron.
+- **Measured from `last_run`.** A slow run does not drift the schedule —
+  the next run is N units after the previous one *finished*.
+- **No spreading.** The interval is its own spacing. Tasks with the same
+  interval and a common start (e.g. after a deploy) may cluster; that is
+  accepted for the few tasks that need a custom interval.
+
+`interval_type` accepts `minutes`, `hours`, `days`, `weeks`, `months`.
+Months are 30 days, the same approximation as the cadences.
+
 ## Three trigger types — one run path
 
 ```

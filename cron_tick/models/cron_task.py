@@ -6,12 +6,18 @@
 One record per scheduled task. Modules declare their tasks as data XML;
 this module owns the engine. The engine knows nothing about any task.
 
-CADENCE, NOT INTERVAL
+CADENCE, NOT INTERVAL — WITH AN ESCAPE HATCH
     A task states *which* cadence it belongs to (min/hour/daily/week/month),
     not an interval in seconds. That removes the per-task `next_run`
     arithmetic and the entire class of calculation errors (wrong timedelta,
     wrong timezone, forgotten next_run on failure). Only the tick needs to
     know when to run.
+
+    A task may instead set `interval_number`/`interval_type` when the five
+    cadences cannot express the interval it needs (15 minutes, 6 hours,
+    14 days). Such a task is carried by the `min` tick and runs when its own
+    interval has elapsed. The two are mutually exclusive: a task sets a
+    cadence XOR an interval.
 
 THE ENGINE OWNS THE RUN HISTORY
     `_run()` NEVER touches `last_run`/`failure_count`. The engine writes
@@ -26,7 +32,7 @@ import time
 from datetime import timedelta
 
 from odoo import _, api, fields, models
-from odoo.exceptions import UserError
+from odoo.exceptions import UserError, ValidationError
 
 _logger = logging.getLogger(__name__)
 
@@ -168,30 +174,90 @@ class CronTask(models.Model):
          'The technical name must be unique — it is the identity of the task.'),
     ]
 
+    # NOTE: the cadence/interval XOR is enforced in Python (`_check_schedule`),
+    # not as a SQL CHECK. A CHECK fires before `@api.constrains` and surfaces
+    # as a raw psycopg2 error, so the readable message would never be shown.
+    # `cron.task` records are created from module data, not free input, so the
+    # Python constraint is the only validation path that matters.
+
     # ───────────────────────────────────────────────────────────────────
     # Computed fields
     # ───────────────────────────────────────────────────────────────────
+
+    @api.constrains('cadence', 'interval_number', 'interval_type')
+    def _check_schedule(self):
+        """Exactly one of cadence / interval must be set.
+
+        NOTE: `@api.constrains` only fires when one of the named fields is
+        present in `vals`. `create()` with neither field would therefore
+        pass unvalidated, so `create()` calls this explicitly — see
+        `create()` below. This constraint covers `write()`.
+        """
+        for task in self:
+            task._validate_schedule()
+
+    def _validate_schedule(self):
+        """Validate the schedule fields on a single record."""
+        self.ensure_one()
+        has_cadence = bool(self.cadence)
+        has_interval = bool(self.interval_type)
+        if has_cadence and has_interval:
+            raise ValidationError(_(
+                'The task "%s" has both a cadence and an interval. Set '
+                'one of them.') % self.technical_name)
+        if not has_cadence and not has_interval:
+            raise ValidationError(_(
+                'The task "%s" has neither a cadence nor an interval. '
+                'Set one of them.') % self.technical_name)
+        if has_interval and not self.interval_number:
+            raise ValidationError(_(
+                'The task "%s" has an interval type but no interval '
+                'number.') % self.technical_name)
+
+    @api.model_create_multi
+    def create(self, vals_list):
+        """Validate the schedule on create.
+
+        `@api.constrains` does not fire when none of its fields appear in
+        `vals`, so a task created without a cadence AND without an interval
+        would slip through. Validate explicitly here.
+        """
+        tasks = super().create(vals_list)
+        for task in tasks:
+            task._validate_schedule()
+        return tasks
 
     @api.depends('locked_by')
     def _compute_is_locked(self):
         for task in self:
             task.is_locked = bool(task.locked_by)
 
-    @api.depends('last_run', 'cadence', 'active')
+    @api.depends('last_run', 'cadence', 'interval_number', 'interval_type',
+                 'active')
     def _compute_is_overdue(self):
         now = fields.Datetime.now()
         for task in self:
             if not task.active or not task.last_run:
                 task.is_overdue = False
                 continue
-            limit = CADENCE_SECONDS.get(task.cadence, 86400) * 3
+            if task.interval_type:
+                limit = task._interval_seconds() * 3
+            else:
+                limit = CADENCE_SECONDS.get(task.cadence, 86400) * 3
             task.is_overdue = (now - task.last_run).total_seconds() > limit
 
-    @api.depends('cadence')
+    @api.depends('cadence', 'interval_number', 'interval_type')
     def _compute_cadence_label(self):
         labels = dict(self._fields['cadence'].selection)
+        type_labels = dict(self._fields['interval_type'].selection)
         for task in self:
-            task.cadence_label = labels.get(task.cadence, task.cadence or '')
+            if task.interval_type:
+                unit = type_labels.get(task.interval_type, task.interval_type)
+                task.cadence_label = 'Every %s %s' % (
+                    task.interval_number or '?', unit.lower())
+            else:
+                task.cadence_label = labels.get(
+                    task.cadence, task.cadence or '')
 
     def _search_is_locked(self, operator, value):
         """Searchable counterpart of `is_locked` (locked_by is set)."""
@@ -233,6 +299,15 @@ class CronTask(models.Model):
                 ('last_run', '<', limit),
             ])
 
+        # Interval tasks cannot be expressed as a domain: the threshold
+        # depends on interval_number * interval_type per record. Search on
+        # the cadence branches only and let the caller over-fetch; the
+        # computed field is always correct when read on a record.
+        branches.append([
+            ('interval_type', '!=', False),
+            ('last_run', '!=', False),
+        ])
+
         def _and_group(branch):
             return ['&'] * (len(branch) - 1) + list(branch)
 
@@ -264,20 +339,42 @@ class CronTask(models.Model):
             (self.technical_name or '').encode('utf-8')).hexdigest()
         return int(digest, 16) % window
 
+    def _interval_seconds(self):
+        """The task's interval in seconds (0 when it uses a cadence)."""
+        self.ensure_one()
+        if not self.interval_type or not self.interval_number:
+            return 0
+        return (INTERVAL_SECONDS.get(self.interval_type, 0)
+                * self.interval_number)
+
     # ───────────────────────────────────────────────────────────────────
     # Cadence logic (D7)
     # ───────────────────────────────────────────────────────────────────
 
     def _is_due(self, now=None):
-        """Is the task due in its cadence?
+        """Is the task due?
 
-        `min`/`hour` are governed by the time elapsed since the last run.
-        `daily`/`week`/`month` are governed by the spread window — the task
-        runs when the window has opened and it has not already run in the
-        period.
+        Two modes, mutually exclusive (see `_check_schedule`):
+
+        INTERVAL MODE (`interval_number`/`interval_type` set)
+            Due when the interval has elapsed since the last run. Measured
+            from `last_run`, so a slow run does not drift the schedule —
+            the next run is N units after the previous one FINISHED.
+
+        CADENCE MODE (`cadence` set)
+            `min`/`hour` are governed by the time elapsed since the last run.
+            `daily`/`week`/`month` are governed by the spread window — the
+            task runs when the window has opened and it has not already run
+            in the period.
         """
         self.ensure_one()
         now = now or fields.Datetime.now()
+
+        if self.interval_type:
+            if not self.last_run:
+                return True
+            seconds = self._interval_seconds()
+            return (now - self.last_run).total_seconds() >= seconds
 
         if self.cadence == 'min':
             return True
@@ -506,10 +603,21 @@ class CronTask(models.Model):
 
         try:
             now = fields.Datetime.now()
-            candidates = self.search([
-                ('active', '=', True),
-                ('cadence', '=', cadence),
-            ], order='sequence, id')
+            # A task belongs to exactly one tick: the one named by its
+            # cadence, or the interval tick when it uses an interval.
+            if cadence == INTERVAL_TICK_CADENCE:
+                domain = [
+                    ('active', '=', True),
+                    '|',
+                    ('cadence', '=', cadence),
+                    ('interval_type', '!=', False),
+                ]
+            else:
+                domain = [
+                    ('active', '=', True),
+                    ('cadence', '=', cadence),
+                ]
+            candidates = self.search(domain, order='sequence, id')
             due = candidates.filtered(lambda t: t._is_due(now))
 
             ran, failed, locked = 0, 0, 0

@@ -12,6 +12,12 @@
              `min` is 5 minutes, not 1 — `_heartbeat_all` and friends
              already have an internal 5-minute check, so 4 of 5 wakeups
              were guaranteed waste when the cron ran every minute.
+
+             The `min` tick ALSO carries tasks that set an interval
+             (`interval_number`/`interval_type`) instead of a cadence —
+             see INTERVAL_TICK_CADENCE. Those tasks are checked every 5
+             minutes and run when their own interval has elapsed, so the
+             granularity matches ir.cron. No sixth tick is needed.
              ============================================================ -->
 
         <record id="cron_min" model="ir.cron">

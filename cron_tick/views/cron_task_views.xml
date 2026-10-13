@@ -17,7 +17,7 @@
                 <field name="name"/>
                 <field name="technical_name"/>
                 <field name="module" optional="show"/>
-                <field name="cadence" optional="show"/>
+                <field name="cadence_label" optional="show"/>
                 <field name="last_run"/>
                 <field name="last_duration_ms" optional="show"/>
                 <field name="failure_count" optional="show"/>
@@ -64,7 +64,16 @@
                     </group>
                     <group>
                         <group string="When">
-                            <field name="cadence"/>
+                            <field name="cadence"
+                                   invisible="bool(interval_type)"
+                                   required="not interval_type"/>
+                            <field name="interval_number"
+                                   invisible="bool(cadence)"
+                                   required="bool(interval_type)"/>
+                            <field name="interval_type"
+                                   invisible="bool(cadence)"
+                                   required="bool(interval_number)"/>
+                            <field name="cadence_label"/>
                             <field name="sequence"/>
                         </group>
                         <group string="Execution">
@@ -129,11 +138,15 @@
                         domain="[('cadence', '=', 'week')]"/>
                 <filter name="filter_month" string="Monthly"
                         domain="[('cadence', '=', 'month')]"/>
+                <filter name="filter_interval" string="Custom interval"
+                        domain="[('interval_type', '!=', False)]"/>
                 <group expand="0" string="Group By">
                     <filter name="group_module" string="Module"
                             context="{'group_by': 'module'}"/>
                     <filter name="group_cadence" string="Cadence"
                             context="{'group_by': 'cadence'}"/>
+                    <filter name="group_interval_type" string="Interval unit"
+                            context="{'group_by': 'interval_type'}"/>
                 </group>
             </search>
         </field>
@@ -155,7 +168,9 @@
             </p>
             <p>
                 Modules register their tasks as data XML. The engine runs
-                them via five tick crons — one per cadence.
+                them via five tick crons — one per cadence. A task may set
+                a custom interval instead of a cadence; it is then checked
+                by the 5-minute tick.
             </p>
         </field>
     </record>
