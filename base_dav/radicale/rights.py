@@ -17,6 +17,30 @@ class Rights(BaseRights):
     def __init__(self, configuration):
         super().__init__(configuration)
 
+    @staticmethod
+    def _is_granted(user, odoo_collection, owner_login):
+        """Is this collection available to the authenticated user?
+
+        Ownership alone is not enough. A collection seeded by a data file is
+        created by the system user, so its create_uid is not the person it is
+        meant for: user_settings_dav ships a "User Calendar" collection whose
+        domain selects each user's own events, yet create_uid is '__system__'.
+        With rights='owner_only' that made the collection reachable by nobody,
+        and clients got PROPFIND 401 on their own calendar even with correct
+        credentials.
+
+        user_settings_dav therefore exposes res.users.dav_collection_ids so an
+        administrator can grant a collection explicitly. That field was
+        written by the UI but never read here, so honour it as well.
+        """
+        if owner_login == user:
+            return True
+        granted = request.env['res.users'].sudo().search([
+            ('login', '=', user),
+            ('dav_collection_ids', 'in', odoo_collection.id),
+        ], limit=1)
+        return bool(granted)
+
     def authorization(self, user, path):
         if path == '/':
             return "Rr"
@@ -46,11 +70,15 @@ class Rights(BaseRights):
         elif rights == 'owner_write_only':
             if not user:
                 return "Rr"
-            return "RWrw" if owner_login == user else "Rr"
+            if self._is_granted(user, odoo_collection, owner_login):
+                return "RWrw"
+            return "Rr"
 
         elif rights == 'owner_only':
             if not user:
                 return ""
-            return "RWrw" if owner_login == user else ""
+            if self._is_granted(user, odoo_collection, owner_login):
+                return "RWrw"
+            return ""
 
         return ""
