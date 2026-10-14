@@ -88,7 +88,12 @@ class Collection(BaseCollection):
 
     @property
     def last_modified(self):
-        date = self.odoo_collection.create_date or self.odoo_collection.write_date or time.strftime('%Y-%m-%d %H:%M:%S')
+        collection = self.odoo_collection
+        if collection is None:
+            date = time.strftime('%Y-%m-%d %H:%M:%S')
+        else:
+            date = (collection.create_date or collection.write_date
+                    or time.strftime('%Y-%m-%d %H:%M:%S'))
         return self._odoo_to_http_datetime(date)
 
     def _odoo_to_http_datetime(self, value):
@@ -104,15 +109,38 @@ class Collection(BaseCollection):
 
     def get_meta(self, key=None):
         logger.info("get_meta called for key: %s on path: %s", key, self._path)
+        # The root path ('/') and the principal path ('/<login>') have no
+        # backing dav.collection record: they exist so clients can discover
+        # the user's collections. rights.py already grants "Rr" on both, and
+        # Storage.discover() yields a Collection for them, so get_meta() must
+        # answer as a plain collection instead of dereferencing None. Before
+        # this guard a client's very first PROPFIND (/.well-known/caldav ->
+        # /.dav) raised AttributeError: 'NoneType' object has no attribute
+        # 'tag' -> HTTP 500, which DAVx5 reports as "Couldn't find CalDAV or
+        # CardDAV service" even though OPTIONS and the leaf paths worked.
+        collection = self.odoo_collection
+        if collection is None:
+            if key is None:
+                return {
+                    'tag': '',
+                    'D:displayname': str(self._path or '/'),
+                }
+            if key == 'D:displayname':
+                return str(self._path or '/')
+            if key == 'C:supported-calendar-component-set':
+                return 'VTODO,VEVENT,VJOURNAL'
+            if key == 'ICAL:calendar-color':
+                return '#48c9f4'
+            return None
         if key is None:
             return {
-                'tag': str(self.odoo_collection.tag or ''),
-                'D:displayname': str(self.odoo_collection.display_name or self._path),
+                'tag': str(collection.tag or ''),
+                'D:displayname': str(collection.display_name or self._path),
             }
         elif key == 'tag':
-            return str(self.odoo_collection.tag or '')
+            return str(collection.tag or '')
         elif key == 'D:displayname':
-            return str(self.odoo_collection.display_name or self._path)
+            return str(collection.display_name or self._path)
         elif key == 'C:supported-calendar-component-set':
             return 'VTODO,VEVENT,VJOURNAL'
         elif key in ('C:calendar-home-set', 'D:principal-URL'):
@@ -122,12 +150,20 @@ class Collection(BaseCollection):
         return None
 
     def get_all(self):
-        for href in self.odoo_collection.dav_list(self, self._path_components):
-            yield self.odoo_collection.dav_get(self, href)
+        # A principal/root collection has no backing record and therefore no
+        # items of its own; its children are produced by Storage.discover().
+        collection = self.odoo_collection
+        if collection is None:
+            return
+        for href in collection.dav_list(self, self._path_components):
+            yield collection.dav_get(self, href)
 
     def get_multi(self, hrefs):
+        collection = self.odoo_collection
+        if collection is None:
+            return
         for href in hrefs:
-            yield href, self.odoo_collection.dav_get(self, href)
+            yield href, collection.dav_get(self, href)
 
     def upload(self, href, item):
         result = self.odoo_collection.dav_upload(self, href, item)
