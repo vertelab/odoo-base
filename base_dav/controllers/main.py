@@ -61,12 +61,26 @@ class Main(http.Controller):
             response_holder['status'] = status
             response_holder['headers'] = headers
 
+        # Odoo strips every 'wsgi.*' key out of httprequest.environ (see
+        # HTTPRequest.__init__ in odoo/http.py), keeping only 'wsgi.url_scheme'.
+        # Radicale is a WSGI application and reads the request body straight
+        # from environ['wsgi.input'], so without it every request carrying a
+        # body fails with KeyError: 'wsgi.input' -> HTTP 500. The symptom is
+        # that OPTIONS succeeds (no body) while PROPFIND fails, which makes
+        # DAVx5 report "Couldn't find CalDAV or CardDAV service".
+        # Re-add the stream from the unfiltered environ (same accessor Odoo
+        # itself uses in http.py:Request._set_request_dispatcher).
+        raw_environ = getattr(
+            request.httprequest, '_HTTPRequest__environ', {}) or {}
         environ = dict(
             request.httprequest.environ,
             HTTP_X_SCRIPT_NAME=PREFIX,
             PATH_INFO='/' + (davpath or ''),
             **({'wsgi.errors': sys.stderr}
                if 'wsgi.errors' not in request.httprequest.environ else {}),
+            **({'wsgi.input': raw_environ['wsgi.input']}
+               if raw_environ.get('wsgi.input') is not None
+               and 'wsgi.input' not in request.httprequest.environ else {}),
         )
 
         result = application(environ, start_response)
