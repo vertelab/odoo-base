@@ -205,7 +205,18 @@ class Storage(BaseStorage):
         yield collection
 
         if depth and len(components) == 1:
-            for odoo_col in self.env['dav.collection'].search([]):
+            # .sudo() is required: Radicale authenticates through its own auth
+            # class, not through an Odoo session, so request.env.user is an
+            # empty recordset here. A plain search([]) then hits
+            # ir.model.access.check -> _get_group_ids -> ensure_one(), which
+            # raises "ValueError: Expected singleton: res.users()" and turns
+            # every PROPFIND on the principal path into a 500.
+            #
+            # Access is not weakened by this: rights.py still authorizes each
+            # collection individually (owner_only / owner_write_only /
+            # authenticated) on every request, and discover() only advertises
+            # the collections the client may then actually read.
+            for odoo_col in self.env['dav.collection'].sudo().search([]):
                 yield Collection(
                     '/'.join(components + [str(odoo_col.id)]),
                     odoo_collection=odoo_col,
