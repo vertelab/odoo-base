@@ -6,10 +6,25 @@ import base64
 import datetime
 
 from odoo import api, fields, models, tools
+from odoo.tools import safe_eval as safe_eval_module
+from odoo.tools.safe_eval import safe_eval
 
 import dateutil
 import vobject
 from dateutil import tz
+
+# Odoo 18's safe_eval refuses raw modules, so expose vobject through a
+# whitelisted wrapper. wrap_module() resolves every name eagerly with
+# getattr(), so only names that actually exist in the installed vobject may
+# be requested: vobject 0.9.9 has no ``vCalendar`` (calendars are built with
+# ``iCalendar()``), and asking for it raises at import time and takes the
+# whole registry down.
+_VOBJECT_WHITELIST = [
+    'vCard', 'iCalendar', 'readOne', 'readComponents',
+]
+vobject_safe = safe_eval_module.wrap_module(
+    vobject, [a for a in _VOBJECT_WHITELIST if hasattr(vobject, a)],
+)
 
 
 class DavCollectionFieldMapping(models.Model):
@@ -60,15 +75,14 @@ class DavCollectionFieldMapping(models.Model):
     def _from_vobject_code(self, child):
         self.ensure_one()
         context = {
-            'datetime': datetime,
-            'dateutil': dateutil,
+            'datetime': safe_eval_module.datetime,
+            'dateutil': safe_eval_module.dateutil,
             'item': child,
             'result': None,
-            'tools': tools,
-            'tz': tz,
-            'vobject': vobject,
+            'tz': safe_eval_module.dateutil.tz,
+            'vobject': vobject_safe,
         }
-        tools.safe_eval(self.import_code, context, mode="exec", nocopy=True)
+        safe_eval(self.import_code, context, mode="exec", nocopy=True)
         return context.get('result', {})
 
     def _from_vobject_simple(self, child):
@@ -133,15 +147,14 @@ class DavCollectionFieldMapping(models.Model):
     def _to_vobject_code(self, record):
         self.ensure_one()
         context = {
-            'datetime': datetime,
-            'dateutil': dateutil,
+            'datetime': safe_eval_module.datetime,
+            'dateutil': safe_eval_module.dateutil,
             'record': record,
             'result': None,
-            'tools': tools,
-            'tz': tz,
-            'vobject': vobject,
+            'tz': safe_eval_module.dateutil.tz,
+            'vobject': vobject_safe,
         }
-        tools.safe_eval(self.export_code, context, mode="exec", nocopy=True)
+        safe_eval(self.export_code, context, mode="exec", nocopy=True)
         return context.get('result', None)
 
     def _to_vobject_simple(self, record):
