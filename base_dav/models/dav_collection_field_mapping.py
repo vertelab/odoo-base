@@ -2,6 +2,7 @@
 # Copyright 2019-2020 initOS GmbH <https://initos.com>
 # License AGPL-3.0 or later (https://www.gnu.org/licenses/agpl.html).
 
+import base64
 import datetime
 
 from odoo import api, fields, models, tools
@@ -106,7 +107,13 @@ class DavCollectionFieldMapping(models.Model):
 
     @api.model
     def _from_vobject_binary(self, item):
-        return item.value.encode('ascii')
+        # vobject decodes PHOTO/LOGO with ENCODING=b to raw bytes; other
+        # binary properties stay str. Odoo's Binary field expects the
+        # base64 payload as str, so normalise both cases to that.
+        value = item.value
+        if isinstance(value, bytes):
+            return base64.b64encode(value).decode('ascii')
+        return value
 
     @api.model
     def _from_vobject_char_n(self, item):
@@ -167,7 +174,12 @@ class DavCollectionFieldMapping(models.Model):
 
     @api.model
     def _to_vobject_binary(self, value):
-        return value and value.decode('ascii')
+        # Odoo 18 returns Binary field content as a base64 str (bytes only
+        # when the value comes straight from the attachment cache).
+        # vobject wants a str for the property value.
+        if isinstance(value, bytes):
+            return value.decode('ascii')
+        return value or None
 
     @api.model
     def _to_vobject_char_n(self, value):
