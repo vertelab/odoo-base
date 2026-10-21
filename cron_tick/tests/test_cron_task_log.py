@@ -45,13 +45,28 @@ class CronTaskTestBase(TransactionCase):
         return self.Log.search([('task_id', '=', task.id)])
 
     def notes_of(self, task):
-        """Chatter notes only — the creation message is not ours.
+        """The messages this module posted to the task's chatter.
 
-        Tests run in the admin's language, so assertions must not depend on
-        the English source strings; assert on the error text instead.
+        `message_post()` without an explicit subtype creates a `notification`
+        message with the internal "Note" subtype — NOT `message_type ==
+        'comment'` (verified: a fresh task shows only 'Scheduled Task
+        created' + our note, both as `notification`). Filtering on 'comment'
+        silently returned nothing and made every chatter test vacuous.
+
+        Empty-bodied notes are filtered out as well: Odoo's tracking posts a
+        note with no body text (only `tracking_value_ids`) when a tracked
+        field changes — that is the `active`/`cadence` tracking, not a
+        message we wrote. See design D6.
+
+        The creation message (also a note) is excluded by its body, and tests
+        run in the admin's language, so assertions never depend on the
+        English source strings — they assert on the error text instead.
         """
         return task.message_ids.filtered(
-            lambda m: m.message_type == 'comment')
+            lambda m: m.message_type == 'notification'
+            and m.subtype_id.internal
+            and (m.body or '').strip()
+            and 'Scheduled Task created' not in (m.body or ''))
 
 
 class TestRunLog(CronTaskTestBase):
@@ -212,6 +227,7 @@ class TestChatter(CronTaskTestBase):
 
     def test_repeated_failure_does_not_spam(self):
         """A second failure in the same streak posts nothing new."""
+        self.task_fail.write({'max_failures': 10})  # keep it active
         self.task_fail._execute(owner='test', trigger='manual')
         self.task_fail._execute(owner='test', trigger='manual')
         self.assertEqual(len(self.notes_of(self.task_fail)), 1)
@@ -224,6 +240,9 @@ class TestChatter(CronTaskTestBase):
         self.task_fail._execute(owner='test', trigger='manual')
         self.assertFalse(self.task_fail.active)
         notes = self.notes_of(self.task_fail)
+        # One message: `_record_failure` posts the deactivation branch and
+        # skips the first-failure branch — the deactivation IS the first
+        # failure in the streak when `max_failures` is 1 (design D6).
         self.assertEqual(len(notes), 1)
         self.assertIn('_no_such_method_here', notes[0].body or '')
 
