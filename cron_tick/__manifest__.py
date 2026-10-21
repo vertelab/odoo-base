@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 {
     'name': 'Cron: Tick Engine',
-    'version': '18.0.2.0.0',
+    'version': '18.0.2.1.0',
     'summary': 'Declarative scheduling — one engine, five cadences',
     'category': 'Hidden',
     'author': 'Vertel Sverige AB',
@@ -37,6 +37,15 @@
         ISOLATED ERROR HANDLING: each task runs in its own savepoint — a
         crashing task does not stop the chain.
 
+        RUN HISTORY: every run (tick, webhook, manual) leaves a
+        `cron.task.log` record with time, text, status and trigger, so
+        failures and slow runs can be followed in Odoo instead of being
+        overwritten by the next run. Retention is configurable
+        (`cron_tick.log_retention_days`, default 90 days) and cleaned by a
+        daily `cron.task`. `cron.task` also carries chatter, so
+        auto-deactivation and the first failure of a streak are visible in
+        the form view.
+
         ATOMIC LOCK: session-bound PostgreSQL advisory lock per task.
         A conditional UPDATE is NOT sufficient — Odoo runs under
         `repeatable read`, where two workers can both see the lock as free
@@ -45,12 +54,15 @@
     """,
     'depends': [
         'base',
+        'mail',
     ],
     'data': [
         'security/ir.model.access.csv',
         'data/config_data.xml',
         'data/cron_tick_data.xml',
+        'data/cron_log_data.xml',
         'views/cron_task_views.xml',
+        'views/cron_task_log_views.xml',
     ],
     'demo': [],
     'application': False,

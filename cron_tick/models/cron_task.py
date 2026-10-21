@@ -31,7 +31,7 @@ import logging
 import time
 from datetime import timedelta
 
-from odoo import _, api, fields, models
+from odoo import _, SUPERUSER_ID, api, fields, models
 from odoo.exceptions import UserError, ValidationError
 
 _logger = logging.getLogger(__name__)
@@ -79,6 +79,7 @@ class CronTask(models.Model):
     _name = 'cron.task'
     _description = 'Scheduled Task'
     _order = 'sequence, id'
+    _inherit = ['mail.thread', 'mail.activity.mixin']
 
     # ── Identity ───────────────────────────────────────────────────────
     name = fields.Char(
@@ -111,7 +112,7 @@ class CronTask(models.Model):
         ('daily', 'Daily'),
         ('week', 'Weekly'),
         ('month', 'Monthly'),
-    ], index=True,
+    ], index=True, tracking=True,
         help='Which tick cron runs the task. The cadence is a FIELD — a name '
              'prefix in the technical name does not affect execution.\n\n'
              'Leave empty when `interval_number`/`interval_type` are set: a '
@@ -132,7 +133,10 @@ class CronTask(models.Model):
     sequence = fields.Integer(
         default=10,
         help='Run order within the cadence. Lower value runs first.')
-    active = fields.Boolean(default=True)
+    active = fields.Boolean(
+        default=True, tracking=True,
+        help='Deactivated automatically after `max_failures` consecutive '
+             'failures. Re-activate to resume scheduling.')
 
     # ── Execution ──────────────────────────────────────────────────────
     timeout_seconds = fields.Integer(
@@ -168,6 +172,9 @@ class CronTask(models.Model):
         help='True when the task has not run within three cadence intervals.')
     cadence_label = fields.Char(
         compute='_compute_cadence_label')
+    run_log_count = fields.Integer(
+        compute='_compute_run_log_count',
+        help='Number of run log records for this task.')
 
     _sql_constraints = [
         ('technical_name_uniq', 'UNIQUE(technical_name)',
@@ -245,6 +252,26 @@ class CronTask(models.Model):
             else:
                 limit = CADENCE_SECONDS.get(task.cadence, 86400) * 3
             task.is_overdue = (now - task.last_run).total_seconds() > limit
+
+    def _compute_run_log_count(self):
+        """Count run log records per task (smart button).
+
+        `read_group` in one query instead of one `search_count` per record —
+        the list view reads the field for every row.
+        """
+        counts = {}
+        if self.ids:
+            try:
+                groups = self.env['cron.task.log'].sudo().read_group(
+                    [('task_id', 'in', self.ids)], ['task_id'], ['task_id'])
+                counts = {g['task_id'][0]: g['task_id_count'] for g in groups
+                          if g.get('task_id')}
+            except Exception:  # noqa: BLE001 — never break the form over a count
+                _logger.exception(
+                    'cron.task: could not count run logs for %s', self.ids)
+                counts = {}
+        for task in self:
+            task.run_log_count = counts.get(task.id, 0)
 
     @api.depends('cadence', 'interval_number', 'interval_type')
     def _compute_cadence_label(self):
@@ -434,53 +461,118 @@ class CronTask(models.Model):
             ) % (self.method_name, self.model_name, self.technical_name))
         return method()
 
-    def _execute(self, owner='manual'):
+    def _execute(self, owner='manual', trigger=None, trigger_detail=None):
         """Run the task with locking, measuring and recording.
 
         This is the common path for all three trigger types. Returns a dict
         with status and duration.
+
+        `trigger` defaults to `manual` — the webhook passes `webhook`.
         """
         self.ensure_one()
-        if not self._acquire_lock(owner):
+        trigger = trigger or 'manual'
+        user = self.env.user if trigger == 'manual' else None
+        result = self._run_locked_task(
+            self.id, owner=owner, trigger=trigger,
+            trigger_detail=trigger_detail or (user.name if user else None),
+            user_id=user.id if user else None)
+        if result['status'] == 'locked':
             return {
                 'status': 'locked',
                 'technical_name': self.technical_name,
             }
+        if result['status'] == 'error':
+            return {
+                'status': 'error',
+                'technical_name': self.technical_name,
+                'duration_ms': result['duration_ms'],
+                'error': result['error'],
+            }
+        return {
+            'status': 'ok',
+            'technical_name': self.technical_name,
+            'duration_ms': result['duration_ms'],
+        }
+
+    def _run_locked_task(self, task_id, owner, trigger, trigger_detail=None,
+                         user_id=None):
+        """The ONE run path: lock → savepoint → run → record → log.
+
+        Shared by the tick engine and `_execute` (webhook/manual), so the two
+        paths cannot drift apart. Returns a dict:
+
+            {'status': 'ok'|'error'|'locked', 'duration_ms': int,
+             'error': str|None}
+
+        WARNING: after a rolled-back savepoint the ORM cache is corrupt —
+        `invalidate_all()` + `browse(task_id)` is mandatory before writing
+        the error (see README).
+
+        `user_id` is an ID and not a recordset on purpose: a parameter named
+        `user` holding a recordset breaks `_()` (Odoo's translation helper
+        inspects the caller's locals and calls `int()` on a `user` it finds
+        there). See README, "Troubleshooting".
+        """
+        task = self.browse(task_id)
+        if not task._acquire_lock(owner):
+            # Refused: the method was NOT called. Record it so a task that
+            # never runs because of a stuck lock is visible in the log.
+            task.browse(task_id)._log_run_record(
+                'locked', trigger, trigger_detail,
+                text=_('Already running (%s) — not started.') % (
+                    task.locked_by or _('unknown')))
+            return {'status': 'locked', 'duration_ms': 0, 'error': None}
         started = time.monotonic()
         try:
             try:
                 with self.env.cr.savepoint():
-                    self._run()
+                    task._run()
             except Exception as exc:  # noqa: BLE001 — the engine catches all
                 duration_ms = int((time.monotonic() - started) * 1000)
                 self.env.invalidate_all()
-                self.browse(self.id)._record_failure(exc, duration_ms)
+                failed = self.browse(task_id)
+                failed._record_failure(exc, duration_ms)
+                failed._log_run_record(
+                    'error', trigger, trigger_detail,
+                    duration_ms=duration_ms, text=str(exc), user_id=user_id)
                 _logger.exception(
                     'cron.task %s failed (%s ms)',
-                    self.technical_name, duration_ms)
+                    failed.technical_name, duration_ms)
                 return {
                     'status': 'error',
-                    'technical_name': self.technical_name,
                     'duration_ms': duration_ms,
                     'error': str(exc),
                 }
             duration_ms = int((time.monotonic() - started) * 1000)
             self.env.invalidate_all()
-            task = self.browse(self.id)
-            task._record_success(duration_ms)
-            if duration_ms > self.timeout_seconds * 1000:
+            done = self.browse(task_id)
+            done._record_success(duration_ms)
+            done._log_run_record(
+                'ok', trigger, trigger_detail,
+                duration_ms=duration_ms,
+                text=_('Ran in %s ms.') % duration_ms, user_id=user_id)
+            if duration_ms > done.timeout_seconds * 1000:
                 _logger.warning(
                     'cron.task %s exceeded the time limit: %s ms > %s s',
-                    self.technical_name, duration_ms, self.timeout_seconds)
-            return {
-                'status': 'ok',
-                'technical_name': self.technical_name,
-                'duration_ms': duration_ms,
-            }
+                    done.technical_name, duration_ms, done.timeout_seconds)
+            return {'status': 'ok', 'duration_ms': duration_ms, 'error': None}
         finally:
             # Release the advisory lock EVEN on error — otherwise it is held
             # until the connection closes and the task can never run again.
-            self.browse(self.id)._release_lock()
+            self.browse(task_id)._release_lock()
+
+    def _log_run_record(self, status, trigger, trigger_detail=None,
+                        duration_ms=0, text=None, user_id=None):
+        """Write one run log record. Never raises."""
+        self.ensure_one()
+        try:
+            self.env['cron.task.log']._log_run(
+                self, status=status, trigger=trigger,
+                trigger_detail=trigger_detail, duration_ms=duration_ms,
+                text=text, user_id=user_id)
+        except Exception:  # noqa: BLE001 — history must never break a run
+            _logger.exception(
+                'cron.task %s: could not write the run log', self.technical_name)
 
     # ───────────────────────────────────────────────────────────────────
     # Lock (D10 — atomic via advisory lock, independent of isolation level)
@@ -565,7 +657,9 @@ class CronTask(models.Model):
         we write to a record whose transaction is gone.
         """
         self.ensure_one()
-        count = self.failure_count + 1
+        previous_count = self.failure_count
+        count = previous_count + 1
+        deactivated = count >= self.max_failures
         vals = {
             'last_run': fields.Datetime.now(),
             'last_duration_ms': duration_ms,
@@ -574,12 +668,53 @@ class CronTask(models.Model):
             'locked_by': False,
             'locked_at': False,
         }
-        if count >= self.max_failures:
+        if deactivated:
             vals['active'] = False
             _logger.error(
                 'cron.task %s deactivated after %s consecutive failures',
                 self.technical_name, count)
         self.write(vals)
+
+        # Chatter: only the events a human needs to see. Repeating failures in
+        # the same streak produce a run log record but no new message — see
+        # design D6. `message_post` must never change the run result.
+        try:
+            if deactivated:
+                self.message_post(body=_(
+                    'Deactivated automatically after %(count)s consecutive '
+                    'failures. Last error: %(error)s',
+                    count=count, error=str(exc)[:500]))
+            elif previous_count == 0:
+                self.message_post(body=_(
+                    'First failure in a new streak: %s', str(exc)[:500]))
+        except Exception:  # noqa: BLE001 — chatter must not break the run
+            _logger.exception(
+                'cron.task %s: could not post the failure to chatter',
+                self.technical_name)
+
+    def write(self, vals):
+        """Post a chatter message when a task is re-activated manually.
+
+        Auto-deactivation is posted by `_record_failure`; this covers the
+        human action of switching a deactivated task back on, which is
+        otherwise an invisible state change.
+        """
+        was_inactive = {task.id for task in self if not task.active}
+        result = super().write(vals)
+        if vals.get('active') and was_inactive:
+            # `with_user(SUPERUSER_ID)` is required: `base.group_user` has
+            # read-only access to `cron.task`, so a non-admin re-activation
+            # would otherwise fail on the message write.
+            for task in self.with_user(SUPERUSER_ID):
+                if task.id in was_inactive:
+                    try:
+                        task.message_post(body=_(
+                            'Re-activated manually by %s.', self.env.user.name))
+                    except Exception:  # noqa: BLE001
+                        _logger.exception(
+                            'cron.task %s: could not post re-activation',
+                            task.technical_name)
+        return result
 
     # ───────────────────────────────────────────────────────────────────
     # The engine (D6, D8, D11)
@@ -622,40 +757,23 @@ class CronTask(models.Model):
 
             ran, failed, locked = 0, 0, 0
             for task in due:
-                task_id = task.id
-                if not task._acquire_lock('tick:%s' % cadence):
+                # One run path for tick, webhook and manual — see
+                # `_run_locked_task`. It acquires and releases the task lock,
+                # records the run history and writes the run log.
+                result = self._run_locked_task(
+                    task.id, owner='tick:%s' % cadence, trigger='tick',
+                    trigger_detail=cadence)
+                if result['status'] == 'locked':
                     locked += 1
-                    continue
-                started = time.monotonic()
-                try:
-                    try:
-                        with self.env.cr.savepoint():
-                            task._run()
-                    except Exception as exc:  # noqa: BLE001
-                        duration_ms = int((time.monotonic() - started) * 1000)
-                        # The savepoint was rolled back — the ORM cache is
-                        # corrupt. Re-fetch the record before writing the
-                        # error (D8).
-                        self.env.invalidate_all()
-                        self.browse(task_id)._record_failure(exc, duration_ms)
-                        _logger.exception(
-                            'cron.task %s failed in tick %s',
-                            task.technical_name, cadence)
-                        failed += 1
-                        continue
-                    duration_ms = int((time.monotonic() - started) * 1000)
-                    self.env.invalidate_all()
-                    self.browse(task_id)._record_success(duration_ms)
-                    if duration_ms > task.timeout_seconds * 1000:
-                        _logger.warning(
-                            'cron.task %s exceeded the time limit: %s ms > %s s',
-                            task.technical_name, duration_ms,
-                            task.timeout_seconds)
+                elif result['status'] == 'error':
+                    # `_run_locked_task` already logged the traceback; a
+                    # second `_logger.exception` here would print it twice.
+                    _logger.info(
+                        'cron.task %s failed in tick %s: %s',
+                        task.technical_name, cadence, result.get('error'))
+                    failed += 1
+                else:
                     ran += 1
-                finally:
-                    # Release the task lock every iteration — otherwise it is
-                    # held until the connection closes and the task is blocked.
-                    self.browse(task_id)._release_lock()
 
             _logger.info(
                 'cron.tick %s: %s ran, %s failed, %s locked',
@@ -708,6 +826,18 @@ class CronTask(models.Model):
                 'type': 'success',
                 'sticky': False,
             },
+        }
+
+    def action_view_run_logs(self):
+        """Smart button: open the run log filtered on this task."""
+        self.ensure_one()
+        return {
+            'type': 'ir.actions.act_window',
+            'name': _('Run Log'),
+            'res_model': 'cron.task.log',
+            'view_mode': 'list,form',
+            'domain': [('task_id', '=', self.id)],
+            'context': {'default_task_id': self.id},
         }
 
     # ───────────────────────────────────────────────────────────────────

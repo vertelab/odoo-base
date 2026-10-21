@@ -23,6 +23,7 @@
                 <field name="failure_count" optional="show"/>
                 <field name="is_locked" optional="hide"/>
                 <field name="is_overdue" optional="hide"/>
+                <field name="run_log_count" optional="hide"/>
                 <field name="active" widget="boolean_toggle"/>
             </list>
         </field>
@@ -44,7 +45,13 @@
                     <field name="is_overdue" invisible="1"/>
                 </header>
                 <sheet>
-                    <div class="oe_button_box" name="button_box"/>
+                    <div class="oe_button_box" name="button_box">
+                        <button name="action_view_run_logs" type="object"
+                                class="oe_stat_button" icon="fa-history">
+                            <field name="run_log_count" widget="statinfo"
+                                   string="Runs"/>
+                        </button>
+                    </div>
                     <widget name="web_ribbon" title="Deactivated"
                             bg_color="text-bg-danger" invisible="active"/>
                     <group>
@@ -100,6 +107,7 @@
                         </page>
                     </notebook>
                 </sheet>
+                <chatter/>
             </form>
         </field>
     </record>

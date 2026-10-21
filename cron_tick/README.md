@@ -137,9 +137,86 @@ running.
 `_run()` is **pure**: it resolves the model, calls the method, returns the
 result. It never touches `last_run`, `failure_count` or `last_error`.
 
-The engine (`_cron_tick`, `_execute`) records after the run. **One write
-point, not two.** If `_run()` set `last_run` and then raised, the savepoint
-would roll back the write and the engine would believe the task never ran.
+The engine records after the run. **One write point, not two.** If `_run()`
+set `last_run` and then raised, the savepoint would roll back the write and
+the engine would believe the task never ran.
+
+All three triggers go through **one** method, `_run_locked_task()`:
+
+```
+lock → savepoint → _run() → _record_success/_record_failure → _log_run_record
+```
+
+`_cron_tick()` and `_execute()` only differ in what they pass as
+`trigger`/`trigger_detail`, so the tick path and the webhook path cannot
+drift apart. Their return values are unchanged (`{'cadence','ran','failed',
+'locked'}` and `{'status',...}`) — the webhook contract is intact.
+
+## Run log — `cron.task.log`
+
+`cron.task` keeps only the **latest** run. `last_error` is overwritten by the
+next success, so an error survives only until the task happens to work again.
+The run log keeps every run.
+
+| Field            | Description                                              |
+|------------------|----------------------------------------------------------|
+| `task_id`        | The task (cascade delete)                                |
+| `task_name`, `technical_name`, `module` | Snapshot — readable after a rename |
+| `run_at`         | When the run started (indexed)                           |
+| `status`         | `ok` / `error` / `locked` / `skipped`                    |
+| `trigger`        | `tick` / `webhook` / `manual`                            |
+| `trigger_detail` | Cadence for a tick, user name for a manual run           |
+| `user_id`        | Who pressed "Run now" (manual only)                      |
+| `duration_ms`    | Measured run time (0 for locked/skipped)                 |
+| `text`           | Short description; the error message for a failure       |
+
+**Order:** `_order = 'run_at desc, id desc'` — newest first, in the list view
+and in the smart button's list. The view sets no `default_order`, so it cannot
+drift from the model.
+
+**Colour:** the list is decorated — red on `error`, orange on `locked`, muted
+on `skipped`.
+
+**Why a dedicated model and not `mail.message`:** the `min` tick can produce
+thousands of rows a day. `mail.message` cannot be filtered on status,
+aggregated per task, or pruned per task.
+
+**Why the log is written in `_record_*` and not in `_run()`:** if the log were
+written inside `_run()` and the method then raised, the savepoint would roll
+back the write and the log would vanish exactly when it is needed. The log
+write is also wrapped in `try/except` — history must never be the reason a run
+is reported as failed.
+
+### Retention
+
+`cron_tick.log_retention_days` (system parameter, **default 90**). Enforced by
+the `cron_log_cleanup` task (cadence `daily`), which calls
+`cron.task.log._cron_cleanup()` and deletes in batches.
+
+- `0` (or less) **disables** cleanup — that is the rollback switch.
+- An unparsable value falls back to 90 with a warning in the log.
+
+## Chatter
+
+`cron.task` inherits `mail.thread` + `mail.activity.mixin`.
+
+- **Tracked fields:** `active` and `cadence` only. Not `last_run` — a message
+  per run would bury everything else.
+- **Explicit messages** (`mail.mt_note`) on three events only:
+  1. auto-deactivation after `max_failures`,
+  2. the **first** failure in a new streak (`failure_count` was 0),
+  3. manual re-activation of a deactivated task.
+- Repeating failures in the same streak produce a run log record but **no**
+  new message.
+- Every `message_post` is wrapped in `try/except`: chatter must never change
+  the outcome of a run.
+
+**Smart button:** *Runs* in the form (`run_log_count`, computed with one
+`read_group`) opens the log filtered on the task.
+
+## Menu
+
+*Technical → Cron Runs* (`base.menu_custom`, sequence 96).
 
 ## Error isolation
 

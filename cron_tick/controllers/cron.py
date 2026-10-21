@@ -62,7 +62,7 @@ class CronTriggerController(http.Controller):
 
         # 4. Run — the same path as tick and manual execution.
         try:
-            result = task._execute(owner='webhook')
+            result = task._execute(owner='webhook', trigger='webhook')
         except Exception as exc:  # noqa: BLE001 — always 200
             _logger.exception('cron.trigger: %s raised', technical_name)
             return {'status': 'error', 'error': str(exc)}

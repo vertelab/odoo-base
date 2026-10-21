@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data noupdate="1">
+        <!-- Retention for the run log.
+
+             `log_retention_days` is read by
+             `cron.task.log._cron_cleanup()`. A value of 0 (or less) disables
+             cleanup entirely — that is the documented rollback switch.
+             `noupdate="1"` so a module upgrade never resets a value the
+             administrator has changed. -->
+        <record id="config_log_retention_days" model="ir.config_parameter">
+            <field name="key">cron_tick.log_retention_days</field>
+            <field name="value">90</field>
+        </record>
+
+        <!-- The cleanup itself is a `cron.task`, not an `ir.cron`: the whole
+             point of this module is that scheduled work is visible in one
+             registry and can be run manually like everything else. -->
+        <record id="cron_log_cleanup" model="cron.task">
+            <field name="name">Cron: clean up run log</field>
+            <field name="technical_name">cron_log_cleanup</field>
+            <field name="model_name">cron.task.log</field>
+            <field name="method_name">_cron_cleanup</field>
+            <field name="cadence">daily</field>
+            <field name="module">cron_tick</field>
+            <field name="sequence">90</field>
+        </record>
+    </data>
+</odoo>

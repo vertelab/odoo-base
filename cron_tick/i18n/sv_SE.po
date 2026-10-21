@@ -432,3 +432,227 @@ msgstr "t.ex. ai.skill"
 #: model_terms:ir.ui.view,arch_db:cron_tick.view_cron_task_form
 msgid "e.g. skill_sync"
 msgstr "t.ex. skill_sync"
+
+#. module: cron_tick
+#. odoo-python
+#: code:addons/cron_tick/models/cron_task.py:0
+#, python-format
+msgid "Deactivated automatically after %(count)s consecutive failures. Last error: %(error)s"
+msgstr "Avaktiverades automatiskt efter %(count)s misslyckanden i följd. Senaste fel: %(error)s"
+
+#. module: cron_tick
+#. odoo-python
+#: code:addons/cron_tick/models/cron_task.py:0
+#, python-format
+msgid "First failure in a new streak: %s"
+msgstr "Första felet i en ny svit: %s"
+
+#. module: cron_tick
+#. odoo-python
+#: code:addons/cron_tick/models/cron_task.py:0
+#, python-format
+msgid "Re-activated manually by %s."
+msgstr "Återaktiverad manuellt av %s."
+
+#. module: cron_tick
+#. odoo-python
+#: code:addons/cron_tick/models/cron_task.py:0
+msgid "Run Log"
+msgstr "Körningshistorik"
+
+#. module: cron_tick
+#. odoo-python
+#: code:addons/cron_tick/models/cron_task.py:0
+msgid "Runs"
+msgstr "Körningar"
+
+#. module: cron_tick
+#. odoo-python
+#: code:addons/cron_tick/models/cron_task_log.py:0
+#, python-format
+msgid "Already running (%s) — not started."
+msgstr "Kör redan (%s) — startades inte."
+
+#. module: cron_tick
+#. odoo-python
+#: code:addons/cron_tick/models/cron_task_log.py:0
+#, python-format
+msgid "Ran in %s ms."
+msgstr "Kördes på %s ms."
+
+#. module: cron_tick
+#. odoo-python
+#: code:addons/cron_tick/models/cron_task_log.py:0
+msgid "Unknown task"
+msgstr "Okänd uppgift"
+
+#. module: cron_tick
+#: model:ir.model,name:cron_tick.model_cron_task_log
+msgid "Scheduled Task Run Log"
+msgstr "Körningshistorik för schemalagda uppgifter"
+
+#. module: cron_tick
+#: model:ir.model.fields,field_description:cron_tick.field_cron_task__run_log_count
+msgid "Run Log Count"
+msgstr "Antal körningar"
+
+#. module: cron_tick
+#: model:ir.model.fields,field_description:cron_tick.field_cron_task_log__task_id
+msgid "Task"
+msgstr "Uppgift"
+
+#. module: cron_tick
+#: model:ir.model.fields,field_description:cron_tick.field_cron_task_log__task_name
+msgid "Task Name"
+msgstr "Uppgiftsnamn"
+
+#. module: cron_tick
+#: model:ir.model.fields,field_description:cron_tick.field_cron_task_log__technical_name
+msgid "Technical Name"
+msgstr "Tekniskt namn"
+
+#. module: cron_tick
+#: model:ir.model.fields,field_description:cron_tick.field_cron_task_log__module
+msgid "Module"
+msgstr "Modul"
+
+#. module: cron_tick
+#: model:ir.model.fields,field_description:cron_tick.field_cron_task_log__run_at
+msgid "Run At"
+msgstr "Körd"
+
+#. module: cron_tick
+#: model:ir.model.fields,field_description:cron_tick.field_cron_task_log__status
+msgid "Status"
+msgstr "Status"
+
+#. module: cron_tick
+#: model:ir.model.fields.selection,name:cron_tick.selection__cron_task_log__status__ok
+msgid "OK"
+msgstr "OK"
+
+#. module: cron_tick
+#: model:ir.model.fields.selection,name:cron_tick.selection__cron_task_log__status__error
+msgid "Error"
+msgstr "Fel"
+
+#. module: cron_tick
+#: model:ir.model.fields.selection,name:cron_tick.selection__cron_task_log__status__locked
+msgid "Locked"
+msgstr "Låst"
+
+#. module: cron_tick
+#: model:ir.model.fields.selection,name:cron_tick.selection__cron_task_log__status__skipped
+msgid "Skipped"
+msgstr "Överhoppad"
+
+#. module: cron_tick
+#: model:ir.model.fields,field_description:cron_tick.field_cron_task_log__trigger
+msgid "Trigger"
+msgstr "Utlösare"
+
+#. module: cron_tick
+#: model:ir.model.fields.selection,name:cron_tick.selection__cron_task_log__trigger__tick
+msgid "Scheduled"
+msgstr "Schemalagd"
+
+#. module: cron_tick
+#: model:ir.model.fields.selection,name:cron_tick.selection__cron_task_log__trigger__webhook
+msgid "Webhook"
+msgstr "Webhook"
+
+#. module: cron_tick
+#: model:ir.model.fields.selection,name:cron_tick.selection__cron_task_log__trigger__manual
+msgid "Manual"
+msgstr "Manuell"
+
+#. module: cron_tick
+#: model:ir.model.fields,field_description:cron_tick.field_cron_task_log__trigger_detail
+msgid "Trigger Detail"
+msgstr "Utlösardetalj"
+
+#. module: cron_tick
+#: model:ir.model.fields,field_description:cron_tick.field_cron_task_log__user_id
+msgid "Run by"
+msgstr "Körd av"
+
+#. module: cron_tick
+#: model:ir.model.fields,field_description:cron_tick.field_cron_task_log__duration_ms
+msgid "Duration (ms)"
+msgstr "Varaktighet (ms)"
+
+#. module: cron_tick
+#: model:ir.model.fields,field_description:cron_tick.field_cron_task_log__text
+msgid "Text"
+msgstr "Text"
+
+#. module: cron_tick
+#: model_terms:ir.ui.view,arch_db:cron_tick.view_cron_task_log_list
+msgid "Run Log"
+msgstr "Körningshistorik"
+
+#. module: cron_tick
+#: model_terms:ir.ui.view,arch_db:cron_tick.view_cron_task_log_form
+msgid "Run Log Entry"
+msgstr "Körningspost"
+
+#. module: cron_tick
+#: model_terms:ir.ui.view,arch_db:cron_tick.view_cron_task_log_form
+msgid "Run"
+msgstr "Körning"
+
+#. module: cron_tick
+#: model_terms:ir.ui.view,arch_db:cron_tick.view_cron_task_log_form
+msgid "Result"
+msgstr "Resultat"
+
+#. module: cron_tick
+#: model_terms:ir.ui.view,arch_db:cron_tick.view_cron_task_log_list
+msgid "Search Run Log"
+msgstr "Sök i körningshistoriken"
+
+#. module: cron_tick
+#: model_terms:ir.ui.view,arch_db:cron_tick.view_cron_task_log_list
+msgid "Failed"
+msgstr "Misslyckade"
+
+#. module: cron_tick
+#: model_terms:ir.ui.view,arch_db:cron_tick.view_cron_task_log_list
+msgid "Successful"
+msgstr "Lyckade"
+
+#. module: cron_tick
+#: model_terms:ir.ui.view,arch_db:cron_tick.view_cron_task_log_list
+msgid "Today"
+msgstr "I dag"
+
+#. module: cron_tick
+#: model_terms:ir.ui.view,arch_db:cron_tick.view_cron_task_log_list
+msgid "Last 7 days"
+msgstr "Senaste 7 dagarna"
+
+#. module: cron_tick
+#: model_terms:ir.ui.view,arch_db:cron_tick.view_cron_task_log_list
+msgid "Group By"
+msgstr "Gruppera efter"
+
+#. module: cron_tick
+#: model_terms:ir.ui.view,arch_db:cron_tick.view_cron_task_log_list
+msgid "Day"
+msgstr "Dag"
+
+#. module: cron_tick
+#: model:ir.actions.act_window,name:cron_tick.action_cron_task_log
+#: model:ir.ui.menu,name:cron_tick.menu_cron_task_log
+msgid "Cron Runs"
+msgstr "Körningshistorik"
+
+#. module: cron_tick
+#: model_terms:ir.ui.view,arch_db:cron_tick.view_cron_task_log_list
+msgid "No runs recorded yet"
+msgstr "Inga körningar registrerade än"
+
+#. module: cron_tick
+#: model:cron.task,name:cron_tick.cron_log_cleanup
+msgid "Cron: clean up run log"
+msgstr "Cron: städa körningshistoriken"
