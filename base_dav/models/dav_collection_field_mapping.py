@@ -74,6 +74,8 @@ class DavCollectionFieldMapping(models.Model):
 
     def _from_vobject_code(self, child):
         self.ensure_one()
+        # Odoo 18 refuses raw modules in a safe_eval context; use the
+        # pre-wrapped ones shipped with odoo.tools.safe_eval.
         context = {
             'datetime': safe_eval_module.datetime,
             'dateutil': safe_eval_module.dateutil,
@@ -146,6 +148,8 @@ class DavCollectionFieldMapping(models.Model):
 
     def _to_vobject_code(self, record):
         self.ensure_one()
+        # Odoo 18 refuses raw modules in a safe_eval context; use the
+        # pre-wrapped ones shipped with odoo.tools.safe_eval.
         context = {
             'datetime': safe_eval_module.datetime,
             'dateutil': safe_eval_module.dateutil,

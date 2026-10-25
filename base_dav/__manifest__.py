@@ -3,7 +3,7 @@
 # License AGPL-3.0 or later (https://www.gnu.org/licenses/agpl.html).
 {
     "name": "Base: CalDAV and CardDAV",
-    "version": "18.0.1.0.1",
+    "version": "18.0.1.0.4",
     "author": "Vertel Sverige AB, initOS GmbH,Therp BV,Odoo Community Association (OCA)",
     "website": "https://vertel.se/apps/odoo-base/base_dav",
     "license": "AGPL-3",
@@ -42,6 +42,14 @@
     # samma spar. Adressboks-funktionaliteten (CardDAV) saknar da
     # motsvarighet i calendar_caldav och far byggas separat om behov uppstar.
     #
+        # Retired 2026-10-25: the Radicale-based DAV track is superseded by
+    # calendar_caldav, which is the single CalDAV+CardDAV server for
+    # ledningssystem. Both tracks registered /.well-known/caldav, and
+    # whichever answered first won — the Radicale track answered and
+    # returned an empty 207 for every client (DAVx5, Thunderbird,
+    # Evolution). The routes are unregistered in the code, not here:
+    # installable=False also stops Odoo from loading the module's
+    # models, which broke res.ppartner and caldav.collection.
     "installable": True,
     "auto_install": False,
 }
