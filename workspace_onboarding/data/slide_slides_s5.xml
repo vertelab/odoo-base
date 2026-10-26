@@ -1,0 +1,237 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data noupdate="0">
+
+    <!-- ═══════════════════════════════════════════════════════════════════
+         SEKTION 5: Manuellt test — verifiera att det fungerar
+         Slides: 2 (1 article, 1 quiz)
+         ═══════════════════════════════════════════════════════════════════ -->
+
+    <!-- SECTION HEADER -->
+    <record id="slide_category_ws_s5" model="slide.slide">
+        <field name="name">5. Manuellt test</field>
+        <field name="is_category" eval="True"/>
+        <field name="channel_id" ref="workspace_onboarding.slide_channel_workspace"/>
+        <field name="sequence">400</field>
+    </record>
+
+    <!-- SLIDE 5.1: Manuellt test -->
+    <record id="slide_ws_s5_01" model="slide.slide">
+        <field name="name">Manuellt test — inloggning, navigering och appen</field>
+        <field name="sequence">410</field>
+        <field name="slide_category">article</field>
+        <field name="channel_id" ref="workspace_onboarding.slide_channel_workspace"/>
+        <field name="is_published" eval="True"/>
+        <field name="is_preview" eval="True"/>
+        <field name="completion_time">0.50</field>
+        <field name="html_content" type="html">
+<section class="s_cover o_cc o_cc3 pt160 pb160">
+    <div class="container">
+        <h1 class="display-3-fs" style="text-align: center;">Manuellt test</h1>
+        <p class="lead" style="text-align: center;">Fem minuter som visar att du kommer in, hittar rätt och har appen på plats — innan du går vidare.</p>
+    </div>
+</section>
+
+<section class="s_text_block pt64 pb40">
+    <div class="container s_allow_columns">
+        <h2>Innan du börjar</h2>
+        <p>Du behöver:</p>
+        <ul>
+            <li>din inloggningsadress och dina uppgifter</li>
+            <li>en webbläsare på datorn</li>
+            <li>din mobil, om du ska testa appen</li>
+        </ul>
+        <p class="small text-muted">Testet tar cirka fem minuter. Gör det en gång när du får ditt konto — då vet du att allt fungerar innan du behöver det på riktigt.</p>
+    </div>
+</section>
+
+<section class="s_text_block pt32 pb40">
+    <div class="container s_allow_columns">
+        <h2>Test 1 — inloggningen</h2>
+        <ol>
+            <li>Öppna arbetsytans adress i en webbläsare.</li>
+            <li>Logga in med din e-postadress och ditt lösenord.</li>
+            <li>Du ska komma till startsidan med appmenyn uppe till vänster.</li>
+        </ol>
+        <p><strong>Förväntat resultat:</strong> du är inloggad och ser appmenyn. Inget felmeddelande, ingen omdirigering tillbaka till inloggningssidan.</p>
+    </div>
+</section>
+
+<section class="s_text_block pt32 pb40">
+    <div class="container s_allow_columns">
+        <h2>Test 2 — navigeringen</h2>
+        <ol>
+            <li>Klicka på appmenyn och öppna valfritt program du har tillgång till.</li>
+            <li>Skriv ett ord i sökfältet som du vet finns — en kollegas namn, eller namnet på ett dokument.</li>
+            <li>Kontrollera att sökningen ger träffar och att du kan öppna en av dem.</li>
+        </ol>
+        <p><strong>Förväntat resultat:</strong> programmet öppnas, och sökningen hittar det du skrev. Hittar sökningen inget alls, prova ett ord du är säker på finns — då skiljer du "fel sökord" från "trasig sökning".</p>
+    </div>
+</section>
+
+<section class="s_text_block pt32 pb40">
+    <div class="container s_allow_columns">
+        <h2>Test 3 — appen på mobilen</h2>
+        <ol>
+            <li>Öppna arbetsytan i mobilens webbläsare — <strong>Safari</strong> på iPhone, <strong>Chrome</strong> på Android.</li>
+            <li>Installera appen enligt sektion 3 i den här kursen.</li>
+            <li>Öppna den installerade appen från hemskärmen.</li>
+            <li>Logga in om du blir ombedd, och kontrollera att du ser samma innehåll som på datorn.</li>
+        </ol>
+        <p><strong>Förväntat resultat:</strong> appen öppnas i ett eget fönster utan adressrad, och du ser samma data som på datorn.</p>
+    </div>
+</section>
+
+<section class="s_text_block pt32 pb64">
+    <div class="container s_allow_columns">
+        <h2>Om det inte fungerar</h2>
+        <p>Nästan alla fel beror på något av dessa tre:</p>
+        <ol>
+            <li><strong>Lösenordet stämmer inte.</strong> Använd <strong>Glömt lösenord?</strong> på inloggningssidan i stället för att gissa. Länken kommer till din e-post — titta i skräpposten om den dröjer.</li>
+            <li><strong>Du ser färre program än du förväntar dig.</strong> Det är behörigheter, inte ett fel. Hör av dig till IT och beskriv vilket program du saknar.</li>
+            <li><strong>Appen går inte att installera.</strong> På iPhone måste du använda Safari — Chrome och Firefox kan inte lägga till appar på hemskärmen. På Android letar du efter <strong>Installera app</strong> i menyn med tre prickar.</li>
+        </ol>
+        <p class="small text-muted">Fungerar det fortfarande inte: hör av dig till IT och beskriv vilket av de tre testerna som stannade. Det räcker som felbeskrivning.</p>
+    </div>
+</section>
+
+<section class="s_call_to_action o_cc o_cc5 pt48 pb48">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-9">
+                <h3>Nu är du igång</h3>
+                <p class="lead">Går alla tre testerna igenom är arbetsytan redo. Välj sedan den kurs som ligger närmast det du gör mest — kalender, e-post eller dokument.</p>
+            </div>
+        </div>
+    </div>
+</section>
+        </field>
+        <field name="description">Steg för steg: verifiera inloggning, navigering och att appen fungerar på mobilen. Tre tester, förväntat resultat och de tre vanligaste felen.</field>
+    </record>
+
+    <!-- SLIDE 5.2: Quiz — Manuellt test -->
+    <record id="slide_ws_s5_02" model="slide.slide">
+        <field name="name">🧪 Testa dina kunskaper — Manuellt test</field>
+        <field name="sequence">420</field>
+        <field name="slide_category">quiz</field>
+        <field name="channel_id" ref="workspace_onboarding.slide_channel_workspace"/>
+        <field name="is_published" eval="True"/>
+        <field name="is_preview" eval="True"/>
+        <field name="completion_time">0.25</field>
+        <field name="quiz_first_attempt_reward">100</field>
+        <field name="quiz_second_attempt_reward">75</field>
+        <field name="quiz_third_attempt_reward">50</field>
+        <field name="quiz_fourth_attempt_reward">25</field>
+        <field name="description">Kontrollera att du vet hur du verifierar inloggning, navigering och appen själv.</field>
+    </record>
+
+    <record id="slide_ws_s5_02_q1" model="slide.question">
+        <field name="question">Vad är det avgörande tecknet på att inloggningen fungerar?</field>
+        <field name="sequence">1</field>
+        <field name="slide_id" ref="slide_ws_s5_02"/>
+    </record>
+    <record id="slide_ws_s5_02_q1_a1" model="slide.answer">
+        <field name="text_value">Att du kommer till startsidan och ser appmenyn</field>
+        <field name="sequence">1</field>
+        <field name="is_correct" eval="True"/>
+        <field name="comment">Rätt. Att sidan laddas räcker inte — du ska vara inne, inte tillbaka på inloggningen.</field>
+        <field name="question_id" ref="slide_ws_s5_02_q1"/>
+    </record>
+    <record id="slide_ws_s5_02_q1_a2" model="slide.answer">
+        <field name="text_value">Att inloggningssidan laddas utan felmeddelande</field>
+        <field name="sequence">2</field>
+        <field name="is_correct" eval="False"/>
+        <field name="comment">Det betyder bara att sidan fungerar — inte att du kommit in.</field>
+        <field name="question_id" ref="slide_ws_s5_02_q1"/>
+    </record>
+    <record id="slide_ws_s5_02_q1_a3" model="slide.answer">
+        <field name="text_value">Att adressen inte ändras</field>
+        <field name="sequence">3</field>
+        <field name="is_correct" eval="False"/>
+        <field name="comment">Adressen ändras när du loggar in. Det är normalt.</field>
+        <field name="question_id" ref="slide_ws_s5_02_q1"/>
+    </record>
+
+    <record id="slide_ws_s5_02_q2" model="slide.question">
+        <field name="question">Sökningen hittar inget. Hur skiljer du "fel sökord" från "trasig sökning"?</field>
+        <field name="sequence">2</field>
+        <field name="slide_id" ref="slide_ws_s5_02"/>
+    </record>
+    <record id="slide_ws_s5_02_q2_a1" model="slide.answer">
+        <field name="text_value">Prova ett ord du är säker på finns</field>
+        <field name="sequence">1</field>
+        <field name="is_correct" eval="True"/>
+        <field name="comment">Rätt. Ger det träff är sökningen hel — då var det bara ordet.</field>
+        <field name="question_id" ref="slide_ws_s5_02_q2"/>
+    </record>
+    <record id="slide_ws_s5_02_q2_a2" model="slide.answer">
+        <field name="text_value">Starta om webbläsaren</field>
+        <field name="sequence">2</field>
+        <field name="is_correct" eval="False"/>
+        <field name="comment">Hjälper sällan. Testa med ett känt ord först.</field>
+        <field name="question_id" ref="slide_ws_s5_02_q2"/>
+    </record>
+    <record id="slide_ws_s5_02_q2_a3" model="slide.answer">
+        <field name="text_value">Anta att sökningen är trasig och ring IT</field>
+        <field name="sequence">3</field>
+        <field name="is_correct" eval="False"/>
+        <field name="comment">Onödigt om det bara var fel ord. Testa först.</field>
+        <field name="question_id" ref="slide_ws_s5_02_q2"/>
+    </record>
+
+    <record id="slide_ws_s5_02_q3" model="slide.question">
+        <field name="question">Du ser färre program i appmenyn än din kollega. Vad beror det på?</field>
+        <field name="sequence">3</field>
+        <field name="slide_id" ref="slide_ws_s5_02"/>
+    </record>
+    <record id="slide_ws_s5_02_q3_a1" model="slide.answer">
+        <field name="text_value">Behörigheter — du ser bara det som ingår i din roll</field>
+        <field name="sequence">1</field>
+        <field name="is_correct" eval="True"/>
+        <field name="comment">Rätt. Hör av dig till IT om du tror att du ska ha mer.</field>
+        <field name="question_id" ref="slide_ws_s5_02_q3"/>
+    </record>
+    <record id="slide_ws_s5_02_q3_a2" model="slide.answer">
+        <field name="text_value">Att din inloggning är halvfärdig</field>
+        <field name="sequence">2</field>
+        <field name="is_correct" eval="False"/>
+        <field name="comment">Du är inloggad — annars kom du inte in alls.</field>
+        <field name="question_id" ref="slide_ws_s5_02_q3"/>
+    </record>
+    <record id="slide_ws_s5_02_q3_a3" model="slide.answer">
+        <field name="text_value">Att appen inte är installerad</field>
+        <field name="sequence">3</field>
+        <field name="is_correct" eval="False"/>
+        <field name="comment">Appmenyn ser likadan ut oavsett hur du öppnar arbetsytan.</field>
+        <field name="question_id" ref="slide_ws_s5_02_q3"/>
+    </record>
+
+    <record id="slide_ws_s5_02_q4" model="slide.question">
+        <field name="question">Vad gör du om lösenordet inte fungerar?</field>
+        <field name="sequence">4</field>
+        <field name="slide_id" ref="slide_ws_s5_02"/>
+    </record>
+    <record id="slide_ws_s5_02_q4_a1" model="slide.answer">
+        <field name="text_value">Använder Glömt lösenord? i stället för att gissa</field>
+        <field name="sequence">1</field>
+        <field name="is_correct" eval="True"/>
+        <field name="comment">Rätt. Länken kommer till din e-post — titta i skräpposten om den dröjer.</field>
+        <field name="question_id" ref="slide_ws_s5_02_q4"/>
+    </record>
+    <record id="slide_ws_s5_02_q4_a2" model="slide.answer">
+        <field name="text_value">Försöker flera gånger med varianter</field>
+        <field name="sequence">2</field>
+        <field name="is_correct" eval="False"/>
+        <field name="comment">Kan låsa kontot. Återställ i stället.</field>
+        <field name="question_id" ref="slide_ws_s5_02_q4"/>
+    </record>
+    <record id="slide_ws_s5_02_q4_a3" model="slide.answer">
+        <field name="text_value">Ber en kollega logga in åt sig</field>
+        <field name="sequence">3</field>
+        <field name="is_correct" eval="False"/>
+        <field name="comment">Aldrig — inloggningen är personlig och spårbarheten försvinner.</field>
+        <field name="question_id" ref="slide_ws_s5_02_q4"/>
+    </record>
+
+    </data>
+</odoo>

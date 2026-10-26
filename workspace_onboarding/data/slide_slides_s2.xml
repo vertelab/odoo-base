@@ -1,0 +1,218 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data noupdate="0">
+
+    <!-- ═══════════════════════════════════════════════════════════════════
+         SEKTION 2: Så kopplar du upp dig
+         Slides: 2 (1 article, 1 quiz)
+         ═══════════════════════════════════════════════════════════════════ -->
+
+    <!-- SECTION HEADER -->
+    <record id="slide_category_ws_s2" model="slide.slide">
+        <field name="name">2. Så kopplar du upp dig</field>
+        <field name="is_category" eval="True"/>
+        <field name="channel_id" ref="workspace_onboarding.slide_channel_workspace"/>
+        <field name="sequence">100</field>
+    </record>
+
+    <!-- SLIDE 2.1: Logga in och navigera -->
+    <record id="slide_ws_s2_01" model="slide.slide">
+        <field name="name">Logga in och hitta rätt</field>
+        <field name="sequence">110</field>
+        <field name="slide_category">article</field>
+        <field name="channel_id" ref="workspace_onboarding.slide_channel_workspace"/>
+        <field name="is_published" eval="True"/>
+        <field name="is_preview" eval="True"/>
+        <field name="completion_time">0.50</field>
+        <field name="html_content" type="html">
+<section class="s_cover o_cc o_cc3 pt160 pb160">
+    <div class="container">
+        <h1 class="display-3-fs" style="text-align: center;">Logga in och hitta rätt</h1>
+        <p class="lead" style="text-align: center;">Första inloggningen, och de tre sätten att ta sig vidare som gör resten av dagen snabbare.</p>
+    </div>
+</section>
+
+<section class="s_text_block pt64 pb40">
+    <div class="container s_allow_columns">
+        <h2>Första inloggningen</h2>
+        <ol>
+            <li>Öppna adressen du fick av IT i en webbläsare.</li>
+            <li>Logga in med den e-postadress och det lösenord du fick.</li>
+            <li>Första gången kan du bli ombedd att byta lösenord — gör det direkt och spara det i din lösenordshanterare.</li>
+        </ol>
+        <p class="small text-muted">Glömmer du lösenordet finns <strong>Glömt lösenord?</strong> på inloggningssidan. Då skickas en återställningslänk till din e-post.</p>
+    </div>
+</section>
+
+<section class="s_text_block pt32 pb40">
+    <div class="container s_allow_columns">
+        <h2>Tre sätt att navigera</h2>
+        <p>Det finns ingen anledning att lära sig menyn utantill. Använd det som passar situationen:</p>
+        <ul>
+            <li><strong>Appmenyn</strong> — rutnätet uppe till vänster. Här ligger alla program du har tillgång till. Klicka på en ikon för att öppna.</li>
+            <li><strong>Sökfältet</strong> — det snabbaste. Skriv vad du letar efter, oavsett om det är en person, ett dokument eller en funktion. Sökningen når allt du har rätt att se.</li>
+            <li><strong>Genvägar</strong> — de senast använda programmen ligger överst i appmenyn, så du slipper leta igen.</li>
+        </ul>
+    </div>
+</section>
+
+<section class="s_text_block pt32 pb40">
+    <div class="container s_allow_columns">
+        <h2>Bra att veta om behörigheter</h2>
+        <p>Du ser bara det du har rätt att se. Saknar du ett program i appmenyn betyder det att det inte ingår i din roll — inte att det är trasigt. Hör av dig till IT om du tror att du ska ha åtkomst.</p>
+        <p>Detsamma gäller innehåll: söker du på ett dokument du vet finns, men inte hittar det, kan det bero på att det ligger i en mapp du inte har åtkomst till.</p>
+    </div>
+</section>
+
+<section class="s_text_block pt32 pb64">
+    <div class="container s_allow_columns">
+        <h2>Ställ in dig först</h2>
+        <p>Innan du går vidare, gör dessa tre saker — de sparar tid varje dag:</p>
+        <ol>
+            <li>Ladda upp en profilbild under dina inställningar. Kollegor känner igen dig i chatt och kommentarer.</li>
+            <li>Kontrollera din tidszon, så att möten hamnar rätt i kalendern.</li>
+            <li>Sätt språket till svenska om det inte redan är det.</li>
+        </ol>
+    </div>
+</section>
+
+<section class="s_call_to_action o_cc o_cc5 pt48 pb48">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-9">
+                <h3>Sök, leta inte</h3>
+                <p class="lead">Om du inte hittar något: skriv det i sökfältet i stället för att klicka dig genom menyer. Det går nästan alltid fortare.</p>
+            </div>
+        </div>
+    </div>
+</section>
+        </field>
+        <field name="description">Första inloggningen, de tre sätten att navigera (appmeny, sök, genvägar) och tre inställningar du bör göra direkt.</field>
+    </record>
+
+    <!-- SLIDE 2.2: Quiz -->
+    <record id="slide_ws_s2_02" model="slide.slide">
+        <field name="name">🧪 Testa dina kunskaper — Logga in och hitta rätt</field>
+        <field name="sequence">140</field>
+        <field name="slide_category">quiz</field>
+        <field name="channel_id" ref="workspace_onboarding.slide_channel_workspace"/>
+        <field name="is_published" eval="True"/>
+        <field name="is_preview" eval="True"/>
+        <field name="completion_time">0.25</field>
+        <field name="quiz_first_attempt_reward">100</field>
+        <field name="quiz_second_attempt_reward">75</field>
+        <field name="quiz_third_attempt_reward">50</field>
+        <field name="quiz_fourth_attempt_reward">25</field>
+        <field name="description">Kontrollera att du kan navigera och förstår behörigheter.</field>
+    </record>
+
+    <record id="slide_ws_s2_02_q1" model="slide.question">
+        <field name="question">Vad är det snabbaste sättet att hitta en person, ett dokument eller en funktion?</field>
+        <field name="sequence">1</field>
+        <field name="slide_id" ref="slide_ws_s2_02"/>
+    </record>
+    <record id="slide_ws_s2_02_q1_a1" model="slide.answer">
+        <field name="text_value">Klicka sig genom appmenyn tills man hittar rätt</field>
+        <field name="sequence">1</field>
+        <field name="is_correct" eval="False"/>
+        <field name="comment">Fungerar, men är långsamt — särskilt när du inte vet var det ligger.</field>
+        <field name="question_id" ref="slide_ws_s2_02_q1"/>
+    </record>
+    <record id="slide_ws_s2_02_q1_a2" model="slide.answer">
+        <field name="text_value">Skriva det i sökfältet</field>
+        <field name="sequence">2</field>
+        <field name="is_correct" eval="True"/>
+        <field name="comment">Rätt. Sökningen når allt du har rätt att se, oavsett vilket program det ligger i.</field>
+        <field name="question_id" ref="slide_ws_s2_02_q1"/>
+    </record>
+    <record id="slide_ws_s2_02_q1_a3" model="slide.answer">
+        <field name="text_value">Fråga en kollega</field>
+        <field name="sequence">3</field>
+        <field name="is_correct" eval="False"/>
+        <field name="comment">Går det med, men då är ni två som letar i stället för en.</field>
+        <field name="question_id" ref="slide_ws_s2_02_q1"/>
+    </record>
+
+    <record id="slide_ws_s2_02_q2" model="slide.question">
+        <field name="question">Du saknar ett program i appmenyn. Vad betyder det?</field>
+        <field name="sequence">2</field>
+        <field name="slide_id" ref="slide_ws_s2_02"/>
+    </record>
+    <record id="slide_ws_s2_02_q2_a1" model="slide.answer">
+        <field name="text_value">Att det inte ingår i din roll — hör av dig till IT om du tror att du ska ha det</field>
+        <field name="sequence">1</field>
+        <field name="is_correct" eval="True"/>
+        <field name="comment">Rätt. Du ser bara det du har rätt att se.</field>
+        <field name="question_id" ref="slide_ws_s2_02_q2"/>
+    </record>
+    <record id="slide_ws_s2_02_q2_a2" model="slide.answer">
+        <field name="text_value">Att systemet är trasigt</field>
+        <field name="sequence">2</field>
+        <field name="is_correct" eval="False"/>
+        <field name="comment">Nästan aldrig. Behörigheter är den vanliga förklaringen.</field>
+        <field name="question_id" ref="slide_ws_s2_02_q2"/>
+    </record>
+    <record id="slide_ws_s2_02_q2_a3" model="slide.answer">
+        <field name="text_value">Att du måste logga in igen</field>
+        <field name="sequence">3</field>
+        <field name="is_correct" eval="False"/>
+        <field name="comment">Hjälper inte — inloggningen är det inte fel på.</field>
+        <field name="question_id" ref="slide_ws_s2_02_q2"/>
+    </record>
+
+    <record id="slide_ws_s2_02_q3" model="slide.question">
+        <field name="question">Varför ska du kontrollera tidszonen direkt?</field>
+        <field name="sequence">3</field>
+        <field name="slide_id" ref="slide_ws_s2_02"/>
+    </record>
+    <record id="slide_ws_s2_02_q3_a1" model="slide.answer">
+        <field name="text_value">För att möten annars kan hamna fel i kalendern</field>
+        <field name="sequence">1</field>
+        <field name="is_correct" eval="True"/>
+        <field name="comment">Rätt. Fel tidszon ger fel tid på varje möte — och det märks först när man missar ett.</field>
+        <field name="question_id" ref="slide_ws_s2_02_q3"/>
+    </record>
+    <record id="slide_ws_s2_02_q3_a2" model="slide.answer">
+        <field name="text_value">För att systemet ska gå snabbare</field>
+        <field name="sequence">2</field>
+        <field name="is_correct" eval="False"/>
+        <field name="comment">Tidszonen påverkar ingen prestanda.</field>
+        <field name="question_id" ref="slide_ws_s2_02_q3"/>
+    </record>
+    <record id="slide_ws_s2_02_q3_a3" model="slide.answer">
+        <field name="text_value">Det behövs inte — det ställs in automatiskt</field>
+        <field name="sequence">3</field>
+        <field name="is_correct" eval="False"/>
+        <field name="comment">Det stämmer oftast, men inte alltid. Kontrollera en gång.</field>
+        <field name="question_id" ref="slide_ws_s2_02_q3"/>
+    </record>
+
+    <record id="slide_ws_s2_02_q4" model="slide.question">
+        <field name="question">Du vet att ett dokument finns men sökningen hittar det inte. Vad kan det bero på?</field>
+        <field name="sequence">4</field>
+        <field name="slide_id" ref="slide_ws_s2_02"/>
+    </record>
+    <record id="slide_ws_s2_02_q4_a1" model="slide.answer">
+        <field name="text_value">Att det ligger i en mapp du inte har åtkomst till</field>
+        <field name="sequence">1</field>
+        <field name="is_correct" eval="True"/>
+        <field name="comment">Rätt. Sökningen visar bara det du har rätt att se — den är inte trasig för det.</field>
+        <field name="question_id" ref="slide_ws_s2_02_q4"/>
+    </record>
+    <record id="slide_ws_s2_02_q4_a2" model="slide.answer">
+        <field name="text_value">Att sökningen är trasig</field>
+        <field name="sequence">2</field>
+        <field name="is_correct" eval="False"/>
+        <field name="comment">Kontrollera behörigheten först — det är den vanligaste orsaken.</field>
+        <field name="question_id" ref="slide_ws_s2_02_q4"/>
+    </record>
+    <record id="slide_ws_s2_02_q4_a3" model="slide.answer">
+        <field name="text_value">Att dokumentet har raderats</field>
+        <field name="sequence">3</field>
+        <field name="is_correct" eval="False"/>
+        <field name="comment">Möjligt, men mindre troligt. Behörighet först.</field>
+        <field name="question_id" ref="slide_ws_s2_02_q4"/>
+    </record>
+
+    </data>
+</odoo>

@@ -1,0 +1,207 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data noupdate="0">
+
+    <!-- ═══════════════════════════════════════════════════════════════════
+         SEKTION 1: Vad det är och varför
+         Slides: 2 (1 article, 1 quiz)
+         ═══════════════════════════════════════════════════════════════════ -->
+
+    <!-- SECTION HEADER -->
+    <record id="slide_category_ws_s1" model="slide.slide">
+        <field name="name">1. Vad det är och varför</field>
+        <field name="is_category" eval="True"/>
+        <field name="channel_id" ref="workspace_onboarding.slide_channel_workspace"/>
+        <field name="sequence">0</field>
+    </record>
+
+    <!-- SLIDE 1.1: Vad en digital arbetsplats är -->
+    <record id="slide_ws_s1_01" model="slide.slide">
+        <field name="name">En arbetsplats, inte nio appar</field>
+        <field name="sequence">10</field>
+        <field name="slide_category">article</field>
+        <field name="channel_id" ref="workspace_onboarding.slide_channel_workspace"/>
+        <field name="is_published" eval="True"/>
+        <field name="is_preview" eval="True"/>
+        <field name="completion_time">0.50</field>
+        <field name="html_content" type="html">
+<section class="s_cover o_cc o_cc3 pt160 pb160">
+    <div class="container">
+        <h1 class="display-3-fs" style="text-align: center;">En arbetsplats, inte nio appar</h1>
+        <p class="lead" style="text-align: center;">Allt du gör under en arbetsdag samlat på ett ställe — i webbläsaren och på mobilen.</p>
+    </div>
+</section>
+
+<section class="s_text_block pt64 pb40">
+    <div class="container s_allow_columns">
+        <h2>Vad du får</h2>
+        <p>Din digitala arbetsplats samlar de funktioner du förväntar dig av en modern arbetsdag. Du loggar in på ett ställe och når allt därifrån:</p>
+        <ul>
+            <li><strong>Kalender och kontakter</strong> — synkade med mobilen, åt båda hållen</li>
+            <li><strong>E-post</strong> — företagets adress, i samma gränssnitt som resten</li>
+            <li><strong>Chatt och web-möte</strong> — prata med kollegor och kunder utan externa konton</li>
+            <li><strong>Dokument</strong> — filer på en gemensam yta, med versioner och nätverksdisk</li>
+            <li><strong>Kunskap och anteckningar</strong> — det ni lärt er, sökbart</li>
+            <li><strong>Dokumentsignering</strong> — skicka, signera och arkivera avtal</li>
+            <li><strong>AI-assistent</strong> — en hjälpare som läser era egna dokument</li>
+        </ul>
+    </div>
+</section>
+
+<section class="s_text_block pt32 pb40">
+    <div class="container s_allow_columns">
+        <h2>Varför det spelar roll</h2>
+        <p>Varje separat system kostar tid i inloggningar, i letande efter saker som hamnade någon annanstans, och i frågor till kollegor om var något ligger. När funktionerna delar samma yta behöver du inte veta <em>var</em> saker finns — du söker och hittar.</p>
+        <p>Det viktigaste är inte att det finns många funktioner. Det är att de <strong>hänger ihop</strong>: ett dokument du hittar i sökningen kan du skicka för signering, och AI-assistenten kan läsa det eftersom det ligger i samma system.</p>
+    </div>
+</section>
+
+<section class="s_text_block pt32 pb64">
+    <div class="container s_allow_columns">
+        <h2>Så är kursen upplagd</h2>
+        <p>Den här kursen är porten in. Den tar dig från inloggning till en fungerande arbetsyta på mobilen — på cirka tjugo minuter.</p>
+        <p>Därefter finns en kurs per funktionsområde. Varje sådan kurs har samma fem kapitel: vad det är och varför, hur du kopplar upp det, hur du använder det i vardagen, ett <strong>manuellt test</strong> där du själv verifierar att det fungerar, och sist ett quiz.</p>
+        <p class="small text-muted">Du behöver inte gå dem i ordning, men den här kursen först sparar dig tid — resten förutsätter att du kan logga in och navigera.</p>
+    </div>
+</section>
+
+<section class="s_call_to_action o_cc o_cc5 pt48 pb48">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-9">
+                <h3>En sak att ta med sig</h3>
+                <p class="lead">Arbetsytan är inte ännu ett system ovanpå de andra. Den är tänkt att ersätta dem.</p>
+            </div>
+        </div>
+    </div>
+</section>
+        </field>
+        <field name="description">Vad en digital arbetsplats är, vilka funktioner den samlar och varför de hänger ihop. Plus hur kursen är upplagd.</field>
+    </record>
+
+    <!-- SLIDE 1.2: Quiz -->
+    <record id="slide_ws_s1_02" model="slide.slide">
+        <field name="name">🧪 Testa dina kunskaper — Vad det är och varför</field>
+        <field name="sequence">40</field>
+        <field name="slide_category">quiz</field>
+        <field name="channel_id" ref="workspace_onboarding.slide_channel_workspace"/>
+        <field name="is_published" eval="True"/>
+        <field name="is_preview" eval="True"/>
+        <field name="completion_time">0.25</field>
+        <field name="quiz_first_attempt_reward">100</field>
+        <field name="quiz_second_attempt_reward">75</field>
+        <field name="quiz_third_attempt_reward">50</field>
+        <field name="quiz_fourth_attempt_reward">25</field>
+        <field name="description">Kontrollera att du vet vad arbetsytan är och hur kursen är upplagd.</field>
+    </record>
+
+    <record id="slide_ws_s1_02_q1" model="slide.question">
+        <field name="question">Vad är det viktigaste med en digital arbetsplats?</field>
+        <field name="sequence">1</field>
+        <field name="slide_id" ref="slide_ws_s1_02"/>
+    </record>
+    <record id="slide_ws_s1_02_q1_a1" model="slide.answer">
+        <field name="text_value">Att den har så många funktioner som möjligt</field>
+        <field name="sequence">1</field>
+        <field name="is_correct" eval="False"/>
+        <field name="comment">Många funktioner som inte hänger ihop är bara många system igen.</field>
+        <field name="question_id" ref="slide_ws_s1_02_q1"/>
+    </record>
+    <record id="slide_ws_s1_02_q1_a2" model="slide.answer">
+        <field name="text_value">Att funktionerna hänger ihop så du slipper leta</field>
+        <field name="sequence">2</field>
+        <field name="is_correct" eval="True"/>
+        <field name="comment">Rätt. Du ska inte behöva veta var saker finns — du söker och hittar.</field>
+        <field name="question_id" ref="slide_ws_s1_02_q1"/>
+    </record>
+    <record id="slide_ws_s1_02_q1_a3" model="slide.answer">
+        <field name="text_value">Att den ser modern ut</field>
+        <field name="sequence">3</field>
+        <field name="is_correct" eval="False"/>
+        <field name="comment">Utseende är trevligt men löser inget problem.</field>
+        <field name="question_id" ref="slide_ws_s1_02_q1"/>
+    </record>
+
+    <record id="slide_ws_s1_02_q2" model="slide.question">
+        <field name="question">Varför är just den här kursen värd att ta först?</field>
+        <field name="sequence">2</field>
+        <field name="slide_id" ref="slide_ws_s1_02"/>
+    </record>
+    <record id="slide_ws_s1_02_q2_a1" model="slide.answer">
+        <field name="text_value">För att resten av kurserna förutsätter att du kan logga in och navigera</field>
+        <field name="sequence">1</field>
+        <field name="is_correct" eval="True"/>
+        <field name="comment">Rätt. Det är porten in — de andra kurserna bygger på den.</field>
+        <field name="question_id" ref="slide_ws_s1_02_q2"/>
+    </record>
+    <record id="slide_ws_s1_02_q2_a2" model="slide.answer">
+        <field name="text_value">För att den är obligatorisk</field>
+        <field name="sequence">2</field>
+        <field name="is_correct" eval="False"/>
+        <field name="comment">Ingen kurs är obligatorisk. Den är bara först i ordningen av praktiska skäl.</field>
+        <field name="question_id" ref="slide_ws_s1_02_q2"/>
+    </record>
+    <record id="slide_ws_s1_02_q2_a3" model="slide.answer">
+        <field name="text_value">För att den ger flest poäng</field>
+        <field name="sequence">3</field>
+        <field name="is_correct" eval="False"/>
+        <field name="comment">Poängen är samma i alla kurser.</field>
+        <field name="question_id" ref="slide_ws_s1_02_q2"/>
+    </record>
+
+    <record id="slide_ws_s1_02_q3" model="slide.question">
+        <field name="question">Vilka fem kapitel har varje funktionskurs?</field>
+        <field name="sequence">3</field>
+        <field name="slide_id" ref="slide_ws_s1_02"/>
+    </record>
+    <record id="slide_ws_s1_02_q3_a1" model="slide.answer">
+        <field name="text_value">Vad det är, koppla upp, använda, manuellt test, quiz</field>
+        <field name="sequence">1</field>
+        <field name="is_correct" eval="True"/>
+        <field name="comment">Rätt. Samma struktur i varje kurs — du känner igen dig direkt.</field>
+        <field name="question_id" ref="slide_ws_s1_02_q3"/>
+    </record>
+    <record id="slide_ws_s1_02_q3_a2" model="slide.answer">
+        <field name="text_value">Inledning, teori, övning, prov, intyg</field>
+        <field name="sequence">2</field>
+        <field name="is_correct" eval="False"/>
+        <field name="comment">Låter som en kurs, men det är inte den här strukturen.</field>
+        <field name="question_id" ref="slide_ws_s1_02_q3"/>
+    </record>
+    <record id="slide_ws_s1_02_q3_a3" model="slide.answer">
+        <field name="text_value">Det varierar från kurs till kurs</field>
+        <field name="sequence">3</field>
+        <field name="is_correct" eval="False"/>
+        <field name="comment">Tvärtom — samma struktur är hela poängen.</field>
+        <field name="question_id" ref="slide_ws_s1_02_q3"/>
+    </record>
+
+    <record id="slide_ws_s1_02_q4" model="slide.question">
+        <field name="question">Varför finns ett manuellt testkapitel i varje kurs?</field>
+        <field name="sequence">4</field>
+        <field name="slide_id" ref="slide_ws_s1_02"/>
+    </record>
+    <record id="slide_ws_s1_02_q4_a1" model="slide.answer">
+        <field name="text_value">För att du själv ska kunna verifiera att funktionen fungerar för dig</field>
+        <field name="sequence">1</field>
+        <field name="is_correct" eval="True"/>
+        <field name="comment">Rätt. Att läsa att något fungerar är inte samma sak som att se det göra det.</field>
+        <field name="question_id" ref="slide_ws_s1_02_q4"/>
+    </record>
+    <record id="slide_ws_s1_02_q4_a2" model="slide.answer">
+        <field name="text_value">För att kursen ska bli längre</field>
+        <field name="sequence">2</field>
+        <field name="is_correct" eval="False"/>
+        <field name="comment">Tvärtom — det är det mest nyttiga kapitlet.</field>
+        <field name="question_id" ref="slide_ws_s1_02_q4"/>
+    </record>
+    <record id="slide_ws_s1_02_q4_a3" model="slide.answer">
+        <field name="text_value">För att IT ska få något att rätta efter</field>
+        <field name="sequence">3</field>
+        <field name="is_correct" eval="False"/>
+        <field name="comment">Testet är för din skull, inte för IT:s. Men hittar du fel är det bra att höra av sig.</field>
+        <field name="question_id" ref="slide_ws_s1_02_q4"/>
+    </record>
+
+    </data>
+</odoo>

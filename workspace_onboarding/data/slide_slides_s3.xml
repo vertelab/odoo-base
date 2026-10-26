@@ -1,0 +1,215 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data noupdate="0">
+
+    <!-- ═══════════════════════════════════════════════════════════════════
+         SEKTION 3: Så använder du det i vardagen
+         Slides: 2 (1 article, 1 quiz)
+         ═══════════════════════════════════════════════════════════════════ -->
+
+    <!-- SECTION HEADER -->
+    <record id="slide_category_ws_s3" model="slide.slide">
+        <field name="name">3. Så använder du det i vardagen</field>
+        <field name="is_category" eval="True"/>
+        <field name="channel_id" ref="workspace_onboarding.slide_channel_workspace"/>
+        <field name="sequence">200</field>
+    </record>
+
+    <!-- SLIDE 3.1: Installera appen (PWA) -->
+    <record id="slide_ws_s3_01" model="slide.slide">
+        <field name="name">Installera arbetsytan som app</field>
+        <field name="sequence">210</field>
+        <field name="slide_category">article</field>
+        <field name="channel_id" ref="workspace_onboarding.slide_channel_workspace"/>
+        <field name="is_published" eval="True"/>
+        <field name="is_preview" eval="True"/>
+        <field name="completion_time">0.50</field>
+        <field name="html_content" type="html">
+<section class="s_cover o_cc o_cc3 pt160 pb160">
+    <div class="container">
+        <h1 class="display-3-fs" style="text-align: center;">Installera arbetsytan som app</h1>
+        <p class="lead" style="text-align: center;">Egen ikon på hemskärmen, eget fönster, ingen adressrad. Samma arbetsyta — bara närmare.</p>
+    </div>
+</section>
+
+<section class="s_text_block pt64 pb40">
+    <div class="container s_allow_columns">
+        <h2>Vad det innebär</h2>
+        <p>Arbetsytan är en webbapp, men den kan installeras som en vanlig app. Du får då en ikon på hemskärmen, den öppnas i ett eget fönster utan adressrad, och den startar snabbare eftersom delar redan finns på enheten.</p>
+        <p>Det är <strong>samma arbetsyta</strong> — samma data, samma inloggning. Inget installeras om, inget synkas separat.</p>
+    </div>
+</section>
+
+<section class="s_text_block pt32 pb40">
+    <div class="container s_allow_columns">
+        <h2>På Android</h2>
+        <ol>
+            <li>Öppna arbetsytan i <strong>Chrome</strong>.</li>
+            <li>Tryck på de tre prickarna uppe till höger.</li>
+            <li>Välj <strong>Installera app</strong> eller <strong>Lägg till på startskärmen</strong>.</li>
+            <li>Bekräfta. Ikonen dyker upp bland dina appar.</li>
+        </ol>
+    </div>
+</section>
+
+<section class="s_text_block pt32 pb40">
+    <div class="container s_allow_columns">
+        <h2>På iPhone och iPad</h2>
+        <ol>
+            <li>Öppna arbetsytan i <strong>Safari</strong>.</li>
+            <li>Tryck på delningsknappen — rutan med en pil uppåt.</li>
+            <li>Välj <strong>Lägg till på hemskärmen</strong>.</li>
+            <li>Bekräfta. Ikonen dyker upp på hemskärmen.</li>
+        </ol>
+        <p class="small text-muted">Det måste vara Safari på iOS. Chrome och Firefox på iPhone kan inte lägga till appar på hemskärmen.</p>
+    </div>
+</section>
+
+<section class="s_text_block pt32 pb64">
+    <div class="container s_allow_columns">
+        <h2>På datorn</h2>
+        <p>I Chrome och Edge finns en installationsikon i adressfältets högra ände — ett litet fönster med en pil, eller ett plustecken. Klicka på den och bekräfta.</p>
+        <p>Du får då ett eget fönster utan adressrad, och en genväg i startmenyn. Praktiskt om du vill hålla arbetsytan åtskild från resten av webbläsaren.</p>
+    </div>
+</section>
+
+<section class="s_call_to_action o_cc o_cc5 pt48 pb48">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-9">
+                <h3>Fortfarande en webbläsare</h3>
+                <p class="lead">Appen är ett skal runt arbetsytan. Uppdateringar sker automatiskt — du behöver aldrig installera om något.</p>
+            </div>
+        </div>
+    </div>
+</section>
+        </field>
+        <field name="description">Så installerar du arbetsytan som app på Android, iPhone/iPad och dator. Vad som skiljer en installerad app från webbläsaren.</field>
+    </record>
+
+    <!-- SLIDE 3.2: Quiz -->
+    <record id="slide_ws_s3_02" model="slide.slide">
+        <field name="name">🧪 Testa dina kunskaper — Installera appen</field>
+        <field name="sequence">240</field>
+        <field name="slide_category">quiz</field>
+        <field name="channel_id" ref="workspace_onboarding.slide_channel_workspace"/>
+        <field name="is_published" eval="True"/>
+        <field name="is_preview" eval="True"/>
+        <field name="completion_time">0.25</field>
+        <field name="quiz_first_attempt_reward">100</field>
+        <field name="quiz_second_attempt_reward">75</field>
+        <field name="quiz_third_attempt_reward">50</field>
+        <field name="quiz_fourth_attempt_reward">25</field>
+        <field name="description">Kontrollera att du vet hur installationen går till på din enhet.</field>
+    </record>
+
+    <record id="slide_ws_s3_02_q1" model="slide.question">
+        <field name="question">Vilken webbläsare måste du använda för att lägga till appen på hemskärmen på iPhone?</field>
+        <field name="sequence">1</field>
+        <field name="slide_id" ref="slide_ws_s3_02"/>
+    </record>
+    <record id="slide_ws_s3_02_q1_a1" model="slide.answer">
+        <field name="text_value">Safari</field>
+        <field name="sequence">1</field>
+        <field name="is_correct" eval="True"/>
+        <field name="comment">Rätt. Chrome och Firefox på iOS kan inte lägga till appar på hemskärmen.</field>
+        <field name="question_id" ref="slide_ws_s3_02_q1"/>
+    </record>
+    <record id="slide_ws_s3_02_q1_a2" model="slide.answer">
+        <field name="text_value">Chrome</field>
+        <field name="sequence">2</field>
+        <field name="is_correct" eval="False"/>
+        <field name="comment">Fungerar på Android, men inte på iPhone.</field>
+        <field name="question_id" ref="slide_ws_s3_02_q1"/>
+    </record>
+    <record id="slide_ws_s3_02_q1_a3" model="slide.answer">
+        <field name="text_value">Vilken som helst</field>
+        <field name="sequence">3</field>
+        <field name="is_correct" eval="False"/>
+        <field name="comment">Nej — på iOS är det bara Safari som gäller.</field>
+        <field name="question_id" ref="slide_ws_s3_02_q1"/>
+    </record>
+
+    <record id="slide_ws_s3_02_q2" model="slide.question">
+        <field name="question">Vad händer med dina data när du installerar appen?</field>
+        <field name="sequence">2</field>
+        <field name="slide_id" ref="slide_ws_s3_02"/>
+    </record>
+    <record id="slide_ws_s3_02_q2_a1" model="slide.answer">
+        <field name="text_value">Ingenting — det är samma arbetsyta, bara med egen ikon</field>
+        <field name="sequence">1</field>
+        <field name="is_correct" eval="True"/>
+        <field name="comment">Rätt. Ingen separat kopia, ingen extra synk.</field>
+        <field name="question_id" ref="slide_ws_s3_02_q2"/>
+    </record>
+    <record id="slide_ws_s3_02_q2_a2" model="slide.answer">
+        <field name="text_value">De kopieras ner till telefonen</field>
+        <field name="sequence">2</field>
+        <field name="is_correct" eval="False"/>
+        <field name="comment">Nej. Appen är ett skal runt samma yta — inget kopieras.</field>
+        <field name="question_id" ref="slide_ws_s3_02_q2"/>
+    </record>
+    <record id="slide_ws_s3_02_q2_a3" model="slide.answer">
+        <field name="text_value">De synkas mellan telefon och dator</field>
+        <field name="sequence">3</field>
+        <field name="is_correct" eval="False"/>
+        <field name="comment">Det finns inget att synka — det är samma data hela tiden.</field>
+        <field name="question_id" ref="slide_ws_s3_02_q2"/>
+    </record>
+
+    <record id="slide_ws_s3_02_q3" model="slide.question">
+        <field name="question">Hur uppdateras appen när arbetsytan får nya funktioner?</field>
+        <field name="sequence">3</field>
+        <field name="slide_id" ref="slide_ws_s3_02"/>
+    </record>
+    <record id="slide_ws_s3_02_q3_a1" model="slide.answer">
+        <field name="text_value">Automatiskt — du behöver aldrig installera om något</field>
+        <field name="sequence">1</field>
+        <field name="is_correct" eval="True"/>
+        <field name="comment">Rätt. Uppdateringar sker på servern, inte på din enhet.</field>
+        <field name="question_id" ref="slide_ws_s3_02_q3"/>
+    </record>
+    <record id="slide_ws_s3_02_q3_a2" model="slide.answer">
+        <field name="text_value">Du måste ladda ner en ny version från App Store</field>
+        <field name="sequence">2</field>
+        <field name="is_correct" eval="False"/>
+        <field name="comment">Appen ligger inte i någon appbutik — den installeras från webbläsaren.</field>
+        <field name="question_id" ref="slide_ws_s3_02_q3"/>
+  </record>
+    <record id="slide_ws_s3_02_q3_a3" model="slide.answer">
+        <field name="text_value">IT skickar en uppdatering du installerar</field>
+        <field name="sequence">3</field>
+        <field name="is_correct" eval="False"/>
+        <field name="comment">Ingen distribution behövs. Uppdateringen sker centralt.</field>
+        <field name="question_id" ref="slide_ws_s3_02_q3"/>
+    </record>
+
+    <record id="slide_ws_s3_02_q4" model="slide.question">
+        <field name="question">Vad vinner du på att installera appen i stället för att använda webbläsaren?</field>
+        <field name="sequence">4</field>
+        <field name="slide_id" ref="slide_ws_s3_02"/>
+    </record>
+    <record id="slide_ws_s3_02_q4_a1" model="slide.answer">
+        <field name="text_value">Egen ikon, eget fönster och snabbare start</field>
+        <field name="sequence">1</field>
+        <field name="is_correct" eval="True"/>
+        <field name="comment">Rätt. Praktiskt, men inget som ändrar vad du kan göra.</field>
+        <field name="question_id" ref="slide_ws_s3_02_q4"/>
+    </record>
+    <record id="slide_ws_s3_02_q4_a2" model="slide.answer">
+        <field name="text_value">Fler funktioner</field>
+        <field name="sequence">2</field>
+        <field name="is_correct" eval="False"/>
+        <field name="comment">Funktionerna är desamma — det är samma arbetsyta.</field>
+        <field name="question_id" ref="slide_ws_s3_02_q4"/>
+    </record>
+    <record id="slide_ws_s3_02_q4_a3" model="slide.answer">
+        <field name="text_value">Åtkomst till fler program</field>
+        <field name="sequence">3</field>
+        <field name="is_correct" eval="False"/>
+        <field name="comment">Behörigheterna styrs av din roll, inte av hur du öppnar arbetsytan.</field>
+        <field name="question_id" ref="slide_ws_s3_02_q4"/>
+    </record>
+
+    </data>
+</odoo>

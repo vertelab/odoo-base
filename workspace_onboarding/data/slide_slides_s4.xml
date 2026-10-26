@@ -1,0 +1,213 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data noupdate="0">
+
+    <!-- ═══════════════════════════════════════════════════════════════════
+         SEKTION 4: Så använder du det i vardagen — mobilen
+         Slides: 2 (1 article, 1 quiz)
+         ═══════════════════════════════════════════════════════════════════ -->
+
+    <!-- SECTION HEADER -->
+    <record id="slide_category_ws_s4" model="slide.slide">
+        <field name="name">4. Mobilen i vardagen</field>
+        <field name="is_category" eval="True"/>
+        <field name="channel_id" ref="workspace_onboarding.slide_channel_workspace"/>
+        <field name="sequence">300</field>
+    </record>
+
+    <!-- SLIDE 4.1: Mobilen och offline -->
+    <record id="slide_ws_s4_01" model="slide.slide">
+        <field name="name">Mobilen, notiserna och det som inte kräver nät</field>
+        <field name="sequence">310</field>
+        <field name="slide_category">article</field>
+        <field name="channel_id" ref="workspace_onboarding.slide_channel_workspace"/>
+        <field name="is_published" eval="True"/>
+        <field name="is_preview" eval="True"/>
+        <field name="completion_time">0.50</field>
+        <field name="html_content" type="html">
+<section class="s_cover o_cc o_cc3 pt160 pb160">
+    <div class="container">
+        <h1 class="display-3-fs" style="text-align: center;">Mobilen, notiserna och det som inte kräver nät</h1>
+        <p class="lead" style="text-align: center;">Samma arbetsyta i fickan — men med några skillnader värda att känna till.</p>
+    </div>
+</section>
+
+<section class="s_text_block pt64 pb40">
+    <div class="container s_allow_columns">
+        <h2>Anpassat gränssnitt, inte en förminskad dator</h2>
+        <p>Öppnar du arbetsytan på en telefon anpassar den sig: menyn blir en sidopanel, tabeller blir kort, och knapparna blir stora nog att träffa med tummen. Det är samma data och samma behörigheter som på datorn.</p>
+        <p>En del saker är helt enkelt bättre på datorn — att redigera ett längre dokument, eller att arbeta med många rader i en lista. Använd mobilen för det den är bra på: att svara, kolla, godkänna och boka.</p>
+    </div>
+</section>
+
+<section class="s_text_block pt32 pb40">
+    <div class="container s_allow_columns">
+        <h2>Notiser</h2>
+        <p>När du installerat appen kan du tillåta notiser. De dyker upp som vanliga aviseringar på telefonen — nya meddelanden, mötesinbjudningar, saker som väntar på ditt godkännande.</p>
+        <p class="small text-muted">Tillåt notiser första gången du blir tillfrågad. Tackar du nej kan du slå på dem senare i telefonens inställningar för appen.</p>
+    </div>
+</section>
+
+<section class="s_text_block pt32 pb40">
+    <div class="container s_allow_columns">
+        <h2>Vad som fungerar utan nät</h2>
+        <p>Är du utan uppkoppling — i hissen, på tåget, i källaren — gäller detta:</p>
+        <ul>
+            <li><strong>Fungerar:</strong> öppna appen och se det som redan laddats, läsa ett dokument du nyss öppnat.</li>
+            <li><strong>Fungerar inte:</strong> spara ändringar, skicka meddelanden, hämta ny e-post, ladda upp filer.</li>
+        </ul>
+        <p>Ändringar du försöker göra utan nät går inte förlorade tyst — de avvisas, och du får försöka igen när du är uppkopplad. Det är bättre än att tro att något sparats när det inte gjorde det.</p>
+    </div>
+</section>
+
+<section class="s_text_block pt32 pb64">
+    <div class="container s_allow_columns">
+        <h2>Tre vanor som sparar tid</h2>
+        <ol>
+            <li><strong>Lägg appen där tummen är.</strong> Första platsen i dockan, inte på sida tre.</li>
+            <li><strong>Använd sökningen även på mobilen.</strong> Den är ofta snabbare än att navigera.</li>
+            <li><strong>Godkänn från mobilen.</strong> Det mesta som väntar på dig — ledigheter, fakturor, signeringar — går att hantera i fickan.</li>
+        </ol>
+    </div>
+</section>
+
+<section class="s_call_to_action o_cc o_cc5 pt48 pb48">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-9">
+                <h3>Mobilen kompletterar, ersätter inte</h3>
+                <p class="lead">Gör det snabba i mobilen. Spara det som kräver överblick till datorn.</p>
+            </div>
+        </div>
+    </div>
+</section>
+        </field>
+        <field name="description">Hur arbetsytan beter sig på mobilen: anpassat gränssnitt, notiser, vad som fungerar utan nät och tre vanor som sparar tid.</field>
+    </record>
+
+    <!-- SLIDE 4.2: Quiz -->
+    <record id="slide_ws_s4_02" model="slide.slide">
+        <field name="name">🧪 Testa dina kunskaper — Mobilen i vardagen</field>
+        <field name="sequence">340</field>
+        <field name="slide_category">quiz</field>
+        <field name="channel_id" ref="workspace_onboarding.slide_channel_workspace"/>
+        <field name="is_published" eval="True"/>
+        <field name="is_preview" eval="True"/>
+        <field name="completion_time">0.25</field>
+        <field name="quiz_first_attempt_reward">100</field>
+        <field name="quiz_second_attempt_reward">75</field>
+        <field name="quiz_third_attempt_reward">50</field>
+        <field name="quiz_fourth_attempt_reward">25</field>
+        <field name="description">Kontrollera att du vet vad som fungerar på mobilen och utan nät.</field>
+    </record>
+
+    <record id="slide_ws_s4_02_q1" model="slide.question">
+        <field name="question">Vad fungerar när du är helt utan nätuppkoppling?</field>
+        <field name="sequence">1</field>
+        <field name="slide_id" ref="slide_ws_s4_02"/>
+    </record>
+    <record id="slide_ws_s4_02_q1_a1" model="slide.answer">
+        <field name="text_value">Läsa ett dokument du nyss öppnat</field>
+        <field name="sequence">1</field>
+        <field name="is_correct" eval="True"/>
+        <field name="comment">Rätt. Det som redan laddats finns kvar på enheten.</field>
+        <field name="question_id" ref="slide_ws_s4_02_q1"/>
+    </record>
+    <record id="slide_ws_s4_02_q1_a2" model="slide.answer">
+        <field name="text_value">Skicka ett meddelande</field>
+        <field name="sequence">2</field>
+        <field name="is_correct" eval="False"/>
+        <field name="comment">Kräver uppkoppling — det ska ju fram till någon annan.</field>
+        <field name="question_id" ref="slide_ws_s4_02_q1"/>
+    </record>
+    <record id="slide_ws_s4_02_q1_a3" model="slide.answer">
+        <field name="text_value">Ladda upp en fil</field>
+        <field name="sequence">3</field>
+        <field name="is_correct" eval="False"/>
+        <field name="comment">Kräver uppkoppling — filen ska till servern.</field>
+        <field name="question_id" ref="slide_ws_s4_02_q1"/>
+    </record>
+
+    <record id="slide_ws_s4_02_q2" model="slide.question">
+        <field name="question">Du försöker spara en ändring utan nät. Vad händer?</field>
+        <field name="sequence">2</field>
+        <field name="slide_id" ref="slide_ws_s4_02"/>
+    </record>
+    <record id="slide_ws_s4_02_q2_a1" model="slide.answer">
+        <field name="text_value">Ändringen avvisas och du får försöka igen när du är uppkopplad</field>
+        <field name="sequence">1</field>
+        <field name="is_correct" eval="True"/>
+        <field name="comment">Rätt. Bättre än att tro att något sparats när det inte gjorde det.</field>
+        <field name="question_id" ref="slide_ws_s4_02_q2"/>
+    </record>
+    <record id="slide_ws_s4_02_q2_a2" model="slide.answer">
+        <field name="text_value">Den sparas och skickas automatiskt senare</field>
+        <field name="sequence">2</field>
+        <field name="is_correct" eval="False"/>
+        <field name="comment">Så fungerar det inte — du får ingen tyst synk i efterhand.</field>
+        <field name="question_id" ref="slide_ws_s4_02_q2"/>
+  </record>
+    <record id="slide_ws_s4_02_q2_a3" model="slide.answer">
+        <field name="text_value">Den sparas lokalt och syns bara för dig</field>
+        <field name="sequence">3</field>
+        <field name="is_correct" eval="False"/>
+        <field name="comment">Nej — ändringen avvisas, den sparas inte någonstans.</field>
+        <field name="question_id" ref="slide_ws_s4_02_q2"/>
+    </record>
+
+    <record id="slide_ws_s4_02_q3" model="slide.question">
+        <field name="question">Vad är mobilversionen av arbetsytan bra på?</field>
+        <field name="sequence">3</field>
+        <field name="slide_id" ref="slide_ws_s4_02"/>
+    </record>
+    <record id="slide_ws_s4_02_q3_a1" model="slide.answer">
+        <field name="text_value">Svara, kolla, godkänna och boka</field>
+        <field name="sequence">1</field>
+        <field name="is_correct" eval="True"/>
+        <field name="comment">Rätt. Det snabba, korta — inte det som kräver överblick.</field>
+        <field name="question_id" ref="slide_ws_s4_02_q3"/>
+    </record>
+    <record id="slide_ws_s4_02_q3_a2" model="slide.answer">
+        <field name="text_value">Redigera längre dokument</field>
+        <field name="sequence">2</field>
+        <field name="is_correct" eval="False"/>
+        <field name="comment">Går, men är betydligt krångligare än på datorn.</field>
+        <field name="question_id" ref="slide_ws_s4_02_q3"/>
+    </record>
+    <record id="slide_ws_s4_02_q3_a3" model="slide.answer">
+        <field name="text_value">Arbeta med långa listor</field>
+        <field name="sequence">3</field>
+        <field name="is_correct" eval="False"/>
+        <field name="comment">Trångt på en liten skärm — datorn är bättre.</field>
+        <field name="question_id" ref="slide_ws_s4_02_q3"/>
+    </record>
+
+    <record id="slide_ws_s4_02_q4" model="slide.question">
+        <field name="question">Vad gör du om du tackade nej till notiser första gången?</field>
+        <field name="sequence">4</field>
+        <field name="slide_id" ref="slide_ws_s4_02"/>
+    </record>
+    <record id="slide_ws_s4_02_q4_a1" model="slide.answer">
+        <field name="text_value">Slår på dem i telefonens inställningar för appen</field>
+        <field name="sequence">1</field>
+        <field name="is_correct" eval="True"/>
+        <field name="comment">Rätt. Det går att ändra i efterhand — du är inte utelåst.</field>
+        <field name="question_id" ref="slide_ws_s4_02_q4"/>
+    </record>
+    <record id="slide_ws_s4_02_q4_a2" model="slide.answer">
+        <field name="text_value">Installerar om appen</field>
+        <field name="sequence">2</field>
+        <field name="is_correct" eval="False"/>
+        <field name="comment">Onödigt — inställningen finns i telefonen.</field>
+        <field name="question_id" ref="slide_ws_s4_02_q4"/>
+    </record>
+    <record id="slide_ws_s4_02_q4_a3" model="slide.answer">
+        <field name="text_value">Det går inte att ändra</field>
+        <field name="sequence">3</field>
+        <field name="is_correct" eval="False"/>
+        <field name="comment">Jo, det går. Telefonens inställningar styr detta.</field>
+        <field name="question_id" ref="slide_ws_s4_02_q4"/>
+    </record>
+
+    </data>
+</odoo>
