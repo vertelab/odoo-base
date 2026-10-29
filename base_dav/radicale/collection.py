@@ -77,13 +77,28 @@ class Collection(BaseCollection):
 
     @property
     def odoo_collection(self):
+        """The backing dav.collection, or None when there is none.
+
+        Returning None for a *deleted* collection is the whole point. browse()
+        always hands back a recordset -- len() 1, bool() True, exists() empty --
+        so a guard written as ``if collection is None`` never fires for an id
+        that has been removed. The recordset then passes the guard and the next
+        attribute access (``collection.tag``) raises MissingError, which Radicale
+        turns into HTTP 500. That is what a client sees when it keeps a stale
+        collection URL from a previous sync: PROPFIND /.dav/<login>/<id>/ -> 500
+        instead of a clean 404.
+
+        Normalising here fixes every caller at once: last_modified, get_meta,
+        get_all, get_multi, upload and delete all test ``is None``.
+        """
         if self._odoo_collection is not None:
-            return self._odoo_collection
+            return self._odoo_collection or None
         if (len(self._path_components) >= 2 and
             str(self._path_components[1]).isdigit()):
-            return self.env['dav.collection'].sudo().browse(
+            collection = self.env['dav.collection'].sudo().browse(
                 int(self._path_components[1])
             )
+            return collection if collection.exists() else None
         return None
 
     @property
@@ -166,7 +181,16 @@ class Collection(BaseCollection):
             yield href, collection.dav_get(self, href)
 
     def upload(self, href, item):
-        result = self.odoo_collection.dav_upload(self, href, item)
+        # Radicale 3.x hands us a radicale_item.Item, not a vobject component.
+        # Item proxies .name to its vobject_item, so the ``item.name !=
+        # 'VCALENDAR'`` check in dav_collection.from_vobject() passes, but Item
+        # has no ``.vevent`` attribute -- so ``hasattr(item, 'vevent')`` is
+        # False, from_vobject() returns None, and dav_upload() calls
+        # create(None) -> TypeError: object of type 'NoneType' has no len()
+        # -> HTTP 500 on every PUT. Unwrap to the real vobject before handing
+        # it over; from_vobject() is written against vobject components.
+        vobject_item = getattr(item, 'vobject_item', item)
+        result = self.odoo_collection.dav_upload(self, href, vobject_item)
         return result, None
 
     def delete(self, href=None):
