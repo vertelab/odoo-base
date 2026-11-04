@@ -2,7 +2,7 @@
 ##############################################################################
 #
 #    Odoo SA, Open Source Management Solution, third party addon
-#    Copyright (C) 2022- Vertel AB (<https://vertel.se>).
+#    Copyright (C) 2022- Vertel Sverige AB (<https://vertel.se>).
 #
 #    This program is free software: you can redistribute it and/or modify
 #    it under the terms of the GNU Affero General Public License as
@@ -25,17 +25,24 @@
     # Version ledger: 14.0 = Odoo version. 1 = Major. Non regressionable code. 2 = Minor. New features that are regressionable. 3 = Bug fixes
     'summary': 'Adds a UserGroup field to the res_users tree-view in debug-mode.',
     'category': 'Technical',
-    'description': """
-        Adds a UserGroup field to the res_users tree-view in debug-mode.\n
-        This module is maintained from: https://github.com/vertelab/odoo-base/edit/14.0/users_rights_listed/ \n
-    """,
+    'description': '''
+Users Rights Listed
+===================
+
+    Adds a UserGroup field to the res_users tree-view in debug-mode.\n
+            This module is maintained from: https://github.com/vertelab/odoo-base/edit/14.0/users_rights_listed/ \n
+
+    Features:
+
+        - UI Integration: Extends 1 view(s) in the Odoo interface.
+    ''',
     #'sequence': '1',
-    'author': 'Vertel AB',
-    'website': 'https://vertel.se/apps/odoo-base/user_rights_listed',
+    'author': 'Vertel Sverige AB',
+    'website': 'https://vertel.se/apps/odoo-base/users_rights_listed',
     'images': ['static/description/banner.png'], # 560x280 px.
     'license': 'AGPL-3',
     'contributor': '',
-    'maintainer': 'Vertel AB',
+    'maintainer': 'Vertel Sverige AB',
     'repository': 'https://github.com/vertelab/odoo-base.git',
     'depends': ['base',],
     'data': [

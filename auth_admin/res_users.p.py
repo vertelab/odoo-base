@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 ##############################################################################
 #
-#    Copyright (C) 2015-2017 Vertel AB (<http://www.vertel.se>).
+#    Copyright (C) 2015-2017 Vertel Sverige AB (<http://www.vertel.se>).
 #
 #    This program is free software: you can redistribute it and/or modify
 #    it under the terms of the GNU Affero General Public License as

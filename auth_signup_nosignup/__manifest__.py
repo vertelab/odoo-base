@@ -2,7 +2,7 @@
 ##############################################################################
 #
 #    Odoo SA, Open Source Management Solution, third party addon
-#    Copyright (C) 2021- Vertel AB (<https://vertel.se>).
+#    Copyright (C) 2021- Vertel Sverige AB (<https://vertel.se>).
 #
 #    This program is free software: you can redistribute it and/or modify
 #    it under the terms of the GNU Affero General Public License as
@@ -21,18 +21,25 @@
 
 # License AGPL-3.0 or later (https://www.gnu.org/licenses/agpl).
 {
-    "name": "Auth Signup NoSignup",
+    "name": "Base: Auth Signup NoSignup",
     'version': '18.0.1.0.0',
-    'summary': 'Removes new user signup from the front page',
-    'author': 'Vertel AB',
+    'summary': 'Removes new user signup from the front page.',
+    'author': 'Vertel Sverige AB',
     'images': ['static/description/banner.png'], # 560x280 px.
-    'maintainer': 'Vertel AB',
+    'maintainer': 'Vertel Sverige AB',
     'category': 'Base',
     'license': 'AGPL-3',
     'website': 'https://vertel.se/apps/odoo-base/auth_signup_nosignup',
-    'description': """    
+    'description': '''
+Auth Signup NoSignup
+====================
+
     Removes new user signup from the front page.
-    """,
+
+    Features:
+
+        - UI Integration: Extends 1 view(s) in the Odoo interface.
+    ''',
     "depends": [
         "base",
         "auth_signup"

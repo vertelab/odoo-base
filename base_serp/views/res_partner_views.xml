@@ -5,12 +5,20 @@
         <field name="model">res.partner</field>
         <field name="inherit_id" ref="base.view_partner_form"/>
         <field name="arch" type="xml">
+            <!-- is_serp-checkbox: bara för SERP-behöriga OCH företag (company) -->
+            <field name="company_type" position="after">
+                <div class="d-inline-flex align-items-center" groups="base_serp.group_serp_user" invisible="company_type != 'company'">
+                    <field name="is_serp"/>
+                    <label for="is_serp" string="SERP" class="mb-0 ms-1"/>
+                </div>
+            </field>
+
             <xpath expr="//div[@name='button_box']" position="inside">
                 <button name="action_view_reports"
                         type="object"
                         class="oe_stat_button"
                         icon="fa-line-chart"
-                        invisible="not project_id">
+                        invisible="not is_serp">
                     <div class="o_field_widget o_stat_info">
                         <span class="o_stat_value">
                             <field name="serp_report_count" nolabel="1"/>
@@ -20,8 +28,9 @@
                 </button>
             </xpath>
 
+            <!-- SERP-fliken visas bara för SERP-övervakade kontakter -->
             <notebook position="inside">
-                <page string="SERP Tracking" name="serp_tracking">
+                <page string="SERP Tracking" name="serp_tracking" invisible="not is_serp">
                     <group>
                         <group string="SERP Configuration">
                             <field name="serp_provider_id"/>
@@ -33,7 +42,6 @@
                             <field name="analytics_provider_id"/>
                             <field name="analytics_site_id"/>
                             <field name="analytics_report_template_id"/>
-<!--                            <field name="analytics_report_type_ids" widget="many2many_tags"/>-->
                         </group>
                     </group>
 
@@ -62,11 +70,9 @@
                                 <field name="report_interval_number" class="oe_inline"/>
                                 <field name="report_interval_type" class="oe_inline"/>
                             </div>
-<!--                            <field name="date_from" string="Date Range" widget="daterange" options="{'end_date_field': 'date_to'}" />-->
-<!--                            <field name="date_to" invisible="1" />-->
-                            <field name="serp_date_range"/>
+                            <!-- Requirement-fält: krävs endast när is_serp är satt -->
+                            <field name="serp_date_range" required="is_serp"/>
                             <field name="report_nextcall"/>
-<!--                            <field name="report_template_id"/>-->
                         </group>
 
                     </group>

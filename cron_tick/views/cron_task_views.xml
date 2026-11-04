@@ -1,0 +1,192 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <!-- ================================================================
+         List view — the overview that was missing when 26 ir.cron sat in
+         one flat list. Colour coding: red on failure, orange when overdue.
+         ================================================================ -->
+    <record id="view_cron_task_list" model="ir.ui.view">
+        <field name="name">cron.task.list</field>
+        <field name="model">cron.task</field>
+        <field name="arch" type="xml">
+            <list string="Scheduled Tasks"
+                  decoration-danger="failure_count &gt; 0"
+                  decoration-warning="is_overdue"
+                  decoration-muted="not active">
+                <field name="sequence" widget="handle"/>
+                <field name="name"/>
+                <field name="technical_name"/>
+                <field name="module" optional="show"/>
+                <field name="cadence_label" optional="show"/>
+                <field name="last_run"/>
+                <field name="last_duration_ms" optional="show"/>
+                <field name="failure_count" optional="show"/>
+                <field name="is_locked" optional="hide"/>
+                <field name="is_overdue" optional="hide"/>
+                <field name="run_log_count" optional="hide"/>
+                <field name="active" widget="boolean_toggle"/>
+            </list>
+        </field>
+    </record>
+
+    <!-- ================================================================
+         Form view — all fields + "Run now".
+         ================================================================ -->
+    <record id="view_cron_task_form" model="ir.ui.view">
+        <field name="name">cron.task.form</field>
+        <field name="model">cron.task</field>
+        <field name="arch" type="xml">
+            <form string="Scheduled Task">
+                <header>
+                    <button name="action_run_now" type="object"
+                            string="Run now" class="btn-primary"
+                            invisible="is_locked"/>
+                    <field name="is_locked" invisible="1"/>
+                    <field name="is_overdue" invisible="1"/>
+                </header>
+                <sheet>
+                    <div class="oe_button_box" name="button_box">
+                        <button name="action_view_run_logs" type="object"
+                                class="oe_stat_button" icon="fa-history">
+                            <field name="run_log_count" widget="statinfo"
+                                   string="Runs"/>
+                        </button>
+                    </div>
+                    <widget name="web_ribbon" title="Deactivated"
+                            bg_color="text-bg-danger" invisible="active"/>
+                    <group>
+                        <group string="Identity">
+                            <field name="name" placeholder="Readable name"/>
+                            <field name="technical_name"
+                                   placeholder="e.g. skill_sync"/>
+                            <field name="module"/>
+                            <field name="active"/>
+                        </group>
+                        <group string="What runs">
+                            <field name="model_name"
+                                   placeholder="e.g. ai.skill"/>
+                            <field name="method_name"
+                                   placeholder="e.g. _sync_from_filesystem"/>
+                        </group>
+                    </group>
+                    <group>
+                        <group string="When">
+                            <field name="cadence"
+                                   invisible="bool(interval_type)"
+                                   required="not interval_type"/>
+                            <field name="interval_number"
+                                   invisible="bool(cadence)"
+                                   required="bool(interval_type)"/>
+                            <field name="interval_type"
+                                   invisible="bool(cadence)"
+                                   required="bool(interval_number)"/>
+                            <field name="cadence_label"/>
+                            <field name="sequence"/>
+                        </group>
+                        <group string="Execution">
+                            <field name="timeout_seconds"/>
+                            <field name="max_failures"/>
+                        </group>
+                    </group>
+                    <group string="Run history" colspan="2">
+                        <group>
+                            <field name="last_run"/>
+                            <field name="last_duration_ms"/>
+                        </group>
+                        <group>
+                            <field name="failure_count"/>
+                            <field name="locked_by"/>
+                            <field name="locked_at"/>
+                        </group>
+                    </group>
+                    <notebook>
+                        <page string="Last error" name="error"
+                              invisible="not last_error">
+                            <field name="last_error" readonly="1"
+                                   widget="text" nolabel="1"/>
+                        </page>
+                    </notebook>
+                </sheet>
+                <chatter/>
+            </form>
+        </field>
+    </record>
+
+    <!-- ================================================================
+         Search view — filters and grouping.
+         ================================================================ -->
+    <record id="view_cron_task_search" model="ir.ui.view">
+        <field name="name">cron.task.search</field>
+        <field name="model">cron.task</field>
+        <field name="arch" type="xml">
+            <search string="Search Scheduled Tasks">
+                <field name="name"/>
+                <field name="technical_name"/>
+                <field name="module"/>
+                <field name="model_name"/>
+                <filter name="filter_active" string="Active"
+                        domain="[('active', '=', True)]"/>
+                <filter name="filter_inactive" string="Inactive"
+                        domain="[('active', '=', False)]"/>
+                <separator/>
+                <filter name="filter_failed" string="Failed"
+                        domain="[('failure_count', '&gt;', 0)]"/>
+                <filter name="filter_overdue" string="Overdue"
+                        domain="[('is_overdue', '=', True)]"/>
+                <filter name="filter_locked" string="Running"
+                        domain="[('is_locked', '=', True)]"/>
+                <separator/>
+                <filter name="filter_min" string="Every 5 minutes"
+                        domain="[('cadence', '=', 'min')]"/>
+                <filter name="filter_hour" string="Hourly"
+                        domain="[('cadence', '=', 'hour')]"/>
+                <filter name="filter_daily" string="Daily"
+                        domain="[('cadence', '=', 'daily')]"/>
+                <filter name="filter_week" string="Weekly"
+                        domain="[('cadence', '=', 'week')]"/>
+                <filter name="filter_month" string="Monthly"
+                        domain="[('cadence', '=', 'month')]"/>
+                <filter name="filter_interval" string="Custom interval"
+                        domain="[('interval_type', '!=', False)]"/>
+                <group expand="0" string="Group By">
+                    <filter name="group_module" string="Module"
+                            context="{'group_by': 'module'}"/>
+                    <filter name="group_cadence" string="Cadence"
+                            context="{'group_by': 'cadence'}"/>
+                    <filter name="group_interval_type" string="Interval unit"
+                            context="{'group_by': 'interval_type'}"/>
+                </group>
+            </search>
+        </field>
+    </record>
+
+    <!-- ================================================================
+         Actions and menu.
+         Technical menu = base.menu_custom (Odoo 18).
+         ================================================================ -->
+    <record id="action_cron_task" model="ir.actions.act_window">
+        <field name="name">Scheduled Tasks</field>
+        <field name="res_model">cron.task</field>
+        <field name="view_mode">list,form</field>
+        <field name="search_view_id" ref="view_cron_task_search"/>
+        <field name="context">{'search_default_filter_active': 1}</field>
+        <field name="help" type="html">
+            <p class="o_view_nocontent_smiling_face">
+                No scheduled tasks
+            </p>
+            <p>
+                Modules register their tasks as data XML. The engine runs
+                them via five tick crons — one per cadence. A task may set
+                a custom interval instead of a cadence; it is then checked
+                by the 5-minute tick.
+            </p>
+        </field>
+    </record>
+
+    <menuitem id="menu_cron_task_root"
+              name="Cron Tasks"
+              parent="base.menu_custom"
+              action="action_cron_task"
+              sequence="95"/>
+
+</odoo>

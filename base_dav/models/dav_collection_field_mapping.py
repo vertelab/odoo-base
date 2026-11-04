@@ -2,13 +2,29 @@
 # Copyright 2019-2020 initOS GmbH <https://initos.com>
 # License AGPL-3.0 or later (https://www.gnu.org/licenses/agpl.html).
 
+import base64
 import datetime
 
 from odoo import api, fields, models, tools
+from odoo.tools import safe_eval as safe_eval_module
+from odoo.tools.safe_eval import safe_eval
 
 import dateutil
 import vobject
 from dateutil import tz
+
+# Odoo 18's safe_eval refuses raw modules, so expose vobject through a
+# whitelisted wrapper. wrap_module() resolves every name eagerly with
+# getattr(), so only names that actually exist in the installed vobject may
+# be requested: vobject 0.9.9 has no ``vCalendar`` (calendars are built with
+# ``iCalendar()``), and asking for it raises at import time and takes the
+# whole registry down.
+_VOBJECT_WHITELIST = [
+    'vCard', 'iCalendar', 'readOne', 'readComponents',
+]
+vobject_safe = safe_eval_module.wrap_module(
+    vobject, [a for a in _VOBJECT_WHITELIST if hasattr(vobject, a)],
+)
 
 
 class DavCollectionFieldMapping(models.Model):
@@ -58,16 +74,17 @@ class DavCollectionFieldMapping(models.Model):
 
     def _from_vobject_code(self, child):
         self.ensure_one()
+        # Odoo 18 refuses raw modules in a safe_eval context; use the
+        # pre-wrapped ones shipped with odoo.tools.safe_eval.
         context = {
-            'datetime': datetime,
-            'dateutil': dateutil,
+            'datetime': safe_eval_module.datetime,
+            'dateutil': safe_eval_module.dateutil,
             'item': child,
             'result': None,
-            'tools': tools,
-            'tz': tz,
-            'vobject': vobject,
+            'tz': safe_eval_module.dateutil.tz,
+            'vobject': vobject_safe,
         }
-        tools.safe_eval(self.import_code, context, mode="exec", nocopy=True)
+        safe_eval(self.import_code, context, mode="exec", nocopy=True)
         return context.get('result', {})
 
     def _from_vobject_simple(self, child):
@@ -106,7 +123,13 @@ class DavCollectionFieldMapping(models.Model):
 
     @api.model
     def _from_vobject_binary(self, item):
-        return item.value.encode('ascii')
+        # vobject decodes PHOTO/LOGO with ENCODING=b to raw bytes; other
+        # binary properties stay str. Odoo's Binary field expects the
+        # base64 payload as str, so normalise both cases to that.
+        value = item.value
+        if isinstance(value, bytes):
+            return base64.b64encode(value).decode('ascii')
+        return value
 
     @api.model
     def _from_vobject_char_n(self, item):
@@ -125,16 +148,17 @@ class DavCollectionFieldMapping(models.Model):
 
     def _to_vobject_code(self, record):
         self.ensure_one()
+        # Odoo 18 refuses raw modules in a safe_eval context; use the
+        # pre-wrapped ones shipped with odoo.tools.safe_eval.
         context = {
-            'datetime': datetime,
-            'dateutil': dateutil,
+            'datetime': safe_eval_module.datetime,
+            'dateutil': safe_eval_module.dateutil,
             'record': record,
             'result': None,
-            'tools': tools,
-            'tz': tz,
-            'vobject': vobject,
+            'tz': safe_eval_module.dateutil.tz,
+            'vobject': vobject_safe,
         }
-        tools.safe_eval(self.export_code, context, mode="exec", nocopy=True)
+        safe_eval(self.export_code, context, mode="exec", nocopy=True)
         return context.get('result', None)
 
     def _to_vobject_simple(self, record):
@@ -167,7 +191,12 @@ class DavCollectionFieldMapping(models.Model):
 
     @api.model
     def _to_vobject_binary(self, value):
-        return value and value.decode('ascii')
+        # Odoo 18 returns Binary field content as a base64 str (bytes only
+        # when the value comes straight from the attachment cache).
+        # vobject wants a str for the property value.
+        if isinstance(value, bytes):
+            return value.decode('ascii')
+        return value or None
 
     @api.model
     def _to_vobject_char_n(self, value):

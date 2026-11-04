@@ -23,16 +23,22 @@
 #
 {
     'name': 'Base: Replace User',
-    'version': '1.0',
-    'summary': """
-        Replace User on Records
-    """,
+    'version': '18.0.1.0.0',
+    'summary': """Replace User on Records.""",
     'category': '',
-    'description': """
-        Replace User on Records
-    """,
-    'author': 'Vertel AB',
-    'website': 'https://vertel.se/apps/odoo-base',
+    'description': '''
+Replace User
+============
+
+    Replace User on Records.
+
+    Features:
+
+        - Guided Wizards: Step-by-step dialogs for data entry.
+        - UI Integration: Extends 2 view(s) in the Odoo interface.
+    ''',
+    'author': 'Vertel Sverige AB',
+    'website': 'https://vertel.se/apps/odoo-base/base_replace_user',
     'license': 'AGPL-3',
     'depends': ["sale","sale_management", "sales_team", "base"],
     'data': [

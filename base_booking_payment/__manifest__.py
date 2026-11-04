@@ -1,10 +1,23 @@
 # -*- coding: utf-8 -*-
 {
-    'name': 'Booking payment',
-    'version': '18.0',
+    'name': 'Base: Booking Payment',
+'author': 'Vertel Sverige AB',
+    'website': 'https://vertel.se/apps/odoo-base/base_booking_payment',
+    'version': '18.0.1.0.0',
     'category': 'Booking',
-    'summary': 'Booking payment',
-    'description': """Booking payment""",
+    'summary': 'Booking payment.',
+    'description': '''
+Booking payment
+===============
+
+    Booking payment.
+
+    Features:
+
+        - Web integration: Exposes HTTP endpoints for external systems.
+        - UI Integration: Extends 9 view(s) in the Odoo interface.
+        - Extends Odoo: Builds on account.move, booking.answer.input, booking.resource, booking.type.
+    ''',
     'license': 'AGPL-3',
     'depends': ['base_booking', 'account_payment'],
     'data': [

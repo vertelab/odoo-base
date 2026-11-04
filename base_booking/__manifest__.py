@@ -3,14 +3,24 @@
 
 {
     'name': 'Bookings: ',
-    'version': '1.3',
+'author': 'Vertel Sverige AB',
+    'version': '18.0.1.3.0',
     'category': 'Booking/Appointment',
     'sequence': 215,
-    'summary': 'A base module to allow booking integrations in any flow',
-    'website': 'https://www.odoo.com/app/appointments',
-    'description': """
-A base module to allow booking integrations in any flow
-    """,
+    'summary': 'A base module to allow booking integrations in any flow.',
+    'website': 'https://vertel.se/apps/odoo-base/base_booking',
+    'description': '''
+
+
+
+    A base module to allow booking integrations in any flow.
+
+    Features:
+
+        - Web integration: Exposes HTTP endpoints for external systems.
+        - UI Integration: Extends 16 view(s) in the Odoo interface.
+        - Extends Odoo: Builds on avatar.mixin, booking.answer, booking.answer.input, booking.invite.
+    ''',
     'depends': ['calendar', 'phone_validation', 'portal', 'resource', 'mail'],
     'data': [
         # 'data/calendar_data.xml',
@@ -43,7 +53,7 @@ A base module to allow booking integrations in any flow
     # ],
     'installable': True,
     'application': True,
-    'license': 'OEEL-1',
+    'license': 'AGPL-3',
     'assets': {
         'web.assets_frontend': [
             # 'mail/static/src/utils/common/format.js',

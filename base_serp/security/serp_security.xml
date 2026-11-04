@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <!-- SERP-kategori + rättighet för att markera kontakter som SERP-övervakade -->
+    <record id="module_category_serp" model="ir.module.category">
+        <field name="name">SERP</field>
+        <field name="sequence">100</field>
+    </record>
+
+    <record id="group_serp_user" model="res.groups">
+        <field name="name">SERP User</field>
+        <field name="category_id" ref="module_category_serp"/>
+        <field name="implied_ids" eval="[(4, ref('base.group_user'))]"/>
+        <field name="comment">Can mark contacts for SERP tracking and manage SERP keywords.</field>
+    </record>
+
+    <!-- Administratörer (base.group_system) får SERP User automatiskt
+         (samma mönster som keykeep/bifrost). -->
+    <record id="base.group_system" model="res.groups">
+        <field name="implied_ids" eval="[(4, ref('group_serp_user'))]"/>
+    </record>
+</odoo>

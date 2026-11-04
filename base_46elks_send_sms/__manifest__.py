@@ -2,7 +2,7 @@
 ##############################################################################
 #
 #    Odoo SA, Open Source Management Solution, third party addon
-#    Copyright (C) 2023- Vertel AB (<https://vertel.se>).
+#    Copyright (C) 2023- Vertel Sverige AB (<https://vertel.se>).
 #
 #    This program is free software: you can redistribute it and/or modify
 #    it under the terms of the GNU Affero General Public License as
@@ -22,17 +22,26 @@
 {
     'name': 'Base: 46Elks Send SMS',
     'version': '18.0.0.0.0',
-    'summary': '',
+    'summary': "Sends SMS messages through the 46elks gateway.",
     'category': 'Technical',
-    'description': """
-    
-    """,
-    'author': 'Vertel AB',
+    'description': '''
+46Elks Send SMS
+===============
+
+    Sends SMS messages through the 46elks gateway.
+
+    Features:
+
+        - Web integration: Exposes HTTP endpoints for external systems.
+        - UI Integration: Extends 2 view(s) in the Odoo interface.
+        - Extends Odoo: Builds on sms.sms.
+    ''',
+    'author': 'Vertel Sverige AB',
     'website': 'https://vertel.se/apps/odoo-base/base_46elks_send_sms',
     'images': ['static/description/banner.png'], # 560x280 px.
     'license': 'AGPL-3',
     'contributor': '',
-    'maintainer': 'Vertel AB',
+    'maintainer': 'Vertel Sverige AB',
     'repository': 'https://github.com/vertelab/odoo-base',
     'depends': ['sms'],
     'data': [
@@ -40,4 +49,3 @@
         "data/ir_config_parameter.xml"
     ],
 }
-# vim:expandtab:smartindent:tabstop=4:softtabstop=4:shiftwidth=4:

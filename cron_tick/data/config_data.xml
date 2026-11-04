@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data noupdate="1">
+        <!-- Webhook configuration for event-driven triggering.
+
+             `webhook_enabled` can be turned off without a code change.
+             `webhook_token` is empty by default — then
+             `saltstack.alert.webhook_token` is reused, so Salt minions do
+             not need a second key. If set here, it takes precedence. -->
+        <record id="config_webhook_enabled" model="ir.config_parameter">
+            <field name="key">cron_tick.webhook_enabled</field>
+            <field name="value">True</field>
+        </record>
+    </data>
+</odoo>

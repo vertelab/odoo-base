@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="ir_attachment_exif_tree" model="ir.ui.view">
+        <field name="name">ir.attachment.exif.tree</field>
+        <field name="model">ir.attachment.exif</field>
+        <field name="arch" type="xml">
+            <list>
+                <field name="exif_tag"/>
+                <field name="exif_value"/>
+            </list>
+        </field>
+    </record>
+
+    <record id="view_attachment_form_exif" model="ir.ui.view">
+        <field name="model">ir.attachment</field>
+        <field name="inherit_id" ref="base.view_attachment_form"/>
+        <field name="arch" type="xml">
+            <xpath expr="//sheet" position="inside">
+                <group invisible="has_exif == False">
+                    <field name="has_exif" invisible="1"/>
+                    <group string="EXIF Data">
+                        <field name="exif_ids" nolabel="1"/>
+                    </group>
+                </group>
+            </xpath>
+        </field>
+    </record>
+</odoo>

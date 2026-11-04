@@ -639,3 +639,8 @@ msgstr "t.ex. Google BeautifulSoup"
 #: model_terms:ir.ui.view,arch_db:base_serp.view_partner_form_serp
 msgid "e.g., solceller, solpaneler, solenergi"
 msgstr "t.ex. solceller, solpaneler, solenergi"
+
+#. module: base_serp
+#: model:ir.model.fields.selection,name:base.selection__res_partner__company_type__company
+msgid "Company"
+msgstr "Företag"

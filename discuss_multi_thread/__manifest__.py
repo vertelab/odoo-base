@@ -2,7 +2,7 @@
 ##############################################################################
 #
 #    Odoo SA, Open Source Management Solution, third party addon
-#    Copyright (C) 2023- Vertel AB (<https://vertel.se>).
+#    Copyright (C) 2023- Vertel Sverige AB (<https://vertel.se>).
 #
 #    This program is free software: you can redistribute it and/or modify
 #    it under the terms of the GNU Affero General Public License as
@@ -21,23 +21,30 @@
 
 {
     'name': 'Base: Multi Thread',
-    'version': '1.0.0',
+    'version': '18.0.1.0.0',
     # Version ledger: XX.0 = Odoo version. 1 = Major. Non regressionable code. 2 = Minor. New features that are regressionable. 3 = Bug fixes
     'summary': 'Multi Thread in Odoo Discuss.',
     # Categories can be used to filter modules in modules listing
     # Check https://github.com/odoo/odoo/blob/14.0/odoo/addons/base/data/ir_module_category_data.xml
     # for the full list
     'category': 'Technical',
-    'description': """
+    'description': '''
+Multi Thread
+============
+
     Multi Thread in Odoo Discuss.
-    """,
+
+    Features:
+
+        - Focused Fix: A small, targeted improvement to standard Odoo behaviour.
+    ''',
     #'sequence': '1',
-    'author': 'Vertel AB',
+    'author': 'Vertel Sverige AB',
     'website': 'https://vertel.se/apps/odoo-base/discuss_multi_thread',
     'images': ['static/description/banner.png'], # 560x280 px.
     'license': 'AGPL-3',
     'contributor': '',
-    'maintainer': 'Vertel AB',
+    'maintainer': 'Vertel Sverige AB',
     'repository': 'https://github.com/vertelab/odoo-user-mail',
     'depends': ['base'],
     'assets': {
@@ -49,4 +56,3 @@
     'installable': True,
     'application': False,
 }
-# vim:expandtab:smartindent:tabstop=4:softtabstop=4:shiftwidth=4:

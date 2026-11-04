@@ -47,16 +47,16 @@
      borderopacity="1.0"
      inkscape:pageopacity="0.0"
      inkscape:pageshadow="2"
-     inkscape:zoom="1.4142136"
-     inkscape:cx="33.587571"
-     inkscape:cy="-31.112698"
+     inkscape:zoom="1"
+     inkscape:cx="9.5"
+     inkscape:cy="-30.5"
      inkscape:document-units="px"
      inkscape:current-layer="layer1"
      showgrid="false"
      inkscape:window-width="1128"
-     inkscape:window-height="805"
-     inkscape:window-x="720"
-     inkscape:window-y="144"
+     inkscape:window-height="962"
+     inkscape:window-x="390"
+     inkscape:window-y="71"
      inkscape:window-maximized="0"
      inkscape:pagecheckerboard="0" />
   <metadata
@@ -85,35 +85,20 @@
        style="stroke-width:4.60939169" />
     <text
        xml:space="preserve"
-       style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:16.0522px;line-height:125%;font-family:Ubuntu;-inkscape-font-specification:'Ubuntu, Normal';text-align:center;letter-spacing:0px;word-spacing:0px;writing-mode:lr-tb;text-anchor:middle;fill:#ffffff;fill-opacity:1;stroke:none;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
-       x="72.161728"
-       y="87.702263"
+       style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:24.25px;line-height:125%;font-family:Ubuntu;-inkscape-font-specification:'Ubuntu, Normal';text-align:start;letter-spacing:0px;word-spacing:0px;writing-mode:lr-tb;text-anchor:start;fill:#ffffff;fill-opacity:1;stroke:none;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
+       x="70.0"
+       y="81.734192"
        id="text2035"
        inkscape:export-xdpi="92"
-       inkscape:export-ydpi="92"
-       inkscape:export-filename="/usr/share/odoo-base/elk46_send_sms/static/description/icon.png"><tspan
-         sodipodi:role="line"
-         x="72.161728"
-         y="87.702263"
-         style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:28.5375px;font-family:Ubuntu;-inkscape-font-specification:'Ubuntu, Normal';font-variant-ligatures:normal;font-variant-caps:normal;font-variant-numeric:normal;font-feature-settings:normal;text-align:center;writing-mode:lr-tb;text-anchor:middle;fill:#ffffff;fill-opacity:1;stroke-width:1px"
-         id="tspan835">46Elks</tspan><tspan
-         sodipodi:role="line"
-         x="72.161728"
-         y="111.60664"
-         style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:28.5375px;font-family:Ubuntu;-inkscape-font-specification:'Ubuntu, Normal';font-variant-ligatures:normal;font-variant-caps:normal;font-variant-numeric:normal;font-feature-settings:normal;text-align:center;writing-mode:lr-tb;text-anchor:middle;fill:#ffffff;fill-opacity:1;stroke-width:1px"
-         id="tspan366">Send SMS</tspan></text>
-    <text
-       id="text845-2"
-       y="42.39505"
-       x="6.9329834"
-       style="font-style:normal;font-variant:normal;font-weight:500;font-stretch:normal;font-size:39.5584px;line-height:1.25;font-family:'Futura PT';-inkscape-font-specification:'Futura PT, Medium';font-variant-ligatures:normal;font-variant-caps:normal;font-variant-numeric:normal;font-feature-settings:normal;text-align:start;letter-spacing:0px;word-spacing:0px;writing-mode:lr-tb;text-anchor:start;fill:#ffffff;fill-opacity:0.994609;stroke:none;stroke-width:1"
-       xml:space="preserve"
-       inkscape:export-xdpi="92"
-       inkscape:export-ydpi="92"><tspan
-         style="fill:#ffffff;fill-opacity:0.994609;stroke-width:1"
-         y="42.39505"
-         x="6.9329834"
-         id="tspan843-9"
-         sodipodi:role="line"></tspan></text>
+       inkscape:export-ydpi="92"><tspan sodipodi:role="line" x="70.0" y="65.75" style="font-size:24.25px;text-anchor:middle;fill:#ffffff">Base</tspan><tspan sodipodi:role="line" x="70.0" y="94.85" style="font-size:24.25px;text-anchor:middle;fill:#ffffff">46Elks</tspan><tspan sodipodi:role="line" x="70.0" y="123.95" style="font-size:24.25px;text-anchor:middle;fill:#ffffff">Send SMS</tspan></text>
+    <image
+       width="29.0"
+       height="29.0"
+       preserveAspectRatio="none"
+       style="stroke-width:1.14035;image-rendering:optimizeQuality"
+       xlink:href="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAADIAAAAyCAYAAAAeP4ixAAAFE0lEQVR4nO3Za4xdVRUH8N/cAXm0lDRVkJcuKWBVUqgSi/JSCYUofAB8BCMao1/QaGhiJCCCEUQ+mMAHiF+IlaCgyKNCMEB5aLWKEjFEGsvLrChQY0xtA20RnA4f9rn03NN7Z+7cmbmMsf/kJHPXXmfv9Z+99mP9D7uxG7OCkZnqKDNbOAxH4HAsxHzMq8Z5qXr+jb/iGfw9InbMxPgDE8nMUZyED+EULMc+U+xmOx7BWjyMXw9KbMpEMvO9+Cw+hbcOMugE2Iif4KaI+NNUXuybSGaeikvwkanFNjAewFUR8XA/zpMSycwl+L6SQr2wBb9T0uRpPIvnsVVZFyPKWpmHQ7AYR+J4fAD7T9D3Q7ggIp4aiEi1Br6Ji/GmLi7P4Wf4KR4dNLerTeL9+CQ+gUO7uP0HV+HKXuN0JZKZC5VcXdGl+Te4BqtnasepjdvC2ViJE7q43IvzImJzs2EXIpl5iLKDHNlo+gtWRsR90w24H2TmGco/bEmj6Ul8OCI21o2txstvxhqdJHbg21g6LBIQEfdiKb6D8VrTO7EmMxfV/V+fkczcQ0mb5bX2zfh4RDw4WwH3g8w8HbdiQc28DqdExBidM3K5ThKbcOobTQKqTFih7I5tnIBvtH+MQGYuxWMYreyv4uSIeGQ4ofaHzDwZD2KPyvRfHBsR69szcqmdJODrc40ERMRatVlQCF0CI5n5DuUC1ya1XlnYM7q1zhSq8229suhhDItbOEvnWrlirpKAanFfUTON4mMtnFYzvoy7hxnYgPi5ctq3saKl88D5fURsG25MU0dEvIQ/1ExLWjigZnhuuCFNC/VYD2xh75phzs9GDfVY92kpB18bbxlyMNNBvaj7ZwtZMxw33FimhaW1v59vKferNg7NzGOGHNCUkZnLFKGjjbUt/KLh95XhhTQwVjZ+3zeSmSPYgKMq4xjeFxGPDzW0PlFlzGN2HuJP4t2tiBjHd2u+o7gxM/cdcoyTIjPnK5Vr/SZydUTsaBtuVISDNo7BTVWNMieQmXvixxoHOH5EZ2F1FB7VWbzcgU9HRP06MHRk5l64DWfWzFuxLCKepjZFldxyvlLatnEO1mVmzHq0PZCZixWpqU5iDJ9rk6C7+PAZ/FBnffKiIg1d1y4tZxtVWl+AK3VmyTi+EBGr6v695KBzlXUzr9H0OC6MiF/OVMBdxh5VJKFv4T2N5u34YkTc3HxvIoHuaNxu57Zcx8qIuHbQYHuM93ZFpPsSoovL33BORPyx2/s9d6WIeCIzj1VS6mvYsz7uYOHWOigi4PH4oFITLe/hOobrcWlEvNirv75E7My8Bx+tfr6KRc1OM3MebsEyRVXfXD1blA1kX+V7ycGK9tuhS3XBOO7BZf0o8/2I2AvxDzv13/sj4vSGz9uwuiIxXWxVUvp7EfHnfl/q58A7T6eIfWu9MTNPUw6q6ZQAm/Ar5axYPUiVOiGRage5sGbajjurtvnK1ebLOmd2m/JpYUH17Fe1b62e+qe3p/BbPFFdlQbGZDPyVZ068A3YnJmfVzTZgxr+zyg7S98pMVPoSaS6stRll3Fl8W6wq1JPUV/Oj4gtXdpmHRN9H1mHd/XRx79wEVZNNz2mg11mJDP3xl0mJ7FDSbWLI2LTJL6zjg4iVZF1M06c4J1tWIVrIuLZWYxtSmjOyLnKPaeJceXufzt+MBdmoIkmkQ14RTk3XlCCX6Ps7Rv9LyEzF2Xmgsk9d2M3/i/wGn6ghxahmZ+bAAAAAElFTkSuQmCC"
+       id="image2838"
+       x="7"
+       y="9.5" />
   </g>
 </svg>

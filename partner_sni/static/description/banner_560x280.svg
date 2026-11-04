@@ -9,7 +9,7 @@
    id="SVGRoot"
    inkscape:version="1.1.2 (0a00cf5339, 2022-02-04)"
    sodipodi:docname="banner_560x280.svg"
-   inkscape:export-filename="/home/jakob/Dokument/Odoo17/odoo-base/partner_sni/static/description/banner.png"
+   inkscape:export-filename="/usr/share/odoo-base/partner_sni/static/description/banner.png"
    inkscape:export-xdpi="92.61972"
    inkscape:export-ydpi="92.61972"
    xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
@@ -30,6 +30,23 @@
          offset="0"
          id="stop4209" />
     </linearGradient>
+    <linearGradient
+       id="linearGradient-1"
+       y2="145.47549"
+       x2="79.832403"
+       y1="-2.9184923"
+       x1="66.881189"
+       gradientTransform="scale(1.7597466,0.56826363)"
+       gradientUnits="userSpaceOnUse">
+      <stop
+         id="stop833"
+         offset="0%"
+         stop-color="#222357" />
+      <stop
+         id="stop835"
+         offset="100%"
+         stop-color="#254AA5" />
+    </linearGradient>
   </defs>
   <sodipodi:namedview
      id="base"
@@ -39,15 +56,15 @@
      inkscape:pageopacity="0.0"
      inkscape:pageshadow="2"
      inkscape:zoom="1"
-     inkscape:cx="242.5"
-     inkscape:cy="212"
+     inkscape:cx="164"
+     inkscape:cy="105"
      inkscape:document-units="px"
      inkscape:current-layer="layer1"
      showgrid="false"
-     inkscape:window-width="1466"
+     inkscape:window-width="1625"
      inkscape:window-height="773"
-     inkscape:window-x="407"
-     inkscape:window-y="83"
+     inkscape:window-x="295"
+     inkscape:window-y="104"
      inkscape:window-maximized="0"
      inkscape:pagecheckerboard="0">
     <inkscape:grid
@@ -119,68 +136,37 @@
     </g>
     <text
        xml:space="preserve"
-       style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:15px;line-height:125%;font-family:Ubuntu;-inkscape-font-specification:'Ubuntu, Normal';text-align:end;letter-spacing:0px;word-spacing:0px;writing-mode:lr-tb;text-anchor:end;fill:#000000;fill-opacity:1;stroke:none;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
-       x="519.41309"
-       y="74.822594"
-       id="text2035"
-       inkscape:export-filename="/usr/share/odoo-website-blog/website_blog_app/static/description/banner.png"
-       inkscape:export-xdpi="92.61972"
-       inkscape:export-ydpi="92.61972"><tspan
-         sodipodi:role="line"
-         x="519.41309"
-         y="74.822594"
-         style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:26.6667px;font-family:Ubuntu;-inkscape-font-specification:'Ubuntu, Normal';font-variant-ligatures:normal;font-variant-caps:normal;font-variant-numeric:normal;font-feature-settings:normal;text-align:end;writing-mode:lr-tb;text-anchor:end;stroke-width:1px"
-         id="tspan3141">Partner SNI</tspan></text>
-    <flowRoot
-       xml:space="preserve"
-       id="flowRoot892"
-       style="font-style:normal;font-variant:normal;font-weight:500;font-stretch:normal;font-size:53.33333206px;line-height:1.25;font-family:'Futura PT';-inkscape-font-specification:'Futura PT, Medium';font-variant-ligatures:normal;font-variant-caps:normal;font-variant-numeric:normal;font-feature-settings:normal;text-align:start;letter-spacing:0px;word-spacing:0px;writing-mode:lr-tb;text-anchor:start;fill:#000000;fill-opacity:1;stroke:none"><flowRegion
-         id="flowRegion894"><rect
-           id="rect896"
-           width="165"
-           height="57"
-           x="276"
-           y="-57" /></flowRegion><flowPara
-         id="flowPara898"></flowPara></flowRoot>
-    <text
-       xml:space="preserve"
        style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:15px;line-height:125%;font-family:Ubuntu;-inkscape-font-specification:'Ubuntu, Normal';text-align:start;letter-spacing:0px;word-spacing:0px;writing-mode:lr-tb;text-anchor:start;fill:#000000;fill-opacity:1;stroke:none;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
-       x="332.03513"
-       y="154.41"
+       x="319.77063"
+       y="153.03708"
        id="text2039"><tspan
          sodipodi:role="line"
-         x="332.03513"
-         y="154.41"
-         id="tspan2041"
-         style="stroke-width:1px">odoo-base</tspan></text>
+         id="tspan2037"
+         x="319.77063"
+         y="153.03708"
+         style="stroke-width:1px">odoo-base</tspan><tspan
+         sodipodi:role="line"
+         x="319.77063"
+         y="171.78708"
+         id="tspan2041" /></text>
     <text
        xml:space="preserve"
-       style="font-style:normal;font-variant:normal;font-weight:500;font-stretch:normal;font-size:53.3333px;line-height:1.25;font-family:'Futura PT';-inkscape-font-specification:'Futura PT, Medium';font-variant-ligatures:normal;font-variant-caps:normal;font-variant-numeric:normal;font-feature-settings:normal;text-align:start;letter-spacing:0px;word-spacing:0px;writing-mode:lr-tb;text-anchor:start;fill:#000000;fill-opacity:1;stroke:none"
-       x="227.0979"
-       y="254.66064"
-       id="text12382"><tspan
-         sodipodi:role="line"
-         id="tspan12380"
-         x="227.0979"
-         y="254.66064" /></text>
-    <text
+       style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:26.6667px;line-height:125%;font-family:Ubuntu;-inkscape-font-specification:'Ubuntu, Normal';text-align:end;letter-spacing:0px;word-spacing:0px;writing-mode:lr-tb;text-anchor:end;fill:#000000;fill-opacity:1;stroke:none;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
+       x="518.0"
+       y="77.2"
+       id="text2035"
+       inkscape:export-xdpi="92"
+       inkscape:export-ydpi="92"><tspan sodipodi:role="line" x="518.0" y="77.2" style="font-size:26.6667px;text-anchor:end;fill:#000000">Base Res SNI</tspan></text>
+    <flowRoot
        xml:space="preserve"
-       style="font-style:normal;font-variant:normal;font-weight:500;font-stretch:normal;font-size:53.3333px;line-height:1.25;font-family:'Futura PT';-inkscape-font-specification:'Futura PT, Medium';font-variant-ligatures:normal;font-variant-caps:normal;font-variant-numeric:normal;font-feature-settings:normal;text-align:start;letter-spacing:0px;word-spacing:0px;writing-mode:lr-tb;text-anchor:start;fill:#000000;fill-opacity:1;stroke:none"
-       x="251.18945"
-       y="243.29272"
-       id="text11397"><tspan
-         sodipodi:role="line"
-         id="tspan11395"
-         x="251.18945"
-         y="243.29272" /></text>
-    <image
-       width="22.680769"
-       height="26.309692"
-       preserveAspectRatio="none"
-       style="stroke-width:2.20451;image-rendering:optimizeQuality"
-       xlink:href="data:image/png;base64,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 "
-       id="image943"
-       x="305.31921"
-       y="130.69031" />
+       id="flowRoot844"
+       style="font-style:normal;font-variant:normal;font-weight:500;font-stretch:normal;font-size:53.3333px;line-height:1.25;font-family:'Futura PT';-inkscape-font-specification:'Futura PT, Medium';font-variant-ligatures:normal;font-variant-caps:normal;font-variant-numeric:normal;font-feature-settings:normal;text-align:start;letter-spacing:0px;word-spacing:0px;writing-mode:lr-tb;text-anchor:start;fill:#000000;fill-opacity:1;stroke:none"><flowRegion
+         id="flowRegion846"><rect
+           id="rect848"
+           width="100"
+           height="83"
+           x="206"
+           y="-32" /></flowRegion><flowPara
+         id="flowPara850" /></flowRoot>
   </g>
 </svg>

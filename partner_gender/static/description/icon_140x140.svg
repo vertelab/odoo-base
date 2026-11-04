@@ -2,14 +2,6 @@
 <!-- Created with Inkscape (http://www.inkscape.org/) -->
 
 <svg
-   xmlns:dc="http://purl.org/dc/elements/1.1/"
-   xmlns:cc="http://creativecommons.org/ns#"
-   xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
-   xmlns:svg="http://www.w3.org/2000/svg"
-   xmlns="http://www.w3.org/2000/svg"
-   xmlns:xlink="http://www.w3.org/1999/xlink"
-   xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
-   xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
    width="140px"
    height="140px"
    viewBox="0 0 140 140"
@@ -19,7 +11,15 @@
    inkscape:export-filename="/usr/share/odoo-base/partner_gender/static/description/icon.png"
    inkscape:export-xdpi="92"
    inkscape:export-ydpi="92"
-   inkscape:version="0.92.5 (2060ec1f9f, 2020-04-08)">
+   inkscape:version="1.1.2 (0a00cf5339, 2022-02-04)"
+   xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
+   xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
+   xmlns:xlink="http://www.w3.org/1999/xlink"
+   xmlns="http://www.w3.org/2000/svg"
+   xmlns:svg="http://www.w3.org/2000/svg"
+   xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+   xmlns:cc="http://creativecommons.org/ns#"
+   xmlns:dc="http://purl.org/dc/elements/1.1/">
   <defs
      id="defs3475">
     <linearGradient
@@ -47,17 +47,18 @@
      borderopacity="1.0"
      inkscape:pageopacity="0.0"
      inkscape:pageshadow="2"
-     inkscape:zoom="1.4142136"
-     inkscape:cx="51.602761"
-     inkscape:cy="-31.191402"
+     inkscape:zoom="1"
+     inkscape:cx="9.5"
+     inkscape:cy="-30.5"
      inkscape:document-units="px"
      inkscape:current-layer="layer1"
      showgrid="false"
      inkscape:window-width="1128"
-     inkscape:window-height="805"
-     inkscape:window-x="2488"
-     inkscape:window-y="247"
-     inkscape:window-maximized="0" />
+     inkscape:window-height="962"
+     inkscape:window-x="390"
+     inkscape:window-y="71"
+     inkscape:window-maximized="0"
+     inkscape:pagecheckerboard="0" />
   <metadata
      id="metadata3478">
     <rdf:RDF>
@@ -66,7 +67,6 @@
         <dc:format>image/svg+xml</dc:format>
         <dc:type
            rdf:resource="http://purl.org/dc/dcmitype/StillImage" />
-        <dc:title />
       </cc:Work>
     </rdf:RDF>
   </metadata>
@@ -85,34 +85,20 @@
        style="stroke-width:4.60939169" />
     <text
        xml:space="preserve"
-       style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:16.15116882px;line-height:125%;font-family:Ubuntu;-inkscape-font-specification:'Ubuntu, Normal';text-align:center;letter-spacing:0px;word-spacing:0px;writing-mode:lr-tb;text-anchor:middle;fill:#ffffff;fill-opacity:1;stroke:none;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
-       x="70.25148"
-       y="87.256248"
+       style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:24.25px;line-height:125%;font-family:Ubuntu;-inkscape-font-specification:'Ubuntu, Normal';text-align:start;letter-spacing:0px;word-spacing:0px;writing-mode:lr-tb;text-anchor:start;fill:#ffffff;fill-opacity:1;stroke:none;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
+       x="70.0"
+       y="81.734192"
        id="text2035"
        inkscape:export-xdpi="92"
-       inkscape:export-ydpi="92"><tspan
-         sodipodi:role="line"
-         x="70.25148"
-         y="87.256248"
-         style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:28.71319008px;font-family:Ubuntu;-inkscape-font-specification:'Ubuntu, Normal';font-variant-ligatures:normal;font-variant-caps:normal;font-variant-numeric:normal;font-feature-settings:normal;text-align:center;writing-mode:lr-tb;text-anchor:middle;fill:#ffffff;fill-opacity:1;stroke-width:1px"
-         id="tspan832">Partner</tspan><tspan
-         sodipodi:role="line"
-         x="70.25148"
-         y="111.30793"
-         style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:28.71319008px;font-family:Ubuntu;-inkscape-font-specification:'Ubuntu, Normal';font-variant-ligatures:normal;font-variant-caps:normal;font-variant-numeric:normal;font-feature-settings:normal;text-align:center;writing-mode:lr-tb;text-anchor:middle;fill:#ffffff;fill-opacity:1;stroke-width:1px"
-         id="tspan835">Gender</tspan></text>
-    <text
-       id="text845-2"
-       y="42.39505"
-       x="6.9329834"
-       style="font-style:normal;font-variant:normal;font-weight:500;font-stretch:normal;font-size:39.55838394px;line-height:1.25;font-family:'Futura PT';-inkscape-font-specification:'Futura PT, Medium';font-variant-ligatures:normal;font-variant-caps:normal;font-variant-numeric:normal;font-feature-settings:normal;text-align:start;letter-spacing:0px;word-spacing:0px;writing-mode:lr-tb;text-anchor:start;fill:#ffffff;fill-opacity:0.99460916;stroke:none;stroke-width:0.99999988"
-       xml:space="preserve"
-       inkscape:export-xdpi="92"
-       inkscape:export-ydpi="92"><tspan
-         style="fill:#ffffff;fill-opacity:0.99460916;stroke-width:0.99999988"
-         y="42.39505"
-         x="6.9329834"
-         id="tspan843-9"
-         sodipodi:role="line"></tspan></text>
+       inkscape:export-ydpi="92"><tspan sodipodi:role="line" x="70.0" y="65.75" style="font-size:24.25px;text-anchor:middle;fill:#ffffff">Base</tspan><tspan sodipodi:role="line" x="70.0" y="94.85" style="font-size:24.25px;text-anchor:middle;fill:#ffffff">Partner</tspan><tspan sodipodi:role="line" x="70.0" y="123.95" style="font-size:24.25px;text-anchor:middle;fill:#ffffff">Gender</tspan></text>
+    <image
+       width="29.0"
+       height="29.0"
+       preserveAspectRatio="none"
+       style="stroke-width:1.14035;image-rendering:optimizeQuality"
+       xlink:href="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAADIAAAAyCAYAAAAeP4ixAAAFZElEQVR4nM2ae4gVVRzHP7tWvipNy1L745dmWUim5aMso8SswNJMK4qiUtP+EDWNMiGwQpFCJGPXP7JAetlDtMdqSSEWIWpZgfio/BqthmkWmqXruv1xzl1nrzN37px7b/aBy8ydc36P7z0z5zW3ijwkDQRqgP75ZcDvwDNmtiimrCxI6gfUAgNjivcDs82sNr+gKs/JKOAtoHVKvFeBR8ysKSjbBCSNAN4H2qVUrTWzydEL1REnfYDXSRcB8BAwK2OeBZHUE1hGugiASZKmRi9UR85fLNJJjtmSLsxQP425wNkZ6s+R1Dn3pRpAUjfg5oyB2wD3ZLSJRVIHYHRGs7OAO3Nfci0yODCHawLt8rkKOK2U+DnjcwMTiLWTVA30Aww4DzgE/ApsMLM/i/VTBM23Vk5InPNi+CP6xd+iTwNjcQLyaZC0DphvZqsj10PjN9vlbq2vAx19kzuRNAXYATxGvAiA04GbgFWS6iIP62YgpCtvjt88jkjaAFydwUkj0AfYDiwGxgck8hNwm5ltk7QGGJbB9ijQy8x+hpbd7wzgeAZHi81sK67bDBEB0AP42LfMk0BDBtuFOREQEWJma4GpFNfEnwHTJI0EnsgQPI4ewFIz2whMorgfcxV5A3K0RTCzl3AP6p4EB8eAhcAtuFtrfracE7lV0nAzWwLcAfySUK8BN3CPNLNj0YIq36y9gPW5uZOkdt7hUKALrvv8DnjPzOTrjAKWl0kIwBozG+59t43EP9/H/9bH35UzkNQbOGZmP1RJOgB09BWfA5abWWNaVElLcHOuctEAdDazg0XE7g88BYzxl2ZWScp/JuqBN4BPca2wD2gLdMONpFvNbL2kLcBl5dHQzI24LnU8sBbYCRzAzcF6+vJxwIA8u8a4aUF3YKb/xDEOWA9cUHLaJ9MV2AS8kNGuVXV6nZM44o/tA2zTaB/xn4kQIZ388beQgCnsBc4JMQwRcrE/7gwJmIJw40pmQoRc54+fhAQswG7ge2BQiHGQED/LXUa2KU0ab/txbExqzRhChLQCJpnZNmBpSNAYDgHzJF3KiRbPRIgQgOmSuuMGpd2BPqLMMLO9wPOhDrIK2YhL/gHc1GAPMAr4OzQBYJGZLfbnNcBk3JZUpm44bmSPYxMwwcyiC6l2ZnbYnw8AVuAGtCw8i9vwa5LUBjhqZse9z064JcLEYhwVI2QRMA23upsI3IWbIrQG6oDJZrZLUldgHnA/6S29BXc71fkJ6hxgirfbAXyAW2/USxqNa6EzCvjbVyVpAnAf0BfoQMvdx1fMbLykwcA7QNw+1iHcmqTW/7K9cUuBEZzYfPgLtzT4ClgJfGRmjZKuB5ZwYmyKcgR43MxeljQOeJOWP9Bh4EcvekFVjIMWSBoCrMHtYxViM+5WWZm/VojxORC3Ih2bFh+YZWZz0yoVFOLv0y24NUGx7AVWA1/gRuoDwJm452cQMJxss+YmYJiZfV6oUpqQWuDRDEErxXbg8kLrpMSH0u/rPlyJrAK4BLi7UIVCvcuDuJ7q/0LBnZpCQm4vcyKlcoPf7I4lVoik9sS/sTqVVANDChXGcS1hu+OVZmhSQZKQKyuTR8n0TSpIEmKVyaNkLkoqSBKSaHCKMUmxY1+SkC4VTKYUWpPwnjFJSNvK5VIysbklCSnmFfWpInbymiQkaJPsPyJ2NZokpL6CiZTCUdzfOE4iScjayuVSEl8mrXWShLwG/FOxdMKpSSqIFWJm9ZT5vyZl4EPg3aTCxNmvmS3AvTMv525iKMuBewv9G6mYNfsVwHTce8MsS95SOQysA2rMbEVa5VQhUSR1xG37twpKrTiagIPA/mJeAeb4F4cYldqdwwrXAAAAAElFTkSuQmCC"
+       id="image2838"
+       x="7"
+       y="9.5" />
   </g>
 </svg>

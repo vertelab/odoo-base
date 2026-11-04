@@ -2,7 +2,7 @@
 ##############################################################################
 #
 #    Odoo SA, Open Source Management Solution, third party addon
-#    Copyright (C) 2021- Vertel AB (<https://vertel.se>).
+#    Copyright (C) 2021- Vertel Sverige AB (<https://vertel.se>).
 #
 #    This program is free software: you can redistribute it and/or modify
 #    it under the terms of the GNU Affero General Public License as
@@ -23,24 +23,32 @@
     'name': 'Base: Export Records to XML',
     'version': '18.0.0.1.1',
     # Version ledger: 14.0 = Odoo version. 1 = Major. Non regressionable code. 2 = Minor. New features that are regressionable. 3 = Bug fixes
-    'summary': 'Export Records to XML',
+    'summary': 'Export Records to XML.',
     'category': 'Technical',
-    'description': """
-        Export Records to XML - Models you can import include: \n
-            - users
-            - contacts
-            - sale orders
-            - events
-            - hr employee
-            - project/tasks
-        \n 18.0.0.1.1 - Added Documentations
-    """,
-    'author': 'Vertel AB',
+    'description': '''
+Export Records to XML
+=====================
+
+    Export Records to XML - Models you can import include: \n
+                - users
+                - contacts
+                - sale orders
+                - events
+                - hr employee
+                - project/tasks
+            \n 18.0.0.1.1 - Added Documentations
+
+    Features:
+
+        - UI Integration: Extends 1 view(s) in the Odoo interface.
+        - Extends Odoo: Builds on xml.export.
+    ''',
+    'author': 'Vertel Sverige AB',
     'website': 'https://vertel.se/apps/odoo-base/record_export_to_xml',
     'images': ['static/description/banner.png'], # 560x280 px.
     'license': 'AGPL-3',
     'contributor': '',
-    'maintainer': 'Vertel AB',
+    'maintainer': 'Vertel Sverige AB',
     'repository': 'https://github.com/vertelab/odoo-base.git',
     'depends': ['base', 'event', 'hr', 'sale', 'project'],
     'data': [

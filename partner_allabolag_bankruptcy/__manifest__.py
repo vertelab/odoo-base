@@ -2,7 +2,7 @@
 ##############################################################################
 #
 #    Odoo SA, Open Source Management Solution, third party addon
-#    Copyright (C) 2024- Vertel AB (<https://vertel.se>).
+#    Copyright (C) 2024- Vertel Sverige AB (<https://vertel.se>).
 #
 #    This program is free software: you can redistribute it and/or modify
 #    it under the terms of the GNU Affero General Public License as
@@ -21,20 +21,28 @@
 
 {
     'name': 'Base: Partner Allabolag Bankruptcy',
-    'version': '1.1.0',
+    'version': '18.0.1.1.0',
     # Version ledger: XX.0 = Odoo version. 1 = Major. Non regressionable code. 2 = Minor. New features that are regressionable. 3 = Bug fixes
-    'summary': 'Track Allabolag Partner Bankruptcy',
+    'summary': 'Track Allabolag Partner Bankruptcy.',
     'category': 'Website',
-    'description': """
-        Track Allabolag Partner Bankruptcy
-    """,
+    'description': '''
+Partner Allabolag Bankruptcy
+============================
+
+    Track Allabolag Partner Bankruptcy.
+
+    Features:
+
+        - Automation: Scheduled jobs: Allabolag: Bankruptcy Alert.
+        - Extends Odoo: Builds on existing Odoo models.
+    ''',
     # 'sequence': '1',
-    'author': 'Vertel AB',
+    'author': 'Vertel Sverige AB',
     'website': 'https://vertel.se/apps/odoo-base/partner_allabolag_bankruptcy',
     'images': ['static/description/banner.png'],  # 560x280 px.
     'license': 'AGPL-3',
     'contributor': '',
-    'maintainer': 'Vertel AB',
+    'maintainer': 'Vertel Sverige AB',
     'repository': 'https://github.com/vertelab/odoo-base',
     'depends': ['base'],
     'data': [
@@ -43,4 +51,3 @@
     'application': False,
     'installable': True,
 }
-# vim:expandtab:smartindent:tabstop=4:softtabstop=4:shiftwidth=4:

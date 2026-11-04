@@ -1,5 +1,7 @@
 # Project specific
 oca.cfg
+.env
+**/.env
 
 # Byte-compiled / optimized / DLL files
 __pycache__/
@@ -77,3 +79,7 @@ docs/_build/
 !static/lib/
 temp/*
 graphify-out/
+.shazam/
+PLAN*
+*.pyc
+openspec/

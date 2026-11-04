@@ -1,14 +1,14 @@
 # Copyright (C) 2025 Cetmix OÜ
-# License LGPL-3.0 or later (https://www.gnu.org/licenses/lgpl-3.0).
+# License AGPL-3.0 or later (https://www.gnu.org/licenses/agpl).
 
 {
-    "name": "Partner Anonymization Rule",
+    "name": "Base: Partner Anonymization Rule",
     "version": "18.0.1.0.0",
     "category": "Data Protection",
     "summary": "Partner Anonymization Rule for GDPR compliance",
-    "author": "Vertel AB",
-    "license": "LGPL-3",
-    "website": "https://vertel.se",
+    "author": "Vertel Sverige AB",
+    "license": "AGPL-3",
+    "website": "https://vertel.se/apps/odoo-base/partner_anonymization_rule",
     'repository': 'https://github.com/vertelab/odoo-base',
     "depends": ["privacy_partner_to_be_forgotten"],
     "data": [

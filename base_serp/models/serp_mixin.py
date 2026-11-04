@@ -46,14 +46,14 @@ class SERPMixin(models.AbstractModel):
     report_nextcall = fields.Datetime(string="Next Report Generation")
 
     # Date Range
+    # Krävs endast när is_serp är satt (se vyerna) — annars tvingas varje
+    # res.partner ha datum trots att SERP inte används.
     date_from = fields.Date(
         string='From Date',
-        required=True,
         default=lambda self: self._default_date_from()
     )
     date_to = fields.Date(
         string='To Date',
-        required=True,
         default=lambda self: self._default_date_to()
     )
 
@@ -91,7 +91,7 @@ class SERPMixin(models.AbstractModel):
         ('last90', 'Last 90 Days'),  # Sep 19 - Dec 17 (if today is Dec 17) - rolling 90 days including today
         ('lastMonth', 'Last Month'), # Nov 1-30 (if today is in December) - complete previous calendar month (28-31 days)
         ('lastYear', 'Last Year'),  # Jan 1 - Dec 31, 2024 (if today is in 2025) - complete previous calendar year
-    ], string='Report Date Range', required=True, default='lastMonth')
+    ], string='Report Date Range', default='lastMonth')
 
     # Website Analytics
     analytics_provider_id = fields.Many2one('website.analytics.provider', string='Analytics Provider')

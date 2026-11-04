@@ -2,7 +2,7 @@
 ##############################################################################
 #
 #    Odoo SA, Open Source Management Solution, third party addon
-#    Copyright (C) 2024- Vertel AB (<https://vertel.se>).
+#    Copyright (C) 2024- Vertel Sverige AB (<https://vertel.se>).
 #
 #    This program is free software: you can redistribute it and/or modify
 #    it under the terms of the GNU Affero General Public License as
@@ -21,21 +21,27 @@
 
 {
     'name': 'Base: Module Extra Repos',
-    'version': '0.2',
+    'version': '18.0.1.0.0',
     # Version ledger: 14.0 = Odoo version. 1 = Major. Non regressionable code. 2 = Minor. New features that are regressionable. 3 = Bug fixes
-    'summary': 'Add an extra repos',
+    'summary': 'Add an extra repos.',
     'category': 'Technical',
-    'description': """
-Add an extra repo
-=================
-""",
+    'description': '''
+Module Extra Repos
+==================
+
+    Add an extra repos.
+
+    Features:
+
+        - Extends Odoo: Builds on existing Odoo models.
+    ''',
     #'sequence': '1',
-    'author': 'Vertel AB',
-    'website': 'https://vertel.se/apps/odoo-base/ir_module_extra_repo',
+    'author': 'Vertel Sverige AB',
+    'website': 'https://vertel.se/apps/odoo-base/ir_module_extra_repos',
     'images': ['static/description/banner.png'],  # 560x280 px.
     'license': 'AGPL-3',
     'contributor': '',
-    'maintainer': 'Vertel AB',
+    'maintainer': 'Vertel Sverige AB',
     'depends': ['base',],
     'data': [
     ],
@@ -43,4 +49,3 @@ Add an extra repo
     'installable': True,
     'auto_install': False,
 }
-# vim:expandtab:smartindent:tabstop=4s:softtabstop=4:shiftwidth=4:

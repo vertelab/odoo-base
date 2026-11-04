@@ -77,18 +77,38 @@ class Collection(BaseCollection):
 
     @property
     def odoo_collection(self):
+        """The backing dav.collection, or None when there is none.
+
+        Returning None for a *deleted* collection is the whole point. browse()
+        always hands back a recordset -- len() 1, bool() True, exists() empty --
+        so a guard written as ``if collection is None`` never fires for an id
+        that has been removed. The recordset then passes the guard and the next
+        attribute access (``collection.tag``) raises MissingError, which Radicale
+        turns into HTTP 500. That is what a client sees when it keeps a stale
+        collection URL from a previous sync: PROPFIND /.dav/<login>/<id>/ -> 500
+        instead of a clean 404.
+
+        Normalising here fixes every caller at once: last_modified, get_meta,
+        get_all, get_multi, upload and delete all test ``is None``.
+        """
         if self._odoo_collection is not None:
-            return self._odoo_collection
+            return self._odoo_collection or None
         if (len(self._path_components) >= 2 and
             str(self._path_components[1]).isdigit()):
-            return self.env['dav.collection'].sudo().browse(
+            collection = self.env['dav.collection'].sudo().browse(
                 int(self._path_components[1])
             )
+            return collection if collection.exists() else None
         return None
 
     @property
     def last_modified(self):
-        date = self.odoo_collection.create_date or self.odoo_collection.write_date or time.strftime('%Y-%m-%d %H:%M:%S')
+        collection = self.odoo_collection
+        if collection is None:
+            date = time.strftime('%Y-%m-%d %H:%M:%S')
+        else:
+            date = (collection.create_date or collection.write_date
+                    or time.strftime('%Y-%m-%d %H:%M:%S'))
         return self._odoo_to_http_datetime(date)
 
     def _odoo_to_http_datetime(self, value):
@@ -104,15 +124,38 @@ class Collection(BaseCollection):
 
     def get_meta(self, key=None):
         logger.info("get_meta called for key: %s on path: %s", key, self._path)
+        # The root path ('/') and the principal path ('/<login>') have no
+        # backing dav.collection record: they exist so clients can discover
+        # the user's collections. rights.py already grants "Rr" on both, and
+        # Storage.discover() yields a Collection for them, so get_meta() must
+        # answer as a plain collection instead of dereferencing None. Before
+        # this guard a client's very first PROPFIND (/.well-known/caldav ->
+        # /.dav) raised AttributeError: 'NoneType' object has no attribute
+        # 'tag' -> HTTP 500, which DAVx5 reports as "Couldn't find CalDAV or
+        # CardDAV service" even though OPTIONS and the leaf paths worked.
+        collection = self.odoo_collection
+        if collection is None:
+            if key is None:
+                return {
+                    'tag': '',
+                    'D:displayname': str(self._path or '/'),
+                }
+            if key == 'D:displayname':
+                return str(self._path or '/')
+            if key == 'C:supported-calendar-component-set':
+                return 'VTODO,VEVENT,VJOURNAL'
+            if key == 'ICAL:calendar-color':
+                return '#48c9f4'
+            return None
         if key is None:
             return {
-                'tag': str(self.odoo_collection.tag or ''),
-                'D:displayname': str(self.odoo_collection.display_name or self._path),
+                'tag': str(collection.tag or ''),
+                'D:displayname': str(collection.display_name or self._path),
             }
         elif key == 'tag':
-            return str(self.odoo_collection.tag or '')
+            return str(collection.tag or '')
         elif key == 'D:displayname':
-            return str(self.odoo_collection.display_name or self._path)
+            return str(collection.display_name or self._path)
         elif key == 'C:supported-calendar-component-set':
             return 'VTODO,VEVENT,VJOURNAL'
         elif key in ('C:calendar-home-set', 'D:principal-URL'):
@@ -122,15 +165,32 @@ class Collection(BaseCollection):
         return None
 
     def get_all(self):
-        for href in self.odoo_collection.dav_list(self, self._path_components):
-            yield self.odoo_collection.dav_get(self, href)
+        # A principal/root collection has no backing record and therefore no
+        # items of its own; its children are produced by Storage.discover().
+        collection = self.odoo_collection
+        if collection is None:
+            return
+        for href in collection.dav_list(self, self._path_components):
+            yield collection.dav_get(self, href)
 
     def get_multi(self, hrefs):
+        collection = self.odoo_collection
+        if collection is None:
+            return
         for href in hrefs:
-            yield href, self.odoo_collection.dav_get(self, href)
+            yield href, collection.dav_get(self, href)
 
     def upload(self, href, item):
-        result = self.odoo_collection.dav_upload(self, href, item)
+        # Radicale 3.x hands us a radicale_item.Item, not a vobject component.
+        # Item proxies .name to its vobject_item, so the ``item.name !=
+        # 'VCALENDAR'`` check in dav_collection.from_vobject() passes, but Item
+        # has no ``.vevent`` attribute -- so ``hasattr(item, 'vevent')`` is
+        # False, from_vobject() returns None, and dav_upload() calls
+        # create(None) -> TypeError: object of type 'NoneType' has no len()
+        # -> HTTP 500 on every PUT. Unwrap to the real vobject before handing
+        # it over; from_vobject() is written against vobject components.
+        vobject_item = getattr(item, 'vobject_item', item)
+        result = self.odoo_collection.dav_upload(self, href, vobject_item)
         return result, None
 
     def delete(self, href=None):
@@ -169,7 +229,18 @@ class Storage(BaseStorage):
         yield collection
 
         if depth and len(components) == 1:
-            for odoo_col in self.env['dav.collection'].search([]):
+            # .sudo() is required: Radicale authenticates through its own auth
+            # class, not through an Odoo session, so request.env.user is an
+            # empty recordset here. A plain search([]) then hits
+            # ir.model.access.check -> _get_group_ids -> ensure_one(), which
+            # raises "ValueError: Expected singleton: res.users()" and turns
+            # every PROPFIND on the principal path into a 500.
+            #
+            # Access is not weakened by this: rights.py still authorizes each
+            # collection individually (owner_only / owner_write_only /
+            # authenticated) on every request, and discover() only advertises
+            # the collections the client may then actually read.
+            for odoo_col in self.env['dav.collection'].sudo().search([]):
                 yield Collection(
                     '/'.join(components + [str(odoo_col.id)]),
                     odoo_collection=odoo_col,

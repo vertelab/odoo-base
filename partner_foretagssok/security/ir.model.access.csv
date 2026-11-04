@@ -1,0 +1,5 @@
+id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
+access_res_partner_financials_user,res.partner.financials.user,model_res_partner_financials,base.group_user,1,0,0,0
+access_res_partner_financials_manager,res.partner.financials.manager,model_res_partner_financials,base.group_partner_manager,1,1,1,1
+access_foretagssok_similar_wizard,foretagssok.similar.wizard,model_foretagssok_similar_wizard,base.group_user,1,1,1,0
+access_foretagssok_similar_wizard_line,foretagssok.similar.wizard.line,model_foretagssok_similar_wizard_line,base.group_user,1,1,1,1
