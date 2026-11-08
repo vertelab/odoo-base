@@ -20,7 +20,7 @@
     <record model="ir.actions.act_window" id="scaffold_test.action_window">
       <field name="name">scaffold_test window</field>
       <field name="res_model">scaffold_test.scaffold_test</field>
-      <field name="view_mode">tree,form</field>
+      <field name="list,form</field>
     </record>
 -->
 
