@@ -6,9 +6,9 @@
 		<field name="name">module2install.missing.module.tree</field>
 		<field name="model">ir.module.install_wizard.missing_module</field>
 		<field name="arch" type="xml">
-			<tree string="Missing Modules">
+			<list string="Missing Modules">
 				<field name="name"/>
-			</tree>
+			</list>
 		</field>
 	</record>
 
@@ -16,11 +16,11 @@
 		<field name="name">module2install.to.be.installed.tree</field>
 		<field name="model">ir.module.install_wizard.to_be_installed</field>
 		<field name="arch" type="xml">
-			<tree string="Modules to be Installed">
+			<list string="Modules to be Installed">
 				<field name="name"/>
 				<field name="module_id"/>
 				<field name="state"/>
-			</tree>
+			</list>
 		</field>
 	</record>
 	  
@@ -46,25 +46,25 @@
 		<notebook>
 		  <page string="Modules to be Installed" invisible="not to_be_installed_modules_ids">
 			<field name="to_be_installed_modules_ids">
-			  <tree editable="bottom">
+			  <list editable="bottom">
 				<field name="name"/>
 				<field name="module_id"/>
 				<field name="state"/>
-			  </tree>
+			  </list>
 			</field>
 		  </page>
 		  <page string="Missing Modules" invisible="not missing_modules_ids">
 			<field name="missing_modules_ids">
-			  <tree editable="bottom">
+			  <list editable="bottom">
 				<field name="name"/>
-			  </tree>
+			  </list>
 			</field>
 		  </page>
 		  <page string="Enterprise Modules" invisible="not missing_modules_enterprise_ids">
 			<field name="missing_modules_enterprise_ids">
-			  <tree editable="bottom">
+			  <list editable="bottom">
 				<field name="name"/>
-			  </tree>
+			  </list>
 			</field>
 		  </page>
 		 
