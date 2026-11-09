@@ -18,6 +18,20 @@
              see INTERVAL_TICK_CADENCE. Those tasks are checked every 5
              minutes and run when their own interval has elapsed, so the
              granularity matches ir.cron. No sixth tick is needed.
+
+             WHY EVERY TICK IS 5 MINUTES — NOT 1 DAY / 7 DAYS / 1 MONTH
+             A `daily`/`week`/`month` task is spread inside its window by
+             a deterministic offset (`sha256(technical_name) % window`).
+             The tick must therefore POLL REPEATEDLY INSIDE that window,
+             otherwise the offset can never be reached: when the daily
+             tick ran once a day at 05:19, `now.minute >= offset` was only
+             satisfiable for offset <= 19, and every task hashed above 19
+             silently NEVER RAN (six keykeep/storage tasks had last_run
+             NULL for weeks).
+
+             The cadence is a FILTER on `_is_due`, not a schedule of the
+             tick. `last_run` is the once-per-period guard, so polling
+             every 5 minutes still runs each task exactly once per period.
              ============================================================ -->
 
         <record id="cron_min" model="ir.cron">
@@ -47,8 +61,8 @@
             <field name="model_id" ref="model_cron_task"/>
             <field name="state">code</field>
             <field name="code">model._cron_tick('daily')</field>
-            <field name="interval_number">1</field>
-            <field name="interval_type">days</field>
+            <field name="interval_number">5</field>
+            <field name="interval_type">minutes</field>
             <field name="active" eval="True"/>
             <field name="user_id" ref="base.user_root"/>
         </record>
@@ -58,8 +72,8 @@
             <field name="model_id" ref="model_cron_task"/>
             <field name="state">code</field>
             <field name="code">model._cron_tick('week')</field>
-            <field name="interval_number">7</field>
-            <field name="interval_type">days</field>
+            <field name="interval_number">5</field>
+            <field name="interval_type">minutes</field>
             <field name="active" eval="True"/>
             <field name="user_id" ref="base.user_root"/>
         </record>
@@ -69,8 +83,8 @@
             <field name="model_id" ref="model_cron_task"/>
             <field name="state">code</field>
             <field name="code">model._cron_tick('month')</field>
-            <field name="interval_number">1</field>
-            <field name="interval_type">months</field>
+            <field name="interval_number">5</field>
+            <field name="interval_type">minutes</field>
             <field name="active" eval="True"/>
             <field name="user_id" ref="base.user_root"/>
         </record>

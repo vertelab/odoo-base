@@ -74,6 +74,11 @@ INTERVAL_SECONDS = {
 # elapsed. 5 minutes matches ir.cron's granularity.
 INTERVAL_TICK_CADENCE = 'min'
 
+# Granularity of the tick crons, in minutes. Every tick polls at this
+# interval, and the spread offset is quantised to it — see
+# `_spread_offset_minutes`.
+TICK_GRANULARITY_MINUTES = 5
+
 
 class CronTask(models.Model):
     _name = 'cron.task'
@@ -357,6 +362,14 @@ class CronTask(models.Model):
 
         The same technical name yields the same offset every time — a
         `daily` task therefore runs at the same time every day, not randomly.
+
+        The offset is QUANTISED to the tick granularity (5 minutes). The
+        tick polls every 5 minutes, so an offset of 3 is only reachable at
+        :05 and an offset of 57 only at :55 — an unquantised offset would
+        either never match or match at the wrong minute. Quantising also
+        collapses the window to 12 distinct slots per hour, which is what
+        the spread is actually for: not 60 different minutes, but enough
+        slots that 19 daily tasks do not all fire in the same tick.
         """
         self.ensure_one()
         window = SPREAD_MINUTES.get(self.cadence, 0)
@@ -364,7 +377,9 @@ class CronTask(models.Model):
             return 0
         digest = hashlib.sha256(
             (self.technical_name or '').encode('utf-8')).hexdigest()
-        return int(digest, 16) % window
+        offset = int(digest, 16) % window
+        # Snap down to the tick granularity, never above the window.
+        return (offset // TICK_GRANULARITY_MINUTES) * TICK_GRANULARITY_MINUTES
 
     def _interval_seconds(self):
         """The task's interval in seconds (0 when it uses a cadence)."""
@@ -414,26 +429,27 @@ class CronTask(models.Model):
         # daily / week / month — spread over a window.
         offset = self._spread_offset_minutes()
         if self.cadence == 'daily':
-            # The window is one hour: run when minute >= offset and not run today.
-            if not self.last_run:
-                return now.minute >= offset
-            return self.last_run.date() < now.date() and now.minute >= offset
+            # The window is one hour: run when minute >= offset and not run
+            # today. `last_run` is the guard, not the offset: once the task
+            # has run today it is done, whatever the minute is. The offset
+            # only decides WHEN in the hour the window opens.
+            if self.last_run and self.last_run.date() >= now.date():
+                return False
+            return now.minute >= offset
 
         if self.cadence == 'week':
             # The window is one day (1440 min): offset in minutes since midnight.
-            window_open = now.hour * 60 + now.minute >= offset
-            if not self.last_run:
-                return window_open
-            return (now - self.last_run).days >= 7 and window_open
+            if self.last_run and (now - self.last_run).days < 7:
+                return False
+            return now.hour * 60 + now.minute >= offset
 
         if self.cadence == 'month':
             # The window is one week (10080 min): offset in minutes since
             # the start of the week (Monday 00:00).
+            if self.last_run and (now - self.last_run).days < 28:
+                return False
             minutes_into_week = now.weekday() * 1440 + now.hour * 60 + now.minute
-            window_open = minutes_into_week >= offset
-            if not self.last_run:
-                return window_open
-            return (now - self.last_run).days >= 28 and window_open
+            return minutes_into_week >= offset
 
         return False
 
