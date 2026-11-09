@@ -573,9 +573,17 @@ class CronTask(models.Model):
                     done.technical_name, duration_ms, done.timeout_seconds)
             return {'status': 'ok', 'duration_ms': duration_ms, 'error': None}
         finally:
-            # Release the advisory lock EVEN on error — otherwise it is held
-            # until the connection closes and the task can never run again.
-            self.browse(task_id)._release_lock()
+            # Clear the informational lock columns EVEN on error. The advisory
+            # lock itself is transaction-bound and released by PostgreSQL, but
+            # `locked_by` is a plain column: if the run raised, the savepoint
+            # rollback also reverted the UPDATE that set it, so it must be
+            # cleared here — and this must never raise, or it masks the real
+            # error and leaves the task looking permanently locked in the UI.
+            try:
+                self.browse(task_id)._release_lock()
+            except Exception:  # noqa: BLE001 — cleanup must not mask the run
+                _logger.exception(
+                    'cron.task id=%s: could not clear locked_by', task_id)
 
     def _log_run_record(self, status, trigger, trigger_detail=None,
                         duration_ms=0, text=None, user_id=None):
