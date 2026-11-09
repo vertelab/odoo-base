@@ -602,17 +602,29 @@ class CronTask(models.Model):
         empty in their snapshot and both get `rowcount == 1`. Verified in
         production — two concurrent workers ran the same task.
 
-        We use a session-bound advisory lock per task
-        (`pg_try_advisory_lock`), which is atomic regardless of isolation
-        level. `locked_by`/`locked_at` are written as INFORMATION (who is
-        running), not as the lock itself — the latter is owned by PostgreSQL.
+        We use an advisory lock per task, which is atomic regardless of
+        isolation level. `locked_by`/`locked_at` are written as INFORMATION
+        (who is running), not as the lock itself — the latter is owned by
+        PostgreSQL.
 
-        The lock is released by `_release_lock()` or automatically when the
-        session (connection) closes.
+        TRANSACTION-BOUND, NOT SESSION-BOUND (pg_try_advisory_xact_lock).
+        A session-bound lock (`pg_try_advisory_lock`) is released only when
+        the CONNECTION closes — and Odoo pools connections. When a worker
+        died mid-run, its connection went back to the pool WITH the lock
+        still held, and the next worker that borrowed that connection could
+        never acquire it. Production symptom: `ai_okf_index_dirty` sat with
+        `locked_by='tick:min'` and blocked the whole min tick, while
+        `pg_locks` showed the lock owned by a live-but-idle backend.
+
+        The xact variant is released automatically at COMMIT/ROLLBACK, so a
+        dead worker cannot leak it. `_release_lock` is kept for symmetry and
+        to clear the informational columns, but correctness no longer
+        depends on it being called.
         """
         self.ensure_one()
         lock_id = self._task_lock_id()
-        self.env.cr.execute('SELECT pg_try_advisory_lock(%s)', (lock_id,))
+        self.env.cr.execute(
+            'SELECT pg_try_advisory_xact_lock(%s)', (lock_id,))
         row = self.env.cr.fetchone()
         if not row or not row[0]:
             return False
@@ -626,10 +638,13 @@ class CronTask(models.Model):
         return True
 
     def _release_lock(self):
-        """Release the lock after the run."""
+        """Clear the informational lock columns.
+
+        The advisory lock itself is transaction-bound (see `_acquire_lock`)
+        and is released by PostgreSQL at COMMIT/ROLLBACK. Only the
+        `locked_by`/`locked_at` columns are cleared here.
+        """
         self.ensure_one()
-        lock_id = self._task_lock_id()
-        self.env.cr.execute('SELECT pg_advisory_unlock(%s)', (lock_id,))
         self.env.cr.execute("""
             UPDATE cron_task
                SET locked_by = NULL, locked_at = NULL
@@ -742,9 +757,14 @@ class CronTask(models.Model):
 
         Protected by a global advisory lock per cadence (D11) so that two
         Odoo workers do not run the same cadence simultaneously.
+
+        TRANSACTION-BOUND (pg_try_advisory_xact_lock), for the same reason
+        as the per-task lock: a session-bound lock survives the worker and
+        leaks back into the connection pool when the worker dies mid-run.
         """
         lock_id = self._advisory_lock_id(cadence)
-        self.env.cr.execute('SELECT pg_try_advisory_lock(%s)', (lock_id,))
+        self.env.cr.execute(
+            'SELECT pg_try_advisory_xact_lock(%s)', (lock_id,))
         got_lock = self.env.cr.fetchone()
         if not got_lock or not got_lock[0]:
             _logger.info(
@@ -801,8 +821,10 @@ class CronTask(models.Model):
                 'locked': locked,
             }
         finally:
-            self.env.cr.execute(
-                'SELECT pg_advisory_unlock(%s)', (lock_id,))
+            # The advisory lock is transaction-bound and is released by
+            # PostgreSQL at COMMIT/ROLLBACK — no explicit unlock needed (and
+            # no leak if this worker dies first).
+            pass
 
     @api.model
     def _advisory_lock_id(self, cadence):
