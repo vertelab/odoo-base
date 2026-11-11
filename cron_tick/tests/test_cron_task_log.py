@@ -12,6 +12,7 @@ second worker.
 from datetime import timedelta
 from unittest import mock
 
+import psycopg2
 from odoo import fields
 from odoo.tests.common import TransactionCase
 
@@ -319,3 +320,54 @@ class TestAccess(TransactionCase):
                               'status': 'ok', 'trigger': 'tick'})
         with self.assertRaises(Exception):
             LogAsUser.browse(log.id).unlink()
+
+
+class TestFailureRecordingInPoisonedTransaction(CronTaskTestBase):
+    """`_record_failure` must survive a transaction PostgreSQL already aborted.
+
+    Measured in production 2026-11-11: a `lock timeout` on an INSERT left the
+    transaction in `InFailedSqlTransaction`. `cursor.savepoint()` could not
+    help — `_FlushingSavepoint.__init__` calls `cr.flush()` before issuing
+    `SAVEPOINT`, so `__enter__` raised and nothing was rolled back.
+    `_record_failure` then raised on `self.failure_count`, the exception
+    escaped `_cron_tick`, and the whole tick transaction — including every
+    `nextcall` update — was rolled back. Tick 991 reached failure_count 471
+    and 18 of 80 active crons sat with a `nextcall` in the past for over an
+    hour.
+    """
+
+    def _poison(self):
+        """Abort the transaction the way a database error does."""
+        with self.assertRaises(psycopg2.Error):
+            self.env.cr.execute('SELECT 1/0')
+
+    def test_record_failure_survives_poisoned_transaction(self):
+        """The whole point: no raise, and the counter still advances."""
+        before = self.task_fail.failure_count
+        self._poison()
+        # Must not raise. Before the fix this raised InFailedSqlTransaction.
+        self.task_fail._record_failure(Exception('simulated'), 42)
+        self.assertEqual(self.task_fail.failure_count, before + 1)
+        self.assertIn('simulated', self.task_fail.last_error or '')
+
+    def test_transaction_is_usable_after_recording(self):
+        """Recovery must leave the connection usable, not just swallow the error."""
+        self._poison()
+        self.task_fail._record_failure(Exception('simulated'), 0)
+        # A plain query proves the transaction left InFailedSqlTransaction.
+        self.env.cr.execute('SELECT 1')
+        self.assertEqual(self.env.cr.fetchone()[0], 1)
+
+    def test_healthy_transaction_is_untouched(self):
+        """No regression: the probe must not roll back a working transaction."""
+        before = self.task_fail.failure_count
+        self.task_fail._record_failure(Exception('simulated'), 7)
+        self.assertEqual(self.task_fail.failure_count, before + 1)
+        self.assertIn('simulated', self.task_fail.last_error or '')
+
+    def test_deactivation_still_works_after_recovery(self):
+        """The deactivation path must run too — it is the reason to record."""
+        self.task_fail.write({'max_failures': 1})
+        self._poison()
+        self.task_fail._record_failure(Exception('simulated'), 0)
+        self.assertFalse(self.task_fail.active)

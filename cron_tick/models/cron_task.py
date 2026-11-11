@@ -688,13 +688,68 @@ class CronTask(models.Model):
             'locked_at': False,
         })
 
+    def _ensure_usable_transaction(self):
+        """Get the transaction out of `InFailedSqlTransaction`, or explain why.
+
+        A failed task can leave the connection in an aborted transaction.
+        Recovery has to happen BEFORE any ORM call, because the ORM reads
+        fields (cache miss) and PostgreSQL then answers `current transaction
+        is aborted` to every statement.
+
+        Only `cr.rollback()` clears that state — `ROLLBACK TO SAVEPOINT`
+        cannot, because `cursor.savepoint()` never got as far as issuing
+        `SAVEPOINT` (see `_record_failure`).
+
+        After the rollback the ORM cache points at rows the database no
+        longer has, so it must be invalidated and the caller must re-browse.
+        """
+        cr = self.env.cr
+        try:
+            cr.execute('SELECT 1')
+            return
+        except Exception:  # noqa: BLE001,S110 — any failure means "not usable"
+            # The rollback below IS the handling — the probe failing is
+            # exactly the condition we are here to fix, and logging it as an
+            # exception would repeat the traceback already in the log.
+            pass
+        _logger.warning(
+            'cron.task: transaction was aborted, rolling back before '
+            'recording — everything written in this transaction is lost')
+        cr.rollback()
+        self.env.invalidate_all()
+
     def _record_failure(self, exc, duration_ms=0):
         """Record a failed run. Deactivates after `max_failures`.
 
         WARNING: called AFTER the savepoint has been rolled back — the caller
         must have run `invalidate_all()` and re-fetched the record, otherwise
         we write to a record whose transaction is gone.
+
+        SURVIVES A POISONED TRANSACTION (2026-11-11). The savepoint above is
+        not a guarantee: `cursor.savepoint()` builds a `_FlushingSavepoint`,
+        whose `__init__` calls `cr.flush()` BEFORE issuing `SAVEPOINT`. When
+        the failure is a database error (`lock timeout`, `deadlock detected`,
+        `serialization failure`), PostgreSQL has already aborted the
+        transaction, so `flush()` raises in `__enter__` — the savepoint is
+        never created and nothing is rolled back. The transaction stays in
+        `InFailedSqlTransaction`, and every statement here (starting with
+        `self.failure_count`) raises `current transaction is aborted`.
+
+        The result was not a missing error message: `_record_failure` raised
+        inside the `except` block, so the exception escaped `_cron_tick` and
+        the whole tick transaction — including the `nextcall` updates of every
+        task already run in that tick — was rolled back. One poisoned task
+        stopped the entire scheduler (measured 2026-11-11: tick 991 at
+        failure_count 471, 18 of 80 active crons stuck with a `nextcall` in
+        the past, for over an hour).
+
+        `cr.rollback()` is the only escape from `InFailedSqlTransaction` —
+        `ROLLBACK TO SAVEPOINT` cannot be used because no savepoint exists
+        (verified against the live database). The cost is that anything else
+        written in the same transaction is discarded too; the alternative is
+        a scheduler that stops.
         """
+        self._ensure_usable_transaction()
         self.ensure_one()
         previous_count = self.failure_count
         count = previous_count + 1
@@ -804,9 +859,25 @@ class CronTask(models.Model):
                 # One run path for tick, webhook and manual — see
                 # `_run_locked_task`. It acquires and releases the task lock,
                 # records the run history and writes the run log.
-                result = self._run_locked_task(
-                    task.id, owner='tick:%s' % cadence, trigger='tick',
-                    trigger_detail=cadence)
+                #
+                # BELT AND BRACES (2026-11-11). `_run_locked_task` is written
+                # not to raise, but it runs inside this loop: an exception
+                # escaping it aborts the WHOLE tick, rolling back the
+                # `nextcall` of every task already run. That is exactly what
+                # happened when `_record_failure` hit a poisoned transaction —
+                # one broken task stopped the scheduler for over an hour. A
+                # per-task guard makes the blast radius one task.
+                try:
+                    result = self._run_locked_task(
+                        task.id, owner='tick:%s' % cadence, trigger='tick',
+                        trigger_detail=cadence)
+                except Exception:  # never abort the tick
+                    _logger.exception(
+                        'cron.task %s: the run path itself raised in tick %s '
+                        '— continuing with the next task',
+                        task.technical_name, cadence)
+                    failed += 1
+                    continue
                 if result['status'] == 'locked':
                     locked += 1
                 elif result['status'] == 'error':
