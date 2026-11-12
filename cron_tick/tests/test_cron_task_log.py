@@ -14,6 +14,7 @@ from unittest import mock
 
 import psycopg2
 from odoo import fields
+from odoo.modules.registry import Registry
 from odoo.tests.common import TransactionCase
 
 
@@ -510,3 +511,89 @@ class TestPoisonedTaskInTick(CronTaskTestBase):
                 side_effect=psycopg2.InterfaceError('connection already closed')):
             # Must not raise.
             self.task_fail._record_failure(Exception('simulated'), 0)
+
+
+class TestSavepointCleanup(CronTaskTestBase):
+    """The engine must clean up its own savepoint without deciding the run.
+
+    Production 2026-11-12: `ai_okf_index_dirty` hit `canceling statement due
+    to lock timeout` inside `_run()`. PostgreSQL aborted the transaction, so
+    `_FlushingSavepoint.__init__`'s `cr.flush()` (or the cleanup's
+    `ROLLBACK TO`/`RELEASE`) raised `InvalidSavepointSpecification` — and that
+    exception replaced the task's own error on the way out. The tick died and
+    69 tasks sat stuck for five days.
+
+    Closing the savepoint is CLEANUP. It must never decide the outcome, and
+    it must never replace the task's real error.
+    """
+
+    def _make_task(self, name, method, sequence=10, cadence='week'):
+        return self.Task.create({
+            'name': name,
+            'technical_name': name.replace(' ', '_').lower(),
+            'model_name': 'cron.tick.poison.probe',
+            'method_name': method,
+            'cadence': cadence,
+            'sequence': sequence,
+            'module': 'cron_tick',
+        })
+
+    def test_run_survives_unclosable_savepoint(self):
+        """A savepoint that cannot be closed must not raise out of the run path."""
+        task = self._make_task('Unclosable savepoint', 'poison_then_raise')
+        # Must not raise. Before the fix this raised InvalidSavepointSpecification.
+        result = task._execute(owner='test', trigger='manual')
+        self.assertEqual(result['status'], 'error')
+
+    def test_original_error_survives_failed_cleanup(self):
+        """The reported error is the task's, not the cleanup's."""
+        task = self._make_task('Error preserved', 'poison_then_raise')
+        result = task._execute(owner='test', trigger='manual')
+        self.assertIn('division by zero', result['error'])
+        self.assertNotIn('savepoint', result['error'].lower())
+        self.assertIn('division by zero', task.last_error or '')
+
+    def test_failure_is_recorded_despite_failed_cleanup(self):
+        """The counter still advances — that is what deactivation depends on."""
+        task = self._make_task('Counter advances', 'poison_then_raise')
+        before = task.failure_count
+        task._execute(owner='test', trigger='manual')
+        self.assertEqual(task.failure_count, before + 1)
+
+    def test_close_savepoint_safely_reports_dead_savepoint(self):
+        """A savepoint that does not exist is reported, not raised.
+
+        Runs on a SEPARATE cursor: the test framework forbids `cr.rollback()`
+        on the test's own cursor (it would break the outer test transaction),
+        and recovering from an aborted transaction requires exactly that.
+        """
+        with Registry(self.env.cr.dbname).cursor() as cr:
+            sp = cr.savepoint()
+            sp.__enter__()
+            # Kill it the way a database error does.
+            with self.assertRaises(psycopg2.Error):
+                cr.execute('SELECT 1/0')
+            cr.rollback()
+            # Must not raise; must report that the savepoint is gone.
+            self.assertFalse(
+                self.task_ok.with_env(self.env(cr=cr))
+                ._close_savepoint_safely(sp))
+
+    def test_close_savepoint_safely_handles_none(self):
+        """No savepoint at all is a valid state, not an error."""
+        self.assertTrue(self.task_ok._close_savepoint_safely(None))
+
+    def test_tick_continues_after_unclosable_savepoint(self):
+        """The blast radius stays one task."""
+        poison = self._make_task(
+            'Poison chain', 'poison_then_raise', 1, cadence='min')
+        after = self._make_task(
+            'Runs afterwards', 'succeed', 2, cadence='min')
+        self.task_fail.write({'cadence': 'month'})
+        self.task_ok.write({'cadence': 'month'})
+
+        result = self.Task._cron_tick('min')
+
+        self.assertEqual(result['failed'], 1)
+        self.assertTrue(after.last_run, 'the following task never ran')
+        self.assertEqual(poison.failure_count, 1)

@@ -29,6 +29,8 @@ THE ENGINE OWNS THE RUN HISTORY
 import hashlib
 import logging
 import time
+
+import psycopg2.errors
 from datetime import timedelta
 
 from odoo import _, SUPERUSER_ID, api, fields, models
@@ -510,6 +512,60 @@ class CronTask(models.Model):
             'duration_ms': result['duration_ms'],
         }
 
+    def _close_savepoint_safely(self, sp):
+        """Close a savepoint without raising. Returns True when it is gone.
+
+        The `with cr.savepoint()` context manager cannot be trusted to clean
+        up: `_FlushingSavepoint._close()` issues `ROLLBACK TO SAVEPOINT` and
+        `RELEASE SAVEPOINT` bare. When the task's body has already killed the
+        savepoint — a database error aborts the transaction, and
+        `__init__`'s `cr.flush()` may never have issued `SAVEPOINT` at all —
+        those statements raise `InvalidSavepointSpecification`, and that
+        exception REPLACES the task's own error on its way out.
+
+        Measured in production 2026-11-12: `ai_okf_index_dirty` hit
+        `canceling statement due to lock timeout` inside `_run()`; the
+        savepoint could never be established, `_close` raised, and every one
+        of 69 tasks stayed stuck for five days.
+
+        Closing is cleanup, not a result — it must never decide the outcome.
+        A dead savepoint is an expected state here, not an error.
+        """
+        if sp is None or getattr(sp, 'closed', True):
+            return True
+        try:
+            sp.close(rollback=True)
+            return True
+        except psycopg2.errors.InvalidSavepointSpecification:
+            # The savepoint is gone (transaction aborted, or never created).
+            # Mark it closed so nothing tries again, and tell the caller the
+            # transaction needs recovering.
+            sp.closed = True
+            return False
+        except Exception:  # noqa: BLE001 — cleanup must never mask the run
+            _logger.debug(
+                'cron.task: savepoint cleanup failed', exc_info=True)
+            sp.closed = True
+            return False
+
+    def _abandon_transaction(self):
+        """Discard the transaction after a failed cleanup. Never raises.
+
+        When the savepoint could not be closed the connection is in
+        `InFailedSqlTransaction` (or worse). `cr.rollback()` is the only way
+        back. The cost is that everything written in this transaction is
+        discarded — which is correct here: the task failed, and the
+        alternative is a scheduler that stops.
+        """
+        try:
+            self.env.cr.rollback()
+            self.env.invalidate_all()
+        except Exception:  # noqa: BLE001 — a dead connection cannot roll back
+            _logger.error(
+                'cron.task: could not roll back after a failed savepoint '
+                'cleanup — the connection may be gone. The failure record '
+                'is lost; the scheduler continues.')
+
     def _run_locked_task(self, task_id, owner, trigger, trigger_detail=None,
                          user_id=None):
         """The ONE run path: lock → savepoint → run → record → log.
@@ -540,24 +596,40 @@ class CronTask(models.Model):
             return {'status': 'locked', 'duration_ms': 0, 'error': None}
         started = time.monotonic()
         try:
+            # The savepoint is opened and closed EXPLICITLY, not through
+            # `with`. The context manager's `__exit__` cleans up bare, so a
+            # task that aborts the transaction makes the cleanup raise — and
+            # that exception replaces the task's own error on the way out.
+            # See `_close_savepoint_safely`.
+            sp = None
+            run_error = None
             try:
-                with self.env.cr.savepoint():
-                    task._run()
+                sp = self.env.cr.savepoint()
+                sp.__enter__()
+                task._run()
             except Exception as exc:  # noqa: BLE001 — the engine catches all
+                run_error = exc
+            finally:
+                closed_ok = self._close_savepoint_safely(sp)
+                if not closed_ok:
+                    self._abandon_transaction()
+
+            if run_error is not None:
                 duration_ms = int((time.monotonic() - started) * 1000)
                 self.env.invalidate_all()
                 failed = self.browse(task_id)
-                failed._record_failure(exc, duration_ms)
+                failed._record_failure(run_error, duration_ms)
                 failed._log_run_record(
                     'error', trigger, trigger_detail,
-                    duration_ms=duration_ms, text=str(exc), user_id=user_id)
+                    duration_ms=duration_ms, text=str(run_error),
+                    user_id=user_id)
                 _logger.exception(
                     'cron.task %s failed (%s ms)',
                     failed.technical_name, duration_ms)
                 return {
                     'status': 'error',
                     'duration_ms': duration_ms,
-                    'error': str(exc),
+                    'error': str(run_error),
                 }
             duration_ms = int((time.monotonic() - started) * 1000)
             self.env.invalidate_all()

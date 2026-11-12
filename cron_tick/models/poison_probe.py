@@ -34,3 +34,21 @@ class CronTickPoisonProbe(models.AbstractModel):
     def succeed(self):
         """A no-op that always succeeds — the control task in a tick."""
         return True
+
+    def poison_and_release_savepoint(self):
+        """Abort the transaction AND leave the engine's savepoint unusable.
+
+        This is the shape that broke production on 2026-11-12: the task hits
+        a database error, PostgreSQL aborts the transaction, and the
+        savepoint the engine opened can no longer be closed. Before
+        `_close_savepoint_safely`, the cleanup raised
+        `InvalidSavepointSpecification` and that exception replaced the
+        task's own error — the tick died and every following task stayed
+        stuck.
+
+        `SELECT 1/0` aborts the transaction; the explicit `ROLLBACK TO` in
+        the caller's cleanup is what then fails. No table locks, no external
+        state — safe to run anywhere.
+        """
+        self.env.cr.execute('SELECT 1/0')
+        return True
