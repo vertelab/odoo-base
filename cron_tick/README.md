@@ -235,6 +235,46 @@ WARNING: `invalidate_all()` + `browse()` is **mandatory**. After a rollback
 the ORM cache points at data that does not exist in the database — writing to
 that record gives `could not serialize access due to concurrent update`.
 
+### The savepoint is not a guarantee (2026-11-11)
+
+`cursor.savepoint()` returns a `_FlushingSavepoint`, whose `__init__` calls
+`cr.flush()` **before** issuing `SAVEPOINT`:
+
+```python
+def __init__(self, cr):
+    cr.flush()            # raises if the transaction is already aborted
+    super().__init__(cr)  # SAVEPOINT is never reached
+```
+
+When the task fails with a **database error** (`lock timeout`, `deadlock
+detected`, `serialization failure`), PostgreSQL has already aborted the
+transaction. `flush()` raises in `__enter__`, the savepoint is never created,
+and there is nothing to roll back to. Four cases, and the fourth is the one
+that occurs in production:
+
+| Case | Body does | Savepoint exists? | Escape |
+|---|---|---|---|
+| A | raises a Python exception | yes | `ROLLBACK TO` |
+| B | calls `cr.rollback()` | no | `cr.rollback()` |
+| C | releases the savepoint | no | `cr.rollback()` |
+| **D** | **DB error: tx already aborted** | **never created** | **`cr.rollback()`** |
+
+`_ensure_usable_transaction()` handles all four: it probes with `SELECT 1`
+and, if the transaction cannot answer, calls `cr.rollback()` +
+`invalidate_all()` **before any ORM access** — `ROLLBACK TO SAVEPOINT` cannot
+be used, because no savepoint exists. `_record_failure` calls it first, ahead
+of `ensure_one()` and `failure_count`.
+
+**The cost is real and deliberate:** `cr.rollback()` discards everything in
+the transaction, including the `nextcall` of tasks already run in the same
+tick. They run again on the next tick. The alternative — measured 2026-11-11
+— is a scheduler that stops: tick 991 reached `failure_count` 471 and 18 of
+80 active crons sat with a `nextcall` in the past for over an hour.
+
+`_cron_tick` also guards each task individually, so an exception that still
+escapes the run path has a blast radius of one task instead of the whole
+tick.
+
 After `max_failures` consecutive failures the task is deactivated
 automatically.
 
@@ -330,4 +370,5 @@ stack — `odoo-project` can be installed without `odoo-ai`.
 | `The method "X" does not exist` | Wrong method name, or the module was upgraded |
 | The task appears to hang | `locked_by` is set — a worker is running. Check `locked_at` |
 | `could not serialize access` | Write after rollback without `invalidate_all()` |
+| `InvalidSavepointSpecification` / `InFailedSqlTransaction` | The task hit a DB error; `_FlushingSavepoint.__init__` raised before `SAVEPOINT`, so no savepoint exists. `_ensure_usable_transaction()` recovers with `cr.rollback()` |
 | `search` on `is_overdue` returns 0 | Wrong prefix domain — see `_search_is_overdue` |

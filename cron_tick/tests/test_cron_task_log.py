@@ -59,15 +59,32 @@ class CronTaskTestBase(TransactionCase):
         field changes — that is the `active`/`cadence` tracking, not a
         message we wrote. See design D6.
 
-        The creation message (also a note) is excluded by its body, and tests
-        run in the admin's language, so assertions never depend on the
-        English source strings — they assert on the error text instead.
+        The creation message (also a note) is excluded by WHEN it was
+        posted, not by its text. The old filter compared against the English
+        source string `'Scheduled Task created'`, which silently stopped
+        working on a database with Swedish translations active — the body
+        reads "Schemalagd uppgift skapades" and every assertion got one note
+        too many. Measured 2026-11-11: four chatter tests failed on a Swedish
+        test database while passing on an English one.
+
+        The creation message is the FIRST one on the record — `mail.thread`
+        posts it from `create()`, so it always has the lowest id and nothing
+        we write can precede it. Excluding the lowest id is deterministic and
+        language-independent, which is what the original docstring promised
+        but the code did not do (it compared the English source string, and
+        got one note too many on a Swedish database).
+
+        Timestamps cannot be used here: the whole test runs within the same
+        second, so the creation note and our note share `date`.
         """
-        return task.message_ids.filtered(
+        notes = task.message_ids.filtered(
             lambda m: m.message_type == 'notification'
             and m.subtype_id.internal
-            and (m.body or '').strip()
-            and 'Scheduled Task created' not in (m.body or ''))
+            and (m.body or '').strip())
+        if not notes:
+            return notes
+        first = notes.sorted('id')[0]
+        return notes - first
 
 
 class TestRunLog(CronTaskTestBase):
@@ -371,3 +388,125 @@ class TestFailureRecordingInPoisonedTransaction(CronTaskTestBase):
         self._poison()
         self.task_fail._record_failure(Exception('simulated'), 0)
         self.assertFalse(self.task_fail.active)
+
+    def test_original_error_is_preserved(self):
+        """`last_error` reports the task's error, not the recovery's.
+
+        The recovery logs its own warning, but the reason the task failed must
+        survive — otherwise an operator sees "transaction aborted" and never
+        learns what actually broke.
+        """
+        self._poison()
+        self.task_fail._record_failure(ValueError('the real reason'), 0)
+        self.assertIn('the real reason', self.task_fail.last_error or '')
+
+
+class TestPoisonedTaskInTick(CronTaskTestBase):
+    """The blast radius of a poisoned task must be exactly one task.
+
+    Production 2026-11-11: when `_record_failure` hit an aborted transaction
+    the exception escaped `_cron_tick` and rolled back the whole tick —
+    including the `nextcall` of every task already run. One broken task
+    stopped the scheduler for over an hour (18 of 80 crons stuck).
+
+    These tests run the real `_cron_tick` with a task that poisons the
+    transaction from inside its own body, which is the production trigger.
+    """
+
+    def _make_task(self, name, method, sequence=10):
+        return self.Task.create({
+            'name': name,
+            'technical_name': name.replace(' ', '_').lower(),
+            'model_name': 'cron.tick.poison.probe',
+            'method_name': method,
+            'cadence': 'min',
+            'sequence': sequence,
+            'module': 'cron_tick',
+        })
+
+    def _run_min_tick(self):
+        """Run the `min` tick with ONLY this test's tasks due.
+
+        `CronTaskTestBase` already created `task_fail` (a method that does not
+        exist) on the `min` cadence. It would fail in the same tick and make
+        the counters meaningless, so it is parked on another cadence for the
+        duration of the test.
+        """
+        self.task_fail.write({'cadence': 'week'})
+        self.task_ok.write({'cadence': 'week'})
+        return self.Task._cron_tick('min')
+
+    def test_tick_continues_after_poisoned_task(self):
+        """A poisoned task must not prevent the next task from running."""
+        poison = self._make_task('Poison first', 'poison_then_raise', 1)
+        after = self._make_task('Runs after', 'succeed', 2)
+
+        result = self._run_min_tick()
+
+        # The poisoned task is reported as failed...
+        self.assertEqual(result['failed'], 1)
+        # ...and the task after it still ran.
+        self.assertEqual(
+            after.failure_count, 0,
+            'the task after a poisoned one must not be marked failed')
+        self.assertTrue(after.last_run, 'the following task never ran')
+        self.assertEqual(
+            poison.failure_count, 1,
+            'the poisoned task must be recorded as failed')
+
+    def test_run_log_written_after_poisoned_task(self):
+        """The run log must get an `error` row even after a poisoned run.
+
+        The log is the only place an operator can see that the task failed —
+        `last_error` shows just the latest. If the poison swallowed the log
+        write there would be no trace at all.
+        """
+        poison = self._make_task('Poison logged', 'poison_then_raise', 1)
+
+        self._run_min_tick()
+
+        logs = self.logs_of(poison)
+        self.assertEqual(len(logs), 1, 'no run log was written')
+        self.assertEqual(logs[0].status, 'error')
+        # The text is the PostgreSQL error the probe raises (`SELECT 1/0`),
+        # not the task's name — assert on that, not on a guessed string.
+        self.assertIn('division by zero', (logs[0].text or '').lower())
+
+    def test_following_task_keeps_its_run_record(self):
+        """The task before a poisoned one keeps its own run record.
+
+        This is the regression that mattered in production: `cr.rollback()`
+        discards everything in the transaction, so the recovery has to happen
+        *after* the earlier tasks have been accounted for. If the rollback
+        runs before they are recorded, their `last_run` disappears and they
+        look like they never ran.
+        """
+        before = self._make_task('Runs before', 'succeed', 1)
+        self._make_task('Poison second', 'poison_then_raise', 2)
+
+        self._run_min_tick()
+
+        self.assertTrue(
+            before.last_run,
+            'the task that ran before the poisoned one lost its run record — '
+            'the recovery rolled back too much')
+        self.assertEqual(before.failure_count, 0)
+
+    def test_record_failure_survives_dead_connection(self):
+        """A closed connection must not raise either.
+
+        Measured 2026-11-11: `ai_cost_aggregate` was killed by
+        `psycopg2.DatabaseError: out of memory for query result`, and the
+        connection was already closed when `_record_failure` ran. The
+        rollback then raised `InterfaceError: connection already closed`,
+        which escaped into `_cron_tick` and stopped the tick — the same
+        cascade the fix exists to prevent, through a second door.
+
+        Nothing can be recorded on a dead connection; the contract is that
+        the scheduler keeps running.
+        """
+        with mock.patch.object(
+                type(self.env.cr), 'rollback',
+                side_effect=psycopg2.InterfaceError('connection already closed')):
+            # Must not raise.
+            self.task_fail._record_failure(Exception('simulated'), 0)

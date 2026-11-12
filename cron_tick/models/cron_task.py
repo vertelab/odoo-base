@@ -708,15 +708,28 @@ class CronTask(models.Model):
             cr.execute('SELECT 1')
             return
         except Exception:  # noqa: BLE001,S110 — any failure means "not usable"
-            # The rollback below IS the handling — the probe failing is
-            # exactly the condition we are here to fix, and logging it as an
-            # exception would repeat the traceback already in the log.
+            # The handling below IS the response — the probe failing is
+            # exactly the condition we are here to fix.
             pass
         _logger.warning(
             'cron.task: transaction was aborted, rolling back before '
             'recording — everything written in this transaction is lost')
-        cr.rollback()
-        self.env.invalidate_all()
+        try:
+            cr.rollback()
+            self.env.invalidate_all()
+        except Exception:  # noqa: BLE001
+            # The CONNECTION can be gone, not just the transaction:
+            # `psycopg2.InterfaceError: connection already closed` (measured
+            # 2026-11-11 on the `ai_cost_aggregate` out-of-memory kill).
+            # Rolling back a dead connection cannot work, and raising here
+            # would reintroduce the very cascade this method exists to stop —
+            # the caller (`_record_failure`) must still be able to try, and
+            # `_cron_tick` must still be able to move on to the next task.
+            # The record is lost; that is the honest outcome for a dead
+            # connection, and it is logged rather than silently swallowed.
+            _logger.error(
+                'cron.task: could not roll back — the connection is gone. '
+                'The failure record is lost; the scheduler continues.')
 
     def _record_failure(self, exc, duration_ms=0):
         """Record a failed run. Deactivates after `max_failures`.
@@ -751,7 +764,18 @@ class CronTask(models.Model):
         """
         self._ensure_usable_transaction()
         self.ensure_one()
-        previous_count = self.failure_count
+        # The connection can be dead, not just the transaction (see
+        # `_ensure_usable_transaction`). Reading `failure_count` or writing
+        # then raises `InterfaceError`, and that must not escape to
+        # `_cron_tick` — a lost failure record is bad, a stopped scheduler is
+        # worse. The counter simply does not advance in that case.
+        try:
+            previous_count = self.failure_count
+        except Exception:  # noqa: BLE001 — dead connection, nothing to record
+            _logger.error(
+                'cron.task %s: could not read failure_count — the failure '
+                'record is lost', self.technical_name)
+            return
         count = previous_count + 1
         deactivated = count >= self.max_failures
         vals = {
@@ -767,7 +791,14 @@ class CronTask(models.Model):
             _logger.error(
                 'cron.task %s deactivated after %s consecutive failures',
                 self.technical_name, count)
-        self.write(vals)
+        try:
+            self.write(vals)
+        except Exception:  # noqa: BLE001 — dead connection, nothing to record
+            _logger.error(
+                'cron.task %s: could not write the failure record — the '
+                'failure is lost; the scheduler continues',
+                self.technical_name)
+            return
 
         # Chatter: only the events a human needs to see. Repeating failures in
         # the same streak produce a run log record but no new message — see
@@ -781,7 +812,7 @@ class CronTask(models.Model):
             elif previous_count == 0:
                 self.message_post(body=_(
                     'First failure in a new streak: %s', str(exc)[:500]))
-        except Exception:  # noqa: BLE001 — chatter must not break the run
+        except Exception:  # chatter must not break the run
             _logger.exception(
                 'cron.task %s: could not post the failure to chatter',
                 self.technical_name)
