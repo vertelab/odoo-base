@@ -15,3 +15,20 @@ inotify
 odoorpc
 fake-useragent
 radicale
+
+# ── Saknade beroenden — inventering 2026-11-13 ──────────────────────────────
+# Se /srv/salt/odoo/REQUIREMENTS-AUDIT-2026-11-13.md.
+#
+# knowledge_joplin (importeras på modulnivå i joplin_note.py / joplin_api.py)
+markdown
+diff-match-patch
+python-magic
+
+# base_serp — matplotlib.use('Agg') + pyplot på modulnivå
+matplotlib
+
+# base_booking_website — pandas på modulnivå
+pandas
+
+# serp_serpapi — manifest deklarerar google-search-results
+google-search-results
