@@ -1,6 +1,6 @@
 {
     'name': 'Base: Attachment Exif',
-    'version': '18.0.1.0.0',
+    'version': '1.0.0',
     'category': 'Technical',
     'summary': 'Extract and display EXIF metadata from image attachments.',
     'description': '''

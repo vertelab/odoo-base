@@ -23,7 +23,7 @@
 #
 {
     'name': 'Base: Security Classification',
-    'version': '18.0.1.0.0',
+    'version': '1.0.0',
     'summary': """Security Classification.""",
     'category': '',
     'description': '''

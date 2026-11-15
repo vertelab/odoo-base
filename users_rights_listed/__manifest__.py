@@ -21,7 +21,7 @@
 
 {
     'name': 'Base: Users Rights Listed',
-    'version': '18.0.0.0.1',
+    'version': '0.0.1',
     # Version ledger: 14.0 = Odoo version. 1 = Major. Non regressionable code. 2 = Minor. New features that are regressionable. 3 = Bug fixes
     'summary': 'Adds a UserGroup field to the res_users tree-view in debug-mode.',
     'category': 'Technical',

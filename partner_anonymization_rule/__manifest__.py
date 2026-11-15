@@ -3,7 +3,7 @@
 
 {
     "name": "Base: Partner Anonymization Rule",
-    "version": "18.0.1.0.0",
+    "version": "1.0.0",
     "category": "Data Protection",
     "summary": "Partner Anonymization Rule for GDPR compliance",
     "author": "Vertel Sverige AB",

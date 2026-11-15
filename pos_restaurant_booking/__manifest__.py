@@ -2,7 +2,7 @@
 {
     'name': 'Base: POS Restaurant Booking',
 'author': 'Vertel Sverige AB',
-    'version': '18.0.1.0.0',
+    'version': '1.0.0',
     'category': 'Sales/Point of Sale',
     'sequence': 6,
     'summary': 'This module lets you manage online reservations for restaurant tables.',
