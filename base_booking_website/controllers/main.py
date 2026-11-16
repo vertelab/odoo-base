@@ -16,7 +16,7 @@ from werkzeug.urls import url_encode
 
 from odoo import Command, exceptions, http, fields, _
 from odoo.http import request, route
-from odoo.osv import expression
+from odoo.fields import Domain
 from odoo.tools import DEFAULT_SERVER_DATETIME_FORMAT as dtf, email_normalize
 from odoo.tools.mail import is_html_empty
 from odoo.tools.misc import babel_locale_parse, get_lang
@@ -109,21 +109,21 @@ class BookingControllerExtended(BookingController):
         domain = list(additional_domain) if additional_domain else []
         if filter_booking_type_ids:
             filter_booking_type_ids = unquote_plus(filter_booking_type_ids)
-            domain = expression.AND([domain, [('id', 'in', json.loads(filter_booking_type_ids))]])
+            domain = Domain.AND([Domain(domain), Domain([('id', 'in', json.loads(filter_booking_type_ids))])])
 
         if not invite_token:
             country = cls._get_customer_country()
             if country:
                 country_domain = ['|', ('country_ids', '=', False), ('country_ids', 'in', [country.id])]
-                domain = expression.AND([domain, country_domain])
+                domain = Domain.AND([Domain(domain), Domain(country_domain)])
 
         # Add domain related to the search bar
         if search:
-            domain = expression.AND([domain, [('name', 'ilike', search)]])
+            domain = Domain.AND([Domain(domain), Domain([('name', 'ilike', search)])])
 
         # Because of sudo search, we need to search only published ones if there is no invite_token
         if request.env.user.share and not invite_token:
-            domain = expression.AND([domain, [('is_published', '=', True)]])
+            domain = Domain.AND([Domain(domain), Domain([('is_published', '=', True)])])
 
         return domain
 
@@ -860,7 +860,7 @@ class BookingControllerExtended(BookingController):
         else:
             domain = [('access_token', 'in', calendar_event_access_tokens)]
         upcoming_bookings = request.env['calendar.event'].sudo().search_read(
-            expression.AND([common_domain, domain]),
+            Domain.AND([Domain(common_domain), Domain(domain)]),
             fields=['access_token', 'booking_booker_id', 'booking_type_id', 'start'],
             order="start",
             limit=20,

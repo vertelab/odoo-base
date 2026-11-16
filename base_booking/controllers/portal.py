@@ -6,7 +6,7 @@ from operator import itemgetter
 
 from odoo import http, _
 from odoo.http import request
-from odoo.osv.expression import AND, OR
+from odoo.fields import Domain
 from odoo.tools import groupby as groupbyelem
 
 from odoo.addons.portal.controllers import portal
@@ -39,7 +39,7 @@ class AppointmentPortal(portal.CustomerPortal):
             search_domains.append([('user_id', 'ilike', search)])
         if search_in in ('all', 'description'):
             search_domains.append([('description', 'ilike', search)])
-        return OR(search_domains) if search_domains else []
+        return Domain.OR(search_domains) if search_domains else []
 
     def _booking_get_groupby_mapping(self):
         return {
@@ -90,10 +90,10 @@ class AppointmentPortal(portal.CustomerPortal):
 
         if not filterby:
             filterby = 'all'
-        domain = AND([domain, searchbar_filters[filterby]['domain']])
+        domain = Domain.AND([Domain(domain), Domain(searchbar_filters[filterby]['domain'])])
 
         if search and search_in and (search_domain := self._get_booking_search_domain(search_in, search)):
-            domain = AND([domain, search_domain])
+            domain = Domain.AND([Domain(domain), Domain(search_domain)])
 
         booking_count = Event.search_count(domain)
         pager = portal_pager(

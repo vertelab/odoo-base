@@ -13,7 +13,7 @@ from werkzeug.urls import url_encode, url_join
 
 from odoo import api, fields, models, _, Command
 from odoo.exceptions import ValidationError
-from odoo.osv import expression
+from odoo.fields import Domain
 from odoo.tools import float_compare, frozendict
 from odoo.tools.misc import babel_locale_parse, get_lang
 from odoo.addons.base.models.res_partner import _tz_get
@@ -409,7 +409,7 @@ class BookingType(models.Model):
             action = self.env["ir.actions.actions"]._for_xml_id("base_booking.calendar_event_action_view_bookings_resources")
         domain = [('start', '>=', datetime.today())]
         if calendar_event_domain:
-            domain = expression.AND([domain, calendar_event_domain])
+            domain = Domain.AND([Domain(domain), Domain(calendar_event_domain)])
         bookings = self.meeting_ids.filtered_domain(domain)
         nbr_bookings_week_later = bookings.filtered_domain([
             ('start', '>=', datetime.today() + timedelta(weeks=1))

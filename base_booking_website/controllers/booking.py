@@ -6,7 +6,7 @@ from odoo.http import request
 
 from odoo.addons.base.models.ir_qweb import keep_query
 from odoo.addons.base_booking.controllers.booking import BookingController
-from odoo.osv import expression
+from odoo.fields import Domain
 
 
 class WebsiteBooking(BookingController):
@@ -183,5 +183,5 @@ class WebsiteBooking(BookingController):
     @classmethod
     def _bookings_base_domain(cls, filter_booking_type_ids, search=False, invite_token=False, additional_domain=None):
         domain = super()._bookings_base_domain(filter_booking_type_ids, search, invite_token, additional_domain)
-        domain = expression.AND([domain, ['|', ('website_id', '=', request.website.id), ('website_id', '=', False)]])
+        domain = Domain.AND([Domain(domain), Domain(['|', ('website_id', '=', request.website.id), ('website_id', '=', False)])])
         return domain
