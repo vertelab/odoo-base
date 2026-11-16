@@ -23,7 +23,7 @@ class PortalWizardUser(models.TransientModel):
 
         An invitation email will be sent to the partner.
         """
-        default_portal_role_id = self.env['ir.config_parameter'].sudo().get_str('portal_role_id')
+        default_portal_role_id = self.env['ir.config_parameter'].sudo().get_param('portal_role_id')
 
 
         self.ensure_one()
@@ -64,7 +64,7 @@ class PortalWizardUser(models.TransientModel):
         if error_msg:
             raise UserError("\n\n".join(error_msg))
 
-        default_portal_role_id = self.env['ir.config_parameter'].sudo().get_str('portal_role_id')
+        default_portal_role_id = self.env['ir.config_parameter'].sudo().get_param('portal_role_id')
 
         for wizard_user in self.sudo().with_context(active_test=False):
 
