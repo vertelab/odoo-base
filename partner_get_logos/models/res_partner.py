@@ -1,312 +1,241 @@
-from odoo import fields, models, _, api
-import requests
-from bs4 import BeautifulSoup
-import re
-import time
-from urllib.parse import urljoin
-import base64  # ← FIX: Saknade import
+# -*- coding: utf-8 -*-
+# Copyright (C) 2026 Vertel Sverige AB (<https://vertel.se>).
+# License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl).
+
+"""Logo as an enrichment provider.
+
+Two things were wrong with this module before:
+
+1. ``fetch_logo()`` was never called. No button, no cron, no server action —
+   the method existed and nothing invoked it, so no logo was ever fetched by
+   the module that exists to fetch logos.
+2. It wrote ``image_1920`` directly, which meant it could never take part in a
+   multi-provider run: whichever module ran last won, and there was no way to
+   say "prefer this provider's logo".
+
+It is now a provider like the others: it returns ``media.logo`` in the
+canonical format and the base module decides whether to write it.
+"""
+
+import base64
 import logging
+
+from odoo import api, models
+
+from odoo.addons.partner_enrich_base.models.enrich_format import empty
+
 _logger = logging.getLogger(__name__)
+
+#: The key this provider registers under in ``partner_enrich.provider_order``.
+PROVIDER_KEY = 'logos'
+
+#: A logo smaller than this is a tracking pixel or a spacer, not a logo.
+MIN_LOGO_BYTES = 512
+
+#: Never download more than this. A "logo" that is 40 MB is a photo.
+MAX_LOGO_BYTES = 5 * 1024 * 1024
+
 
 class ResPartner(models.Model):
     _inherit = 'res.partner'
-    
-    
-    # ~ def find_website_allabolag(self, company_name):
-        # ~ """ALLABOLAG.SE - korrekt sök-URL för svenska bolag"""
-        # ~ if not company_name:
-            # ~ _logger.warning("NO COMPANY NAME")
-            # ~ return None
-        
-        # ~ _logger.warning("ALLABOLAG: Searching %s", company_name)
-        
-        # ~ # RIKTIG Allabolag sök-URL (som du visade)
-        # ~ search_query = company_name.lower().replace(' ', '%20')
-        # ~ search_url = f"https://www.allabolag.se/bransch-s%C3%B6k?q={search_query}"
-        # ~ _logger.warning("ALLABOLAG URL: %s", search_url)
-        
-        # ~ headers = {
-            # ~ 'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/122.0.0.0 Safari/537.36'
-        # ~ }
-        
-        # ~ try:
-            # ~ _logger.warning("ALLABOLAG REQUEST...")
-            # ~ r = requests.get(search_url, headers=headers, timeout=10)
-            # ~ _logger.warning("ALLABOLAG STATUS: %s", r.status_code)
-            # ~ _logger.warning("RESPONSE LENGTH: %s bytes", len(r.text))
-            
-            # ~ if r.status_code != 200:
-                # ~ _logger.error("ALLABOLAG ERROR: %s", r.status_code)
-                # ~ return None
-                
-            # ~ soup = BeautifulSoup(r.text, 'html.parser')
-            
-            # ~ # LOGGA ALLA LINKAR FÖR DEBUG
-            # ~ all_links = soup.find_all('a', href=True)
-            # ~ _logger.warning("ALL LINKS FOUND: %s", len(all_links))
-            
-            # ~ # Hitta företagsresultat (nya selectors)
-            # ~ company_links = soup.select('a[href*="/foretag/"], a[href*="/0"], .company-link a, .result a')
-            # ~ _logger.warning("COMPANY LINKS: %s", len(company_links))
-            
-            # ~ for i, link in enumerate(company_links[:5]):
-                # ~ href = link.get('href') or ''
-                # ~ link_text = link.get_text(strip=True)[:50]
-                # ~ _logger.warning("LINK %s: %s | Text: %s", i+1, href, link_text)
-                
-                # ~ # Extrahera domän från Allabolag eller direkt länk
-                # ~ if '/foretag/' in href:
-                    # ~ # Allabolag företagsida → domän
-                    # ~ company_slug = href.split('/foretag/')[1].split('/')[0].replace('-', '.')
-                    # ~ candidate_url = f"https://www.{company_slug}.se"
-                # ~ elif 'http' in href and not any(x in href for x in ['allabolag', 'facebook', 'linkedin']):
-                    # ~ # Direkt hemsidalänk
-                    # ~ candidate_url = href.split('?')[0].split('#')[0]
-                # ~ else:
-                    # ~ continue
-                    
-                # ~ _logger.warning("CANDIDATE: %s", candidate_url)
-                
-                # ~ if self._verify_website(candidate_url):
-                    # ~ _logger.warning("SUCCESS: %s VERIFIED", candidate_url)
-                    # ~ return candidate_url
-                # ~ else:
-                    # ~ _logger.warning("VERIFY FAILED: %s", candidate_url)
-            
-            # ~ _logger.warning("NO VALID WEBSITES FROM ALLABOLAG")
-            
-            # ~ # FALLBACK: Gissa domän från företagsnamn
-            # ~ name_clean = re.sub(r'[^a-z0-9]', '', company_name.lower())
-            # ~ fallback = f"https://www.{name_clean}.se"
-            # ~ _logger.warning("FALLBACK GUESS: %s", fallback)
-            
-            # ~ if self._verify_website(fallback):
-                # ~ return fallback
-                
-            # ~ return None
-            
-        # ~ except Exception as e:
-            # ~ _logger.error("ALLABOLAG EXCEPTION: %s", str(e))
-            # ~ import traceback
-            # ~ _logger.error("TRACEBACK: %s", traceback.format_exc())
-            # ~ return None
 
-    # ~ def _verify_website(self, url):
-        # ~ """Verifiera hemsida med FULL loggning"""
-        # ~ _logger.warning("VERIFY HEAD: %s", url)
-        # ~ try:
-            # ~ headers = {'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36'}
-            # ~ r = requests.head(url, headers=headers, timeout=7, allow_redirects=True)
-            # ~ _logger.warning("VERIFY STATUS: %s", r.status_code)
-            # ~ _logger.warning("VERIFY CONTENT-TYPE: %s", r.headers.get('content-type', 'NONE'))
-            
-            # ~ is_html = 'text/html' in r.headers.get('content-type', '').lower()
-            # ~ _logger.warning("IS HTML: %s", is_html)
-            
-            # ~ result = r.status_code == 200 and is_html
-            # ~ _logger.warning("VERIFY RESULT: %s", result)
-            # ~ return result
-        
-        # ~ except Exception as e:
-            # ~ _logger.error("VERIFY ERROR: %s", str(e))
-            # ~ return False
-    
-    # ~ def find_website_google_search(self, company_name):
-            # ~ """GOOGLE SÖK - hitta hemsida från företagsnamn"""
-            # ~ if not company_name:
-                # ~ _logger.warning("NO COMPANY NAME")
-                # ~ return None
-            
-            # ~ _logger.warning("START: %s", company_name)
-            
-            # ~ # Google search query
-            # ~ search_query = f'"{company_name}" site:.se OR site:.com "officiell" OR "huvudkontor" OR homepage'
-            # ~ _logger.warning("QUERY: %s", search_query)
-            
-            # ~ google_url = f"https://www.google.com/search?q={search_query.replace(' ', '+')}&num=5"
-            # ~ _logger.warning("GOOGLE URL: %s", google_url)
-            
-            # ~ headers = {
-                # ~ 'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/122.0.0.0 Safari/537.36'
-            # ~ }
-            
-            # ~ try:
-                # ~ _logger.warning("SENDING REQUEST...")
-                # ~ session = requests.Session()
-                # ~ session.headers.update(headers)
-                # ~ r = session.get(google_url, timeout=10)
-                # ~ _logger.warning("RESPONSE STATUS: %s", r.status_code)
-                # ~ _logger.warning("RESPONSE LENGTH: %s bytes", len(r.text))
-                
-                # ~ if r.status_code != 200:
-                    # ~ _logger.error("HTTP ERROR: %s", r.status_code)
-                    # ~ return None
-                    
-                # ~ soup = BeautifulSoup(r.text, 'html.parser')
-                # ~ _logger.warning("HTML PARSED")
-                
-                # ~ # LOGGA ALLA LINKAR
-                # ~ all_links = soup.select('div.g a[href]')
-                # ~ _logger.warning("FOUND %s Google result links", len(all_links))
-                
-                # ~ for i, result in enumerate(all_links[:5]):
-                    # ~ href = result.get('href') or ''
-                    # ~ _logger.warning("LINK %s: %s", i+1, href[:100])
-                    
-                    # ~ if href and 'http' in href:
-                        # ~ # Skippa Google/sociala medier
-                        # ~ skip_words = ['google', 'facebook', 'linkedin', 'youtube', 'twitter']
-                        # ~ if any(skip in href.lower() for skip in skip_words):
-                            # ~ _logger.warning("SKIP: social/tracking (%s)", href[:50])
-                            # ~ continue
-                        
-                        # ~ # Rensa Google params
-                        # ~ clean_url = re.sub(r'&gts=.*|&ved=.*|&usg=.*', '', href).split('&')[0]
-                        # ~ _logger.warning("CLEAN URL: %s", clean_url)
-                        
-                        # ~ # Verifiera hemsida
-                        # ~ _logger.warning("VERIFYING: %s", clean_url)
-                        # ~ if self._verify_website(clean_url):
-                            # ~ _logger.warning("SUCCESS: %s VERIFIED OK", clean_url)
-                            # ~ return clean_url
-                        # ~ else:
-                            # ~ _logger.warning("FAILED verification: %s", clean_url)
-                
-                # ~ _logger.warning("NO VALID WEBSITES FOUND")
-                # ~ return None
-                
-            # ~ except Exception as e:
-                # ~ _logger.error("EXCEPTION: %s", str(e))
-                # ~ import traceback
-                # ~ _logger.error("TRACEBACK: %s", traceback.format_exc())
-                # ~ return None
+    # ---------------------------------------------------------------------
+    # Provider contract
+    # ---------------------------------------------------------------------
+
+    @api.model
+    def _enrich_from_provider(self, provider_key, ctx):
+        """Answer the base module's provider call for ``logos``.
+
+        Logos are never part of a *search*: a dropdown suggestion has no logo
+        to show, and fetching one per keystroke would be absurd. Only the
+        detail and enrich modes do work here.
+        """
+        if provider_key != PROVIDER_KEY:
+            return super()._enrich_from_provider(provider_key, ctx)
+        mode = ctx.get('mode') or 'enrich'
+        if mode == 'search':
+            return []
+        try:
+            record = ctx.get('record')
+            website = ctx.get('website')
+            if empty(website) and record is not None and record:
+                website = record.website
+            if empty(website):
+                return {}
+            logo = self._logos_fetch(website)
+            if not logo:
+                return {}
+            return {
+                'logo': logo,
+                'payload': {'website': website},
+            }
+        except Exception:  # noqa: BLE001 - a scrape failure is not fatal
+            _logger.warning(
+                "Logo lookup failed for %r.", ctx.get('website'),
+                exc_info=True,
+            )
+            return {}
+
+    # ---------------------------------------------------------------------
+    # Fetch
+    # ---------------------------------------------------------------------
+
+    @api.model
+    def _logos_fetch(self, website):
+        """Find and download a logo, returned as base64 or ``False``."""
+        logo_url = self._logos_find_url(website)
+        if not logo_url:
+            return False
+        return self._logos_download(logo_url)
+
+    @api.model
+    def _logos_find_url(self, website):
+        """The URL of the most likely logo on a page, or ``False``.
+
+        The strategies are ordered by confidence, not by convenience: a
+        ``<link rel="icon">`` is a favicon (often 16×16), so it ranks below an
+        ``<img>`` inside a ``logo`` container. Returning the favicon first is
+        how you end up with a blurry 16-pixel square as the company logo.
+        """
+        from bs4 import BeautifulSoup
+        from urllib.parse import urljoin
+
+        import requests
+
+        url = website.rstrip('/')
+        try:
+            response = requests.get(
+                url,
+                timeout=15,
+                allow_redirects=True,
+                headers={
+                    'User-Agent': (
+                        'Mozilla/5.0 (Windows NT 10.0; Win64; x64) '
+                        'AppleWebKit/537.36 (KHTML, like Gecko) '
+                        'Chrome/122.0.0.0 Safari/537.36'
+                    ),
+                    'Accept': 'text/html,application/xhtml+xml,image/*,*/*;q=0.8',
+                    'Accept-Language': 'sv-SE,sv;q=0.9,en;q=0.8',
+                },
+            )
+            if response.status_code != 200:
+                _logger.info("Logo: HTTP %s for %s", response.status_code, url)
+                return False
+            soup = BeautifulSoup(response.text, 'html.parser')
+        except Exception:  # noqa: BLE001 - a broken site is not our problem
+            _logger.info("Logo: could not read %s", url, exc_info=True)
+            return False
+
+        def first_img(selector):
+            node = soup.select_one(selector)
+            if not node:
+                return False
+            src = node.get('src') or node.get('data-src')
+            return urljoin(url, src) if src else False
+
+        def meta_content(attr, value):
+            node = soup.find('meta', {attr: value})
+            if not node:
+                return False
+            content = node.get('content')
+            return urljoin(url, content) if content else False
+
+        strategies = (
+            lambda: first_img("img[src*='logo'], img[data-src*='logo']"),
+            lambda: first_img('.logo img, #logo img, [class*="logo"] img'),
+            lambda: first_img('header img, .header-logo img, [class*="header"] img'),
+            lambda: meta_content('property', 'og:image'),
+            lambda: meta_content('name', 'twitter:image'),
+            lambda: first_img('.brand img, [class*="brand"] img'),
+            lambda: first_img('nav img, .navbar img'),
+            # Favicons last: they are usually 16–32 px.
+            lambda: self._logos_link_href(soup, url, 'apple-touch-icon'),
+            lambda: self._logos_link_href(soup, url, 'icon'),
+        )
+        for index, strategy in enumerate(strategies, 1):
+            try:
+                candidate = strategy()
+            except Exception:  # noqa: BLE001 - one bad selector is not fatal
+                continue
+            if candidate:
+                _logger.info("Logo: strategy %s found %s", index, candidate)
+                return candidate
+        _logger.info("Logo: nothing found on %s", url)
+        return False
+
+    @api.model
+    def _logos_link_href(self, soup, base_url, rel):
+        from urllib.parse import urljoin
+
+        node = soup.find('link', {'rel': rel})
+        if not node:
+            return False
+        href = node.get('href')
+        return urljoin(base_url, href) if href else False
+
+    @api.model
+    def _logos_download(self, logo_url):
+        """Download an image and return it base64-encoded, or ``False``."""
+        import requests
+
+        try:
+            response = requests.get(logo_url, timeout=15, stream=True)
+            if response.status_code != 200:
+                _logger.info(
+                    "Logo: HTTP %s for %s", response.status_code, logo_url,
+                )
+                return False
+            content_type = response.headers.get('content-type', '')
+            if content_type and not content_type.startswith('image/'):
+                _logger.info(
+                    "Logo: %s is %r, not an image.", logo_url, content_type,
+                )
+                return False
+            content = response.content
+        except Exception:  # noqa: BLE001
+            _logger.info("Logo: download failed for %s", logo_url, exc_info=True)
+            return False
+
+        if len(content) < MIN_LOGO_BYTES:
+            _logger.info(
+                "Logo: %s is only %s bytes — treating it as a spacer.",
+                logo_url, len(content),
+            )
+            return False
+        if len(content) > MAX_LOGO_BYTES:
+            _logger.info(
+                "Logo: %s is %s bytes — too large to be a logo.",
+                logo_url, len(content),
+            )
+            return False
+        return base64.b64encode(content).decode('ascii')
+
+    # ---------------------------------------------------------------------
+    # Kept for callers outside the provider contract
+    # ---------------------------------------------------------------------
 
     def find_logo_url(self):
-        """Hitta logo URL från website med 15 strategier"""
+        """The logo URL for this record, or ``None``.
+
+        Kept as a public method because the original module exposed it and
+        other code may call it directly. It now delegates to the provider
+        implementation instead of carrying its own copy of the strategies.
+        """
+        self.ensure_one()
         if not self.website:
             return None
-            
-        url = self.website.rstrip('/')
-        company_name = self.name or ''
-        session = requests.Session()
-        
-        # Realistiska browser headers (motverkar 403)
-        session.headers.update({
-            'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/122.0.0.0 Safari/537.36',
-            'Accept': 'text/html,application/xhtml+xml,application/xml;q=0.9,image/avif,image/webp,*/*;q=0.8',
-            'Accept-Language': 'sv-SE,sv;q=0.9,en;q=0.8',
-            'Accept-Encoding': 'gzip, deflate, br',
-            'Connection': 'keep-alive',
-            'Upgrade-Insecure-Requests': '1',
-        })
-        
-        try:
-            _logger.warning("Fetching logo from %s", url)
-            r = session.get(url, timeout=15, allow_redirects=True)
-            
-            if r.status_code != 200:
-                _logger.warning("HTTP %s for %s", r.status_code, url)
-                return None
-                
-            soup = BeautifulSoup(r.text, 'html.parser')
-            
-            # 15 strategier för att hitta logo
-            strategies = [
-                # 1. CSS logo selectors
-                lambda: soup.select_one("img[src*='logo'], img[data-src*='logo'], .logo img, #logo img, [class*='logo'] img"),
-                
-                # 2. Header bilder
-                lambda: soup.select_one("header img, .header img, .header-logo img, [class*='header'] img"),
-                
-                # 3. Open Graph image
-                lambda: soup.find("meta", {"property": "og:image"}),
-                
-                # 4. Bolagsnamn i alt/src
-                lambda: next((img.get('src') or img.get('data-src') 
-                             for img in soup.find_all("img", limit=50) 
-                             if company_name.lower().replace(" ", "") in 
-                             (img.get('src','') + img.get('alt','')).lower().replace(" ", "")), None),
-                
-                # 5. Brand class
-                lambda: soup.select_one(".brand img, [class*='brand'] img"),
-                
-                # 6. Navbar bilder
-                lambda: soup.select_one("nav img, .navbar img, .nav img"),
-                
-                # 7. Favicon
-                lambda: urljoin(url, '/favicon.ico'),
-                
-                # 8. Apple-touch-icon
-                lambda: soup.find("link", {"rel": "apple-touch-icon"}),
-                
-                # 9. Vanliga logo-paths
-                lambda: next((urljoin(url, p) for p in 
-                             ['/logo.png','/logo.svg','/images/logo.png','/assets/logo.png']), None),
-                
-                # 10. Meta twitter:image
-                lambda: soup.find("meta", {"name": "twitter:image"}),
-                
-                # 11. Första rimlig header-bild
-                lambda: (soup.find("header") or soup.select_one(".header")).find("img") if soup.find("header") else None,
-                
-                # 12. Site icon
-                lambda: soup.find("link", {"rel": "icon"}),
-                
-                # 13. Största bild (width > 100px)
-                lambda: next((img.get('src') for img in soup.find_all("img", limit=30) 
-                             if img.get('width', '').isdigit() and int(img.get('width', 0)) > 100), None),
-                
-                # 14. Första bild i body
-                lambda: soup.find("body").find("img") if soup.find("body") else None,
-                
-                # 15. Fallback - första img
-                lambda: soup.find("img", {"src": True})
-            ]
-            
-            for i, strategy in enumerate(strategies, 1):
-                result = strategy()
-                if result:
-                    # Hantera olika resultatyper säkert
-                    if hasattr(result, 'get'):
-                        src = result.get('src') or result.get('data-src') or result.get('content') or result.get('href')
-                    else:
-                        src = str(result) if result else None
-                    
-                    if src and len(src) > 10:
-                        logo_url = urljoin(url, src)
-                        _logger.warning("Found logo (strategy %d): %s", i, logo_url[:100])
-                        return logo_url
-            
-            _logger.warning("No logo found for %s after 15 strategies", url)
-            return None
-            
-        except Exception as e:
-            _logger.error("Logo fetch failed for %s: %s", url, str(e))
-            return None
+        return self._logos_find_url(self.website) or None
 
-    # ANVÄND I DIN fetch_logo():
     def fetch_logo(self):
-        """Hämta hemsida (Allabolag) + logo"""
+        """Fetch and store the logo for these records.
+
+        This is the method the module always had — and which nothing ever
+        called. It now goes through the enrichment pipeline, so the field-group
+        policy applies: a logo the user uploaded by hand is not overwritten.
+        """
         for record in self:
-            # Steg 1: Allabolag-sök om ingen hemsida
-            # ~ if not record.website:
-                # ~ website = record.find_website_allabolag(record.name)
-                # ~ if website:
-                    # ~ record.website = website
-                    # ~ _logger.info("Allabolag website for %s: %s", record.name, website)
-            
-            # Steg 2: Logo om hemsida finns
-            if record.website and not record.image_1920:
-                logo_url = record.find_logo_url()
-                if logo_url:
-                    try:
-                        r = requests.get(logo_url, timeout=15, stream=True)
-                        if r.status_code == 200:
-                            image_data = base64.b64encode(r.content).decode('utf-8')
-                            record.image_1920 = image_data
-                            _logger.info("Logo saved for %s", record.name)
-                    except Exception as e:
-                        _logger.error("Logo download failed: %s", str(e))
-
-
-
+            if record.image_1920:
+                continue
+            record.partner_enrich()
+        return True

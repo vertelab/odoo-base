@@ -61,7 +61,11 @@ class ForetagssokSimilarWizard(models.TransientModel):
         self.line_ids.unlink()
         lines = []
         for company in companies:
-            org_number = Partner._foretagsapi_format_org_number(company.get('orgNumber'))
+            # Normalise through the base module: ``company_registry`` is
+            # stored as ten bare digits, and a formatted ``NNNNNN-NNNN`` here
+            # would never match it.
+            org_number, _vat = Partner._enrich_normalize_registry(
+                company.get('orgNumber'))
             # Skip the current partner
             if self.partner_id.company_registry and org_number == self.partner_id.company_registry:
                 continue

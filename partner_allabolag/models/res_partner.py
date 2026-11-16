@@ -1,21 +1,25 @@
 from odoo import models, fields, api, _
-from odoo.addons.partner_autocomplete.models.res_company import COMPANY_AC_TIMEOUT
-from datetime import date
 import logging
-from odoo.exceptions import ValidationError, UserError
 import re
 
-from allabolag import Company
-from allabolag.liquidated_companies import iter_liquidated_companies
 from allabolag.list import iter_list
 from copy import deepcopy
 from datetime import datetime
 from urllib.parse import quote
-from odoo.addons.partner_allabolag.tools.logoscrape import LogoScrape, name2url
+
+from odoo.addons.partner_enrich_base.models.enrich_format import (
+    empty,
+    pick,
+    to_float,
+    to_int,
+)
 
 
 _logger = logging.getLogger(__name__)
-COMPANY_NO_IAP=True
+COMPANY_NO_IAP = True
+
+#: The key this provider registers under in ``partner_enrich.provider_order``.
+PROVIDER_KEY = 'allabolag'
 
 
 class ResPartnerMixin(models.AbstractModel):
@@ -60,165 +64,11 @@ class ResPartnerMixin(models.AbstractModel):
         
         return item['orgnr'],item
         
-    def partner_enrich_allabolag(self, company_registry):
-        pass # TODO
-    #
-    #     partner = Company(company_registry)
-    #     _logger.warning(f'{partner.data=}')
-    #
-    #     allabolag = {
-    #         "Översikt - Omsättning" : "summary_revenue",
-    #         "Översikt - Årets resultat" : "summary_profit_ebit",
-    #         "Aktivitet och status - Verksamhet & ändamål" : "summary_purpose",
-    #         "Nycketal - Antal anställda" : "kpi_no_employees",
-    #         "Nycketal - Nettoomsättningförändring" : "summary_net_sales_change" ,
-    #         "Nycketal - Vinstmarginal" : "summary_profit_margin" ,
-    #         "Nycketal - Soliditet" : "summary_solvency" ,
-    #         "Nycketal - Kassalikviditet" : "summary_cash_flow" ,
-    #         'Nycketal - Nettoomsättning per anställd (tkr)': 'kpi_revenue_employees',
-    #         "Översikt - Besöksadress" : "street",
-    #         'Översikt - Utdelningsadress': 'street',
-    #         "Översikt - Ort" : "city",
-    #         "Översikt - Telefon" : "phone",
-    #         'Aktivitet och status - Bolaget registrerat': 'summary_registry_year',
-    #         'Aktivitet och status - Status':  'summary_state',
-    #         'Aktivitet och status - Moderbolag': 'summary_parent_company',
-    #     }
-    #
-    #
-    #     zipcode = ''
-    #     f = self.fields_get()
-    #     record = {allabolag[k]:partner.data[k] for k in allabolag.keys() if partner.data.get(k,False) }
-    #     for k in record.keys():
-    #         _logger.warning(f"{k= } {f[k]['type']=} {record[k]=}")
-    #         if k == 'city':
-    #             zipcode,record['city'] = partner.data["Översikt - Ort"].split('  ')
-    #             continue
-    #         if f[k]['type'] == 'integer':
-    #             if type(record[k]) == list:
-    #                 record[k]=int(record[k][0][1] or 0)
-    #             else:
-    #                 record[k]=int(record[k] or 0)
-    #
-    #         if f[k]['type'] in ['float', 'monetary']:
-    #             if type(record[k]) == list:
-    #                 record[k]=record[k][0][1]
-    #             else:
-    #                 record[k]=record[k]
-    #         if f[k]['type'] in ['char', 'text', 'html']:
-    #             if type(record[k]) == list:
-    #                 record[k]= ', '.join(record[k])
-    #             else:
-    #                 record[k]=record[k]
-    #
-    #     record['vat'] = self.orgnr2vat(company_registry)
-    #     record['zip'] = zipcode
-    #     if "\n" in record.get('street',''):
-    #         record['street'],record['street2'] = [s.strip() for s in record['street'].split('\n')+['.','.'] if s.strip() > ''][0:2]
-    #         if record['street'] == record['street2']:
-    #             record['street2'] = ''
-    #     _logger.warning(f"write {partner.data=}")
-    #     if partner.data.get('remarks'):
-    #         self.write(partner.data['remarks'])
-    #         partner.message_post(body=_(f'{partner.data["remarks"]["remarkCode"]=} {partner.data["remarks"]["remarkDescription"]=} {partner.data["remarks"]["remarkDate"]=}'), message_type='notification')
-    #         _logger.warning(f"write record[k]=")
-    #
-    #     return record
-                    
-
-
-        
-
-    def autocomplete_override(self, query):
-        _logger.warning(f"allabolag autocomplete_override {query=}  {self=}")
-        res={}
-        company_registry, item = self.name2orgno(query)
-        if item['hasremarks']:
-            for (key,data) in item.get('remarks',[{}])[0].items():
-                res['key'] = data
-        res['company_registry'] = company_registry
-        res['vat'] = self.orgnr2vat(res['company_registry'])
-
-        res['website'] = name2url(query)
-        if res['website']:
-            res['image_1920'] = LogoScrape(res['website'])
-        return self._format_data_company(res)
-
-    @api.model
-    def read_by_vat(self, vat):
-        _logger.warning(f"read_by_vat {vat=}")
-        # ~ return super(ResPartner, self).read_by_vat(vat)
-        return []
-
-    
-    # @api.model
-    # def enrich_company(self, company_domain, partner_gid, vat,timeout=COMPANY_AC_TIMEOUT):
-    #     _logger.warning(f"allabolag enrich_company {company_domain=} {partner_gid=} {vat=} {self=}")
-    #     company_registry, item = partner.name2orgno(query)
-    #     _logger.warning(f"allabolag {company_registry=} {item=}")
-    #     try:
-    #         if item['hasremarks']:
-    #             partner.message_post(body=_(f'{item["remarks"][0]["remarkCode"]=} {item["remarks"][0]["remarkDescription"]=} {item["remarks"][0]["remarkDate"]=}'), message_type='notification')
-    #             _logger.warning(f"write record[k]=")
-    #     except Exception as e:
-    #         _logger.warning(f"_company hasremarks {item=} error {e}")
-    #     _logger.warning(f'{company_registry=}')
-    #     return self._format_data_company(record)
-        
-        
-        res = {}
-        if COMPANY_NO_IAP == True:
-            res = super(ResPartner, self).enrich_company(company_domain,partner_gid,vat)
-        return res
-
-
 
 class ResPartner(models.Model):
     _name = 'res.partner'
-    _inherit = ["res.partner",'res.partner.allabolag.mixin']
-    
-    def partner_enrich(self):
-        pass # TODO
-    #     _logger.warning(f"allabolag partner_enrich {self=}")
-    #
-    #     for partner in self:
-    #         if not partner.website:
-    #             try:
-    #                 partner.website = name2url(partner.name)
-    #                 _logger.warning(f"{partner.website=}")
-    #             except Exception as e:
-    #                 _logger.warning(f"Google: An unexpected error occurred: {e}")
-    #                 partner.message_post(body=_(f'Google name2url: unexpected error {e} {partner.name}\nMaybe you can add website manually?'), message_type='notification')
-    #                 continue
-    #         if not partner.image_1920 and partner.website:
-    #             _logger.warning(f"allabolag partner_enrich {LogoScrape(partner.website)=}")
-    #             partner.image_1920 = LogoScrape(partner.website)
-    #         if not partner.company_registry:
-    #             company_registry, item = partner.name2orgno(partner.name)
-    #             if item['hasremarks']:
-    #                 partner.write(item['remarks'][0])
-    #                 partner.message_post(body=_(f'[{item["remarks"][0]["remarkCode"]}] {item["remarks"][0]["remarkDescription"]} {item["remarks"][0]["remarkDate"]}'), message_type='notification')
-    #             partner.company_registry = company_registry
-    #
-    #         if partner.company_registry:
-    #             record = partner.partner_enrich_allabolag(partner.company_registry)
-    #             _logger.warning(f'{record=}')
-    #             partner.write(record)
-    #             return self._format_data_company(record)
-    #     super(ResPartner,self).partner_enrich()
+    _inherit = ['res.partner', 'res.partner.allabolag.mixin']
 
-    def enrich_allabolag(self):
-        if not self.company_type == "company":
-            raise UserError(_('This function has to be on company.'))
-
-        _logger.warning('%s' % self._fields['summary_revenue'])
-        if not self.company_registry:
-            self.company_registry, items=self.name2orgno(self.name)
-
-        record = self.partner_enrich_allabolag(self.company_registry)
-        self.write(record)
-
-    @api.model
     def check_bankruptcy(self):
         until = datetime.strptime('2024-07-01','%Y-%m-%d') #TODO fetch this date from system parameter
         orgnummer=[]
@@ -255,6 +105,238 @@ class ResPartner(models.Model):
         _logger.warning(f'{orgnummer}')
         
         for partner in self.env['res.partner'].search([('company_registry', 'in', orgnummer )]):
-            partner.message_post(body=_(f'Company filed for bankrupcy'), message_type='notification')
+            partner.message_post(
+                body=_('Company filed for bankruptcy'),
+                message_type='notification',
+            )
         
         #TODO save todays date to system parameter
+
+    # ---------------------------------------------------------------------
+    # Provider contract
+    # ---------------------------------------------------------------------
+
+    @api.model
+    def _enrich_from_provider(self, provider_key, ctx):
+        """Answer the base module's provider call for ``allabolag``."""
+        if provider_key != PROVIDER_KEY:
+            return super()._enrich_from_provider(provider_key, ctx)
+        mode = ctx.get('mode') or 'enrich'
+        try:
+            if mode == 'search':
+                return self._allabolag_search(ctx)
+            if mode == 'detail':
+                return self._allabolag_detail(ctx)
+            return self._allabolag_enrich(ctx)
+        except ImportError:
+            _logger.info(
+                "The 'allabolag' Python package is not installed — the "
+                "allabolag provider is disabled.",
+            )
+            return [] if mode == 'search' else {}
+        except Exception:  # noqa: BLE001 - a scrape failure is not fatal
+            _logger.warning(
+                "Allabolag lookup failed (mode=%s).", mode, exc_info=True,
+            )
+            return [] if mode == 'search' else {}
+
+    @api.model
+    def _allabolag_search(self, ctx):
+        """One scrape, by organisation number or by name.
+
+        ``name2orgno()`` is the only search Allabolag offers us, and it costs a
+        full page fetch. It is therefore called at most once per lookup.
+        """
+        registry = ctx.get('registry')
+        if empty(registry):
+            name = ctx.get('name')
+            if empty(name):
+                return []
+            registry, _item = self.name2orgno(name)
+        if empty(registry):
+            return []
+        canonical = self._allabolag_fetch(registry)
+        return [canonical] if canonical else []
+
+    @api.model
+    def _allabolag_detail(self, ctx):
+        reference = ctx.get('reference')
+        if empty(reference):
+            return {}
+        return self._allabolag_fetch(reference) or {}
+
+    @api.model
+    def _allabolag_enrich(self, ctx):
+        registry = ctx.get('registry')
+        if empty(registry):
+            name = ctx.get('name')
+            if empty(name):
+                return {}
+            registry, _item = self.name2orgno(name)
+        if empty(registry):
+            return {}
+        return self._allabolag_fetch(registry) or {}
+
+    # ---------------------------------------------------------------------
+    # Fetch and map
+    # ---------------------------------------------------------------------
+
+    @api.model
+    def _allabolag_fetch(self, registry):
+        """Fetch one company and map it to the canonical format."""
+        from allabolag import Company
+        from allabolag.company import NoSuchCompany
+
+        digits = ''.join(ch for ch in str(registry) if ch.isdigit())
+        if len(digits) != 10:
+            _logger.info("Allabolag: %r is not an organisation number.", registry)
+            return {}
+        try:
+            company = Company('%s-%s' % (digits[:6], digits[6:]))
+            data = company.data
+        except NoSuchCompany:
+            _logger.info("Allabolag has no company %s.", digits)
+            return {}
+        if not data:
+            return {}
+        return self._allabolag_map_company(data)
+
+    @api.model
+    def _allabolag_map_company(self, data):
+        """Map ``Company.data`` onto the canonical enrichment format.
+
+        The organisation number is passed through raw; the base module
+        normalises it. Financial figures arrive in SEK from Allabolag and are
+        converted to the same unit the other providers use (whole kronor).
+        """
+        company = (data or {}).get('company') or {}
+        if not company:
+            return {}
+        address = company.get('postalAddress') or {}
+        status = company.get('status') or {}
+        contact = company.get('contactPerson') or {}
+
+        canonical = {
+            'name': pick(company, 'name'),
+            'company_registry': pick(company, 'orgnr'),
+            'legal_form': pick(company, 'legalForm', 'companyForm'),
+            'status': pick(status, 'status') or False,
+            'registration_date': self._allabolag_parse_date(
+                company.get('registrationDate')),
+            'street': pick(address, 'addressLine'),
+            'street2': pick(address, 'addressLine2'),
+            'zip': pick(address, 'zipCode'),
+            'city': pick(address, 'postPlace'),
+            # Allabolag is a Swedish register; the country is implicit.
+            'country_code': 'SE',
+            'phone': pick(company, 'phone'),
+            'mobile': pick(company, 'mobile'),
+            'email': pick(company, 'email'),
+            'website': pick(company, 'homePage'),
+            'sni_codes': self._allabolag_sni_codes(company),
+            'financials': self._allabolag_financials(company),
+            'payload': company,
+        }
+        # ``contactPerson`` is a person, not a company field. It is kept in the
+        # payload so a caller can use it; writing it into ``name`` would
+        # overwrite the company name with a human's.
+        if contact:
+            canonical['payload'] = dict(company, _contact=contact)
+        return canonical
+
+    @api.model
+    def _allabolag_parse_date(self, value):
+        from odoo import fields
+
+        if empty(value):
+            return False
+        try:
+            return fields.Date.to_date(value)
+        except (ValueError, TypeError):
+            return False
+
+    @api.model
+    def _allabolag_sni_codes(self, company):
+        codes = []
+        for key in ('sniCode', 'sniCodes', 'sni'):
+            value = company.get(key)
+            if empty(value):
+                continue
+            if isinstance(value, (list, tuple)):
+                codes.extend(str(code).strip() for code in value if not empty(code))
+            elif isinstance(value, dict):
+                codes.extend(
+                    str(code).strip() for code in value.values() if not empty(code)
+                )
+            else:
+                codes.append(str(value).strip())
+        # Deduplicate while keeping order.
+        return list(dict.fromkeys(codes))
+
+    @api.model
+    def _allabolag_financials(self, company):
+        """One canonical financials entry from the overview figures.
+
+        Allabolag's overview gives a single latest-year snapshot, not a series.
+        ``fiscal_year`` is therefore derived from the accounts year when it is
+        present, and left out otherwise — a financial row with a guessed year is
+        worse than a row without one.
+        """
+        entry = {
+            'net_sales': to_float(company.get('revenue')),
+            'operating_profit': to_float(company.get('profit')),
+            'employees': to_int(company.get('employees')),
+        }
+        year = pick(company, 'accountFiguresYear', 'accountsYear')
+        if not empty(year):
+            entry['fiscal_year'] = str(to_int(year) or year)
+        entry = {key: value for key, value in entry.items() if not empty(value)}
+        return [entry] if entry else []
+
+    # ---------------------------------------------------------------------
+    # Provider-specific fields
+    # ---------------------------------------------------------------------
+
+    def _enrich_apply_extra(self, resolved, collected):
+        """Map the ``summary_*`` / ``kpi_*`` fields Allabolag owns."""
+        vals = super()._enrich_apply_extra(resolved, collected)
+        if not any(pkey == PROVIDER_KEY for _v, pkey in resolved.values()):
+            return vals
+        canonical = dict(collected).get(PROVIDER_KEY) or {}
+        company = canonical.get('payload') or {}
+        if not company:
+            return vals
+
+        revenue = to_float(company.get('revenue'))
+        employees = to_int(company.get('employees'))
+        if not employees and revenue:
+            # Allabolag leaves employees at 0 for many small companies. A
+            # revenue-derived estimate is better than a blank, but it is
+            # recorded as an estimate, never as a reported figure.
+            employees = max(1, int(revenue // 200000))
+        purpose = pick(company, 'purpose')
+        contact = company.get('_contact') or {}
+
+        extra = {
+            'summary_revenue': revenue,
+            'summary_profit_ebit': to_float(company.get('profit')),
+            'summary_purpose': purpose,
+            'summary_state': pick(company.get('status') or {}, 'status'),
+            'summary_registry_year': self._allabolag_parse_date(
+                company.get('registrationDate')),
+            'summary_parent_company': pick(company, 'parentCompany'),
+            'kpi_no_employees': employees,
+            'kpi_revenue_employees': (
+                round(revenue / employees, 2) if employees and revenue else False
+            ),
+            'linkTo': pick(company, 'linkTo', 'url'),
+            'remarkCode': pick(company, 'remarkCode'),
+            'remarkDescription': pick(company, 'remarkDescription'),
+            'remarkDate': self._allabolag_parse_date(company.get('remarkDate')),
+            'contact_name': pick(contact, 'name'),
+            'function': pick(contact, 'role'),
+        }
+        for key, value in extra.items():
+            if not empty(value):
+                vals[key] = value
+        return vals

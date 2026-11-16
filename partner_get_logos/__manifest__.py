@@ -21,7 +21,7 @@
 
 {
     'name': 'Base: Get logos',
-    'version': '18.0.0.1.0',
+    'version': '18.0.2.0.0',
     # Version ledger: 14.0 = Odoo version. 1 = Major. Non regressionable code. 2 = Minor. New features that are regressionable. 3 = Bug fixes
     'summary': 'Get logos.',
     'category': 'Website',
@@ -44,7 +44,7 @@ Get logos
     'maintainer': 'Vertel Sverige AB',
     'repository': 'https://github.com/vertelab/odoo-base',
     'depends': [
-        'contacts',
+        'partner_enrich_base',
         # 'website_contact_management' (this module is in sks repo and i think it is a paid module)
     ],
     'data': [

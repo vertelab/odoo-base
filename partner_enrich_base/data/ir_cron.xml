@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+    <data noupdate="1">
+        <!--
+          Nightly refresh of stale enrichment data.
+
+          noupdate="1" on purpose: an operator who turns this off in the UI
+          must not have it silently turned back on by the next upgrade. A cron
+          that re-enables itself is a cron nobody can trust.
+
+          The interval is a day; what actually limits the work is
+          ``partner_enrich.refresh_days`` (default 365), read by the method.
+        -->
+        <record id="ir_cron_enrich_refresh" model="ir.cron">
+            <field name="name">Partner enrichment: refresh stale records</field>
+            <field name="model_id" ref="base.model_res_partner"/>
+            <field name="state">code</field>
+            <field name="code">model._enrich_cron()</field>
+            <field name="interval_number">1</field>
+            <field name="interval_type">days</field>
+            <field name="active" eval="False"/>
+        </record>
+    </data>
+</odoo>
