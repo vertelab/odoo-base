@@ -10,5 +10,9 @@ class Users(models.Model):
     @api.model
     def active_paying_users(self):
         group = self.env.ref('base.group_user')
+        # #if VERSION >= "19.0"
+        res_users_count = self.env["res.users"].search_count([("group_ids", "=", group.id), ("login", "!=", "admin")])
+        # #else
         res_users_count = self.env["res.users"].search_count([("groups_id", "=", group.id), ("login", "!=", "admin")])
+        # #endif
         return res_users_count
