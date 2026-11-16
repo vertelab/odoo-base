@@ -15,7 +15,12 @@ from odoo.fields import Domain
 from odoo.osv import expression
 # #endif
 from odoo.addons.base_booking.utils import invert_intervals
+# #if VERSION >= "20.0"
+from odoo.tools.intervals import Intervals
+from odoo.addons.base_booking.utils import timezone_datetime
+# #else
 from odoo.addons.resource.models.utils import Intervals, timezone_datetime
+# #endif
 from ..utils import interval_from_events, intervals_overlap
 
 _logger = logging.getLogger(__name__)
