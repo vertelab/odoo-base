@@ -21,7 +21,7 @@ Booking payment
     'license': 'AGPL-3',
     'depends': ['base_booking', 'account_payment'],
     'data': [
-        'security/ir.model.access.csv',
+        'security/ir.access.csv',
         #'views/booking_answer_input_views.xml',
         'views/booking_templates_appointments.xml',
         'views/booking_templates_payment.xml',

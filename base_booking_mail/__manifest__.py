@@ -44,7 +44,7 @@ Booking Mail
     'license': 'AGPL-3',
     'depends': ["base_booking"],
     'data': [
-        "security/ir.model.access.csv",
+        "security/ir.access.csv",
         "views/booking_mail_views.xml",
         "views/booking_type_views.xml",
         "views/booking_menu_views.xml",

@@ -75,8 +75,8 @@ class ResPartner(models.Model, ForetagsapiMappingMixin):
     @api.model
     def _foretagsapi_get_config(self):
         params = self.env['ir.config_parameter'].sudo()
-        api_key = params.get_param('partner_foretagssok.api_key', default='').strip()
-        base_url = params.get_param(
+        api_key = params.get_str('partner_foretagssok.api_key', default='').strip()
+        base_url = params.get_str(
             'partner_foretagssok.base_url',
             default=DEFAULT_BASE_URL,
         ).strip().rstrip('/')

@@ -22,7 +22,7 @@ Attachment Exif
     'repository': 'https://github.com/vertelab/odoo-base.git',
     'depends': ['base'],
     'data': [
-        'security/ir.model.access.csv',
+        'security/ir.access.csv',
         'views/ir_attachment_view.xml',
     ],
     'application': False,

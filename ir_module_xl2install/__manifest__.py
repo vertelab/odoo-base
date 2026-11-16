@@ -46,7 +46,7 @@ Module XL2Install
     'depends': ['base',],
     'data': [
         'views/ir_module_view.xml',
-        'security/ir.model.access.csv'
+        'security/ir.access.csv'
     ],
     'application': False,
     'installable': True,

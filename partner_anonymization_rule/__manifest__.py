@@ -12,7 +12,7 @@
     'repository': 'https://github.com/vertelab/odoo-base',
     "depends": ["privacy_partner_to_be_forgotten"],
     "data": [
-        "security/ir.model.access.csv",
+        "security/ir.access.csv",
         "views/anonymization_rule_view.xml",
         "data/ir_cron.xml",
     ],

@@ -26,7 +26,7 @@ class ResConfigSettings(models.TransientModel):
     def load_env_api_key(self):
         """Load API key from .env file if the system parameter is empty."""
         params = self.env['ir.config_parameter'].sudo()
-        current = params.get_param('partner_foretagssok.api_key', default='').strip()
+        current = params.get_str('partner_foretagssok.api_key', default='').strip()
         if current:
             return
 
@@ -50,7 +50,7 @@ class ResConfigSettings(models.TransientModel):
                     if key.strip() == 'FORETAGSSOK_API_KEY':
                         value = value.strip().strip('"').strip("'")
                         if value:
-                            params.set_param('partner_foretagssok.api_key', value)
+                            params.set_str('partner_foretagssok.api_key', value)
                             _logger.info('FöretagsAPI API key loaded from .env')
                         break
         except Exception as e:

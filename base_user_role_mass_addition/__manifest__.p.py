@@ -41,7 +41,11 @@
         'views/base_user_role_mass_addition_wizard.xml',
         'views/res_user.xml',
         'data/ir.actions.xml',
+        # #if VERSION >= "20.0"
+        'security/ir.access.csv'
+        # #else
         'security/ir.model.access.csv'
+        # #endif
     ],
     'installable': True,
     'application': False,

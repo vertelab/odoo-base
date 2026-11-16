@@ -75,7 +75,7 @@ class SerpProvider(models.Model):
         return domain
 
     def _get_max_position(self):
-        return int(self.env['ir.config_parameter'].sudo().get_param('base_serp.max_position', 50))
+        return int(self.env['ir.config_parameter'].sudo().get_str('base_serp.max_position', 50))
 
     def execute_search(self, keyword, domain=None, country='SE', language='sv'):
         self.ensure_one()

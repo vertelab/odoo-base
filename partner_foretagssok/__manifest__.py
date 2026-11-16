@@ -52,7 +52,7 @@ Enrich partner information from FöretagsAPI
         'mail',
     ],
     'data': [
-        'security/ir.model.access.csv',
+        'security/ir.access.csv',
         'data/ir_actions_server.xml',
         'views/res_config_settings_views.xml',
         'views/res_partner_views.xml',

@@ -6,8 +6,8 @@
         <field name="inherit_id" ref="base.view_partner_form"/>
         <field name="arch" type="xml">
             <!-- is_serp-checkbox: bara för SERP-behöriga OCH företag (company) -->
-            <field name="company_type" position="after">
-                <div class="d-inline-flex align-items-center" groups="base_serp.group_serp_user" invisible="company_type != 'company'">
+            <field name="name" position="after">
+                <div class="d-inline-flex align-items-center" groups="base_serp.group_serp_user" invisible="is_company != True">
                     <field name="is_serp"/>
                     <label for="is_serp" string="SERP" class="mb-0 ms-1"/>
                 </div>

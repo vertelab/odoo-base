@@ -25,7 +25,7 @@ class ConfigSettings(models.TransientModel):
             # #if VERSION >= "18.0"
             'view_mode': 'list,kanban,form',
             # #elif VERSION <= "17.0"
-            'view_mode': 'tree,kanban,form',
+            'view_mode': 'list,kanban,form',
             # #endif
             'target': 'current',
             'domain': [("id", 'in', res_users_ids.ids)]

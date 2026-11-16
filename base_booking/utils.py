@@ -1,7 +1,18 @@
 # -*- coding: utf-8 -*-
 # Part of Odoo. See LICENSE file for full copyright and licensing details.
 
-from odoo.addons.resource.models.utils import Intervals, timezone_datetime
+from datetime import timezone
+
+from odoo.tools.intervals import Intervals
+
+
+def timezone_datetime(dt):
+    """Normalisera datetime till naive UTC (Odoo 20 saknar resource-helpern)."""
+    if dt is None:
+        return dt
+    if dt.tzinfo is not None:
+        dt = dt.astimezone(timezone.utc).replace(tzinfo=None)
+    return dt
 
 def intervals_overlap(interval_a, interval_b):
     """Check whether an interval of time intersects another.

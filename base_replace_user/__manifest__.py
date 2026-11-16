@@ -42,7 +42,7 @@ Replace User
     'license': 'AGPL-3',
     'depends': ["sale","sale_management", "sales_team", "base"],
     'data': [
-        "security/ir.model.access.csv",
+        "security/ir.access.csv",
         "views/user_lookup_wizard_views.xml",
         "views/user_lookup_wizard_line_views.xml",
     ],

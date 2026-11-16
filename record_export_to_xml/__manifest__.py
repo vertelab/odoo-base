@@ -52,7 +52,7 @@ Export Records to XML
     'repository': 'https://github.com/vertelab/odoo-base.git',
     'depends': ['base', 'event', 'hr', 'sale', 'project'],
     'data': [
-        "security/ir.model.access.csv",
+        "security/ir.access.csv",
         "views/export_view.xml",
         "data/data.xml",
     ],

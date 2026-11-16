@@ -29,7 +29,7 @@
         # 'data/resource_calendar_data.xml',
         'security/res_groups_data.xml',
         # 'security/ir_rule_data.xml',
-        'security/ir.model.access.csv',
+        'security/ir.access.csv',
         'views/calendar_views.xml',
         'views/calendar_alarm_views.xml',
         'views/calendar_event_views.xml',

@@ -17,7 +17,7 @@
     ],
     "data": [
         "views/dav_collection.xml",
-        'security/ir.model.access.csv',
+        'security/ir.access.csv',
     ],
     "external_dependencies": {
         'python': ['radicale'],

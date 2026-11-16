@@ -49,7 +49,7 @@ Base SERP Tracker
     },
     'data': [
         'security/serp_security.xml',
-        'security/ir.model.access.csv',
+        'security/ir.access.csv',
 
         'report/ir_actions_report.xml',
         'report/ir_actions_report_templates.xml',

@@ -57,7 +57,7 @@ Res SNI
     'depends': ['contacts',],
     'data': [
         'data/res.sni.csv',
-        'security/ir.model.access.csv',
+        'security/ir.access.csv',
         'views/res_partner_view.xml',
         'views/res_sni_view.xml',
     ],

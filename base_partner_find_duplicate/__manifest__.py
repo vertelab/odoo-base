@@ -42,7 +42,7 @@ Find Duplicate Contacts
     'license': 'AGPL-3',
     'depends': ['contacts'],
     'data': [
-        "security/ir.model.access.csv",
+        "security/ir.access.csv",
         "wizard/find_duplicates_contact_view.xml",
         "views/menu.xml",
     ],

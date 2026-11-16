@@ -69,7 +69,7 @@ class DavCollection(models.Model):
                 this.tag = 'VADDRESSBOOK'
 
     def _compute_url(self):
-        base_url = self.env['ir.config_parameter'].get_param('web.base.url')
+        base_url = self.env['ir.config_parameter'].get_str('web.base.url')
         for this in self:
             this.url = '%s%s/%s/%s' % (
                 base_url,
