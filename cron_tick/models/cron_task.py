@@ -1,0 +1,1072 @@
+# Copyright (C) 2026 Vertel Sverige AB (<https://vertel.se>).
+# License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl).
+
+"""cron.task — declarative scheduling.
+
+One record per scheduled task. Modules declare their tasks as data XML;
+this module owns the engine. The engine knows nothing about any task.
+
+CADENCE, NOT INTERVAL — WITH AN ESCAPE HATCH
+    A task states *which* cadence it belongs to (min/hour/daily/week/month),
+    not an interval in seconds. That removes the per-task `next_run`
+    arithmetic and the entire class of calculation errors (wrong timedelta,
+    wrong timezone, forgotten next_run on failure). Only the tick needs to
+    know when to run.
+
+    A task may instead set `interval_number`/`interval_type` when the five
+    cadences cannot express the interval it needs (15 minutes, 6 hours,
+    14 days). Such a task is carried by the `min` tick and runs when its own
+    interval has elapsed. The two are mutually exclusive: a task sets a
+    cadence XOR an interval.
+
+THE ENGINE OWNS THE RUN HISTORY
+    `_run()` NEVER touches `last_run`/`failure_count`. The engine writes
+    those after the task returned or raised — one write point, not two.
+    If `_run()` set `last_run` and then raised, the savepoint would roll
+    back the write and the engine would believe the task never ran.
+"""
+
+import hashlib
+import logging
+import time
+
+import psycopg2.errors
+from datetime import timedelta
+
+from odoo import _, SUPERUSER_ID, api, fields, models
+from odoo.exceptions import UserError, ValidationError
+
+_logger = logging.getLogger(__name__)
+
+# Cadence → approximate number of seconds. Used only for overdue detection
+# and logging — NOT for scheduling (the tick cron owns that).
+CADENCE_SECONDS = {
+    'min': 300,
+    'hour': 3600,
+    'daily': 86400,
+    'week': 604800,
+    'month': 2592000,
+}
+
+# Spread window per cadence (minutes). A `daily` task spreads over an hour,
+# a `week` task over a day, a `month` task over a week. Without spreading,
+# 19 daily jobs would all run at 00:00 and create a spike of heavy batch
+# operations at the same moment.
+SPREAD_MINUTES = {
+    'min': 0,
+    'hour': 0,
+    'daily': 60,
+    'week': 1440,
+    'month': 10080,
+}
+
+# Interval type → number of seconds. Used by tasks that set
+# `interval_number`/`interval_type` instead of a cadence. Approximate for
+# months (30 days), which is the same convention as CADENCE_SECONDS.
+INTERVAL_SECONDS = {
+    'minutes': 60,
+    'hours': 3600,
+    'days': 86400,
+    'weeks': 604800,
+    'months': 2592000,
+}
+
+# The cadence the interval tick runs under. Interval tasks are checked by a
+# tick cron of this cadence; the task itself is due when its own interval has
+# elapsed. 5 minutes matches ir.cron's granularity.
+INTERVAL_TICK_CADENCE = 'min'
+
+# Granularity of the tick crons, in minutes. Every tick polls at this
+# interval, and the spread offset is quantised to it — see
+# `_spread_offset_minutes`.
+TICK_GRANULARITY_MINUTES = 5
+
+
+class CronTask(models.Model):
+    _name = 'cron.task'
+    _description = 'Scheduled Task'
+    _order = 'sequence, id'
+    _inherit = ['mail.thread', 'mail.activity.mixin']
+
+    # ── Identity ───────────────────────────────────────────────────────
+    name = fields.Char(
+        required=True,
+        help='Readable name shown in the list.')
+    technical_name = fields.Char(
+        required=True, index=True,
+        help='Stable identifier. Used by event-driven triggering '
+             '(/cron/trigger/<technical_name>) and for daily spread. '
+             'Never change it on a task already in production.')
+    module = fields.Char(
+        index=True,
+        help='The module that owns the task. On uninstall the XML record is '
+             'removed and the task disappears.')
+
+    # ── What to run ────────────────────────────────────────────────────
+    model_name = fields.Char(
+        required=True,
+        help='Technical model name, e.g. "ai.skill". Resolved at run time — '
+             'therefore robust against modules being uninstalled.')
+    method_name = fields.Char(
+        required=True,
+        help='Method name on the model, e.g. "_sync_from_filesystem". '
+             'Called without arguments.')
+
+    # ── When ───────────────────────────────────────────────────────────
+    cadence = fields.Selection([
+        ('min', 'Every 5 minutes'),
+        ('hour', 'Hourly'),
+        ('daily', 'Daily'),
+        ('week', 'Weekly'),
+        ('month', 'Monthly'),
+    ], index=True, tracking=True,
+        help='Which tick cron runs the task. The cadence is a FIELD — a name '
+             'prefix in the technical name does not affect execution.\n\n'
+             'Leave empty when `interval_number`/`interval_type` are set: a '
+             'task uses EITHER a cadence OR an interval, never both.')
+    interval_number = fields.Integer(
+        help='Run every N `interval_type` units, measured from the last run. '
+             'Use this instead of `cadence` when the task needs an interval '
+             'the five cadences cannot express (15 minutes, 6 hours, 14 days).\n\n'
+             'The task is checked by the "interval" tick every 5 minutes, so '
+             'the effective granularity is 5 minutes — the same as ir.cron.')
+    interval_type = fields.Selection([
+        ('minutes', 'Minutes'),
+        ('hours', 'Hours'),
+        ('days', 'Days'),
+        ('weeks', 'Weeks'),
+        ('months', 'Months'),
+    ], help='Unit for `interval_number`.')
+    sequence = fields.Integer(
+        default=10,
+        help='Run order within the cadence. Lower value runs first.')
+    active = fields.Boolean(
+        default=True, tracking=True,
+        help='Deactivated automatically after `max_failures` consecutive '
+             'failures. Re-activate to resume scheduling.')
+
+    # ── Execution ──────────────────────────────────────────────────────
+    timeout_seconds = fields.Integer(
+        default=120,
+        help='Soft time limit. The engine measures the run time and logs a '
+             'warning when the limit is exceeded. Python threads cannot be '
+             'aborted safely — the limit is therefore measuring, not '
+             'aborting. A task that consistently exceeds the limit should be '
+             'moved to queue_job.')
+    max_failures = fields.Integer(
+        default=10,
+        help='Number of consecutive failures before the task is '
+             'automatically deactivated.')
+
+    # ── Run history (owned by the engine) ──────────────────────────────
+    last_run = fields.Datetime(readonly=True)
+    last_duration_ms = fields.Integer(readonly=True)
+    failure_count = fields.Integer(readonly=True, default=0)
+    last_error = fields.Text(readonly=True)
+
+    # ── Lock (atomic, D10) ─────────────────────────────────────────────
+    locked_by = fields.Char(
+        readonly=True,
+        help='Who is running the task right now (e.g. "tick:min" or '
+             '"webhook"). Empty = free.')
+    locked_at = fields.Datetime(readonly=True)
+
+    # ── Computed fields ────────────────────────────────────────────────
+    is_locked = fields.Boolean(
+        compute='_compute_is_locked', search='_search_is_locked')
+    is_overdue = fields.Boolean(
+        compute='_compute_is_overdue', search='_search_is_overdue',
+        help='True when the task has not run within three cadence intervals.')
+    cadence_label = fields.Char(
+        compute='_compute_cadence_label')
+    run_log_count = fields.Integer(
+        compute='_compute_run_log_count',
+        help='Number of run log records for this task.')
+
+    _sql_constraints = [
+        ('technical_name_uniq', 'UNIQUE(technical_name)',
+         'The technical name must be unique — it is the identity of the task.'),
+    ]
+
+    # NOTE: the cadence/interval XOR is enforced in Python (`_check_schedule`),
+    # not as a SQL CHECK. A CHECK fires before `@api.constrains` and surfaces
+    # as a raw psycopg2 error, so the readable message would never be shown.
+    # `cron.task` records are created from module data, not free input, so the
+    # Python constraint is the only validation path that matters.
+
+    # ───────────────────────────────────────────────────────────────────
+    # Computed fields
+    # ───────────────────────────────────────────────────────────────────
+
+    @api.constrains('cadence', 'interval_number', 'interval_type')
+    def _check_schedule(self):
+        """Exactly one of cadence / interval must be set.
+
+        NOTE: `@api.constrains` only fires when one of the named fields is
+        present in `vals`. `create()` with neither field would therefore
+        pass unvalidated, so `create()` calls this explicitly — see
+        `create()` below. This constraint covers `write()`.
+        """
+        for task in self:
+            task._validate_schedule()
+
+    def _validate_schedule(self):
+        """Validate the schedule fields on a single record."""
+        self.ensure_one()
+        has_cadence = bool(self.cadence)
+        has_interval = bool(self.interval_type)
+        if has_cadence and has_interval:
+            raise ValidationError(_(
+                'The task "%s" has both a cadence and an interval. Set '
+                'one of them.') % self.technical_name)
+        if not has_cadence and not has_interval:
+            raise ValidationError(_(
+                'The task "%s" has neither a cadence nor an interval. '
+                'Set one of them.') % self.technical_name)
+        if has_interval and not self.interval_number:
+            raise ValidationError(_(
+                'The task "%s" has an interval type but no interval '
+                'number.') % self.technical_name)
+
+    @api.model_create_multi
+    def create(self, vals_list):
+        """Validate the schedule on create.
+
+        `@api.constrains` does not fire when none of its fields appear in
+        `vals`, so a task created without a cadence AND without an interval
+        would slip through. Validate explicitly here.
+        """
+        tasks = super().create(vals_list)
+        for task in tasks:
+            task._validate_schedule()
+        return tasks
+
+    @api.depends('locked_by')
+    def _compute_is_locked(self):
+        for task in self:
+            task.is_locked = bool(task.locked_by)
+
+    @api.depends('last_run', 'cadence', 'interval_number', 'interval_type',
+                 'active')
+    def _compute_is_overdue(self):
+        now = fields.Datetime.now()
+        for task in self:
+            if not task.active or not task.last_run:
+                task.is_overdue = False
+                continue
+            if task.interval_type:
+                limit = task._interval_seconds() * 3
+            else:
+                limit = CADENCE_SECONDS.get(task.cadence, 86400) * 3
+            task.is_overdue = (now - task.last_run).total_seconds() > limit
+
+    def _compute_run_log_count(self):
+        """Count run log records per task (smart button).
+
+        `read_group` in one query instead of one `search_count` per record —
+        the list view reads the field for every row.
+        """
+        counts = {}
+        if self.ids:
+            try:
+                groups = self.env['cron.task.log'].sudo().read_group(
+                    [('task_id', 'in', self.ids)], ['task_id'], ['task_id'])
+                counts = {g['task_id'][0]: g['task_id_count'] for g in groups
+                          if g.get('task_id')}
+            except Exception:  # noqa: BLE001 — never break the form over a count
+                _logger.exception(
+                    'cron.task: could not count run logs for %s', self.ids)
+                counts = {}
+        for task in self:
+            task.run_log_count = counts.get(task.id, 0)
+
+    @api.depends('cadence', 'interval_number', 'interval_type')
+    def _compute_cadence_label(self):
+        labels = dict(self._fields['cadence'].selection)
+        type_labels = dict(self._fields['interval_type'].selection)
+        for task in self:
+            if task.interval_type:
+                unit = type_labels.get(task.interval_type, task.interval_type)
+                task.cadence_label = 'Every %s %s' % (
+                    task.interval_number or '?', unit.lower())
+            else:
+                task.cadence_label = labels.get(
+                    task.cadence, task.cadence or '')
+
+    def _search_is_locked(self, operator, value):
+        """Searchable counterpart of `is_locked` (locked_by is set)."""
+        if operator in ('=', '!=') and isinstance(value, bool):
+            # is_locked = True  → locked_by != False
+            # is_locked = False → locked_by = False
+            if (operator == '=' and value) or (operator == '!=' and not value):
+                return [('locked_by', '!=', False)]
+            return [('locked_by', '=', False)]
+        return [('locked_by', operator, value)]
+
+    def _search_is_overdue(self, operator, value):
+        """Searchable counterpart of `is_overdue`.
+
+        Overdue = active, has run, and the last run is older than three
+        cadence intervals. The threshold depends on the cadence, so we build
+        an OR across the cadences.
+
+        WARNING: Odoo 18 wants a FLAT domain in prefix notation — nested
+        lists crash in `domain_combine_anies`.
+
+        WARNING: prefix notation requires one operator TOKEN per join:
+        a group of 3 operands needs '&','&' (not a single '&' — then the
+        operator binds incorrectly and the domain matches nothing).
+        The same applies to the OR chain: N branches require N-1 leading '|'.
+        """
+        now = fields.Datetime.now()
+        if operator not in ('=', '!='):
+            return []
+        want = value if operator == '=' else not value
+
+        # One OR branch per cadence: (cadence = X AND last_run < threshold)
+        branches = []
+        for cadence, seconds in CADENCE_SECONDS.items():
+            limit = now - timedelta(seconds=seconds * 3)
+            branches.append([
+                ('cadence', '=', cadence),
+                ('last_run', '!=', False),
+                ('last_run', '<', limit),
+            ])
+
+        # Interval tasks cannot be expressed as a domain: the threshold
+        # depends on interval_number * interval_type per record. Search on
+        # the cadence branches only and let the caller over-fetch; the
+        # computed field is always correct when read on a record.
+        branches.append([
+            ('interval_type', '!=', False),
+            ('last_run', '!=', False),
+        ])
+
+        def _and_group(branch):
+            return ['&'] * (len(branch) - 1) + list(branch)
+
+        if want:
+            or_ops = ['|'] * (len(branches) - 1)
+            return or_ops + [t for b in branches for t in _and_group(b)]
+
+        # NOT(OR over branches) — negate each branch separately and AND them.
+        # NOT(a OR b) == (NOT a) AND (NOT b)
+        negated = [['!'] + _and_group(b) for b in branches]
+        and_ops = ['&'] * (len(negated) - 1)
+        return and_ops + [t for g in negated for t in g]
+
+    # ───────────────────────────────────────────────────────────────────
+    # Spread (D7)
+    # ───────────────────────────────────────────────────────────────────
+
+    def _spread_offset_minutes(self):
+        """Deterministic spread within the cadence window.
+
+        The same technical name yields the same offset every time — a
+        `daily` task therefore runs at the same time every day, not randomly.
+
+        The offset is QUANTISED to the tick granularity (5 minutes). The
+        tick polls every 5 minutes, so an offset of 3 is only reachable at
+        :05 and an offset of 57 only at :55 — an unquantised offset would
+        either never match or match at the wrong minute. Quantising also
+        collapses the window to 12 distinct slots per hour, which is what
+        the spread is actually for: not 60 different minutes, but enough
+        slots that 19 daily tasks do not all fire in the same tick.
+        """
+        self.ensure_one()
+        window = SPREAD_MINUTES.get(self.cadence, 0)
+        if not window:
+            return 0
+        digest = hashlib.sha256(
+            (self.technical_name or '').encode('utf-8')).hexdigest()
+        offset = int(digest, 16) % window
+        # Snap down to the tick granularity, never above the window.
+        return (offset // TICK_GRANULARITY_MINUTES) * TICK_GRANULARITY_MINUTES
+
+    def _interval_seconds(self):
+        """The task's interval in seconds (0 when it uses a cadence)."""
+        self.ensure_one()
+        if not self.interval_type or not self.interval_number:
+            return 0
+        return (INTERVAL_SECONDS.get(self.interval_type, 0)
+                * self.interval_number)
+
+    # ───────────────────────────────────────────────────────────────────
+    # Cadence logic (D7)
+    # ───────────────────────────────────────────────────────────────────
+
+    def _is_due(self, now=None):
+        """Is the task due?
+
+        Two modes, mutually exclusive (see `_check_schedule`):
+
+        INTERVAL MODE (`interval_number`/`interval_type` set)
+            Due when the interval has elapsed since the last run. Measured
+            from `last_run`, so a slow run does not drift the schedule —
+            the next run is N units after the previous one FINISHED.
+
+        CADENCE MODE (`cadence` set)
+            `min`/`hour` are governed by the time elapsed since the last run.
+            `daily`/`week`/`month` are governed by the spread window — the
+            task runs when the window has opened and it has not already run
+            in the period.
+        """
+        self.ensure_one()
+        now = now or fields.Datetime.now()
+
+        if self.interval_type:
+            if not self.last_run:
+                return True
+            seconds = self._interval_seconds()
+            return (now - self.last_run).total_seconds() >= seconds
+
+        if self.cadence == 'min':
+            return True
+
+        if self.cadence == 'hour':
+            if not self.last_run:
+                return True
+            return (now - self.last_run).total_seconds() >= 3600
+
+        # daily / week / month — spread over a window.
+        offset = self._spread_offset_minutes()
+        if self.cadence == 'daily':
+            # The window is one hour: run when minute >= offset and not run
+            # today. `last_run` is the guard, not the offset: once the task
+            # has run today it is done, whatever the minute is. The offset
+            # only decides WHEN in the hour the window opens.
+            if self.last_run and self.last_run.date() >= now.date():
+                return False
+            return now.minute >= offset
+
+        if self.cadence == 'week':
+            # The window is one day (1440 min): offset in minutes since midnight.
+            if self.last_run and (now - self.last_run).days < 7:
+                return False
+            return now.hour * 60 + now.minute >= offset
+
+        if self.cadence == 'month':
+            # The window is one week (10080 min): offset in minutes since
+            # the start of the week (Monday 00:00).
+            if self.last_run and (now - self.last_run).days < 28:
+                return False
+            minutes_into_week = now.weekday() * 1440 + now.hour * 60 + now.minute
+            return minutes_into_week >= offset
+
+        return False
+
+    # ───────────────────────────────────────────────────────────────────
+    # Execution — the single run path (D9, D12)
+    # ───────────────────────────────────────────────────────────────────
+
+    def _run(self):
+        """Run the task. A PURE method — never touches the run history.
+
+        Returns the method's result. Propagates errors to the caller, which
+        records them. The engine (and webhook/manual) owns `last_run`,
+        `last_duration_ms` and `failure_count`.
+        """
+        self.ensure_one()
+        model = self.env.get(self.model_name)
+        if model is None:
+            raise UserError(_(
+                'The model "%s" does not exist (task %s). The module may be '
+                'uninstalled.') % (self.model_name, self.technical_name))
+        method = getattr(model, self.method_name, None)
+        if method is None or not callable(method):
+            raise UserError(_(
+                'The method "%s" does not exist on the model "%s" (task %s).'
+            ) % (self.method_name, self.model_name, self.technical_name))
+        return method()
+
+    def _execute(self, owner='manual', trigger=None, trigger_detail=None):
+        """Run the task with locking, measuring and recording.
+
+        This is the common path for all three trigger types. Returns a dict
+        with status and duration.
+
+        `trigger` defaults to `manual` — the webhook passes `webhook`.
+        """
+        self.ensure_one()
+        trigger = trigger or 'manual'
+        user = self.env.user if trigger == 'manual' else None
+        result = self._run_locked_task(
+            self.id, owner=owner, trigger=trigger,
+            trigger_detail=trigger_detail or (user.name if user else None),
+            user_id=user.id if user else None)
+        if result['status'] == 'locked':
+            return {
+                'status': 'locked',
+                'technical_name': self.technical_name,
+            }
+        if result['status'] == 'error':
+            return {
+                'status': 'error',
+                'technical_name': self.technical_name,
+                'duration_ms': result['duration_ms'],
+                'error': result['error'],
+            }
+        return {
+            'status': 'ok',
+            'technical_name': self.technical_name,
+            'duration_ms': result['duration_ms'],
+        }
+
+    def _close_savepoint_safely(self, sp):
+        """Close a savepoint without raising. Returns True when it is gone.
+
+        The `with cr.savepoint()` context manager cannot be trusted to clean
+        up: `_FlushingSavepoint._close()` issues `ROLLBACK TO SAVEPOINT` and
+        `RELEASE SAVEPOINT` bare. When the task's body has already killed the
+        savepoint — a database error aborts the transaction, and
+        `__init__`'s `cr.flush()` may never have issued `SAVEPOINT` at all —
+        those statements raise `InvalidSavepointSpecification`, and that
+        exception REPLACES the task's own error on its way out.
+
+        Measured in production 2026-11-12: `ai_okf_index_dirty` hit
+        `canceling statement due to lock timeout` inside `_run()`; the
+        savepoint could never be established, `_close` raised, and every one
+        of 69 tasks stayed stuck for five days.
+
+        Closing is cleanup, not a result — it must never decide the outcome.
+        A dead savepoint is an expected state here, not an error.
+        """
+        if sp is None or getattr(sp, 'closed', True):
+            return True
+        try:
+            sp.close(rollback=True)
+            return True
+        except psycopg2.errors.InvalidSavepointSpecification:
+            # The savepoint is gone (transaction aborted, or never created).
+            # Mark it closed so nothing tries again, and tell the caller the
+            # transaction needs recovering.
+            sp.closed = True
+            return False
+        except Exception:  # noqa: BLE001 — cleanup must never mask the run
+            _logger.debug(
+                'cron.task: savepoint cleanup failed', exc_info=True)
+            sp.closed = True
+            return False
+
+    def _abandon_transaction(self):
+        """Discard the transaction after a failed cleanup. Never raises.
+
+        When the savepoint could not be closed the connection is in
+        `InFailedSqlTransaction` (or worse). `cr.rollback()` is the only way
+        back. The cost is that everything written in this transaction is
+        discarded — which is correct here: the task failed, and the
+        alternative is a scheduler that stops.
+        """
+        try:
+            self.env.cr.rollback()
+            self.env.invalidate_all()
+        except Exception:  # noqa: BLE001 — a dead connection cannot roll back
+            _logger.error(
+                'cron.task: could not roll back after a failed savepoint '
+                'cleanup — the connection may be gone. The failure record '
+                'is lost; the scheduler continues.')
+
+    def _run_locked_task(self, task_id, owner, trigger, trigger_detail=None,
+                         user_id=None):
+        """The ONE run path: lock → savepoint → run → record → log.
+
+        Shared by the tick engine and `_execute` (webhook/manual), so the two
+        paths cannot drift apart. Returns a dict:
+
+            {'status': 'ok'|'error'|'locked', 'duration_ms': int,
+             'error': str|None}
+
+        WARNING: after a rolled-back savepoint the ORM cache is corrupt —
+        `invalidate_all()` + `browse(task_id)` is mandatory before writing
+        the error (see README).
+
+        `user_id` is an ID and not a recordset on purpose: a parameter named
+        `user` holding a recordset breaks `_()` (Odoo's translation helper
+        inspects the caller's locals and calls `int()` on a `user` it finds
+        there). See README, "Troubleshooting".
+        """
+        task = self.browse(task_id)
+        if not task._acquire_lock(owner):
+            # Refused: the method was NOT called. Record it so a task that
+            # never runs because of a stuck lock is visible in the log.
+            task.browse(task_id)._log_run_record(
+                'locked', trigger, trigger_detail,
+                text=_('Already running (%s) — not started.') % (
+                    task.locked_by or _('unknown')))
+            return {'status': 'locked', 'duration_ms': 0, 'error': None}
+        started = time.monotonic()
+        try:
+            # The savepoint is opened and closed EXPLICITLY, not through
+            # `with`. The context manager's `__exit__` cleans up bare, so a
+            # task that aborts the transaction makes the cleanup raise — and
+            # that exception replaces the task's own error on the way out.
+            # See `_close_savepoint_safely`.
+            sp = None
+            run_error = None
+            try:
+                sp = self.env.cr.savepoint()
+                sp.__enter__()
+                task._run()
+            except Exception as exc:  # noqa: BLE001 — the engine catches all
+                run_error = exc
+            finally:
+                closed_ok = self._close_savepoint_safely(sp)
+                if not closed_ok:
+                    self._abandon_transaction()
+
+            if run_error is not None:
+                duration_ms = int((time.monotonic() - started) * 1000)
+                self.env.invalidate_all()
+                failed = self.browse(task_id)
+                failed._record_failure(run_error, duration_ms)
+                failed._log_run_record(
+                    'error', trigger, trigger_detail,
+                    duration_ms=duration_ms, text=str(run_error),
+                    user_id=user_id)
+                _logger.exception(
+                    'cron.task %s failed (%s ms)',
+                    failed.technical_name, duration_ms)
+                return {
+                    'status': 'error',
+                    'duration_ms': duration_ms,
+                    'error': str(run_error),
+                }
+            duration_ms = int((time.monotonic() - started) * 1000)
+            self.env.invalidate_all()
+            done = self.browse(task_id)
+            done._record_success(duration_ms)
+            done._log_run_record(
+                'ok', trigger, trigger_detail,
+                duration_ms=duration_ms,
+                text=_('Ran in %s ms.') % duration_ms, user_id=user_id)
+            if duration_ms > done.timeout_seconds * 1000:
+                _logger.warning(
+                    'cron.task %s exceeded the time limit: %s ms > %s s',
+                    done.technical_name, duration_ms, done.timeout_seconds)
+            return {'status': 'ok', 'duration_ms': duration_ms, 'error': None}
+        finally:
+            # Clear the informational lock columns EVEN on error. The advisory
+            # lock itself is transaction-bound and released by PostgreSQL, but
+            # `locked_by` is a plain column: if the run raised, the savepoint
+            # rollback also reverted the UPDATE that set it, so it must be
+            # cleared here — and this must never raise, or it masks the real
+            # error and leaves the task looking permanently locked in the UI.
+            try:
+                self.browse(task_id)._release_lock()
+            except Exception:  # noqa: BLE001 — cleanup must not mask the run
+                _logger.exception(
+                    'cron.task id=%s: could not clear locked_by', task_id)
+
+    def _log_run_record(self, status, trigger, trigger_detail=None,
+                        duration_ms=0, text=None, user_id=None):
+        """Write one run log record. Never raises."""
+        self.ensure_one()
+        try:
+            self.env['cron.task.log']._log_run(
+                self, status=status, trigger=trigger,
+                trigger_detail=trigger_detail, duration_ms=duration_ms,
+                text=text, user_id=user_id)
+        except Exception:  # noqa: BLE001 — history must never break a run
+            _logger.exception(
+                'cron.task %s: could not write the run log', self.technical_name)
+
+    # ───────────────────────────────────────────────────────────────────
+    # Lock (D10 — atomic via advisory lock, independent of isolation level)
+    # ───────────────────────────────────────────────────────────────────
+
+    def _acquire_lock(self, owner):
+        """Acquire the lock atomically. Returns True if we got it.
+
+        WARNING: a conditional UPDATE is NOT sufficient: Odoo runs under
+        `repeatable read`, and two transactions can both see `locked_by` as
+        empty in their snapshot and both get `rowcount == 1`. Verified in
+        production — two concurrent workers ran the same task.
+
+        We use an advisory lock per task, which is atomic regardless of
+        isolation level. `locked_by`/`locked_at` are written as INFORMATION
+        (who is running), not as the lock itself — the latter is owned by
+        PostgreSQL.
+
+        TRANSACTION-BOUND, NOT SESSION-BOUND (pg_try_advisory_xact_lock).
+        A session-bound lock (`pg_try_advisory_lock`) is released only when
+        the CONNECTION closes — and Odoo pools connections. When a worker
+        died mid-run, its connection went back to the pool WITH the lock
+        still held, and the next worker that borrowed that connection could
+        never acquire it. Production symptom: `ai_okf_index_dirty` sat with
+        `locked_by='tick:min'` and blocked the whole min tick, while
+        `pg_locks` showed the lock owned by a live-but-idle backend.
+
+        The xact variant is released automatically at COMMIT/ROLLBACK, so a
+        dead worker cannot leak it. `_release_lock` is kept for symmetry and
+        to clear the informational columns, but correctness no longer
+        depends on it being called.
+        """
+        self.ensure_one()
+        lock_id = self._task_lock_id()
+        self.env.cr.execute(
+            'SELECT pg_try_advisory_xact_lock(%s)', (lock_id,))
+        row = self.env.cr.fetchone()
+        if not row or not row[0]:
+            return False
+        # We own the lock. Write information about who is running.
+        self.env.cr.execute("""
+            UPDATE cron_task
+               SET locked_by = %s, locked_at = now()
+             WHERE id = %s
+        """, (owner, self.id))
+        self.env.invalidate_all()
+        return True
+
+    def _release_lock(self):
+        """Clear the informational lock columns.
+
+        The advisory lock itself is transaction-bound (see `_acquire_lock`)
+        and is released by PostgreSQL at COMMIT/ROLLBACK. Only the
+        `locked_by`/`locked_at` columns are cleared here.
+        """
+        self.ensure_one()
+        self.env.cr.execute("""
+            UPDATE cron_task
+               SET locked_by = NULL, locked_at = NULL
+             WHERE id = %s
+        """, (self.id,))
+        self.env.invalidate_all()
+
+    def _task_lock_id(self):
+        """Stable advisory lock id per task (fits in int8).
+
+        A dedicated namespace prefix keeps task locks separate from the
+        cadence locks in `_advisory_lock_id`.
+        """
+        self.ensure_one()
+        digest = hashlib.sha256(
+            ('cron_task:lock:%s' % self.technical_name).encode('utf-8')
+        ).hexdigest()
+        return int(digest, 16) % (2 ** 31)
+
+    # ───────────────────────────────────────────────────────────────────
+    # Recording (D8, D9)
+    # ───────────────────────────────────────────────────────────────────
+
+    def _record_success(self, duration_ms):
+        """Record a successful run. Resets the failure counter."""
+        self.ensure_one()
+        self.write({
+            'last_run': fields.Datetime.now(),
+            'last_duration_ms': duration_ms,
+            'failure_count': 0,
+            'last_error': False,
+            'locked_by': False,
+            'locked_at': False,
+        })
+
+    def _ensure_usable_transaction(self):
+        """Get the transaction out of `InFailedSqlTransaction`, or explain why.
+
+        A failed task can leave the connection in an aborted transaction.
+        Recovery has to happen BEFORE any ORM call, because the ORM reads
+        fields (cache miss) and PostgreSQL then answers `current transaction
+        is aborted` to every statement.
+
+        Only `cr.rollback()` clears that state — `ROLLBACK TO SAVEPOINT`
+        cannot, because `cursor.savepoint()` never got as far as issuing
+        `SAVEPOINT` (see `_record_failure`).
+
+        After the rollback the ORM cache points at rows the database no
+        longer has, so it must be invalidated and the caller must re-browse.
+        """
+        cr = self.env.cr
+        try:
+            cr.execute('SELECT 1')
+            return
+        except Exception:  # noqa: BLE001,S110 — any failure means "not usable"
+            # The handling below IS the response — the probe failing is
+            # exactly the condition we are here to fix.
+            pass
+        _logger.warning(
+            'cron.task: transaction was aborted, rolling back before '
+            'recording — everything written in this transaction is lost')
+        try:
+            cr.rollback()
+            self.env.invalidate_all()
+        except Exception:  # noqa: BLE001
+            # The CONNECTION can be gone, not just the transaction:
+            # `psycopg2.InterfaceError: connection already closed` (measured
+            # 2026-11-11 on the `ai_cost_aggregate` out-of-memory kill).
+            # Rolling back a dead connection cannot work, and raising here
+            # would reintroduce the very cascade this method exists to stop —
+            # the caller (`_record_failure`) must still be able to try, and
+            # `_cron_tick` must still be able to move on to the next task.
+            # The record is lost; that is the honest outcome for a dead
+            # connection, and it is logged rather than silently swallowed.
+            _logger.error(
+                'cron.task: could not roll back — the connection is gone. '
+                'The failure record is lost; the scheduler continues.')
+
+    def _record_failure(self, exc, duration_ms=0):
+        """Record a failed run. Deactivates after `max_failures`.
+
+        WARNING: called AFTER the savepoint has been rolled back — the caller
+        must have run `invalidate_all()` and re-fetched the record, otherwise
+        we write to a record whose transaction is gone.
+
+        SURVIVES A POISONED TRANSACTION (2026-11-11). The savepoint above is
+        not a guarantee: `cursor.savepoint()` builds a `_FlushingSavepoint`,
+        whose `__init__` calls `cr.flush()` BEFORE issuing `SAVEPOINT`. When
+        the failure is a database error (`lock timeout`, `deadlock detected`,
+        `serialization failure`), PostgreSQL has already aborted the
+        transaction, so `flush()` raises in `__enter__` — the savepoint is
+        never created and nothing is rolled back. The transaction stays in
+        `InFailedSqlTransaction`, and every statement here (starting with
+        `self.failure_count`) raises `current transaction is aborted`.
+
+        The result was not a missing error message: `_record_failure` raised
+        inside the `except` block, so the exception escaped `_cron_tick` and
+        the whole tick transaction — including the `nextcall` updates of every
+        task already run in that tick — was rolled back. One poisoned task
+        stopped the entire scheduler (measured 2026-11-11: tick 991 at
+        failure_count 471, 18 of 80 active crons stuck with a `nextcall` in
+        the past, for over an hour).
+
+        `cr.rollback()` is the only escape from `InFailedSqlTransaction` —
+        `ROLLBACK TO SAVEPOINT` cannot be used because no savepoint exists
+        (verified against the live database). The cost is that anything else
+        written in the same transaction is discarded too; the alternative is
+        a scheduler that stops.
+        """
+        self._ensure_usable_transaction()
+        self.ensure_one()
+        # The connection can be dead, not just the transaction (see
+        # `_ensure_usable_transaction`). Reading `failure_count` or writing
+        # then raises `InterfaceError`, and that must not escape to
+        # `_cron_tick` — a lost failure record is bad, a stopped scheduler is
+        # worse. The counter simply does not advance in that case.
+        try:
+            previous_count = self.failure_count
+        except Exception:  # noqa: BLE001 — dead connection, nothing to record
+            _logger.error(
+                'cron.task %s: could not read failure_count — the failure '
+                'record is lost', self.technical_name)
+            return
+        count = previous_count + 1
+        deactivated = count >= self.max_failures
+        vals = {
+            'last_run': fields.Datetime.now(),
+            'last_duration_ms': duration_ms,
+            'failure_count': count,
+            'last_error': str(exc)[:4000],
+            'locked_by': False,
+            'locked_at': False,
+        }
+        if deactivated:
+            vals['active'] = False
+            _logger.error(
+                'cron.task %s deactivated after %s consecutive failures',
+                self.technical_name, count)
+        try:
+            self.write(vals)
+        except Exception:  # noqa: BLE001 — dead connection, nothing to record
+            _logger.error(
+                'cron.task %s: could not write the failure record — the '
+                'failure is lost; the scheduler continues',
+                self.technical_name)
+            return
+
+        # Chatter: only the events a human needs to see. Repeating failures in
+        # the same streak produce a run log record but no new message — see
+        # design D6. `message_post` must never change the run result.
+        try:
+            if deactivated:
+                self.message_post(body=_(
+                    'Deactivated automatically after %(count)s consecutive '
+                    'failures. Last error: %(error)s',
+                    count=count, error=str(exc)[:500]))
+            elif previous_count == 0:
+                self.message_post(body=_(
+                    'First failure in a new streak: %s', str(exc)[:500]))
+        except Exception:  # chatter must not break the run
+            _logger.exception(
+                'cron.task %s: could not post the failure to chatter',
+                self.technical_name)
+
+    def write(self, vals):
+        """Post a chatter message when a task is re-activated manually.
+
+        Auto-deactivation is posted by `_record_failure`; this covers the
+        human action of switching a deactivated task back on, which is
+        otherwise an invisible state change.
+        """
+        was_inactive = {task.id for task in self if not task.active}
+        result = super().write(vals)
+        if vals.get('active') and was_inactive:
+            # `with_user(SUPERUSER_ID)` is required: `base.group_user` has
+            # read-only access to `cron.task`, so a non-admin re-activation
+            # would otherwise fail on the message write.
+            for task in self.with_user(SUPERUSER_ID):
+                if task.id in was_inactive:
+                    try:
+                        task.message_post(body=_(
+                            'Re-activated manually by %s.', self.env.user.name))
+                    except Exception:  # noqa: BLE001
+                        _logger.exception(
+                            'cron.task %s: could not post re-activation',
+                            task.technical_name)
+        return result
+
+    # ───────────────────────────────────────────────────────────────────
+    # The engine (D6, D8, D11)
+    # ───────────────────────────────────────────────────────────────────
+
+    @api.model
+    def _cron_tick(self, cadence):
+        """Run all due tasks in one cadence.
+
+        Protected by a global advisory lock per cadence (D11) so that two
+        Odoo workers do not run the same cadence simultaneously.
+
+        TRANSACTION-BOUND (pg_try_advisory_xact_lock), for the same reason
+        as the per-task lock: a session-bound lock survives the worker and
+        leaks back into the connection pool when the worker dies mid-run.
+        """
+        lock_id = self._advisory_lock_id(cadence)
+        self.env.cr.execute(
+            'SELECT pg_try_advisory_xact_lock(%s)', (lock_id,))
+        got_lock = self.env.cr.fetchone()
+        if not got_lock or not got_lock[0]:
+            _logger.info(
+                'cron.tick %s: another worker is already running — skipping',
+                cadence)
+            return {'cadence': cadence, 'skipped': 'locked'}
+
+        try:
+            now = fields.Datetime.now()
+            # A task belongs to exactly one tick: the one named by its
+            # cadence, or the interval tick when it uses an interval.
+            if cadence == INTERVAL_TICK_CADENCE:
+                domain = [
+                    ('active', '=', True),
+                    '|',
+                    ('cadence', '=', cadence),
+                    ('interval_type', '!=', False),
+                ]
+            else:
+                domain = [
+                    ('active', '=', True),
+                    ('cadence', '=', cadence),
+                ]
+            candidates = self.search(domain, order='sequence, id')
+            due = candidates.filtered(lambda t: t._is_due(now))
+
+            ran, failed, locked = 0, 0, 0
+            for task in due:
+                # One run path for tick, webhook and manual — see
+                # `_run_locked_task`. It acquires and releases the task lock,
+                # records the run history and writes the run log.
+                #
+                # BELT AND BRACES (2026-11-11). `_run_locked_task` is written
+                # not to raise, but it runs inside this loop: an exception
+                # escaping it aborts the WHOLE tick, rolling back the
+                # `nextcall` of every task already run. That is exactly what
+                # happened when `_record_failure` hit a poisoned transaction —
+                # one broken task stopped the scheduler for over an hour. A
+                # per-task guard makes the blast radius one task.
+                try:
+                    result = self._run_locked_task(
+                        task.id, owner='tick:%s' % cadence, trigger='tick',
+                        trigger_detail=cadence)
+                except Exception:  # never abort the tick
+                    _logger.exception(
+                        'cron.task %s: the run path itself raised in tick %s '
+                        '— continuing with the next task',
+                        task.technical_name, cadence)
+                    failed += 1
+                    continue
+                if result['status'] == 'locked':
+                    locked += 1
+                elif result['status'] == 'error':
+                    # `_run_locked_task` already logged the traceback; a
+                    # second `_logger.exception` here would print it twice.
+                    _logger.info(
+                        'cron.task %s failed in tick %s: %s',
+                        task.technical_name, cadence, result.get('error'))
+                    failed += 1
+                else:
+                    ran += 1
+
+            _logger.info(
+                'cron.tick %s: %s ran, %s failed, %s locked',
+                cadence, ran, failed, locked)
+            return {
+                'cadence': cadence,
+                'ran': ran,
+                'failed': failed,
+                'locked': locked,
+            }
+        finally:
+            # The advisory lock is transaction-bound and is released by
+            # PostgreSQL at COMMIT/ROLLBACK — no explicit unlock needed (and
+            # no leak if this worker dies first).
+            pass
+
+    @api.model
+    def _advisory_lock_id(self, cadence):
+        """Stable advisory lock id per cadence (fits in int4)."""
+        digest = hashlib.sha256(
+            ('cron_tick:%s' % cadence).encode('utf-8')).hexdigest()
+        return int(digest, 16) % (2 ** 31)
+
+    # ───────────────────────────────────────────────────────────────────
+    # Manual run (D12)
+    # ───────────────────────────────────────────────────────────────────
+
+    def action_run_now(self):
+        """Run the task immediately — manual trigger.
+
+        Respects the lock: a task already running is refused with a clear
+        message instead of being run twice.
+        """
+        self.ensure_one()
+        result = self._execute(owner='manual')
+        if result['status'] == 'locked':
+            raise UserError(_(
+                'The task "%s" is already running (%s). Try again when it '
+                'has finished.') % (self.name, self.locked_by or 'unknown'))
+        if result['status'] == 'error':
+            raise UserError(_(
+                'The task "%s" failed:\n%s'
+            ) % (self.name, result.get('error', '')))
+        return {
+            'type': 'ir.actions.client',
+            'tag': 'display_notification',
+            'params': {
+                'title': _('Task executed'),
+                'message': _(
+                    '%s ran in %s ms.') % (
+                    self.name, result.get('duration_ms', 0)),
+                'type': 'success',
+                'sticky': False,
+            },
+        }
+
+    def action_view_run_logs(self):
+        """Smart button: open the run log filtered on this task."""
+        self.ensure_one()
+        return {
+            'type': 'ir.actions.act_window',
+            'name': _('Run Log'),
+            'res_model': 'cron.task.log',
+            'view_mode': 'list,form',
+            'domain': [('task_id', '=', self.id)],
+            'context': {'default_task_id': self.id},
+        }
+
+    # ───────────────────────────────────────────────────────────────────
+    # Helpers for the webhook (D12)
+    # ───────────────────────────────────────────────────────────────────
+
+    @api.model
+    def _find_by_technical_name(self, technical_name):
+        """Look up a task by technical name. Empty recordset if none."""
+        return self.search([
+            ('technical_name', '=', technical_name),
+        ], limit=1)

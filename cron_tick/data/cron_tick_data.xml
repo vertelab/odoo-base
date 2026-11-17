@@ -1,0 +1,92 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data noupdate="1">
+        <!-- ============================================================
+             Five tick crons — one per cadence.
+
+             The engine knows nothing about any task; it picks due records
+             from `cron.task` and runs them. The cadence split provides
+             natural isolation: a hanging `daily` task does not block the
+             `min` tick.
+
+             `min` is 5 minutes, not 1 — `_heartbeat_all` and friends
+             already have an internal 5-minute check, so 4 of 5 wakeups
+             were guaranteed waste when the cron ran every minute.
+
+             The `min` tick ALSO carries tasks that set an interval
+             (`interval_number`/`interval_type`) instead of a cadence —
+             see INTERVAL_TICK_CADENCE. Those tasks are checked every 5
+             minutes and run when their own interval has elapsed, so the
+             granularity matches ir.cron. No sixth tick is needed.
+
+             WHY EVERY TICK IS 5 MINUTES — NOT 1 DAY / 7 DAYS / 1 MONTH
+             A `daily`/`week`/`month` task is spread inside its window by
+             a deterministic offset (`sha256(technical_name) % window`).
+             The tick must therefore POLL REPEATEDLY INSIDE that window,
+             otherwise the offset can never be reached: when the daily
+             tick ran once a day at 05:19, `now.minute >= offset` was only
+             satisfiable for offset <= 19, and every task hashed above 19
+             silently NEVER RAN (six keykeep/storage tasks had last_run
+             NULL for weeks).
+
+             The cadence is a FILTER on `_is_due`, not a schedule of the
+             tick. `last_run` is the once-per-period guard, so polling
+             every 5 minutes still runs each task exactly once per period.
+             ============================================================ -->
+
+        <record id="cron_min" model="ir.cron">
+            <field name="name">Cron: Tick (5 min)</field>
+            <field name="model_id" ref="model_cron_task"/>
+            <field name="state">code</field>
+            <field name="code">model._cron_tick('min')</field>
+            <field name="interval_number">5</field>
+            <field name="interval_type">minutes</field>
+            <field name="active" eval="True"/>
+            <field name="user_id" ref="base.user_root"/>
+        </record>
+
+        <record id="cron_hour" model="ir.cron">
+            <field name="name">Cron: Tick (hourly)</field>
+            <field name="model_id" ref="model_cron_task"/>
+            <field name="state">code</field>
+            <field name="code">model._cron_tick('hour')</field>
+            <field name="interval_number">1</field>
+            <field name="interval_type">hours</field>
+            <field name="active" eval="True"/>
+            <field name="user_id" ref="base.user_root"/>
+        </record>
+
+        <record id="cron_daily" model="ir.cron">
+            <field name="name">Cron: Tick (daily)</field>
+            <field name="model_id" ref="model_cron_task"/>
+            <field name="state">code</field>
+            <field name="code">model._cron_tick('daily')</field>
+            <field name="interval_number">5</field>
+            <field name="interval_type">minutes</field>
+            <field name="active" eval="True"/>
+            <field name="user_id" ref="base.user_root"/>
+        </record>
+
+        <record id="cron_week" model="ir.cron">
+            <field name="name">Cron: Tick (weekly)</field>
+            <field name="model_id" ref="model_cron_task"/>
+            <field name="state">code</field>
+            <field name="code">model._cron_tick('week')</field>
+            <field name="interval_number">5</field>
+            <field name="interval_type">minutes</field>
+            <field name="active" eval="True"/>
+            <field name="user_id" ref="base.user_root"/>
+        </record>
+
+        <record id="cron_month" model="ir.cron">
+            <field name="name">Cron: Tick (monthly)</field>
+            <field name="model_id" ref="model_cron_task"/>
+            <field name="state">code</field>
+            <field name="code">model._cron_tick('month')</field>
+            <field name="interval_number">5</field>
+            <field name="interval_type">minutes</field>
+            <field name="active" eval="True"/>
+            <field name="user_id" ref="base.user_root"/>
+        </record>
+    </data>
+</odoo>

@@ -1,0 +1,150 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <!-- ================================================================
+         Run log — one record per run.
+
+         Colour coding carries the signal: red on error, orange on locked,
+         muted on skipped. The list is ordered newest first by the model
+         (`_order = 'run_at desc, id desc'`) — no `default_order` here, so
+         the view cannot drift from the model.
+         ================================================================ -->
+    <record id="view_cron_task_log_list" model="ir.ui.view">
+        <field name="name">cron.task.log.list</field>
+        <field name="model">cron.task.log</field>
+        <field name="arch" type="xml">
+            <list string="Run Log"
+                  decoration-danger="status == 'error'"
+                  decoration-warning="status == 'locked'"
+                  decoration-muted="status == 'skipped'">
+                <field name="run_at"/>
+                <field name="task_id"/>
+                <field name="status" widget="badge"
+                       decoration-danger="status == 'error'"
+                       decoration-warning="status == 'locked'"
+                       decoration-muted="status == 'skipped'"
+                       decoration-success="status == 'ok'"/>
+                <field name="trigger"/>
+                <field name="trigger_detail" optional="show"/>
+                <field name="duration_ms" optional="show"/>
+                <field name="module" optional="hide"/>
+                <field name="technical_name" optional="hide"/>
+                <field name="user_id" optional="show"/>
+                <field name="text" optional="show"/>
+            </list>
+        </field>
+    </record>
+
+    <!-- ================================================================
+         Form view — read-only detail for a single run.
+         ================================================================ -->
+    <record id="view_cron_task_log_form" model="ir.ui.view">
+        <field name="name">cron.task.log.form</field>
+        <field name="model">cron.task.log</field>
+        <field name="arch" type="xml">
+            <form string="Run Log Entry" create="0" edit="0">
+                <sheet>
+                    <group>
+                        <group string="Run">
+                            <field name="task_id"/>
+                            <field name="run_at"/>
+                            <field name="status"/>
+                            <field name="trigger"/>
+                            <field name="trigger_detail"/>
+                            <field name="user_id"/>
+                        </group>
+                        <group string="Result">
+                            <field name="duration_ms"/>
+                            <field name="module"/>
+                            <field name="technical_name"/>
+                        </group>
+                    </group>
+                    <group string="Text" colspan="2">
+                        <field name="text" nolabel="1" readonly="1"/>
+                    </group>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+    <!-- ================================================================
+         Search view — filters and groupings.
+
+         Groupings answer the questions the old flat `last_run` could not:
+         which task fails most, which module, which cadence, and on which
+         day did it start.
+         ================================================================ -->
+    <record id="view_cron_task_log_search" model="ir.ui.view">
+        <field name="name">cron.task.log.search</field>
+        <field name="model">cron.task.log</field>
+        <field name="arch" type="xml">
+            <search string="Search Run Log">
+                <field name="task_id"/>
+                <field name="technical_name"/>
+                <field name="module"/>
+                <field name="text"/>
+                <filter name="filter_error" string="Failed"
+                        domain="[('status', '=', 'error')]"/>
+                <filter name="filter_ok" string="Successful"
+                        domain="[('status', '=', 'ok')]"/>
+                <filter name="filter_locked" string="Locked"
+                        domain="[('status', '=', 'locked')]"/>
+                <filter name="filter_skipped" string="Skipped"
+                        domain="[('status', '=', 'skipped')]"/>
+                <separator/>
+                <filter name="filter_today" string="Today"
+                        domain="[('run_at', '&gt;=', (context_today() - relativedelta(days=0)).strftime('%Y-%m-%d 00:00:00'))]"/>
+                <filter name="filter_7_days" string="Last 7 days"
+                        domain="[('run_at', '&gt;=', (context_today() - relativedelta(days=7)).strftime('%Y-%m-%d 00:00:00'))]"/>
+                <separator/>
+                <filter name="filter_tick" string="Scheduled"
+                        domain="[('trigger', '=', 'tick')]"/>
+                <filter name="filter_webhook" string="Webhook"
+                        domain="[('trigger', '=', 'webhook')]"/>
+                <filter name="filter_manual" string="Manual"
+                        domain="[('trigger', '=', 'manual')]"/>
+                <group expand="0" string="Group By">
+                    <filter name="group_status" string="Status"
+                            context="{'group_by': 'status'}"/>
+                    <filter name="group_task" string="Task"
+                            context="{'group_by': 'task_id'}"/>
+                    <filter name="group_module" string="Module"
+                            context="{'group_by': 'module'}"/>
+                    <filter name="group_trigger" string="Trigger"
+                            context="{'group_by': 'trigger'}"/>
+                    <filter name="group_day" string="Day"
+                            context="{'group_by': 'run_at:day'}"/>
+                </group>
+            </search>
+        </field>
+    </record>
+
+    <!-- ================================================================
+         Action and menu.
+         Technical menu = base.menu_custom (Odoo 18).
+         ================================================================ -->
+    <record id="action_cron_task_log" model="ir.actions.act_window">
+        <field name="name">Run Log</field>
+        <field name="res_model">cron.task.log</field>
+        <field name="view_mode">list,form</field>
+        <field name="search_view_id" ref="view_cron_task_log_search"/>
+        <field name="help" type="html">
+            <p class="o_view_nocontent_smiling_face">
+                No runs recorded yet
+            </p>
+            <p>
+                Every run of a scheduled task leaves a record here — scheduled,
+                webhook or manual. Records older than
+                <code>cron_tick.log_retention_days</code> (default 90 days) are
+                removed by the daily <code>cron_log_cleanup</code> task.
+            </p>
+        </field>
+    </record>
+
+    <menuitem id="menu_cron_task_log"
+              name="Cron Runs"
+              parent="base.menu_custom"
+              action="action_cron_task_log"
+              sequence="96"/>
+
+</odoo>
