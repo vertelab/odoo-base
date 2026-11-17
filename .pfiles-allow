@@ -15,7 +15,6 @@ base_46elks_send_sms/static/src/js/fields_phone_widget.js
 base_46elks_send_sms/views/assets.xml
 base_46elks_send_sms/views/sms_view.xml
 base_ai/data/okf_artifact_types_base.xml
-base_ai/data/okf_debug_actions.xml
 base_ai/models/res_company.py
 base_ai/models/res_partner.py
 base_ai/models/res_users.py
@@ -33,11 +32,9 @@ base_allow_marketing/views/res_partner_form_inherit.xml
 base_allow_marketing/views/res_users_form_inherit.xml
 base_allow_marketing/views/signup_form_inherit.xml
 base_booking/utils.py
-base_booking/controllers/booking.py
 base_booking/controllers/calendar.py
 base_booking/controllers/calendar_view.py
 base_booking/controllers/legacy.py
-base_booking/controllers/portal.py
 base_booking/data/appointment_resource_demo.xml
 base_booking/data/appointment_type_demo.xml
 base_booking/data/calendar_data.xml
@@ -50,16 +47,13 @@ base_booking/models/booking_line.py
 base_booking/models/booking_question.py
 base_booking/models/booking_resource.py
 base_booking/models/booking_slot.py
-base_booking/models/booking_type.py
 base_booking/models/calendar_alarm.py
 base_booking/models/calendar_attendee.py
-base_booking/models/calendar_event.py
 base_booking/models/ir_binary.py
 base_booking/models/ir_http.py
 base_booking/models/res_partner.py
 base_booking/models/templates/booking_type.py
 base_booking/security/ir.model.access.csv
-base_booking/security/ir_rule_data.xml
 base_booking/security/res_groups_data.xml
 base_booking/static/description/index.html
 base_booking/static/src/appointment_plugin.js
@@ -157,8 +151,6 @@ base_booking_payment/views/booking_templates_validation.xml
 base_booking_payment/views/booking_type_views.xml
 base_booking_payment/views/calendar_booking_templates.xml
 base_booking_payment/views/calendar_booking_views.xml
-base_booking_website/controllers/booking.py
-base_booking_website/controllers/main.py
 base_booking_website/data/website_data.xml
 base_booking_website/models/booking_invite.py
 base_booking_website/models/booking_type.py
@@ -215,7 +207,6 @@ base_partner_template/static/description/index.html
 base_partner_template/views/partner_views.xml
 base_replace_user/security/ir.model.access.csv
 base_replace_user/static/description/index.html
-base_replace_user/views/user_lookup_wizard_line_views.xml
 base_replace_user/views/user_lookup_wizard_views.xml
 base_replace_user/wizard/user_lookup_wizard.py
 base_replace_user/wizard/user_lookup_wizard_line.py
@@ -256,7 +247,6 @@ base_serp/views/website_analytics_provider_views.xml
 base_serp/views/website_analytics_report_type_views.xml
 base_serp/wizards/website_analytics_report_type_preview.py
 base_serp/wizards/website_analytics_report_type_preview_views.xml
-base_user_role_default/models/portal_wizard.py
 base_user_role_default/models/res_company.py
 base_user_role_default/models/res_config_settings.py
 base_user_role_default/static/description/index.html
@@ -279,6 +269,18 @@ boat_booking/views/booking_templates_registration.xml
 boat_booking/views/calendar_event_view.xml
 boat_booking/views/templates.xml
 boat_booking/views/website.xml
+cron_tick/controllers/cron.py
+cron_tick/data/config_data.xml
+cron_tick/data/cron_log_data.xml
+cron_tick/data/cron_tick_data.xml
+cron_tick/models/cron_task.py
+cron_tick/models/cron_task_log.py
+cron_tick/models/poison_probe.py
+cron_tick/security/ir.access.csv
+cron_tick/security/ir.model.access.csv
+cron_tick/tests/test_cron_task_log.py
+cron_tick/views/cron_task_log_views.xml
+cron_tick/views/cron_task_views.xml
 discuss_multi_thread/static/description/index.html
 discuss_multi_thread/static/src/js/message_actions.js
 html_field_code_view/static/description/index.html
@@ -338,6 +340,7 @@ partner_counterpart/static/description/index.html
 partner_counterpart/views/partner_counterpart_view.xml
 partner_counterpart/views/res_partner_view.xml
 partner_enrich_base/data/ir_action.xml
+partner_enrich_base/models/enrich_format.py
 partner_enrich_base/models/res_partner.py
 partner_enrich_base/static/description/index.html
 partner_enrich_base/tools/builtwith.py
@@ -414,7 +417,6 @@ serp_serpapi/models/serp_provider.py
 serp_serpapi/static/description/index.html
 serp_serpapi/views/serp_provider_views.xml
 users_rights_listed/static/description/index.html
-users_rights_listed/views/usergroup.xml
 web_menu_no_cache/controllers/main.py
 web_menu_no_cache/static/description/index.html
 workspace_onboarding/demo/slide_slide_demo.xml
