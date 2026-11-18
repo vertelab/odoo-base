@@ -17,7 +17,9 @@
         <field name="model">calendar.event</field>
         <field name="priority" eval="2"/>
         <field name="arch" type="xml">
-            <calendar string="Bookings" date_start="start" date_stop="stop" date_delay="duration" all_day="allday"
+            <!-- date_delay was removed from the calendar arch in 20.0; the
+                 duration is derived from date_start/date_stop. -->
+            <calendar string="Bookings" date_start="start" date_stop="stop" all_day="allday"
                 event_open_popup="true"
                 event_limit="5"
                 quick_create="true"

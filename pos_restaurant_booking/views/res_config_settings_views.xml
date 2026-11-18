@@ -5,7 +5,9 @@
         <field name="model">res.config.settings</field>
         <field name="inherit_id" ref="pos_restaurant.res_config_settings_view_form"/>
         <field name="arch" type="xml">
-            <xpath expr="//block[@id='restaurant_section']//setting[@invisible='not pos_module_pos_restaurant or is_kiosk_mode']" position="replace">
+            <!-- 20.0 gave the setting an id and reordered the invisible
+                 expression (use_kiosk_mode first). Target it by id. -->
+            <xpath expr="//block[@id='restaurant_section']//setting[@id='floor_and_table_map']" position="replace">
                 <setting help="Online reservation for restaurant">
                     <field name="pos_module_pos_restaurant_booking" string="Table Booking" />
                     <div class="content-group" id="pos_table_booking" invisible="not pos_module_pos_restaurant_booking">
