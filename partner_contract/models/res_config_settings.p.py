@@ -17,7 +17,11 @@ class ConfigSettings(models.TransientModel):
 
     def action_active_paying_users(self):
         group = self.env.ref('base.group_user')
+        # #if VERSION >= "19.0"
+        res_users_ids = self.env["res.users"].search([("group_ids", "=", group.id), ("login", "!=", "admin")])
+        # #else
         res_users_ids = self.env["res.users"].search([("groups_id", "=", group.id), ("login", "!=", "admin")])
+        # #endif
         action = {
             'name': 'Active Paying Users',
             'type': 'ir.actions.act_window',
@@ -25,7 +29,7 @@ class ConfigSettings(models.TransientModel):
             # #if VERSION >= "18.0"
             'view_mode': 'list,kanban,form',
             # #elif VERSION <= "17.0"
-            'view_mode': 'tree,kanban,form',
+            'view_mode': 'list,kanban,form',
             # #endif
             'target': 'current',
             'domain': [("id", 'in', res_users_ids.ids)]

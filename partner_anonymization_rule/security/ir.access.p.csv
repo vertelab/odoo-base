@@ -1,0 +1,2 @@
+id,name,model_id:id,group_id:id,operation,domain
+partner_anonymization_rule.access_anonymization_rule,access_anonymization_rule,partner_anonymization_rule.model_anonymization_rule,base.group_user,crud,

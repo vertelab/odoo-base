@@ -5,7 +5,6 @@ import logging
 
 from collections import defaultdict
 from odoo import api, fields, models, _
-from odoo.osv import expression
 from odoo.exceptions import ValidationError
 
 _logger = logging.getLogger(__name__)

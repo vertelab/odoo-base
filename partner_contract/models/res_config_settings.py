@@ -17,7 +17,7 @@ class ConfigSettings(models.TransientModel):
 
     def action_active_paying_users(self):
         group = self.env.ref('base.group_user')
-        res_users_ids = self.env["res.users"].search([("groups_id", "=", group.id), ("login", "!=", "admin")])
+        res_users_ids = self.env["res.users"].search([("group_ids", "=", group.id), ("login", "!=", "admin")])
         action = {
             'name': 'Active Paying Users',
             'type': 'ir.actions.act_window',

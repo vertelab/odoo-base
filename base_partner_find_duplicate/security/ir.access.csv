@@ -1,0 +1,2 @@
+id,name,model_id:id,group_id:id,operation,domain
+base_partner_find_duplicate.access_find_duplicates_contacts_wizard,access_find_duplicates_contacts_wizard,base_partner_find_duplicate.model_find_duplicates_contacts_wizard,base.group_user,crud,

@@ -21,10 +21,8 @@
 
 {
     'name': 'Base: User Roles Mass addition',
-    # #if VERSION <=  "18.0" 
     'version': '1.0',
     # Version ledger: 16.0 = Odoo version. 1 = Major. Non regressionable code. 2 = Minor. New features that are regressionable. 3 = Bug fixes
-    # #endif
     'summary': 'Extends the User Roles to enable assiging several users to a role, at the same time.',
     'category': 'Tools',
     'description': """
@@ -43,7 +41,11 @@
         'views/base_user_role_mass_addition_wizard.xml',
         'views/res_user.xml',
         'data/ir.actions.xml',
+        # #if VERSION >= "20.0"
+        'security/ir.access.csv'
+        # #else
         'security/ir.model.access.csv'
+        # #endif
     ],
     'installable': True,
     'application': False,
