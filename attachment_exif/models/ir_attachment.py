@@ -37,11 +37,11 @@ class IrAttachment(models.Model):
 
     def _extract_exif(self):
         self.ensure_one()
-        if not self.datas or not self.mimetype or not self.mimetype.startswith('image/'):
+        if not self.raw or not self.mimetype or not self.mimetype.startswith('image/'):
             self.exif_ids.unlink()
             return
         try:
-            stream = BytesIO(base64.b64decode(self.datas))
+            stream = BytesIO(self.raw)
             img = Image.open(stream)
             exif_data = img._getexif()
         except Exception:

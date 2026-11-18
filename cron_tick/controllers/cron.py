@@ -35,15 +35,15 @@ class CronTriggerController(http.Controller):
         params = request.env['ir.config_parameter'].sudo()
 
         # 1. Enabled?
-        if params.get_param('cron_tick.webhook_enabled', 'True') not in (
+        if params.get_str('cron_tick.webhook_enabled', 'True') not in (
                 'True', 'true', '1'):
             return {'status': 'disabled'}
 
         # 2. Bearer token — our own key takes precedence, otherwise the
         #    saltstack key, so Salt minions do not need a second key.
-        expected = params.get_param('cron_tick.webhook_token', '')
+        expected = params.get_str('cron_tick.webhook_token', '')
         if not expected:
-            expected = params.get_param('saltstack.alert.webhook_token', '')
+            expected = params.get_str('saltstack.alert.webhook_token', '')
         auth_header = request.httprequest.headers.get('Authorization', '')
         provided = auth_header[7:] if auth_header.startswith('Bearer ') else ''
         if not expected or not hmac.compare_digest(provided, expected):

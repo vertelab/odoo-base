@@ -37,11 +37,11 @@ class FileItem:
         return 'VCARD'
 
     def serialize(self):
-        return BytesPretendingToBeString(base64.b64decode(self.item.datas or b''))
+        return BytesPretendingToBeString(base64.b64decode(self.item.raw or b''))
 
     @property
     def etag(self):
-        datas = self.item.datas
+        datas = self.item.raw
         if not datas:
             return '"empty"'
         import hashlib
