@@ -35,6 +35,37 @@ class CronTickPoisonProbe(models.AbstractModel):
         """A no-op that always succeeds — the control task in a tick."""
         return True
 
+    def write_a_param_and_succeed(self):
+        """Write something and succeed. The engine must KEEP the write.
+
+        Regression for 2026-11-19: `_close_savepoint_safely` was called with
+        a hardcoded `rollback=True` from a `finally` block that runs on both
+        paths, so every SUCCESSFUL task had its own work rolled back. The
+        task reported `status=ok` while everything it wrote disappeared —
+        `storage_collect` measured 46 minions, logged them, saved its cursor,
+        and the cursor was gone.
+
+        `last_run` and `failure_count` are written AFTER the savepoint, which
+        is exactly why the old tests missed it: they asserted on the status,
+        not on the work. This method writes INSIDE the savepoint so a test
+        can prove the write survives.
+
+        The key is per-call so parallel tests do not collide.
+        """
+        key = 'cron_tick.test.savepoint_release.%s' % self.env.cr.dbname
+        self.env['ir.config_parameter'].sudo().set_param(key, 'kept')
+        return True
+
+    def write_a_param_then_raise(self):
+        """Write something, then fail. The engine must DISCARD the write.
+
+        The mirror of the method above: a failed run must not leave partial
+        writes behind. Together they pin both sides of the rollback flag.
+        """
+        key = 'cron_tick.test.savepoint_rollback.%s' % self.env.cr.dbname
+        self.env['ir.config_parameter'].sudo().set_param(key, 'discarded')
+        raise ValueError('deliberate failure after a write')
+
     def poison_and_release_savepoint(self):
         """Abort the transaction AND leave the engine's savepoint unusable.
 
