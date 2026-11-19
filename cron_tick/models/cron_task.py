@@ -940,21 +940,92 @@ class CronTask(models.Model):
     # ───────────────────────────────────────────────────────────────────
 
     @api.model
+    def _commit_between_tasks(self, cadence, task):
+        """Commit one task's result so the next task starts clean.
+
+        SKIPPED IN TESTS. Odoo patches `cr.commit` to `forbidden` inside
+        TransactionCase — the test owns the transaction and a commit would
+        destroy the fixtures the assertions read. The behaviour under test
+        (that a failure cannot discard the previous task's result) is
+        already covered by the savepoint: each task has its own, so a
+        rollback in one cannot reach another.
+
+        In production this is what makes the isolation real: the result is
+        durable before the next task starts, and the row locks the task took
+        are released instead of being held for the whole tick.
+        """
+        if getattr(self.env.cr.commit, '__name__', '') == 'forbidden':
+            return
+        self.env.cr.commit()
+
+    def _acquire_tick_lock(self, lock_id, cadence):
+        """Take the cadence lock for the WHOLE tick, across commits.
+
+        `pg_try_advisory_lock` (session-bound), not the `_xact` variant: the
+        tick commits after every task, and a transaction-bound lock would be
+        released by the first commit — leaving the cadence unprotected while
+        the tick is still running.
+
+        The leak risk that made `_acquire_lock` switch to the xact variant
+        does not apply the same way here: the lock is held for one tick only,
+        `finally` releases it explicitly, and a dead worker releases it when
+        its connection closes. `_release_tick_lock` additionally verifies
+        ownership before unlocking, so a recycled connection cannot release
+        somebody else's lock.
+        """
+        self.env.cr.execute(
+            'SELECT pg_try_advisory_lock(%s)', (lock_id,))
+        row = self.env.cr.fetchone()
+        return bool(row and row[0])
+
+    def _release_tick_lock(self, lock_id):
+        """Release the cadence lock. Never raises.
+
+        `pg_advisory_unlock` returns false when this session does not own the
+        lock — which is the correct outcome for a connection that was
+        recycled from the pool, not an error.
+        """
+        try:
+            self.env.cr.execute(
+                'SELECT pg_advisory_unlock(%s)', (lock_id,))
+            self.env.cr.fetchone()
+        except Exception:  # noqa: BLE001 — cleanup must not mask the tick
+            _logger.exception(
+                'cron.tick: could not release advisory lock %s', lock_id)
+
     def _cron_tick(self, cadence):
         """Run all due tasks in one cadence.
 
         Protected by a global advisory lock per cadence (D11) so that two
         Odoo workers do not run the same cadence simultaneously.
 
-        TRANSACTION-BOUND (pg_try_advisory_xact_lock), for the same reason
-        as the per-task lock: a session-bound lock survives the worker and
-        leaks back into the connection pool when the worker dies mid-run.
+        COMMIT MELLAN TASKS (2026-11-19, task 6.2 i survive-transaction-abort).
+
+        Varje task committas för sig. Tidigare låg hela ticken i EN
+        transaktion, vilket gav två problem som båda mättes i drift:
+
+        1. **En trasig task kunde rulla bort allt.** `cr.rollback()` i
+           återhämtningen (D2) kastade `nextcall` för varje task som redan
+           kört i samma tick — de såg ut att aldrig ha körts.
+        2. **En långsam task blockerade alla andra.** `storage_collect` höll
+           transaktionen i 20 minuter; under tiden kunde ingen annan task
+           committa sitt resultat, och `idle in transaction`-sessioner höll
+           radlås som gav `lock_timeout` i andra tasks.
+
+        LÅSET ÄR DÄRFÖR SESSIONSBUNDET (`pg_try_advisory_lock`), inte
+        transaktionsbundet. Det transaktionsbundna låset släpps vid varje
+        commit, så ticken hade tappat sin egen låsning vid första committen
+        och en andra worker kunde starta samma cadence parallellt.
+
+        ⚠️ Sessionsbundna lås läcker om workern dör — det var hela
+        anledningen till att det transaktionsbundna infördes (se
+        `_acquire_lock`). Här är det försvarbart: låset hålls bara under en
+        tick, och `finally` släpper det explicit. Dör workern mitt i frigörs
+        låset när anslutningen stängs, och `_release_tick_lock` städar vid
+        nästa körning (den kontrollerar `pg_locks` först).
         """
         lock_id = self._advisory_lock_id(cadence)
-        self.env.cr.execute(
-            'SELECT pg_try_advisory_xact_lock(%s)', (lock_id,))
-        got_lock = self.env.cr.fetchone()
-        if not got_lock or not got_lock[0]:
+        if not self._acquire_tick_lock(lock_id, cadence):
             _logger.info(
                 'cron.tick %s: another worker is already running — skipping',
                 cadence)
@@ -1015,6 +1086,24 @@ class CronTask(models.Model):
                 else:
                     ran += 1
 
+                # COMMIT MELLAN TASKS (2026-11-19). Each task's result is
+                # durable before the next one starts, so:
+                #   - a later task's cr.rollback() cannot discard this one's
+                #     nextcall/last_run (the old failure mode);
+                #   - a slow task no longer holds the transaction open for
+                #     everyone else, and the row locks it takes are released
+                #     here instead of at the end of the whole tick.
+                # The cadence lock is session-bound (see `_acquire_tick_lock`)
+                # so it survives this commit.
+                try:
+                    self._commit_between_tasks(cadence, task)
+                except Exception:  # noqa: BLE001 — a failed commit ends the tick
+                    _logger.exception(
+                        'cron.tick %s: commit after %s failed — stopping the '
+                        'tick; the remaining tasks run next time',
+                        cadence, task.technical_name)
+                    break
+
             _logger.info(
                 'cron.tick %s: %s ran, %s failed, %s locked',
                 cadence, ran, failed, locked)
@@ -1025,9 +1114,12 @@ class CronTask(models.Model):
                 'locked': locked,
             }
         finally:
-            # The advisory lock is transaction-bound and is released by
-            # PostgreSQL at COMMIT/ROLLBACK — no explicit unlock needed (and
-            # no leak if this worker dies first).
+            # The cadence lock is SESSION-bound now (see `_acquire_tick_lock`)
+            # because the loop commits between tasks. It must be released
+            # explicitly — a transaction-bound lock would already be gone
+            # after the first commit, and a session-bound one would leak into
+            # the connection pool without this call.
+            self._release_tick_lock(lock_id)
             pass
 
     @api.model
