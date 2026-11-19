@@ -318,6 +318,10 @@ class TestAccess(TransactionCase):
             'login': 'cron_reader_test',
             # `groups_id` is the Odoo 18 field name (`group_ids` is 19+).
             'groups_id': [(6, 0, [self.env.ref('base.group_user').id])],
+            # res.users has _check_company via company_ids. Without these the
+            # user is built against an empty company list and create() fails
+            # with "Företag YourCompany finns inte bland de tillåtna
+            # företagen" — an isolated test database has no default company.
             'company_id': self.env.company.id,
             'company_ids': [(6, 0, [self.env.company.id])],
         })
