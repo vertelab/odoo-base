@@ -43,7 +43,7 @@ Genererad av `scripts/porting-status.py` — handredigera inte.
 | `base_user_role_default` | Extends the User Roles to add portal user to res.users.role. | ✓ `18.0.0.1.0` ✗ · 1 p-fil<br>⚠ `base_user_role` (finns inte i något addons-repo) |
 | `base_user_role_mass_addition` | Extends the User Roles to enable assiging several users to a role, at the same time. | ✓ `1.0` ✗ · 7 p-filer<br>⚠ `base_user_role` (finns inte i något addons-repo) |
 | `boat_booking` | Booking of boats and other bookable resources. | ✓ `18.0.1.0.0` install · 0 p-filer |
-| `cron_tick` | Declarative scheduling — one engine, five cadences | ✓ `2.5.1` install · 6 p-filer |
+| `cron_tick` | Declarative scheduling — one engine, five cadences | ✓ `2.5.2` install · 6 p-filer |
 | `discuss_multi_thread` | Multi Thread in Odoo Discuss. | ✓ `18.0.1.0.0` install · 0 p-filer |
 | `html_field_code_view` | Show Code View on HTML Field. | ✓ `18.0.0.1.0` ✗ · 0 p-filer<br>⚠ `web_editor` (finns inte i något addons-repo) |
 | `ir_module_extra_repos` | Add an extra repos. | ✓ `18.0.1.0.0` install · 0 p-filer |
