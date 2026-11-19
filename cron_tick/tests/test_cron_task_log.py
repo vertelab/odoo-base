@@ -318,6 +318,8 @@ class TestAccess(TransactionCase):
             'login': 'cron_reader_test',
             # `groups_id` is the Odoo 18 field name (`group_ids` is 19+).
             'groups_id': [(6, 0, [self.env.ref('base.group_user').id])],
+            'company_id': self.env.company.id,
+            'company_ids': [(6, 0, [self.env.company.id])],
         })
         log = self.env['cron.task.log'].sudo().create({
             'task_id': self.env['cron.task'].sudo().create({
