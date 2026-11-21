@@ -24,14 +24,14 @@ class ElkSms(models.Model):
 
     def send(self, unlink_failed=False, unlink_sent=True, auto_commit=False, raise_exception=False):
         try:
-            username, password = (self.env['ir.config_parameter'].get_param('elk_sms_auth')).split(',')
+            username, password = (self.env['ir.config_parameter'].get_str('elk_sms_auth')).split(',')
         except Exception as e:
             raise UserError(
                 _('Error. Create a system parameter called "elk_sms_auth" containing the auth info like this: '
                   'username,password'))
 
         try:
-            dryrun_toggle = (self.env['ir.config_parameter'].get_param('elk_sms_dryrun')).split(',')
+            dryrun_toggle = (self.env['ir.config_parameter'].get_str('elk_sms_dryrun')).split(',')
         except Exception as e:
             raise UserError(
                 _('Error. Create a system parameter called "elk_sms_dryrun" containing a yes or no depending on if '
@@ -46,7 +46,7 @@ class ElkSms(models.Model):
                     auth=(username, password),
                     data={'dryrun': dryrun_toggle, 'from': from_name,
                           'to': sms.convert_number(sms.number), 'message': sms.body,
-                          'whendelivered': f"{self.env['ir.config_parameter'].get_param('web.base.url')}/sms"})
+                          'whendelivered': f"{self.env['ir.config_parameter'].get_str('web.base.url')}/sms"})
                 if response.status_code == 200:
                     response = json.loads(response.content.decode("utf-8"))
                     sms.write({

@@ -21,7 +21,7 @@
 
 {
     'name': 'Base: Module XL2Install',
-    'version': '18.0.1.0.0',
+    'version': '1.0.0',
     # Version ledger: 14.0 = Odoo version. 1 = Major. Non regressionable code. 2 = Minor. New features that are regressionable. 3 = Bug fixes
     'summary': 'Install modules from a excel document.',
     'category': 'Technical',
@@ -46,7 +46,7 @@ Module XL2Install
     'depends': ['base',],
     'data': [
         'views/ir_module_view.xml',
-        'security/ir.model.access.csv'
+        'security/ir.access.csv'
     ],
     'application': False,
     'installable': True,

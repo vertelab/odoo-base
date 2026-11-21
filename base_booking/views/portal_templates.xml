@@ -14,18 +14,10 @@
     </template>
 
     <template id="portal_my_home_booking" name="Bookings" inherit_id="portal.portal_my_home">
+        <!-- Odoo 20: portal-korten är data (portal.entry), inte markup i vyn -->
         <xpath expr="//div[hasclass('o_portal_docs')]" position="before">
             <t t-set="portal_client_category_enable" t-value="True"/>
         </xpath>
-        <div id="portal_client_category" position="inside">
-            <t t-call="portal.portal_docs_entry">
-                <t t-set="icon" t-value="'/base_booking/static/src/img/calendar.svg'"/>
-                <t t-set="text">Follow, reschedule or cancel your bookings</t>
-                <t t-set="title">Bookings</t>
-                <t t-set="url" t-value="'/my/bookings'"/>
-                <t t-set="placeholder_count" t-value="'booking_count'"/>
-            </t>
-        </div>
     </template>
 
     <template id="portal_my_bookings" name="My Bookings">

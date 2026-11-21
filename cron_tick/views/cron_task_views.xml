@@ -148,14 +148,20 @@
                         domain="[('cadence', '=', 'month')]"/>
                 <filter name="filter_interval" string="Custom interval"
                         domain="[('interval_type', '!=', False)]"/>
+<<<<<<< HEAD
                 <group expand="0" string="Group By">
+=======
+>>>>>>> origin/20.0
                     <filter name="group_module" string="Module"
                             context="{'group_by': 'module'}"/>
                     <filter name="group_cadence" string="Cadence"
                             context="{'group_by': 'cadence'}"/>
                     <filter name="group_interval_type" string="Interval unit"
                             context="{'group_by': 'interval_type'}"/>
+<<<<<<< HEAD
                 </group>
+=======
+>>>>>>> origin/20.0
             </search>
         </field>
     </record>

@@ -1,6 +1,6 @@
 {
     'name': 'Base: Attachment Exif',
-    'version': '18.0.1.0.0',
+    'version': '1.0.0',
     'category': 'Technical',
     'summary': 'Extract and display EXIF metadata from image attachments.',
     'description': '''
@@ -22,7 +22,7 @@ Attachment Exif
     'repository': 'https://github.com/vertelab/odoo-base.git',
     'depends': ['base'],
     'data': [
-        'security/ir.model.access.csv',
+        'security/ir.access.csv',
         'views/ir_attachment_view.xml',
     ],
     'application': False,

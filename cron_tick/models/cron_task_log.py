@@ -160,7 +160,11 @@ class CronTaskLog(models.Model):
         A value of 0 or less disables cleanup entirely — that is the
         documented rollback switch.
         """
+<<<<<<< HEAD
         raw = self.env['ir.config_parameter'].sudo().get_param(
+=======
+        raw = self.env['ir.config_parameter'].sudo().get_str(
+>>>>>>> origin/20.0
             'cron_tick.log_retention_days', DEFAULT_RETENTION_DAYS)
         try:
             days = int(raw)

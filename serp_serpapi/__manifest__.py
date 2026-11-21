@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 {
     'name': 'Base: SerpAPI Integration',
-    'version': '18.0.1.0.0',
+    'version': '1.0.0',
     'category': 'Marketing',
     'summary': 'SerpAPI provider for reliable SERP tracking.',
     'description': '''

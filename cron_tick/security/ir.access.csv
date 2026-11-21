@@ -1,0 +1,5 @@
+id,name,model_id,group_id/id,operation,domain
+access_cron_task_user,cron.task.user,cron.task,base.group_user,r,
+access_cron_task_system,cron.task.system,cron.task,base.group_system,crud,
+access_cron_task_log_user,cron.task.log.user,cron.task.log,base.group_user,r,
+access_cron_task_log_system,cron.task.log.system,cron.task.log,base.group_system,crud,

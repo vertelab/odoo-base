@@ -14,7 +14,7 @@
                 <filter string="Selection Questions"
                     domain="[('question_id.question_type', 'in', ['checkbox', 'select', 'radio'])]"
                     name="filter_question_type_selection"/>
-                <group expand="0" string="Group By">
+                <group>
                     <filter string="Question" name="group_by_question" context="{'group_by': 'question_id'}"/>
                     <filter string="Customer" name="group_by_customer" context="{'group_by': 'partner_id'}"/>
                     <filter string="Appointment Type"

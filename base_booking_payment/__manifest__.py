@@ -3,7 +3,7 @@
     'name': 'Base: Booking Payment',
 'author': 'Vertel Sverige AB',
     'website': 'https://vertel.se/apps/odoo-base/base_booking_payment',
-    'version': '18.0.1.0.0',
+    'version': '1.0.0',
     'category': 'Booking',
     'summary': 'Booking payment.',
     'description': '''
@@ -21,7 +21,7 @@ Booking payment
     'license': 'AGPL-3',
     'depends': ['base_booking', 'account_payment'],
     'data': [
-        'security/ir.model.access.csv',
+        'security/ir.access.csv',
         #'views/booking_answer_input_views.xml',
         'views/booking_templates_appointments.xml',
         'views/booking_templates_payment.xml',

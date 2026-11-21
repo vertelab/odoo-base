@@ -192,7 +192,11 @@ class TestRetention(CronTaskTestBase):
 
     def test_old_records_deleted_new_kept(self):
         """Only records older than the window are removed."""
+<<<<<<< HEAD
         self.env['ir.config_parameter'].sudo().set_param(
+=======
+        self.env['ir.config_parameter'].sudo().set_str(
+>>>>>>> origin/20.0
             'cron_tick.log_retention_days', '90')
         old = self._make_log(120)
         fresh = self._make_log(5)
@@ -202,7 +206,11 @@ class TestRetention(CronTaskTestBase):
 
     def test_retention_value_is_respected(self):
         """Lowering the window deletes more."""
+<<<<<<< HEAD
         self.env['ir.config_parameter'].sudo().set_param(
+=======
+        self.env['ir.config_parameter'].sudo().set_str(
+>>>>>>> origin/20.0
             'cron_tick.log_retention_days', '7')
         ten_days = self._make_log(10)
         two_days = self._make_log(2)
@@ -212,7 +220,11 @@ class TestRetention(CronTaskTestBase):
 
     def test_zero_disables_cleanup(self):
         """0 is the rollback switch — nothing is deleted."""
+<<<<<<< HEAD
         self.env['ir.config_parameter'].sudo().set_param(
+=======
+        self.env['ir.config_parameter'].sudo().set_str(
+>>>>>>> origin/20.0
             'cron_tick.log_retention_days', '0')
         old = self._make_log(400)
         result = self.Log._cron_cleanup()
@@ -221,7 +233,11 @@ class TestRetention(CronTaskTestBase):
 
     def test_invalid_value_falls_back_to_default(self):
         """A garbage parameter falls back to 90 days, not to a crash."""
+<<<<<<< HEAD
         self.env['ir.config_parameter'].sudo().set_param(
+=======
+        self.env['ir.config_parameter'].sudo().set_str(
+>>>>>>> origin/20.0
             'cron_tick.log_retention_days', 'not-a-number')
         self.assertEqual(self.Log._retention_days(), 90)
 
@@ -318,12 +334,15 @@ class TestAccess(TransactionCase):
             'login': 'cron_reader_test',
             # `groups_id` is the Odoo 18 field name (`group_ids` is 19+).
             'groups_id': [(6, 0, [self.env.ref('base.group_user').id])],
+<<<<<<< HEAD
             # res.users has _check_company via company_ids. Without these the
             # user is built against an empty company list and create() fails
             # with "Företag YourCompany finns inte bland de tillåtna
             # företagen" — an isolated test database has no default company.
             'company_id': self.env.company.id,
             'company_ids': [(6, 0, [self.env.company.id])],
+=======
+>>>>>>> origin/20.0
         })
         log = self.env['cron.task.log'].sudo().create({
             'task_id': self.env['cron.task'].sudo().create({
@@ -603,6 +622,7 @@ class TestSavepointCleanup(CronTaskTestBase):
         self.assertEqual(result['failed'], 1)
         self.assertTrue(after.last_run, 'the following task never ran')
         self.assertEqual(poison.failure_count, 1)
+<<<<<<< HEAD
 
 
 class TestSavepointOutcome(CronTaskTestBase):
@@ -673,3 +693,5 @@ class TestSavepointOutcome(CronTaskTestBase):
             sig.parameters['rollback'].default, True,
             'the default must remain rollback=True: an unexpected path should '
             'discard work, not keep it')
+=======
+>>>>>>> origin/20.0

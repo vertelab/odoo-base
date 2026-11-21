@@ -6,7 +6,7 @@
     'name': 'Base: Booking Website',
     'summary': "Adds booking types to the website.",
 'author': 'Vertel Sverige AB',
-    'version': '18.0.1.0.0',
+    'version': '1.0.0',
     'category': 'Services/Appointment',
     'sequence': 215,
     'website': 'https://vertel.se/apps/odoo-base/base_booking_website',
@@ -40,7 +40,7 @@ Website Appointments
         # 'views/snippets/s_searchbar.xml',
         # 'views/snippets/snippets.xml',
         'security/calendar_security.xml',
-        'security/ir.model.access.csv',
+        'security/ir.access.csv',
     ],
     # 'demo': [
     #     'data/appointment_demo.xml',

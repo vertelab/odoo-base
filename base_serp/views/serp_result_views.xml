@@ -68,7 +68,7 @@
                     domain="[('search_date', '&gt;=', (context_today() - relativedelta(weeks=1)).strftime('%Y-%m-%d 00:00:00'))]"/>
                 <filter string="This Month" name="this_month"
                     domain="[('search_date', '&gt;=', (context_today() - relativedelta(months=1)).strftime('%Y-%m-%d 00:00:00'))]"/>
-                <group expand="0" string="Group By">
+                <group>
                     <filter string="Keyword" name="group_keyword" context="{'group_by': 'keyword'}"/>
                     <filter string="Search Date" name="group_search_date" context="{'group_by': 'search_date:month'}"/>
                 </group>

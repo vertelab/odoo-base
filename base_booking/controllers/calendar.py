@@ -11,7 +11,8 @@ from werkzeug.urls import url_encode
 from odoo import fields, _
 from odoo.addons.base.models.ir_qweb import keep_query
 from odoo.addons.calendar.controllers.main import CalendarController
-from odoo.http import content_disposition, request, route
+from odoo.http import request, route
+from odoo.http.stream import content_disposition
 from odoo.tools.misc import get_lang
 
 

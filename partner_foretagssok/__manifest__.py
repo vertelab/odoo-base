@@ -21,7 +21,11 @@
 
 {
     'name': 'Base: Enrich partner information from FöretagsAPI',
+<<<<<<< HEAD
     'version': '18.0.2.0.0',
+=======
+    'version': '1.0.0',
+>>>>>>> origin/20.0
     'summary': 'Enrich partner with data from FöretagsAPI.se',
     'category': 'Website',
     'description': '''
@@ -52,7 +56,7 @@ Enrich partner information from FöretagsAPI
         'mail',
     ],
     'data': [
-        'security/ir.model.access.csv',
+        'security/ir.access.csv',
         'data/ir_actions_server.xml',
         'views/res_config_settings_views.xml',
         'views/res_partner_views.xml',

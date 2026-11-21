@@ -5,7 +5,7 @@
         <field name="model">calendar.alarm</field>
         <field name="inherit_id" ref="calendar.calendar_alarm_view_form"/>
         <field name="arch" type="xml">
-            <xpath expr="//group[@name='right_details']/div[last()]" position="after">
+            <xpath expr="//field[@name='body']" position="after">
                 <field name="default_for_new_booking_type"/>
             </xpath>
         </field>

@@ -10,5 +10,5 @@ class Users(models.Model):
     @api.model
     def active_paying_users(self):
         group = self.env.ref('base.group_user')
-        res_users_count = self.env["res.users"].search_count([("groups_id", "=", group.id), ("login", "!=", "admin")])
+        res_users_count = self.env["res.users"].search_count([("group_ids", "=", group.id), ("login", "!=", "admin")])
         return res_users_count

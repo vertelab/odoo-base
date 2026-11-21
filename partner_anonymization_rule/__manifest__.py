@@ -3,7 +3,7 @@
 
 {
     "name": "Base: Partner Anonymization Rule",
-    "version": "18.0.1.0.0",
+    "version": "1.0.0",
     "category": "Data Protection",
     "summary": "Partner Anonymization Rule for GDPR compliance",
     "author": "Vertel Sverige AB",
@@ -12,7 +12,7 @@
     'repository': 'https://github.com/vertelab/odoo-base',
     "depends": ["privacy_partner_to_be_forgotten"],
     "data": [
-        "security/ir.model.access.csv",
+        "security/ir.access.csv",
         "views/anonymization_rule_view.xml",
         "data/ir_cron.xml",
     ],

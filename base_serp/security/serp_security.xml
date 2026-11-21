@@ -6,9 +6,16 @@
         <field name="sequence">100</field>
     </record>
 
-    <record id="group_serp_user" model="res.groups">
-        <field name="name">SERP User</field>
+    <record id="privilege_serp_user" model="res.groups.privilege">
+        <field name="name">SERP</field>
+        <field name="sequence">110</field>
         <field name="category_id" ref="module_category_serp"/>
+    </record>
+
+<record id="group_serp_user" model="res.groups">
+        <field name="privilege_id" ref="privilege_serp_user"/>
+        <field name="name">SERP User</field>
+        
         <field name="implied_ids" eval="[(4, ref('base.group_user'))]"/>
         <field name="comment">Can mark contacts for SERP tracking and manage SERP keywords.</field>
     </record>

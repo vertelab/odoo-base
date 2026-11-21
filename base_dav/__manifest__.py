@@ -3,7 +3,11 @@
 # License AGPL-3.0 or later (https://www.gnu.org/licenses/agpl.html).
 {
     "name": "Base: CalDAV and CardDAV",
+<<<<<<< HEAD
     "version": "18.0.1.0.4",
+=======
+    "version": "1.0.0",
+>>>>>>> origin/20.0
     "author": "Vertel Sverige AB, initOS GmbH,Therp BV,Odoo Community Association (OCA)",
     "website": "https://vertel.se/apps/odoo-base/base_dav",
     "license": "AGPL-3",
@@ -17,7 +21,7 @@
     ],
     "data": [
         "views/dav_collection.xml",
-        'security/ir.model.access.csv',
+        'security/ir.access.csv',
     ],
     "external_dependencies": {
         'python': ['radicale'],

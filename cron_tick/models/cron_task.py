@@ -512,6 +512,7 @@ class CronTask(models.Model):
             'duration_ms': result['duration_ms'],
         }
 
+<<<<<<< HEAD
     def _close_savepoint_safely(self, sp, rollback=True):
         """Close a savepoint without raising. Returns True when it is gone.
 
@@ -522,6 +523,11 @@ class CronTask(models.Model):
         cursor, but the cursor was gone because the cleanup rolled back the
         whole savepoint after a successful run.
 
+=======
+    def _close_savepoint_safely(self, sp):
+        """Close a savepoint without raising. Returns True when it is gone.
+
+>>>>>>> origin/20.0
         The `with cr.savepoint()` context manager cannot be trusted to clean
         up: `_FlushingSavepoint._close()` issues `ROLLBACK TO SAVEPOINT` and
         `RELEASE SAVEPOINT` bare. When the task's body has already killed the
@@ -541,7 +547,11 @@ class CronTask(models.Model):
         if sp is None or getattr(sp, 'closed', True):
             return True
         try:
+<<<<<<< HEAD
             sp.close(rollback=rollback)
+=======
+            sp.close(rollback=True)
+>>>>>>> origin/20.0
             return True
         except psycopg2.errors.InvalidSavepointSpecification:
             # The savepoint is gone (transaction aborted, or never created).
@@ -564,12 +574,15 @@ class CronTask(models.Model):
         discarded — which is correct here: the task failed, and the
         alternative is a scheduler that stops.
         """
+<<<<<<< HEAD
         # I test är `cr.rollback` patchad till Odoo:s `forbidden` (se
         # TransactionCase.setUpClass). Att anropa den fäller testet med
         # AssertionError — men den här vägen nås bara när transaktionen
         # redan är död, och i test äger ramverket den. Hoppa över.
         if getattr(self.env.cr.rollback, '__name__', '') == 'forbidden':
             return
+=======
+>>>>>>> origin/20.0
         try:
             self.env.cr.rollback()
             self.env.invalidate_all()
@@ -623,6 +636,7 @@ class CronTask(models.Model):
             except Exception as exc:  # noqa: BLE001 — the engine catches all
                 run_error = exc
             finally:
+<<<<<<< HEAD
                 # `rollback=run_error is not None`: a SUCCESSFUL run must be
                 # RELEASED, not rolled back. Rolling back a successful
                 # savepoint discards everything the task just wrote — the
@@ -631,6 +645,9 @@ class CronTask(models.Model):
                 # returned `status=ok`, and the cursor was gone.
                 closed_ok = self._close_savepoint_safely(
                     sp, rollback=run_error is not None)
+=======
+                closed_ok = self._close_savepoint_safely(sp)
+>>>>>>> origin/20.0
                 if not closed_ok:
                     self._abandon_transaction()
 
@@ -806,8 +823,11 @@ class CronTask(models.Model):
         _logger.warning(
             'cron.task: transaction was aborted, rolling back before '
             'recording — everything written in this transaction is lost')
+<<<<<<< HEAD
         if getattr(cr.rollback, '__name__', '') == 'forbidden':
             return
+=======
+>>>>>>> origin/20.0
         try:
             cr.rollback()
             self.env.invalidate_all()
@@ -940,6 +960,7 @@ class CronTask(models.Model):
     # ───────────────────────────────────────────────────────────────────
 
     @api.model
+<<<<<<< HEAD
     def _commit_between_tasks(self, cadence, task):
         """Commit one task's result so the next task starts clean.
 
@@ -993,12 +1014,15 @@ class CronTask(models.Model):
             _logger.exception(
                 'cron.tick: could not release advisory lock %s', lock_id)
 
+=======
+>>>>>>> origin/20.0
     def _cron_tick(self, cadence):
         """Run all due tasks in one cadence.
 
         Protected by a global advisory lock per cadence (D11) so that two
         Odoo workers do not run the same cadence simultaneously.
 
+<<<<<<< HEAD
         COMMIT MELLAN TASKS (2026-11-19, task 6.2 i survive-transaction-abort).
 
         Varje task committas för sig. Tidigare låg hela ticken i EN
@@ -1026,6 +1050,17 @@ class CronTask(models.Model):
         """
         lock_id = self._advisory_lock_id(cadence)
         if not self._acquire_tick_lock(lock_id, cadence):
+=======
+        TRANSACTION-BOUND (pg_try_advisory_xact_lock), for the same reason
+        as the per-task lock: a session-bound lock survives the worker and
+        leaks back into the connection pool when the worker dies mid-run.
+        """
+        lock_id = self._advisory_lock_id(cadence)
+        self.env.cr.execute(
+            'SELECT pg_try_advisory_xact_lock(%s)', (lock_id,))
+        got_lock = self.env.cr.fetchone()
+        if not got_lock or not got_lock[0]:
+>>>>>>> origin/20.0
             _logger.info(
                 'cron.tick %s: another worker is already running — skipping',
                 cadence)
@@ -1086,6 +1121,7 @@ class CronTask(models.Model):
                 else:
                     ran += 1
 
+<<<<<<< HEAD
                 # COMMIT MELLAN TASKS (2026-11-19). Each task's result is
                 # durable before the next one starts, so:
                 #   - a later task's cr.rollback() cannot discard this one's
@@ -1104,6 +1140,8 @@ class CronTask(models.Model):
                         cadence, task.technical_name)
                     break
 
+=======
+>>>>>>> origin/20.0
             _logger.info(
                 'cron.tick %s: %s ran, %s failed, %s locked',
                 cadence, ran, failed, locked)
@@ -1114,12 +1152,18 @@ class CronTask(models.Model):
                 'locked': locked,
             }
         finally:
+<<<<<<< HEAD
             # The cadence lock is SESSION-bound now (see `_acquire_tick_lock`)
             # because the loop commits between tasks. It must be released
             # explicitly — a transaction-bound lock would already be gone
             # after the first commit, and a session-bound one would leak into
             # the connection pool without this call.
             self._release_tick_lock(lock_id)
+=======
+            # The advisory lock is transaction-bound and is released by
+            # PostgreSQL at COMMIT/ROLLBACK — no explicit unlock needed (and
+            # no leak if this worker dies first).
+>>>>>>> origin/20.0
             pass
 
     @api.model

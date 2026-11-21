@@ -9,9 +9,10 @@ from markupsafe import Markup
 from odoo import _, api, Command, fields, models, SUPERUSER_ID
 from odoo.exceptions import ValidationError
 from odoo.tools.mail import email_normalize, email_split_tuples, html_sanitize, is_html_empty, plaintext2html
-from odoo.osv import expression
+from odoo.fields import Domain
 from odoo.addons.base_booking.utils import invert_intervals
-from odoo.addons.resource.models.utils import Intervals, timezone_datetime
+from odoo.tools.intervals import Intervals
+from odoo.addons.base_booking.utils import timezone_datetime
 from ..utils import interval_from_events, intervals_overlap
 
 _logger = logging.getLogger(__name__)
@@ -500,11 +501,11 @@ class CalendarEvent(models.Model):
             The read_group privacy domain adapted to include every events related to a resource booking type.
         """
         domain = super()._get_default_privacy_domain()
-        return expression.OR([domain, [
+        return Domain.OR([Domain(domain), Domain([
             '&',
             ('booking_type_id', '!=', False),
             ('booking_type_id.schedule_based_on', '=', 'resources')
-        ]])
+        ])])
 
     @api.model
     def _gantt_unavailability(self, field, res_ids, start, stop, scale):

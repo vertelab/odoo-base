@@ -11,7 +11,7 @@
                 <field name="capacity"/>
                 <separator/>
                 <filter name="filter_active" string="Archived" domain="[('active', '=', False)]"/>
-                <group expand="0" string="Group By">
+                <group>
                     <filter string="Available In" name="group_by_booking_type" context="{'group_by': 'booking_type_ids'}"/>
                 </group>
             </search>

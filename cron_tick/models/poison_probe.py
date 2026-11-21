@@ -35,6 +35,7 @@ class CronTickPoisonProbe(models.AbstractModel):
         """A no-op that always succeeds — the control task in a tick."""
         return True
 
+<<<<<<< HEAD
     def write_a_param_and_succeed(self):
         """Write something and succeed. The engine must KEEP the write.
 
@@ -66,6 +67,8 @@ class CronTickPoisonProbe(models.AbstractModel):
         self.env['ir.config_parameter'].sudo().set_param(key, 'discarded')
         raise ValueError('deliberate failure after a write')
 
+=======
+>>>>>>> origin/20.0
     def poison_and_release_savepoint(self):
         """Abort the transaction AND leave the engine's savepoint unusable.
 

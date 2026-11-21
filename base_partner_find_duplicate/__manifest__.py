@@ -23,7 +23,7 @@
 #
 {
     'name': 'Base: Partner Find Duplicate',
-    'version': '18.0.0.0.0',
+    'version': '0.0.0',
     'summary': """The module adds a new meny choice under Configuration in Contacts. This meny choice will present the existing contact, sorted by matching names, email, or phone number.""",
     'category': '', # Technical Settings|Localization|Payroll Localization|Account Charts|User types|Invoicing|Sales|Human Resources|Operations|Marketing|Manufacturing|Website|Theme|Administration|Appraisals|Sign|Helpdesk|Administration|Extra Rights|Other Extra Rights|
     'description': '''
@@ -42,7 +42,7 @@ Find Duplicate Contacts
     'license': 'AGPL-3',
     'depends': ['contacts'],
     'data': [
-        "security/ir.model.access.csv",
+        "security/ir.access.csv",
         "wizard/find_duplicates_contact_view.xml",
         "views/menu.xml",
     ],

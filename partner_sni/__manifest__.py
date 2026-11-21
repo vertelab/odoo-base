@@ -21,7 +21,7 @@
 
 {
     'name': 'Base: Res SNI',
-    'version': '18.0.1.0.0',
+    'version': '1.0.0',
     # Version ledger: 14.0 = Odoo version. 1 = Major. Non regressionable code. 2 = Minor. New features that are regressionable. 3 = Bug fixes
     'summary': 'SNI Swedish Standard Industrial Classification.',
     'category': 'Technical',
@@ -57,7 +57,7 @@ Res SNI
     'depends': ['contacts',],
     'data': [
         'data/res.sni.csv',
-        'security/ir.model.access.csv',
+        'security/ir.access.csv',
         'views/res_partner_view.xml',
         'views/res_sni_view.xml',
     ],

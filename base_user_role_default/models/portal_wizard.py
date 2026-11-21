@@ -44,7 +44,7 @@ class PortalWizardUser(models.TransientModel):
             user_sudo = self.sudo().with_company(company.id)._create_user()
 
         if not user_sudo.active or not self.is_portal:
-            user_sudo.write({'active': True, 'groups_id': [(4, group_portal.id), (3, group_public.id)]})
+            user_sudo.write({'active': True, 'group_ids': [(4, group_portal.id), (3, group_public.id)]})
             # prepare for the signup process
             user_sudo.partner_id.signup_prepare()
 
@@ -87,8 +87,8 @@ class PortalWizardUser(models.TransientModel):
                 else:
                     user_portal = user
                 wizard_user.write({'user_id': user_portal.id})
-                if not wizard_user.user_id.active or group_portal not in wizard_user.user_id.groups_id:
-                    wizard_user.user_id.write({'active': True, 'groups_id': [(4, group_portal.id)]})
+                if not wizard_user.user_id.active or group_portal not in wizard_user.user_id.group_ids:
+                    wizard_user.user_id.write({'active': True, 'group_ids': [(4, group_portal.id)]})
                     # prepare for the signup process
                     wizard_user.user_id.partner_id.signup_prepare()
                 wizard_user.with_context(active_test=True)._send_email()
@@ -98,12 +98,12 @@ class PortalWizardUser(models.TransientModel):
                 wizard_user.refresh()
             else:
                 # remove the user (if it exists) from the portal group
-                if user and group_portal in user.groups_id:
+                if user and group_portal in user.group_ids:
                     # if user belongs to portal only, deactivate it
-                    if len(user.groups_id) <= 1:
-                        user.write({'groups_id': [(3, group_portal.id)], 'active': False})
+                    if len(user.group_ids) <= 1:
+                        user.write({'group_ids': [(3, group_portal.id)], 'active': False})
                     else:
-                        user.write({'groups_id': [(3, group_portal.id)]})
+                        user.write({'group_ids': [(3, group_portal.id)]})
 
                     self._assign_user_role(default_portal_role_id, user)
 

@@ -3,11 +3,13 @@
 
     <data noupdate="1">
 
-        <record id="booking_type_rule_public" model="ir.rule">
+        <!-- 20.0: ir.rule -> ir.access (model_id/group_id/operation/domain) -->
+        <record id="booking_type_rule_public" model="ir.access">
             <field name="name">Calendar: public: published only</field>
             <field name="model_id" ref="model_booking_type"/>
-            <field name="groups" eval="[(4, ref('base.group_public')), (4, ref('base.group_portal'))]"/>
-            <field name="domain_force">[('website_published', '=', True)]</field>
+            <field name="group_id" ref="base.group_public"/>
+            <field name="operation">crud</field>
+            <field name="domain">[('website_published', '=', True)]</field>
         </record>
 
     </data>

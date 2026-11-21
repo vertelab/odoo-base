@@ -21,7 +21,7 @@
 
 {
     'name': 'Base: Partner Counterpart',
-    'version': '18.0.1.0.0',
+    'version': '1.0.0',
     # Version ledger: 14.0 = Odoo version. 1 = Major. Non regressionable code. 2 = Minor. New features that are regressionable. 3 = Bug fixes
     'summary': 'Partner Counterpart.',
     'description': '''
@@ -49,7 +49,7 @@ Partner Counterpart
     'repository': 'https://github.com/vertelab/odoo-base',
     'depends': ['base', 'contacts', 'sales_team', 'account'],
     "data": [
-        "security/ir.model.access.csv",
+        "security/ir.access.csv",
         'views/partner_counterpart_view.xml',
         # 'views/res_partner_view.xml', not sure if we need this
     ],

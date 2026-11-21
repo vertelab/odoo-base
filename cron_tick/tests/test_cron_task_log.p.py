@@ -334,12 +334,15 @@ class TestAccess(TransactionCase):
             'login': 'cron_reader_test',
             # `groups_id` is the Odoo 18 field name (`group_ids` is 19+).
             'groups_id': [(6, 0, [self.env.ref('base.group_user').id])],
+<<<<<<< HEAD
             # res.users has _check_company via company_ids. Without these the
             # user is built against an empty company list and create() fails
             # with "Företag YourCompany finns inte bland de tillåtna
             # företagen" — an isolated test database has no default company.
             'company_id': self.env.company.id,
             'company_ids': [(6, 0, [self.env.company.id])],
+=======
+>>>>>>> origin/20.0
         })
         log = self.env['cron.task.log'].sudo().create({
             'task_id': self.env['cron.task'].sudo().create({
@@ -619,6 +622,7 @@ class TestSavepointCleanup(CronTaskTestBase):
         self.assertEqual(result['failed'], 1)
         self.assertTrue(after.last_run, 'the following task never ran')
         self.assertEqual(poison.failure_count, 1)
+<<<<<<< HEAD
 
 
 class TestSavepointOutcome(CronTaskTestBase):
@@ -689,3 +693,5 @@ class TestSavepointOutcome(CronTaskTestBase):
             sig.parameters['rollback'].default, True,
             'the default must remain rollback=True: an unexpected path should '
             'discard work, not keep it')
+=======
+>>>>>>> origin/20.0

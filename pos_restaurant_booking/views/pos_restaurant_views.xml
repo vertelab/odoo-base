@@ -16,7 +16,8 @@
         <field name="model">restaurant.floor</field>
         <field name="inherit_id" ref="pos_restaurant.view_restaurant_floor_form"/>
         <field name="arch" type="xml">
-            <xpath expr="//field[@name='table_ids']//field[@name='shape']" position="after">
+            <!-- 20.0 dropped the shape column from the floor's table list. -->
+            <xpath expr="//field[@name='table_ids']//field[@name='seats']" position="after">
                 <field name="booking_resource_id" optional="hide"/>
             </xpath>
         </field>

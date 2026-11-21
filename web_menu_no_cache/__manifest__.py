@@ -2,7 +2,7 @@
 # Copyright 2026 Vertel Sverige AB — License AGPL-3.0
 {
     'name': 'Base: Web Menu No Cache',
-    'version': '18.0.1.0.0',
+    'version': '1.0.0',
     'category': 'Technical',
     'summary': 'Send no-cache for /web/webclient/load_menus so menu updates always reach clients.',
     'description': '''

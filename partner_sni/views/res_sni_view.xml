@@ -43,7 +43,7 @@
                     <separator />
                     <!-- <filter string="Main" name="parent_id_none" domain="[('parent_id','=',None)]" />
                          <filter string="Parent" name="parent_id" domain="[('parent_id','!=',None)]" /> -->
-                    <!-- <group expand="0" string="Group By">
+                    <!-- <group>
                          <filter name="parent_grp" string="Parent" context="{'group_by': 'parent_id'}" />
                          </group> -->
                 </search>
