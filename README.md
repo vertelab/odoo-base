@@ -12,65 +12,66 @@ This part will be replaced when running the oca-gen-addons-table script from OCA
 [//]: # (end addons)
 <!-- prettier-ignore-end -->
 
-## Porteringsstatus — Odoo 20.0
+## Porteringsstatus — Odoo 19.0
 
-Den här grenen är Odoo 20.0. Tabellen beskriver bara 20.0.
+Den här grenen är Odoo 19.0. Tabellen beskriver bara 19.0.
 
 Genererad av `scripts/porting-status.py` — handredigera inte.
 
-| Modul | Funktionsbeskrivning | Porteringsstatus |
+| Modul | Beskrivning | Porteringsstatus |
 |---|---|---|
-| `attachment_exif` | Extract and display EXIF metadata from image attachments. | ✓ `1.0.0` install · 2 p-filer |
-| `attachment_notebook` | Adds a notebook for other modules to populate with more functionality. | ✓ `0.1.0` install · 0 p-filer |
-| `auth_admin` | Unified password for admin. | ✓ `1.0.0` install · 3 p-filer |
-| `auth_signup_nosignup` | Removes new user signup from the front page. | ✓ `1.0.0` install · 0 p-filer |
-| `base_46elks_send_sms` | Sends SMS messages through the 46elks gateway. | ✓ `0.0.0` install · 0 p-filer |
-| `base_ai` | OKF-indexering av res.partner, res.company och res.users | ✓ `1.0.0` ✗ · 1 p-fil<br>⚠ `ai_agent_core` (odoo-ai; saknas i 20.0) |
-| `base_allow_marketing` | Opt-in for marketing email. | ✓ `1.0.0` install · 1 p-fil |
-| `base_booking` | A base module to allow booking integrations in any flow. | ✓ `1.3.0` install · 6 p-filer |
-| `base_booking_mail` | Sends emails for bookings. | ✓ `1.0.0` install · 1 p-fil |
-| `base_booking_payment` | Booking payment. | ✓ `1.0.0` install · 1 p-fil |
-| `base_booking_website` | Adds booking types to the website. | ✓ `1.0.0` install · 3 p-filer |
-| `base_dav` | Access Odoo data as calendar or address book | ✓ `1.0.0` install · 2 p-filer |
-| `base_migration_helper` | Helpers for migrating data between Odoo instances. | ✓ `1.0.0` install · 1 p-fil |
-| `base_partner_find_duplicate` | The module adds a new meny choice under Configuration in Contacts. This meny choice will present the existing contact, sorted by matching names, email, or phone number. | ✓ `0.0.0` install · 1 p-fil |
-| `base_partner_se` | Localized Partner Records. | ✓ `1.0.0` install · 0 p-filer |
-| `base_partner_template` | Marks contacts as templates for quick creation. | ✓ `1.0.0` install · 1 p-fil |
-| `base_replace_user` | Replace User on Records. | ✓ `1.0.0` install · 3 p-filer |
-| `base_security_classification` | Security Classification. | ✓ `1.0.0` ✗ · 0 p-filer<br>⚠ `server_environment_data_encryption` (odooext-OCA-server-env; 20.0-grenen är tom) |
-| `base_serp` | Track Search Engine Results Page (SERP) positions for domains and keywords. | ✓ `1.3.0` install · 1 p-fil |
-| `base_user_role_default` | Extends the User Roles to add portal user to res.users.role. | ✓ `0.1.0` ✗ · 1 p-fil<br>⚠ `base_user_role` (finns inte i något addons-repo) |
-| `base_user_role_mass_addition` | Extends the User Roles to enable assiging several users to a role, at the same time. | ✓ `1.0` ✗ · 7 p-filer<br>⚠ `base_user_role` (finns inte i något addons-repo) |
-| `boat_booking` | Booking of boats and other bookable resources. | ✓ `1.0.0` install · 0 p-filer |
-| `cron_tick` | Declarative scheduling — one engine, five cadences | ✓ `2.5.0` install · 6 p-filer |
-| `discuss_multi_thread` | Multi Thread in Odoo Discuss. | ✓ `1.0.0` install · 0 p-filer |
-| `html_field_code_view` | Show Code View on HTML Field. | ✓ `0.1.0` ✗ · 0 p-filer<br>⚠ `web_editor` (finns inte i något addons-repo) |
-| `ir_module_extra_repos` | Add an extra repos. | ✓ `1.0.0` install · 0 p-filer |
-| `ir_module_xl2install` | Install modules from a excel document. | ✓ `1.0.0` install · 1 p-fil |
-| `matomo_website_analytics` | Matomo integration for website analytics. | ✓ `1.0.0` install · 0 p-filer |
-| `model_import_directory` | Imports records from a directory of files. | ✓ `1.0.0` ✗ · 1 p-fil<br>⚠ `edi_base` (odoo-edi; saknas i 20.0) |
-| `partner_allabolag` | Enrich partner with data from Allabolag. | ✓ `1.1.0` install · 0 p-filer |
-| `partner_allabolag_bankruptcy` | Track Allabolag Partner Bankruptcy. | ✓ `1.1.0` install · 0 p-filer |
-| `partner_anonymization_rule` | Partner Anonymization Rule for GDPR compliance | ✓ `1.0.0` ✗ · 1 p-fil<br>⚠ `privacy_partner_to_be_forgotten` (odoo-oca-data-protection; saknas i 20.0) |
-| `partner_builtwith` | Enrich partner with technical information. | ✓ `1.1.0` install · 0 p-filer |
-| `partner_company_registry` | Adds a Partner Registry field to the partner object. | ✓ `1.0.0` install · 0 p-filer |
-| `partner_contract` | Short (1 phrase/line) summary of the module's purpose, used as subtitle on modules listing or apps.odoo.com | ✓ `1.0` install · 7 p-filer |
-| `partner_counterpart` | Partner Counterpart. | ✓ `1.0.0` install · 1 p-fil |
-| `partner_enrich_base` | Base module for partner data enrichment. | ✓ `1.1.0` install · 0 p-filer |
-| `partner_flip_firstname` | Change position. Replace by the other. | ✓ `0.2.0` ✗ · 0 p-filer<br>⚠ `partner_firstname` (odooext-OCA-partner-contact; 20.0-grenen är tom) |
-| `partner_flip_zip_city` | Change order to Zip, State, City. | ✓ `1.1.0` install · 0 p-filer |
-| `partner_foretagssok` | Enrich partner with data from FöretagsAPI.se | ✓ `1.0.0` install · 1 p-fil |
-| `partner_gender` | Adds a "Personal information" tab on res_partners with a gender field. | ✓ `0.1.0` install · 0 p-filer |
-| `partner_get_logos` | Get logos ========= Get logos. Features: - Extends Odoo: Builds on existing Odoo models. | ✓ `0.1.0` install · 0 p-filer |
-| `partner_legacy_id` | Stores legacy IDs on contacts. | ✓ `1.0.0` install · 0 p-filer |
-| `partner_portal_user` | Adds a field on partners that shows if the partner is connected to a portal user. | ✓ `0.1.0` install · 0 p-filer |
-| `partner_sni` | SNI Swedish Standard Industrial Classification. | ✓ `1.0.0` install · 1 p-fil |
-| `partner_ssn` | Adds social security number to partners. | ✓ `0.1.0` install · 0 p-filer |
-| `partner_uuid` | Adds a partner_uuid field to partners. | ✓ `0.1.0` install · 0 p-filer |
-| `pos_restaurant_booking` | This module lets you manage online reservations for restaurant tables. | ✓ `1.0.0` install · 3 p-filer |
-| `record_export_to_xml` | Export Records to XML. | ✓ `0.1.1` install · 1 p-fil |
-| `res_config_quests` | Add quests field to res.config.settings. | ✓ `1.0.0` install · 0 p-filer |
-| `serp_serpapi` | SerpAPI provider for reliable SERP tracking. | ✓ `1.0.0` install · 0 p-filer |
-| `users_rights_listed` | Adds a UserGroup field to the res_users tree-view in debug-mode. | ✓ `0.0.1` install · 1 p-fil |
-| `web_menu_no_cache` | Send no-cache for /web/webclient/load_menus so menu updates always reach clients. | ✓ `1.0.0` install · 0 p-filer |
-| `workspace_onboarding` | Sammanhållande onboardingskurs: navigering, mobil och PWA | ✓ `1.0.0` install · 0 p-filer |
+| `attachment_exif` | Extract and display EXIF metadata from image attachments. | ok |
+| `attachment_notebook` | Adds a notebook for other modules to populate with more functionality. | ok |
+| `auth_admin` | Unified password for admin. | ok |
+| `auth_signup_nosignup` | Removes new user signup from the front page. | ok |
+| `base_46elks_send_sms` | Sends SMS messages through the 46elks gateway. | ok |
+| `base_ai` | OKF-indexering av res.partner, res.company och res.users | blocked by ai_agent_core (Vertel) |
+| `base_allow_marketing` | Opt-in for marketing email. | ok |
+| `base_booking` | A base module to allow booking integrations in any flow. | ok |
+| `base_booking_mail` | Sends emails for bookings. | ok |
+| `base_booking_payment` | Booking payment. | ok |
+| `base_booking_website` | Adds booking types to the website. | ok |
+| `base_dav` | Access Odoo data as calendar or address book | ok |
+| `base_health_deep` | Registry-aware health endpoint for load balancers and monitoring | ok |
+| `base_migration_helper` | Helpers for migrating data between Odoo instances. | ok |
+| `base_partner_find_duplicate` | The module adds a new meny choice under Configuration in Contacts. This meny … | ok |
+| `base_partner_se` | Localized Partner Records. | ok |
+| `base_partner_template` | Marks contacts as templates for quick creation. | ok |
+| `base_replace_user` | Replace User on Records. | ok |
+| `base_security_classification` | Security Classification. | blocked by server_environment_data_encryption (OCA) |
+| `base_serp` | Track Search Engine Results Page (SERP) positions for domains and keywords. | ok |
+| `base_user_role_default` | Extends the User Roles to add portal user to res.users.role. | blocked by base_user_role (core) |
+| `base_user_role_mass_addition` | Extends the User Roles to enable assiging several users to a role, at the same … | blocked by base_user_role (core) |
+| `boat_booking` | Booking of boats and other bookable resources. | ok |
+| `cron_tick` | Declarative scheduling — one engine, five cadences | ok |
+| `discuss_multi_thread` | Multi Thread in Odoo Discuss. | ok |
+| `html_field_code_view` | Show Code View on HTML Field. | blocked by web_editor (core) |
+| `ir_module_extra_repos` | Add an extra repos. | ok |
+| `ir_module_xl2install` | Install modules from a excel document. | ok |
+| `matomo_website_analytics` | Matomo integration for website analytics. | ok |
+| `model_import_directory` | Imports records from a directory of files. | blocked by edi_base (Vertel) |
+| `partner_allabolag` | Enrich partner with data from Allabolag. | ok |
+| `partner_allabolag_bankruptcy` | Track Allabolag Partner Bankruptcy. | ok |
+| `partner_anonymization_rule` | Partner Anonymization Rule for GDPR compliance | blocked by privacy_partner_to_be_forgotten (Vertel) |
+| `partner_builtwith` | Enrich partner with technical information. | ok |
+| `partner_company_registry` | Adds a Partner Registry field to the partner object. | ok |
+| `partner_contract` | Short (1 phrase/line) summary of the module's purpose, used as subtitle on … | ok |
+| `partner_counterpart` | Partner Counterpart. | ok |
+| `partner_enrich_base` | Base module for partner data enrichment. | ok |
+| `partner_flip_firstname` | Change position. Replace by the other. | ok |
+| `partner_flip_zip_city` | Change order to Zip, State, City. | ok |
+| `partner_foretagssok` | Enrich partner with data from FöretagsAPI.se | ok |
+| `partner_gender` | Adds a "Personal information" tab on res_partners with a gender field. | ok |
+| `partner_get_logos` | Get logos ========= Get logos. Features: - Extends Odoo: Builds on existing … | ok |
+| `partner_legacy_id` | Stores legacy IDs on contacts. | ok |
+| `partner_portal_user` | Adds a field on partners that shows if the partner is connected to a portal … | ok |
+| `partner_sni` | SNI Swedish Standard Industrial Classification. | ok |
+| `partner_ssn` | Adds social security number to partners. | ok |
+| `partner_uuid` | Adds a partner_uuid field to partners. | ok |
+| `pos_restaurant_booking` | This module lets you manage online reservations for restaurant tables. | ok |
+| `record_export_to_xml` | Export Records to XML. | ok |
+| `res_config_quests` | Add quests field to res.config.settings. | ok |
+| `serp_serpapi` | SerpAPI provider for reliable SERP tracking. | ok |
+| `users_rights_listed` | Adds a UserGroup field to the res_users tree-view in debug-mode. | ok |
+| `web_menu_no_cache` | Send no-cache for /web/webclient/load_menus so menu updates always reach … | ok |
+| `workspace_onboarding` | Sammanhållande onboardingskurs: navigering, mobil och PWA | ok |
