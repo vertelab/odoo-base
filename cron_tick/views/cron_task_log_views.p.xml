@@ -103,7 +103,7 @@
                         domain="[('trigger', '=', 'webhook')]"/>
                 <filter name="filter_manual" string="Manual"
                         domain="[('trigger', '=', 'manual')]"/>
-                <!-- #if VERSION <= "19.0" -->
+                <!-- #if VERSION < "19.0" -->
                 <group expand="0" string="Group By">
                 <!-- #endif -->
                     <filter name="group_status" string="Status"
@@ -116,7 +116,7 @@
                             context="{'group_by': 'trigger'}"/>
                     <filter name="group_day" string="Day"
                             context="{'group_by': 'run_at:day'}"/>
-                <!-- #if VERSION <= "19.0" -->
+                <!-- #if VERSION < "19.0" -->
                 </group>
                 <!-- #endif -->
             </search>
