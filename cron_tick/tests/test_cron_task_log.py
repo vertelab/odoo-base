@@ -192,7 +192,7 @@ class TestRetention(CronTaskTestBase):
 
     def test_old_records_deleted_new_kept(self):
         """Only records older than the window are removed."""
-        self.env['ir.config_parameter'].sudo().set_param(
+        self.env['ir.config_parameter'].sudo().set_str(
             'cron_tick.log_retention_days', '90')
         old = self._make_log(120)
         fresh = self._make_log(5)
@@ -202,7 +202,7 @@ class TestRetention(CronTaskTestBase):
 
     def test_retention_value_is_respected(self):
         """Lowering the window deletes more."""
-        self.env['ir.config_parameter'].sudo().set_param(
+        self.env['ir.config_parameter'].sudo().set_str(
             'cron_tick.log_retention_days', '7')
         ten_days = self._make_log(10)
         two_days = self._make_log(2)
@@ -212,7 +212,7 @@ class TestRetention(CronTaskTestBase):
 
     def test_zero_disables_cleanup(self):
         """0 is the rollback switch — nothing is deleted."""
-        self.env['ir.config_parameter'].sudo().set_param(
+        self.env['ir.config_parameter'].sudo().set_str(
             'cron_tick.log_retention_days', '0')
         old = self._make_log(400)
         result = self.Log._cron_cleanup()
@@ -221,7 +221,7 @@ class TestRetention(CronTaskTestBase):
 
     def test_invalid_value_falls_back_to_default(self):
         """A garbage parameter falls back to 90 days, not to a crash."""
-        self.env['ir.config_parameter'].sudo().set_param(
+        self.env['ir.config_parameter'].sudo().set_str(
             'cron_tick.log_retention_days', 'not-a-number')
         self.assertEqual(self.Log._retention_days(), 90)
 

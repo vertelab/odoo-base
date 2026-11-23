@@ -57,7 +57,7 @@
         'mail',
     ],
     'data': [
-        'security/ir.model.access.csv',
+        'security/ir.access.csv',
         'data/config_data.xml',
         'data/cron_tick_data.xml',
         'data/cron_log_data.xml',

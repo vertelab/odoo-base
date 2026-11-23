@@ -195,7 +195,7 @@ class TestRetention(CronTaskTestBase):
         # #if VERSION >= "20.0"
         self.env['ir.config_parameter'].sudo().set_str(
         # #else
-        self.env['ir.config_parameter'].sudo().set_param(
+        self.env['ir.config_parameter'].sudo().set_str(
         # #endif
             'cron_tick.log_retention_days', '90')
         old = self._make_log(120)
@@ -209,7 +209,7 @@ class TestRetention(CronTaskTestBase):
         # #if VERSION >= "20.0"
         self.env['ir.config_parameter'].sudo().set_str(
         # #else
-        self.env['ir.config_parameter'].sudo().set_param(
+        self.env['ir.config_parameter'].sudo().set_str(
         # #endif
             'cron_tick.log_retention_days', '7')
         ten_days = self._make_log(10)
@@ -223,7 +223,7 @@ class TestRetention(CronTaskTestBase):
         # #if VERSION >= "20.0"
         self.env['ir.config_parameter'].sudo().set_str(
         # #else
-        self.env['ir.config_parameter'].sudo().set_param(
+        self.env['ir.config_parameter'].sudo().set_str(
         # #endif
             'cron_tick.log_retention_days', '0')
         old = self._make_log(400)
@@ -236,7 +236,7 @@ class TestRetention(CronTaskTestBase):
         # #if VERSION >= "20.0"
         self.env['ir.config_parameter'].sudo().set_str(
         # #else
-        self.env['ir.config_parameter'].sudo().set_param(
+        self.env['ir.config_parameter'].sudo().set_str(
         # #endif
             'cron_tick.log_retention_days', 'not-a-number')
         self.assertEqual(self.Log._retention_days(), 90)
