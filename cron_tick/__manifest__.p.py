@@ -1,11 +1,7 @@
 # -*- coding: utf-8 -*-
 {
     'name': 'Cron: Tick Engine',
-<<<<<<< HEAD
-    'version': '2.5.2',
-=======
     'version': '2.5.0',
->>>>>>> origin/20.0
     'summary': 'Declarative scheduling — one engine, five cadences',
     'category': 'Hidden',
     'author': 'Vertel Sverige AB',

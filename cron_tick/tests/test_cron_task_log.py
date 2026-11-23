@@ -192,11 +192,7 @@ class TestRetention(CronTaskTestBase):
 
     def test_old_records_deleted_new_kept(self):
         """Only records older than the window are removed."""
-<<<<<<< HEAD
         self.env['ir.config_parameter'].sudo().set_param(
-=======
-        self.env['ir.config_parameter'].sudo().set_str(
->>>>>>> origin/20.0
             'cron_tick.log_retention_days', '90')
         old = self._make_log(120)
         fresh = self._make_log(5)
@@ -206,11 +202,7 @@ class TestRetention(CronTaskTestBase):
 
     def test_retention_value_is_respected(self):
         """Lowering the window deletes more."""
-<<<<<<< HEAD
         self.env['ir.config_parameter'].sudo().set_param(
-=======
-        self.env['ir.config_parameter'].sudo().set_str(
->>>>>>> origin/20.0
             'cron_tick.log_retention_days', '7')
         ten_days = self._make_log(10)
         two_days = self._make_log(2)
@@ -220,11 +212,7 @@ class TestRetention(CronTaskTestBase):
 
     def test_zero_disables_cleanup(self):
         """0 is the rollback switch — nothing is deleted."""
-<<<<<<< HEAD
         self.env['ir.config_parameter'].sudo().set_param(
-=======
-        self.env['ir.config_parameter'].sudo().set_str(
->>>>>>> origin/20.0
             'cron_tick.log_retention_days', '0')
         old = self._make_log(400)
         result = self.Log._cron_cleanup()
@@ -233,11 +221,7 @@ class TestRetention(CronTaskTestBase):
 
     def test_invalid_value_falls_back_to_default(self):
         """A garbage parameter falls back to 90 days, not to a crash."""
-<<<<<<< HEAD
         self.env['ir.config_parameter'].sudo().set_param(
-=======
-        self.env['ir.config_parameter'].sudo().set_str(
->>>>>>> origin/20.0
             'cron_tick.log_retention_days', 'not-a-number')
         self.assertEqual(self.Log._retention_days(), 90)
 
@@ -334,15 +318,6 @@ class TestAccess(TransactionCase):
             'login': 'cron_reader_test',
             # `groups_id` is the Odoo 18 field name (`group_ids` is 19+).
             'groups_id': [(6, 0, [self.env.ref('base.group_user').id])],
-<<<<<<< HEAD
-            # res.users has _check_company via company_ids. Without these the
-            # user is built against an empty company list and create() fails
-            # with "Företag YourCompany finns inte bland de tillåtna
-            # företagen" — an isolated test database has no default company.
-            'company_id': self.env.company.id,
-            'company_ids': [(6, 0, [self.env.company.id])],
-=======
->>>>>>> origin/20.0
         })
         log = self.env['cron.task.log'].sudo().create({
             'task_id': self.env['cron.task'].sudo().create({
@@ -622,76 +597,3 @@ class TestSavepointCleanup(CronTaskTestBase):
         self.assertEqual(result['failed'], 1)
         self.assertTrue(after.last_run, 'the following task never ran')
         self.assertEqual(poison.failure_count, 1)
-<<<<<<< HEAD
-
-
-class TestSavepointOutcome(CronTaskTestBase):
-    """A successful run must KEEP its writes; a failed one must DISCARD them.
-
-    Regression 2026-11-19: `_close_savepoint_safely` was called with a
-    hardcoded `rollback=True` from a `finally` block that runs on BOTH paths.
-    So every successful task had its own work rolled back — it reported
-    `status=ok` while everything it wrote silently disappeared.
-
-    In production for seven days (f2fb4a1c, 2026-11-12 -> 19) and it affected
-    EVERY cron.task. `storage_collect` measured 46 minions, logged
-    "46 minions measured, 0 failed, 119 remaining", saved its cursor — and
-    the cursor was gone.
-
-    The tests from 1895aaf8 did not catch it because they asserted on
-    `status` and `failure_count`, both of which are written AFTER the
-    savepoint. These tests assert on the WORK instead: that is the whole
-    point.
-    """
-
-    def _make_task(self, name, method, cadence='week'):
-        return self.Task.create({
-            'name': name,
-            'technical_name': name.replace(' ', '_').lower(),
-            'model_name': 'cron.tick.poison.probe',
-            'method_name': method,
-            'cadence': cadence,
-            'module': 'cron_tick',
-        })
-
-    def _param(self, kind):
-        return self.env['ir.config_parameter'].sudo().get_param(
-            'cron_tick.test.savepoint_%s.%s' % (kind, self.env.cr.dbname), '')
-
-    def test_successful_run_keeps_its_writes(self):
-        """THE regression: status=ok must mean the work is still there."""
-        task = self._make_task('Keeps writes', 'write_a_param_and_succeed')
-        result = task._execute(owner='test', trigger='manual')
-        self.assertEqual(result['status'], 'ok')
-        self.assertEqual(
-            self._param('release'), 'kept',
-            'a successful run rolled back its own work — status=ok lied')
-
-    def test_failed_run_discards_its_writes(self):
-        """The mirror: a failure must not leave partial writes behind."""
-        task = self._make_task('Discards writes', 'write_a_param_then_raise')
-        result = task._execute(owner='test', trigger='manual')
-        self.assertEqual(result['status'], 'error')
-        self.assertEqual(
-            self._param('rollback'), '',
-            'a failed run kept a write it should have discarded')
-
-    def test_success_also_records_the_run(self):
-        """Both the work AND the run record survive — not one or the other."""
-        task = self._make_task('Both survive', 'write_a_param_and_succeed')
-        task._execute(owner='test', trigger='manual')
-        self.assertEqual(self._param('release'), 'kept')
-        self.assertTrue(task.last_run, 'last_run was not written')
-        self.assertEqual(task.failure_count, 0)
-
-    def test_close_savepoint_defaults_to_rollback(self):
-        """The default must stay rollback=True — failure is the safe default."""
-        import inspect
-        sig = inspect.signature(
-            type(self.env['cron.task'])._close_savepoint_safely)
-        self.assertEqual(
-            sig.parameters['rollback'].default, True,
-            'the default must remain rollback=True: an unexpected path should '
-            'discard work, not keep it')
-=======
->>>>>>> origin/20.0

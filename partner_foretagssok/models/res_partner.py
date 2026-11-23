@@ -44,21 +44,9 @@ class ResPartner(models.Model, ForetagsapiMappingMixin):
 
     @api.model
     def _foretagsapi_get_config(self):
-<<<<<<< HEAD
-        """Return ``(api_key, base_url)``.
-
-        The API key is an application secret and lives in keykeep, pushed to
-        ``/etc/odoo/enrich.env`` by maintenance-runner. It is deliberately not
-        read from ``ir.config_parameter``: a credential in a system parameter
-        is readable by anyone who can read settings, and it ends up in every
-        database dump.
-        """
-        base_url = self.env['ir.config_parameter'].sudo().get_param(
-=======
         params = self.env['ir.config_parameter'].sudo()
         api_key = params.get_str('partner_foretagssok.api_key', default='').strip()
         base_url = params.get_str(
->>>>>>> origin/20.0
             'partner_foretagssok.base_url',
             default=DEFAULT_BASE_URL,
         ).strip().rstrip('/')

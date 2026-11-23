@@ -21,11 +21,7 @@
 
 {
     'name': 'Base: Get logos',
-<<<<<<< HEAD
-    'version': '18.0.2.0.0',
-=======
     'version': '0.1.0',
->>>>>>> origin/20.0
     # Version ledger: 14.0 = Odoo version. 1 = Major. Non regressionable code. 2 = Minor. New features that are regressionable. 3 = Bug fixes
     'summary': 'Get logos.',
     'category': 'Website',

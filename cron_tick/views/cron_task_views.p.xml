@@ -148,11 +148,7 @@
                         domain="[('cadence', '=', 'month')]"/>
                 <filter name="filter_interval" string="Custom interval"
                         domain="[('interval_type', '!=', False)]"/>
-<<<<<<< HEAD
                 <!-- #if VERSION <= "19.0" -->
-=======
-                <!-- #if VERSION < "19.0" -->
->>>>>>> origin/20.0
                 <group expand="0" string="Group By">
                 <!-- #endif -->
                     <filter name="group_module" string="Module"
@@ -161,11 +157,7 @@
                             context="{'group_by': 'cadence'}"/>
                     <filter name="group_interval_type" string="Interval unit"
                             context="{'group_by': 'interval_type'}"/>
-<<<<<<< HEAD
                 <!-- #if VERSION <= "19.0" -->
-=======
-                <!-- #if VERSION < "19.0" -->
->>>>>>> origin/20.0
                 </group>
                 <!-- #endif -->
             </search>

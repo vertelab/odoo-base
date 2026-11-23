@@ -21,11 +21,7 @@
 
 {
     'name': 'Base: Enrich partner information from FöretagsAPI',
-<<<<<<< HEAD
-    'version': '18.0.2.0.0',
-=======
     'version': '1.0.0',
->>>>>>> origin/20.0
     'summary': 'Enrich partner with data from FöretagsAPI.se',
     'category': 'Website',
     'description': '''
