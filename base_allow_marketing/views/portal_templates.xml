@@ -22,8 +22,7 @@
     <template
         id="portal_allow_marketing"
         name="Portal Option for Marketing"
-        inherit_id="portal.address_form_fields"
-        priority="99"
+        inherit_id="portal.portal_my_details_fields"
     >
         <xpath expr="//select[@name='country_id']/.." position="after">
             <div t-attf-class="form-group #{error.get('state_id') and 'o_has_error' or ''} col-xl-6">

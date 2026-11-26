@@ -6,7 +6,10 @@ import odoo
 from odoo.modules.registry import Registry, _REGISTRY_CACHES
 from contextlib import closing, contextmanager
 from collections import defaultdict, deque
-from odoo.tools import config, lazy_classproperty, lazy_property, Collector, OrderedSet
+from odoo.tools import config, lazy_classproperty
+from odoo.tools.misc import Collector, OrderedSet
+# 18.0 keeps lazy_property in odoo.tools; 19.0 dropped it.
+from odoo.tools import lazy_property  # noqa: F401
 from odoo.tools.lru import LRU
 
 _logger = logging.getLogger(__name__)

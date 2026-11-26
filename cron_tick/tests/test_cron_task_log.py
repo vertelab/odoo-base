@@ -316,7 +316,6 @@ class TestAccess(TransactionCase):
         user = self.env['res.users'].create({
             'name': 'Cron Reader',
             'login': 'cron_reader_test',
-            # `groups_id` is the Odoo 18 field name (`group_ids` is 19+).
             'groups_id': [(6, 0, [self.env.ref('base.group_user').id])],
             # res.users has _check_company via company_ids. Without these the
             # user is built against an empty company list and create() fails

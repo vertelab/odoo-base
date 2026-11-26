@@ -20,7 +20,9 @@ class EnrichPolicyCase(TransactionCase):
         # first, matching the shipped default.
         cls.params.set_param('partner_enrich.provider_order', 'foretagssok,allabolag')
         cls.partner = cls.partner_model.create({
-            'name': '',
+            # 18.0 rejects an empty partner name (EmptyNamesError); the
+            # enrichment test overwrites it with the provider's name.
+            'name': 'Placeholder AB',
             'is_company': True,
             'country_id': cls.env.ref('base.se').id,
         })
@@ -184,6 +186,15 @@ class TestPartnerEnrich(EnrichPolicyCase):
         self.assertEqual(self.partner.zip, '111 22')
 
     def test_writes_fields_and_bookkeeping(self):
+        # #if VERSION < "19.0"
+        # 18.0's partner_firstname refuses an empty name on write, so the
+        # name is cleared in SQL — which is what "unset" means for the
+        # policy under test. 19.0+ allows the write.
+        self.env.cr.execute(
+            "UPDATE res_partner SET name = NULL WHERE id = %s",
+            (self.partner.id,))
+        self.partner.invalidate_recordset(['name'])
+        # #endif
         self._set_provider_data({
             'foretagssok': {
                 'name': 'Testbolaget AB',
