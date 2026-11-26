@@ -26,7 +26,7 @@
             <field name="res_model">user.lookup.wizard</field>
             <field name="view_mode">form</field>
             <field name="view_id" ref="view_user_lookup_wizard"/>
-            <!-- #if VERSION <= "19.0" -->
+            <!-- #if VERSION < "19.0" -->
             <field name="target">inline</field>
             <!-- #endif -->
             <!-- 20.0 removed the 'inline' target; current is the default. -->

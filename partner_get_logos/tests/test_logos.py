@@ -187,9 +187,14 @@ class TestFetchLogo(LogosCase):
         enrich.assert_called_once()
 
     def test_existing_logo_is_not_refetched(self):
-        # 20.0 wants BinaryValue, not bytes, for a binary field.
-        from odoo.tools.binary import BinaryBytes
-        self.partner.image_1920 = BinaryBytes(PNG)
+        # 20.0 wants BinaryValue (raw bytes) for a binary field; 18/19 take
+        # the base64 string.
+        try:
+            from odoo.tools.binary import BinaryBytes
+        except ImportError:
+            BinaryBytes = None
+        self.partner.image_1920 = (
+            BinaryBytes(PNG) if BinaryBytes else base64.b64encode(PNG))
         with patch.object(
             type(self.partner_model), 'partner_enrich',
         ) as enrich:

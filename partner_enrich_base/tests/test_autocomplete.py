@@ -5,6 +5,12 @@
 from odoo.tests.common import TransactionCase
 
 
+def _set_param(params, key, value):
+    """set_param on 18/19, set_str on 20 (renamed)."""
+    setter = getattr(params, 'set_str', None) or params.set_param
+    return setter(key, value)
+
+
 class AutocompleteCase(TransactionCase):
     """Fake provider plumbing for the widget-facing methods."""
 
@@ -13,7 +19,7 @@ class AutocompleteCase(TransactionCase):
         super().setUpClass()
         cls.partner_model = cls.env['res.partner']
         cls.params = cls.env['ir.config_parameter'].sudo()
-        cls.params.set_str('partner_enrich.provider_order', 'foretagssok,allabolag')
+        _set_param(cls.params, 'partner_enrich.provider_order', 'foretagssok,allabolag')
 
     def _install_provider(self, handler):
         """Install ``handler(provider_key, ctx)`` as the provider callable."""

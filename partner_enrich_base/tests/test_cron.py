@@ -9,6 +9,12 @@ from odoo import fields
 from odoo.tests.common import TransactionCase
 
 
+def _set_param(params, key, value):
+    """set_param on 18/19, set_str on 20 (renamed)."""
+    setter = getattr(params, 'set_str', None) or params.set_param
+    return setter(key, value)
+
+
 class CronCase(TransactionCase):
 
     @classmethod
@@ -16,11 +22,11 @@ class CronCase(TransactionCase):
         super().setUpClass()
         cls.partner_model = cls.env['res.partner']
         cls.params = cls.env['ir.config_parameter'].sudo()
-        cls.params.set_str('partner_enrich.provider_order', 'foretagssok')
+        _set_param(cls.params, 'partner_enrich.provider_order', 'foretagssok')
 
     def setUp(self):
         super().setUp()
-        self.params.set_str('partner_enrich.refresh_days', '365')
+        _set_param(self.params, 'partner_enrich.refresh_days', '365')
 
     def _make(self, name, **vals):
         # 20.0 computes is_company from the VAT, so a test company needs one.
@@ -43,19 +49,19 @@ class CronCase(TransactionCase):
 class TestRefreshDays(CronCase):
 
     def test_default_is_365(self):
-        self.params.set_str('partner_enrich.refresh_days', '')
+        _set_param(self.params, 'partner_enrich.refresh_days', '')
         self.assertEqual(self.partner_model._enrich_refresh_days(), 365)
 
     def test_reads_the_parameter(self):
-        self.params.set_str('partner_enrich.refresh_days', '30')
+        _set_param(self.params, 'partner_enrich.refresh_days', '30')
         self.assertEqual(self.partner_model._enrich_refresh_days(), 30)
 
     def test_garbage_falls_back_to_365(self):
-        self.params.set_str('partner_enrich.refresh_days', 'aldrig')
+        _set_param(self.params, 'partner_enrich.refresh_days', 'aldrig')
         self.assertEqual(self.partner_model._enrich_refresh_days(), 365)
 
     def test_negative_is_clamped_to_zero(self):
-        self.params.set_str('partner_enrich.refresh_days', '-5')
+        _set_param(self.params, 'partner_enrich.refresh_days', '-5')
         self.assertEqual(self.partner_model._enrich_refresh_days(), 0)
 
 

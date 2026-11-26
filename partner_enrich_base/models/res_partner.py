@@ -475,9 +475,10 @@ class ResPartner(models.Model):
         the order of a year, and re-scraping every partner nightly would be
         both pointless and hostile to the providers.
         """
-        raw = self.env['ir.config_parameter'].sudo().get_str(
-            'partner_enrich.refresh_days', default='365',
-        )
+        # 20.0 renamed get_param to get_str.
+        params = self.env['ir.config_parameter'].sudo()
+        getter = getattr(params, 'get_str', None) or params.get_param
+        raw = getter('partner_enrich.refresh_days', default='365')
         try:
             days = int(raw)
         except (TypeError, ValueError):

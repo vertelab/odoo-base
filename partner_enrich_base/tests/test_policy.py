@@ -5,6 +5,12 @@
 from odoo.tests.common import TransactionCase
 
 
+def _set_param(params, key, value):
+    """set_param on 18/19, set_str on 20 (renamed)."""
+    setter = getattr(params, 'set_str', None) or params.set_param
+    return setter(key, value)
+
+
 class EnrichPolicyCase(TransactionCase):
     """Base for dispatcher tests: fake providers, no network, no IAP."""
 
@@ -18,9 +24,11 @@ class EnrichPolicyCase(TransactionCase):
         )
         # Two fake providers, configured in this order. ``foretagssok`` comes
         # first, matching the shipped default.
-        cls.params.set_str('partner_enrich.provider_order', 'foretagssok,allabolag')
+        _set_param(cls.params, 'partner_enrich.provider_order', 'foretagssok,allabolag')
         cls.partner = cls.partner_model.create({
-            'name': '',
+            # 18.0 rejects an empty partner name (EmptyNamesError); the
+            # enrichment test overwrites it with the provider's name.
+            'name': 'Placeholder AB',
             'is_company': True,
             'country_id': cls.env.ref('base.se').id,
         })
@@ -39,37 +47,37 @@ class EnrichPolicyCase(TransactionCase):
 class TestProviderKeys(EnrichPolicyCase):
 
     def test_default_order_when_unset(self):
-        self.params.set_str('partner_enrich.provider_order', '')
+        _set_param(self.params, 'partner_enrich.provider_order', '')
         self.assertEqual(
             self.policy._enrich_provider_keys(), ['foretagssok', 'allabolag'],
         )
 
     def test_order_is_respected(self):
-        self.params.set_str('partner_enrich.provider_order', 'allabolag, foretagssok')
+        _set_param(self.params, 'partner_enrich.provider_order', 'allabolag, foretagssok')
         # Spaces around the comma must not become part of the key.
         self.assertEqual(
             self.policy._enrich_provider_keys(), ['allabolag', 'foretagssok'],
         )
 
     def test_empty_entries_are_dropped(self):
-        self.params.set_str('partner_enrich.provider_order', 'a,,b,')
+        _set_param(self.params, 'partner_enrich.provider_order', 'a,,b,')
         self.assertEqual(self.policy._enrich_provider_keys(), ['a', 'b'])
 
 
 class TestPolicy(EnrichPolicyCase):
 
     def test_default_is_fill_empty(self):
-        self.params.set_str('partner_enrich.policy.identity', '')
+        _set_param(self.params, 'partner_enrich.policy.identity', '')
         self.assertEqual(
             self.policy._enrich_policy('identity'), ('fill_empty', None),
         )
 
     def test_manual(self):
-        self.params.set_str('partner_enrich.policy.identity', 'manual')
+        _set_param(self.params, 'partner_enrich.policy.identity', 'manual')
         self.assertEqual(self.policy._enrich_policy('identity'), ('manual', None))
 
     def test_prefer_known_provider(self):
-        self.params.set_str('partner_enrich.policy.identity', 'prefer:allabolag')
+        _set_param(self.params, 'partner_enrich.policy.identity', 'prefer:allabolag')
         self.assertEqual(
             self.policy._enrich_policy('identity'), ('prefer', 'allabolag'),
         )
@@ -77,19 +85,19 @@ class TestPolicy(EnrichPolicyCase):
     def test_prefer_unknown_provider_falls_back(self):
         # A typo in the provider name must not stop enrichment; it falls back
         # to fill_empty rather than silently preferring nothing.
-        self.params.set_str('partner_enrich.policy.identity', 'prefer:bolagsverket')
+        _set_param(self.params, 'partner_enrich.policy.identity', 'prefer:bolagsverket')
         self.assertEqual(
             self.policy._enrich_policy('identity'), ('fill_empty', None),
         )
 
     def test_prefer_without_name_falls_back(self):
-        self.params.set_str('partner_enrich.policy.identity', 'prefer:')
+        _set_param(self.params, 'partner_enrich.policy.identity', 'prefer:')
         self.assertEqual(
             self.policy._enrich_policy('identity'), ('fill_empty', None),
         )
 
     def test_unknown_policy_falls_back(self):
-        self.params.set_str('partner_enrich.policy.identity', 'yolo')
+        _set_param(self.params, 'partner_enrich.policy.identity', 'yolo')
         self.assertEqual(
             self.policy._enrich_policy('identity'), ('fill_empty', None),
         )
@@ -100,7 +108,7 @@ class TestResolve(EnrichPolicyCase):
     def setUp(self):
         super().setUp()
         for group in ('identity', 'address', 'contact', 'classification'):
-            self.params.set_str('partner_enrich.policy.%s' % group, '')
+            _set_param(self.params, 'partner_enrich.policy.%s' % group, '')
 
     def test_first_provider_wins_on_conflict(self):
         collected = [
@@ -126,7 +134,7 @@ class TestResolve(EnrichPolicyCase):
         self.assertEqual(resolved, {'zip': ('111 22', 'foretagssok')})
 
     def test_manual_writes_nothing(self):
-        self.params.set_str('partner_enrich.policy.identity', 'manual')
+        _set_param(self.params, 'partner_enrich.policy.identity', 'manual')
         collected = [('foretagssok', {'name': 'Test AB', 'city': 'Stockholm'})]
         resolved = self.policy._enrich_resolve(collected, {})
         self.assertNotIn('name', resolved)
@@ -134,7 +142,7 @@ class TestResolve(EnrichPolicyCase):
         self.assertEqual(resolved['city'], ('Stockholm', 'foretagssok'))
 
     def test_prefer_overrides_existing_value(self):
-        self.params.set_str('partner_enrich.policy.identity', 'prefer:allabolag')
+        _set_param(self.params, 'partner_enrich.policy.identity', 'prefer:allabolag')
         collected = [
             ('foretagssok', {'name': 'Fel AB'}),
             ('allabolag', {'name': 'Rätt AB'}),
@@ -145,7 +153,7 @@ class TestResolve(EnrichPolicyCase):
     def test_prefer_without_data_falls_back_to_normal_precedence(self):
         # ``allabolag`` is preferred for identity but returned nothing for it;
         # the group must still be filled by whoever has data, not left empty.
-        self.params.set_str('partner_enrich.policy.identity', 'prefer:allabolag')
+        _set_param(self.params, 'partner_enrich.policy.identity', 'prefer:allabolag')
         collected = [
             ('foretagssok', {'name': 'Test AB'}),
             ('allabolag', {'city': 'Stockholm'}),
@@ -184,6 +192,17 @@ class TestPartnerEnrich(EnrichPolicyCase):
         self.assertEqual(self.partner.zip, '111 22')
 
     def test_writes_fields_and_bookkeeping(self):
+        # #if VERSION < "20.0"
+        # 18.0's partner_firstname and 19.0's res_partner_check_name both
+        # refuse an empty name, so the name is cleared in SQL — which is what
+        # "unset" means for the policy under test. 20.0 allows the write.
+        self.env.cr.execute(
+            "ALTER TABLE res_partner DROP CONSTRAINT IF EXISTS res_partner_check_name")
+        self.env.cr.execute(
+            "UPDATE res_partner SET name = NULL WHERE id = %s",
+            (self.partner.id,))
+        self.partner.invalidate_recordset(['name'])
+        # #endif
         self._set_provider_data({
             'foretagssok': {
                 'name': 'Testbolaget AB',
@@ -234,7 +253,7 @@ class TestPartnerEnrich(EnrichPolicyCase):
         self.assertFalse(self.partner.enrich_fetched_at)
 
     def test_policy_manual_blocks_write_but_keeps_bookkeeping(self):
-        self.params.set_str('partner_enrich.policy.identity', 'manual')
+        _set_param(self.params, 'partner_enrich.policy.identity', 'manual')
         self._set_provider_data({'foretagssok': {'name': 'Ny AB', 'city': 'Stockholm'}})
         self.partner.partner_enrich()
         self.assertNotEqual(self.partner.name, 'Ny AB')
