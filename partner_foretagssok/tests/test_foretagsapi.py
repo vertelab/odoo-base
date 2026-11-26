@@ -9,6 +9,12 @@ from odoo.addons.partner_enrich_base.models.enrich_format import (
     clean,
 )
 
+
+def _set_param(params, key, value):
+    """set_param on 18/19, set_str on 20 (renamed)."""
+    setter = getattr(params, 'set_str', None) or params.set_param
+    return setter(key, value)
+
 #: A FöretagsAPI company object, shaped like the real response.
 COMPANY = {
     'name': 'Testbolaget AB',
@@ -160,7 +166,8 @@ class TestProviderContract(ForetagsapiMappingCase):
 
     def test_missing_api_key_does_not_raise(self):
         """An unconfigured provider must not drown the log on every run."""
-        self.env['ir.config_parameter'].sudo().set_param(
+        _set_param(
+            self.env['ir.config_parameter'].sudo(),
             'partner_foretagssok.api_key', '',
         )
         result = self.partner_model._enrich_from_provider(

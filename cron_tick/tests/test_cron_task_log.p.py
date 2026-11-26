@@ -332,8 +332,11 @@ class TestAccess(TransactionCase):
         user = self.env['res.users'].create({
             'name': 'Cron Reader',
             'login': 'cron_reader_test',
-            # `groups_id` is the Odoo 18 field name (`group_ids` is 19+).
+            # #if VERSION >= "19.0"
+            'group_ids': [(6, 0, [self.env.ref('base.group_user').id])],
+            # #else
             'groups_id': [(6, 0, [self.env.ref('base.group_user').id])],
+            # #endif
             # res.users has _check_company via company_ids. Without these the
             # user is built against an empty company list and create() fails
             # with "Företag YourCompany finns inte bland de tillåtna
@@ -651,7 +654,11 @@ class TestSavepointOutcome(CronTaskTestBase):
         })
 
     def _param(self, kind):
+        # #if VERSION >= "20.0"
+        return self.env['ir.config_parameter'].sudo().get_str(
+        # #else
         return self.env['ir.config_parameter'].sudo().get_param(
+        # #endif
             'cron_tick.test.savepoint_%s.%s' % (kind, self.env.cr.dbname), '')
 
     def test_successful_run_keeps_its_writes(self):
