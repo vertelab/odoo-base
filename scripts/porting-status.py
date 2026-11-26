@@ -371,6 +371,34 @@ def status_cell(module: str, edition: str, manifest: dict) -> str:
 MEASUREMENT = "/tmp/install-{edition}.txt"
 
 
+def repo_owning(module: str) -> str | None:
+    """Which repo has the module on ANY edition branch — the owner."""
+    for core in CORE_ROOTS:
+        if os.path.isdir(os.path.join(core, module)):
+            return "kärnan"
+    for root in ADDON_ROOTS:
+        if not os.path.isdir(root):
+            continue
+        for name in sorted(os.listdir(root)):
+            if not (name.startswith("odoo-") or name.startswith("odooext-")):
+                continue
+            path = os.path.join(root, name)
+            if not os.path.isdir(os.path.join(path, ".git")):
+                continue
+            try:
+                refs = git("-C", path, "for-each-ref", "--format=%(refname)",
+                           "refs/remotes/origin").split()
+            except RuntimeError:
+                continue
+            for ref in refs:
+                try:
+                    if module in git("-C", path, "ls-tree", "-d", "--name-only", ref).split():
+                        return name
+                except RuntimeError:
+                    continue
+    return None
+
+
 def measured_installed(edition: str):
     """Modules measured as installed, or None when nothing was measured."""
     path = MEASUREMENT.format(edition=edition)
@@ -396,7 +424,16 @@ def measured_failure(edition: str, module: str) -> str:
         reason = parts[3].strip()
         m = re.search(r'depends on module "([^"]+)"', reason)
         if m:
-            return m.group(1) + " (repo)"
+            dep = m.group(1)
+            # Name the owner: the same module can be core, OCA or Vertel.
+            try:
+                owner = repo_owning(dep)
+                if owner:
+                    return f"{dep} ({repo_type(owner)})"
+                # Not in any repo here: core in a later edition, or absent.
+                return f"{dep} (core)"
+            except Exception:  # noqa: BLE001 — the reason is still useful
+                return dep + " (repo)"
         m = re.search(r"external dependency is not met: (?:External dependency )?(\S+)", reason)
         if m:
             return m.group(1) + " (python)"
@@ -405,7 +442,9 @@ def measured_failure(edition: str, module: str) -> str:
             return m.group(1) + " (python)"
         m = re.search(r"depends are not loaded \(([^)]+)\)", reason)
         if m:
-            return m.group(1) + " (repo)"
+            dep = m.group(1)
+            owner = repo_owning(dep)
+            return f"{dep} ({repo_type(owner)})" if owner else f"{dep} (core)"
         return reason[:60]
     return ""
 

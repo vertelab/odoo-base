@@ -25,7 +25,7 @@ Genererad av `scripts/porting-status.py` — handredigera inte.
 | `auth_admin` | Unified password for admin. | ok |
 | `auth_signup_nosignup` | Removes new user signup from the front page. | ok |
 | `base_46elks_send_sms` | Sends SMS messages through the 46elks gateway. | ok |
-| `base_ai` | OKF-indexering av res.partner, res.company och res.users | blocked by ai_agent_core (repo) |
+| `base_ai` | OKF-indexering av res.partner, res.company och res.users | blocked by ai_agent_core (Vertel) |
 | `base_allow_marketing` | Opt-in for marketing email. | ok |
 | `base_booking` | A base module to allow booking integrations in any flow. | ok |
 | `base_booking_mail` | Sends emails for bookings. | ok |
@@ -49,10 +49,10 @@ Genererad av `scripts/porting-status.py` — handredigera inte.
 | `ir_module_extra_repos` | Add an extra repos. | ok |
 | `ir_module_xl2install` | Install modules from a excel document. | ok |
 | `matomo_website_analytics` | Matomo integration for website analytics. | blocked by fake_useragent (python) |
-| `model_import_directory` | Imports records from a directory of files. | blocked by edi_base (repo) |
+| `model_import_directory` | Imports records from a directory of files. | blocked by edi_base (Vertel) |
 | `partner_allabolag` | Enrich partner with data from Allabolag. | blocked by allabolag (python) |
 | `partner_allabolag_bankruptcy` | Track Allabolag Partner Bankruptcy. | blocked by allabolag (python) |
-| `partner_anonymization_rule` | Partner Anonymization Rule for GDPR compliance | blocked by privacy_partner_to_be_forgotten (repo) |
+| `partner_anonymization_rule` | Partner Anonymization Rule for GDPR compliance | blocked by privacy_partner_to_be_forgotten (Vertel) |
 | `partner_builtwith` | Enrich partner with technical information. | blocked by builtwith (python) |
 | `partner_company_registry` | Adds a Partner Registry field to the partner object. | ok |
 | `partner_contract` | Short (1 phrase/line) summary of the module's purpose, used as subtitle on … | ok |
