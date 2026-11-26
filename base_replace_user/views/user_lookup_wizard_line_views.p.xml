@@ -38,9 +38,11 @@
                     <field name="is_updated" invisible="1"/>
                     <filter string="Not Updated" name="not_updated" domain="[('is_updated', '=', False)]"/>
                     <filter string="Updated" name="updated" domain="[('is_updated', '=', True)]"/>
-                    <group>
+                    <!-- #if VERSION <= "19.0" -->
+                    <group expand="0" string="Group By">
                         <filter string="Model" name="group_by_res_model_id" domain="[]" context="{'group_by': 'res_model_id'}"/>
                     </group>
+                    <!-- #endif -->
                 </search>
             </field>
         </record>

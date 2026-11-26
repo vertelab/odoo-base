@@ -15,7 +15,7 @@ from odoo.fields import Domain
 from odoo.osv import expression
 # #endif
 from odoo.addons.base_booking.utils import invert_intervals
-# #if VERSION >= "19.0"
+# #if VERSION >= "20.0"
 from odoo.tools.intervals import Intervals
 from odoo.addons.base_booking.utils import timezone_datetime
 # #else
