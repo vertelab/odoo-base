@@ -25,7 +25,7 @@ Genererad av `scripts/porting-status.py` — handredigera inte.
 | `auth_admin` | Unified password for admin. | ok |
 | `auth_signup_nosignup` | Removes new user signup from the front page. | ok |
 | `base_46elks_send_sms` | Sends SMS messages through the 46elks gateway. | ok |
-| `base_ai` | OKF-indexering av res.partner, res.company och res.users | blocked by web_pwa_push (repo) |
+| `base_ai` | OKF-indexering av res.partner, res.company och res.users | blocked by web_pwa_push (Vertel) |
 | `base_allow_marketing` | Opt-in for marketing email. | ok |
 | `base_booking` | A base module to allow booking integrations in any flow. | ok |
 | `base_booking_mail` | Sends emails for bookings. | ok |
@@ -58,7 +58,7 @@ Genererad av `scripts/porting-status.py` — handredigera inte.
 | `partner_contract` | Short (1 phrase/line) summary of the module's purpose, used as subtitle on … | ok |
 | `partner_counterpart` | Partner Counterpart. | ok |
 | `partner_enrich_base` | Base module for partner data enrichment. | ok |
-| `partner_flip_firstname` | Change position. Replace by the other. | blocked by partner_firstname (repo) |
+| `partner_flip_firstname` | Change position. Replace by the other. | blocked by partner_firstname (OCA) |
 | `partner_flip_zip_city` | Change order to Zip, State, City. | ok |
 | `partner_foretagssok` | Enrich partner with data from FöretagsAPI.se | ok |
 | `partner_gender` | Adds a "Personal information" tab on res_partners with a gender field. | ok |
