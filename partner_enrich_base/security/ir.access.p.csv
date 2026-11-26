@@ -1,3 +1,9 @@
+# #if VERSION >= "20.0"
 id,name,model_id,group_id/id,operation,domain
 access_res_partner_financials_user,res.partner.financials user,res_partner_financials,base.group_user,crud,
 access_res_partner_financials_portal,res.partner.financials portal,res_partner_financials,base.group_portal,r,
+# #else
+id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
+access_res_partner_financials_user,res.partner.financials user,model_res_partner_financials,base.group_user,1,1,1,1
+access_res_partner_financials_portal,res.partner.financials portal,model_res_partner_financials,base.group_portal,1,0,0,0
+# #endif
