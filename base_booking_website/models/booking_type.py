@@ -4,7 +4,6 @@
 from odoo import api, fields, models, _
 from odoo.addons.base.models.res_partner import _tz_get
 from odoo.exceptions import ValidationError
-import pandas as pd
 
 
 class BookingType(models.Model):

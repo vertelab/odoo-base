@@ -11,7 +11,8 @@ from odoo.exceptions import ValidationError
 from odoo.tools.mail import email_normalize, email_split_tuples, html_sanitize, is_html_empty, plaintext2html
 from odoo.osv import expression
 from odoo.addons.base_booking.utils import invert_intervals
-from odoo.addons.resource.models.utils import Intervals, timezone_datetime
+from odoo.tools.intervals import Intervals
+from odoo.addons.base_booking.utils import timezone_datetime
 from ..utils import interval_from_events, intervals_overlap
 
 _logger = logging.getLogger(__name__)

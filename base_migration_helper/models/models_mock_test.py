@@ -25,14 +25,15 @@ class rkDOTdocument(models.Model):
     document_type_id = fields.Many2one(string='Document Type', comodel_name='rk.document.type') #Source Module record_keeping, Module author Vertel Sverige AB
     draw_up_date = fields.Date(string='Drawn up') #Source Module record_keeping, Module author Vertel Sverige AB
     draw_up_receive_date = fields.Date(string='Drawn up/Received') #Source Module record_keeping, Module author Vertel Sverige AB
-    id = fields.Integer(string='ID', readonly=True) #Source Module record_keeping, Module author Vertel Sverige AB
+    # id is reserved: Odoo 19 rejects a field named id that is not fields.Id
+    # (TypeError: Field <model>.id is not an instance of fields.Id). #Source Module record_keeping, Module author Vertel Sverige AB
     is_official = fields.Boolean(string='Official document') #Source Module record_keeping, Module author Vertel Sverige AB
     is_secret = fields.Boolean(string='Secrecy marker') #Source Module record_keeping, Module author Vertel Sverige AB
     __last_update = fields.Datetime(string='Last Modified on', readonly=True, store=False) #Source Module record_keeping, Module author Vertel Sverige AB
     law_section_id = fields.Many2one(string='Secrecy provision', comodel_name='rk.law.section') #Source Module record_keeping, Module author Vertel Sverige AB
     matter_id = fields.Many2one(string='Matter', comodel_name='rk.matter') #Source Module record_keeping, Module author Vertel Sverige AB
     message_attachment_count = fields.Integer(string='Attachment Count', readonly=True, store=False) #Source Module record_keeping, Module author Vertel Sverige AB
-    message_channel_ids = fields.Many2many(string='Followers (Channels)', comodel_name='mail.channel', readonly=True, store=False) #Source Module record_keeping, Module author Vertel Sverige AB
+    message_channel_ids = fields.Many2many(string='Followers (Channels)', comodel_name='discuss.channel', readonly=True, store=False) #Source Module record_keeping, Module author Vertel Sverige AB
     message_follower_ids = fields.One2many(string='Followers', comodel_name='mail.followers', inverse_name='res_id') #Source Module record_keeping, Module author Vertel Sverige AB
     message_has_error = fields.Boolean(string='Message Delivery error', readonly=True, store=False) #Source Module record_keeping, Module author Vertel Sverige AB
     message_has_error_counter = fields.Integer(string='Number of errors', readonly=True, store=False) #Source Module record_keeping, Module author Vertel Sverige AB
@@ -52,7 +53,7 @@ class rkDOTdocument(models.Model):
     receiver = fields.Char(string='Receiver ') #Source Module record_keeping, Module author Vertel Sverige AB
     res_id = fields.Integer(string='Resource ID', readonly=True) #Source Module record_keeping, Module author Vertel Sverige AB
     res_model = fields.Char(string='Resource Model', readonly=True) #Source Module record_keeping, Module author Vertel Sverige AB
-    #res_ref = fields.Reference(string='Resource Reference', readonly=True, store=False) #Source Module record_keeping, Module author Vertel Sverige AB
+    #res_ref = fields.Reference([], string='Resource Reference', readonly=True, store=False) #Source Module record_keeping, Module author Vertel Sverige AB
     secrecy_grounds = fields.Char(string='Secrecy grounds') #Source Module record_keeping, Module author Vertel Sverige AB
     sender = fields.Char(string='Sender ') #Source Module record_keeping, Module author Vertel Sverige AB
     website_message_ids = fields.One2many(string='Website Messages', comodel_name='mail.message', inverse_name='res_id') #Source Module record_keeping, Module author Vertel Sverige AB
@@ -69,10 +70,11 @@ class rkDOTdocumentDOTtype(models.Model):
     create_uid = fields.Many2one(string='Created by', comodel_name='res.users', readonly=True) #Source Module record_keeping, Module author Vertel Sverige AB
     description = fields.Char(string='Description') #Source Module record_keeping, Module author Vertel Sverige AB
     display_name = fields.Char(string='Display Name', readonly=True, store=False) #Source Module record_keeping, Module author Vertel Sverige AB
-    id = fields.Integer(string='ID', readonly=True) #Source Module record_keeping, Module author Vertel Sverige AB
+    # id is reserved: Odoo 19 rejects a field named id that is not fields.Id
+    # (TypeError: Field <model>.id is not an instance of fields.Id). #Source Module record_keeping, Module author Vertel Sverige AB
     __last_update = fields.Datetime(string='Last Modified on', readonly=True, store=False) #Source Module record_keeping, Module author Vertel Sverige AB
     message_attachment_count = fields.Integer(string='Attachment Count', readonly=True, store=False) #Source Module sks_record_keeping, Module author Vertel Sverige AB
-    message_channel_ids = fields.Many2many(string='Followers (Channels)', comodel_name='mail.channel', readonly=True, store=False) #Source Module sks_record_keeping, Module author Vertel Sverige AB
+    message_channel_ids = fields.Many2many(string='Followers (Channels)', comodel_name='discuss.channel', readonly=True, store=False) #Source Module sks_record_keeping, Module author Vertel Sverige AB
     message_follower_ids = fields.One2many(string='Followers', comodel_name='mail.followers', inverse_name='res_id') #Source Module sks_record_keeping, Module author Vertel Sverige AB
     message_has_error = fields.Boolean(string='Message Delivery error', readonly=True, store=False) #Source Module sks_record_keeping, Module author Vertel Sverige AB
     message_has_error_counter = fields.Integer(string='Number of errors', readonly=True, store=False) #Source Module sks_record_keeping, Module author Vertel Sverige AB
@@ -107,10 +109,11 @@ class rkDOTlawDOTsection(models.Model):
     create_uid = fields.Many2one(string='Created by', comodel_name='res.users', readonly=True) #Source Module record_keeping, Module author Vertel Sverige AB
     description = fields.Html(string='Description') #Source Module record_keeping, Module author Vertel Sverige AB
     display_name = fields.Char(string='Display Name', readonly=True, store=False) #Source Module record_keeping, Module author Vertel Sverige AB
-    id = fields.Integer(string='ID', readonly=True) #Source Module record_keeping, Module author Vertel Sverige AB
+    # id is reserved: Odoo 19 rejects a field named id that is not fields.Id
+    # (TypeError: Field <model>.id is not an instance of fields.Id). #Source Module record_keeping, Module author Vertel Sverige AB
     __last_update = fields.Datetime(string='Last Modified on', readonly=True, store=False) #Source Module record_keeping, Module author Vertel Sverige AB
     message_attachment_count = fields.Integer(string='Attachment Count', readonly=True, store=False) #Source Module record_keeping, Module author Vertel Sverige AB
-    message_channel_ids = fields.Many2many(string='Followers (Channels)', comodel_name='mail.channel', readonly=True, store=False) #Source Module record_keeping, Module author Vertel Sverige AB
+    message_channel_ids = fields.Many2many(string='Followers (Channels)', comodel_name='discuss.channel', readonly=True, store=False) #Source Module record_keeping, Module author Vertel Sverige AB
     message_follower_ids = fields.One2many(string='Followers', comodel_name='mail.followers', inverse_name='res_id') #Source Module record_keeping, Module author Vertel Sverige AB
     message_has_error = fields.Boolean(string='Message Delivery error', readonly=True, store=False) #Source Module record_keeping, Module author Vertel Sverige AB
     message_has_error_counter = fields.Integer(string='Number of errors', readonly=True, store=False) #Source Module record_keeping, Module author Vertel Sverige AB
@@ -158,7 +161,8 @@ class rkDOTmatter(models.Model):
     document_type_id = fields.Many2one(string='Document Type', comodel_name='rk.document.type') #Source Module record_keeping, Module author Vertel Sverige AB
     draw_up_date = fields.Date(string='Drawn up') #Source Module record_keeping, Module author Vertel Sverige AB
     draw_up_receive_date = fields.Date(string='Drawn up/Received') #Source Module record_keeping, Module author Vertel Sverige AB
-    id = fields.Integer(string='ID', readonly=True) #Source Module record_keeping, Module author Vertel Sverige AB
+    # id is reserved: Odoo 19 rejects a field named id that is not fields.Id
+    # (TypeError: Field <model>.id is not an instance of fields.Id). #Source Module record_keeping, Module author Vertel Sverige AB
     is_official = fields.Boolean(string='Official document') #Source Module record_keeping, Module author Vertel Sverige AB
     is_secret = fields.Boolean(string='Secrecy marker') #Source Module record_keeping, Module author Vertel Sverige AB
     __last_update = fields.Datetime(string='Last Modified on', readonly=True, store=False) #Source Module record_keeping, Module author Vertel Sverige AB
@@ -167,7 +171,7 @@ class rkDOTmatter(models.Model):
     legacy_reg_no = fields.Char(string='Legacy registration number') #Source Module record_keeping, Module author Vertel Sverige AB
     matter_name = fields.Char(string='Matter Name') #Source Module record_keeping, Module author Vertel Sverige AB
     message_attachment_count = fields.Integer(string='Attachment Count', readonly=True, store=False) #Source Module record_keeping, Module author Vertel Sverige AB
-    message_channel_ids = fields.Many2many(string='Followers (Channels)', comodel_name='mail.channel', readonly=True, store=False) #Source Module record_keeping, Module author Vertel Sverige AB
+    message_channel_ids = fields.Many2many(string='Followers (Channels)', comodel_name='discuss.channel', readonly=True, store=False) #Source Module record_keeping, Module author Vertel Sverige AB
     message_follower_ids = fields.One2many(string='Followers', comodel_name='mail.followers', inverse_name='res_id') #Source Module record_keeping, Module author Vertel Sverige AB
     message_has_error = fields.Boolean(string='Message Delivery error', readonly=True, store=False) #Source Module record_keeping, Module author Vertel Sverige AB
     message_has_error_counter = fields.Integer(string='Number of errors', readonly=True, store=False) #Source Module record_keeping, Module author Vertel Sverige AB
@@ -205,7 +209,8 @@ class rkDOTclassification(models.Model):
     description = fields.Char(string='Description') #Source Module record_keeping, Module author Vertel Sverige AB
     display_name = fields.Char(string='Display Name', readonly=True, store=False) #Source Module record_keeping, Module author Vertel Sverige AB
     has_types = fields.Boolean(string='Has Types') #Source Module record_keeping, Module author Vertel Sverige AB
-    id = fields.Integer(string='ID', readonly=True) #Source Module record_keeping, Module author Vertel Sverige AB
+    # id is reserved: Odoo 19 rejects a field named id that is not fields.Id
+    # (TypeError: Field <model>.id is not an instance of fields.Id). #Source Module record_keeping, Module author Vertel Sverige AB
     __last_update = fields.Datetime(string='Last Modified on', readonly=True, store=False) #Source Module record_keeping, Module author Vertel Sverige AB
     name = fields.Char(string='Name', readonly=True) #Source Module record_keeping, Module author Vertel Sverige AB
     parent_id = fields.Many2one(string='Parent Structure', comodel_name='rk.classification') #Source Module record_keeping, Module author Vertel Sverige AB
@@ -223,7 +228,7 @@ class rkDOTdocumentDOTmixin(models.Model):
     activity_date_deadline = fields.Date(string='Next Activity Deadline', readonly=True, store=False) #Source Module record_keeping, Module author Vertel Sverige AB
     activity_exception_decoration = fields.Selection(string='Activity Exception Decoration', readonly=True, store=False, selection=[]) #Source Module record_keeping, Module author Vertel Sverige AB
     activity_exception_icon = fields.Char(string='Icon', readonly=True, store=False) #Source Module record_keeping, Module author Vertel Sverige AB
-    activity_ids = fields.One2many(string='Activities', comodel_name='mail.activity', inverse_name='False', store=False) #Source Module record_keeping, Module author Vertel Sverige AB
+    activity_ids = fields.One2many(string='Activities', comodel_name='mail.activity', inverse_name='res_id', store=False) #Source Module record_keeping, Module author Vertel Sverige AB
     activity_state = fields.Selection(string='Activity State', readonly=True, store=False, selection=[]) #Source Module record_keeping, Module author Vertel Sverige AB
     activity_summary = fields.Char(string='Next Activity Summary', store=False) #Source Module record_keeping, Module author Vertel Sverige AB
     activity_type_icon = fields.Char(string='Activity Type Icon', readonly=True, store=False) #Source Module record_keeping, Module author Vertel Sverige AB
@@ -237,22 +242,23 @@ class rkDOTdocumentDOTmixin(models.Model):
     display_name = fields.Char(string='Display Name', readonly=True, store=False) #Source Module record_keeping, Module author Vertel Sverige AB
     document_id = fields.Many2one(string='Document', comodel_name='rk.document') #Source Module record_keeping, Module author Vertel Sverige AB
     document_no = fields.Char(string='Document number', readonly=True, store=False) #Source Module record_keeping, Module author Vertel Sverige AB
-    document_ref = fields.Reference(string='Document Reference', readonly=True, store=False) #Source Module record_keeping, Module author Vertel Sverige AB
+    document_ref = fields.Reference([], string='Document Reference', readonly=True, store=False) #Source Module record_keeping, Module author Vertel Sverige AB
     document_type_id = fields.Many2one(string='Document Type', comodel_name='rk.document.type', store=False) #Source Module record_keeping, Module author Vertel Sverige AB
     draw_up_date = fields.Date(string='Drawn up', store=False) #Source Module record_keeping, Module author Vertel Sverige AB
     draw_up_receive_date = fields.Date(string='Drawn up/Received', store=False) #Source Module record_keeping, Module author Vertel Sverige AB
-    id = fields.Integer(string='ID', readonly=True) #Source Module record_keeping, Module author Vertel Sverige AB
+    # id is reserved: Odoo 19 rejects a field named id that is not fields.Id
+    # (TypeError: Field <model>.id is not an instance of fields.Id). #Source Module record_keeping, Module author Vertel Sverige AB
     is_official = fields.Boolean(string='Official document', store=False) #Source Module record_keeping, Module author Vertel Sverige AB
     is_secret = fields.Boolean(string='Secrecy marker', store=False) #Source Module record_keeping, Module author Vertel Sverige AB
     __last_update = fields.Datetime(string='Last Modified on', readonly=True, store=False) #Source Module record_keeping, Module author Vertel Sverige AB
     law_section_id = fields.Many2one(string='Secrecy provision', comodel_name='rk.law.section', store=False) #Source Module record_keeping, Module author Vertel Sverige AB
     matter_id = fields.Many2one(string='Matter', comodel_name='rk.matter', store=False) #Source Module record_keeping, Module author Vertel Sverige AB
     message_attachment_count = fields.Integer(string='Attachment Count', readonly=True, store=False) #Source Module record_keeping, Module author Vertel Sverige AB
-    message_channel_ids = fields.Many2many(string='Followers (Channels)', comodel_name='mail.channel', readonly=True, store=False) #Source Module record_keeping, Module author Vertel Sverige AB
-    message_follower_ids = fields.One2many(string='Followers', comodel_name='mail.followers', inverse_name='False', store=False) #Source Module record_keeping, Module author Vertel Sverige AB
+    message_channel_ids = fields.Many2many(string='Followers (Channels)', comodel_name='discuss.channel', readonly=True, store=False) #Source Module record_keeping, Module author Vertel Sverige AB
+    message_follower_ids = fields.One2many(string='Followers', comodel_name='mail.followers', inverse_name='res_id', store=False) #Source Module record_keeping, Module author Vertel Sverige AB
     message_has_error = fields.Boolean(string='Message Delivery error', readonly=True, store=False) #Source Module record_keeping, Module author Vertel Sverige AB
     message_has_error_counter = fields.Integer(string='Number of errors', readonly=True, store=False) #Source Module record_keeping, Module author Vertel Sverige AB
-    message_ids = fields.One2many(string='Messages', comodel_name='mail.message', inverse_name='False', store=False) #Source Module record_keeping, Module author Vertel Sverige AB
+    message_ids = fields.One2many(string='Messages', comodel_name='mail.message', inverse_name='res_id', store=False) #Source Module record_keeping, Module author Vertel Sverige AB
     message_is_follower = fields.Boolean(string='Is Follower', readonly=True, store=False) #Source Module record_keeping, Module author Vertel Sverige AB
     message_main_attachment_id = fields.Many2one(string='Main Attachment', comodel_name='ir.attachment', store=False) #Source Module record_keeping, Module author Vertel Sverige AB
     message_needaction = fields.Boolean(string='Action Needed', readonly=True, store=False) #Source Module record_keeping, Module author Vertel Sverige AB
@@ -268,10 +274,10 @@ class rkDOTdocumentDOTmixin(models.Model):
     receiver = fields.Char(string='Receiver ', store=False) #Source Module record_keeping, Module author Vertel Sverige AB
     res_id = fields.Integer(string='Resource ID', readonly=True, store=False) #Source Module record_keeping, Module author Vertel Sverige AB
     res_model = fields.Char(string='Resource Model', readonly=True, store=False) #Source Module record_keeping, Module author Vertel Sverige AB
-    res_ref = fields.Reference(string='Resource Reference', readonly=True, store=False) #Source Module record_keeping, Module author Vertel Sverige AB
+    res_ref = fields.Reference([], string='Resource Reference', readonly=True, store=False) #Source Module record_keeping, Module author Vertel Sverige AB
     secrecy_grounds = fields.Char(string='Secrecy grounds', store=False) #Source Module record_keeping, Module author Vertel Sverige AB
     sender = fields.Char(string='Sender ', store=False) #Source Module record_keeping, Module author Vertel Sverige AB
-    website_message_ids = fields.One2many(string='Website Messages', comodel_name='mail.message', inverse_name='False', store=False) #Source Module record_keeping, Module author Vertel Sverige AB
+    website_message_ids = fields.One2many(string='Website Messages', comodel_name='mail.message', inverse_name='res_id', store=False) #Source Module record_keeping, Module author Vertel Sverige AB
     write_date = fields.Datetime(string='Last Updated on', readonly=True, store=False) #Source Module record_keeping, Module author Vertel Sverige AB
     write_uid = fields.Many2one(string='Last Updated by', comodel_name='res.users', readonly=True, store=False) #Source Module record_keeping, Module author Vertel Sverige AB
 
@@ -284,7 +290,8 @@ class rkDOTmixin(models.Model):
     document_type_id = fields.Many2one(string='Document Type', comodel_name='rk.document.type') #Source Module record_keeping, Module author Vertel Sverige AB
     draw_up_date = fields.Date(string='Drawn up') #Source Module record_keeping, Module author Vertel Sverige AB
     draw_up_receive_date = fields.Date(string='Drawn up/Received') #Source Module record_keeping, Module author Vertel Sverige AB
-    id = fields.Integer(string='ID', readonly=True) #Source Module record_keeping, Module author Vertel Sverige AB
+    # id is reserved: Odoo 19 rejects a field named id that is not fields.Id
+    # (TypeError: Field <model>.id is not an instance of fields.Id). #Source Module record_keeping, Module author Vertel Sverige AB
     is_official = fields.Boolean(string='Official document') #Source Module record_keeping, Module author Vertel Sverige AB
     is_secret = fields.Boolean(string='Secrecy marker') #Source Module record_keeping, Module author Vertel Sverige AB
     __last_update = fields.Datetime(string='Last Modified on', readonly=True, store=False) #Source Module record_keeping, Module author Vertel Sverige AB
@@ -302,7 +309,7 @@ class rkDOTmail(models.Model):
     activity_date_deadline = fields.Date(string='Next Activity Deadline', readonly=True, store=False) #Source Module record_keeping, Module author Vertel Sverige AB
     activity_exception_decoration = fields.Selection(string='Activity Exception Decoration', readonly=True, store=False, selection=[]) #Source Module record_keeping, Module author Vertel Sverige AB
     activity_exception_icon = fields.Char(string='Icon', readonly=True, store=False) #Source Module record_keeping, Module author Vertel Sverige AB
-    activity_ids = fields.One2many(string='Activities', comodel_name='mail.activity', inverse_name='False', store=False) #Source Module record_keeping, Module author Vertel Sverige AB
+    activity_ids = fields.One2many(string='Activities', comodel_name='mail.activity', inverse_name='res_id', store=False) #Source Module record_keeping, Module author Vertel Sverige AB
     activity_state = fields.Selection(string='Activity State', readonly=True, store=False, selection=[]) #Source Module record_keeping, Module author Vertel Sverige AB
     activity_summary = fields.Char(string='Next Activity Summary', store=False) #Source Module record_keeping, Module author Vertel Sverige AB
     activity_type_icon = fields.Char(string='Activity Type Icon', readonly=True, store=False) #Source Module record_keeping, Module author Vertel Sverige AB
@@ -321,7 +328,7 @@ class rkDOTmail(models.Model):
     display_name = fields.Char(string='Display Name', readonly=True, store=False) #Source Module record_keeping, Module author Vertel Sverige AB
     document_id = fields.Many2one(string='Document', comodel_name='rk.document') #Source Module record_keeping, Module author Vertel Sverige AB
     document_no = fields.Char(string='Document number', readonly=True, store=False) #Source Module record_keeping, Module author Vertel Sverige AB
-    document_ref = fields.Reference(string='Document Reference', readonly=True, store=False) #Source Module record_keeping, Module author Vertel Sverige AB
+    document_ref = fields.Reference([], string='Document Reference', readonly=True, store=False) #Source Module record_keeping, Module author Vertel Sverige AB
     document_type_id = fields.Many2one(string='Document Type', comodel_name='rk.document.type', store=False) #Source Module record_keeping, Module author Vertel Sverige AB
     draw_up_date = fields.Date(string='Drawn up', store=False) #Source Module record_keeping, Module author Vertel Sverige AB
     draw_up_receive_date = fields.Date(string='Drawn up/Received', store=False) #Source Module record_keeping, Module author Vertel Sverige AB
@@ -329,7 +336,8 @@ class rkDOTmail(models.Model):
     email_from = fields.Char(string='From', readonly=True) #Source Module record_keeping, Module author Vertel Sverige AB
     email_to = fields.Text(string='To', readonly=True) #Source Module record_keeping, Module author Vertel Sverige AB
     headers = fields.Text(string='Headers', readonly=True) #Source Module record_keeping, Module author Vertel Sverige AB
-    id = fields.Integer(string='ID', readonly=True) #Source Module record_keeping, Module author Vertel Sverige AB
+    # id is reserved: Odoo 19 rejects a field named id that is not fields.Id
+    # (TypeError: Field <model>.id is not an instance of fields.Id). #Source Module record_keeping, Module author Vertel Sverige AB
     is_official = fields.Boolean(string='Official document', store=False) #Source Module record_keeping, Module author Vertel Sverige AB
     is_secret = fields.Boolean(string='Secrecy marker', store=False) #Source Module record_keeping, Module author Vertel Sverige AB
     __last_update = fields.Datetime(string='Last Modified on', readonly=True, store=False) #Source Module record_keeping, Module author Vertel Sverige AB
@@ -337,12 +345,12 @@ class rkDOTmail(models.Model):
     mail_server_id = fields.Many2one(string='Outgoing mail server', comodel_name='ir.mail_server', readonly=True) #Source Module record_keeping, Module author Vertel Sverige AB
     matter_id = fields.Many2one(string='Matter', comodel_name='rk.matter', store=False) #Source Module record_keeping, Module author Vertel Sverige AB
     message_attachment_count = fields.Integer(string='Attachment Count', readonly=True, store=False) #Source Module record_keeping, Module author Vertel Sverige AB
-    message_channel_ids = fields.Many2many(string='Followers (Channels)', comodel_name='mail.channel', readonly=True, store=False) #Source Module record_keeping, Module author Vertel Sverige AB
-    message_follower_ids = fields.One2many(string='Followers', comodel_name='mail.followers', inverse_name='False', store=False) #Source Module record_keeping, Module author Vertel Sverige AB
+    message_channel_ids = fields.Many2many(string='Followers (Channels)', comodel_name='discuss.channel', readonly=True, store=False) #Source Module record_keeping, Module author Vertel Sverige AB
+    message_follower_ids = fields.One2many(string='Followers', comodel_name='mail.followers', inverse_name='res_id', store=False) #Source Module record_keeping, Module author Vertel Sverige AB
     message_has_error = fields.Boolean(string='Message Delivery error', readonly=True, store=False) #Source Module record_keeping, Module author Vertel Sverige AB
     message_has_error_counter = fields.Integer(string='Number of errors', readonly=True, store=False) #Source Module record_keeping, Module author Vertel Sverige AB
     message_id = fields.Char(string='Message-Id', readonly=True) #Source Module record_keeping, Module author Vertel Sverige AB
-    message_ids = fields.One2many(string='Messages', comodel_name='mail.message', inverse_name='False', store=False) #Source Module record_keeping, Module author Vertel Sverige AB
+    message_ids = fields.One2many(string='Messages', comodel_name='mail.message', inverse_name='res_id', store=False) #Source Module record_keeping, Module author Vertel Sverige AB
     message_is_follower = fields.Boolean(string='Is Follower', readonly=True, store=False) #Source Module record_keeping, Module author Vertel Sverige AB
     message_main_attachment_id = fields.Many2one(string='Main Attachment', comodel_name='ir.attachment', store=False) #Source Module record_keeping, Module author Vertel Sverige AB
     message_needaction = fields.Boolean(string='Action Needed', readonly=True, store=False) #Source Module record_keeping, Module author Vertel Sverige AB
@@ -363,14 +371,14 @@ class rkDOTmail(models.Model):
     record_name = fields.Char(string='Message Record Name', readonly=True) #Source Module record_keeping, Module author Vertel Sverige AB
     references = fields.Text(string='References', readonly=True) #Source Module record_keeping, Module author Vertel Sverige AB
     reply_to = fields.Char(string='Reply-To', readonly=True) #Source Module record_keeping, Module author Vertel Sverige AB
-    res_id = fields.Reference(string='Related Document ID', readonly=True) #Source Module record_keeping, Module author Vertel Sverige AB
+    res_id = fields.Reference([], string='Related Document ID', readonly=True) #Source Module record_keeping, Module author Vertel Sverige AB
     res_model = fields.Char(string='Resource Model', readonly=True, store=False) #Source Module record_keeping, Module author Vertel Sverige AB
-    res_ref = fields.Reference(string='Resource Reference', readonly=True, store=False) #Source Module record_keeping, Module author Vertel Sverige AB
+    res_ref = fields.Reference([], string='Resource Reference', readonly=True, store=False) #Source Module record_keeping, Module author Vertel Sverige AB
     scheduled_date = fields.Char(string='Scheduled Send Date', readonly=True) #Source Module record_keeping, Module author Vertel Sverige AB
     secrecy_grounds = fields.Char(string='Secrecy grounds', store=False) #Source Module record_keeping, Module author Vertel Sverige AB
     sender = fields.Char(string='Sender ', store=False) #Source Module record_keeping, Module author Vertel Sverige AB
     subject = fields.Char(string='Subject', readonly=True) #Source Module record_keeping, Module author Vertel Sverige AB
-    website_message_ids = fields.One2many(string='Website Messages', comodel_name='mail.message', inverse_name='False', store=False) #Source Module record_keeping, Module author Vertel Sverige AB
+    website_message_ids = fields.One2many(string='Website Messages', comodel_name='mail.message', inverse_name='res_id', store=False) #Source Module record_keeping, Module author Vertel Sverige AB
     write_date = fields.Datetime(string='Last Updated on', readonly=True) #Source Module record_keeping, Module author Vertel Sverige AB
     write_uid = fields.Many2one(string='Last Updated by', comodel_name='res.users', readonly=True) #Source Module record_keeping, Module author Vertel Sverige AB
 
@@ -386,7 +394,8 @@ class rkDOTaddDOTfileDOTwizard(models.TransientModel):
     description = fields.Text(string='Description') #Source Module record_keeping_attachment, Module author Vertel Sverige AB
     display_name = fields.Char(string='Display Name', readonly=True, store=False) #Source Module record_keeping_attachment, Module author Vertel Sverige AB
     document_type_id = fields.Many2one(string='Document Type', comodel_name='rk.document.type') #Source Module sks_record_keeping, Module author Vertel Sverige AB
-    id = fields.Integer(string='ID', readonly=True) #Source Module record_keeping_attachment, Module author Vertel Sverige AB
+    # id is reserved: Odoo 19 rejects a field named id that is not fields.Id
+    # (TypeError: Field <model>.id is not an instance of fields.Id). #Source Module record_keeping_attachment, Module author Vertel Sverige AB
     is_secret = fields.Boolean(string='Secrecy marker') #Source Module sks_record_keeping, Module author Vertel Sverige AB
     __last_update = fields.Datetime(string='Last Modified on', readonly=True, store=False) #Source Module record_keeping_attachment, Module author Vertel Sverige AB
     law_section_id = fields.Many2one(string='Secrecy Provision', comodel_name='rk.law.section') #Source Module sks_record_keeping, Module author Vertel Sverige AB
@@ -405,7 +414,8 @@ class rkDOTwizard(models.TransientModel):
     create_date = fields.Datetime(string='Created on', readonly=True) #Source Module record_keeping_wizard, Module author Vertel Sverige AB
     create_uid = fields.Many2one(string='Created by', comodel_name='res.users', readonly=True) #Source Module record_keeping_wizard, Module author Vertel Sverige AB
     display_name = fields.Char(string='Display Name', readonly=True, store=False) #Source Module record_keeping_wizard, Module author Vertel Sverige AB
-    id = fields.Integer(string='ID', readonly=True) #Source Module record_keeping_wizard, Module author Vertel Sverige AB
+    # id is reserved: Odoo 19 rejects a field named id that is not fields.Id
+    # (TypeError: Field <model>.id is not an instance of fields.Id). #Source Module record_keeping_wizard, Module author Vertel Sverige AB
     is_official = fields.Boolean(string='Official document') #Source Module record_keeping_wizard, Module author Vertel Sverige AB
     is_secret = fields.Boolean(string='Secrecy marker') #Source Module record_keeping_wizard, Module author Vertel Sverige AB
     __last_update = fields.Datetime(string='Last Modified on', readonly=True, store=False) #Source Module record_keeping_wizard, Module author Vertel Sverige AB
@@ -422,7 +432,8 @@ class rkDOTaddDOTrecordDOTwizard(models.TransientModel):
     create_date = fields.Datetime(string='Created on', readonly=True) #Source Module record_keeping, Module author Vertel Sverige AB
     create_uid = fields.Many2one(string='Created by', comodel_name='res.users', readonly=True) #Source Module record_keeping, Module author Vertel Sverige AB
     display_name = fields.Char(string='Display Name', readonly=True, store=False) #Source Module record_keeping, Module author Vertel Sverige AB
-    id = fields.Integer(string='ID', readonly=True) #Source Module record_keeping, Module author Vertel Sverige AB
+    # id is reserved: Odoo 19 rejects a field named id that is not fields.Id
+    # (TypeError: Field <model>.id is not an instance of fields.Id). #Source Module record_keeping, Module author Vertel Sverige AB
     is_official = fields.Boolean(string='Official document') #Source Module record_keeping, Module author Vertel Sverige AB
     is_secret = fields.Boolean(string='Secrecy marker') #Source Module record_keeping, Module author Vertel Sverige AB
     __last_update = fields.Datetime(string='Last Modified on', readonly=True, store=False) #Source Module record_keeping, Module author Vertel Sverige AB

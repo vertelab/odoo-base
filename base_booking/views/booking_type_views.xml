@@ -18,7 +18,7 @@
                 <filter string="Any Time" name="filter_category_anytime" domain="[('category', '=', 'anytime')]"/>
                 <separator/>
                 <filter name="filter_active" string="Archived" domain="[('active', '=', False)]"/>
-                <group expand="0" string="Group By">
+                <group>
                     <filter string="Timezone" name="group_by_timezone" context="{'group_by': 'booking_tz'}"/>
                     <filter string="Type" name="group_by_category" context="{'group_by': 'category'}"/>
                 </group>
