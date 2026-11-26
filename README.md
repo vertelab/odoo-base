@@ -25,13 +25,13 @@ Genererad av `scripts/porting-status.py` — handredigera inte.
 | `auth_admin` | Unified password for admin. | ok |
 | `auth_signup_nosignup` | Removes new user signup from the front page. | ok |
 | `base_46elks_send_sms` | Sends SMS messages through the 46elks gateway. | ok |
-| `base_ai` | OKF-indexering av res.partner, res.company och res.users | blocked by ai_agent_core (Vertel) |
+| `base_ai` | OKF-indexering av res.partner, res.company och res.users | blocked by web_pwa_push (repo) |
 | `base_allow_marketing` | Opt-in for marketing email. | ok |
 | `base_booking` | A base module to allow booking integrations in any flow. | ok |
 | `base_booking_mail` | Sends emails for bookings. | ok |
 | `base_booking_payment` | Booking payment. | ok |
 | `base_booking_website` | Adds booking types to the website. | ok |
-| `base_dav` | Access Odoo data as calendar or address book | ok |
+| `base_dav` | Access Odoo data as calendar or address book | blocked by radicale (python) |
 | `base_health_deep` | Registry-aware health endpoint for load balancers and monitoring | ok |
 | `base_migration_helper` | Helpers for migrating data between Odoo instances. | ok |
 | `base_partner_find_duplicate` | The module adds a new meny choice under Configuration in Contacts. This meny … | ok |
@@ -39,7 +39,7 @@ Genererad av `scripts/porting-status.py` — handredigera inte.
 | `base_partner_template` | Marks contacts as templates for quick creation. | ok |
 | `base_replace_user` | Replace User on Records. | ok |
 | `base_security_classification` | Security Classification. | blocked by server_environment_data_encryption (OCA) |
-| `base_serp` | Track Search Engine Results Page (SERP) positions for domains and keywords. | ok |
+| `base_serp` | Track Search Engine Results Page (SERP) positions for domains and keywords. | blocked by fake_useragent (python) |
 | `base_user_role_default` | Extends the User Roles to add portal user to res.users.role. | blocked by base_user_role (core) |
 | `base_user_role_mass_addition` | Extends the User Roles to enable assiging several users to a role, at the same … | blocked by base_user_role (core) |
 | `boat_booking` | Booking of boats and other bookable resources. | ok |
@@ -48,17 +48,17 @@ Genererad av `scripts/porting-status.py` — handredigera inte.
 | `html_field_code_view` | Show Code View on HTML Field. | blocked by web_editor (core) |
 | `ir_module_extra_repos` | Add an extra repos. | ok |
 | `ir_module_xl2install` | Install modules from a excel document. | ok |
-| `matomo_website_analytics` | Matomo integration for website analytics. | ok |
+| `matomo_website_analytics` | Matomo integration for website analytics. | blocked by fake_useragent (python) |
 | `model_import_directory` | Imports records from a directory of files. | blocked by edi_base (Vertel) |
-| `partner_allabolag` | Enrich partner with data from Allabolag. | ok |
-| `partner_allabolag_bankruptcy` | Track Allabolag Partner Bankruptcy. | ok |
+| `partner_allabolag` | Enrich partner with data from Allabolag. | blocked by allabolag (python) |
+| `partner_allabolag_bankruptcy` | Track Allabolag Partner Bankruptcy. | blocked by allabolag (python) |
 | `partner_anonymization_rule` | Partner Anonymization Rule for GDPR compliance | blocked by privacy_partner_to_be_forgotten (Vertel) |
-| `partner_builtwith` | Enrich partner with technical information. | ok |
+| `partner_builtwith` | Enrich partner with technical information. | blocked by builtwith (python) |
 | `partner_company_registry` | Adds a Partner Registry field to the partner object. | ok |
 | `partner_contract` | Short (1 phrase/line) summary of the module's purpose, used as subtitle on … | ok |
 | `partner_counterpart` | Partner Counterpart. | ok |
 | `partner_enrich_base` | Base module for partner data enrichment. | ok |
-| `partner_flip_firstname` | Change position. Replace by the other. | ok |
+| `partner_flip_firstname` | Change position. Replace by the other. | blocked by partner_firstname (repo) |
 | `partner_flip_zip_city` | Change order to Zip, State, City. | ok |
 | `partner_foretagssok` | Enrich partner with data from FöretagsAPI.se | ok |
 | `partner_gender` | Adds a "Personal information" tab on res_partners with a gender field. | ok |
@@ -71,7 +71,7 @@ Genererad av `scripts/porting-status.py` — handredigera inte.
 | `pos_restaurant_booking` | This module lets you manage online reservations for restaurant tables. | ok |
 | `record_export_to_xml` | Export Records to XML. | ok |
 | `res_config_quests` | Add quests field to res.config.settings. | ok |
-| `serp_serpapi` | SerpAPI provider for reliable SERP tracking. | ok |
+| `serp_serpapi` | SerpAPI provider for reliable SERP tracking. | blocked by fake_useragent (python) |
 | `users_rights_listed` | Adds a UserGroup field to the res_users tree-view in debug-mode. | ok |
 | `web_menu_no_cache` | Send no-cache for /web/webclient/load_menus so menu updates always reach … | ok |
 | `workspace_onboarding` | Sammanhållande onboardingskurs: navigering, mobil och PWA | ok |

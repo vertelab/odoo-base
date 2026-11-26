@@ -18,7 +18,15 @@ import re
 import subprocess
 import sys
 
-CORE = "/usr/share/core-odoo/addons"
+# The core addons of the checked-out edition. /usr/share/core-odoo/addons is
+# one checkout of one edition; the pfile environments each have their own, and
+# `base` itself lives in odoo/addons (not addons) since Odoo 16.
+_EDITION = os.environ.get("PORTING_STATUS_EDITION", "18.0")
+CORE_ROOTS = [
+    os.environ.get("PORTING_STATUS_CORE", "/opt/odoo/pfile/%s/src/addons" % _EDITION),
+    "/opt/odoo/pfile/%s/src/odoo/addons" % _EDITION,
+    "/usr/share/core-odoo/addons",
+]
 ADDON_ROOTS = ["/usr/share"]
 SECTION = "## Porteringsstatus"
 
@@ -113,8 +121,9 @@ def pfile_count(module: str, ref: str = "HEAD") -> int:
 def edition_modules(edition: str) -> set[str]:
     """Alla moduler som finns för en utgåva: kärnan + alla repo-grenar."""
     have: set[str] = set()
-    if os.path.isdir(CORE):
-        have |= {n for n in os.listdir(CORE) if os.path.isdir(os.path.join(CORE, n))}
+    for core in CORE_ROOTS:
+        if os.path.isdir(core):
+            have |= {n for n in os.listdir(core) if os.path.isdir(os.path.join(core, n))}
     for root in ADDON_ROOTS:
         if not os.path.isdir(root):
             continue
@@ -141,8 +150,9 @@ def edition_modules(edition: str) -> set[str]:
 
 def find_module_repo(module: str, edition: str) -> str | None:
     """Vilket repo har modulen på den utgåvan? None = ingenstans."""
-    if os.path.isdir(os.path.join(CORE, module)):
-        return "kärnan"
+    for core in CORE_ROOTS:
+        if os.path.isdir(os.path.join(core, module)):
+            return "kärnan"
     for root in ADDON_ROOTS:
         if not os.path.isdir(root):
             continue
@@ -332,18 +342,72 @@ def disabled_reason(module: str, ref: str = "HEAD") -> str:
 
 
 def status_cell(module: str, edition: str, manifest: dict) -> str:
-    """Ett värde: `ok` eller `blocked by <orsak>` (design D1)."""
+    """Ett värde: `ok` eller `blocked by <orsak>` (design D1).
+
+    `ok` means the module was INSTALLED in that edition's test database, not
+    that it looks installable. The measurement is written by
+    scripts/install-module.sh and read here; without it the module is
+    reported as unverified rather than ok.
+    """
     if manifest.get("installable", True) is False:
         return f"blocked by {disabled_reason(module)}"
 
     missing = [d for d in manifest.get("depends", []) if d not in edition_modules(edition)]
     if not missing:
-        return "ok"
+        installed = measured_installed(edition)
+        if installed is None:
+            return "unverified: no measurement"
+        if module in installed:
+            return "ok"
+        reason = measured_failure(edition, module)
+        return f"blocked by {reason}" if reason else "blocked by not installed"
     parts = [blocked_by(d, edition) for d in missing]
     if len(parts) > 2:
         rest = len(parts) - 2
         parts = parts[:2] + [f"+{rest} more"]
     return "blocked by " + "; ".join(parts)
+
+
+MEASUREMENT = "/tmp/install-{edition}.txt"
+
+
+def measured_installed(edition: str):
+    """Modules measured as installed, or None when nothing was measured."""
+    path = MEASUREMENT.format(edition=edition)
+    if not os.path.exists(path):
+        return None
+    out = set()
+    for line in open(path):
+        parts = line.split(" ", 3)
+        if len(parts) >= 3 and parts[2] == "OK":
+            out.add(parts[0])
+    return out
+
+
+def measured_failure(edition: str, module: str) -> str:
+    """The measured reason a module did not install, as a short owner string."""
+    path = MEASUREMENT.format(edition=edition)
+    if not os.path.exists(path):
+        return ""
+    for line in open(path):
+        parts = line.split(" ", 3)
+        if len(parts) < 4 or parts[0] != module or parts[2] != "FAIL":
+            continue
+        reason = parts[3].strip()
+        m = re.search(r'depends on module "([^"]+)"', reason)
+        if m:
+            return m.group(1) + " (repo)"
+        m = re.search(r"external dependency is not met: (?:External dependency )?(\S+)", reason)
+        if m:
+            return m.group(1) + " (python)"
+        m = re.search(r"No module named '([^']+)'", reason)
+        if m:
+            return m.group(1) + " (python)"
+        m = re.search(r"depends are not loaded \(([^)]+)\)", reason)
+        if m:
+            return m.group(1) + " (repo)"
+        return reason[:60]
+    return ""
 
 
 def render(edition: str) -> str:
