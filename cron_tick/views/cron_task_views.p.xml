@@ -149,17 +149,15 @@
                 <filter name="filter_interval" string="Custom interval"
                         domain="[('interval_type', '!=', False)]"/>
                 <!-- #if VERSION <= "19.0" -->
-                <!-- 19.0:s RelaxNG-schema tillåter inte string på group i en
-                     search-vy (Odoo 20 gör det). Etiketten sätts i stället på
-                     den första filter-gruppen via help-attributet — se
-                     view_cron_task_search i 20.0-grenen. -->
-                <group>
+                <group expand="0" string="Group By">
+                <!-- #endif -->
                     <filter name="group_module" string="Module"
                             context="{'group_by': 'module'}"/>
                     <filter name="group_cadence" string="Cadence"
                             context="{'group_by': 'cadence'}"/>
                     <filter name="group_interval_type" string="Interval unit"
                             context="{'group_by': 'interval_type'}"/>
+                <!-- #if VERSION <= "19.0" -->
                 </group>
                 <!-- #endif -->
             </search>
