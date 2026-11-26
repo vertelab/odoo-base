@@ -44,9 +44,12 @@ Partner Enrich Base
     'contributor': '',
     'maintainer': 'Vertel Sverige AB',
     'repository': 'https://github.com/vertelab/odoo-base',
-    'depends': ['partner_autocomplete','contacts'],
+    'depends': ['partner_autocomplete', 'contacts'],
     'data': [
+        'security/ir.model.access.csv',
         'data/ir_action.xml',
+        'data/ir_cron.xml',
+        'views/res_partner_view.xml',
     ],
     'application': False,
     'installable': True,

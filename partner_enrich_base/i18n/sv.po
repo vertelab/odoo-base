@@ -1,15 +1,249 @@
 # Translation of Odoo Server.
 # This file contains the translation of the following modules:
+# 	* partner_enrich_base
 #
 msgid ""
 msgstr ""
-"Project-Id-Version: Odoo Server 18.0-20250826\n"
+"Project-Id-Version: Odoo Server 18.0-20261115\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2025-08-27 12:37+0000\n"
-"PO-Revision-Date: 2025-08-27 12:37+0000\n"
+"POT-Creation-Date: 2026-11-15 21:26+0000\n"
+"PO-Revision-Date: 2026-11-15 21:26+0000\n"
 "Last-Translator: \n"
 "Language-Team: \n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: \n"
 "Plural-Forms: \n"
+
+#. module: partner_enrich_base
+#: model:ir.model.constraint,message:partner_enrich_base.constraint_res_partner_financials_partner_fiscal_year_uniq
+msgid "A partner can only have one financial record per fiscal year."
+msgstr "En partner kan bara ha en finansiell post per räkenskapsår."
+
+#. module: partner_enrich_base
+#: model:ir.model.fields,field_description:partner_enrich_base.field_res_partner_financials__cash_and_bank
+msgid "Cash and Bank"
+msgstr "Kassa och bank"
+
+#. module: partner_enrich_base
+#: model:ir.model,name:partner_enrich_base.model_res_partner
+msgid "Contact"
+msgstr "Kontakt"
+
+#. module: partner_enrich_base
+#: model:ir.model.fields,field_description:partner_enrich_base.field_res_partner_financials__create_uid
+msgid "Created by"
+msgstr "Skapad av"
+
+#. module: partner_enrich_base
+#: model:ir.model.fields,field_description:partner_enrich_base.field_res_partner_financials__create_date
+msgid "Created on"
+msgstr "Skapad den"
+
+#. module: partner_enrich_base
+#: model:ir.model.fields,field_description:partner_enrich_base.field_res_partner_financials__currency
+msgid "Currency"
+msgstr "Valuta"
+
+#. module: partner_enrich_base
+#: model:ir.model.fields,field_description:partner_enrich_base.field_res_partner_financials__current_assets
+msgid "Current Assets"
+msgstr "Omsättningstillgångar"
+
+#. module: partner_enrich_base
+#: model:ir.model.fields,field_description:partner_enrich_base.field_res_partner_financials__current_liabilities
+msgid "Current Liabilities"
+msgstr "Kortfristiga skulder"
+
+#. module: partner_enrich_base
+#: model:ir.model.fields,field_description:partner_enrich_base.field_res_partner_financials__display_name
+msgid "Display Name"
+msgstr "Visningsnamn"
+
+#. module: partner_enrich_base
+#: model:ir.model.fields,field_description:partner_enrich_base.field_res_partner_financials__employees
+msgid "Employees"
+msgstr "Anställda"
+
+#. module: partner_enrich_base
+#: model:ir.actions.server,name:partner_enrich_base.action_enrich
+msgid "Enrich with Allabolag"
+msgstr "Berika med Allabolag"
+
+#. module: partner_enrich_base
+#: model:ir.model.fields,field_description:partner_enrich_base.field_res_partner__enrich_fetched_at
+#: model:ir.model.fields,field_description:partner_enrich_base.field_res_users__enrich_fetched_at
+msgid "Enriched At"
+msgstr "Berikad"
+
+#. module: partner_enrich_base
+#: model:ir.model.fields,field_description:partner_enrich_base.field_res_partner__enrich_provider
+#: model:ir.model.fields,field_description:partner_enrich_base.field_res_users__enrich_provider
+msgid "Enriched By"
+msgstr "Berikad av"
+
+#. module: partner_enrich_base
+#: model_terms:ir.ui.view,arch_db:partner_enrich_base.view_partner_form_enrich
+msgid "Enrichment"
+msgstr "Berikning"
+
+#. module: partner_enrich_base
+#: model:ir.model.fields,field_description:partner_enrich_base.field_res_partner__enrich_raw
+#: model:ir.model.fields,field_description:partner_enrich_base.field_res_users__enrich_raw
+msgid "Enrichment Raw Data"
+msgstr "Rådata från berikning"
+
+#. module: partner_enrich_base
+#: model:ir.model.fields,field_description:partner_enrich_base.field_res_partner_financials__equity
+msgid "Equity"
+msgstr "Eget kapital"
+
+#. module: partner_enrich_base
+#: model:ir.model.fields,field_description:partner_enrich_base.field_res_partner_financials__fiscal_year
+msgid "Fiscal Year"
+msgstr "Räkenskapsår"
+
+#. module: partner_enrich_base
+#: model:ir.model.fields,field_description:partner_enrich_base.field_res_partner_financials__fiscal_year_end
+msgid "Fiscal Year End"
+msgstr "Räkenskapsårets slut"
+
+#. module: partner_enrich_base
+#: model:ir.model.fields,field_description:partner_enrich_base.field_res_partner_financials__fiscal_year_start
+msgid "Fiscal Year Start"
+msgstr "Räkenskapsårets början"
+
+#. module: partner_enrich_base
+#: model:ir.model.fields,field_description:partner_enrich_base.field_res_partner_financials__fixed_assets
+msgid "Fixed Assets"
+msgstr "Anläggningstillgångar"
+
+#. module: partner_enrich_base
+#: model:ir.model.fields,field_description:partner_enrich_base.field_res_partner_financials__id
+msgid "ID"
+msgstr "ID"
+
+#. module: partner_enrich_base
+#: model:ir.model.fields,field_description:partner_enrich_base.field_res_partner_financials__write_uid
+msgid "Last Updated by"
+msgstr "Senast uppdaterad av"
+
+#. module: partner_enrich_base
+#: model:ir.model.fields,field_description:partner_enrich_base.field_res_partner_financials__write_date
+msgid "Last Updated on"
+msgstr "Senast uppdaterad den"
+
+#. module: partner_enrich_base
+#: model:ir.model.fields,field_description:partner_enrich_base.field_res_partner_financials__long_term_liabilities
+msgid "Long Term Liabilities"
+msgstr "Långfristiga skulder"
+
+#. module: partner_enrich_base
+#: model:ir.model.fields,field_description:partner_enrich_base.field_res_partner_financials__net_result
+msgid "Net Result"
+msgstr "Årets resultat"
+
+#. module: partner_enrich_base
+#: model:ir.model.fields,field_description:partner_enrich_base.field_res_partner_financials__net_sales
+msgid "Net Sales"
+msgstr "Nettoomsättning"
+
+#. module: partner_enrich_base
+#: model:ir.model.fields,field_description:partner_enrich_base.field_res_partner_financials__operating_margin
+msgid "Operating Margin"
+msgstr "Rörelsemarginal"
+
+#. module: partner_enrich_base
+#: model:ir.model.fields,field_description:partner_enrich_base.field_res_partner_financials__operating_profit
+msgid "Operating Profit"
+msgstr "Rörelseresultat"
+
+#. module: partner_enrich_base
+#: model:ir.model.fields,field_description:partner_enrich_base.field_res_partner_financials__partner_id
+msgid "Partner"
+msgstr "Partner"
+
+#. module: partner_enrich_base
+#: model:ir.model,name:partner_enrich_base.model_res_partner_enrich_policy
+msgid "Partner Enrichment Policy"
+msgstr "Berikningspolicy för partner"
+
+#. module: partner_enrich_base
+#: model:ir.model,name:partner_enrich_base.model_res_partner_financials
+msgid "Partner Financials"
+msgstr "Partnerns ekonomi"
+
+#. module: partner_enrich_base
+#: model:ir.actions.server,name:partner_enrich_base.ir_cron_enrich_refresh_ir_actions_server
+msgid "Partner enrichment: refresh stale records"
+msgstr "Partnerberikning: uppdatera inaktuella poster"
+
+#. module: partner_enrich_base
+#: model:ir.model.fields,field_description:partner_enrich_base.field_res_partner_financials__profit_before_tax
+msgid "Profit Before Tax"
+msgstr "Resultat före skatt"
+
+#. module: partner_enrich_base
+#: model:ir.model.fields,field_description:partner_enrich_base.field_res_partner_financials__proposed_dividend
+msgid "Proposed Dividend"
+msgstr "Föreslagen utdelning"
+
+#. module: partner_enrich_base
+#: model:ir.model.fields,help:partner_enrich_base.field_res_partner__enrich_raw
+#: model:ir.model.fields,help:partner_enrich_base.field_res_users__enrich_raw
+msgid ""
+"Provider response, kept for troubleshooting and for re-applying without "
+"another API call."
+msgstr ""
+
+#. module: partner_enrich_base
+#: model_terms:ir.ui.view,arch_db:partner_enrich_base.view_partner_form_enrich
+msgid "Raw provider response"
+msgstr "Råsvar från leverantör"
+
+#. module: partner_enrich_base
+#: model:ir.model.fields,field_description:partner_enrich_base.field_res_partner_financials__restricted_equity
+msgid "Restricted Equity"
+msgstr "Bundet eget kapital"
+
+#. module: partner_enrich_base
+#: model:ir.model.fields,field_description:partner_enrich_base.field_res_partner_financials__result_after_financial_items
+msgid "Result After Financial Items"
+msgstr "Resultat efter finansiella poster"
+
+#. module: partner_enrich_base
+#: model:ir.model.fields,field_description:partner_enrich_base.field_res_partner_financials__solidity
+msgid "Solvency"
+msgstr "Soliditet"
+
+#. module: partner_enrich_base
+#: model:ir.model.fields,field_description:partner_enrich_base.field_res_partner_financials__taxonomy
+msgid "Taxonomy"
+msgstr "K2/K3"
+
+#. module: partner_enrich_base
+#: model:ir.model.fields,field_description:partner_enrich_base.field_res_partner_financials__total_assets
+msgid "Total Assets"
+msgstr "Summa tillgångar"
+
+#. module: partner_enrich_base
+#: model:ir.model.fields,field_description:partner_enrich_base.field_res_partner_financials__unrestricted_equity
+msgid "Unrestricted Equity"
+msgstr "Fritt eget kapital"
+
+#. module: partner_enrich_base
+#: model:ir.model.fields,field_description:partner_enrich_base.field_res_partner_financials__untaxed_reserves
+msgid "Untaxed Reserves"
+msgstr "Obeskattade reserver"
+
+#. module: partner_enrich_base
+#: model:ir.model.fields,help:partner_enrich_base.field_res_partner__enrich_fetched_at
+#: model:ir.model.fields,help:partner_enrich_base.field_res_users__enrich_fetched_at
+msgid "When the enrichment data on this contact was last refreshed."
+msgstr "När berikningsdatan på den här kontakten senast uppdaterades."
+
+#. module: partner_enrich_base
+#: model:ir.model.fields,help:partner_enrich_base.field_res_partner__enrich_provider
+#: model:ir.model.fields,help:partner_enrich_base.field_res_users__enrich_provider
+msgid "Which provider supplied the current enrichment data."
+msgstr "Vilken leverantör som bidrog med den aktuella berikningsdatan."

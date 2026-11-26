@@ -44,7 +44,7 @@ Get logos
     'maintainer': 'Vertel Sverige AB',
     'repository': 'https://github.com/vertelab/odoo-base',
     'depends': [
-        'contacts',
+        'partner_enrich_base',
         # 'website_contact_management' (this module is in sks repo and i think it is a paid module)
     ],
     'data': [

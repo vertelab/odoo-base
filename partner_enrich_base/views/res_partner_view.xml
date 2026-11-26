@@ -1,82 +1,57 @@
 <?xml version="1.0" encoding="utf-8"?>
 <odoo>
   <data>
-    <record id="view_partner_form" model="ir.ui.view">
-      <field name="name">res.partner.form.builtwith</field>
+    <!--
+      Enrichment bookkeeping, shown on the Accounting-less "Other" page.
+
+      The "Technical Information" page that used to live in this file held the
+      ``bw_*`` fields — they belong to partner_builtwith and moved there. A
+      view may not reference fields from a module it does not depend on.
+    -->
+    <record id="view_partner_form_enrich" model="ir.ui.view">
+      <field name="name">res.partner.form.enrich</field>
       <field name="model">res.partner</field>
       <field name="inherit_id" ref="base.view_partner_form" />
       <field name="arch" type="xml">
-        <notebook position="inside">
-          <page name="tech_information" string="Technical Information">
-            <group name="container_row_2">
-              <group name="tech1" string="Tech 1" priority="1">
-                <field name="bw_analytics" />
-                <field name="bw_blogs" />
-                <field name="bw_cache_tools" />
-                <field name="bw_cdn" />
-                <field name="bw_cms" />
-                <field name="bw_database_managers" />
-                <field name="bw_databases" />
-                <field name="bw_documentation_tools" />
-                <field name="bw_ecommerce" />
-                <field name="bw_font_scripts" />
-                <field name="bw_issue_trackers" />
-                <field name="bw_javascript_frameworks" />
-              </group>
-              <group name="tech2" string="Tech 2" priority="2">
-                <field name="bw_lms" />
-                <field name="bw_marketing_automation" />
-                <field name="bw_miscellaneous" />
-                <field name="bw_mobile_frameworks" />
-                <field name="bw_operating_systems" />
-                <field name="bw_programming_languages" />
-                <field name="bw_search_engines" />
-                <field name="bw_web_frameworks" />
-                <field name="bw_web_mail" />
-                <field name="bw_web_frameworks" />
-                <field name="bw_web_servers" />
-                <field name="bw_wikis" />
+        <xpath expr="//page[@name='internal_notes']" position="after">
+          <page name="enrichment" string="Enrichment"
+                groups="base.group_no_one">
+            <group name="enrich_meta">
+              <group name="enrich_meta_left">
+                <field name="enrich_provider" />
+                <field name="enrich_fetched_at" />
               </group>
             </group>
-            <group name="container_row_3">
-              <group name="whois" string="WhoIs" priority="1">
-                <field name="bw_domain_name" />
-                <field name="bw_registrant_name" />
-                <field name="bw_creation_date" />
-                <field name="bw_updated_date" />
-                <field name="bw_expiration_date" />
-                <field name="bw_transfer_date" />
-                <field name="bw_name_servers" />
-                <field name="bw_dnssec" />
-                <field name="bw_status" />
-                <field name="bw_registrar" />
-              </group>
-              <group name="dns_mail" string="DNS and Mail" priority="2">
-                <field name="bw_mail_server" />
-                <field name="bw_dns_soa" />
-                <field name="bw_dns_ns" />
-                <field name="bw_dns_a" />
-                <field name="bw_dns_mx" />
-                <field name="bw_dns_txt" />
-              </group>
-              <group name="container_row_4">
-                <group name="social_media" string="Social Media" priority="1">
-                  <field name="bw_facebook" />
-                  <field name="bw_instagram" />
-                  <field name="bw_linkedin" />
-                  <field name="bw_x" />
-                </group>
-                <group name="social_media_tech" string="Social Media Tech" priority="2">
-                  <field name="bw_brainville" />
-                  <field name="bw_github" />
-                  <field name="bw_linkopingsciencepark" />
-                  <field name="bw_myai" />
-                  <field name="bw_odoo_community" />
-                </group>
-              </group>
-            </group>
+            <separator string="Raw provider response" />
+            <field name="enrich_raw"
+                   widget="ace"
+                   options="{'mode': 'python'}"
+                   nolabel="1"
+                   colspan="2"
+                   readonly="1" />
           </page>
-        </notebook>
+        </xpath>
+      </field>
+    </record>
+    <!--
+      Mount the autocomplete widget.
+
+      The stock field carries no widget at all in Odoo 18 — it was mounted only
+      by the (now deprecated) IAP flow, which nobody in this code base ever
+      inherited. Without this inherit the whole suggestion list is unreachable,
+      no matter what the Python side does.
+
+      ``position="attributes"`` on the existing field, not a new field:
+      redefining it would fight every other module that inherits this form.
+    -->
+    <record id="view_partner_form_enrich_autocomplete" model="ir.ui.view">
+      <field name="name">res.partner.form.enrich.autocomplete</field>
+      <field name="model">res.partner</field>
+      <field name="inherit_id" ref="base.view_partner_form" />
+      <field name="arch" type="xml">
+        <xpath expr="//field[@name='company_registry']" position="attributes">
+          <attribute name="widget">field_partner_autocomplete</attribute>
+        </xpath>
       </field>
     </record>
   </data>
