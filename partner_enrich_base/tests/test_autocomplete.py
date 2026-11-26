@@ -13,7 +13,7 @@ class AutocompleteCase(TransactionCase):
         super().setUpClass()
         cls.partner_model = cls.env['res.partner']
         cls.params = cls.env['ir.config_parameter'].sudo()
-        cls.params.set_param('partner_enrich.provider_order', 'foretagssok,allabolag')
+        cls.params.set_str('partner_enrich.provider_order', 'foretagssok,allabolag')
 
     def _install_provider(self, handler):
         """Install ``handler(provider_key, ctx)`` as the provider callable."""

@@ -269,10 +269,13 @@ class CronTask(models.Model):
         counts = {}
         if self.ids:
             try:
+                # 20.0 requires an aggregate method for a grouped field, and
+                # puts it in the groupby spec: ``task_id:count``.
                 groups = self.env['cron.task.log'].sudo().read_group(
-                    [('task_id', 'in', self.ids)], ['task_id'], ['task_id'])
-                counts = {g['task_id'][0]: g['task_id_count'] for g in groups
-                          if g.get('task_id')}
+                    [('task_id', 'in', self.ids)], ['task_id'], ['task_id:count'])
+                # 20.0 returns (value, count) tuples, not dicts, and the
+                # value is the raw id for a many2one groupby.
+                counts = {g[0]: g[1] for g in groups if g[0]}
             except Exception:  # noqa: BLE001 — never break the form over a count
                 _logger.exception(
                     'cron.task: could not count run logs for %s', self.ids)

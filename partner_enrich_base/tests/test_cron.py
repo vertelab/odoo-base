@@ -16,14 +16,15 @@ class CronCase(TransactionCase):
         super().setUpClass()
         cls.partner_model = cls.env['res.partner']
         cls.params = cls.env['ir.config_parameter'].sudo()
-        cls.params.set_param('partner_enrich.provider_order', 'foretagssok')
+        cls.params.set_str('partner_enrich.provider_order', 'foretagssok')
 
     def setUp(self):
         super().setUp()
-        self.params.set_param('partner_enrich.refresh_days', '365')
+        self.params.set_str('partner_enrich.refresh_days', '365')
 
     def _make(self, name, **vals):
-        defaults = {'name': name, 'is_company': True}
+        # 20.0 computes is_company from the VAT, so a test company needs one.
+        defaults = {'name': name, 'is_company': True, 'vat': 'SE556000123401'}
         defaults.update(vals)
         return self.env['res.partner'].create(defaults)
 
@@ -42,19 +43,19 @@ class CronCase(TransactionCase):
 class TestRefreshDays(CronCase):
 
     def test_default_is_365(self):
-        self.params.set_param('partner_enrich.refresh_days', '')
+        self.params.set_str('partner_enrich.refresh_days', '')
         self.assertEqual(self.partner_model._enrich_refresh_days(), 365)
 
     def test_reads_the_parameter(self):
-        self.params.set_param('partner_enrich.refresh_days', '30')
+        self.params.set_str('partner_enrich.refresh_days', '30')
         self.assertEqual(self.partner_model._enrich_refresh_days(), 30)
 
     def test_garbage_falls_back_to_365(self):
-        self.params.set_param('partner_enrich.refresh_days', 'aldrig')
+        self.params.set_str('partner_enrich.refresh_days', 'aldrig')
         self.assertEqual(self.partner_model._enrich_refresh_days(), 365)
 
     def test_negative_is_clamped_to_zero(self):
-        self.params.set_param('partner_enrich.refresh_days', '-5')
+        self.params.set_str('partner_enrich.refresh_days', '-5')
         self.assertEqual(self.partner_model._enrich_refresh_days(), 0)
 
 

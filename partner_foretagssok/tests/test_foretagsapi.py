@@ -160,7 +160,7 @@ class TestProviderContract(ForetagsapiMappingCase):
 
     def test_missing_api_key_does_not_raise(self):
         """An unconfigured provider must not drown the log on every run."""
-        self.env['ir.config_parameter'].sudo().set_param(
+        self.env['ir.config_parameter'].sudo().set_str(
             'partner_foretagssok.api_key', '',
         )
         result = self.partner_model._enrich_from_provider(

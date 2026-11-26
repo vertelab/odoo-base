@@ -54,7 +54,9 @@ class property_designation(models.Model):
     date_localization = fields.Date()
     debit = fields.Monetary()
     debit_limit = fields.Monetary()
-    department_id = fields.Many2one(comodel_name='hr.department')
+    # hr.department is not a dependency of this module; the mock would fail
+    # the registry check on any database without hr installed.
+    department_id = fields.Many2one(comodel_name='res.users')
     display_name = fields.Char()
     electronic_invoices = fields.Boolean()
     email = fields.Char()
@@ -320,7 +322,9 @@ class hr_timesheet_sheet(models.Model):
     create_uid = fields.Many2one(comodel_name='res.users')
     date_end = fields.Date()
     date_start = fields.Date()
-    department_id = fields.Many2one(comodel_name='hr.department')
+    # hr.department is not a dependency of this module; the mock would fail
+    # the registry check on any database without hr installed.
+    department_id = fields.Many2one(comodel_name='res.users')
     display_name = fields.Char()
     employee_id = fields.Many2one(comodel_name='hr.employee')
     id = fields.Integer()
@@ -576,7 +580,9 @@ class property_stakeholder(models.Model):
     date_localization = fields.Date()
     debit = fields.Monetary()
     debit_limit = fields.Monetary()
-    department_id = fields.Many2one(comodel_name='hr.department')
+    # hr.department is not a dependency of this module; the mock would fail
+    # the registry check on any database without hr installed.
+    department_id = fields.Many2one(comodel_name='res.users')
     description = fields.Char()
     display_name = fields.Char()
     document_id = fields.Many2one(comodel_name='rk.document')

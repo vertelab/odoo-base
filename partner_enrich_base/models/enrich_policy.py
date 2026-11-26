@@ -78,7 +78,7 @@ class ResPartnerEnrichPolicy(models.AbstractModel):
         not a priority order — a provider added later would silently outrank
         the one the operator chose.
         """
-        raw = self.env['ir.config_parameter'].sudo().get_param(
+        raw = self.env['ir.config_parameter'].sudo().get_str(
             PARAM_PROVIDER_ORDER, default='',
         )
         raw = (raw or '').strip() or DEFAULT_PROVIDER_ORDER
@@ -97,7 +97,7 @@ class ResPartnerEnrichPolicy(models.AbstractModel):
         ``fill_empty``, ``prefer`` and ``provider`` is the preferred provider
         key (``None`` unless ``mode`` is ``prefer``).
         """
-        raw = self.env['ir.config_parameter'].sudo().get_param(
+        raw = self.env['ir.config_parameter'].sudo().get_str(
             PARAM_POLICY % group, default='',
         )
         raw = (raw or '').strip()

@@ -475,7 +475,7 @@ class ResPartner(models.Model):
         the order of a year, and re-scraping every partner nightly would be
         both pointless and hostile to the providers.
         """
-        raw = self.env['ir.config_parameter'].sudo().get_param(
+        raw = self.env['ir.config_parameter'].sudo().get_str(
             'partner_enrich.refresh_days', default='365',
         )
         try:
@@ -563,7 +563,8 @@ class ResPartner(models.Model):
             'vat': vat,
             'country_code': self.country_id.code or 'SE',
             'website': self.website,
-            'duns': self.partner_gid or False,
+            # 20.0 removed partner_gid (the IAP company registry id).
+            'duns': getattr(self, 'partner_gid', False) or False,
             'mode': 'enrich',
             'record': self,
         }

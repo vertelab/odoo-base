@@ -152,7 +152,7 @@ class rkDOTmatter(models.Model):
     close_date = fields.Date(string='Closed', readonly=True) #Source Module record_keeping, Module author Vertel Sverige AB
     create_date = fields.Datetime(string='Created on', readonly=True) #Source Module record_keeping, Module author Vertel Sverige AB
     create_uid = fields.Many2one(string='Created by', comodel_name='res.users', readonly=True) #Source Module record_keeping, Module author Vertel Sverige AB
-    department_id = fields.Many2one(string='Department', comodel_name='hr.department', readonly=True) #Source Module record_keeping, Module author Vertel Sverige AB
+    department_id = fields.Many2one(string='Department', comodel_name='res.users', readonly=True) #Source Module record_keeping, Module author Vertel Sverige AB
     description = fields.Char(string='Description') #Source Module record_keeping, Module author Vertel Sverige AB
     display_name = fields.Char(string='Display Name', readonly=True, store=False) #Source Module record_keeping, Module author Vertel Sverige AB
     document_count = fields.Integer(string='Number of documents in this matter', readonly=True, store=False) #Source Module record_keeping, Module author Vertel Sverige AB
