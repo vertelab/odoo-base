@@ -103,7 +103,7 @@
                         domain="[('trigger', '=', 'webhook')]"/>
                 <filter name="filter_manual" string="Manual"
                         domain="[('trigger', '=', 'manual')]"/>
-                <group>
+                <group expand="0" string="Group By">
                     <filter name="group_status" string="Status"
                             context="{'group_by': 'status'}"/>
                     <filter name="group_task" string="Task"
