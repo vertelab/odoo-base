@@ -22,7 +22,7 @@
 {
     'name': 'Base: Partner Enrich Base',
     'summary': "Base module for partner data enrichment.",
-    'version': '18.0.1.1.0',
+    'version': '1.1.0',
     'description': '''
 Partner Enrich Base
 ===================

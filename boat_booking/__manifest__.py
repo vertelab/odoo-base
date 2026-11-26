@@ -1,6 +1,6 @@
 {
     'name': 'Base: Boat Booking',
-    'version': '18.0.1.0.0',
+    'version': '1.0.0',
     'summary': "Booking of boats and other bookable resources.",
     'description': '''
 Website Product Map

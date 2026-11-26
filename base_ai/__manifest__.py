@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 {
     'name': 'Base: AI',
-    'version': '18.0.1.0.0',
+    'version': '1.0.0',
     'summary': 'OKF-indexering av res.partner, res.company och res.users',
     'category': 'Hidden',
     'author': 'Vertel Sverige AB',

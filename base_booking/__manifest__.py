@@ -4,7 +4,7 @@
 {
     'name': 'Bookings: ',
 'author': 'Vertel Sverige AB',
-    'version': '18.0.1.3.0',
+    'version': '1.3.0',
     'category': 'Booking/Appointment',
     'sequence': 215,
     'summary': 'A base module to allow booking integrations in any flow.',

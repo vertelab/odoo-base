@@ -23,7 +23,7 @@
 #
 {
     'name': 'Base: Partner',
-    'version': '18.0.1.0.0',
+    'version': '1.0.0',
     'summary': """Localized Partner Records.""",
     'category': '',
     'description': '''

@@ -21,7 +21,7 @@
 
 {
     'name': 'Base: User Roles Permission',
-    'version': '18.0.0.1.0',
+    'version': '0.1.0',
     # Version ledger: 14.0 = Odoo version. 1 = Major. Non regressionable code. 2 = Minor. New features that are regressionable. 3 = Bug fixes
     'summary': 'Extends the User Roles to add portal user to res.users.role.',
     'category': 'Tools',

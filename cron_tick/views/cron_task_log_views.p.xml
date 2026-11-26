@@ -104,7 +104,9 @@
                 <filter name="filter_manual" string="Manual"
                         domain="[('trigger', '=', 'manual')]"/>
                 <!-- #if VERSION <= "19.0" -->
-                <group expand="0" string="Group By">
+                <!-- 19.0:s RelaxNG-schema tillåter inte string på group i en
+                     search-vy (Odoo 20 gör det). -->
+                <group>
                 <!-- #endif -->
                     <filter name="group_status" string="Status"
                             context="{'group_by': 'status'}"/>

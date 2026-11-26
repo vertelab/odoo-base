@@ -21,7 +21,7 @@
 
 {
     'name': 'Base: Export Records to XML',
-    'version': '18.0.0.1.1',
+    'version': '0.1.1',
     # Version ledger: 14.0 = Odoo version. 1 = Major. Non regressionable code. 2 = Minor. New features that are regressionable. 3 = Bug fixes
     'summary': 'Export Records to XML.',
     'category': 'Technical',

@@ -23,7 +23,7 @@
 #
 {
     'name': 'Base: Allow Marketing',
-    'version': '18.0.1.0.0',
+    'version': '1.0.0',
     'summary': """Opt-in for marketing email.""",
     'category': 'Administration',
     'description': '''

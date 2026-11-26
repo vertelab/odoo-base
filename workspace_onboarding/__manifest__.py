@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 {
     'name': 'Base: Kom igång med Vertel',
-    'version': '18.0.2.0.0',
+    'version': '2.0.0',
     'summary': 'Sammanhållande onboardingskurs: navigering, mobil och PWA',
     'description': """
 Den första kursen: logga in, hitta rätt, installera appen och få en översikt över hela arbetsytan.

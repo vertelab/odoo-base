@@ -21,7 +21,7 @@
 
 {
     'name': 'Base: 46Elks Send SMS',
-    'version': '18.0.0.0.0',
+    'version': '0.0.0',
     'summary': "Sends SMS messages through the 46elks gateway.",
     'category': 'Technical',
     'description': '''

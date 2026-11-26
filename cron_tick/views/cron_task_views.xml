@@ -148,7 +148,11 @@
                         domain="[('cadence', '=', 'month')]"/>
                 <filter name="filter_interval" string="Custom interval"
                         domain="[('interval_type', '!=', False)]"/>
-                <group expand="0" string="Group By">
+                <!-- 19.0:s RelaxNG-schema tillåter inte string på group i en
+                     search-vy (Odoo 20 gör det). Etiketten sätts i stället på
+                     den första filter-gruppen via help-attributet — se
+                     view_cron_task_search i 20.0-grenen. -->
+                <group>
                     <filter name="group_module" string="Module"
                             context="{'group_by': 'module'}"/>
                     <filter name="group_cadence" string="Cadence"
