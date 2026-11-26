@@ -25,7 +25,7 @@
                             <field name="name" invisible="1"/>
                         </h1>
                         <group name="main">
-                            <field name="datas" filename="name" string="Generated File" readonly="1" />
+                            <field name="raw" filename="name" string="Generated File" readonly="1" />
                         </group>
                     </sheet>
                 </form>

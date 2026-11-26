@@ -1,7 +1,6 @@
 import logging
 
 from odoo import models, fields, api, _
-import base64
 import xml.etree.cElementTree as ET
 from fnmatch import fnmatch
 
@@ -77,9 +76,10 @@ class XMLExport(models.TransientModel):
         xml = self.generate_xml()
         xmlstr = ET.tostring(xml)
 
+        # 20.0 removed ir.attachment.datas; `raw` is the bytes field.
         attachment_create = {
             'name': str(ir_model_id.name) + '.xml',
-            'datas': base64.encodebytes(xmlstr),
+            'raw': xmlstr,
             'mimetype': 'application/xml',
         }
 

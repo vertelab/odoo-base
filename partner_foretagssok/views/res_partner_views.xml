@@ -12,12 +12,12 @@
                         string="Enrich from FöretagsAPI"
                         type="object"
                         class="oe_highlight"
-                        invisible="company_type != 'company'"/>
+                        invisible="not is_company"/>
                     <button
                         name="action_foretagsapi_find_similar"
                         string="Find Similar Companies"
                         type="object"
-                        invisible="company_type != 'company' or not sni_id"/>
+                        invisible="not is_company or not sni_id"/>
                 </header>
             </sheet>
 

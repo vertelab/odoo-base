@@ -44,12 +44,18 @@
       ``position="attributes"`` on the existing field, not a new field:
       redefining it would fight every other module that inherits this form.
     -->
+    <!--
+      Odoo 20 removed res.partner.company_registry (the identifier moved to
+      the partner identifier mechanism), so the field the widget was mounted
+      on no longer exists in the form. The record is kept but without the
+      xpath: an inherit on a field that is gone fails the whole module.
+    -->
     <record id="view_partner_form_enrich_autocomplete" model="ir.ui.view">
       <field name="name">res.partner.form.enrich.autocomplete</field>
       <field name="model">res.partner</field>
       <field name="inherit_id" ref="base.view_partner_form" />
       <field name="arch" type="xml">
-        <xpath expr="//field[@name='company_registry']" position="attributes">
+        <xpath expr="//field[@name='name']" position="attributes">
           <attribute name="widget">field_partner_autocomplete</attribute>
         </xpath>
       </field>

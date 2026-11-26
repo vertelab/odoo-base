@@ -11,8 +11,9 @@ def post_init_hook(env):
     never having moved it.
     """
     params = env['ir.config_parameter'].sudo()
-    old_key = params.get_param('partner_foretagssok.api_key', default='')
+    # 20.0 renamed get_param/set_param to get_str/set_str.
+    old_key = params.get_str('partner_foretagssok.api_key', default='')
     if not old_key:
         return
     env['res.partner']._foretagsapi_migrate_secret(old_key)
-    params.set_param('partner_foretagssok.api_key', '')
+    params.set_str('partner_foretagssok.api_key', '')
