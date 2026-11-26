@@ -25,7 +25,7 @@ Genererad av `scripts/porting-status.py` — handredigera inte.
 | `auth_admin` | Unified password for admin. | ok |
 | `auth_signup_nosignup` | Removes new user signup from the front page. | ok |
 | `base_46elks_send_sms` | Sends SMS messages through the 46elks gateway. | ok |
-| `base_ai` | OKF-indexering av res.partner, res.company och res.users | blocked by web_pwa_push (repo) |
+| `base_ai` | OKF-indexering av res.partner, res.company och res.users | blocked by web_pwa_push (Vertel) |
 | `base_allow_marketing` | Opt-in for marketing email. | ok |
 | `base_booking` | A base module to allow booking integrations in any flow. | ok |
 | `base_booking_mail` | Sends emails for bookings. | ok |
